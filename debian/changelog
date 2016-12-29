@@ -1,3 +1,9 @@
+kylin-screensaver (1.16.0-1) yakkety; urgency=medium
+
+  * Fork from mate-screensaver, rename to kylin-screensaver.
+
+ -- lihao <lihao@kylinos.cn>  Thu, 29 Dec 2016 19:20:47 +0800
+
 mate-screensaver (1.16.0-1) unstable; urgency=medium
 
   [ Martin Wimpress ]
