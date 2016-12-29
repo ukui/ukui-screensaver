@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Ankit Patel <ankit644@yahoo.com>, 2005, 2006
 # Ankit Patel <ankit@redhat.com>, 2006, 2007
@@ -10,76 +10,75 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-16 17:00+0300\n"
+"POT-Creation-Date: 2016-12-29 19:12+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
 "Last-Translator: monsta <monsta@inbox.ru>\n"
 "Language-Team: Gujarati (http://www.transifex.com/mate/MATE/language/gu/)\n"
+"Language: gu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: gu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/mate-screensaver-preferences.desktop.in.h:1
-#: ../src/mate-screensaver.desktop.in.in.h:1
+#: ../data/kylin-screensaver-preferences.desktop.in.h:1
+#: ../src/kylin-screensaver.desktop.in.in.h:1
 msgid "Screensaver"
 msgstr "સ્ક્રીનસેવર"
 
-#: ../data/mate-screensaver-preferences.desktop.in.h:2
+#: ../data/kylin-screensaver-preferences.desktop.in.h:2
 msgid "Set your screensaver preferences"
 msgstr "તમારી સ્ક્રીનસેવર પસંદગીઓ સુયોજિત કરો"
 
-#: ../data/mate-screensaver-preferences.ui.h:1
-msgid "Screensaver Preferences"
-msgstr "સ્ક્રીનસેવર પસંદગીઓ"
-
-#: ../data/mate-screensaver-preferences.ui.h:2
-msgid "Power _Management"
-msgstr "પાવર વ્યવસ્થાપન (_M)"
-
-#: ../data/mate-screensaver-preferences.ui.h:3
-msgid "_Preview"
-msgstr "પૂર્વદર્શન (_P)"
-
-#: ../data/mate-screensaver-preferences.ui.h:4
-msgid "_Screensaver theme:"
-msgstr "સ્ક્રીનસેવર થીમ (_S):"
-
-#: ../data/mate-screensaver-preferences.ui.h:5
-msgid "Regard the computer as _idle after:"
-msgstr "આના પછી કમ્પ્યૂટરને ફાજલ તરીકે સમજો (_i):"
-
-#: ../data/mate-screensaver-preferences.ui.h:6
-msgid "_Activate screensaver when computer is idle"
-msgstr "જ્યારે કમ્પ્યૂટર ફાજલ હોય ત્યારે સ્ક્રીનસેવર સક્રિય કરો (_A)"
-
-#: ../data/mate-screensaver-preferences.ui.h:7
-msgid "_Lock screen when screensaver is active"
-msgstr "જ્યારે સ્ક્રીનસેવર સક્રિય હોય ત્યારે સ્ક્રીનને તાળું મારો (_L)"
-
-#: ../data/mate-screensaver-preferences.ui.h:8
-msgid "<b>Warning: the screen will not be locked for the root user.</b>"
-msgstr "<b>ચેતવણી: રુટ વપરાશકર્તા માટે સ્ક્રીનને તાળું મારવામાં આવશે નહિં.</b>"
-
-#: ../data/mate-screensaver-preferences.ui.h:9
+#: ../data/kylin-screensaver-preferences.ui.h:1
 msgid "Screensaver Preview"
 msgstr "સ્ક્રીનસેવર પૂર્વદર્શન"
 
-#: ../data/mate-screensaver-preferences.ui.h:10
+#: ../data/kylin-screensaver-preferences.ui.h:2
 msgid "<b>Screensaver preview</b>"
 msgstr "<b>સ્ક્રીનસેવર પૂર્વદર્શન</b>"
 
-#: ../data/mate-screensaver.directory.in.h:1
+#: ../data/kylin-screensaver-preferences.ui.h:3
+msgid "Screensaver Preferences"
+msgstr "સ્ક્રીનસેવર પસંદગીઓ"
+
+#: ../data/kylin-screensaver-preferences.ui.h:4
+msgid "Power _Management"
+msgstr "પાવર વ્યવસ્થાપન (_M)"
+
+#: ../data/kylin-screensaver-preferences.ui.h:5
+msgid "_Preview"
+msgstr "પૂર્વદર્શન (_P)"
+
+#: ../data/kylin-screensaver-preferences.ui.h:6
+msgid "_Screensaver theme:"
+msgstr "સ્ક્રીનસેવર થીમ (_S):"
+
+#: ../data/kylin-screensaver-preferences.ui.h:7
+msgid "Regard the computer as _idle after:"
+msgstr "આના પછી કમ્પ્યૂટરને ફાજલ તરીકે સમજો (_i):"
+
+#: ../data/kylin-screensaver-preferences.ui.h:8
+msgid "_Activate screensaver when computer is idle"
+msgstr "જ્યારે કમ્પ્યૂટર ફાજલ હોય ત્યારે સ્ક્રીનસેવર સક્રિય કરો (_A)"
+
+#: ../data/kylin-screensaver-preferences.ui.h:9
+msgid "_Lock screen when screensaver is active"
+msgstr "જ્યારે સ્ક્રીનસેવર સક્રિય હોય ત્યારે સ્ક્રીનને તાળું મારો (_L)"
+
+#: ../data/kylin-screensaver-preferences.ui.h:10
+msgid "<b>Warning: the screen will not be locked for the root user.</b>"
+msgstr "<b>ચેતવણી: રુટ વપરાશકર્તા માટે સ્ક્રીનને તાળું મારવામાં આવશે નહિં.</b>"
+
+#: ../data/kylin-screensaver.directory.in.h:1
 msgid "Screensavers"
 msgstr "સ્ક્રીનસેવરો"
 
-#: ../data/mate-screensaver.directory.in.h:2
-#: ../data/org.mate.screensaver.gschema.xml.in.h:7
+#: ../data/kylin-screensaver.directory.in.h:2
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:7
 msgid "Screensaver themes"
 msgstr "સ્ક્રીનસેવર થીમો"
 
-#. Translators: This is the name of a desktop background image that shows
-#. outer space images.
+#. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
 #: ../savers/cosmos-slideshow.desktop.in.in.h:1
@@ -102,7 +101,7 @@ msgstr ""
 msgid "_Cancel"
 msgstr ""
 
-#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1792
+#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1791
 msgid "_Unlock"
 msgstr "તાળું ખોલો (_U)"
 
@@ -111,27 +110,27 @@ msgstr "તાળું ખોલો (_U)"
 msgid "<b>Leave a message for %R:</b>"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:1
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:1
 msgid "Activate when idle"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:2
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:2
 msgid "Set this to TRUE to activate the screensaver when the session is idle."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:3
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:3
 msgid "Lock on activation"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:4
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:4
 msgid "Set this to TRUE to lock the screen when the screensaver goes active."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:5
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:5
 msgid "Screensaver theme selection mode"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:6
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:6
 msgid ""
 "The selection mode used by screensaver. May be \"blank-only\" to enable the "
 "screensaver without using any theme on activation, \"single\" to enable "
@@ -140,120 +139,119 @@ msgid ""
 "activation."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:8
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:8
 msgid ""
 "This key specifies the list of themes to be used by the screensaver. It's "
 "ignored when \"mode\" key is \"blank-only\", should provide the theme name "
-"when \"mode\" is \"single\", and should provide a list of themes when "
-"\"mode\" is \"random\"."
+"when \"mode\" is \"single\", and should provide a list of themes when \"mode"
+"\" is \"random\"."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:9
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:9
 msgid "Time before power management baseline"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:10
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:10
 msgid ""
 "The number of seconds of inactivity before signalling to power management. "
 "This key is set and maintained by the session power management agent."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:11
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:11
 msgid "Time before theme change"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:12
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:12
 msgid "The number of minutes to run before changing the screensaver theme."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:13
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:13
 msgid "Time before locking"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:14
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:14
 msgid ""
-"The number of minutes after screensaver activation before locking the "
-"screen."
+"The number of minutes after screensaver activation before locking the screen."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:15
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:15
 msgid "Allow embedding a keyboard into the window"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:16
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:16
 msgid ""
 "Set this to TRUE to allow embedding a keyboard into the window when trying "
 "to unlock. The \"keyboard_command\" key must be set with the appropriate "
 "command."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:17
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:17
 msgid "Embedded keyboard command"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:18
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:18
 msgid ""
 "The command that will be run, if the \"embedded_keyboard_enabled\" key is "
-"set to TRUE, to embed a keyboard widget into the window. This command should"
-" implement an XEMBED plug interface and output a window XID on the standard "
+"set to TRUE, to embed a keyboard widget into the window. This command should "
+"implement an XEMBED plug interface and output a window XID on the standard "
 "output."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:19
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:19
 msgid "Allow logout"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:20
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:20
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to allow logging "
 "out after a delay. The delay is specified in the \"logout_delay\" key."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:21
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:21
 msgid "Time before logout option"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:22
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:22
 msgid ""
 "The number of minutes after the screensaver activation before a logout "
 "option will appear in the unlock dialog. This key has effect only if the "
 "\"logout_enable\" key is set to TRUE."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:23
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:23
 msgid "Logout command"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:24
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:24
 msgid ""
-"The command to invoke when the logout button is clicked. This command should"
-" simply log the user out without any interaction. This key has effect only "
-"if the \"logout_enable\" key is set to TRUE."
+"The command to invoke when the logout button is clicked. This command should "
+"simply log the user out without any interaction. This key has effect only if "
+"the \"logout_enable\" key is set to TRUE."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:25
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:25
 msgid "Allow user switching"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:26
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:26
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to switch to a "
 "different user account."
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:27
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:27
 msgid "Theme for lock dialog"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:28
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:28
 msgid "Theme to use for the lock dialog"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:29
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:29
 msgid "Allow the session status message to be displayed"
 msgstr ""
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:30
+#: ../data/org.kylin.screensaver.gschema.xml.in.h:30
 msgid ""
 "Allow the session status message to be displayed when the screen is locked."
 msgstr ""
@@ -263,12 +261,13 @@ msgid "Display a slideshow of pictures of the cosmos"
 msgstr "કોસમોસના ચિત્રોનો સ્લાઈડશો દર્શાવો"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
-msgid "Floating MATE"
+msgid "Floating KYLIN"
 msgstr ""
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
-msgid "Bubbles the MATE logo around the screen"
-msgstr ""
+#, fuzzy
+msgid "Bubbles the KYLIN logo around the screen"
+msgstr "ચિત્ર - સ્ક્રીનની ફરતે ચિત્રો તરે છે"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"
@@ -294,7 +293,7 @@ msgstr "ઝબૂકતા ચોકઠાઓ"
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "રંગોના કંપન માટે pop-art-ish જાળી."
 
-#: ../savers/popsquares.c:51 ../savers/floaters.c:1252
+#: ../savers/popsquares.c:51 ../savers/floaters.c:1246
 #, c-format
 msgid "%s. See --help for usage information.\n"
 msgstr "%s. વપરાશ જાણકારી માટે --help જુઓ.\n"
@@ -333,11 +332,12 @@ msgstr "વાપરવા માટેનું સ્રોત ચિત્ર
 
 #. translators: the word "image" here
 #. * represents a command line argument
-#: ../savers/floaters.c:1246
+#.
+#: ../savers/floaters.c:1240
 msgid "image - floats images around the screen"
 msgstr "ચિત્ર - સ્ક્રીનની ફરતે ચિત્રો તરે છે"
 
-#: ../savers/floaters.c:1261
+#: ../savers/floaters.c:1255
 #, c-format
 msgid "You must specify one image.  See --help for usage information.\n"
 msgstr "તમારે એક ચિત્ર સ્પષ્ટ કરવું જ પડશે.  વપરાશ જાણકારી માટે --help જુઓ.\n"
@@ -366,246 +366,248 @@ msgstr "સ્થાનમાંથી ચિત્રો રેન્ડમા�
 msgid "Do not try to stretch images on screen"
 msgstr "સ્ક્રીન પર ચિત્રો ખેંચવાનો પ્રયાસ કરો નહિં"
 
-#: ../src/copy-theme-dialog.c:220
+#: ../src/copy-theme-dialog.c:219
 msgid "Copying files"
 msgstr "ફાઈલોની નકલ કરી રહ્યા છીએ"
 
-#: ../src/copy-theme-dialog.c:243
+#: ../src/copy-theme-dialog.c:246
 msgid "From:"
 msgstr "તરફથી:"
 
-#: ../src/copy-theme-dialog.c:247
+#: ../src/copy-theme-dialog.c:250
 msgid "To:"
 msgstr "પ્રતિ:"
 
-#: ../src/copy-theme-dialog.c:271
+#: ../src/copy-theme-dialog.c:279
 msgid "Copying themes"
 msgstr "થીમોની નકલ કરી રહ્યા છીએ"
 
-#: ../src/copy-theme-dialog.c:314
+#: ../src/copy-theme-dialog.c:322
 msgid "Invalid screensaver theme"
 msgstr "અયોગ્ય સ્ક્રીનસેવર થીમ"
 
-#: ../src/copy-theme-dialog.c:317
+#: ../src/copy-theme-dialog.c:325
 #, c-format
 msgid "%s does not appear to be a valid screensaver theme."
 msgstr "%s માન્ય સ્ક્રીનસેવર થીમ હોય એમ દેખાતું નથી."
 
-#: ../src/copy-theme-dialog.c:497
+#: ../src/copy-theme-dialog.c:505
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "ફાઈલની નકલ કરી રહ્યા છીએ: %u જેટલું %u માંથી"
 
-#: ../src/mate-screensaver-command.c:64
+#: ../src/kylin-screensaver-command.c:59
 msgid "Causes the screensaver to exit gracefully"
 msgstr "સ્ક્રીનસેવરને સારી રીતે બંધ કરવાનું કારણ બને છે"
 
-#: ../src/mate-screensaver-command.c:68
+#: ../src/kylin-screensaver-command.c:63
 msgid "Query the state of the screensaver"
 msgstr "સ્ક્રીનસેવરની સ્થિતિને પ્રશ્ન પૂછે છે"
 
-#: ../src/mate-screensaver-command.c:72
+#: ../src/kylin-screensaver-command.c:67
 msgid "Query the length of time the screensaver has been active"
 msgstr "સ્ક્રીનસેવર જેટલા સમયથી સક્રિય છે તેટલા સમયની લંબાઈનો પ્રશ્ન"
 
-#: ../src/mate-screensaver-command.c:76
+#: ../src/kylin-screensaver-command.c:71
 msgid "Tells the running screensaver process to lock the screen immediately"
 msgstr "ચાલી રહેલ સ્ક્રીનસેવર પ્રક્રિયાને સ્ક્રીન તુરંત જ તાળું મારવા માટે કહે છે"
 
-#: ../src/mate-screensaver-command.c:80
+#: ../src/kylin-screensaver-command.c:75
 msgid "If the screensaver is active then switch to another graphics demo"
 msgstr "જો સ્ક્રીનસેવર સક્રિય હોય તો પછી અન્ય ગ્રાફિક્સ ડેમોમાં બદલાવ"
 
-#: ../src/mate-screensaver-command.c:84
+#: ../src/kylin-screensaver-command.c:79
 msgid "Turn the screensaver on (blank the screen)"
 msgstr "સ્ક્રીનસેવરને ચાલુ કરો (સ્ક્રીન કોરી કરો)"
 
-#: ../src/mate-screensaver-command.c:88
+#: ../src/kylin-screensaver-command.c:83
 msgid "If the screensaver is active then deactivate it (un-blank the screen)"
 msgstr "જો સ્ક્રીનસેવર સક્રિય હોય તો પછી તેને અસક્રિય કરો (સ્ક્રીનને કોરી-નહિં રાખો)"
 
-#: ../src/mate-screensaver-command.c:92
+#: ../src/kylin-screensaver-command.c:87
 msgid "Poke the running screensaver to simulate user activity"
 msgstr "વપરાશકર્તા ક્રિયા સિમ્યુલેટ કરવા માટે ચાલી રહેલ સ્ક્રીનસેવરને ધક્કો મારો"
 
-#: ../src/mate-screensaver-command.c:96
+#: ../src/kylin-screensaver-command.c:91
 msgid ""
 "Inhibit the screensaver from activating.  Command blocks while inhibit is "
 "active."
-msgstr "સ્ક્રીનસેવરને સક્રિય કરવાથી બચાવવું.  જ્યારે બચાવવાનું સક્રિય હોય ત્યારે આદેશો અટકાવે છે."
+msgstr ""
+"સ્ક્રીનસેવરને સક્રિય કરવાથી બચાવવું.  જ્યારે બચાવવાનું સક્રિય હોય ત્યારે આદેશો અટકાવે છે."
 
-#: ../src/mate-screensaver-command.c:100
+#: ../src/kylin-screensaver-command.c:95
 msgid "The calling application that is inhibiting the screensaver"
 msgstr "બોલાવી રહેલ કાર્યક્રમ કે જે સ્ક્રીનસેવરને અટકાવી રહ્યો છે"
 
-#: ../src/mate-screensaver-command.c:104
+#: ../src/kylin-screensaver-command.c:99
 msgid "The reason for inhibiting the screensaver"
 msgstr "સ્ક્રીનસેવરને બચાવવા માટેનું કારણ"
 
-#: ../src/mate-screensaver-command.c:108 ../src/mate-screensaver-dialog.c:60
-#: ../src/mate-screensaver.c:55
+#: ../src/kylin-screensaver-command.c:103 ../src/kylin-screensaver-dialog.c:60
+#: ../src/kylin-screensaver.c:55
 msgid "Version of this application"
 msgstr "આ કાર્યક્રમની આવૃત્તિ"
 
-#: ../src/mate-screensaver-command.c:357
+#: ../src/kylin-screensaver-command.c:352
 #, c-format
 msgid "The screensaver is %s\n"
 msgstr "સ્ક્રીનસેવર એ %s છે\n"
 
-#: ../src/mate-screensaver-command.c:357
+#: ../src/kylin-screensaver-command.c:352
 msgid "active"
 msgstr "સક્રિય"
 
-#: ../src/mate-screensaver-command.c:357
+#: ../src/kylin-screensaver-command.c:352
 msgid "inactive"
 msgstr "અસક્રિય"
 
-#: ../src/mate-screensaver-command.c:373
+#: ../src/kylin-screensaver-command.c:368
 #, c-format
 msgid "The screensaver is not inhibited\n"
 msgstr "સ્ક્રીનસેવર એ અટકાવાયેલ છે\n"
 
-#: ../src/mate-screensaver-command.c:381
+#: ../src/kylin-screensaver-command.c:376
 #, c-format
 msgid "The screensaver is being inhibited by:\n"
 msgstr "સ્ક્રીનસેવર એ અટકાવી દેવામાં આવ્યું છે:\n"
 
-#: ../src/mate-screensaver-command.c:416
+#: ../src/kylin-screensaver-command.c:411
 #, c-format
 msgid "The screensaver has been active for %d seconds.\n"
 msgstr "સ્ક્રીનસેવર %d સેકન્ડોથી સક્રિય છે.\n"
 
-#: ../src/mate-screensaver-command.c:422
+#: ../src/kylin-screensaver-command.c:417
 #, c-format
 msgid "The screensaver is not currently active.\n"
 msgstr "સ્ક્રીનસેવર એ હમણાં સક્રિય નથી.\n"
 
-#: ../src/mate-screensaver-dialog.c:59
+#: ../src/kylin-screensaver-dialog.c:59
 msgid "Show debugging output"
 msgstr "ડિબગીંગ આઉટપુટ બતાવો"
 
-#: ../src/mate-screensaver-dialog.c:61
+#: ../src/kylin-screensaver-dialog.c:61
 msgid "Show the logout button"
 msgstr "બહાર નીકળો બટન બતાવો"
 
-#: ../src/mate-screensaver-dialog.c:62
+#: ../src/kylin-screensaver-dialog.c:62
 msgid "Command to invoke from the logout button"
 msgstr "બહાર નીકળો બટનમાંથી ચલાવવાનો આદેશ"
 
-#: ../src/mate-screensaver-dialog.c:63
+#: ../src/kylin-screensaver-dialog.c:63
 msgid "Show the switch user button"
 msgstr "વપરાશકર્તા બદલો બટન બતાવો"
 
-#: ../src/mate-screensaver-dialog.c:64
+#: ../src/kylin-screensaver-dialog.c:64
 msgid "Message to show in the dialog"
 msgstr "સંવાદમાં બતાવવા માટેનો સંદેશો"
 
-#: ../src/mate-screensaver-dialog.c:64 ../src/mate-screensaver-dialog.c:65
+#: ../src/kylin-screensaver-dialog.c:64 ../src/kylin-screensaver-dialog.c:65
 msgid "MESSAGE"
 msgstr "MESSAGE"
 
-#: ../src/mate-screensaver-dialog.c:65
+#: ../src/kylin-screensaver-dialog.c:65
 msgid "Not used"
 msgstr "વપરાયેલ નથી"
 
 #. login: is whacked always translate to Username:
-#: ../src/mate-screensaver-dialog.c:167 ../src/mate-screensaver-dialog.c:168
-#: ../src/mate-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
+#: ../src/kylin-screensaver-dialog.c:167 ../src/kylin-screensaver-dialog.c:168
+#: ../src/kylin-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
 msgid "Username:"
 msgstr "વપરાશકર્તાનામ:"
 
-#: ../src/mate-screensaver-dialog.c:170 ../src/mate-screensaver-dialog.c:171
+#: ../src/kylin-screensaver-dialog.c:170 ../src/kylin-screensaver-dialog.c:171
 #: ../src/gs-auth-pam.c:171
 msgid "Password:"
 msgstr "પાસવર્ડ:"
 
-#: ../src/mate-screensaver-dialog.c:172
+#: ../src/kylin-screensaver-dialog.c:172
 msgid "You are required to change your password immediately (password aged)"
 msgstr "તમે તમારો પાસવર્ડ તુરંત બદલવા માટે આગ્રહ કરવામાં આવે છે (પાસવર્ડની આયુ)"
 
-#: ../src/mate-screensaver-dialog.c:173
+#: ../src/kylin-screensaver-dialog.c:173
 msgid "You are required to change your password immediately (root enforced)"
 msgstr "તમે તમારો પાસવર્ડ તુરંત બદલવા માટે આગ્રહ કરવામાં આવે છે (રુટ દ્વારા દબાણ)"
 
-#: ../src/mate-screensaver-dialog.c:174
+#: ../src/kylin-screensaver-dialog.c:174
 msgid "Your account has expired; please contact your system administrator"
-msgstr "તમારા ખાતાની સમયમર્યાદા સમાપ્ત થઈ ગઈ; મહેરબાની કરીને તમારા સિસ્ટમ સંચાલકનો સંપર્ક કરો"
+msgstr ""
+"તમારા ખાતાની સમયમર્યાદા સમાપ્ત થઈ ગઈ; મહેરબાની કરીને તમારા સિસ્ટમ સંચાલકનો સંપર્ક કરો"
 
-#: ../src/mate-screensaver-dialog.c:175
+#: ../src/kylin-screensaver-dialog.c:175
 msgid "No password supplied"
 msgstr "કોઈ પાસવર્ડો પૂરા પાડવામાં આવેલ નથી"
 
-#: ../src/mate-screensaver-dialog.c:176
+#: ../src/kylin-screensaver-dialog.c:176
 msgid "Password unchanged"
 msgstr "પાસવર્ડ બદલાયેલ નથી"
 
-#: ../src/mate-screensaver-dialog.c:177
+#: ../src/kylin-screensaver-dialog.c:177
 msgid "Can not get username"
 msgstr "વપરાશકર્તાનામ મેળવી શકતા નથી"
 
-#: ../src/mate-screensaver-dialog.c:178
+#: ../src/kylin-screensaver-dialog.c:178
 msgid "Retype new UNIX password:"
 msgstr "નવો UNIX પાસવર્ડ ફરી લખો:"
 
-#: ../src/mate-screensaver-dialog.c:179
+#: ../src/kylin-screensaver-dialog.c:179
 msgid "Enter new UNIX password:"
 msgstr "નવો UNIX પાસવર્ડ દાખલ કરો:"
 
-#: ../src/mate-screensaver-dialog.c:180
+#: ../src/kylin-screensaver-dialog.c:180
 msgid "(current) UNIX password:"
 msgstr "(વર્તમાન) UNIX પાસવર્ડ:"
 
-#: ../src/mate-screensaver-dialog.c:181
+#: ../src/kylin-screensaver-dialog.c:181
 msgid "Error while changing NIS password."
 msgstr "NIS પાસવર્ડ બદલતી વખતે ભૂલ."
 
-#: ../src/mate-screensaver-dialog.c:182
+#: ../src/kylin-screensaver-dialog.c:182
 msgid "You must choose a longer password"
 msgstr "તમારે લાંબો પાસવર્ડ જ પસંદ કરવો જોઈએ"
 
-#: ../src/mate-screensaver-dialog.c:183
+#: ../src/kylin-screensaver-dialog.c:183
 msgid "Password has been already used. Choose another."
 msgstr "પાસવર્ડ પહેલાથી જ વપરાઈ ગયેલ છે. અન્ય પસંદ કરો."
 
-#: ../src/mate-screensaver-dialog.c:184
+#: ../src/kylin-screensaver-dialog.c:184
 msgid "You must wait longer to change your password"
 msgstr "તમારે તમારો પાસવર્ડ બદલવા માટે લાંબે સુધી રાહ જોવી જ પડશે"
 
-#: ../src/mate-screensaver-dialog.c:185
+#: ../src/kylin-screensaver-dialog.c:185
 msgid "Sorry, passwords do not match"
 msgstr "માફ કરજો, પાસવર્ડો બંધ બેસતા નથી"
 
-#: ../src/mate-screensaver-dialog.c:256
+#: ../src/kylin-screensaver-dialog.c:256
 msgid "Checking..."
 msgstr "ચકાસી રહ્યા છીએ..."
 
-#: ../src/mate-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
+#: ../src/kylin-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
 msgid "Authentication failed."
 msgstr "સત્તાધિકરણ નિષ્ફળ."
 
-#: ../src/mate-screensaver-preferences.c:454
+#: ../src/kylin-screensaver-preferences.c:457
 msgid "Blank screen"
 msgstr "ખાલી સ્ક્રીન"
 
-#: ../src/mate-screensaver-preferences.c:460
+#: ../src/kylin-screensaver-preferences.c:463
 msgid "Random"
 msgstr "રેન્ડમ"
 
-#: ../src/mate-screensaver-preferences.c:944
+#: ../src/kylin-screensaver-preferences.c:947
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d કલાક"
 msgstr[1] "%d કલાકો"
 
-#: ../src/mate-screensaver-preferences.c:947
+#: ../src/kylin-screensaver-preferences.c:950
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d મિનિટો"
 msgstr[1] "%d મિનિટો"
 
-#: ../src/mate-screensaver-preferences.c:950
+#: ../src/kylin-screensaver-preferences.c:953
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -613,15 +615,15 @@ msgstr[0] "%d સેકન્ડ"
 msgstr[1] "%d સેકન્ડો"
 
 #. hour:minutes:seconds
-#: ../src/mate-screensaver-preferences.c:958
+#: ../src/kylin-screensaver-preferences.c:961
 #, c-format
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. hour:minutes
 #. minutes:seconds
-#: ../src/mate-screensaver-preferences.c:963
-#: ../src/mate-screensaver-preferences.c:976
+#: ../src/kylin-screensaver-preferences.c:966
+#: ../src/kylin-screensaver-preferences.c:979
 #, c-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -629,35 +631,35 @@ msgstr "%s %s"
 #. hour
 #. minutes
 #. seconds
-#: ../src/mate-screensaver-preferences.c:968
-#: ../src/mate-screensaver-preferences.c:981
-#: ../src/mate-screensaver-preferences.c:987
+#: ../src/kylin-screensaver-preferences.c:971
+#: ../src/kylin-screensaver-preferences.c:984
+#: ../src/kylin-screensaver-preferences.c:990
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: ../src/mate-screensaver-preferences.c:1002
+#: ../src/kylin-screensaver-preferences.c:1005
 #, c-format
 msgid "Never"
 msgstr "ક્યારેય નહિં"
 
-#: ../src/mate-screensaver-preferences.c:1578
+#: ../src/kylin-screensaver-preferences.c:1581
 msgid "Could not load the main interface"
 msgstr "મુખ્ય ઈન્ટરફેસ લાવી શક્યા નહિં"
 
-#: ../src/mate-screensaver-preferences.c:1580
+#: ../src/kylin-screensaver-preferences.c:1583
 msgid "Please make sure that the screensaver is properly installed"
 msgstr "મહેરબાની કરીને ખાતરી કરો કે સ્ક્રીનસેવર યોગ્ય રીતે સ્થાપિત થયેલ છે"
 
-#: ../src/mate-screensaver.c:56
+#: ../src/kylin-screensaver.c:56
 msgid "Don't become a daemon"
 msgstr "ડિમન બનશો નહિં"
 
-#: ../src/mate-screensaver.c:57
+#: ../src/kylin-screensaver.c:57
 msgid "Enable debugging code"
 msgstr "ડિબગીંગ કોડ સક્રિય કરો"
 
-#: ../src/mate-screensaver.desktop.in.in.h:2
+#: ../src/kylin-screensaver.desktop.in.in.h:2
 msgid "Launch screensaver and locker program"
 msgstr ""
 
@@ -683,45 +685,44 @@ msgstr "આ સમયે વપરાશની પરવાનગી નથી."
 msgid "No longer permitted to access the system."
 msgstr "સિસ્ટમના વપરાશની લાંબા સમય સુધી પરવાનગી નથી."
 
-#: ../src/gs-listener-dbus.c:2186
+#: ../src/gs-listener-dbus.c:2180
 msgid "failed to register with the message bus"
 msgstr "સંદેશા બસ સાથે રજીસ્ટર કરવામાં નિષ્ફળ"
 
-#: ../src/gs-listener-dbus.c:2197
+#: ../src/gs-listener-dbus.c:2191
 msgid "not connected to the message bus"
 msgstr "સંદેશા બસમાં જોડાયેલ નથી"
 
-#: ../src/gs-listener-dbus.c:2207 ../src/gs-listener-dbus.c:2239
+#: ../src/gs-listener-dbus.c:2201 ../src/gs-listener-dbus.c:2233
 msgid "screensaver already running in this session"
 msgstr "આ સત્રમાં સ્ક્રીનસેવર પહેલાથી જ ચાલી રહ્યું છે"
 
-#. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-
-#. GDateTime.html#g-date-time-format
-#: ../src/gs-lock-plug.c:308
+#. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format
+#: ../src/gs-lock-plug.c:307
 msgid "%A, %B %e"
 msgstr ""
 
-#: ../src/gs-lock-plug.c:410
+#: ../src/gs-lock-plug.c:409
 msgid "Time has expired."
 msgstr "સમય સમાપ્ત થઈ ગયો."
 
-#: ../src/gs-lock-plug.c:441
+#: ../src/gs-lock-plug.c:440
 msgid "You have the Caps Lock key on."
 msgstr "તમારી Caps Lock કી ચાલુ છે."
 
-#: ../src/gs-lock-plug.c:1772
+#: ../src/gs-lock-plug.c:1771
 msgid "S_witch User..."
 msgstr "વપરાશકર્તા બદલો (_w)..."
 
-#: ../src/gs-lock-plug.c:1781
+#: ../src/gs-lock-plug.c:1780
 msgid "Log _Out"
 msgstr "બહાર નીકળો (_O)"
 
 #. To translators: This expands to USERNAME on HOSTNAME
-#: ../src/gs-lock-plug.c:2010
+#: ../src/gs-lock-plug.c:2029
 msgid "%U on %h"
 msgstr "%U એ %h પર"
 
-#: ../src/gs-lock-plug.c:2029
+#: ../src/gs-lock-plug.c:2056
 msgid "_Password:"
 msgstr "પાસવર્ડ (_P):"
