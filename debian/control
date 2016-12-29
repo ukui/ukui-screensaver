@@ -1,11 +1,12 @@
 Source: kylin-screensaver
 Section: x11
 Priority: optional
-Maintainer: KYLIN Packaging Team <pkg-mate-team@lists.alioth.debian.org>
+Maintainer: Ubuntu Kylin Team <ubuntukylin-members@lists.launchpad.net>
 Uploaders: Mike Gabriel <sunweaver@debian.org>,
            John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
            Stefano Karapetsas <stefano@karapetsas.com>,
            Vangelis Mouhtsis <vangelis@gnugr.org>,
+	   Hao Li <lihao@kylinos.cn>,
 Build-Depends: debhelper (>= 9),
                dpkg-dev (>= 1.16.1.1),
                intltool,
@@ -32,7 +33,7 @@ Build-Depends: debhelper (>= 9),
                x11proto-xf86vidmode-dev,
                xmlto,
 Standards-Version: 3.9.8
-Homepage: http://www.mate-desktop.org/
+Homepage: http://www.ukui.org/
 Vcs-Browser: https://anonscm.debian.org/git/pkg-mate/mate-screensaver.git
 Vcs-Git: https://anonscm.debian.org/git/pkg-mate/mate-screensaver.git
 
