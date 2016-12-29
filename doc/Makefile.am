@@ -1,22 +1,22 @@
 NULL =
 
 SPEC_XML_FILES =			\
-	mate-screensaver.xml		\
+	kylin-screensaver.xml		\
 	dbus-interface.xml		\
 	$(NULL)
 
 if DOCBOOK_DOCS_ENABLED
 
 htmldocdir = $(DOCDIR)
-htmldoc_DATA = mate-screensaver.html
+htmldoc_DATA = kylin-screensaver.html
 
-mate-screensaver.html : dbus-interface.xml
-	$(XMLTO) html-nochunks -m config.xsl mate-screensaver.xml
+kylin-screensaver.html : dbus-interface.xml
+	$(XMLTO) html-nochunks -m config.xsl kylin-screensaver.xml
 
 endif # DOCBOOK_DOCS_ENABLED
 
 EXTRA_DIST =				\
-	mate-screensaver.xml.in	\
+	kylin-screensaver.xml.in	\
 	config.xsl			\
 	docbook.css			\
 	$(SPEC_XML_FILES)
@@ -24,4 +24,4 @@ EXTRA_DIST =				\
 
 clean-local:
 	rm -f *~
-	rm -f mate-screensaver.html
+	rm -f kylin-screensaver.html
