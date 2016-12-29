@@ -1,11 +1,11 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/mate-screensaver-preferences.desktop.in
-[type: gettext/glade]data/mate-screensaver-preferences.ui
-data/mate-screensaver.directory.in
+data/kylin-screensaver-preferences.desktop.in
+[type: gettext/glade]data/kylin-screensaver-preferences.ui
+data/kylin-screensaver.directory.in
 data/images/cosmos/cosmos.xml.in.in
 [type: gettext/glade]data/lock-dialog-default.ui
-[type: gettext/gsettings]data/org.mate.screensaver.gschema.xml.in
+[type: gettext/gsettings]data/org.kylin.screensaver.gschema.xml.in
 savers/cosmos-slideshow.desktop.in.in
 savers/footlogo-floaters.desktop.in.in
 savers/gnomelogo-floaters.desktop.in.in
@@ -15,11 +15,11 @@ savers/popsquares.c
 savers/floaters.c
 savers/slideshow.c
 src/copy-theme-dialog.c
-src/mate-screensaver-command.c
-src/mate-screensaver-dialog.c
-src/mate-screensaver-preferences.c
-src/mate-screensaver.c
-src/mate-screensaver.desktop.in.in
+src/kylin-screensaver-command.c
+src/kylin-screensaver-dialog.c
+src/kylin-screensaver-preferences.c
+src/kylin-screensaver.c
+src/kylin-screensaver.desktop.in.in
 src/gs-auth-pam.c
 src/gs-listener-dbus.c
 src/gs-lock-plug.c
