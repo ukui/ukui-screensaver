@@ -33,9 +33,9 @@
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-lowlevel.h>
 
-#define GS_SERVICE   "org.mate.ScreenSaver"
-#define GS_PATH      "/org/mate/ScreenSaver"
-#define GS_INTERFACE "org.mate.ScreenSaver"
+#define GS_SERVICE   "org.kylin.ScreenSaver"
+#define GS_PATH      "/org/kylin/ScreenSaver"
+#define GS_INTERFACE "org.kylin.ScreenSaver"
 
 static gboolean do_quit       = FALSE;
 static gboolean do_lock       = FALSE;
@@ -487,7 +487,7 @@ main (int    argc,
 	GError         *error = NULL;
 
 #ifdef ENABLE_NLS
-	bindtextdomain (GETTEXT_PACKAGE, MATELOCALEDIR);
+	bindtextdomain (GETTEXT_PACKAGE, KYLINLOCALEDIR);
 # ifdef HAVE_BIND_TEXTDOMAIN_CODESET
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 # endif

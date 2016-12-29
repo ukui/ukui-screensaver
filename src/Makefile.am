@@ -3,16 +3,16 @@ AUTOMAKE_OPTIONS = 1.7
 
 NULL =
 
-saverdir = $(libexecdir)/mate-screensaver
+saverdir = $(libexecdir)/kylin-screensaver
 themesdir = $(pkgdatadir)/themes
 
 AM_CPPFLAGS =							\
 	-I.							\
 	-I$(srcdir)						\
-	-DMATEMENU_I_KNOW_THIS_IS_UNSTABLE			\
-	$(MATE_SCREENSAVER_CFLAGS)				\
-	$(MATE_SCREENSAVER_DIALOG_CFLAGS)			\
-	$(MATE_SCREENSAVER_CAPPLET_CFLAGS)			\
+	-DKYLINMENU_I_KNOW_THIS_IS_UNSTABLE			\
+	$(KYLIN_SCREENSAVER_CFLAGS)				\
+	$(KYLIN_SCREENSAVER_DIALOG_CFLAGS)			\
+	$(KYLIN_SCREENSAVER_CAPPLET_CFLAGS)			\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DPREFIX=\""$(prefix)"\"				\
 	-DBINDIR=\""$(bindir)"\"				\
@@ -20,29 +20,29 @@ AM_CPPFLAGS =							\
 	-DLIBEXECDIR=\""$(libexecdir)"\"			\
 	-DDATADIR=\""$(datadir)"\"				\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"			\
-	-DMATELOCALEDIR=\""$(datadir)/locale"\"			\
+	-DKYLINLOCALEDIR=\""$(datadir)/locale"\"			\
 	-DSAVERDIR=\""$(saverdir)"\"				\
 	-DTHEMESDIR=\""$(themesdir)"\"				\
 	-DGTKBUILDERDIR=\"$(pkgdatadir)\"			\
-	-DPAM_SERVICE_NAME=\""mate-screensaver"\"		\
+	-DPAM_SERVICE_NAME=\""kylin-screensaver"\"		\
 	$(WARN_CFLAGS)						\
 	$(AUTH_CFLAGS)						\
 	$(DEBUG_CFLAGS)						\
 	$(DBUS_CFLAGS)						\
-	$(LIBMATEKBDUI_CFLAGS)					\
+	$(LIBKYLINKBDUI_CFLAGS)					\
 	$(LIBNOTIFY_CFLAGS)					\
 	$(SYSTEMD_CFLAGS)					\
 	$(NULL)
 
 bin_PROGRAMS = \
-	mate-screensaver		\
-	mate-screensaver-command	\
-	mate-screensaver-preferences	\
+	kylin-screensaver		\
+	kylin-screensaver-command	\
+	kylin-screensaver-preferences	\
 	$(NULL)
 
 libexec_PROGRAMS = \
-	mate-screensaver-dialog	\
-	mate-screensaver-gl-helper	\
+	kylin-screensaver-dialog	\
+	kylin-screensaver-gl-helper	\
 	$(NULL)
 
 noinst_PROGRAMS = 	\
@@ -53,16 +53,16 @@ noinst_PROGRAMS = 	\
 	$(NULL)
 
 desktopdir = $(sysconfdir)/xdg/autostart
-desktop_in_files = mate-screensaver.desktop.in
+desktop_in_files = kylin-screensaver.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-mate_screensaver_command_SOURCES = 	\
-	mate-screensaver-command.c	\
+kylin_screensaver_command_SOURCES = 	\
+	kylin-screensaver-command.c	\
 	$(NULL)
 
-mate_screensaver_command_LDADD =	\
-	$(MATE_SCREENSAVER_COMMAND_LIBS)	\
+kylin_screensaver_command_LDADD =	\
+	$(KYLIN_SCREENSAVER_COMMAND_LIBS)	\
 	$(NULL)
 
 AUTH_SOURCES = 			\
@@ -79,7 +79,7 @@ test_fade_SOURCES = 			\
 	$(NULL)
 
 test_fade_LDADD =			\
-	$(MATE_SCREENSAVER_LIBS)	\
+	$(KYLIN_SCREENSAVER_LIBS)	\
 	$(SAVER_LIBS)			\
 	$(NULL)
 
@@ -93,7 +93,7 @@ test_passwd_SOURCES = 			\
 	$(NULL)
 
 test_passwd_LDADD =			\
-	$(MATE_SCREENSAVER_DIALOG_LIBS)\
+	$(KYLIN_SCREENSAVER_DIALOG_LIBS)\
 	$(AUTH_LIBS)			\
 	$(NULL)
 
@@ -108,7 +108,7 @@ test_watcher_SOURCES =			\
 	$(NULL)
 
 test_watcher_LDADD =			\
-	$(MATE_SCREENSAVER_LIBS)	\
+	$(KYLIN_SCREENSAVER_LIBS)	\
 	$(SAVER_LIBS)			\
 	$(NULL)
 
@@ -127,12 +127,12 @@ test_window_SOURCES =			\
 	$(NULL)
 
 test_window_LDADD =			\
-	$(MATE_SCREENSAVER_LIBS)	\
+	$(KYLIN_SCREENSAVER_LIBS)	\
 	$(SAVER_LIBS)			\
 	$(NULL)
 
-mate_screensaver_dialog_SOURCES = 	\
-	mate-screensaver-dialog.c	\
+kylin_screensaver_dialog_SOURCES = 	\
+	kylin-screensaver-dialog.c	\
 	gs-lock-plug.c			\
 	gs-lock-plug.h			\
 	gs-debug.c			\
@@ -144,17 +144,17 @@ mate_screensaver_dialog_SOURCES = 	\
 	$(AUTH_SOURCES)			\
 	$(NULL)
 
-EXTRA_mate_screensaver_dialog_SOURCES = \
+EXTRA_kylin_screensaver_dialog_SOURCES = \
 	gs-auth-pam.c		\
 	gs-auth-helper.c	\
 	gs-auth-pwent.c		\
 	$(NULL)
 
-mate_screensaver_dialog_LDADD =	\
-	$(MATE_SCREENSAVER_DIALOG_LIBS)\
+kylin_screensaver_dialog_LDADD =	\
+	$(KYLIN_SCREENSAVER_DIALOG_LIBS)\
 	$(SAVER_LIBS)			\
 	$(AUTH_LIBS)			\
-	$(LIBMATEKBDUI_LIBS)		\
+	$(LIBKYLINKBDUI_LIBS)		\
 	$(LIBNOTIFY_LIBS)		\
 	$(NULL)
 
@@ -170,9 +170,9 @@ gs-marshal.c: gs-marshal.list
 gs-marshal.h: gs-marshal.list
 	@GLIB_GENMARSHAL@ $< --prefix=gs_marshal --header > $@
 
-mate_screensaver_SOURCES =	\
-	mate-screensaver.c	\
-	mate-screensaver.h	\
+kylin_screensaver_SOURCES =	\
+	kylin-screensaver.c	\
+	kylin-screensaver.h	\
 	gs-monitor.c		\
 	gs-monitor.h		\
 	gs-watcher-x11.c	\
@@ -200,27 +200,27 @@ mate_screensaver_SOURCES =	\
 	$(BUILT_SOURCES)	\
 	$(NULL)
 
-mate_screensaver_gl_helper_LDADD =	\
-	$(MATE_SCREENSAVER_LIBS)	\
+kylin_screensaver_gl_helper_LDADD =	\
+	$(KYLIN_SCREENSAVER_LIBS)	\
 	$(GL_LIBS)			\
 	$(NULL)
 
-mate_screensaver_gl_helper_SOURCES =	\
-	mate-screensaver-gl-helper.c	\
+kylin_screensaver_gl_helper_SOURCES =	\
+	kylin-screensaver-gl-helper.c	\
 	gs-visual-gl.c			\
 	gs-visual-gl.h			\
 	$(NULL)
 
-mate_screensaver_LDADD =		\
-	$(MATE_SCREENSAVER_LIBS)	\
+kylin_screensaver_LDADD =		\
+	$(KYLIN_SCREENSAVER_LIBS)	\
 	$(SAVER_LIBS)			\
 	$(SYSTEMD_LIBS)			\
 	$(NULL)
 
-mate_screensaver_LDFLAGS = -export-dynamic
+kylin_screensaver_LDFLAGS = -export-dynamic
 
-mate_screensaver_preferences_SOURCES =	\
-	mate-screensaver-preferences.c	\
+kylin_screensaver_preferences_SOURCES =	\
+	kylin-screensaver-preferences.c	\
 	copy-theme-dialog.c		\
 	copy-theme-dialog.h		\
 	gs-theme-manager.c		\
@@ -233,19 +233,19 @@ mate_screensaver_preferences_SOURCES =	\
 	subprocs.h			\
 	$(NULL)
 
-mate_screensaver_preferences_LDADD =	\
-	$(MATE_SCREENSAVER_CAPPLET_LIBS)	\
+kylin_screensaver_preferences_LDADD =	\
+	$(KYLIN_SCREENSAVER_CAPPLET_LIBS)	\
 	$(NULL)
 
 EXTRA_DIST =				\
 	debug-screensaver.sh		\
 	gs-marshal.list			\
-	mate-screensaver.desktop.in	\
+	kylin-screensaver.desktop.in	\
 	$(NULL)
 
 CLEANFILES = 				\
 	$(desktop_DATA) 		\
-	mate-screensaver.desktop.in	\
+	kylin-screensaver.desktop.in	\
 	$(BUILT_SOURCES)
 
 MAINTAINERCLEANFILES =			\
@@ -255,14 +255,14 @@ MAINTAINERCLEANFILES =			\
 install-exec-hook:
 	@if [ "x@NEED_SETUID@" = "xyes" ]; then \
 	    echo "***" ; \
-	    echo "***  Warning: mate-screensaver has been compiled with support for" ; \
+	    echo "***  Warning: kylin-screensaver has been compiled with support for" ; \
 	    echo "***           shadow passwords.  If your system actually uses shadow" ; \
 	    echo "***           passwords then it must be installed as a setuid root" ; \
 	    echo "***           program in order for locking to work.  To do this, you" ; \
 	    echo "***           must run:" ; \
 	    echo "***" ; \
-	    echo "***           chown root $(DESTDIR)$(libexecdir)/mate-screensaver-dialog" ; \
-	    echo "***           chmod +s $(DESTDIR)$(libexecdir)/mate-screensaver-dialog" ; \
+	    echo "***           chown root $(DESTDIR)$(libexecdir)/kylin-screensaver-dialog" ; \
+	    echo "***           chmod +s $(DESTDIR)$(libexecdir)/kylin-screensaver-dialog" ; \
 	    echo "***" ; \
 	    echo "***           For now, it will be installed non-setuid, which" ; \
 	    echo "***           means that locking might not work." ; \

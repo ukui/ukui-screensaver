@@ -20,12 +20,12 @@
  *
  */
 
-#ifndef __MATE_SCREENSAVER_H
-#define __MATE_SCREENSAVER_H
+#ifndef __KYLIN_SCREENSAVER_H
+#define __KYLIN_SCREENSAVER_H
 
 G_BEGIN_DECLS
 
-void mate_screensaver_quit(void);
+void kylin_screensaver_quit(void);
 
 G_END_DECLS
 

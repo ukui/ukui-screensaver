@@ -33,11 +33,11 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include "mate-screensaver.h"
+#include "kylin-screensaver.h"
 #include "gs-monitor.h"
 #include "gs-debug.h"
 
-void mate_screensaver_quit(void)
+void kylin_screensaver_quit(void)
 {
 	gtk_main_quit();
 }
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 	};
 
 	#ifdef ENABLE_NLS
-		bindtextdomain(GETTEXT_PACKAGE, MATELOCALEDIR);
+		bindtextdomain(GETTEXT_PACKAGE, KYLINLOCALEDIR);
 		#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
 			bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 		#endif
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 
 	/* debug to a file if in deamon mode */
 	gs_debug_init(debug, FALSE);
-	gs_debug("initializing mate-screensaver %s", VERSION);
+	gs_debug("initializing kylin-screensaver %s", VERSION);
 
 	monitor = gs_monitor_new();
 
@@ -119,7 +119,7 @@ int main(int argc, char **argv)
 
 	g_object_unref(monitor);
 
-	gs_debug("mate-screensaver finished");
+	gs_debug("kylin-screensaver finished");
 
 	gs_debug_shutdown();
 

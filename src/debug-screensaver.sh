@@ -3,7 +3,7 @@
 # This is probably linux only at the moment
 
 if [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
-    pid=`pgrep -u $USER "mate-session|x-session-manager"`
+    pid=`pgrep -u $USER "kylin-session|x-session-manager"`
     if [ "x$pid" != "x" ]; then
         env_address=`(cat /proc/$pid/environ; echo) | tr "\000" "\n" | grep '^DBUS_SESSION_BUS_ADDRESS='`
         env_display=`(cat /proc/$pid/environ; echo) | tr "\000" "\n" | grep '^DISPLAY='`
@@ -30,13 +30,13 @@ fi
 export G_DEBUG=fatal_criticals
 
 # kill the existing daemon
-mate-screensaver-command --exit
+kylin-screensaver-command --exit
 
 # run the daemon in the debugger
-#gdb --args mate-screensaver --no-daemon --debug --sync
+#gdb --args kylin-screensaver --no-daemon --debug --sync
 
 # or if that isn't helpful just get the debug output
-#mate-screensaver --no-daemon --debug > /tmp/gs-debug-log.txt 2>&1
+#kylin-screensaver --no-daemon --debug > /tmp/gs-debug-log.txt 2>&1
 
 # or just run it with debugging on
-mate-screensaver --no-daemon --debug
+kylin-screensaver --no-daemon --debug
