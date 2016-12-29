@@ -6,57 +6,57 @@ Author: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=MATE;screensaver;slideshow;cosmos;
- OnlyShowIn=MATE;
++Keywords=KYLIN;screensaver;slideshow;cosmos;
+ OnlyShowIn=KYLIN;
 --- a/savers/footlogo-floaters.desktop.in.in
 +++ b/savers/footlogo-floaters.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=MATE;screensaver;logo;bubbles;
- OnlyShowIn=MATE;
++Keywords=KYLIN;screensaver;logo;bubbles;
+ OnlyShowIn=KYLIN;
 --- a/savers/gnomelogo-floaters.desktop.in.in
 +++ b/savers/gnomelogo-floaters.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=MATE;screensaver;GNOME;logo;bubbles;
- OnlyShowIn=MATE;
++Keywords=KYLIN;screensaver;GNOME;logo;bubbles;
+ OnlyShowIn=KYLIN;
 --- a/savers/personal-slideshow.desktop.in.in
 +++ b/savers/personal-slideshow.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=MATE;screensaver;custom;slideshow;pictures;folder;
- OnlyShowIn=MATE;
++Keywords=KYLIN;screensaver;custom;slideshow;pictures;folder;
+ OnlyShowIn=KYLIN;
 --- a/savers/popsquares.desktop.in.in
 +++ b/savers/popsquares.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=MATE;screensaver;grid;pulsing;colors;
- OnlyShowIn=MATE;
---- a/data/mate-screensaver-preferences.desktop.in
-+++ b/data/mate-screensaver-preferences.desktop.in
++Keywords=KYLIN;screensaver;grid;pulsing;colors;
+ OnlyShowIn=KYLIN;
+--- a/data/kylin-screensaver-preferences.desktop.in
++++ b/data/kylin-screensaver-preferences.desktop.in
 @@ -6,6 +6,7 @@
  Terminal=false
  Type=Application
  Categories=GTK;Settings;DesktopSettings;
-+Keywords=MATE;screensaver;preferences;
- OnlyShowIn=MATE;
++Keywords=KYLIN;screensaver;preferences;
+ OnlyShowIn=KYLIN;
  StartupNotify=true
- X-MATE-Bugzilla-Bugzilla=MATE
---- a/src/mate-screensaver.desktop.in.in
-+++ b/src/mate-screensaver.desktop.in.in
+ X-KYLIN-Bugzilla-Bugzilla=KYLIN
+--- a/src/kylin-screensaver.desktop.in.in
++++ b/src/kylin-screensaver.desktop.in.in
 @@ -6,6 +6,7 @@
- Exec=mate-screensaver
- OnlyShowIn=MATE;
+ Exec=kylin-screensaver
+ OnlyShowIn=KYLIN;
  NoDisplay=true
-+Keywords=MATE;screensaver;locker;
- X-MATE-Autostart-Phase=Application
- X-MATE-Autostart-Notify=true
- X-MATE-Bugzilla-Bugzilla=MATE
++Keywords=KYLIN;screensaver;locker;
+ X-KYLIN-Autostart-Phase=Application
+ X-KYLIN-Autostart-Notify=true
+ X-KYLIN-Bugzilla-Bugzilla=KYLIN
