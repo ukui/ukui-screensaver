@@ -7,5 +7,5 @@ StartupNotify=false
 Terminal=false
 Type=Application
 Categories=Screensaver;
-Keywords=MATE;screensaver;grid;pulsing;colors;
-OnlyShowIn=MATE;
+Keywords=KYLIN;screensaver;grid;pulsing;colors;
+OnlyShowIn=KYLIN;

@@ -7,5 +7,5 @@ StartupNotify=false
 Terminal=false
 Type=Application
 Categories=Screensaver;
-Keywords=MATE;screensaver;custom;slideshow;pictures;folder;
-OnlyShowIn=MATE;
+Keywords=KYLIN;screensaver;custom;slideshow;pictures;folder;
+OnlyShowIn=KYLIN;

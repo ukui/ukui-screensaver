@@ -7,5 +7,5 @@ StartupNotify=false
 Terminal=false
 Type=Application
 Categories=Screensaver;
-Keywords=MATE;screensaver;GNOME;logo;bubbles;
-OnlyShowIn=MATE;
+Keywords=KYLIN;screensaver;GNOME;logo;bubbles;
+OnlyShowIn=KYLIN;
