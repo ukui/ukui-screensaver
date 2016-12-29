@@ -1,0 +1,44 @@
+mate-screensaver
+=================
+
+mate-screensaver is a screen saver and locker that aims to have
+simple, sane, secure defaults and be well integrated with the desktop.
+It is designed to support:
+
+        * the ability to lock down configuration settings
+        * translation into many languages
+        * user switching
+
+
+Known Issues
+============
+
+
+Installation
+============
+
+See the file 'INSTALL'
+
+./autogen.sh --prefix=/usr --sysconfdir=/etc
+make
+sudo make install
+
+
+How to report bugs
+==================
+
+Bugs should be reported to the MATE bug tracking
+system:
+    https://github.com/mate-desktop/mate-screensaver/issues
+
+You will need to create an account if you don't have one already.
+
+In the bug report please include information about your system, if possible:
+
+   - What operating system and version
+
+   - What version of mate-screenaver
+
+        The output of the "mate-screensaver-command --version" command.
+
+ 
