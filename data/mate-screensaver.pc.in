@@ -10,8 +10,8 @@ privlibexecdir=@privlibexecdir@
 privdatadir=@privdatadir@
 themesdir=@themesdir@
 
-Name: mate-screensaver
-Description: MATE Screensaver
+Name: kylin-screensaver
+Description: KYLIN Screensaver
 Version: @VERSION@
 Requires:
 Libs:
