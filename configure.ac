@@ -1,11 +1,11 @@
 dnl -*- mode: m4 -*-
 
 AC_PREREQ(2.60)
-AC_INIT([mate-screensaver],
+AC_INIT([kylin-screensaver],
         [1.16.0],
-        [http://www.mate-desktop.org/])
+        [http://www.kylin-desktop.org/])
 
-AC_CONFIG_SRCDIR(src/mate-screensaver.c)
+AC_CONFIG_SRCDIR(src/kylin-screensaver.c)
 AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-xz check-news])
@@ -35,7 +35,7 @@ AC_DEFINE([GLIB_VERSION_MAX_ALLOWED], [GLIB_VERSION_2_36],
 AC_DEFINE([GLIB_VERSION_MIN_REQUIRED], [GLIB_VERSION_2_36],
 	[Warn on use of APIs deprecated before GLib 2.36])
 
-GETTEXT_PACKAGE=mate-screensaver
+GETTEXT_PACKAGE=kylin-screensaver
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Name of default gettext domain])
 
@@ -52,9 +52,9 @@ GLIB_GSETTINGS
 DBUS_REQUIRED_VERSION=0.30
 GLIB_REQUIRED_VERSION=2.36.0
 X11_REQUIRED_VERSION=1.0
-LIBMATE_MENU_REQUIRED_VERSION=1.5.0
-MATE_DESKTOP_REQUIRED_VERSION=1.9.4
-LIBMATEKBDUI_REQUIRED_VERSION=1.7.1
+LIBKYLIN_MENU_REQUIRED_VERSION=1.5.0
+KYLIN_DESKTOP_REQUIRED_VERSION=1.9.4
+LIBKYLINKBDUI_REQUIRED_VERSION=1.7.1
 
 AC_MSG_CHECKING([which gtk+ version to compile against])
 AC_ARG_WITH([gtk],
@@ -85,38 +85,38 @@ AC_CHECK_FUNCS(getresuid)
 AC_TYPE_UID_T
 
 AC_CHECK_FUNCS([setresuid setenv unsetenv clearenv])
-PKG_CHECK_MODULES(MATE_SCREENSAVER,
+PKG_CHECK_MODULES(KYLIN_SCREENSAVER,
         x11 >= $X11_REQUIRED_VERSION
         xscrnsaver
         gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION
         dbus-glib-1 >= $DBUS_REQUIRED_VERSION
         gio-2.0 >= $GLIB_REQUIRED_VERSION
-        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
-        libmate-menu >= $LIBMATE_MENU_REQUIRED_VERSION)
-AC_SUBST(MATE_SCREENSAVER_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_LIBS)
+        kylin-desktop-2.0 >= $KYLIN_DESKTOP_REQUIRED_VERSION
+        libkylin-menu >= $LIBKYLIN_MENU_REQUIRED_VERSION)
+AC_SUBST(KYLIN_SCREENSAVER_CFLAGS)
+AC_SUBST(KYLIN_SCREENSAVER_LIBS)
 
-PKG_CHECK_MODULES(MATE_SCREENSAVER_DIALOG,
+PKG_CHECK_MODULES(KYLIN_SCREENSAVER_DIALOG,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         gthread-2.0
         gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION
-        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION)
-AC_SUBST(MATE_SCREENSAVER_DIALOG_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_DIALOG_LIBS)
+        kylin-desktop-2.0 >= $KYLIN_DESKTOP_REQUIRED_VERSION)
+AC_SUBST(KYLIN_SCREENSAVER_DIALOG_CFLAGS)
+AC_SUBST(KYLIN_SCREENSAVER_DIALOG_LIBS)
 
-PKG_CHECK_MODULES(MATE_SCREENSAVER_CAPPLET,
+PKG_CHECK_MODULES(KYLIN_SCREENSAVER_CAPPLET,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION
-        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
-        libmate-menu >= $LIBMATE_MENU_REQUIRED_VERSION)
-AC_SUBST(MATE_SCREENSAVER_CAPPLET_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_CAPPLET_LIBS)
+        kylin-desktop-2.0 >= $KYLIN_DESKTOP_REQUIRED_VERSION
+        libkylin-menu >= $LIBKYLIN_MENU_REQUIRED_VERSION)
+AC_SUBST(KYLIN_SCREENSAVER_CAPPLET_CFLAGS)
+AC_SUBST(KYLIN_SCREENSAVER_CAPPLET_LIBS)
 
-PKG_CHECK_MODULES(MATE_SCREENSAVER_COMMAND,
+PKG_CHECK_MODULES(KYLIN_SCREENSAVER_COMMAND,
         gobject-2.0 >= $GLIB_REQUIRED_VERSION
         dbus-glib-1 >= $DBUS_REQUIRED_VERSION)
-AC_SUBST(MATE_SCREENSAVER_COMMAND_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_COMMAND_LIBS)
+AC_SUBST(KYLIN_SCREENSAVER_COMMAND_CFLAGS)
+AC_SUBST(KYLIN_SCREENSAVER_COMMAND_LIBS)
 
 AC_PATH_XTRA
 
@@ -126,12 +126,12 @@ SAVER_LIBS="$ALL_X_LIBS"
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
 
-MATE_COMPILE_WARNINGS(yes)
+KYLIN_COMPILE_WARNINGS(yes)
 
 # Solaris requires libresolv for daemon()
 case "$host" in
 	*-*-solaris*)
-		AC_CHECK_LIB(resolv, daemon, [MATE_SCREENSAVER_LIBS="$MATE_SCREENSAVER_LIBS -lresolv"])
+		AC_CHECK_LIB(resolv, daemon, [KYLIN_SCREENSAVER_LIBS="$KYLIN_SCREENSAVER_LIBS -lresolv"])
 	;;
 esac
 
@@ -139,9 +139,9 @@ esac
 
 SAVER_MODULES="gthread-2.0 gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION gobject-2.0 >= $GLIB_REQUIRED_VERSION"
 
-PKG_CHECK_MODULES(MATE_SCREENSAVER_SAVER, $SAVER_MODULES)
-AC_SUBST(MATE_SCREENSAVER_SAVER_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_SAVER_LIBS)
+PKG_CHECK_MODULES(KYLIN_SCREENSAVER_SAVER, $SAVER_MODULES)
+AC_SUBST(KYLIN_SCREENSAVER_SAVER_CFLAGS)
+AC_SUBST(KYLIN_SCREENSAVER_SAVER_LIBS)
 
 # Find out where the session service file goes
 # The sad sed hack is recomended by section 27.10 of the automake manual.
@@ -166,11 +166,11 @@ AC_SUBST(PAM_PREFIX)
 
 # Desktop entry handling
 
-PKG_CHECK_MODULES(LIB_MATE_MENU,
+PKG_CHECK_MODULES(LIB_KYLIN_MENU,
         gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION)
 
-AC_SUBST(LIB_MATE_MENU_CFLAGS)
-AC_SUBST(LIB_MATE_MENU_LIBS)
+AC_SUBST(LIB_KYLIN_MENU_CFLAGS)
+AC_SUBST(LIB_KYLIN_MENU_LIBS)
 
 dnl ---------------------------------------------------------------------------
 dnl - Where should we put documentation ?
@@ -179,9 +179,9 @@ AC_ARG_WITH(doc-dir,
               [AC_HELP_STRING([--with-doc-dir=<dir>],
               [directory to install documentation])])
 if ! test -z "$with_doc_dir"; then
-   DOCDIR="$with_doc_dir/mate-screensaver-$VERSION"
+   DOCDIR="$with_doc_dir/kylin-screensaver-$VERSION"
 else
-   DOCDIR="$datadir/doc/mate-screensaver-$VERSION"
+   DOCDIR="$datadir/doc/kylin-screensaver-$VERSION"
 fi
 AC_SUBST(DOCDIR)
 
@@ -927,18 +927,18 @@ AC_SUBST(SYSTEMD_CFLAGS)
 AC_SUBST(SYSTEMD_LIBS)
 
 dnl ---------------------------------------------------------------------------
-dnl libmatekbd
+dnl libkylinkbd
 dnl ---------------------------------------------------------------------------
 
-have_libmatekbdui=no
+have_libkylinkbdui=no
 AC_ARG_WITH(kbd-layout-indicator,[  --without-kbd-layout-indicator         disable keyboard layout indicator],
             [with_kbd_layout_indicator="$withval"],[with_kbd_layout_indicator=yes])
 if test x$with_kbd_layout_indicator != xno; then
-  PKG_CHECK_MODULES(LIBMATEKBDUI, libmatekbdui >= $LIBMATEKBDUI_REQUIRED_VERSION, have_libmatekbdui=yes, have_libmatekbdui=no)
+  PKG_CHECK_MODULES(LIBKYLINKBDUI, libkylinkbdui >= $LIBKYLINKBDUI_REQUIRED_VERSION, have_libkylinkbdui=yes, have_libkylinkbdui=no)
 fi
-if test "x$have_libmatekbdui" = "xyes"; then
-  AC_SUBST(LIBMATEKBDUI_CFLAGS)
-  AC_SUBST(LIBMATEKBDUI_LIBS)
+if test "x$have_libkylinkbdui" = "xyes"; then
+  AC_SUBST(LIBKYLINKBDUI_CFLAGS)
+  AC_SUBST(LIBKYLINKBDUI_LIBS)
   AC_DEFINE(WITH_KBD_LAYOUT_INDICATOR, 1, [Define if keyboard layout indicator should be built])
 fi
 
@@ -1077,23 +1077,23 @@ SLIDESHOW_COSMOS_DIR="${EXPANDED_DATADIR}/backgrounds/cosmos"
 
 AC_SUBST(SLIDESHOW_COSMOS_DIR)
 
-FLOATERS_FOOT_LOGO_IMAGE="${EXPANDED_DATADIR}/pixmaps/mate-logo-white.svg"
+FLOATERS_FOOT_LOGO_IMAGE="${EXPANDED_DATADIR}/pixmaps/kylin-logo-white.svg"
 AC_SUBST(FLOATERS_FOOT_LOGO_IMAGE)
 FLOATERS_FOOT_GNOME_LOGO_IMAGE="${EXPANDED_DATADIR}/pixmaps/gnome-logo-white.svg"
 AC_SUBST(FLOATERS_FOOT_GNOME_LOGO_IMAGE)
 
 # Menu stuff
 
-MATE_SCREENSAVER_THEMES_DIR="${EXPANDED_DATADIR}/applications/screensavers"
-AC_SUBST(MATE_SCREENSAVER_THEMES_DIR)
+KYLIN_SCREENSAVER_THEMES_DIR="${EXPANDED_DATADIR}/applications/screensavers"
+AC_SUBST(KYLIN_SCREENSAVER_THEMES_DIR)
 
 # Special directories
 # Used for .pc.in file
 
-privlibexecdir='${libexecdir}'/mate-screensaver
+privlibexecdir='${libexecdir}'/kylin-screensaver
 AC_SUBST(privlibexecdir)
 
-privdatadir='${datadir}'/mate-screensaver
+privdatadir='${datadir}'/kylin-screensaver
 AC_SUBST(privdatadir)
 
 themesdir='${datadir}'/applications/screensavers
@@ -1106,21 +1106,21 @@ AC_OUTPUT([
 Makefile
 po/Makefile.in
 src/Makefile
-src/mate-screensaver.desktop.in
+src/kylin-screensaver.desktop.in
 data/Makefile
-data/mate-screensavers.menu
-data/mate-screensaver.pc
-data/org.mate.ScreenSaver.service
-data/org.mate.screensaver.gschema.xml
+data/kylin-screensavers.menu
+data/kylin-screensaver.pc
+data/org.kylin.ScreenSaver.service
+data/org.kylin.screensaver.gschema.xml
 data/images/Makefile
 data/images/cosmos/Makefile
 savers/Makefile
 doc/Makefile
-doc/mate-screensaver.xml
+doc/kylin-screensaver.xml
 ])
 
 echo "
-                    mate-screensaver $VERSION
+                    kylin-screensaver $VERSION
                     ========================
 
         prefix:                   ${prefix}
@@ -1134,7 +1134,7 @@ echo "
         source code location:     ${srcdir}
         compiler:                 ${CC}
         cflags:                   ${CFLAGS}
-        Base libs:                ${MATE_SCREENSAVER_LIBS}
+        Base libs:                ${KYLIN_SCREENSAVER_LIBS}
         Extension libs:           ${SAVER_LIBS}
         Maintainer mode:          ${USE_MAINTAINER_MODE}
         Docs enabled:             ${enable_docbook_docs}

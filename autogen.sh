@@ -4,7 +4,7 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="mate-screensaver"
+PKG_NAME="kylin-screensaver"
 
 (test -f $srcdir/configure.ac) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
@@ -12,13 +12,13 @@ PKG_NAME="mate-screensaver"
     exit 1
 }
 
-which mate-autogen || {
-    echo "You need to install mate-common from the MATE Git"
+which kylin-autogen || {
+    echo "You need to install kylin-common from the KYLIN Git"
     exit 1
 }
 
 REQUIRED_AUTOMAKE_VERSION=1.9
-MATE_DATADIR="$mate_datadir"
+KYLIN_DATADIR="$kylin_datadir"
 
-. mate-autogen
+. kylin-autogen
 
