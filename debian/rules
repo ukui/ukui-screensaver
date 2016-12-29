@@ -21,8 +21,8 @@ override_dh_install:
 	rm -rfv debian/tmp/usr/share/help/*/fdl/
 	rm -rfv debian/tmp/usr/share/help/*/gpl/
 	rm -rfv debian/tmp/usr/share/help/*/lgpl/
-	# For Debian we ship our own mate-screensaver PAM configuration...
-	rm -rfv debian/tmp/etc/pam.d/mate-screensaver
+	# For Debian we ship our own kylin-screensaver PAM configuration...
+	rm -rfv debian/tmp/etc/pam.d/kylin-screensaver
 	dh_install --fail-missing
 
 override_dh_auto_configure:
@@ -34,7 +34,7 @@ override_dh_auto_configure:
 	        --with-xscreensaverdir=/usr/share/xscreensaver/config \
 	        --with-xscreensaverhackdir=/usr/lib/xscreensaver \
 	        --with-mit-ext \
-	        --libexecdir=/usr/lib/mate-screensaver \
+	        --libexecdir=/usr/lib/kylin-screensaver \
 	        --with-console-kit \
 	        --with-libnotify \
 	        --enable-locking \
@@ -42,7 +42,7 @@ override_dh_auto_configure:
 	        $(SYSTEMD_SUPPORT)
 
 override_dh_strip:
-	dh_strip --dbgsym-migration='mate-screensaver-dbg (<< 1.14.1-2~)'
+	dh_strip --dbgsym-migration='kylin-screensaver-dbg (<< 1.14.1-2~)'
 
 get-orig-source:
 	uscan --noconf --force-download --rename --download-current-version --destdir=..
