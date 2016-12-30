@@ -15,14 +15,14 @@ AM_CPPFLAGS =							\
 	$(NULL)
 
 DESKTOP_IN_IN_FILES = 			 \
-	cosmos-slideshow.desktop.in.in 	 \
+	cosmos-slideshow-kylin.desktop.in.in 	 \
 	footlogo-floaters.desktop.in.in	 \
 	gnomelogo-floaters.desktop.in.in	 \
 	personal-slideshow.desktop.in.in \
 	popsquares.desktop.in.in	 \
 	$(NULL)
 
-cosmos-slideshow.desktop.in: cosmos-slideshow.desktop.in.in Makefile
+cosmos-slideshow-kylin.desktop.in: cosmos-slideshow-kylin.desktop.in.in Makefile
 	$(edit) $< >$@
 footlogo-floaters.desktop.in: footlogo-floaters.desktop.in.in Makefile
 	$(edit) $< >$@
@@ -43,7 +43,7 @@ edit = sed \
 
 themesdir = $(datadir)/applications/screensavers
 themes_in_files = 			\
-	cosmos-slideshow.desktop.in	\
+	cosmos-slideshow-kylin.desktop.in	\
 	footlogo-floaters.desktop.in    \
 	gnomelogo-floaters.desktop.in    \
 	personal-slideshow.desktop.in	\
@@ -128,7 +128,7 @@ EXTRA_DIST =				\
 
 CLEANFILES = 				\
 	$(BUILT_SOURCES)		\
-	cosmos-slideshow.desktop.in	\
+	cosmos-slideshow-kylin.desktop.in	\
 	footlogo-floaters.desktop.in	\
 	gnomelogo-floaters.desktop.in	\
 	popsquares.desktop.in		\
@@ -142,7 +142,7 @@ DISTCLEANFILES = 			\
 MAINTAINERCLEANFILES =			\
 	*~				\
 	Makefile.in			\
-	cosmos-slideshow.desktop	\
+	cosmos-slideshow-kylin.desktop	\
 	footlogo-floaters.desktop	\
 	gnomelogo-floaters.desktop	\
 	personal-slideshow.desktop	\

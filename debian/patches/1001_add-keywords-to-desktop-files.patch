@@ -1,7 +1,7 @@
 Description: Add keywords key to .desktop files
 Author: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
---- a/savers/cosmos-slideshow.desktop.in.in
-+++ b/savers/cosmos-slideshow.desktop.in.in
+--- a/savers/cosmos-slideshow-kylin.desktop.in.in
++++ b/savers/cosmos-slideshow-kylin.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
