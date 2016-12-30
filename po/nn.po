@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-29 19:12+0800\n"
+"POT-Creation-Date: 2016-12-30 14:52+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
 "Last-Translator: monsta <monsta@inbox.ru>\n"
 "Language-Team: Norwegian Nynorsk (http://www.transifex.com/mate/MATE/"
@@ -80,7 +80,7 @@ msgstr "Tema for skjermsparar"
 #. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
-#: ../savers/cosmos-slideshow.desktop.in.in.h:1
+#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:1
 msgid "Cosmos"
 msgstr "Kosmos"
 
@@ -255,7 +255,7 @@ msgid ""
 "Allow the session status message to be displayed when the screen is locked."
 msgstr ""
 
-#: ../savers/cosmos-slideshow.desktop.in.in.h:2
+#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:2
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Lysbiletvising med bileta frå verdensrommet"
 

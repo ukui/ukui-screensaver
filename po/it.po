@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-29 19:12+0800\n"
+"POT-Creation-Date: 2016-12-30 14:52+0800\n"
 "PO-Revision-Date: 2016-01-24 19:37+0000\n"
 "Last-Translator: Marco Bartolucci <nap.84@live.it>\n"
 "Language-Team: Italian (http://www.transifex.com/mate/MATE/language/it/)\n"
@@ -82,7 +82,7 @@ msgstr "Temi del salvaschermo"
 #. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
-#: ../savers/cosmos-slideshow.desktop.in.in.h:1
+#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:1
 msgid "Cosmos"
 msgstr "Cosmo"
 
@@ -296,7 +296,7 @@ msgstr ""
 "Consente di mostrare i messaggi di stato della sessione quando lo schermo è "
 "bloccato."
 
-#: ../savers/cosmos-slideshow.desktop.in.in.h:2
+#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:2
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Mostra una sequenza di immagini del cosmo"
 

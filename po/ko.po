@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-29 19:12+0800\n"
+"POT-Creation-Date: 2016-12-30 14:52+0800\n"
 "PO-Revision-Date: 2016-03-31 01:23+0000\n"
 "Last-Translator: 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mate/MATE/language/ko/)\n"
@@ -85,7 +85,7 @@ msgstr "화면 보호기 테마"
 #. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
-#: ../savers/cosmos-slideshow.desktop.in.in.h:1
+#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:1
 msgid "Cosmos"
 msgstr "우주"
 
@@ -282,7 +282,7 @@ msgid ""
 "Allow the session status message to be displayed when the screen is locked."
 msgstr "화면을 잠궜을 때 세션 상태 메시지 출력을 허용합니다."
 
-#: ../savers/cosmos-slideshow.desktop.in.in.h:2
+#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:2
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "우주 그림의 슬라이드를 보여줍니다"
 

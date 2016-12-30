@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-29 19:12+0800\n"
+"POT-Creation-Date: 2016-12-30 14:52+0800\n"
 "PO-Revision-Date: 2016-03-30 13:37+0000\n"
 "Last-Translator: liushuyu011 <liushuyu011@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mate/MATE/language/"
@@ -84,7 +84,7 @@ msgstr "屏幕保护程序主题"
 #. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
-#: ../savers/cosmos-slideshow.desktop.in.in.h:1
+#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:1
 msgid "Cosmos"
 msgstr "宇宙"
 
@@ -277,7 +277,7 @@ msgid ""
 "Allow the session status message to be displayed when the screen is locked."
 msgstr "屏幕被锁定时允许显示会话状态消息。"
 
-#: ../savers/cosmos-slideshow.desktop.in.in.h:2
+#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:2
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "显示一组宇宙图片的幻灯片"
 
