@@ -9,7 +9,7 @@
 # Manuela Silva <inactive+h_manuela_rodsilva@transifex.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
@@ -737,8 +737,8 @@ msgstr "%U em %h"
 msgid "_Password:"
 msgstr "_Senha:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "MATE Flutuante"
+#~ msgid "Floating KYLIN"
+#~ msgstr "KYLIN Flutuante"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Bolhas com o logótipo do MATE por todo o ecrã"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Bolhas com o logótipo do KYLIN por todo o ecrã"

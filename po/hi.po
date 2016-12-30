@@ -8,7 +8,7 @@
 # Rajesh Ranjan <rajesh672@gmail.com>, 2006, 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
@@ -727,8 +727,8 @@ msgstr "%U %h पर"
 msgid "_Password:"
 msgstr "पासवर्ड: (_P)"
 
-#~ msgid "Floating MATE"
+#~ msgid "Floating KYLIN"
 #~ msgstr "फ्लोटिंग माटे"
 
-#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgid "Bubbles the KYLIN logo around the screen"
 #~ msgstr "स्क्रीन के चारों ओर माटे के प्रतीक चिन्ह को बुदबुदाता है"

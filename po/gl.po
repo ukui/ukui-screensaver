@@ -14,7 +14,7 @@
 # Miguel Anxo Bouzada <mbouzada@gmail.com>, 2013-2014
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
@@ -742,8 +742,8 @@ msgstr "%U en %h"
 msgid "_Password:"
 msgstr "Co_ntrasinal:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "MATE flotante"
+#~ msgid "Floating KYLIN"
+#~ msgstr "KYLIN flotante"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Move o logotipo do do MATE pola pantalla"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Move o logotipo do do KYLIN pola pantalla"

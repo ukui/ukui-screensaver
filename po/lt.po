@@ -9,7 +9,7 @@
 # Moo, 2015-2016
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-06-24 12:36+0000\n"
@@ -297,7 +297,7 @@ msgstr "Rodyti kosmoso paveikslų skaidrių rodymą"
 #: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating KYLIN"
-msgstr "Plaukiojantis MATE"
+msgstr "Plaukiojantis KYLIN"
 
 #: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
 #, fuzzy
@@ -306,7 +306,7 @@ msgstr "GNOME logotipas „burbuliuoja“ ekrane"
 
 #: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
 msgid "Floating GNOME"
-msgstr "Plaukiojantis MATE"
+msgstr "Plaukiojantis KYLIN"
 
 #: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
@@ -769,8 +769,8 @@ msgstr "%U kompiuteryje %h"
 msgid "_Password:"
 msgstr "_Slaptažodis:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "Plaukiojantis MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "Plaukiojantis KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "MATE logotipas „burbuliuoja“ ekrane"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "KYLIN logotipas „burbuliuoja“ ekrane"

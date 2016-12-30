@@ -9,7 +9,7 @@
 # Pilar Embid Giner <embid_mar@gva.es>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-09-15 07:17+0000\n"
@@ -783,8 +783,8 @@ msgstr "%U a %h"
 msgid "_Password:"
 msgstr "_Contrasenya:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "MATE flotant"
+#~ msgid "Floating KYLIN"
+#~ msgstr "KYLIN flotant"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Bambolles amb el logotip del MATE per tota la pantalla"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Bambolles amb el logotip del KYLIN per tota la pantalla"

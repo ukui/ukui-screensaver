@@ -6,7 +6,7 @@
 # Siranush <ss.m.95@mail.ru>, 2015-2016
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-01-30 13:12+0000\n"
@@ -764,8 +764,8 @@ msgstr "%U վրա %h"
 msgid "_Password:"
 msgstr "_Գաղտնաբառ"
 
-#~ msgid "Floating MATE"
-#~ msgstr "Փոփոխական MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "Փոփոխական KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "MATE լոգոյի պղպջակները էկրանի շուրջը"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "KYLIN լոգոյի պղպջակները էկրանի շուրջը"

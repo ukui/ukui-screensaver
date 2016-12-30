@@ -20,7 +20,7 @@
 # Vladimir Melo <vladimirmelo@foresightlinux.org>, 2008
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-07-08 17:06+0000\n"
@@ -786,8 +786,8 @@ msgstr "%U em %h"
 msgid "_Password:"
 msgstr "_Senha:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "MATE Flutuante"
+#~ msgid "Floating KYLIN"
+#~ msgstr "KYLIN Flutuante"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Borbulha o logotipo MATE ao redor da tela"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Borbulha o logotipo KYLIN ao redor da tela"

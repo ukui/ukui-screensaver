@@ -10,7 +10,7 @@
 # Woodman Tuen <wmtuen@gmail.com>, 2007
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
@@ -726,8 +726,8 @@ msgstr "%U 於 %h"
 msgid "_Password:"
 msgstr "密碼(_P):"
 
-#~ msgid "Floating MATE"
-#~ msgstr "浮動的 MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "浮動的 KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "畫面上四處移動的 MATE 圖標泡泡"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "畫面上四處移動的 KYLIN 圖標泡泡"

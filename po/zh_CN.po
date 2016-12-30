@@ -10,7 +10,7 @@
 # Mingcong Bai <jeffbai@aosc.xyz>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-03-30 13:37+0000\n"
@@ -744,8 +744,8 @@ msgstr "%h 上的 %U"
 msgid "_Password:"
 msgstr "密码(_P)："
 
-#~ msgid "Floating MATE"
-#~ msgstr "浮动的 MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "浮动的 KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "在屏幕上如泡泡一样浮动 MATE 徽标"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "在屏幕上如泡泡一样浮动 KYLIN 徽标"

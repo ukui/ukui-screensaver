@@ -12,7 +12,7 @@
 # thunk <thunk77@gmail.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-04-30 19:10+0000\n"
@@ -766,8 +766,8 @@ msgstr "%U σε %h"
 msgid "_Password:"
 msgstr "_Κωδικός:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "Ελεύθερα μετακινούμενο MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "Ελεύθερα μετακινούμενο KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Φούσκες του λογότυπου του MATE στην οθόνη"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Φούσκες του λογότυπου του KYLIN στην οθόνη"

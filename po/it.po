@@ -9,7 +9,7 @@
 # Stefano Karapetsas <stefano@karapetsas.com>, 2013-2014
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-01-24 19:37+0000\n"
@@ -777,8 +777,8 @@ msgstr "%U su %h"
 msgid "_Password:"
 msgstr "Pass_word:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "MATE fluttuante"
+#~ msgid "Floating KYLIN"
+#~ msgstr "KYLIN fluttuante"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Fa rimbalzare il logo di MATE sullo schermo"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Fa rimbalzare il logo di KYLIN sullo schermo"

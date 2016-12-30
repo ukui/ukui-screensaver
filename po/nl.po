@@ -9,7 +9,7 @@
 # Stef Pletinck <stef.plet@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-03-30 14:22+0000\n"
@@ -778,8 +778,8 @@ msgstr "%U op %h"
 msgid "_Password:"
 msgstr "_Wachtwoord:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "MATE-logo's"
+#~ msgid "Floating KYLIN"
+#~ msgstr "KYLIN-logo's"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Toont vliegende MATE-logo's op het scherm."
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Toont vliegende KYLIN-logo's op het scherm."

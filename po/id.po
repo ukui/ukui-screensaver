@@ -11,7 +11,7 @@
 # Willy Sudiarto Raharjo <willysr@slackware-id.org>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-03-14 16:54+0000\n"
@@ -303,7 +303,7 @@ msgstr "GNOME Mengapung"
 #: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the KYLIN logo around the screen"
-msgstr "Balonkan logo kaki MATE di sekitar layar"
+msgstr "Balonkan logo kaki KYLIN di sekitar layar"
 
 #: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
 msgid "Floating GNOME"
@@ -311,7 +311,7 @@ msgstr "GNOME Mengapung"
 
 #: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
-msgstr "Balonkan logo kaki MATE di sekitar layar"
+msgstr "Balonkan logo kaki KYLIN di sekitar layar"
 
 #: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
 msgid "Pictures folder"
@@ -765,8 +765,8 @@ msgstr "%U pada %h"
 msgid "_Password:"
 msgstr "_Kata sandi:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "MATE Mengapung"
+#~ msgid "Floating KYLIN"
+#~ msgstr "KYLIN Mengapung"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Balonkan logo MATE di sekitar layar"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Balonkan logo KYLIN di sekitar layar"

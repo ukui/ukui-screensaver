@@ -9,7 +9,7 @@
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
@@ -687,7 +687,7 @@ msgstr "Glade インタフェースを読み込めませんでした"
 
 #: ../src/kylin-screensaver-preferences.c:1583
 msgid "Please make sure that the screensaver is properly installed"
-msgstr "mate-screensaver が正しくインストールされているか確認して下さい。"
+msgstr "kylin-screensaver が正しくインストールされているか確認して下さい。"
 
 #: ../src/kylin-screensaver.c:56
 msgid "Don't become a daemon"
@@ -765,8 +765,8 @@ msgstr "%U@%h"
 msgid "_Password:"
 msgstr "パスワード(_P):"
 
-#~ msgid "Floating MATE"
-#~ msgstr "フローティング MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "フローティング KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "画面の回りに MATE のロゴが浮かびます"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "画面の回りに KYLIN のロゴが浮かびます"

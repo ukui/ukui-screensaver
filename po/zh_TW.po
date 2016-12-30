@@ -12,7 +12,7 @@
 # Jeff Huang <s8321414@gmail.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
@@ -747,8 +747,8 @@ msgstr "%U 於 %h"
 msgid "_Password:"
 msgstr "密碼(_P):"
 
-#~ msgid "Floating MATE"
-#~ msgstr "浮動 MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "浮動 KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "讓 MATE 標誌圍繞畫面"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "讓 KYLIN 標誌圍繞畫面"

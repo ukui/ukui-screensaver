@@ -9,7 +9,7 @@
 # Yavor Doganov <yavor@gnu.org>, 2008
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
@@ -748,8 +748,8 @@ msgstr "%U на %h"
 msgid "_Password:"
 msgstr "_Парола:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "Плаващ MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "Плаващ KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Балончета по екрана с логото на MATE"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Балончета по екрана с логото на KYLIN"

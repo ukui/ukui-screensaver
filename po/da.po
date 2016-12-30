@@ -8,7 +8,7 @@
 # Joe Hansen <joedalton2@yahoo.dk>, 2013-2016
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-03-25 17:09+0000\n"
@@ -762,8 +762,8 @@ msgstr "%U på %h"
 msgid "_Password:"
 msgstr "_Adgangskode:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "Flydende MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "Flydende KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Bobler MATE-logoet omkring på skærmen"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Bobler KYLIN-logoet omkring på skærmen"

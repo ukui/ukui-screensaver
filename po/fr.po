@@ -15,7 +15,7 @@
 # yoplait <yoplait@tememe.org>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
@@ -786,8 +786,8 @@ msgstr "%U sur %h"
 msgid "_Password:"
 msgstr "_Mot de passe :"
 
-#~ msgid "Floating MATE"
-#~ msgstr "MATE flottant"
+#~ msgid "Floating KYLIN"
+#~ msgstr "KYLIN flottant"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Diffuser le logo MATE sous forme de bulles partout sur l'écran"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Diffuser le logo KYLIN sous forme de bulles partout sur l'écran"

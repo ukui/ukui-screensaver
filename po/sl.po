@@ -8,7 +8,7 @@
 # Matjaž Horvat <m@owca.info>, 2006
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: KYLIN Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
@@ -740,8 +740,8 @@ msgstr "%U na %h"
 msgid "_Password:"
 msgstr "_Geslo:"
 
-#~ msgid "Floating MATE"
-#~ msgstr "Lebdeči MATE"
+#~ msgid "Floating KYLIN"
+#~ msgstr "Lebdeči KYLIN"
 
-#~ msgid "Bubbles the MATE logo around the screen"
-#~ msgstr "Premikanje mehurčkov z logotipom MATE po zaslonu"
+#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgstr "Premikanje mehurčkov z logotipom KYLIN po zaslonu"
