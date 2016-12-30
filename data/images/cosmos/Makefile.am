@@ -1,15 +1,15 @@
 NULL =
 
 BACKGROUNDS = \
-	blue-marble-west.jpg	\
-	cloud.jpg 		\
-	comet.jpg 		\
-	earth-horizon.jpg	\
-	galaxy-ngc3370.jpg	\
-	helix-nebula.jpg	\
-	jupiter.jpg		\
-	sombrero.jpg		\
-	whirlpool.jpg		\
+	blue-marble-west-kylin.jpg	\
+	cloud-kylin.jpg 		\
+	comet-kylin.jpg 		\
+	earth-horizon-kylin.jpg	\
+	galaxy-ngc3370-kylin.jpg	\
+	helix-nebula-kylin.jpg	\
+	jupiter-kylin.jpg		\
+	sombrero-kylin.jpg		\
+	whirlpool-kylin.jpg		\
 	$(NULL)
 
 imagesdir   = $(SLIDESHOW_COSMOS_DIR)
