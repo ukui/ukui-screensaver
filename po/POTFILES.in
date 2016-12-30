@@ -7,10 +7,10 @@ data/images/cosmos/cosmos.xml.in.in
 [type: gettext/glade]data/lock-dialog-default.ui
 [type: gettext/gsettings]data/org.kylin.screensaver.gschema.xml.in
 savers/cosmos-slideshow-kylin.desktop.in.in
-savers/footlogo-floaters.desktop.in.in
-savers/gnomelogo-floaters.desktop.in.in
-savers/personal-slideshow.desktop.in.in
-savers/popsquares.desktop.in.in
+savers/footlogo-floaters-kylin.desktop.in.in
+savers/gnomelogo-floaters-kylin.desktop.in.in
+savers/personal-slideshow-kylin.desktop.in.in
+savers/popsquares-kylin.desktop.in.in
 savers/popsquares.c
 savers/floaters.c
 savers/slideshow.c
