@@ -8,32 +8,32 @@ Author: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
  Categories=Screensaver;
 +Keywords=KYLIN;screensaver;slideshow;cosmos;
  OnlyShowIn=KYLIN;
---- a/savers/footlogo-floaters.desktop.in.in
-+++ b/savers/footlogo-floaters.desktop.in.in
+--- a/savers/footlogo-floaters-kylin.desktop.in.in
++++ b/savers/footlogo-floaters-kylin.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
 +Keywords=KYLIN;screensaver;logo;bubbles;
  OnlyShowIn=KYLIN;
---- a/savers/gnomelogo-floaters.desktop.in.in
-+++ b/savers/gnomelogo-floaters.desktop.in.in
+--- a/savers/gnomelogo-floaters-kylin.desktop.in.in
++++ b/savers/gnomelogo-floaters-kylin.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
 +Keywords=KYLIN;screensaver;GNOME;logo;bubbles;
  OnlyShowIn=KYLIN;
---- a/savers/personal-slideshow.desktop.in.in
-+++ b/savers/personal-slideshow.desktop.in.in
+--- a/savers/personal-slideshow-kylin.desktop.in.in
++++ b/savers/personal-slideshow-kylin.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
 +Keywords=KYLIN;screensaver;custom;slideshow;pictures;folder;
  OnlyShowIn=KYLIN;
---- a/savers/popsquares.desktop.in.in
-+++ b/savers/popsquares.desktop.in.in
+--- a/savers/popsquares-kylin.desktop.in.in
++++ b/savers/popsquares-kylin.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application

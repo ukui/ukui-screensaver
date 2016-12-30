@@ -16,21 +16,21 @@ AM_CPPFLAGS =							\
 
 DESKTOP_IN_IN_FILES = 			 \
 	cosmos-slideshow-kylin.desktop.in.in 	 \
-	footlogo-floaters.desktop.in.in	 \
-	gnomelogo-floaters.desktop.in.in	 \
-	personal-slideshow.desktop.in.in \
-	popsquares.desktop.in.in	 \
+	footlogo-floaters-kylin.desktop.in.in	 \
+	gnomelogo-floaters-kylin.desktop.in.in	 \
+	personal-slideshow-kylin.desktop.in.in \
+	popsquares-kylin.desktop.in.in	 \
 	$(NULL)
 
 cosmos-slideshow-kylin.desktop.in: cosmos-slideshow-kylin.desktop.in.in Makefile
 	$(edit) $< >$@
-footlogo-floaters.desktop.in: footlogo-floaters.desktop.in.in Makefile
+footlogo-floaters-kylin.desktop.in: footlogo-floaters-kylin.desktop.in.in Makefile
 	$(edit) $< >$@
-gnomelogo-floaters.desktop.in: gnomelogo-floaters.desktop.in.in Makefile
+gnomelogo-floaters-kylin.desktop.in: gnomelogo-floaters-kylin.desktop.in.in Makefile
 	$(edit) $< >$@
-personal-slideshow.desktop.in: personal-slideshow.desktop.in.in Makefile
+personal-slideshow-kylin.desktop.in: personal-slideshow-kylin.desktop.in.in Makefile
 	$(edit) $< >$@
-popsquares.desktop.in: popsquares.desktop.in.in Makefile
+popsquares-kylin.desktop.in: popsquares-kylin.desktop.in.in Makefile
 	$(edit) $< >$@
 
 @INTLTOOL_DESKTOP_RULE@
@@ -44,10 +44,10 @@ edit = sed \
 themesdir = $(datadir)/applications/screensavers
 themes_in_files = 			\
 	cosmos-slideshow-kylin.desktop.in	\
-	footlogo-floaters.desktop.in    \
-	gnomelogo-floaters.desktop.in    \
-	personal-slideshow.desktop.in	\
-	popsquares.desktop.in		\
+	footlogo-floaters-kylin.desktop.in    \
+	gnomelogo-floaters-kylin.desktop.in    \
+	personal-slideshow-kylin.desktop.in	\
+	popsquares-kylin.desktop.in		\
 	$(NULL)
 themes_DATA = $(themes_in_files:.desktop.in=.desktop)
 
@@ -129,10 +129,10 @@ EXTRA_DIST =				\
 CLEANFILES = 				\
 	$(BUILT_SOURCES)		\
 	cosmos-slideshow-kylin.desktop.in	\
-	footlogo-floaters.desktop.in	\
-	gnomelogo-floaters.desktop.in	\
-	popsquares.desktop.in		\
-	personal-slideshow.desktop.in	\
+	footlogo-floaters-kylin.desktop.in	\
+	gnomelogo-floaters-kylin.desktop.in	\
+	popsquares-kylin.desktop.in		\
+	personal-slideshow-kylin.desktop.in	\
 	$(NULL)
 
 DISTCLEANFILES = 			\
@@ -143,8 +143,8 @@ MAINTAINERCLEANFILES =			\
 	*~				\
 	Makefile.in			\
 	cosmos-slideshow-kylin.desktop	\
-	footlogo-floaters.desktop	\
-	gnomelogo-floaters.desktop	\
-	personal-slideshow.desktop	\
-	popsquares.desktop		\
+	footlogo-floaters-kylin.desktop	\
+	gnomelogo-floaters-kylin.desktop	\
+	personal-slideshow-kylin.desktop	\
+	popsquares-kylin.desktop		\
 	$(NULL)
