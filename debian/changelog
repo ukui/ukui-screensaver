@@ -1,3 +1,9 @@
+kylin-screensaver (1.16.0-1ubuntu1) yakkety; urgency=medium
+
+  * po/ 目录内 .po 文件中部分遗留的MATE、Mate关键字替换
+
+ -- lihao <lihao@kylinos.cn>  Fri, 30 Dec 2016 17:24:31 +0800
+
 kylin-screensaver (1.16.0-1) yakkety; urgency=medium
 
   * Fork from mate-screensaver, rename to kylin-screensaver.
