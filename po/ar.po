@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 14:52+0800\n"
+"POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
 "Last-Translator: monsta <monsta@inbox.ru>\n"
 "Language-Team: Arabic (http://www.transifex.com/mate/MATE/language/ar/)\n"
@@ -263,37 +263,37 @@ msgstr ""
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "أظهر عرض شرائح من صور الكَوْن"
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:1
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating KYLIN"
 msgstr "أقدام غنّوم طافية"
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:2
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the KYLIN logo around the screen"
 msgstr "فقاعات شعار غنّوم حول الشّاشة"
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:1
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
 msgid "Floating GNOME"
 msgstr "أقدام غنّوم طافية"
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:2
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
 msgstr "فقاعات شعار غنّوم حول الشّاشة"
 
-#: ../savers/personal-slideshow.desktop.in.in.h:1
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
 msgid "Pictures folder"
 msgstr "مجلّد الصور"
 
-#: ../savers/personal-slideshow.desktop.in.in.h:2
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:2
 msgid "Display a slideshow from your Pictures folder"
 msgstr "أظهر عرض شرائح من مجلد الصور الخاص بك"
 
-#: ../savers/popsquares.desktop.in.in.h:1
+#: ../savers/popsquares-kylin.desktop.in.in.h:1
 msgid "Pop art squares"
 msgstr "المربعات الفنية"
 
-#: ../savers/popsquares.desktop.in.in.h:2
+#: ../savers/popsquares-kylin.desktop.in.in.h:2
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "شَبَكَة شبه فنية للألوان النابضة."
 

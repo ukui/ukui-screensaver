@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 14:52+0800\n"
+"POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-03-31 01:23+0000\n"
 "Last-Translator: 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mate/MATE/language/ko/)\n"
@@ -286,37 +286,37 @@ msgstr "화면을 잠궜을 때 세션 상태 메시지 출력을 허용합니�
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "우주 그림의 슬라이드를 보여줍니다"
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:1
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating KYLIN"
 msgstr "떠다니는 GNOME"
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:2
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the KYLIN logo around the screen"
 msgstr "화면에 그놈 발바닥 로고가 떠다닙니다"
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:1
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
 msgid "Floating GNOME"
 msgstr "떠다니는 GNOME"
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:2
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
 msgstr "화면에 그놈 발바닥 로고가 떠다닙니다"
 
-#: ../savers/personal-slideshow.desktop.in.in.h:1
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
 msgid "Pictures folder"
 msgstr "그림 폴더"
 
-#: ../savers/personal-slideshow.desktop.in.in.h:2
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:2
 msgid "Display a slideshow from your Pictures folder"
 msgstr "그림 폴더에 있는 그림의 슬라이드를 보여줍니다"
 
-#: ../savers/popsquares.desktop.in.in.h:1
+#: ../savers/popsquares-kylin.desktop.in.in.h:1
 msgid "Pop art squares"
 msgstr "팝 아트 사각형"
 
-#: ../savers/popsquares.desktop.in.in.h:2
+#: ../savers/popsquares-kylin.desktop.in.in.h:2
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "고동치는 색깔의 팝아트 형식 격자 모양."
 

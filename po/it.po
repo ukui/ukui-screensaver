@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 14:52+0800\n"
+"POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-01-24 19:37+0000\n"
 "Last-Translator: Marco Bartolucci <nap.84@live.it>\n"
 "Language-Team: Italian (http://www.transifex.com/mate/MATE/language/it/)\n"
@@ -300,37 +300,37 @@ msgstr ""
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Mostra una sequenza di immagini del cosmo"
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:1
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating KYLIN"
 msgstr "GNOME fluttuante"
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:2
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the KYLIN logo around the screen"
 msgstr "Fa rimbalzare il logo di GNOME sullo schermo"
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:1
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
 msgid "Floating GNOME"
 msgstr "GNOME fluttuante"
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:2
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
 msgstr "Fa rimbalzare il logo di GNOME sullo schermo"
 
-#: ../savers/personal-slideshow.desktop.in.in.h:1
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
 msgid "Pictures folder"
 msgstr "Cartella Immagini"
 
-#: ../savers/personal-slideshow.desktop.in.in.h:2
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:2
 msgid "Display a slideshow from your Pictures folder"
 msgstr "Mostra una sequenza dalla propria cartella Immagini"
 
-#: ../savers/popsquares.desktop.in.in.h:1
+#: ../savers/popsquares-kylin.desktop.in.in.h:1
 msgid "Pop art squares"
 msgstr "Quadrati Pop-art"
 
-#: ../savers/popsquares.desktop.in.in.h:2
+#: ../savers/popsquares-kylin.desktop.in.in.h:2
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "Una griglia in stile Pop-art di colori pulsanti."
 

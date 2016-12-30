@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 14:52+0800\n"
+"POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-09-15 07:17+0000\n"
 "Last-Translator: Jose Alfredo Murcia Andrés <joamuran@gmail.com>\n"
 "Language-Team: Catalan (Valencian) (http://www.transifex.com/mate/MATE/"
@@ -305,37 +305,37 @@ msgstr ""
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Mostra una projecció amb diapositives d'imatges del cosmos"
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:1
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating KYLIN"
 msgstr "GNOME flotant"
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:2
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the KYLIN logo around the screen"
 msgstr "Bambolles amb el logotip del GNOME per tota la pantalla"
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:1
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
 msgid "Floating GNOME"
 msgstr "GNOME flotant"
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:2
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
 msgstr "Bambolles amb el logotip del GNOME per tota la pantalla"
 
-#: ../savers/personal-slideshow.desktop.in.in.h:1
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
 msgid "Pictures folder"
 msgstr "Carpeta d'imatges"
 
-#: ../savers/personal-slideshow.desktop.in.in.h:2
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:2
 msgid "Display a slideshow from your Pictures folder"
 msgstr "Mostra una projecció amb diapositives de la vostra carpeta d'imatges"
 
-#: ../savers/popsquares.desktop.in.in.h:1
+#: ../savers/popsquares-kylin.desktop.in.in.h:1
 msgid "Pop art squares"
 msgstr "Quadrats pop-art"
 
-#: ../savers/popsquares.desktop.in.in.h:2
+#: ../savers/popsquares-kylin.desktop.in.in.h:2
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "Una graella de colors de pulsació d'estil pop-art."
 

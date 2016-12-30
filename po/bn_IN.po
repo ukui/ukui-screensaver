@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 14:52+0800\n"
+"POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
 "Last-Translator: monsta <monsta@inbox.ru>\n"
 "Language-Team: Bengali (India) (http://www.transifex.com/mate/MATE/language/"
@@ -261,36 +261,36 @@ msgstr ""
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "কসমস এর ছবিগুলোর একটি স্লাইডশো প্রদর্শন করুন"
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:1
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
 msgid "Floating KYLIN"
 msgstr ""
 
-#: ../savers/footlogo-floaters.desktop.in.in.h:2
+#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the KYLIN logo around the screen"
 msgstr "image - ভাসাবে images পর্দা জুড়ে"
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:1
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
 msgid "Floating GNOME"
 msgstr ""
 
-#: ../savers/gnomelogo-floaters.desktop.in.in.h:2
+#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
 msgstr ""
 
-#: ../savers/personal-slideshow.desktop.in.in.h:1
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
 msgid "Pictures folder"
 msgstr "ছবির ফোল্ডার"
 
-#: ../savers/personal-slideshow.desktop.in.in.h:2
+#: ../savers/personal-slideshow-kylin.desktop.in.in.h:2
 msgid "Display a slideshow from your Pictures folder"
 msgstr "আপনার ছবির ফোল্ডার এর োর একটি স্লাইডশো প্রদর্শন করুন"
 
-#: ../savers/popsquares.desktop.in.in.h:1
+#: ../savers/popsquares-kylin.desktop.in.in.h:1
 msgid "Pop art squares"
 msgstr "পপ আর্ট স্কোয়ার"
 
-#: ../savers/popsquares.desktop.in.in.h:2
+#: ../savers/popsquares-kylin.desktop.in.in.h:2
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "A pop-art-ish grid of pulsing colors."
 
