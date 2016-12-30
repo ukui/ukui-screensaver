@@ -15,13 +15,13 @@ BACKGROUNDS = \
 imagesdir   = $(SLIDESHOW_COSMOS_DIR)
 images_DATA =			\
 	$(BACKGROUNDS)		\
-	background-1.xml	\
+	background-1-kylin.xml	\
 	$(NULL)
 
 cosmos.xml.in: cosmos.xml.in.in Makefile
 	$(edit) $< >$@
 
-background-1.xml: background-1.xml.in Makefile
+background-1-kylin.xml: background-1-kylin.xml.in Makefile
 	$(edit) $< >$@
 
 metadata_in_files = cosmos.xml.in
@@ -35,7 +35,7 @@ edit = sed \
 EXTRA_DIST =			\
 	CREDITS 		\
 	$(BACKGROUNDS)		\
-	background-1.xml.in	\
+	background-1-kylin.xml.in	\
 	cosmos.xml.in.in	\
 	$(NULL)
 
@@ -45,7 +45,7 @@ CLEANFILES = \
 
 DISTCLEANFILES = \
 	cosmos.xml			\
-	background-1.xml		\
+	background-1-kylin.xml		\
 	$(NULL)
 
 MAINTAINERCLEANFILES =                  \
