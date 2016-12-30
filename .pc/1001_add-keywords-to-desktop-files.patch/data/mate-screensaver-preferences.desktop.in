@@ -2,12 +2,12 @@
 _Name=Screensaver
 _Comment=Set your screensaver preferences
 Icon=preferences-desktop-screensaver
-Exec=mate-screensaver-preferences
+Exec=kylin-screensaver-preferences
 Terminal=false
 Type=Application
 Categories=GTK;Settings;DesktopSettings;
-OnlyShowIn=MATE;
+OnlyShowIn=KYLIN;
 StartupNotify=true
-X-MATE-Bugzilla-Bugzilla=MATE
-X-MATE-Bugzilla-Product=mate-screensaver
-X-MATE-Bugzilla-Component=general
+X-KYLIN-Bugzilla-Bugzilla=KYLIN
+X-KYLIN-Bugzilla-Product=kylin-screensaver
+X-KYLIN-Bugzilla-Component=general
