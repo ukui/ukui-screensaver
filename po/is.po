@@ -756,8 +756,8 @@ msgstr "%U á %h"
 msgid "_Password:"
 msgstr "_Lykilorð:"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "Fljótandi KYLIN"
+#~ msgid "Floating MATE"
+#~ msgstr "Fljótandi MATE"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "Freyðir KYLIN-merkinu um skjáinn"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "Freyðir MATE-merkinu um skjáinn"

@@ -766,8 +766,8 @@ msgstr "%U σε %h"
 msgid "_Password:"
 msgstr "_Κωδικός:"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "Ελεύθερα μετακινούμενο KYLIN"
+#~ msgid "Floating MATE"
+#~ msgstr "Ελεύθερα μετακινούμενο MATE"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "Φούσκες του λογότυπου του KYLIN στην οθόνη"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "Φούσκες του λογότυπου του MATE στην οθόνη"

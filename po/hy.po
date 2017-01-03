@@ -764,8 +764,8 @@ msgstr "%U վրա %h"
 msgid "_Password:"
 msgstr "_Գաղտնաբառ"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "Փոփոխական KYLIN"
+#~ msgid "Floating MATE"
+#~ msgstr "Փոփոխական MATE"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "KYLIN լոգոյի պղպջակները էկրանի շուրջը"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "MATE լոգոյի պղպջակները էկրանի շուրջը"

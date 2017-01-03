@@ -742,8 +742,8 @@ msgstr "%U en %h"
 msgid "_Password:"
 msgstr "Co_ntrasinal:"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "KYLIN flotante"
+#~ msgid "Floating MATE"
+#~ msgstr "MATE flotante"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "Move o logotipo do do KYLIN pola pantalla"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "Move o logotipo do do MATE pola pantalla"

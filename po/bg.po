@@ -748,8 +748,8 @@ msgstr "%U на %h"
 msgid "_Password:"
 msgstr "_Парола:"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "Плаващ KYLIN"
+#~ msgid "Floating MATE"
+#~ msgstr "Плаващ MATE"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "Балончета по екрана с логото на KYLIN"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "Балончета по екрана с логото на MATE"

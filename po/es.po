@@ -779,8 +779,8 @@ msgstr "%U en %h"
 msgid "_Password:"
 msgstr "_Contraseña:"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "KYLIN flotante"
+#~ msgid "Floating MATE"
+#~ msgstr "MATE flotante"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "Burbujas del logo KYLIN alrededor de la pantalla"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "Burbujas del logo MATE alrededor de la pantalla"

@@ -760,8 +760,8 @@ msgstr "%U на %h"
 msgid "_Password:"
 msgstr "_Лозинка:"
 
-#~ msgid "Floating KYLIN"
+#~ msgid "Floating MATE"
 #~ msgstr "Лебдећи Мејт"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgid "Bubbles the MATE logo around the screen"
 #~ msgstr "Приказује мехуриће Мејтовог обележја по екрану"

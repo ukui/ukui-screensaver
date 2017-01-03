@@ -728,8 +728,8 @@ msgstr "%U روی %h"
 msgid "_Password:"
 msgstr "_گذرواژه:"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "KYLIN معلق"
+#~ msgid "Floating MATE"
+#~ msgstr "MATE معلق"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "حباب‌پراکنی از لوگوی KYLIN در اطراف صفحهٔ نمایش"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "حباب‌پراکنی از لوگوی MATE در اطراف صفحهٔ نمایش"

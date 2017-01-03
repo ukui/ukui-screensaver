@@ -747,8 +747,8 @@ msgstr "%U 於 %h"
 msgid "_Password:"
 msgstr "密碼(_P):"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "浮動 KYLIN"
+#~ msgid "Floating MATE"
+#~ msgstr "浮動 MATE"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "讓 KYLIN 標誌圍繞畫面"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "讓 MATE 標誌圍繞畫面"

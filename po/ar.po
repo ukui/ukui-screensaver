@@ -741,8 +741,8 @@ msgstr "‏%U على %h"
 msgid "_Password:"
 msgstr "_كلمة المرور:"
 
-#~ msgid "Floating KYLIN"
+#~ msgid "Floating MATE"
 #~ msgstr "متّة طافية"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
+#~ msgid "Bubbles the MATE logo around the screen"
 #~ msgstr "فقاعات شعار متّة حول الشّاشة"

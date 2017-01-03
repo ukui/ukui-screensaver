@@ -768,8 +768,8 @@ msgstr "%U ezen: %h"
 msgid "_Password:"
 msgstr "_Jelszó:"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "Lebegő KYLIN"
+#~ msgid "Floating MATE"
+#~ msgstr "Lebegő MATE"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "A KYLIN logót lebegteti körbe a képernyőn"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "A MATE logót lebegteti körbe a képernyőn"

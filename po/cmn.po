@@ -726,8 +726,8 @@ msgstr "%U 於 %h"
 msgid "_Password:"
 msgstr "密碼(_P):"
 
-#~ msgid "Floating KYLIN"
-#~ msgstr "浮動的 KYLIN"
+#~ msgid "Floating MATE"
+#~ msgstr "浮動的 MATE"
 
-#~ msgid "Bubbles the KYLIN logo around the screen"
-#~ msgstr "畫面上四處移動的 KYLIN 圖標泡泡"
+#~ msgid "Bubbles the MATE logo around the screen"
+#~ msgstr "畫面上四處移動的 MATE 圖標泡泡"

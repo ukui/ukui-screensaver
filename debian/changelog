@@ -1,3 +1,9 @@
+kylin-screensaver (1.16.0-1ubuntu2) yakkety; urgency=medium
+
+  * 解决 .po 文件 obsolete #~ messages 信息与正常信息重名导致的错误
+
+ -- lihao <lihao@kylinos.cn>  Tue, 03 Jan 2017 08:55:11 +0800
+
 kylin-screensaver (1.16.0-1ubuntu1) yakkety; urgency=medium
 
   * po/ 目录内 .po 文件中部分遗留的MATE、Mate关键字替换
