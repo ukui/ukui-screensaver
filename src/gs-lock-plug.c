@@ -38,6 +38,9 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
+#include <glib.h>
+#include <glib/gstdio.h>
+
 #define KYLIN_DESKTOP_USE_UNSTABLE_API
 #include <libkylin-desktop/kylin-desktop-utils.h>
 
@@ -244,7 +247,7 @@ do_user_switch (GSLockPlug *plug)
 												&error);
 
 		g_free (command);
-		
+
 		if (! res) {
 			gs_debug ("Unable to start GDM greeter: %s", error->message);
 			g_error_free (error);
@@ -1032,7 +1035,7 @@ set_face_image (GSLockPlug *plug)
 	GdkPixbuf    *pixbuf;
 	const char   *homedir;
 	char         *path;
-	int           icon_size = 96;
+	int           icon_size = 160;
 	gsize         user_max_file = 65536;
 	uid_t         uid;
 
@@ -2210,33 +2213,57 @@ load_theme (GSLockPlug *plug)
 	lock_dialog = GTK_WIDGET (gtk_builder_get_object(builder, "lock-dialog"));
 	gtk_container_add (GTK_CONTAINER (plug), lock_dialog);
 
+	/*
+	while (!g_file_test("/home/lihao/c", G_FILE_TEST_EXISTS))
+		;
+	*/
+
+	/*
+	GtkStyleContext *context = gtk_widget_get_style_context(lock_dialog);
+	GtkStateFlags flags = gtk_style_context_get_state(context);
+	GdkRGBA rgb;
+	gtk_style_context_get_background_color(context, flags, &rgb);
+	rgb.red = rgb.green = rgb.blue =0;
+	rgb.alpha = 1;
+	gtk_widget_override_background_color(lock_dialog, flags, &rgb);
+	GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file(
+			"/home/lihao/桌面/2a-screensaver/r10/debian/wallpaper.png", NULL);
+	cairo_t *cr;
+	cr = gdk_cairo_create(lock_dialog);
+	gdk_cairo_set_source_pixbuf(cr, pixbuf, 100, 100);
+	cairo_pattern_set_extend (cairo_get_source (cr), CAIRO_EXTEND_REPEAT);
+	cairo_rectangle (cr, 0, 0, 50, 50);
+	cairo_fill (cr);
+	cairo_destroy (cr);
+	*/
+
 	plug->priv->vbox = NULL;
-	plug->priv->notebook = GTK_WIDGET (gtk_builder_get_object(builder, "notebook"));
+	//plug->priv->notebook = GTK_WIDGET (gtk_builder_get_object(builder, "notebook"));
 
 	plug->priv->auth_face_image = GTK_WIDGET (gtk_builder_get_object(builder, "auth-face-image"));
-	plug->priv->auth_action_area = GTK_WIDGET (gtk_builder_get_object(builder, "auth-action-area"));
-	plug->priv->auth_time_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-time-label"));
-	plug->priv->auth_date_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-date-label"));
+	//plug->priv->auth_action_area = GTK_WIDGET (gtk_builder_get_object(builder, "auth-action-area"));
+	//plug->priv->auth_time_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-time-label"));
+	//plug->priv->auth_date_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-date-label"));
 	plug->priv->auth_realname_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-realname-label"));
-	plug->priv->auth_username_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-username-label"));
+	//plug->priv->auth_username_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-username-label"));
 	plug->priv->auth_prompt_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-prompt-label"));
 	plug->priv->auth_prompt_entry = GTK_WIDGET (gtk_builder_get_object(builder, "auth-prompt-entry"));
 	plug->priv->auth_prompt_box = GTK_WIDGET (gtk_builder_get_object(builder, "auth-prompt-box"));
-	plug->priv->auth_capslock_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-capslock-label"));
+	//plug->priv->auth_capslock_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-capslock-label"));
 	plug->priv->auth_message_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-status-label"));
 	plug->priv->auth_unlock_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-unlock-button"));
-	plug->priv->auth_cancel_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-cancel-button"));
-	plug->priv->auth_logout_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-logout-button"));
-	plug->priv->auth_switch_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-switch-button"));
-	plug->priv->auth_note_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-note-button"));
-	plug->priv->note_tab = GTK_WIDGET (gtk_builder_get_object(builder, "note-tab"));
-	plug->priv->note_tab_label = GTK_WIDGET (gtk_builder_get_object(builder, "note-tab-label"));
-	plug->priv->note_ok_button = GTK_WIDGET (gtk_builder_get_object(builder, "note-ok-button"));
-	plug->priv->note_text_view = GTK_WIDGET (gtk_builder_get_object(builder, "note-text-view"));
-	plug->priv->note_cancel_button = GTK_WIDGET (gtk_builder_get_object(builder, "note-cancel-button"));
+	//plug->priv->auth_cancel_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-cancel-button"));
+	//plug->priv->auth_logout_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-logout-button"));
+	//plug->priv->auth_switch_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-switch-button"));
+	//plug->priv->auth_note_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-note-button"));
+	//plug->priv->note_tab = GTK_WIDGET (gtk_builder_get_object(builder, "note-tab"));
+	//plug->priv->note_tab_label = GTK_WIDGET (gtk_builder_get_object(builder, "note-tab-label"));
+	//plug->priv->note_ok_button = GTK_WIDGET (gtk_builder_get_object(builder, "note-ok-button"));
+	//plug->priv->note_text_view = GTK_WIDGET (gtk_builder_get_object(builder, "note-text-view"));
+	//plug->priv->note_cancel_button = GTK_WIDGET (gtk_builder_get_object(builder, "note-cancel-button"));
 
 	/* Placeholder for the keyboard indicator */
-	plug->priv->auth_prompt_kbd_layout_indicator = GTK_WIDGET (gtk_builder_get_object(builder, "auth-prompt-kbd-layout-indicator"));
+	//plug->priv->auth_prompt_kbd_layout_indicator = GTK_WIDGET (gtk_builder_get_object(builder, "auth-prompt-kbd-layout-indicator"));
 	if (plug->priv->auth_logout_button != NULL)
 	{
 		gtk_widget_set_no_show_all (plug->priv->auth_logout_button, TRUE);
