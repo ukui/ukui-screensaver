@@ -1,3 +1,3 @@
 version=3
-http://git.mate-desktop.org/mate-screensaver/ \
-    snapshot/mate-screensaver-(\d\.(?:[0-9]+|)[24680]\.\d)\.tar\.xz
+http://git.ukui.org/kylin-screensaver/ \
+    snapshot/kylin-screensaver-(\d\.(?:[0-9]+|)[24680]\.\d)\.tar\.xz

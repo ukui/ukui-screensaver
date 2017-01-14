@@ -1,7 +1,8 @@
-mate-screensaver
+kylin-screensaver
+kylin-screensaver is a fork of mate-screensaver.
 =================
 
-mate-screensaver is a screen saver and locker that aims to have
+kylin-screensaver is a screen saver and locker that aims to have
 simple, sane, secure defaults and be well integrated with the desktop.
 It is designed to support:
 
@@ -27,9 +28,9 @@ sudo make install
 How to report bugs
 ==================
 
-Bugs should be reported to the MATE bug tracking
+Bugs should be reported to the UKUI bug tracking
 system:
-    https://github.com/mate-desktop/mate-screensaver/issues
+    https://github.com/ukui/kylin-screensaver/issues
 
 You will need to create an account if you don't have one already.
 
@@ -37,8 +38,8 @@ In the bug report please include information about your system, if possible:
 
    - What operating system and version
 
-   - What version of mate-screenaver
+   - What version of kylin-screenaver
 
-        The output of the "mate-screensaver-command --version" command.
+        The output of the "kylin-screensaver-command --version" command.
 
  

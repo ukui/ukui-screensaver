@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: mate-screensaver
 Upstream-Contact: Stefano Karapetsas <stefano@karapetsas.com>
-Source: http://git.kylin-dektop.org/kylin-screensaver/
+Source: http://git.ukui.org/kylin-screensaver/
 
 Files: savers/gs-theme-engine.c
        savers/gs-theme-engine.h

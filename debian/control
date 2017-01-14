@@ -34,8 +34,6 @@ Build-Depends: debhelper (>= 9),
                xmlto,
 Standards-Version: 3.9.8
 Homepage: http://www.ukui.org/
-Vcs-Browser: https://anonscm.debian.org/git/pkg-mate/mate-screensaver.git
-Vcs-Git: https://anonscm.debian.org/git/pkg-mate/mate-screensaver.git
 
 Package: kylin-screensaver
 Architecture: any
