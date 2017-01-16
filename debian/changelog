@@ -1,3 +1,9 @@
+kylin-screensaver (1.16.0-1ubuntu3) yakkety; urgency=medium
+
+  * transifex网址、KYLIN Desktop Environment等修改
+
+ -- lihao <lihao@kylinos.cn>  Mon, 16 Jan 2017 14:03:29 +0800
+
 kylin-screensaver (1.16.0-1ubuntu2) yakkety; urgency=medium
 
   * 解决 .po 文件 obsolete #~ messages 信息与正常信息重名导致的错误
