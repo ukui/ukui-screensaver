@@ -9,7 +9,7 @@
 # Mișu Moldovan <dumol@mate.ro>, 2008
 msgid ""
 msgstr ""
-"Project-Id-Version: KYLIN Desktop Environment\n"
+"Project-Id-Version: UKUI Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 15:28+0800\n"
 "PO-Revision-Date: 2016-03-08 18:12+0000\n"
