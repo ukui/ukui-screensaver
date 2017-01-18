@@ -282,20 +282,20 @@ msgstr "Egy diavetítés a kozmosz képeiből"
 #: ../savers/footlogo-floaters-ukui.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Lebegő KYLIN"
+msgstr "Lebegő UKUI"
 
 #: ../savers/footlogo-floaters-ukui.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "A KYLIN logót lebegteti körbe a képernyőn"
+msgstr "A UKUI logót lebegteti körbe a képernyőn"
 
 #: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:1
 msgid "Floating GNOME"
-msgstr "Lebegő KYLIN"
+msgstr "Lebegő UKUI"
 
 #: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
-msgstr "A KYLIN logót lebegteti körbe a képernyőn"
+msgstr "A UKUI logót lebegteti körbe a képernyőn"
 
 #: ../savers/personal-slideshow-ukui.desktop.in.in.h:1
 msgid "Pictures folder"

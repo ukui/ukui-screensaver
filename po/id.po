@@ -286,7 +286,7 @@ msgstr "GNOME Mengapung"
 #: ../savers/footlogo-floaters-ukui.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Balonkan logo kaki KYLIN di sekitar layar"
+msgstr "Balonkan logo kaki UKUI di sekitar layar"
 
 #: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:1
 msgid "Floating GNOME"
@@ -294,7 +294,7 @@ msgstr "GNOME Mengapung"
 
 #: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
-msgstr "Balonkan logo kaki KYLIN di sekitar layar"
+msgstr "Balonkan logo kaki UKUI di sekitar layar"
 
 #: ../savers/personal-slideshow-ukui.desktop.in.in.h:1
 msgid "Pictures folder"

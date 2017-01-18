@@ -6,7 +6,7 @@
 # Fitoschido, 2015
 # Fitoschido, 2014
 # Benjamin Perez Carrillo <benperezc@gmail.com>, 2015
-# Copyright (C) 2005 The KYLIN Foundation, 2005
+# Copyright (C) 2005 The MATE Foundation, 2005
 # Emiliano Fascetti, 2015
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2005, 2006
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009

@@ -280,7 +280,7 @@ msgstr "Rodyti kosmoso paveikslų skaidrių rodymą"
 #: ../savers/footlogo-floaters-ukui.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Plaukiojantis KYLIN"
+msgstr "Plaukiojantis UKUI"
 
 #: ../savers/footlogo-floaters-ukui.desktop.in.in.h:2
 #, fuzzy
@@ -289,7 +289,7 @@ msgstr "GNOME logotipas „burbuliuoja“ ekrane"
 
 #: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:1
 msgid "Floating GNOME"
-msgstr "Plaukiojantis KYLIN"
+msgstr "Plaukiojantis UKUI"
 
 #: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
