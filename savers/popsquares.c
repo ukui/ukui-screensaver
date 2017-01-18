@@ -40,7 +40,7 @@ main (int argc, char **argv)
 	GtkWidget     *window;
 	GError        *error;
 
-	bindtextdomain (GETTEXT_PACKAGE, KYLINLOCALEDIR);
+	bindtextdomain (GETTEXT_PACKAGE, UKUILOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 

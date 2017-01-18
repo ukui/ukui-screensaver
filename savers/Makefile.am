@@ -6,31 +6,31 @@ NULL =
 AM_CPPFLAGS =							\
 	-I.							\
 	-I$(srcdir)						\
-	$(KYLIN_SCREENSAVER_SAVER_CFLAGS)			\
+	$(UKUI_SCREENSAVER_SAVER_CFLAGS)			\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DLIBEXECDIR=\""$(libexecdir)"\"			\
-	-DKYLINLOCALEDIR=\""$(datadir)/locale"\"			\
+	-DUKUILOCALEDIR=\""$(datadir)/locale"\"			\
 	-DDATADIR=\""$(datadir)"\"				\
 	$(WARN_CFLAGS)						\
 	$(NULL)
 
 DESKTOP_IN_IN_FILES = 			 \
-	cosmos-slideshow-kylin.desktop.in.in 	 \
-	footlogo-floaters-kylin.desktop.in.in	 \
-	gnomelogo-floaters-kylin.desktop.in.in	 \
-	personal-slideshow-kylin.desktop.in.in \
-	popsquares-kylin.desktop.in.in	 \
+	cosmos-slideshow-ukui.desktop.in.in 	 \
+	footlogo-floaters-ukui.desktop.in.in	 \
+	gnomelogo-floaters-ukui.desktop.in.in	 \
+	personal-slideshow-ukui.desktop.in.in \
+	popsquares-ukui.desktop.in.in	 \
 	$(NULL)
 
-cosmos-slideshow-kylin.desktop.in: cosmos-slideshow-kylin.desktop.in.in Makefile
+cosmos-slideshow-ukui.desktop.in: cosmos-slideshow-ukui.desktop.in.in Makefile
 	$(edit) $< >$@
-footlogo-floaters-kylin.desktop.in: footlogo-floaters-kylin.desktop.in.in Makefile
+footlogo-floaters-ukui.desktop.in: footlogo-floaters-ukui.desktop.in.in Makefile
 	$(edit) $< >$@
-gnomelogo-floaters-kylin.desktop.in: gnomelogo-floaters-kylin.desktop.in.in Makefile
+gnomelogo-floaters-ukui.desktop.in: gnomelogo-floaters-ukui.desktop.in.in Makefile
 	$(edit) $< >$@
-personal-slideshow-kylin.desktop.in: personal-slideshow-kylin.desktop.in.in Makefile
+personal-slideshow-ukui.desktop.in: personal-slideshow-ukui.desktop.in.in Makefile
 	$(edit) $< >$@
-popsquares-kylin.desktop.in: popsquares-kylin.desktop.in.in Makefile
+popsquares-ukui.desktop.in: popsquares-ukui.desktop.in.in Makefile
 	$(edit) $< >$@
 
 @INTLTOOL_DESKTOP_RULE@
@@ -43,11 +43,11 @@ edit = sed \
 
 themesdir = $(datadir)/applications/screensavers
 themes_in_files = 			\
-	cosmos-slideshow-kylin.desktop.in	\
-	footlogo-floaters-kylin.desktop.in    \
-	gnomelogo-floaters-kylin.desktop.in    \
-	personal-slideshow-kylin.desktop.in	\
-	popsquares-kylin.desktop.in		\
+	cosmos-slideshow-ukui.desktop.in	\
+	footlogo-floaters-ukui.desktop.in    \
+	gnomelogo-floaters-ukui.desktop.in    \
+	personal-slideshow-ukui.desktop.in	\
+	popsquares-ukui.desktop.in		\
 	$(NULL)
 themes_DATA = $(themes_in_files:.desktop.in=.desktop)
 
@@ -67,7 +67,7 @@ noinst_LIBRARIES =			\
 	libgs-theme-engine.a
 
 libgs_theme_engine_a_CPPFLAGS =					\
-	$(KYLIN_SCREENSAVER_SAVER_CFLAGS)			\
+	$(UKUI_SCREENSAVER_SAVER_CFLAGS)			\
 	-DDATADIR=\""$(datadir)"\"				\
 	$(NULL)
 
@@ -79,7 +79,7 @@ libgs_theme_engine_a_SOURCES =		\
 	gs-theme-engine.h		\
 	$(NULL)
 
-saverdir = $(libexecdir)/kylin-screensaver
+saverdir = $(libexecdir)/ukui-screensaver
 saver_PROGRAMS = 	\
 	floaters	\
 	popsquares	\
@@ -92,7 +92,7 @@ floaters_SOURCES =	\
 
 floaters_LDADD =		       \
 	libgs-theme-engine.a		\
-	$(KYLIN_SCREENSAVER_SAVER_LIBS) \
+	$(UKUI_SCREENSAVER_SAVER_LIBS) \
 	-lm                             \
 	$(NULL)
 
@@ -104,7 +104,7 @@ popsquares_SOURCES = 		\
 
 popsquares_LDADD =			\
 	libgs-theme-engine.a 		\
-	$(KYLIN_SCREENSAVER_SAVER_LIBS)	\
+	$(UKUI_SCREENSAVER_SAVER_LIBS)	\
 	$(NULL)
 
 slideshow_SOURCES =   \
@@ -117,7 +117,7 @@ slideshow_SOURCES =   \
 
 slideshow_LDADD =     \
 	libgs-theme-engine.a 		\
-	$(KYLIN_SCREENSAVER_SAVER_LIBS)	\
+	$(UKUI_SCREENSAVER_SAVER_LIBS)	\
 	$(NULL)
 
 EXTRA_DIST =				\
@@ -128,11 +128,11 @@ EXTRA_DIST =				\
 
 CLEANFILES = 				\
 	$(BUILT_SOURCES)		\
-	cosmos-slideshow-kylin.desktop.in	\
-	footlogo-floaters-kylin.desktop.in	\
-	gnomelogo-floaters-kylin.desktop.in	\
-	popsquares-kylin.desktop.in		\
-	personal-slideshow-kylin.desktop.in	\
+	cosmos-slideshow-ukui.desktop.in	\
+	footlogo-floaters-ukui.desktop.in	\
+	gnomelogo-floaters-ukui.desktop.in	\
+	popsquares-ukui.desktop.in		\
+	personal-slideshow-ukui.desktop.in	\
 	$(NULL)
 
 DISTCLEANFILES = 			\
@@ -142,9 +142,9 @@ DISTCLEANFILES = 			\
 MAINTAINERCLEANFILES =			\
 	*~				\
 	Makefile.in			\
-	cosmos-slideshow-kylin.desktop	\
-	footlogo-floaters-kylin.desktop	\
-	gnomelogo-floaters-kylin.desktop	\
-	personal-slideshow-kylin.desktop	\
-	popsquares-kylin.desktop		\
+	cosmos-slideshow-ukui.desktop	\
+	footlogo-floaters-ukui.desktop	\
+	gnomelogo-floaters-ukui.desktop	\
+	personal-slideshow-ukui.desktop	\
+	popsquares-ukui.desktop		\
 	$(NULL)

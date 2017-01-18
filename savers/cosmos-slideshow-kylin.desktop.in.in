@@ -7,5 +7,5 @@ StartupNotify=false
 Terminal=false
 Type=Application
 Categories=Screensaver;
-Keywords=KYLIN;screensaver;slideshow;cosmos;
-OnlyShowIn=KYLIN;
+Keywords=UKUI;screensaver;slideshow;cosmos;
+OnlyShowIn=UKUI;

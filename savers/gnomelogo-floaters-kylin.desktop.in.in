@@ -7,5 +7,5 @@ StartupNotify=false
 Terminal=false
 Type=Application
 Categories=Screensaver;
-Keywords=KYLIN;screensaver;GNOME;logo;bubbles;
-OnlyShowIn=KYLIN;
+Keywords=UKUI;screensaver;GNOME;logo;bubbles;
+OnlyShowIn=UKUI;
