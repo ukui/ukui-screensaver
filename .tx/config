@@ -1,5 +1,5 @@
 [main]
-host = https://www.transifex.com
+host = https://wiki.ukui.org/trans
  
 [UKUI.ukui-screensaver]
 file_filter = po/<lang>.po
