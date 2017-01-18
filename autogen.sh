@@ -4,7 +4,7 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="kylin-screensaver"
+PKG_NAME="ukui-screensaver"
 
 (test -f $srcdir/configure.ac) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
@@ -12,13 +12,13 @@ PKG_NAME="kylin-screensaver"
     exit 1
 }
 
-which kylin-autogen || {
-    echo "You need to install kylin-common from the KYLIN Git"
+which ukui-autogen || {
+    echo "You need to install ukui-common from the UKUI Git"
     exit 1
 }
 
 REQUIRED_AUTOMAKE_VERSION=1.9
-KYLIN_DATADIR="$kylin_datadir"
+UKUI_DATADIR="$ukui_datadir"
 
-. kylin-autogen
+. ukui-autogen
 
