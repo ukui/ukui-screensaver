@@ -1,26 +1,8 @@
-kylin-screensaver (1.16.0-1ubuntu3) yakkety; urgency=medium
+ukui-screensaver (1.16.0-1) yakkety; urgency=medium
 
-  * transifex网址、KYLIN Desktop Environment等修改
+  * Fork from mate-screensaver and rename it to ukui-screensaver
 
- -- lihao <lihao@kylinos.cn>  Mon, 16 Jan 2017 14:03:29 +0800
-
-kylin-screensaver (1.16.0-1ubuntu2) yakkety; urgency=medium
-
-  * 解决 .po 文件 obsolete #~ messages 信息与正常信息重名导致的错误
-
- -- lihao <lihao@kylinos.cn>  Tue, 03 Jan 2017 08:55:11 +0800
-
-kylin-screensaver (1.16.0-1ubuntu1) yakkety; urgency=medium
-
-  * po/ 目录内 .po 文件中部分遗留的MATE、Mate关键字替换
-
- -- lihao <lihao@kylinos.cn>  Fri, 30 Dec 2016 17:24:31 +0800
-
-kylin-screensaver (1.16.0-1) yakkety; urgency=medium
-
-  * Fork from mate-screensaver, rename to kylin-screensaver.
-
- -- lihao <lihao@kylinos.cn>  Thu, 29 Dec 2016 19:20:47 +0800
+ -- lihao <lihao@kylinos.cn>  Wed, 18 Jan 2017 14:55:03 +0800
 
 mate-screensaver (1.16.0-1) unstable; urgency=medium
 

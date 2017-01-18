@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: mate-screensaver
+Upstream-Name: ukui-screensaver
 Upstream-Contact: Stefano Karapetsas <stefano@karapetsas.com>
-Source: http://git.ukui.org/kylin-screensaver/
+Source: http://git.ukui.org/ukui-screensaver/
 
 Files: savers/gs-theme-engine.c
        savers/gs-theme-engine.h
@@ -35,12 +35,12 @@ Files: savers/gs-theme-engine.c
        src/gs-watcher.h
        src/gs-window-x11.c
        src/gs-window.h
-       src/kylin-screensaver-command.c
-       src/kylin-screensaver-dialog.c
-       src/kylin-screensaver-gl-helper.c
-       src/kylin-screensaver-preferences.c
-       src/kylin-screensaver.c
-       src/kylin-screensaver.h
+       src/ukui-screensaver-command.c
+       src/ukui-screensaver-dialog.c
+       src/ukui-screensaver-gl-helper.c
+       src/ukui-screensaver-preferences.c
+       src/ukui-screensaver.c
+       src/ukui-screensaver.h
        src/test-fade.c
        src/test-passwd.c
        src/test-watcher.c
@@ -104,9 +104,9 @@ Copyright: 1991-2003, Jamie Zawinski <jwz@jwz.org>
 Copyright: 2016, Tianjin kylin Ltd.
 License: MIT~OldStyle
 
-Files: data/kylin-screensaver-command.1
-       data/kylin-screensaver-preferences.1
-       data/kylin-screensaver.1
+Files: data/ukui-screensaver-command.1
+       data/ukui-screensaver-preferences.1
+       data/ukui-screensaver.1
 Copyright: *No copyright*
 License: GPL-2+
 
@@ -133,14 +133,14 @@ Files: .tx/config
        data/Makefile.am
        data/xscreensaver-config.xsl
        data/*.ui
-       data/kylin-screensaver
+       data/ukui-screensaver
        data/*.desktop.in
        data/*.directory.in
        data/*.pc.in
        data/*.menu.in
        data/*.service.in
        data/*.sh
-       data/org.kylin.*
+       data/org.ukui.*
        data/images/Makefile.am
        data/images/*.svg
        data/images/cosmos/*
