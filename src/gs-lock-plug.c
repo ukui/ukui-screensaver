@@ -42,15 +42,15 @@
 #include <glib.h>
 #include <glib/gstdio.h>
 
-#define KYLIN_DESKTOP_USE_UNSTABLE_API
-#include <libkylin-desktop/kylin-desktop-utils.h>
+#define UKUI_DESKTOP_USE_UNSTABLE_API
+#include <libukui-desktop/ukui-desktop-utils.h>
 
 #if GTK_CHECK_VERSION (3, 0, 0)
 #include <gtk/gtkx.h>
 #endif
 
 #ifdef WITH_KBD_LAYOUT_INDICATOR
-#include <libkylinkbd/kylinkbd-indicator.h>
+#include <libukuikbd/ukuikbd-indicator.h>
 #endif
 
 #ifdef WITH_LIBNOTIFY
@@ -61,7 +61,7 @@
 
 #include "gs-debug.h"
 
-#define GSETTINGS_SCHEMA "org.kylin.screensaver"
+#define GSETTINGS_SCHEMA "org.ukui.screensaver"
 
 #define KEY_LOCK_DIALOG_THEME "lock-dialog-theme"
 
@@ -223,7 +223,7 @@ do_user_switch (GSLockPlug *plug)
 								   MDM_FLEXISERVER_ARGS);
 
 		error = NULL;
-		res = kylin_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
+		res = ukui_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
 												command,
 												&error);
 
@@ -243,7 +243,7 @@ do_user_switch (GSLockPlug *plug)
 								   GDM_FLEXISERVER_ARGS);
 
 		error = NULL;
-		res = kylin_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
+		res = ukui_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
 												command,
 												&error);
 
@@ -2230,7 +2230,7 @@ load_theme (GSLockPlug *plug)
 	/* 读取图片并设置大小 */
 	GtkWidget *image;
 	GdkPixbuf *pixbuf;
-	pixbuf = gdk_pixbuf_new_from_file_at_size("/home/lihao/桌面/kylin-background.png", width, height, NULL);
+	pixbuf = gdk_pixbuf_new_from_file_at_size("/home/lihao/桌面/ukui-background.png", width, height, NULL);
 	image = gtk_image_new_from_pixbuf(pixbuf);
 	/* 添加图片层 */
 	gtk_layout_put(GTK_LAYOUT(layout), image, 0, 0);
@@ -2326,7 +2326,7 @@ gs_lock_plug_init (GSLockPlug *plug)
 	clear_clipboards (plug);
 
 #ifdef WITH_LIBNOTIFY
-	notify_init ("kylin-screensaver-dialog");
+	notify_init ("ukui-screensaver-dialog");
 	plug->priv->leave_note_enabled = TRUE;
 #else
 	plug->priv->leave_note_enabled = FALSE;
@@ -2385,8 +2385,8 @@ gs_lock_plug_init (GSLockPlug *plug)
 		{
 			GtkWidget *layout_indicator;
 
-			layout_indicator = kylinkbd_indicator_new ();
-			kylinkbd_indicator_set_parent_tooltips (KYLINKBD_INDICATOR (layout_indicator), TRUE);
+			layout_indicator = ukuikbd_indicator_new ();
+			ukuikbd_indicator_set_parent_tooltips (UKUIKBD_INDICATOR (layout_indicator), TRUE);
 			gtk_box_pack_start (GTK_BOX (plug->priv->auth_prompt_kbd_layout_indicator),
 			                    layout_indicator,
 			                    FALSE,

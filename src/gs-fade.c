@@ -41,9 +41,9 @@
 #include "gs-fade.h"
 #include "gs-debug.h"
 
-#define KYLIN_DESKTOP_USE_UNSTABLE_API
+#define UKUI_DESKTOP_USE_UNSTABLE_API
 
-#include "libkylin-desktop/kylin-rr.h"
+#include "libukui-desktop/ukui-rr.h"
 
 /* XFree86 4.x+ Gamma fading */
 
@@ -77,7 +77,7 @@ struct GSFadeScreenPrivate
 	/* one per crtc in randr mode */
 	struct GSGammaInfo *info;
 	/* one per screen in theory */
-	KylinRRScreen      *rrscreen;
+	UkuiRRScreen      *rrscreen;
 #ifdef HAVE_XF86VMODE_GAMMA
 	/* one per screen also */
 	XF86VidModeGamma    vmg;
@@ -533,8 +533,8 @@ static gboolean xrandr_fade_setup (GSFade *fade, int screen_idx)
 #endif
 {
 	struct GSFadeScreenPrivate *screen_priv;
-	KylinRRCrtc *crtc;
-	KylinRRCrtc **crtcs;
+	UkuiRRCrtc *crtc;
+	UkuiRRCrtc **crtcs;
 	int crtc_count = 0;
 	struct GSGammaInfo *info;
 	gboolean res;
@@ -549,9 +549,9 @@ static gboolean xrandr_fade_setup (GSFade *fade, int screen_idx)
 		return TRUE;
 
 	/* refresh the screen info */
-	kylin_rr_screen_refresh (screen_priv->rrscreen, NULL);
+	ukui_rr_screen_refresh (screen_priv->rrscreen, NULL);
 
-	crtcs = kylin_rr_screen_list_crtcs (screen_priv->rrscreen);
+	crtcs = ukui_rr_screen_list_crtcs (screen_priv->rrscreen);
 	while (*crtcs)
 	{
 		crtc_count++;
@@ -562,7 +562,7 @@ static gboolean xrandr_fade_setup (GSFade *fade, int screen_idx)
 	screen_priv->num_ramps = crtc_count;
 
 	crtc_count = 0;
-	crtcs = kylin_rr_screen_list_crtcs (screen_priv->rrscreen);
+	crtcs = ukui_rr_screen_list_crtcs (screen_priv->rrscreen);
 	while (*crtcs)
 	{
 		crtc = *crtcs;
@@ -570,7 +570,7 @@ static gboolean xrandr_fade_setup (GSFade *fade, int screen_idx)
 		info = &screen_priv->info[crtc_count];
 
 		/* if no mode ignore crtc */
-		if (!kylin_rr_crtc_get_current_mode (crtc))
+		if (!ukui_rr_crtc_get_current_mode (crtc))
 		{
 			info->size = 0;
 			info->r = NULL;
@@ -579,7 +579,7 @@ static gboolean xrandr_fade_setup (GSFade *fade, int screen_idx)
 		}
 		else
 		{
-			res = kylin_rr_crtc_get_gamma (crtc, &info->size,
+			res = ukui_rr_crtc_get_gamma (crtc, &info->size,
 			                              &info->r, &info->g,
 			                              &info->b);
 			if (res == FALSE)
@@ -594,7 +594,7 @@ fail:
 	return FALSE;
 }
 
-static void xrandr_crtc_whack_gamma (KylinRRCrtc *crtc,
+static void xrandr_crtc_whack_gamma (UkuiRRCrtc *crtc,
                                      struct GSGammaInfo *gamma_info,
                                      float            ratio)
 {
@@ -624,7 +624,7 @@ static void xrandr_crtc_whack_gamma (KylinRRCrtc *crtc,
 		b[i] = gamma_info->b[i] * ratio;
 	}
 
-	kylin_rr_crtc_set_gamma (crtc, gamma_info->size,
+	ukui_rr_crtc_set_gamma (crtc, gamma_info->size,
 	                        r, g, b);
 	g_free (r);
 	g_free (g);
@@ -639,7 +639,7 @@ static gboolean xrandr_fade_set_alpha_gamma (GSFade *fade,
 {
 	struct GSFadeScreenPrivate *screen_priv;
 	struct GSGammaInfo *info;
-	KylinRRCrtc **crtcs;
+	UkuiRRCrtc **crtcs;
 	int i;
 
 #if GTK_CHECK_VERSION(3, 10, 0)
@@ -651,7 +651,7 @@ static gboolean xrandr_fade_set_alpha_gamma (GSFade *fade,
 	if (!screen_priv->info)
 		return FALSE;
 
-	crtcs = kylin_rr_screen_list_crtcs (screen_priv->rrscreen);
+	crtcs = ukui_rr_screen_list_crtcs (screen_priv->rrscreen);
 	i = 0;
 
 	while (*crtcs)
@@ -685,7 +685,7 @@ check_randr_extension (GSFade *fade, int screen_idx)
 	screen_priv = &fade->priv->screen_priv[screen_idx];
 #endif
 
-	screen_priv->rrscreen = kylin_rr_screen_new (screen,
+	screen_priv->rrscreen = ukui_rr_screen_new (screen,
 	                        NULL);
 	if (!screen_priv->rrscreen)
 	{

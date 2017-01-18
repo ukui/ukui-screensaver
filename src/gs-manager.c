@@ -28,8 +28,8 @@
 
 #include <gio/gio.h>
 
-#define KYLIN_DESKTOP_USE_UNSTABLE_API
-#include <libkylin-desktop/kylin-bg.h>
+#define UKUI_DESKTOP_USE_UNSTABLE_API
+#include <libukui-desktop/ukui-bg.h>
 
 #include "gs-prefs.h"        /* for GSSaverMode */
 
@@ -53,7 +53,7 @@ struct GSManagerPrivate
 	GHashTable  *jobs;
 
 	GSThemeManager *theme_manager;
-	KylinBG        *bg;
+	UkuiBG        *bg;
 
 	/* Policy */
 	glong        lock_timeout;
@@ -1032,7 +1032,7 @@ gs_manager_class_init (GSManagerClass *klass)
 }
 
 static void
-on_bg_changed (KylinBG   *bg,
+on_bg_changed (UkuiBG   *bg,
                GSManager *manager)
 {
 	gs_debug ("background changed");
@@ -1047,14 +1047,14 @@ gs_manager_init (GSManager *manager)
 	manager->priv->grab = gs_grab_new ();
 	manager->priv->theme_manager = gs_theme_manager_new ();
 
-	manager->priv->bg = kylin_bg_new ();
+	manager->priv->bg = ukui_bg_new ();
 
 	g_signal_connect (manager->priv->bg,
 					  "changed",
 					  G_CALLBACK (on_bg_changed),
 					  manager);
 
-	kylin_bg_load_from_system_preferences (manager->priv->bg);
+	ukui_bg_load_from_system_preferences (manager->priv->bg);
 }
 
 static void
@@ -1301,7 +1301,7 @@ apply_background_to_window (GSManager *manager,
 	height = gdk_screen_get_height (screen);
 	gs_debug ("Creating background w:%d h:%d", width, height);
 #if GTK_CHECK_VERSION (3, 0, 0)
-	surface = kylin_bg_create_surface (manager->priv->bg,
+	surface = ukui_bg_create_surface (manager->priv->bg,
 	                                  gs_window_get_gdk_window (window),
 	                                  width,
 	                                  height,
@@ -1309,7 +1309,7 @@ apply_background_to_window (GSManager *manager,
 	gs_window_set_background_surface (window, surface);
 	cairo_surface_destroy (surface);
 #else
-	pixmap = kylin_bg_create_pixmap (manager->priv->bg,
+	pixmap = ukui_bg_create_pixmap (manager->priv->bg,
 	                                gs_window_get_gdk_window (window),
 	                                width,
 	                                height,

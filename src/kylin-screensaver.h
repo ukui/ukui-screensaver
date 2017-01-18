@@ -20,12 +20,12 @@
  *
  */
 
-#ifndef __KYLIN_SCREENSAVER_H
-#define __KYLIN_SCREENSAVER_H
+#ifndef __UKUI_SCREENSAVER_H
+#define __UKUI_SCREENSAVER_H
 
 G_BEGIN_DECLS
 
-void kylin_screensaver_quit(void);
+void ukui_screensaver_quit(void);
 
 G_END_DECLS
 

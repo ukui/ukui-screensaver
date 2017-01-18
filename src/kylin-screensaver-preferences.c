@@ -36,8 +36,8 @@
 
 #include <gio/gio.h>
 
-#define KYLIN_DESKTOP_USE_UNSTABLE_API
-#include <libkylin-desktop/kylin-desktop-utils.h>
+#define UKUI_DESKTOP_USE_UNSTABLE_API
+#include <libukui-desktop/ukui-desktop-utils.h>
 
 #if GTK_CHECK_VERSION (3, 0, 0)
 #include "gs-debug.h"
@@ -49,15 +49,15 @@
 #include "gs-job.h"
 #include "gs-prefs.h" /* for GS_MODE enum */
 
-#define GTK_BUILDER_FILE "kylin-screensaver-preferences.ui"
+#define GTK_BUILDER_FILE "ukui-screensaver-preferences.ui"
 
-#define LOCKDOWN_SETTINGS_SCHEMA "org.kylin.lockdown"
+#define LOCKDOWN_SETTINGS_SCHEMA "org.ukui.lockdown"
 #define KEY_LOCK_DISABLE "disable-lock-screen"
 
-#define SESSION_SETTINGS_SCHEMA "org.kylin.session"
+#define SESSION_SETTINGS_SCHEMA "org.ukui.session"
 #define KEY_IDLE_DELAY "idle-delay"
 
-#define GSETTINGS_SCHEMA "org.kylin.screensaver"
+#define GSETTINGS_SCHEMA "org.ukui.screensaver"
 #define KEY_LOCK "lock-enabled"
 #define KEY_IDLE_ACTIVATION_ENABLED "idle-activation-enabled"
 #define KEY_MODE "mode"
@@ -65,7 +65,7 @@
 #define KEY_CYCLE_DELAY "cycle-delay"
 #define KEY_THEMES "themes"
 
-#define GPM_COMMAND "kylin-power-preferences"
+#define GPM_COMMAND "ukui-power-preferences"
 
 enum
 {
@@ -390,7 +390,7 @@ help_display (void)
 	GError *error;
 
 	error = NULL;
-	gtk_show_uri (NULL, "help:kylin-user-guide/prefs-screensaver", GDK_CURRENT_TIME, &error);
+	gtk_show_uri (NULL, "help:ukui-user-guide/prefs-screensaver", GDK_CURRENT_TIME, &error);
 
 	if (error != NULL)
 	{
@@ -423,7 +423,7 @@ response_cb (GtkWidget *widget,
 
 		error = NULL;
 
-		res = kylin_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
+		res = ukui_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
 		                                        GPM_COMMAND,
 		                                        &error);
 		if (! res)
@@ -845,7 +845,7 @@ drag_leave_cb (GtkWidget      *widget,
 	gtk_widget_queue_draw (widget);
 }
 
-/* GIO has no version of kylin_vfs_uri_list_parse(), so copy from KylinVFS
+/* GIO has no version of ukui_vfs_uri_list_parse(), so copy from UkuiVFS
  * and re-work to create GFiles.
 **/
 static GList *
@@ -1288,7 +1288,7 @@ get_best_visual (void)
 
 	visual = NULL;
 
-	command = g_build_filename (LIBEXECDIR, "kylin-screensaver-gl-helper", NULL);
+	command = g_build_filename (LIBEXECDIR, "ukui-screensaver-gl-helper", NULL);
 
 	error = NULL;
 	res = g_spawn_command_line_sync (command,
@@ -1418,7 +1418,7 @@ get_best_visual_for_screen (GdkScreen *screen)
 
 	visual = NULL;
 
-	command = g_build_filename (LIBEXECDIR, "kylin-screensaver-gl-helper", NULL);
+	command = g_build_filename (LIBEXECDIR, "ukui-screensaver-gl-helper", NULL);
 
 	error = NULL;
 	std_output = NULL;
@@ -1737,7 +1737,7 @@ main (int    argc,
 {
 
 #ifdef ENABLE_NLS
-	bindtextdomain (GETTEXT_PACKAGE, KYLINLOCALEDIR);
+	bindtextdomain (GETTEXT_PACKAGE, UKUILOCALEDIR);
 # ifdef HAVE_BIND_TEXTDOMAIN_CODESET
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 # endif

@@ -362,7 +362,7 @@ static gboolean auth_check_idle(GSLockPlug* plug)
 		{
 			gs_debug ("Authentication failed, quitting (max failures)");
 			again = FALSE;
-			/* Don't quit immediately, but rather request that kylin-screensaver
+			/* Don't quit immediately, but rather request that ukui-screensaver
 			 * terminates us after it has finished the dialog shake. Time out
 			 * after 5 seconds and quit anyway if this doesn't happen though */
 			g_idle_add((GSourceFunc) response_request_quit, NULL);
@@ -549,7 +549,7 @@ int main(int argc, char** argv)
 	char* nolock_reason = NULL;
 
 	#ifdef ENABLE_NLS
-		bindtextdomain(GETTEXT_PACKAGE, KYLINLOCALEDIR);
+		bindtextdomain(GETTEXT_PACKAGE, UKUILOCALEDIR);
 		#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
 			bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 		#endif

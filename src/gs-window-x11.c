@@ -742,7 +742,7 @@ get_best_visual_for_screen (GdkScreen *screen)
 
 	visual = NULL;
 
-	command = g_build_filename (LIBEXECDIR, "kylin-screensaver-gl-helper", NULL);
+	command = g_build_filename (LIBEXECDIR, "ukui-screensaver-gl-helper", NULL);
 
 	error = NULL;
 	std_output = NULL;
@@ -1996,7 +1996,7 @@ popup_dialog (GSWindow *window)
 
 	gs_debug ("Popping up dialog");
 
-	tmp = g_build_filename (LIBEXECDIR, "kylin-screensaver-dialog", NULL);
+	tmp = g_build_filename (LIBEXECDIR, "ukui-screensaver-dialog", NULL);
 	command = g_string_new (tmp);
 	g_free (tmp);
 
@@ -2438,7 +2438,7 @@ gs_window_real_motion_notify_event (GtkWidget      *widget,
 		return FALSE;
 	}
 
-	/* just an approxikylin distance */
+	/* just an approxiukui distance */
 	distance = MAX (ABS (window->priv->last_x - event->x),
 	                ABS (window->priv->last_y - event->y));
 

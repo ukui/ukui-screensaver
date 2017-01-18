@@ -31,7 +31,7 @@
 #include <glib-object.h>
 #include <gdk/gdkx.h>
 
-#include "kylin-screensaver.h"
+#include "ukui-screensaver.h"
 
 #include "gs-manager.h"
 #include "gs-watcher.h"
@@ -223,7 +223,7 @@ static void listener_lock_cb(GSListener* listener, GSMonitor* monitor)
 static void listener_quit_cb(GSListener* listener, GSMonitor* monitor)
 {
 	gs_listener_set_active(monitor->priv->listener, FALSE);
-	kylin_screensaver_quit();
+	ukui_screensaver_quit();
 }
 
 static void listener_cycle_cb(GSListener* listener, GSMonitor* monitor)
