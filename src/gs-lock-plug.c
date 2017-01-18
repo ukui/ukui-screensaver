@@ -37,6 +37,7 @@
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 #include <gio/gio.h>
+#include <gdk/gdk.h>
 
 #include <glib.h>
 #include <glib/gstdio.h>
@@ -2210,31 +2211,41 @@ load_theme (GSLockPlug *plug)
 	}
 	g_free (gtkbuilder);
 
-	lock_dialog = GTK_WIDGET (gtk_builder_get_object(builder, "lock-dialog"));
-	gtk_container_add (GTK_CONTAINER (plug), lock_dialog);
-
 	/*
 	while (!g_file_test("/home/lihao/c", G_FILE_TEST_EXISTS))
 		;
-	*/
+		*/
+
+	lock_dialog = GTK_WIDGET (gtk_builder_get_object(builder, "lock-dialog"));
+	gtk_container_add (GTK_CONTAINER (plug), lock_dialog);
+
+	/* 获取显示器分辨率大小 */
+	GdkScreen *screen = gdk_screen_get_default();
+	int width = gdk_screen_get_width(screen);
+	int height = gdk_screen_get_height(screen);
+	/* 添加 Layout */
+	GtkWidget *layout = gtk_builder_get_object(builder, "layout");
+	gtk_widget_set_size_request(layout, width, height);
+	gtk_widget_show(layout);
+	/* 读取图片并设置大小 */
+	GtkWidget *image;
+	GdkPixbuf *pixbuf;
+	pixbuf = gdk_pixbuf_new_from_file_at_size("/home/lihao/桌面/kylin-background.png", width, height, NULL);
+	image = gtk_image_new_from_pixbuf(pixbuf);
+	/* 添加图片层 */
+	gtk_layout_put(GTK_LAYOUT(layout), image, 0, 0);
+	/* 重新添加已经在Glade中添加好的控件，不然所有东西都被图片盖住了 */
+	GtkWidget *hbox1 = gtk_builder_get_object(builder, "hbox1");
+	gtk_layout_put(GTK_LAYOUT(layout), hbox1, 700,500);
 
 	/*
-	GtkStyleContext *context = gtk_widget_get_style_context(lock_dialog);
+	GtkStyleContext *context = gtk_widget_get_style_context(layout);
 	GtkStateFlags flags = gtk_style_context_get_state(context);
 	GdkRGBA rgb;
 	gtk_style_context_get_background_color(context, flags, &rgb);
-	rgb.red = rgb.green = rgb.blue =0;
-	rgb.alpha = 1;
-	gtk_widget_override_background_color(lock_dialog, flags, &rgb);
-	GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file(
-			"/home/lihao/桌面/2a-screensaver/r10/debian/wallpaper.png", NULL);
-	cairo_t *cr;
-	cr = gdk_cairo_create(lock_dialog);
-	gdk_cairo_set_source_pixbuf(cr, pixbuf, 100, 100);
-	cairo_pattern_set_extend (cairo_get_source (cr), CAIRO_EXTEND_REPEAT);
-	cairo_rectangle (cr, 0, 0, 50, 50);
-	cairo_fill (cr);
-	cairo_destroy (cr);
+	rgb.red = rgb.green = rgb.blue =0.8;
+	rgb.alpha = 0;
+	gtk_widget_override_background_color(layout, flags, &rgb);
 	*/
 
 	plug->priv->vbox = NULL;
