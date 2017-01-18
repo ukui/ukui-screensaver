@@ -10,83 +10,83 @@
 <!-- This animation will start at midnight. -->
   <static>
     <duration>1795.0</duration>
-    <file>@IMAGESDIR@/cloud-kylin.jpg</file>
+    <file>@IMAGESDIR@/cloud-ukui.jpg</file>
   </static>
   <transition>
     <duration>5.0</duration>
-    <from>@IMAGESDIR@/cloud-kylin.jpg</from>
-    <to>@IMAGESDIR@/comet-kylin.jpg</to>
+    <from>@IMAGESDIR@/cloud-ukui.jpg</from>
+    <to>@IMAGESDIR@/comet-ukui.jpg</to>
   </transition>
   <static>
     <duration>1795.0</duration>
-    <file>@IMAGESDIR@/comet-kylin.jpg</file>
+    <file>@IMAGESDIR@/comet-ukui.jpg</file>
   </static>
   <transition>
     <duration>5.0</duration>
-    <from>@IMAGESDIR@/comet-kylin.jpg</from>
-    <to>@IMAGESDIR@/earth-horizon-kylin.jpg</to>
+    <from>@IMAGESDIR@/comet-ukui.jpg</from>
+    <to>@IMAGESDIR@/earth-horizon-ukui.jpg</to>
   </transition>
   <static>
     <duration>1795.0</duration>
-    <file>@IMAGESDIR@/earth-horizon-kylin.jpg</file>
+    <file>@IMAGESDIR@/earth-horizon-ukui.jpg</file>
   </static>
   <transition>
     <duration>5.0</duration>
-    <from>@IMAGESDIR@/earth-horizon-kylin.jpg</from>
-    <to>@IMAGESDIR@/blue-marble-west-kylin.jpg</to>
+    <from>@IMAGESDIR@/earth-horizon-ukui.jpg</from>
+    <to>@IMAGESDIR@/blue-marble-west-ukui.jpg</to>
   </transition>
   <static>
     <duration>1795.0</duration>
-    <file>@IMAGESDIR@/blue-marble-west-kylin.jpg</file>
+    <file>@IMAGESDIR@/blue-marble-west-ukui.jpg</file>
   </static>
   <transition>
     <duration>5.0</duration>
-    <from>@IMAGESDIR@/blue-marble-west-kylin.jpg</from>
-    <to>@IMAGESDIR@/galaxy-ngc3370-kylin.jpg</to>
+    <from>@IMAGESDIR@/blue-marble-west-ukui.jpg</from>
+    <to>@IMAGESDIR@/galaxy-ngc3370-ukui.jpg</to>
   </transition>
   <static>
     <duration>1795.0</duration>
-    <file>@IMAGESDIR@/galaxy-ngc3370-kylin.jpg</file>
+    <file>@IMAGESDIR@/galaxy-ngc3370-ukui.jpg</file>
   </static>
   <transition>
     <duration>5.0</duration>
-    <from>@IMAGESDIR@/galaxy-ngc3370-kylin.jpg</from>
-    <to>@IMAGESDIR@/helix-nebula-kylin.jpg</to>
+    <from>@IMAGESDIR@/galaxy-ngc3370-ukui.jpg</from>
+    <to>@IMAGESDIR@/helix-nebula-ukui.jpg</to>
   </transition>
   <static>
     <duration>1795.0</duration>
-    <file>@IMAGESDIR@/helix-nebula-kylin.jpg</file>
+    <file>@IMAGESDIR@/helix-nebula-ukui.jpg</file>
   </static>
   <transition>
     <duration>5.0</duration>
-    <from>@IMAGESDIR@/helix-nebula-kylin.jpg</from>
-    <to>@IMAGESDIR@/jupiter-kylin.jpg</to>
+    <from>@IMAGESDIR@/helix-nebula-ukui.jpg</from>
+    <to>@IMAGESDIR@/jupiter-ukui.jpg</to>
   </transition>
   <static>
     <duration>1795.0</duration>
-    <file>@IMAGESDIR@/jupiter-kylin.jpg</file>
+    <file>@IMAGESDIR@/jupiter-ukui.jpg</file>
   </static>
   <transition>
     <duration>5.0</duration>
-    <from>@IMAGESDIR@/jupiter-kylin.jpg</from>
-    <to>@IMAGESDIR@/sombrero-kylin.jpg</to>
+    <from>@IMAGESDIR@/jupiter-ukui.jpg</from>
+    <to>@IMAGESDIR@/sombrero-ukui.jpg</to>
   </transition>
   <static>
     <duration>1795.0</duration>
-    <file>@IMAGESDIR@/sombrero-kylin.jpg</file>
+    <file>@IMAGESDIR@/sombrero-ukui.jpg</file>
   </static>
   <transition>
     <duration>5.0</duration>
-    <from>@IMAGESDIR@/sombrero-kylin.jpg</from>
-    <to>@IMAGESDIR@/whirlpool-kylin.jpg</to>
+    <from>@IMAGESDIR@/sombrero-ukui.jpg</from>
+    <to>@IMAGESDIR@/whirlpool-ukui.jpg</to>
   </transition>
   <static>
     <duration>1795.0</duration>
-    <file>@IMAGESDIR@/whirlpool-kylin.jpg</file>
+    <file>@IMAGESDIR@/whirlpool-ukui.jpg</file>
   </static>
   <transition>
     <duration>5.0</duration>
-    <from>@IMAGESDIR@/whirlpool-kylin.jpg</from>
-    <to>@IMAGESDIR@/cloud-kylin.jpg</to>
+    <from>@IMAGESDIR@/whirlpool-ukui.jpg</from>
+    <to>@IMAGESDIR@/cloud-ukui.jpg</to>
   </transition>
 </background>

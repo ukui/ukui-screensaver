@@ -6,8 +6,8 @@ SUBDIRS =			\
 
 imagedir   = $(datadir)/pixmaps
 image_DATA = 			\
-	kylin-logo-white.svg 	\
-	gnome-logo-white-kylin.svg 	\
+	ukui-logo-white.svg 	\
+	gnome-logo-white-ukui.svg 	\
 	$(NULL)
 
 EXTRA_DIST =			\

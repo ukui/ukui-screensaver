@@ -1,3 +1,3 @@
 [D-BUS Service]
-Name=org.kylin.ScreenSaver
-Exec=@EXPANDED_BINDIR@/kylin-screensaver --no-daemon
+Name=org.ukui.ScreenSaver
+Exec=@EXPANDED_BINDIR@/ukui-screensaver --no-daemon

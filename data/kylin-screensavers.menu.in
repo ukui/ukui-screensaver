@@ -4,7 +4,7 @@
 <Menu>
 
   <Name>Screensavers</Name>
-  <Directory>kylin-screensaver.directory</Directory>
+  <Directory>ukui-screensaver.directory</Directory>
 
   <!-- Read standard .directory and .desktop file locations -->
   <DefaultAppDirs/>
