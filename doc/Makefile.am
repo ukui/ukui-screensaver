@@ -1,22 +1,22 @@
 NULL =
 
 SPEC_XML_FILES =			\
-	kylin-screensaver.xml		\
+	ukui-screensaver.xml		\
 	dbus-interface.xml		\
 	$(NULL)
 
 if DOCBOOK_DOCS_ENABLED
 
 htmldocdir = $(DOCDIR)
-htmldoc_DATA = kylin-screensaver.html
+htmldoc_DATA = ukui-screensaver.html
 
-kylin-screensaver.html : dbus-interface.xml
-	$(XMLTO) html-nochunks -m config.xsl kylin-screensaver.xml
+ukui-screensaver.html : dbus-interface.xml
+	$(XMLTO) html-nochunks -m config.xsl ukui-screensaver.xml
 
 endif # DOCBOOK_DOCS_ENABLED
 
 EXTRA_DIST =				\
-	kylin-screensaver.xml.in	\
+	ukui-screensaver.xml.in	\
 	config.xsl			\
 	docbook.css			\
 	$(SPEC_XML_FILES)
@@ -24,4 +24,4 @@ EXTRA_DIST =				\
 
 clean-local:
 	rm -f *~
-	rm -f kylin-screensaver.html
+	rm -f ukui-screensaver.html
