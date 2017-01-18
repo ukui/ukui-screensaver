@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UKUI Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 15:28+0800\n"
+"POT-Creation-Date: 2017-01-18 15:43+0800\n"
 "PO-Revision-Date: 2016-06-24 12:36+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://wiki.ukui.org/trans/)\n"
@@ -22,121 +22,104 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../data/kylin-screensaver-preferences.desktop.in.h:1
-#: ../src/kylin-screensaver.desktop.in.in.h:1
+#: ../data/ukui-screensaver-preferences.desktop.in.h:1
+#: ../src/ukui-screensaver.desktop.in.in.h:1
 msgid "Screensaver"
 msgstr "Ekrano užsklanda"
 
-#: ../data/kylin-screensaver-preferences.desktop.in.h:2
+#: ../data/ukui-screensaver-preferences.desktop.in.h:2
 msgid "Set your screensaver preferences"
 msgstr "Nurodykite ekrano užsklandos nuostatas"
 
-#: ../data/kylin-screensaver-preferences.ui.h:1
+#: ../data/ukui-screensaver-preferences.ui.h:1
 msgid "Screensaver Preview"
 msgstr "Ekrano užsklandos peržiūra"
 
-#: ../data/kylin-screensaver-preferences.ui.h:2
+#: ../data/ukui-screensaver-preferences.ui.h:2
 msgid "<b>Screensaver preview</b>"
 msgstr "<b>Ekrano užsklandos peržiūra</b>"
 
-#: ../data/kylin-screensaver-preferences.ui.h:3
+#: ../data/ukui-screensaver-preferences.ui.h:3
 msgid "Screensaver Preferences"
 msgstr "Ekrano užsklandos nuostatos"
 
-#: ../data/kylin-screensaver-preferences.ui.h:4
+#: ../data/ukui-screensaver-preferences.ui.h:4
 msgid "Power _Management"
 msgstr "Energijos _valdymas"
 
-#: ../data/kylin-screensaver-preferences.ui.h:5
+#: ../data/ukui-screensaver-preferences.ui.h:5
 msgid "_Preview"
 msgstr "_Peržiūra"
 
-#: ../data/kylin-screensaver-preferences.ui.h:6
+#: ../data/ukui-screensaver-preferences.ui.h:6
 msgid "_Screensaver theme:"
 msgstr "_Ekrano užsklandos tema:"
 
-#: ../data/kylin-screensaver-preferences.ui.h:7
+#: ../data/ukui-screensaver-preferences.ui.h:7
 msgid "Regard the computer as _idle after:"
 msgstr "La_ikyti kompiuterį neveikliu po:"
 
-#: ../data/kylin-screensaver-preferences.ui.h:8
+#: ../data/ukui-screensaver-preferences.ui.h:8
 msgid "_Activate screensaver when computer is idle"
 msgstr "_Aktyvuoti ekrano užsklandą, kai kompiuteris neveiklus"
 
-#: ../data/kylin-screensaver-preferences.ui.h:9
+#: ../data/ukui-screensaver-preferences.ui.h:9
 msgid "_Lock screen when screensaver is active"
 msgstr "_Užrakinti ekraną, kai aktyvuota ekrano užsklanda"
 
-#: ../data/kylin-screensaver-preferences.ui.h:10
+#: ../data/ukui-screensaver-preferences.ui.h:10
 msgid "<b>Warning: the screen will not be locked for the root user.</b>"
 msgstr "<b>Dėmesio: ekranas root naudotojui bus neužrakintas.</b>"
 
-#: ../data/kylin-screensaver.directory.in.h:1
+#: ../data/ukui-screensaver.directory.in.h:1
 msgid "Screensavers"
 msgstr "Ekrano užsklandos"
 
-#: ../data/kylin-screensaver.directory.in.h:2
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:7
+#: ../data/ukui-screensaver.directory.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:7
 msgid "Screensaver themes"
 msgstr "Ekrano užsklandos temos"
 
 #. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
-#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:1
+#: ../savers/cosmos-slideshow-ukui.desktop.in.in.h:1
 msgid "Cosmos"
 msgstr "Kosmosas"
 
 #: ../data/lock-dialog-default.ui.h:1
-msgid "_Leave Message"
-msgstr "_Palikti žinutę"
+msgid "已登录"
+msgstr ""
 
-#: ../data/lock-dialog-default.ui.h:2
-msgid "_Switch User"
-msgstr "_Keisti naudotoją"
-
-#: ../data/lock-dialog-default.ui.h:3
-msgid "_Log Out"
-msgstr "At_sijungti"
-
-#: ../data/lock-dialog-default.ui.h:4
-msgid "_Cancel"
-msgstr "_Atsisakyti"
-
-#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1791
+#: ../data/lock-dialog-default.ui.h:2 ../src/gs-lock-plug.c:1795
 msgid "_Unlock"
 msgstr "_Atrakinti"
 
-#: ../data/lock-dialog-default.ui.h:7
-#, no-c-format
-msgid "<b>Leave a message for %R:</b>"
-msgstr "<b>Palikti žinutę %R:</b>"
-
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:1
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:1
 msgid "Activate when idle"
 msgstr "Aktyvuoti, kai neveiklus"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:2
 msgid "Set this to TRUE to activate the screensaver when the session is idle."
 msgstr ""
 "Nustatykite į teigiamą, jei norite aktyvuoti ekrano užsklandą, kai seansas "
 "neveiklus."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:3
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:3
 msgid "Lock on activation"
 msgstr "Paleidus, užrakinti"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:4
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:4
 msgid "Set this to TRUE to lock the screen when the screensaver goes active."
 msgstr ""
 "Nustatykite į teigiamą, jei norite, kad paleidus užsklandą būtų užrakintas "
 "ekranas."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:5
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:5
 msgid "Screensaver theme selection mode"
 msgstr "Ekrano užsklandos temos pasirinkimo veiksena"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:6
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:6
 msgid ""
 "The selection mode used by screensaver. May be \"blank-only\" to enable the "
 "screensaver without using any theme on activation, \"single\" to enable "
@@ -150,7 +133,7 @@ msgstr ""
 "rakte), ir „random“, kai norima įjungti ekrano užsklandą, naudojant "
 "atsitiktinę temą."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:8
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:8
 msgid ""
 "This key specifies the list of themes to be used by the screensaver. It's "
 "ignored when \"mode\" key is \"blank-only\", should provide the theme name "
@@ -162,11 +145,11 @@ msgstr ""
 "„single“, reikia nurodyti vieną temos pavadinimą, kai rakto „mode“ reikšmė "
 "yra „random“, reikia nurodyti temų sąrašą."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:9
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:9
 msgid "Time before power management baseline"
 msgstr "Laikas iki energijos valdymo pirmos reikšmės pranešimo"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:10
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:10
 msgid ""
 "The number of seconds of inactivity before signalling to power management. "
 "This key is set and maintained by the session power management agent."
@@ -174,29 +157,29 @@ msgstr ""
 "Neaktyvumo laikas sekundėmis, po kurio siunčiamas signalas energijos valdymo "
 "posistemei. Ši reikšmė nustatoma seanso energijos valdymo agento programos."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:11
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:11
 msgid "Time before theme change"
 msgstr "Laikas iki temos pakeitimo"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:12
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:12
 msgid "The number of minutes to run before changing the screensaver theme."
 msgstr "Kas kiek minučių pakeičiama ekrano užsklandos tema."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:13
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:13
 msgid "Time before locking"
 msgstr "Laikas iki užrakinimo"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:14
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:14
 msgid ""
 "The number of minutes after screensaver activation before locking the screen."
 msgstr ""
 "Minučių skaičius nuo ekrano užsklandos aktyvavimo iki ekrano užrakinimo."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:15
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:15
 msgid "Allow embedding a keyboard into the window"
 msgstr "Leisti į langą įtaisyti klaviatūrą"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:16
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:16
 msgid ""
 "Set this to TRUE to allow embedding a keyboard into the window when trying "
 "to unlock. The \"keyboard_command\" key must be set with the appropriate "
@@ -205,11 +188,11 @@ msgstr ""
 "Nustatykite į teigiamą, jei norite leisti rodyti klaviatūrą atrakinimo "
 "lange. Atitinkama komanda turi būti nurodyta rakte „keyboard_command“."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:17
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:17
 msgid "Embedded keyboard command"
 msgstr "Įtaisytos klaviatūros komanda"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:18
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:18
 msgid ""
 "The command that will be run, if the \"embedded_keyboard_enabled\" key is "
 "set to TRUE, to embed a keyboard widget into the window. This command should "
@@ -220,11 +203,11 @@ msgstr ""
 "Programa turėtų vaizduoti klaviatūrą realizuodama XEMBED įskiepio sąsają ir "
 "išvesti lango XID į standartinį išėjimą."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:19
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:19
 msgid "Allow logout"
 msgstr "Leisti atsijungti"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:20
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:20
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to allow logging "
 "out after a delay. The delay is specified in the \"logout_delay\" key."
@@ -233,11 +216,11 @@ msgstr ""
 "galimybė atsijungti po tam tikro laiko tarpo. Laikas nurodomas "
 "„logout_delay“ rakte."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:21
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:21
 msgid "Time before logout option"
 msgstr "Laikas iki atsijungimo parinkties"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:22
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:22
 msgid ""
 "The number of minutes after the screensaver activation before a logout "
 "option will appear in the unlock dialog. This key has effect only if the "
@@ -247,11 +230,11 @@ msgstr ""
 "atsiradimo atrakinimo dialoge. Šis raktas turi reikšmės tik tada, kai rakto "
 "„logout_enable“ reikšmė yra teigiama."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:23
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:23
 msgid "Logout command"
 msgstr "Atsijungimo komanda"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:24
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:24
 msgid ""
 "The command to invoke when the logout button is clicked. This command should "
 "simply log the user out without any interaction. This key has effect only if "
@@ -261,11 +244,11 @@ msgstr ""
 "paprasčiausiai atjungti naudotoją be pastarojo įsikišimo. Šis raktas turi "
 "įtakos tik tada, kai rakto „logout_enable“ reikšmė teigiama."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:25
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:25
 msgid "Allow user switching"
 msgstr "Leisti perjungti naudotoją"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:26
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:26
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to switch to a "
 "different user account."
@@ -273,58 +256,58 @@ msgstr ""
 "Nustatykite į teigiamą, jei norite, kad atrakinimo dialoge būtų rodoma "
 "galimybė perjungti naudotoją."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:27
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:27
 msgid "Theme for lock dialog"
 msgstr "Užrakinimo dialogo tema"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:28
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:28
 msgid "Theme to use for the lock dialog"
 msgstr "Užrakinimo dialoge naudojama tema"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:29
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:29
 msgid "Allow the session status message to be displayed"
 msgstr "Leisti rodyti seanso būsenos pranešimą"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:30
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:30
 msgid ""
 "Allow the session status message to be displayed when the screen is locked."
 msgstr "Leisti rodyti seanso būsenos pranešimą, kai ekranas užrakintas."
 
-#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:2
+#: ../savers/cosmos-slideshow-ukui.desktop.in.in.h:2
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Rodyti kosmoso paveikslų skaidrių rodymą"
 
-#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
+#: ../savers/footlogo-floaters-ukui.desktop.in.in.h:1
 #, fuzzy
-msgid "Floating KYLIN"
+msgid "Floating UKUI"
 msgstr "Plaukiojantis KYLIN"
 
-#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
+#: ../savers/footlogo-floaters-ukui.desktop.in.in.h:2
 #, fuzzy
-msgid "Bubbles the KYLIN logo around the screen"
+msgid "Bubbles the UKUI logo around the screen"
 msgstr "GNOME logotipas „burbuliuoja“ ekrane"
 
-#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
+#: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:1
 msgid "Floating GNOME"
 msgstr "Plaukiojantis KYLIN"
 
-#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
+#: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
 msgstr "GNOME logotipas „burbuliuoja“ ekrane"
 
-#: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
+#: ../savers/personal-slideshow-ukui.desktop.in.in.h:1
 msgid "Pictures folder"
 msgstr "Paveikslų aplankas"
 
-#: ../savers/personal-slideshow-kylin.desktop.in.in.h:2
+#: ../savers/personal-slideshow-ukui.desktop.in.in.h:2
 msgid "Display a slideshow from your Pictures folder"
 msgstr "Rodyti skaidrių šou iš jūsų paveikslų aplanko"
 
-#: ../savers/popsquares-kylin.desktop.in.in.h:1
+#: ../savers/popsquares-ukui.desktop.in.in.h:1
 msgid "Pop art squares"
 msgstr "Meniški kvadratėliai"
 
-#: ../savers/popsquares-kylin.desktop.in.in.h:2
+#: ../savers/popsquares-ukui.desktop.in.in.h:2
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "Pulsuojančių spalvų kvadratėliai."
 
@@ -433,40 +416,40 @@ msgstr "%s nėra tinkama ekrano užsklandos tema."
 msgid "Copying file: %u of %u"
 msgstr "Kopijuojamas failas: %u iš %u"
 
-#: ../src/kylin-screensaver-command.c:59
+#: ../src/ukui-screensaver-command.c:59
 msgid "Causes the screensaver to exit gracefully"
 msgstr "Paprasčiausiai užveria ekrano užsklandą"
 
-#: ../src/kylin-screensaver-command.c:63
+#: ../src/ukui-screensaver-command.c:63
 msgid "Query the state of the screensaver"
 msgstr "Užklausti ekrano užsklandos būklės"
 
-#: ../src/kylin-screensaver-command.c:67
+#: ../src/ukui-screensaver-command.c:67
 msgid "Query the length of time the screensaver has been active"
 msgstr "Užklausti, kiek laiko ekrano užsklanda buvo aktyvi"
 
-#: ../src/kylin-screensaver-command.c:71
+#: ../src/ukui-screensaver-command.c:71
 msgid "Tells the running screensaver process to lock the screen immediately"
 msgstr "Nurodo ekrano užsklandos procesui tuojau pat užrakinti ekraną"
 
-#: ../src/kylin-screensaver-command.c:75
+#: ../src/ukui-screensaver-command.c:75
 msgid "If the screensaver is active then switch to another graphics demo"
 msgstr "Jei ekrano užsklanda aktyvi, perjungti į kitą grafinę demonstraciją"
 
-#: ../src/kylin-screensaver-command.c:79
+#: ../src/ukui-screensaver-command.c:79
 msgid "Turn the screensaver on (blank the screen)"
 msgstr "Įjungti ekrano užsklandą (užtemdyti ekraną)"
 
-#: ../src/kylin-screensaver-command.c:83
+#: ../src/ukui-screensaver-command.c:83
 msgid "If the screensaver is active then deactivate it (un-blank the screen)"
 msgstr ""
 "Jei ekrano užsklanda aktyvi, ją deaktyvuoti (išjungti ekrano užtemdymą)"
 
-#: ../src/kylin-screensaver-command.c:87
+#: ../src/ukui-screensaver-command.c:87
 msgid "Poke the running screensaver to simulate user activity"
 msgstr "Simuliuoti naudotojo aktyvumą, kad nebūtų aktyvuota ekrano užsklanda"
 
-#: ../src/kylin-screensaver-command.c:91
+#: ../src/ukui-screensaver-command.c:91
 msgid ""
 "Inhibit the screensaver from activating.  Command blocks while inhibit is "
 "active."
@@ -474,165 +457,165 @@ msgstr ""
 "Sulaikyti ekrano užskalandą nuo aktyvavimo. Komanda blokuoja, kol kliudymas "
 "aktyvus."
 
-#: ../src/kylin-screensaver-command.c:95
+#: ../src/ukui-screensaver-command.c:95
 msgid "The calling application that is inhibiting the screensaver"
 msgstr "Iškviečianti programa slopinanti ekrano užsklandą"
 
-#: ../src/kylin-screensaver-command.c:99
+#: ../src/ukui-screensaver-command.c:99
 msgid "The reason for inhibiting the screensaver"
 msgstr "Ekrano užsklandos iškvietimo priežastis"
 
-#: ../src/kylin-screensaver-command.c:103 ../src/kylin-screensaver-dialog.c:60
-#: ../src/kylin-screensaver.c:55
+#: ../src/ukui-screensaver-command.c:103 ../src/ukui-screensaver-dialog.c:60
+#: ../src/ukui-screensaver.c:55
 msgid "Version of this application"
 msgstr "Šios programos versija"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 #, c-format
 msgid "The screensaver is %s\n"
 msgstr "Ekrano užsklanda yra %s\n"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "active"
 msgstr "aktyvi"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "inactive"
 msgstr "neaktyvi"
 
-#: ../src/kylin-screensaver-command.c:368
+#: ../src/ukui-screensaver-command.c:368
 #, c-format
 msgid "The screensaver is not inhibited\n"
 msgstr "Ekrano užsklanda neblokuojama\n"
 
-#: ../src/kylin-screensaver-command.c:376
+#: ../src/ukui-screensaver-command.c:376
 #, c-format
 msgid "The screensaver is being inhibited by:\n"
 msgstr "Ekrano užsklanda blokuojama šios programos:\n"
 
-#: ../src/kylin-screensaver-command.c:411
+#: ../src/ukui-screensaver-command.c:411
 #, c-format
 msgid "The screensaver has been active for %d seconds.\n"
 msgstr "Ekrano užsklanda buvo aktyvi %d sekundžių.\n"
 
-#: ../src/kylin-screensaver-command.c:417
+#: ../src/ukui-screensaver-command.c:417
 #, c-format
 msgid "The screensaver is not currently active.\n"
 msgstr "Ekrano užsklanda neaktyvi\n"
 
-#: ../src/kylin-screensaver-dialog.c:59
+#: ../src/ukui-screensaver-dialog.c:59
 msgid "Show debugging output"
 msgstr "Rodyti derinimo išvestį"
 
-#: ../src/kylin-screensaver-dialog.c:61
+#: ../src/ukui-screensaver-dialog.c:61
 msgid "Show the logout button"
 msgstr "Rodyti atsijungimo mygtuką"
 
-#: ../src/kylin-screensaver-dialog.c:62
+#: ../src/ukui-screensaver-dialog.c:62
 msgid "Command to invoke from the logout button"
 msgstr "Komanda vykdoma paspaudus atsijungimo mygtuką"
 
-#: ../src/kylin-screensaver-dialog.c:63
+#: ../src/ukui-screensaver-dialog.c:63
 msgid "Show the switch user button"
 msgstr "Rodyti naudotojo perjungimo mygtuką"
 
-#: ../src/kylin-screensaver-dialog.c:64
+#: ../src/ukui-screensaver-dialog.c:64
 msgid "Message to show in the dialog"
 msgstr "Pranešimas, rodomas dialoge"
 
-#: ../src/kylin-screensaver-dialog.c:64 ../src/kylin-screensaver-dialog.c:65
+#: ../src/ukui-screensaver-dialog.c:64 ../src/ukui-screensaver-dialog.c:65
 msgid "MESSAGE"
 msgstr "PRANEŠIMAS"
 
-#: ../src/kylin-screensaver-dialog.c:65
+#: ../src/ukui-screensaver-dialog.c:65
 msgid "Not used"
 msgstr "Nenaudojama"
 
 #. login: is whacked always translate to Username:
-#: ../src/kylin-screensaver-dialog.c:167 ../src/kylin-screensaver-dialog.c:168
-#: ../src/kylin-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
+#: ../src/ukui-screensaver-dialog.c:167 ../src/ukui-screensaver-dialog.c:168
+#: ../src/ukui-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
 msgid "Username:"
 msgstr "Naudotojo vardas:"
 
-#: ../src/kylin-screensaver-dialog.c:170 ../src/kylin-screensaver-dialog.c:171
+#: ../src/ukui-screensaver-dialog.c:170 ../src/ukui-screensaver-dialog.c:171
 #: ../src/gs-auth-pam.c:171
 msgid "Password:"
 msgstr "Slaptažodis:"
 
-#: ../src/kylin-screensaver-dialog.c:172
+#: ../src/ukui-screensaver-dialog.c:172
 msgid "You are required to change your password immediately (password aged)"
 msgstr "Turite tuojau pat pasikeisti slaptažodį (slaptažodis paseno)"
 
-#: ../src/kylin-screensaver-dialog.c:173
+#: ../src/ukui-screensaver-dialog.c:173
 msgid "You are required to change your password immediately (root enforced)"
 msgstr "Turite tuojau pat pasikeisti slaptažodį (root nurodymu)"
 
-#: ../src/kylin-screensaver-dialog.c:174
+#: ../src/ukui-screensaver-dialog.c:174
 msgid "Your account has expired; please contact your system administrator"
 msgstr ""
 "Jūsų slaptažodis nustojo galiojęs; susisiekite su sistemos administratoriumi"
 
-#: ../src/kylin-screensaver-dialog.c:175
+#: ../src/ukui-screensaver-dialog.c:175
 msgid "No password supplied"
 msgstr "Slaptažodis nenurodytas"
 
-#: ../src/kylin-screensaver-dialog.c:176
+#: ../src/ukui-screensaver-dialog.c:176
 msgid "Password unchanged"
 msgstr "Slaptažodis nepakeistas"
 
-#: ../src/kylin-screensaver-dialog.c:177
+#: ../src/ukui-screensaver-dialog.c:177
 msgid "Can not get username"
 msgstr "Nepavyko gauti naudotojo vardo"
 
-#: ../src/kylin-screensaver-dialog.c:178
+#: ../src/ukui-screensaver-dialog.c:178
 msgid "Retype new UNIX password:"
 msgstr "Pakartokite naują UNIX slaptažodį:"
 
-#: ../src/kylin-screensaver-dialog.c:179
+#: ../src/ukui-screensaver-dialog.c:179
 msgid "Enter new UNIX password:"
 msgstr "Įveskite naują UNIX slaptažodį:"
 
-#: ../src/kylin-screensaver-dialog.c:180
+#: ../src/ukui-screensaver-dialog.c:180
 msgid "(current) UNIX password:"
 msgstr "(esamas) UNIX slaptažodis:"
 
-#: ../src/kylin-screensaver-dialog.c:181
+#: ../src/ukui-screensaver-dialog.c:181
 msgid "Error while changing NIS password."
 msgstr "Klaida keičiant NIS slaptažodį."
 
-#: ../src/kylin-screensaver-dialog.c:182
+#: ../src/ukui-screensaver-dialog.c:182
 msgid "You must choose a longer password"
 msgstr "Turite pasirinkti ilgesnį slaptažodį"
 
-#: ../src/kylin-screensaver-dialog.c:183
+#: ../src/ukui-screensaver-dialog.c:183
 msgid "Password has been already used. Choose another."
 msgstr "Slaptažodis jau buvo naudojamas. Pasirinkite kitą."
 
-#: ../src/kylin-screensaver-dialog.c:184
+#: ../src/ukui-screensaver-dialog.c:184
 msgid "You must wait longer to change your password"
 msgstr "Turite palaukti ilgiau norėdami pakeisti slaptažodį"
 
-#: ../src/kylin-screensaver-dialog.c:185
+#: ../src/ukui-screensaver-dialog.c:185
 msgid "Sorry, passwords do not match"
 msgstr "Slaptažodžiai nevienodi"
 
-#: ../src/kylin-screensaver-dialog.c:256
+#: ../src/ukui-screensaver-dialog.c:256
 msgid "Checking..."
 msgstr "Tikrinama..."
 
-#: ../src/kylin-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
+#: ../src/ukui-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
 msgid "Authentication failed."
 msgstr "Tapatybė nepatvirtinta."
 
-#: ../src/kylin-screensaver-preferences.c:457
+#: ../src/ukui-screensaver-preferences.c:457
 msgid "Blank screen"
 msgstr "Tuščias ekranas"
 
-#: ../src/kylin-screensaver-preferences.c:463
+#: ../src/ukui-screensaver-preferences.c:463
 msgid "Random"
 msgstr "Atsitiktinė"
 
-#: ../src/kylin-screensaver-preferences.c:947
+#: ../src/ukui-screensaver-preferences.c:947
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -640,7 +623,7 @@ msgstr[0] "%d valanda"
 msgstr[1] "%d valandos"
 msgstr[2] "%d valandų"
 
-#: ../src/kylin-screensaver-preferences.c:950
+#: ../src/ukui-screensaver-preferences.c:950
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -648,7 +631,7 @@ msgstr[0] "%d minutė"
 msgstr[1] "%d minutės"
 msgstr[2] "%d minučių"
 
-#: ../src/kylin-screensaver-preferences.c:953
+#: ../src/ukui-screensaver-preferences.c:953
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -657,15 +640,15 @@ msgstr[1] "%d sekundės"
 msgstr[2] "%d sekundžių"
 
 #. hour:minutes:seconds
-#: ../src/kylin-screensaver-preferences.c:961
+#: ../src/ukui-screensaver-preferences.c:961
 #, c-format
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. hour:minutes
 #. minutes:seconds
-#: ../src/kylin-screensaver-preferences.c:966
-#: ../src/kylin-screensaver-preferences.c:979
+#: ../src/ukui-screensaver-preferences.c:966
+#: ../src/ukui-screensaver-preferences.c:979
 #, c-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -673,35 +656,35 @@ msgstr "%s %s"
 #. hour
 #. minutes
 #. seconds
-#: ../src/kylin-screensaver-preferences.c:971
-#: ../src/kylin-screensaver-preferences.c:984
-#: ../src/kylin-screensaver-preferences.c:990
+#: ../src/ukui-screensaver-preferences.c:971
+#: ../src/ukui-screensaver-preferences.c:984
+#: ../src/ukui-screensaver-preferences.c:990
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: ../src/kylin-screensaver-preferences.c:1005
+#: ../src/ukui-screensaver-preferences.c:1005
 #, c-format
 msgid "Never"
 msgstr "Niekada"
 
-#: ../src/kylin-screensaver-preferences.c:1581
+#: ../src/ukui-screensaver-preferences.c:1581
 msgid "Could not load the main interface"
 msgstr "Nepavyko įkelti pagrindinės sąsajos"
 
-#: ../src/kylin-screensaver-preferences.c:1583
+#: ../src/ukui-screensaver-preferences.c:1583
 msgid "Please make sure that the screensaver is properly installed"
 msgstr "Įsitikinkite, kad ekrano užsklanda yra tinkamai įdiegta"
 
-#: ../src/kylin-screensaver.c:56
+#: ../src/ukui-screensaver.c:56
 msgid "Don't become a daemon"
 msgstr "Netapti tarnyba"
 
-#: ../src/kylin-screensaver.c:57
+#: ../src/ukui-screensaver.c:57
 msgid "Enable debugging code"
 msgstr "Įjungti derinimo kodą"
 
-#: ../src/kylin-screensaver.desktop.in.in.h:2
+#: ../src/ukui-screensaver.desktop.in.in.h:2
 msgid "Launch screensaver and locker program"
 msgstr "Paleisti ekrano užsklandą ir užraktą"
 
@@ -740,34 +723,49 @@ msgid "screensaver already running in this session"
 msgstr "šiame seanse jau paleista ekrano užsklanda"
 
 #. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format
-#: ../src/gs-lock-plug.c:307
+#: ../src/gs-lock-plug.c:311
 msgid "%A, %B %e"
 msgstr "%A, %B %e"
 
-#: ../src/gs-lock-plug.c:409
+#: ../src/gs-lock-plug.c:413
 msgid "Time has expired."
 msgstr "Baigėsi laikas."
 
-#: ../src/gs-lock-plug.c:440
+#: ../src/gs-lock-plug.c:444
 msgid "You have the Caps Lock key on."
 msgstr "Įjungtas Jūsų Caps Lock klavišas."
 
-#: ../src/gs-lock-plug.c:1771
+#: ../src/gs-lock-plug.c:1775
 msgid "S_witch User..."
 msgstr "_Pakeisti naudotoją..."
 
-#: ../src/gs-lock-plug.c:1780
+#: ../src/gs-lock-plug.c:1784
 msgid "Log _Out"
 msgstr "At_sijungti"
 
 #. To translators: This expands to USERNAME on HOSTNAME
-#: ../src/gs-lock-plug.c:2029
+#: ../src/gs-lock-plug.c:2033
 msgid "%U on %h"
 msgstr "%U kompiuteryje %h"
 
-#: ../src/gs-lock-plug.c:2056
+#: ../src/gs-lock-plug.c:2060
 msgid "_Password:"
 msgstr "_Slaptažodis:"
+
+#~ msgid "_Leave Message"
+#~ msgstr "_Palikti žinutę"
+
+#~ msgid "_Switch User"
+#~ msgstr "_Keisti naudotoją"
+
+#~ msgid "_Log Out"
+#~ msgstr "At_sijungti"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Atsisakyti"
+
+#~ msgid "<b>Leave a message for %R:</b>"
+#~ msgstr "<b>Palikti žinutę %R:</b>"
 
 #~ msgid "Floating MATE"
 #~ msgstr "Plaukiojantis MATE"

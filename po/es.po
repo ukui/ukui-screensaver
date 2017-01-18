@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UKUI Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 15:28+0800\n"
+"POT-Creation-Date: 2017-01-18 15:43+0800\n"
 "PO-Revision-Date: 2015-12-16 14:02+0000\n"
 "Last-Translator: monsta <monsta@inbox.ru>\n"
 "Language-Team: Spanish (http://wiki.ukui.org/trans/)\n"
@@ -25,119 +25,102 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/kylin-screensaver-preferences.desktop.in.h:1
-#: ../src/kylin-screensaver.desktop.in.in.h:1
+#: ../data/ukui-screensaver-preferences.desktop.in.h:1
+#: ../src/ukui-screensaver.desktop.in.in.h:1
 msgid "Screensaver"
 msgstr "Salvapantallas"
 
-#: ../data/kylin-screensaver-preferences.desktop.in.h:2
+#: ../data/ukui-screensaver-preferences.desktop.in.h:2
 msgid "Set your screensaver preferences"
 msgstr "Configure su salvapantallas"
 
-#: ../data/kylin-screensaver-preferences.ui.h:1
+#: ../data/ukui-screensaver-preferences.ui.h:1
 msgid "Screensaver Preview"
 msgstr "Vista previa del salvapantallas"
 
-#: ../data/kylin-screensaver-preferences.ui.h:2
+#: ../data/ukui-screensaver-preferences.ui.h:2
 msgid "<b>Screensaver preview</b>"
 msgstr "<b>Vista previa del salvapantallas</b>"
 
-#: ../data/kylin-screensaver-preferences.ui.h:3
+#: ../data/ukui-screensaver-preferences.ui.h:3
 msgid "Screensaver Preferences"
 msgstr "Preferencias del salvapantallas"
 
-#: ../data/kylin-screensaver-preferences.ui.h:4
+#: ../data/ukui-screensaver-preferences.ui.h:4
 msgid "Power _Management"
 msgstr "Gestión de _energía"
 
-#: ../data/kylin-screensaver-preferences.ui.h:5
+#: ../data/ukui-screensaver-preferences.ui.h:5
 msgid "_Preview"
 msgstr "Vista _previa"
 
-#: ../data/kylin-screensaver-preferences.ui.h:6
+#: ../data/ukui-screensaver-preferences.ui.h:6
 msgid "_Screensaver theme:"
 msgstr "Tema del _salvapantallas:"
 
-#: ../data/kylin-screensaver-preferences.ui.h:7
+#: ../data/ukui-screensaver-preferences.ui.h:7
 msgid "Regard the computer as _idle after:"
 msgstr "Considerar que el equipo está _inactivo después de:"
 
-#: ../data/kylin-screensaver-preferences.ui.h:8
+#: ../data/ukui-screensaver-preferences.ui.h:8
 msgid "_Activate screensaver when computer is idle"
 msgstr "_Activar el salvapantallas cuando el equipo esté inactivo"
 
-#: ../data/kylin-screensaver-preferences.ui.h:9
+#: ../data/ukui-screensaver-preferences.ui.h:9
 msgid "_Lock screen when screensaver is active"
 msgstr "_Bloquear pantalla cuando el salvapantallas esté activo"
 
-#: ../data/kylin-screensaver-preferences.ui.h:10
+#: ../data/ukui-screensaver-preferences.ui.h:10
 msgid "<b>Warning: the screen will not be locked for the root user.</b>"
 msgstr "<b>Atención: la pantalla no se bloqueará para el usuario root.</b>"
 
-#: ../data/kylin-screensaver.directory.in.h:1
+#: ../data/ukui-screensaver.directory.in.h:1
 msgid "Screensavers"
 msgstr "Salvapantallas"
 
-#: ../data/kylin-screensaver.directory.in.h:2
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:7
+#: ../data/ukui-screensaver.directory.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:7
 msgid "Screensaver themes"
 msgstr "Temas del salvapantallas"
 
 #. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
-#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:1
+#: ../savers/cosmos-slideshow-ukui.desktop.in.in.h:1
 msgid "Cosmos"
 msgstr "Cosmos"
 
 #: ../data/lock-dialog-default.ui.h:1
-msgid "_Leave Message"
-msgstr "_Dejar un mensaje"
+msgid "已登录"
+msgstr ""
 
-#: ../data/lock-dialog-default.ui.h:2
-msgid "_Switch User"
-msgstr "Cambiar de _usuario"
-
-#: ../data/lock-dialog-default.ui.h:3
-msgid "_Log Out"
-msgstr "Cerrar la _sesión"
-
-#: ../data/lock-dialog-default.ui.h:4
-msgid "_Cancel"
-msgstr "_Cancelar"
-
-#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1791
+#: ../data/lock-dialog-default.ui.h:2 ../src/gs-lock-plug.c:1795
 msgid "_Unlock"
 msgstr "_Desbloquear"
 
-#: ../data/lock-dialog-default.ui.h:7
-#, no-c-format
-msgid "<b>Leave a message for %R:</b>"
-msgstr "<b>Deje un mensaje para %R:</b>"
-
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:1
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:1
 msgid "Activate when idle"
 msgstr "Activar cuando esté inactivo"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:2
 msgid "Set this to TRUE to activate the screensaver when the session is idle."
 msgstr ""
 "Active esto para activar el salvapantallas cuando la sesión esté inactiva."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:3
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:3
 msgid "Lock on activation"
 msgstr "Bloquear al activar"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:4
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:4
 msgid "Set this to TRUE to lock the screen when the screensaver goes active."
 msgstr ""
 "Active esto para bloquear la pantalla cuando se activa el salvapantallas."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:5
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:5
 msgid "Screensaver theme selection mode"
 msgstr "Modo de selección del tema del salvapantallas"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:6
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:6
 msgid ""
 "The selection mode used by screensaver. May be \"blank-only\" to enable the "
 "screensaver without using any theme on activation, \"single\" to enable "
@@ -150,7 +133,7 @@ msgstr ""
 "el salvapantallas usando sólo un tema (especificado en la clave \"themes"
 "\" ), y \"random\" para activar el salvapantallas usando un tema aleatorio."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:8
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:8
 msgid ""
 "This key specifies the list of themes to be used by the screensaver. It's "
 "ignored when \"mode\" key is \"blank-only\", should provide the theme name "
@@ -162,11 +145,11 @@ msgstr ""
 "nombre del tema cuando \"mode\" es \"single\", y debería proporcionar una "
 "lista de temas cuando \"mode\" es \"random\"."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:9
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:9
 msgid "Time before power management baseline"
 msgstr "Tiempo antes del minimo de la gestión de energía"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:10
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:10
 msgid ""
 "The number of seconds of inactivity before signalling to power management. "
 "This key is set and maintained by the session power management agent."
@@ -175,32 +158,32 @@ msgstr ""
 "energía. Esta clave se establece y mantiene por el agente de sesión de "
 "gestión de energía."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:11
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:11
 msgid "Time before theme change"
 msgstr "Tiempo antes de cambiar el tema"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:12
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:12
 msgid "The number of minutes to run before changing the screensaver theme."
 msgstr ""
 "El número de minutos que se ejecuta antes de cambiar el tema del "
 "salvapantallas."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:13
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:13
 msgid "Time before locking"
 msgstr "Tiempo antes de bloquear"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:14
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:14
 msgid ""
 "The number of minutes after screensaver activation before locking the screen."
 msgstr ""
 "El número de minutos tras la activación del salvapantallas antes de bloquear "
 "la pantalla."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:15
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:15
 msgid "Allow embedding a keyboard into the window"
 msgstr "Permitir empotrar un teclado en la ventana"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:16
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:16
 msgid ""
 "Set this to TRUE to allow embedding a keyboard into the window when trying "
 "to unlock. The \"keyboard_command\" key must be set with the appropriate "
@@ -210,11 +193,11 @@ msgstr ""
 "intentar desbloquear. La clave \"keyboard_command\" debe estar establecida "
 "con el comando apropiado."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:17
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:17
 msgid "Embedded keyboard command"
 msgstr "Comando de teclado empotrado"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:18
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:18
 msgid ""
 "The command that will be run, if the \"embedded_keyboard_enabled\" key is "
 "set to TRUE, to embed a keyboard widget into the window. This command should "
@@ -226,11 +209,11 @@ msgstr ""
 "comando debería implementar un interfaz XEMBED y sacar una ventana XID en la "
 "salida estándar."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:19
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:19
 msgid "Allow logout"
 msgstr "Permitir cerrar sesión"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:20
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:20
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to allow logging "
 "out after a delay. The delay is specified in the \"logout_delay\" key."
@@ -239,11 +222,11 @@ msgstr ""
 "la sesión después de un intervalo de tiempo. El retardo se especifica en la "
 "clave \"logout_delay\"."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:21
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:21
 msgid "Time before logout option"
 msgstr "Tiempo antes de la opción de cierre de sesión"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:22
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:22
 msgid ""
 "The number of minutes after the screensaver activation before a logout "
 "option will appear in the unlock dialog. This key has effect only if the "
@@ -253,11 +236,11 @@ msgstr ""
 "que se muestre la opción de cerrar sesión en el diálogo de desbloqueo. Esta "
 "clave tiene efecto sólo si la clave \"logout_enable\" está activada."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:23
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:23
 msgid "Logout command"
 msgstr "Comando de cierre de sesión"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:24
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:24
 msgid ""
 "The command to invoke when the logout button is clicked. This command should "
 "simply log the user out without any interaction. This key has effect only if "
@@ -268,11 +251,11 @@ msgstr ""
 "interacción. Esta clave tiene efecto sólo si la clave \"logout_enable\" está "
 "activada."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:25
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:25
 msgid "Allow user switching"
 msgstr "Permitir cambiar usuario"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:26
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:26
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to switch to a "
 "different user account."
@@ -280,60 +263,60 @@ msgstr ""
 "Active esto para ofrecer una opción en el diálogo de desbloqueo para cambiar "
 "a una cuenta de usuario diferente."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:27
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:27
 msgid "Theme for lock dialog"
 msgstr "Tema para el diálogo de bloqueo"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:28
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:28
 msgid "Theme to use for the lock dialog"
 msgstr "Tema para usar en el diálogo de bloqueo."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:29
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:29
 msgid "Allow the session status message to be displayed"
 msgstr "Permitir que se muestren los mensajes de estado de la sesión"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:30
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:30
 msgid ""
 "Allow the session status message to be displayed when the screen is locked."
 msgstr ""
 "Permitir que se muestren los mensajes de estado de la sesión cuando la "
 "pantalla está bloqueada."
 
-#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:2
+#: ../savers/cosmos-slideshow-ukui.desktop.in.in.h:2
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Muestra una serie de imágenes del cosmos"
 
-#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
+#: ../savers/footlogo-floaters-ukui.desktop.in.in.h:1
 #, fuzzy
-msgid "Floating KYLIN"
+msgid "Floating UKUI"
 msgstr "GNOME flotante"
 
-#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
+#: ../savers/footlogo-floaters-ukui.desktop.in.in.h:2
 #, fuzzy
-msgid "Bubbles the KYLIN logo around the screen"
+msgid "Bubbles the UKUI logo around the screen"
 msgstr "Muestra el logo de GNOME flotando en burbujas"
 
-#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
+#: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:1
 msgid "Floating GNOME"
 msgstr "GNOME flotante"
 
-#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
+#: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
 msgstr "Muestra el logo de GNOME flotando en burbujas"
 
-#: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
+#: ../savers/personal-slideshow-ukui.desktop.in.in.h:1
 msgid "Pictures folder"
 msgstr "Carpeta de imágenes"
 
-#: ../savers/personal-slideshow-kylin.desktop.in.in.h:2
+#: ../savers/personal-slideshow-ukui.desktop.in.in.h:2
 msgid "Display a slideshow from your Pictures folder"
 msgstr "Muestra una serie de imágenes de su carpeta Imágenes"
 
-#: ../savers/popsquares-kylin.desktop.in.in.h:1
+#: ../savers/popsquares-ukui.desktop.in.in.h:1
 msgid "Pop art squares"
 msgstr "Cuadrados pop art"
 
-#: ../savers/popsquares-kylin.desktop.in.in.h:2
+#: ../savers/popsquares-ukui.desktop.in.in.h:2
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "Esto dibuja una rejilla de cuadros pop-art de colores pulsantes."
 
@@ -440,44 +423,44 @@ msgstr "%s no parece ser un tema válido del salvapantallas."
 msgid "Copying file: %u of %u"
 msgstr "Copiando archivo: %u de %u"
 
-#: ../src/kylin-screensaver-command.c:59
+#: ../src/ukui-screensaver-command.c:59
 msgid "Causes the screensaver to exit gracefully"
 msgstr "Hace que el salvapantallas termine de forma correcta"
 
-#: ../src/kylin-screensaver-command.c:63
+#: ../src/ukui-screensaver-command.c:63
 msgid "Query the state of the screensaver"
 msgstr "Consulta el estado del salvapantallas"
 
-#: ../src/kylin-screensaver-command.c:67
+#: ../src/ukui-screensaver-command.c:67
 msgid "Query the length of time the screensaver has been active"
 msgstr "Consultar cuanto tiempo ha estado activo el salvapantallas"
 
-#: ../src/kylin-screensaver-command.c:71
+#: ../src/ukui-screensaver-command.c:71
 msgid "Tells the running screensaver process to lock the screen immediately"
 msgstr ""
 "Le dice al proceso del salvapantallas en ejecución que bloquee la pantalla "
 "inmediatamente"
 
-#: ../src/kylin-screensaver-command.c:75
+#: ../src/ukui-screensaver-command.c:75
 msgid "If the screensaver is active then switch to another graphics demo"
 msgstr "Si el salvapantallas está activo, cambiar a otra demo gráfica"
 
-#: ../src/kylin-screensaver-command.c:79
+#: ../src/ukui-screensaver-command.c:79
 msgid "Turn the screensaver on (blank the screen)"
 msgstr "Activar el salvapantallas (ennegrecer la pantalla)"
 
-#: ../src/kylin-screensaver-command.c:83
+#: ../src/ukui-screensaver-command.c:83
 msgid "If the screensaver is active then deactivate it (un-blank the screen)"
 msgstr ""
 "Si el salvapantallas está activo entonces lo desactiva (desenegrece la "
 "pantalla)"
 
-#: ../src/kylin-screensaver-command.c:87
+#: ../src/ukui-screensaver-command.c:87
 msgid "Poke the running screensaver to simulate user activity"
 msgstr ""
 "Similar el salvapantallas en ejecución para similar la actividad del usuario"
 
-#: ../src/kylin-screensaver-command.c:91
+#: ../src/ukui-screensaver-command.c:91
 msgid ""
 "Inhibit the screensaver from activating.  Command blocks while inhibit is "
 "active."
@@ -485,181 +468,181 @@ msgstr ""
 "Inhibir la activación del salvapantallas. La orden se bloquea cuando se "
 "activa la inhibición."
 
-#: ../src/kylin-screensaver-command.c:95
+#: ../src/ukui-screensaver-command.c:95
 msgid "The calling application that is inhibiting the screensaver"
 msgstr "La aplicación llamante que está inhibiendo el salvapantallas"
 
-#: ../src/kylin-screensaver-command.c:99
+#: ../src/ukui-screensaver-command.c:99
 msgid "The reason for inhibiting the screensaver"
 msgstr "La razón para inhibir el salvapantallas"
 
-#: ../src/kylin-screensaver-command.c:103 ../src/kylin-screensaver-dialog.c:60
-#: ../src/kylin-screensaver.c:55
+#: ../src/ukui-screensaver-command.c:103 ../src/ukui-screensaver-dialog.c:60
+#: ../src/ukui-screensaver.c:55
 msgid "Version of this application"
 msgstr "Versión de esta aplicación"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 #, c-format
 msgid "The screensaver is %s\n"
 msgstr "El salvapantallas es %s\n"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "active"
 msgstr "activo"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "inactive"
 msgstr "inactivo"
 
-#: ../src/kylin-screensaver-command.c:368
+#: ../src/ukui-screensaver-command.c:368
 #, c-format
 msgid "The screensaver is not inhibited\n"
 msgstr "El salvapantallas no está inhibido\n"
 
-#: ../src/kylin-screensaver-command.c:376
+#: ../src/ukui-screensaver-command.c:376
 #, c-format
 msgid "The screensaver is being inhibited by:\n"
 msgstr "El salvapantallas está siendo inhibido por:\n"
 
-#: ../src/kylin-screensaver-command.c:411
+#: ../src/ukui-screensaver-command.c:411
 #, c-format
 msgid "The screensaver has been active for %d seconds.\n"
 msgstr ""
 "El salvapantallas ha estado activo durante %d segundos.\n"
 "\n"
 
-#: ../src/kylin-screensaver-command.c:417
+#: ../src/ukui-screensaver-command.c:417
 #, c-format
 msgid "The screensaver is not currently active.\n"
 msgstr "Actualmente el salvapantallas no está activo.\n"
 
-#: ../src/kylin-screensaver-dialog.c:59
+#: ../src/ukui-screensaver-dialog.c:59
 msgid "Show debugging output"
 msgstr "Mostrar la salida de depuración"
 
-#: ../src/kylin-screensaver-dialog.c:61
+#: ../src/ukui-screensaver-dialog.c:61
 msgid "Show the logout button"
 msgstr "Mostrar el botón de cerrar sesión"
 
-#: ../src/kylin-screensaver-dialog.c:62
+#: ../src/ukui-screensaver-dialog.c:62
 msgid "Command to invoke from the logout button"
 msgstr "Orden que invocar con el botón de cierre de sesión"
 
-#: ../src/kylin-screensaver-dialog.c:63
+#: ../src/ukui-screensaver-dialog.c:63
 msgid "Show the switch user button"
 msgstr "Mostrar el botón de cambio de usuario"
 
-#: ../src/kylin-screensaver-dialog.c:64
+#: ../src/ukui-screensaver-dialog.c:64
 msgid "Message to show in the dialog"
 msgstr "Mensaje para mostrar en el diálogo"
 
-#: ../src/kylin-screensaver-dialog.c:64 ../src/kylin-screensaver-dialog.c:65
+#: ../src/ukui-screensaver-dialog.c:64 ../src/ukui-screensaver-dialog.c:65
 msgid "MESSAGE"
 msgstr "MENSAJE"
 
-#: ../src/kylin-screensaver-dialog.c:65
+#: ../src/ukui-screensaver-dialog.c:65
 msgid "Not used"
 msgstr "No usado"
 
 #. login: is whacked always translate to Username:
-#: ../src/kylin-screensaver-dialog.c:167 ../src/kylin-screensaver-dialog.c:168
-#: ../src/kylin-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
+#: ../src/ukui-screensaver-dialog.c:167 ../src/ukui-screensaver-dialog.c:168
+#: ../src/ukui-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
 msgid "Username:"
 msgstr "Usuario:"
 
-#: ../src/kylin-screensaver-dialog.c:170 ../src/kylin-screensaver-dialog.c:171
+#: ../src/ukui-screensaver-dialog.c:170 ../src/ukui-screensaver-dialog.c:171
 #: ../src/gs-auth-pam.c:171
 msgid "Password:"
 msgstr "Contraseña:"
 
-#: ../src/kylin-screensaver-dialog.c:172
+#: ../src/ukui-screensaver-dialog.c:172
 msgid "You are required to change your password immediately (password aged)"
 msgstr "Tiene que cambiar la contraseña inmediatamente (la contraseña caducó)"
 
-#: ../src/kylin-screensaver-dialog.c:173
+#: ../src/ukui-screensaver-dialog.c:173
 msgid "You are required to change your password immediately (root enforced)"
 msgstr ""
 "Tiene que cambiar la contraseña inmediatamente (forzado por el administrador)"
 
-#: ../src/kylin-screensaver-dialog.c:174
+#: ../src/ukui-screensaver-dialog.c:174
 msgid "Your account has expired; please contact your system administrator"
 msgstr "Su cuenta ha caducado. Contacte con su administrador de sistemas"
 
-#: ../src/kylin-screensaver-dialog.c:175
+#: ../src/ukui-screensaver-dialog.c:175
 msgid "No password supplied"
 msgstr "No introdujo ninguna contraseña"
 
-#: ../src/kylin-screensaver-dialog.c:176
+#: ../src/ukui-screensaver-dialog.c:176
 msgid "Password unchanged"
 msgstr "Contraseña no cambiada"
 
-#: ../src/kylin-screensaver-dialog.c:177
+#: ../src/ukui-screensaver-dialog.c:177
 msgid "Can not get username"
 msgstr "No se puede obtener el nombre de usuario"
 
-#: ../src/kylin-screensaver-dialog.c:178
+#: ../src/ukui-screensaver-dialog.c:178
 msgid "Retype new UNIX password:"
 msgstr "Vuelva a teclear la contraseña de UNIX nueva:"
 
-#: ../src/kylin-screensaver-dialog.c:179
+#: ../src/ukui-screensaver-dialog.c:179
 msgid "Enter new UNIX password:"
 msgstr "Introduzca una contraseña UNIX nueva:"
 
-#: ../src/kylin-screensaver-dialog.c:180
+#: ../src/ukui-screensaver-dialog.c:180
 msgid "(current) UNIX password:"
 msgstr "Contraseña UNIX (actual):"
 
-#: ../src/kylin-screensaver-dialog.c:181
+#: ../src/ukui-screensaver-dialog.c:181
 msgid "Error while changing NIS password."
 msgstr "Error al cambiar la contraseña NIS."
 
-#: ../src/kylin-screensaver-dialog.c:182
+#: ../src/ukui-screensaver-dialog.c:182
 msgid "You must choose a longer password"
 msgstr "Debe elegir una contraseña más larga"
 
-#: ../src/kylin-screensaver-dialog.c:183
+#: ../src/ukui-screensaver-dialog.c:183
 msgid "Password has been already used. Choose another."
 msgstr "La contraseña ya ha sido usada. Elija otra."
 
-#: ../src/kylin-screensaver-dialog.c:184
+#: ../src/ukui-screensaver-dialog.c:184
 msgid "You must wait longer to change your password"
 msgstr "Debe esperar más para cambiar su contraseña"
 
-#: ../src/kylin-screensaver-dialog.c:185
+#: ../src/ukui-screensaver-dialog.c:185
 msgid "Sorry, passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../src/kylin-screensaver-dialog.c:256
+#: ../src/ukui-screensaver-dialog.c:256
 msgid "Checking..."
 msgstr "Comprobando…"
 
-#: ../src/kylin-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
+#: ../src/ukui-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
 msgid "Authentication failed."
 msgstr "La autenticación ha fallado."
 
-#: ../src/kylin-screensaver-preferences.c:457
+#: ../src/ukui-screensaver-preferences.c:457
 msgid "Blank screen"
 msgstr "Oscurecer pantalla"
 
-#: ../src/kylin-screensaver-preferences.c:463
+#: ../src/ukui-screensaver-preferences.c:463
 msgid "Random"
 msgstr "Aleatorio"
 
-#: ../src/kylin-screensaver-preferences.c:947
+#: ../src/ukui-screensaver-preferences.c:947
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d hora"
 msgstr[1] "%d horas"
 
-#: ../src/kylin-screensaver-preferences.c:950
+#: ../src/ukui-screensaver-preferences.c:950
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
 msgstr[1] "%d minutos"
 
-#: ../src/kylin-screensaver-preferences.c:953
+#: ../src/ukui-screensaver-preferences.c:953
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -667,15 +650,15 @@ msgstr[0] "%d segundo"
 msgstr[1] "%d segundos"
 
 #. hour:minutes:seconds
-#: ../src/kylin-screensaver-preferences.c:961
+#: ../src/ukui-screensaver-preferences.c:961
 #, c-format
 msgid "%s %s %s"
 msgstr "%s:%s:%s"
 
 #. hour:minutes
 #. minutes:seconds
-#: ../src/kylin-screensaver-preferences.c:966
-#: ../src/kylin-screensaver-preferences.c:979
+#: ../src/ukui-screensaver-preferences.c:966
+#: ../src/ukui-screensaver-preferences.c:979
 #, c-format
 msgid "%s %s"
 msgstr "%s:%s"
@@ -683,35 +666,35 @@ msgstr "%s:%s"
 #. hour
 #. minutes
 #. seconds
-#: ../src/kylin-screensaver-preferences.c:971
-#: ../src/kylin-screensaver-preferences.c:984
-#: ../src/kylin-screensaver-preferences.c:990
+#: ../src/ukui-screensaver-preferences.c:971
+#: ../src/ukui-screensaver-preferences.c:984
+#: ../src/ukui-screensaver-preferences.c:990
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: ../src/kylin-screensaver-preferences.c:1005
+#: ../src/ukui-screensaver-preferences.c:1005
 #, c-format
 msgid "Never"
 msgstr "Nunca"
 
-#: ../src/kylin-screensaver-preferences.c:1581
+#: ../src/ukui-screensaver-preferences.c:1581
 msgid "Could not load the main interface"
 msgstr "No se pudo cargar el interfaz principal"
 
-#: ../src/kylin-screensaver-preferences.c:1583
+#: ../src/ukui-screensaver-preferences.c:1583
 msgid "Please make sure that the screensaver is properly installed"
 msgstr "Asegúrese de que el salvapantallas está instalado apropiadamente"
 
-#: ../src/kylin-screensaver.c:56
+#: ../src/ukui-screensaver.c:56
 msgid "Don't become a daemon"
 msgstr "No convertirse en un demonio"
 
-#: ../src/kylin-screensaver.c:57
+#: ../src/ukui-screensaver.c:57
 msgid "Enable debugging code"
 msgstr "Activar código de depuración"
 
-#: ../src/kylin-screensaver.desktop.in.in.h:2
+#: ../src/ukui-screensaver.desktop.in.in.h:2
 msgid "Launch screensaver and locker program"
 msgstr "Lanzar el salvapantallas y el programa de bloqueo"
 
@@ -750,34 +733,49 @@ msgid "screensaver already running in this session"
 msgstr "ya se está ejecutando el salvapantallas en esta sesión"
 
 #. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format
-#: ../src/gs-lock-plug.c:307
+#: ../src/gs-lock-plug.c:311
 msgid "%A, %B %e"
 msgstr "%A, %e de %B"
 
-#: ../src/gs-lock-plug.c:409
+#: ../src/gs-lock-plug.c:413
 msgid "Time has expired."
 msgstr "Tiempo agotado."
 
-#: ../src/gs-lock-plug.c:440
+#: ../src/gs-lock-plug.c:444
 msgid "You have the Caps Lock key on."
 msgstr "Tiene la tecla «Bloq. Mayúsculas» pulsada."
 
-#: ../src/gs-lock-plug.c:1771
+#: ../src/gs-lock-plug.c:1775
 msgid "S_witch User..."
 msgstr "_Cambiar usuario…"
 
-#: ../src/gs-lock-plug.c:1780
+#: ../src/gs-lock-plug.c:1784
 msgid "Log _Out"
 msgstr "Cerrar _sesión"
 
 #. To translators: This expands to USERNAME on HOSTNAME
-#: ../src/gs-lock-plug.c:2029
+#: ../src/gs-lock-plug.c:2033
 msgid "%U on %h"
 msgstr "%U en %h"
 
-#: ../src/gs-lock-plug.c:2056
+#: ../src/gs-lock-plug.c:2060
 msgid "_Password:"
 msgstr "_Contraseña:"
+
+#~ msgid "_Leave Message"
+#~ msgstr "_Dejar un mensaje"
+
+#~ msgid "_Switch User"
+#~ msgstr "Cambiar de _usuario"
+
+#~ msgid "_Log Out"
+#~ msgstr "Cerrar la _sesión"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Cancelar"
+
+#~ msgid "<b>Leave a message for %R:</b>"
+#~ msgstr "<b>Deje un mensaje para %R:</b>"
 
 #~ msgid "Floating MATE"
 #~ msgstr "MATE flotante"

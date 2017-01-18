@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UKUI Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 15:28+0800\n"
+"POT-Creation-Date: 2017-01-18 15:43+0800\n"
 "PO-Revision-Date: 2016-03-14 16:54+0000\n"
 "Last-Translator: hpiece 8 <hpiece8@gmail.com>\n"
 "Language-Team: Indonesian (http://wiki.ukui.org/trans/)\n"
@@ -23,120 +23,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../data/kylin-screensaver-preferences.desktop.in.h:1
-#: ../src/kylin-screensaver.desktop.in.in.h:1
+#: ../data/ukui-screensaver-preferences.desktop.in.h:1
+#: ../src/ukui-screensaver.desktop.in.in.h:1
 msgid "Screensaver"
 msgstr "Screensaver"
 
-#: ../data/kylin-screensaver-preferences.desktop.in.h:2
+#: ../data/ukui-screensaver-preferences.desktop.in.h:2
 msgid "Set your screensaver preferences"
 msgstr "Tentukan setingan screensaver Anda"
 
-#: ../data/kylin-screensaver-preferences.ui.h:1
+#: ../data/ukui-screensaver-preferences.ui.h:1
 msgid "Screensaver Preview"
 msgstr "Preview Screensaver"
 
-#: ../data/kylin-screensaver-preferences.ui.h:2
+#: ../data/ukui-screensaver-preferences.ui.h:2
 msgid "<b>Screensaver preview</b>"
 msgstr "<b>Preview screensaver</b>"
 
-#: ../data/kylin-screensaver-preferences.ui.h:3
+#: ../data/ukui-screensaver-preferences.ui.h:3
 msgid "Screensaver Preferences"
 msgstr "Setingan Screensaver"
 
-#: ../data/kylin-screensaver-preferences.ui.h:4
+#: ../data/ukui-screensaver-preferences.ui.h:4
 msgid "Power _Management"
 msgstr "_Manajemen Daya"
 
-#: ../data/kylin-screensaver-preferences.ui.h:5
+#: ../data/ukui-screensaver-preferences.ui.h:5
 msgid "_Preview"
 msgstr "_Preview"
 
-#: ../data/kylin-screensaver-preferences.ui.h:6
+#: ../data/ukui-screensaver-preferences.ui.h:6
 msgid "_Screensaver theme:"
 msgstr "Tema _screensaver:"
 
-#: ../data/kylin-screensaver-preferences.ui.h:7
+#: ../data/ukui-screensaver-preferences.ui.h:7
 msgid "Regard the computer as _idle after:"
 msgstr "Anggap komputer menganggur _setelah:"
 
-#: ../data/kylin-screensaver-preferences.ui.h:8
+#: ../data/ukui-screensaver-preferences.ui.h:8
 msgid "_Activate screensaver when computer is idle"
 msgstr "_Aktifkan screensaver ketika komputer menganggur"
 
-#: ../data/kylin-screensaver-preferences.ui.h:9
+#: ../data/ukui-screensaver-preferences.ui.h:9
 msgid "_Lock screen when screensaver is active"
 msgstr "Kunci _layar ketika screensaver aktif"
 
-#: ../data/kylin-screensaver-preferences.ui.h:10
+#: ../data/ukui-screensaver-preferences.ui.h:10
 msgid "<b>Warning: the screen will not be locked for the root user.</b>"
 msgstr "<b>Peringatan: layar tidak akan terkunci untuk pengguna root.</b>"
 
-#: ../data/kylin-screensaver.directory.in.h:1
+#: ../data/ukui-screensaver.directory.in.h:1
 msgid "Screensavers"
 msgstr "Screensaver"
 
-#: ../data/kylin-screensaver.directory.in.h:2
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:7
+#: ../data/ukui-screensaver.directory.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:7
 msgid "Screensaver themes"
 msgstr "Tema screensaver"
 
 #. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
-#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:1
+#: ../savers/cosmos-slideshow-ukui.desktop.in.in.h:1
 msgid "Cosmos"
 msgstr "Cosmos"
 
 #: ../data/lock-dialog-default.ui.h:1
-msgid "_Leave Message"
-msgstr "_Tinggalkan Pesan"
+msgid "已登录"
+msgstr ""
 
-#: ../data/lock-dialog-default.ui.h:2
-msgid "_Switch User"
-msgstr "_Pindah Pengguna"
-
-#: ../data/lock-dialog-default.ui.h:3
-msgid "_Log Out"
-msgstr "_Log Out"
-
-#: ../data/lock-dialog-default.ui.h:4
-msgid "_Cancel"
-msgstr "_Batal"
-
-#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1791
+#: ../data/lock-dialog-default.ui.h:2 ../src/gs-lock-plug.c:1795
 msgid "_Unlock"
 msgstr "B_uka kunci"
 
-#: ../data/lock-dialog-default.ui.h:7
-#, no-c-format
-msgid "<b>Leave a message for %R:</b>"
-msgstr "<b>Tinggalkan pesan untuk %R:</b>"
-
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:1
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:1
 msgid "Activate when idle"
 msgstr "Aktifkan ketika menganggur"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:2
 msgid "Set this to TRUE to activate the screensaver when the session is idle."
 msgstr ""
 "Buat menjadi TRUE untuk mengaktifkan screensaver ketika sesi sedang "
 "menganggur."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:3
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:3
 msgid "Lock on activation"
 msgstr "Kunci pada aktivasi"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:4
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:4
 msgid "Set this to TRUE to lock the screen when the screensaver goes active."
 msgstr ""
 "Buat menjadi TRUE untuk mengunci layar ketika screensaver sedang aktif."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:5
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:5
 msgid "Screensaver theme selection mode"
 msgstr "Mode pemilihan tema screensaver"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:6
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:6
 msgid ""
 "The selection mode used by screensaver. May be \"blank-only\" to enable the "
 "screensaver without using any theme on activation, \"single\" to enable "
@@ -150,7 +133,7 @@ msgstr ""
 "aktifasi (terutama pada kunci \"tema\"), dan \"random\" untuk mengaktifkan "
 "screensaver menggunakan tema acak pada saat aktifasi."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:8
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:8
 msgid ""
 "This key specifies the list of themes to be used by the screensaver. It's "
 "ignored when \"mode\" key is \"blank-only\", should provide the theme name "
@@ -162,11 +145,11 @@ msgstr ""
 "ketika \"mode\" adalah \"single\", dan menyediakan daftar tema ketika \"mode"
 "\" adalah \"random\"."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:9
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:9
 msgid "Time before power management baseline"
 msgstr "Waktu sebelum manajemen daya dasar"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:10
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:10
 msgid ""
 "The number of seconds of inactivity before signalling to power management. "
 "This key is set and maintained by the session power management agent."
@@ -174,28 +157,28 @@ msgstr ""
 "Jumlah detik tidak aktif sebelum pemberitahuan kepada manajemen daya. Kunci "
 "ini diatur dan dikelola oleh agen sesi manajemen daya."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:11
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:11
 msgid "Time before theme change"
 msgstr "Waktu sebelum tema berganti"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:12
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:12
 msgid "The number of minutes to run before changing the screensaver theme."
 msgstr "Berapa menit menunggu sebelum mengganti tema screensaver."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:13
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:13
 msgid "Time before locking"
 msgstr "Waktu sebelum penguncian"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:14
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:14
 msgid ""
 "The number of minutes after screensaver activation before locking the screen."
 msgstr "Berapa menit setelah aktivasi screensaver sebelum mengunci layar."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:15
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:15
 msgid "Allow embedding a keyboard into the window"
 msgstr "Izinkan meyambungkan keyboard pada jendela"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:16
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:16
 msgid ""
 "Set this to TRUE to allow embedding a keyboard into the window when trying "
 "to unlock. The \"keyboard_command\" key must be set with the appropriate "
@@ -205,11 +188,11 @@ msgstr ""
 "jendela ketika membuka kunci. kunci \"keyboard_command\" harus diatur dengan "
 "perintah yang sesuai."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:17
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:17
 msgid "Embedded keyboard command"
 msgstr "Perintah penyambungan keyboard"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:18
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:18
 msgid ""
 "The command that will be run, if the \"embedded_keyboard_enabled\" key is "
 "set to TRUE, to embed a keyboard widget into the window. This command should "
@@ -221,11 +204,11 @@ msgstr ""
 "menerapkan interface XEMBED dan menghasilkan jendela XID pada keluaran "
 "standar."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:19
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:19
 msgid "Allow logout"
 msgstr "Boleh keluar"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:20
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:20
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to allow logging "
 "out after a delay. The delay is specified in the \"logout_delay\" key."
@@ -234,11 +217,11 @@ msgstr ""
 "untuk dapat keluar setelah jeda. Jeda waktu ditentukan pada kunci "
 "\"logout_delay\"."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:21
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:21
 msgid "Time before logout option"
 msgstr "Waktu sebelum pilihan keluar"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:22
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:22
 msgid ""
 "The number of minutes after the screensaver activation before a logout "
 "option will appear in the unlock dialog. This key has effect only if the "
@@ -248,11 +231,11 @@ msgstr ""
 "dialog buka kunci. Kunci ini hanya berlaku jika \"logout_enable\" diatur ke "
 "TRUE."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:23
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:23
 msgid "Logout command"
 msgstr "Perintah keluar"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:24
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:24
 msgid ""
 "The command to invoke when the logout button is clicked. This command should "
 "simply log the user out without any interaction. This key has effect only if "
@@ -262,11 +245,11 @@ msgstr ""
 "memudahkan pengguna untuk logout tanpa adanya interaksi. kunci ini hanya "
 "akan berlaku jika \"logout_enable\" diatur ke TRUE"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:25
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:25
 msgid "Allow user switching"
 msgstr "Boleh pindah pengguna"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:26
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:26
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to switch to a "
 "different user account."
@@ -274,58 +257,58 @@ msgstr ""
 "Atur ke TRUE untuk menawarkan pilihan dalam dialog buka kunci untuk "
 "mengganti pengguna."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:27
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:27
 msgid "Theme for lock dialog"
 msgstr "Tema untuk dialog penguncian"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:28
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:28
 msgid "Theme to use for the lock dialog"
 msgstr "Tema yang digunakan untuk dialog penguncian"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:29
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:29
 msgid "Allow the session status message to be displayed"
 msgstr "Perbolehkan ditampilkannya pesan status sesi"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:30
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:30
 msgid ""
 "Allow the session status message to be displayed when the screen is locked."
 msgstr "Perbolehkan ditampilkannya pesan status sesi ketika layar terkunci."
 
-#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:2
+#: ../savers/cosmos-slideshow-ukui.desktop.in.in.h:2
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Tampilkan slideshow dari gambar cosmos"
 
-#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
+#: ../savers/footlogo-floaters-ukui.desktop.in.in.h:1
 #, fuzzy
-msgid "Floating KYLIN"
+msgid "Floating UKUI"
 msgstr "GNOME Mengapung"
 
-#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
+#: ../savers/footlogo-floaters-ukui.desktop.in.in.h:2
 #, fuzzy
-msgid "Bubbles the KYLIN logo around the screen"
+msgid "Bubbles the UKUI logo around the screen"
 msgstr "Balonkan logo kaki KYLIN di sekitar layar"
 
-#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
+#: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:1
 msgid "Floating GNOME"
 msgstr "GNOME Mengapung"
 
-#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
+#: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
 msgstr "Balonkan logo kaki KYLIN di sekitar layar"
 
-#: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
+#: ../savers/personal-slideshow-ukui.desktop.in.in.h:1
 msgid "Pictures folder"
 msgstr "Folder gambar"
 
-#: ../savers/personal-slideshow-kylin.desktop.in.in.h:2
+#: ../savers/personal-slideshow-ukui.desktop.in.in.h:2
 msgid "Display a slideshow from your Pictures folder"
 msgstr "Tampilkan slideshow dari folder Gambar Anda"
 
-#: ../savers/popsquares-kylin.desktop.in.in.h:1
+#: ../savers/popsquares-ukui.desktop.in.in.h:1
 msgid "Pop art squares"
 msgstr "Lapangan pop art"
 
-#: ../savers/popsquares-kylin.desktop.in.in.h:2
+#: ../savers/popsquares-ukui.desktop.in.in.h:2
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "Warna pulsa baris pop-art-ish"
 
@@ -433,41 +416,41 @@ msgstr "%s sepertinya bukan merupakan tema screensaver yang valid."
 msgid "Copying file: %u of %u"
 msgstr "Menyalin berkas: %u dari %u"
 
-#: ../src/kylin-screensaver-command.c:59
+#: ../src/ukui-screensaver-command.c:59
 msgid "Causes the screensaver to exit gracefully"
 msgstr "Menyebabkan screensaver keluar dengan baik"
 
-#: ../src/kylin-screensaver-command.c:63
+#: ../src/ukui-screensaver-command.c:63
 msgid "Query the state of the screensaver"
 msgstr "Query bagian dari screensaver"
 
-#: ../src/kylin-screensaver-command.c:67
+#: ../src/ukui-screensaver-command.c:67
 msgid "Query the length of time the screensaver has been active"
 msgstr "Simpan lama aktif dari screensaver "
 
-#: ../src/kylin-screensaver-command.c:71
+#: ../src/ukui-screensaver-command.c:71
 msgid "Tells the running screensaver process to lock the screen immediately"
 msgstr "Meminta proses screensaver untuk mengunci layar dengan segera"
 
-#: ../src/kylin-screensaver-command.c:75
+#: ../src/ukui-screensaver-command.c:75
 msgid "If the screensaver is active then switch to another graphics demo"
 msgstr "Screensaver aktif dan pindah ke demo grafis yang lain"
 
-#: ../src/kylin-screensaver-command.c:79
+#: ../src/ukui-screensaver-command.c:79
 msgid "Turn the screensaver on (blank the screen)"
 msgstr "Hidupkan screensaver (kosongkan layar)"
 
-#: ../src/kylin-screensaver-command.c:83
+#: ../src/ukui-screensaver-command.c:83
 msgid "If the screensaver is active then deactivate it (un-blank the screen)"
 msgstr ""
 "Screensavernya aktif dan kemudian dinonaktifkan (tidak kosongkan layar)"
 
-#: ../src/kylin-screensaver-command.c:87
+#: ../src/ukui-screensaver-command.c:87
 msgid "Poke the running screensaver to simulate user activity"
 msgstr ""
 "Colek screensaver yang berjalan untuk menyimulasikan aktivitas pengguna"
 
-#: ../src/kylin-screensaver-command.c:91
+#: ../src/ukui-screensaver-command.c:91
 msgid ""
 "Inhibit the screensaver from activating.  Command blocks while inhibit is "
 "active."
@@ -475,193 +458,193 @@ msgstr ""
 "Halangi screensaver dari pengaktifan. Perintah yang diblok ketika "
 "penghalangan aktif."
 
-#: ../src/kylin-screensaver-command.c:95
+#: ../src/ukui-screensaver-command.c:95
 msgid "The calling application that is inhibiting the screensaver"
 msgstr "Aplikasi yang menghalangi screensaver"
 
-#: ../src/kylin-screensaver-command.c:99
+#: ../src/ukui-screensaver-command.c:99
 msgid "The reason for inhibiting the screensaver"
 msgstr "Alasan penghalangan screensaver"
 
-#: ../src/kylin-screensaver-command.c:103 ../src/kylin-screensaver-dialog.c:60
-#: ../src/kylin-screensaver.c:55
+#: ../src/ukui-screensaver-command.c:103 ../src/ukui-screensaver-dialog.c:60
+#: ../src/ukui-screensaver.c:55
 msgid "Version of this application"
 msgstr "Versi dari aplikasi ini"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 #, c-format
 msgid "The screensaver is %s\n"
 msgstr "Screensaver adalah %s\n"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "active"
 msgstr "aktif"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "inactive"
 msgstr "tidak aktif"
 
-#: ../src/kylin-screensaver-command.c:368
+#: ../src/ukui-screensaver-command.c:368
 #, c-format
 msgid "The screensaver is not inhibited\n"
 msgstr "Screensaver tidak dihalangi ⏎\n"
 
-#: ../src/kylin-screensaver-command.c:376
+#: ../src/ukui-screensaver-command.c:376
 #, c-format
 msgid "The screensaver is being inhibited by:\n"
 msgstr "Screensaver dihalangi oleh :⏎\n"
 
-#: ../src/kylin-screensaver-command.c:411
+#: ../src/ukui-screensaver-command.c:411
 #, c-format
 msgid "The screensaver has been active for %d seconds.\n"
 msgstr "Screensaver sudah aktif selama %d detik.⏎\n"
 
-#: ../src/kylin-screensaver-command.c:417
+#: ../src/ukui-screensaver-command.c:417
 #, c-format
 msgid "The screensaver is not currently active.\n"
 msgstr "Screensaver sedang tidak aktif.\n"
 
-#: ../src/kylin-screensaver-dialog.c:59
+#: ../src/ukui-screensaver-dialog.c:59
 msgid "Show debugging output"
 msgstr "Tampilkan hasil pencarian kesalahan"
 
-#: ../src/kylin-screensaver-dialog.c:61
+#: ../src/ukui-screensaver-dialog.c:61
 msgid "Show the logout button"
 msgstr "Tampilkan tombol keluar"
 
-#: ../src/kylin-screensaver-dialog.c:62
+#: ../src/ukui-screensaver-dialog.c:62
 msgid "Command to invoke from the logout button"
 msgstr "Perintah untuk dilaksanakan dari tombol keluar"
 
-#: ../src/kylin-screensaver-dialog.c:63
+#: ../src/ukui-screensaver-dialog.c:63
 msgid "Show the switch user button"
 msgstr "Tampilkan tombol pindah pengguna"
 
-#: ../src/kylin-screensaver-dialog.c:64
+#: ../src/ukui-screensaver-dialog.c:64
 msgid "Message to show in the dialog"
 msgstr "Pesan yang ditampilkan pada dialog"
 
-#: ../src/kylin-screensaver-dialog.c:64 ../src/kylin-screensaver-dialog.c:65
+#: ../src/ukui-screensaver-dialog.c:64 ../src/ukui-screensaver-dialog.c:65
 msgid "MESSAGE"
 msgstr "PESAN"
 
-#: ../src/kylin-screensaver-dialog.c:65
+#: ../src/ukui-screensaver-dialog.c:65
 msgid "Not used"
 msgstr "Tidak digunakan"
 
 #. login: is whacked always translate to Username:
-#: ../src/kylin-screensaver-dialog.c:167 ../src/kylin-screensaver-dialog.c:168
-#: ../src/kylin-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
+#: ../src/ukui-screensaver-dialog.c:167 ../src/ukui-screensaver-dialog.c:168
+#: ../src/ukui-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
 msgid "Username:"
 msgstr "Pengguna:"
 
-#: ../src/kylin-screensaver-dialog.c:170 ../src/kylin-screensaver-dialog.c:171
+#: ../src/ukui-screensaver-dialog.c:170 ../src/ukui-screensaver-dialog.c:171
 #: ../src/gs-auth-pam.c:171
 msgid "Password:"
 msgstr "Kata sandi:"
 
-#: ../src/kylin-screensaver-dialog.c:172
+#: ../src/ukui-screensaver-dialog.c:172
 msgid "You are required to change your password immediately (password aged)"
 msgstr ""
 "Anda diharuskan mengganti kata sandi Anda sekarang (kata sandi sudah usang)"
 
-#: ../src/kylin-screensaver-dialog.c:173
+#: ../src/ukui-screensaver-dialog.c:173
 msgid "You are required to change your password immediately (root enforced)"
 msgstr "Anda diharuskan mengganti kata sandi Anda segera (root·enforced)"
 
-#: ../src/kylin-screensaver-dialog.c:174
+#: ../src/ukui-screensaver-dialog.c:174
 msgid "Your account has expired; please contact your system administrator"
 msgstr ""
 "Account Anda sudah kadaluarsa, silahkan hubungi system administrator Anda"
 
-#: ../src/kylin-screensaver-dialog.c:175
+#: ../src/ukui-screensaver-dialog.c:175
 msgid "No password supplied"
 msgstr "Tidak ada kata sandi diberikan"
 
-#: ../src/kylin-screensaver-dialog.c:176
+#: ../src/ukui-screensaver-dialog.c:176
 msgid "Password unchanged"
 msgstr "Kata sandi tidak berubah"
 
-#: ../src/kylin-screensaver-dialog.c:177
+#: ../src/ukui-screensaver-dialog.c:177
 msgid "Can not get username"
 msgstr "Tidak mendapatkan nama pengguna"
 
-#: ../src/kylin-screensaver-dialog.c:178
+#: ../src/ukui-screensaver-dialog.c:178
 msgid "Retype new UNIX password:"
 msgstr "Ketik ulang kata sandi UNIX baru:"
 
-#: ../src/kylin-screensaver-dialog.c:179
+#: ../src/ukui-screensaver-dialog.c:179
 msgid "Enter new UNIX password:"
 msgstr "Berikan kata sandi UNIX baru:"
 
-#: ../src/kylin-screensaver-dialog.c:180
+#: ../src/ukui-screensaver-dialog.c:180
 msgid "(current) UNIX password:"
 msgstr "Kata sandi UNIX (saat ini):"
 
-#: ../src/kylin-screensaver-dialog.c:181
+#: ../src/ukui-screensaver-dialog.c:181
 msgid "Error while changing NIS password."
 msgstr "Kesalahan ketika mengganti kata sandi NIS."
 
-#: ../src/kylin-screensaver-dialog.c:182
+#: ../src/ukui-screensaver-dialog.c:182
 msgid "You must choose a longer password"
 msgstr "Anda harus memilih kata sandi lebih panjang"
 
-#: ../src/kylin-screensaver-dialog.c:183
+#: ../src/ukui-screensaver-dialog.c:183
 msgid "Password has been already used. Choose another."
 msgstr "Kata sandi sudah dipergunakan. Pilih yang lain."
 
-#: ../src/kylin-screensaver-dialog.c:184
+#: ../src/ukui-screensaver-dialog.c:184
 msgid "You must wait longer to change your password"
 msgstr "Anda harus menunggu lebih lama untuk mengganti kata sandi"
 
-#: ../src/kylin-screensaver-dialog.c:185
+#: ../src/ukui-screensaver-dialog.c:185
 msgid "Sorry, passwords do not match"
 msgstr "Maaf, kata sandi tidak cocok"
 
-#: ../src/kylin-screensaver-dialog.c:256
+#: ../src/ukui-screensaver-dialog.c:256
 msgid "Checking..."
 msgstr "Memeriksa..."
 
-#: ../src/kylin-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
+#: ../src/ukui-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
 msgid "Authentication failed."
 msgstr "Autentikasi gagal."
 
-#: ../src/kylin-screensaver-preferences.c:457
+#: ../src/ukui-screensaver-preferences.c:457
 msgid "Blank screen"
 msgstr "Layar kosong"
 
-#: ../src/kylin-screensaver-preferences.c:463
+#: ../src/ukui-screensaver-preferences.c:463
 msgid "Random"
 msgstr "Acak"
 
-#: ../src/kylin-screensaver-preferences.c:947
+#: ../src/ukui-screensaver-preferences.c:947
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d jam"
 
-#: ../src/kylin-screensaver-preferences.c:950
+#: ../src/ukui-screensaver-preferences.c:950
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d menit"
 
-#: ../src/kylin-screensaver-preferences.c:953
+#: ../src/ukui-screensaver-preferences.c:953
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d detik"
 
 #. hour:minutes:seconds
-#: ../src/kylin-screensaver-preferences.c:961
+#: ../src/ukui-screensaver-preferences.c:961
 #, c-format
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. hour:minutes
 #. minutes:seconds
-#: ../src/kylin-screensaver-preferences.c:966
-#: ../src/kylin-screensaver-preferences.c:979
+#: ../src/ukui-screensaver-preferences.c:966
+#: ../src/ukui-screensaver-preferences.c:979
 #, c-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -669,35 +652,35 @@ msgstr "%s %s"
 #. hour
 #. minutes
 #. seconds
-#: ../src/kylin-screensaver-preferences.c:971
-#: ../src/kylin-screensaver-preferences.c:984
-#: ../src/kylin-screensaver-preferences.c:990
+#: ../src/ukui-screensaver-preferences.c:971
+#: ../src/ukui-screensaver-preferences.c:984
+#: ../src/ukui-screensaver-preferences.c:990
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: ../src/kylin-screensaver-preferences.c:1005
+#: ../src/ukui-screensaver-preferences.c:1005
 #, c-format
 msgid "Never"
 msgstr "Tidak pernah"
 
-#: ../src/kylin-screensaver-preferences.c:1581
+#: ../src/ukui-screensaver-preferences.c:1581
 msgid "Could not load the main interface"
 msgstr "Tidak dapat memuat antarmuka utama"
 
-#: ../src/kylin-screensaver-preferences.c:1583
+#: ../src/ukui-screensaver-preferences.c:1583
 msgid "Please make sure that the screensaver is properly installed"
 msgstr "Coba pastikan bahwa screensaver telah terpasang dengan benar"
 
-#: ../src/kylin-screensaver.c:56
+#: ../src/ukui-screensaver.c:56
 msgid "Don't become a daemon"
 msgstr "Jangan menjadi daemon"
 
-#: ../src/kylin-screensaver.c:57
+#: ../src/ukui-screensaver.c:57
 msgid "Enable debugging code"
 msgstr "Aktifkan kode pencarian kesalahan"
 
-#: ../src/kylin-screensaver.desktop.in.in.h:2
+#: ../src/ukui-screensaver.desktop.in.in.h:2
 msgid "Launch screensaver and locker program"
 msgstr "Luncurkan program screensaver dan pengunci."
 
@@ -736,34 +719,49 @@ msgid "screensaver already running in this session"
 msgstr "screensaver sudah berjalan pada sesi ini"
 
 #. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format
-#: ../src/gs-lock-plug.c:307
+#: ../src/gs-lock-plug.c:311
 msgid "%A, %B %e"
 msgstr "%A, %B %e"
 
-#: ../src/gs-lock-plug.c:409
+#: ../src/gs-lock-plug.c:413
 msgid "Time has expired."
 msgstr "Waktu telah kadaluarsa."
 
-#: ../src/gs-lock-plug.c:440
+#: ../src/gs-lock-plug.c:444
 msgid "You have the Caps Lock key on."
 msgstr "Tombol Caps Lock Anda hidup."
 
-#: ../src/gs-lock-plug.c:1771
+#: ../src/gs-lock-plug.c:1775
 msgid "S_witch User..."
 msgstr "_Pindah Pengguna..."
 
-#: ../src/gs-lock-plug.c:1780
+#: ../src/gs-lock-plug.c:1784
 msgid "Log _Out"
 msgstr "Kel_uar"
 
 #. To translators: This expands to USERNAME on HOSTNAME
-#: ../src/gs-lock-plug.c:2029
+#: ../src/gs-lock-plug.c:2033
 msgid "%U on %h"
 msgstr "%U pada %h"
 
-#: ../src/gs-lock-plug.c:2056
+#: ../src/gs-lock-plug.c:2060
 msgid "_Password:"
 msgstr "_Kata sandi:"
+
+#~ msgid "_Leave Message"
+#~ msgstr "_Tinggalkan Pesan"
+
+#~ msgid "_Switch User"
+#~ msgstr "_Pindah Pengguna"
+
+#~ msgid "_Log Out"
+#~ msgstr "_Log Out"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Batal"
+
+#~ msgid "<b>Leave a message for %R:</b>"
+#~ msgstr "<b>Tinggalkan pesan untuk %R:</b>"
 
 #~ msgid "Floating MATE"
 #~ msgstr "MATE Mengapung"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UKUI Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 15:28+0800\n"
+"POT-Creation-Date: 2017-01-18 15:43+0800\n"
 "PO-Revision-Date: 2016-04-30 19:10+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>\n"
 "Language-Team: Greek (http://wiki.ukui.org/trans/)\n"
@@ -24,121 +24,104 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/kylin-screensaver-preferences.desktop.in.h:1
-#: ../src/kylin-screensaver.desktop.in.in.h:1
+#: ../data/ukui-screensaver-preferences.desktop.in.h:1
+#: ../src/ukui-screensaver.desktop.in.in.h:1
 msgid "Screensaver"
 msgstr "Προστασία οθόνης"
 
-#: ../data/kylin-screensaver-preferences.desktop.in.h:2
+#: ../data/ukui-screensaver-preferences.desktop.in.h:2
 msgid "Set your screensaver preferences"
 msgstr "Ρύθμιση των προτιμήσεων σας για την προστασία οθόνης"
 
-#: ../data/kylin-screensaver-preferences.ui.h:1
+#: ../data/ukui-screensaver-preferences.ui.h:1
 msgid "Screensaver Preview"
 msgstr "Προεπισκόπηση προστασίας οθόνης"
 
-#: ../data/kylin-screensaver-preferences.ui.h:2
+#: ../data/ukui-screensaver-preferences.ui.h:2
 msgid "<b>Screensaver preview</b>"
 msgstr "<b>Προεπισκόπηση προστασίας οθόνης</b>"
 
-#: ../data/kylin-screensaver-preferences.ui.h:3
+#: ../data/ukui-screensaver-preferences.ui.h:3
 msgid "Screensaver Preferences"
 msgstr "Προτιμήσεις προστασίας οθόνης"
 
-#: ../data/kylin-screensaver-preferences.ui.h:4
+#: ../data/ukui-screensaver-preferences.ui.h:4
 msgid "Power _Management"
 msgstr "_Διαχείριση ενέργειας"
 
-#: ../data/kylin-screensaver-preferences.ui.h:5
+#: ../data/ukui-screensaver-preferences.ui.h:5
 msgid "_Preview"
 msgstr "_Προεπισκόπηση"
 
-#: ../data/kylin-screensaver-preferences.ui.h:6
+#: ../data/ukui-screensaver-preferences.ui.h:6
 msgid "_Screensaver theme:"
 msgstr "Θέματα προ_στασίας οθόνης:"
 
-#: ../data/kylin-screensaver-preferences.ui.h:7
+#: ../data/ukui-screensaver-preferences.ui.h:7
 msgid "Regard the computer as _idle after:"
 msgstr "Ορισμός υπολογιστή ως _αδρανή μετά:"
 
-#: ../data/kylin-screensaver-preferences.ui.h:8
+#: ../data/ukui-screensaver-preferences.ui.h:8
 msgid "_Activate screensaver when computer is idle"
 msgstr "Ε_νεργοποίηση προστασίας οθόνης όταν ο υπολογιστής είναι αδρανής"
 
-#: ../data/kylin-screensaver-preferences.ui.h:9
+#: ../data/ukui-screensaver-preferences.ui.h:9
 msgid "_Lock screen when screensaver is active"
 msgstr "_Κλείδωμα οθόνης όταν η προστασία οθόνης είναι ενεργή"
 
-#: ../data/kylin-screensaver-preferences.ui.h:10
+#: ../data/ukui-screensaver-preferences.ui.h:10
 msgid "<b>Warning: the screen will not be locked for the root user.</b>"
 msgstr "<b>Προειδοποίηση: η οθόνη δεν θα κλειδώνεται για το χρήστη root.</b>"
 
-#: ../data/kylin-screensaver.directory.in.h:1
+#: ../data/ukui-screensaver.directory.in.h:1
 msgid "Screensavers"
 msgstr "Θέματα"
 
-#: ../data/kylin-screensaver.directory.in.h:2
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:7
+#: ../data/ukui-screensaver.directory.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:7
 msgid "Screensaver themes"
 msgstr "Θέματα προστασίας οθόνης"
 
 #. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
-#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:1
+#: ../savers/cosmos-slideshow-ukui.desktop.in.in.h:1
 msgid "Cosmos"
 msgstr "Cosmos"
 
 #: ../data/lock-dialog-default.ui.h:1
-msgid "_Leave Message"
-msgstr "_Αφήστε μήνυμα"
+msgid "已登录"
+msgstr ""
 
-#: ../data/lock-dialog-default.ui.h:2
-msgid "_Switch User"
-msgstr "_Αλλαγή χρήστη"
-
-#: ../data/lock-dialog-default.ui.h:3
-msgid "_Log Out"
-msgstr "_Αποσύνδεση"
-
-#: ../data/lock-dialog-default.ui.h:4
-msgid "_Cancel"
-msgstr "_Ακύρωση"
-
-#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1791
+#: ../data/lock-dialog-default.ui.h:2 ../src/gs-lock-plug.c:1795
 msgid "_Unlock"
 msgstr "_Ξεκλείδωμα"
 
-#: ../data/lock-dialog-default.ui.h:7
-#, no-c-format
-msgid "<b>Leave a message for %R:</b>"
-msgstr "<b>Αφήστε μήνυμα για %R:</b>"
-
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:1
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:1
 msgid "Activate when idle"
 msgstr "Ενεργοποίηση στην αδράνεια"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:2
 msgid "Set this to TRUE to activate the screensaver when the session is idle."
 msgstr ""
 "Ορισμός αυτού σε TRUE για την ενεργοποίηση της προστασίας οθόνης όταν η "
 "συνεδρία είναι σε αδράνεια."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:3
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:3
 msgid "Lock on activation"
 msgstr "Κλείδωμα στην ενεργοποίηση"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:4
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:4
 msgid "Set this to TRUE to lock the screen when the screensaver goes active."
 msgstr ""
 "Ορισμός αυτού σε TRUE για να κλειδώνει η οθόνη όταν ενεργοποιείται η "
 "προστασία οθόνης."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:5
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:5
 msgid "Screensaver theme selection mode"
 msgstr "Λειτουργία επιλογής θέματος προστασίας οθόνης"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:6
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:6
 msgid ""
 "The selection mode used by screensaver. May be \"blank-only\" to enable the "
 "screensaver without using any theme on activation, \"single\" to enable "
@@ -152,7 +135,7 @@ msgstr ""
 "χρήση μόνο ενός θέματος (που καθορίζεται στο κλειδί \"themes\"), και \"random"
 "\"  για ενεργοποίηση της προστασίας οθόνης με τη χρήση ενόςτυχαίου θέματος"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:8
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:8
 msgid ""
 "This key specifies the list of themes to be used by the screensaver. It's "
 "ignored when \"mode\" key is \"blank-only\", should provide the theme name "
@@ -164,51 +147,51 @@ msgstr ""
 "θέματος όταν το κλειδί \"mode\" είναι \"single\", και μπορεί να παρέχει μια "
 "λίστα θεμάτων όταν το κλειδί \"mode\" είναι \"random\"."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:9
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:9
 msgid "Time before power management baseline"
 msgstr ""
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:10
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:10
 msgid ""
 "The number of seconds of inactivity before signalling to power management. "
 "This key is set and maintained by the session power management agent."
 msgstr ""
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:11
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:11
 msgid "Time before theme change"
 msgstr "Χρόνος πριν την αλλαγή θέματος"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:12
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:12
 msgid "The number of minutes to run before changing the screensaver theme."
 msgstr ""
 "Το διάστημα του χρόνου σε λεπτά που θα μεσολαβήσει για να γίνει η αλλαγή της "
 "προφύλαξης οθόνης."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:13
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:13
 msgid "Time before locking"
 msgstr "Χρόνος πριν το κλείδωμα"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:14
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:14
 msgid ""
 "The number of minutes after screensaver activation before locking the screen."
 msgstr ""
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:15
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:15
 msgid "Allow embedding a keyboard into the window"
 msgstr "Να επιτρέπεται η ενσωμάτωση πληκτρολογίου σε ένα παράθυρο"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:16
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:16
 msgid ""
 "Set this to TRUE to allow embedding a keyboard into the window when trying "
 "to unlock. The \"keyboard_command\" key must be set with the appropriate "
 "command."
 msgstr ""
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:17
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:17
 msgid "Embedded keyboard command"
 msgstr "Εντολή ενσωματωμένου πληκτρολογίου"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:18
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:18
 msgid ""
 "The command that will be run, if the \"embedded_keyboard_enabled\" key is "
 "set to TRUE, to embed a keyboard widget into the window. This command should "
@@ -220,32 +203,32 @@ msgstr ""
 "εντολή θα πρέπει να εφαρμόζει μια διεπαφή XEMBED plug και να έχει αποτέλεσμα "
 "ένα παράθυρο XID."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:19
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:19
 msgid "Allow logout"
 msgstr "Να επιτρέπεται αποσύνδεση"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:20
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:20
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to allow logging "
 "out after a delay. The delay is specified in the \"logout_delay\" key."
 msgstr ""
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:21
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:21
 msgid "Time before logout option"
 msgstr "Χρόνος πριν την επιλογή αποσύνδεσης"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:22
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:22
 msgid ""
 "The number of minutes after the screensaver activation before a logout "
 "option will appear in the unlock dialog. This key has effect only if the "
 "\"logout_enable\" key is set to TRUE."
 msgstr ""
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:23
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:23
 msgid "Logout command"
 msgstr "Εντολή αποσύνδεσης"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:24
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:24
 msgid ""
 "The command to invoke when the logout button is clicked. This command should "
 "simply log the user out without any interaction. This key has effect only if "
@@ -256,11 +239,11 @@ msgstr ""
 "Αυτό το κλειδί έχει αποτέλεσμα μόνο αν το κλειδί \"logout_enable\" ορισθεί "
 "σε TRUE."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:25
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:25
 msgid "Allow user switching"
 msgstr "Να επιτρέπεται η αλλαγή χρήστη"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:26
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:26
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to switch to a "
 "different user account."
@@ -268,60 +251,60 @@ msgstr ""
 "Ορισμός αυτού σε TRUE για να προσφέρεται η επιλογή του διαλόγου "
 "ξεκλειδώματος όταν γίνεται αλλαγή σε διαφορετικό λογαριασμό χρήστη."
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:27
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:27
 msgid "Theme for lock dialog"
 msgstr "Θέμα για το διάλογο κλειδώματος"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:28
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:28
 msgid "Theme to use for the lock dialog"
 msgstr ""
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:29
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:29
 msgid "Allow the session status message to be displayed"
 msgstr "Να επιτρέπεται η εμφάνιση του μηνύματος κατάστασης συνεδρίας"
 
-#: ../data/org.kylin.screensaver.gschema.xml.in.h:30
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:30
 msgid ""
 "Allow the session status message to be displayed when the screen is locked."
 msgstr ""
 "Να επιτρέπεται η εμφάνιση του μηνύματος κατάστασης συνεδρίας όταν η οθόνη "
 "είναι κλειδωμένη."
 
-#: ../savers/cosmos-slideshow-kylin.desktop.in.in.h:2
+#: ../savers/cosmos-slideshow-ukui.desktop.in.in.h:2
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Προβολή μιας παρουσίασης εικόνων του cosmos"
 
-#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:1
+#: ../savers/footlogo-floaters-ukui.desktop.in.in.h:1
 #, fuzzy
-msgid "Floating KYLIN"
+msgid "Floating UKUI"
 msgstr "Ελεύθερα μετακινούμενο GNOME"
 
-#: ../savers/footlogo-floaters-kylin.desktop.in.in.h:2
+#: ../savers/footlogo-floaters-ukui.desktop.in.in.h:2
 #, fuzzy
-msgid "Bubbles the KYLIN logo around the screen"
+msgid "Bubbles the UKUI logo around the screen"
 msgstr "Φούσκες του λογότυπου του GNOME στην οθόνη"
 
-#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:1
+#: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:1
 msgid "Floating GNOME"
 msgstr "Ελεύθερα μετακινούμενο GNOME"
 
-#: ../savers/gnomelogo-floaters-kylin.desktop.in.in.h:2
+#: ../savers/gnomelogo-floaters-ukui.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
 msgstr "Φούσκες του λογότυπου του GNOME στην οθόνη"
 
-#: ../savers/personal-slideshow-kylin.desktop.in.in.h:1
+#: ../savers/personal-slideshow-ukui.desktop.in.in.h:1
 msgid "Pictures folder"
 msgstr "Φάκελος εικόνων"
 
-#: ../savers/personal-slideshow-kylin.desktop.in.in.h:2
+#: ../savers/personal-slideshow-ukui.desktop.in.in.h:2
 msgid "Display a slideshow from your Pictures folder"
 msgstr "Προβολή μιας παρουσίασης εικόνων του φακέλου των εικόνων σας"
 
-#: ../savers/popsquares-kylin.desktop.in.in.h:1
+#: ../savers/popsquares-ukui.desktop.in.in.h:1
 msgid "Pop art squares"
 msgstr "Τετράγωνα pop-art"
 
-#: ../savers/popsquares-kylin.desktop.in.in.h:2
+#: ../savers/popsquares-ukui.desktop.in.in.h:2
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "Ένα πλέγμα παλλόμενων εικόνων pop-art"
 
@@ -429,224 +412,224 @@ msgstr "Το %s δεν φαίνεται να είναι ένα έγκυρο αρ
 msgid "Copying file: %u of %u"
 msgstr "Αντιγραφή αρχείου: %u από %u"
 
-#: ../src/kylin-screensaver-command.c:59
+#: ../src/ukui-screensaver-command.c:59
 msgid "Causes the screensaver to exit gracefully"
 msgstr "Προκαλεί την έξοδο της προστασίας οθόνης"
 
-#: ../src/kylin-screensaver-command.c:63
+#: ../src/ukui-screensaver-command.c:63
 msgid "Query the state of the screensaver"
 msgstr "Ερώτηση της κατάστασης της προστασίας οθόνης"
 
-#: ../src/kylin-screensaver-command.c:67
+#: ../src/ukui-screensaver-command.c:67
 msgid "Query the length of time the screensaver has been active"
 msgstr "Ερώτημα για το χρόνο που ήταν ενεργή η προστασία οθόνης"
 
-#: ../src/kylin-screensaver-command.c:71
+#: ../src/ukui-screensaver-command.c:71
 msgid "Tells the running screensaver process to lock the screen immediately"
 msgstr ""
 "Ειδοποιεί την προστασία οθόνης που εκτελείται για να κλειδώσει την οθόνη "
 "άμεσα."
 
-#: ../src/kylin-screensaver-command.c:75
+#: ../src/ukui-screensaver-command.c:75
 msgid "If the screensaver is active then switch to another graphics demo"
 msgstr ""
 "Αν η προστασία οθόνης είναι ενεργή τότε να γίνει αλλαγή σε ένα άλλο graphics "
 "demo"
 
-#: ../src/kylin-screensaver-command.c:79
+#: ../src/ukui-screensaver-command.c:79
 msgid "Turn the screensaver on (blank the screen)"
 msgstr "Ενεργοποίηση της προστασίας οθόνης (κενή οθόνη)"
 
-#: ../src/kylin-screensaver-command.c:83
+#: ../src/ukui-screensaver-command.c:83
 msgid "If the screensaver is active then deactivate it (un-blank the screen)"
 msgstr "Αν η προστασία οθόνης είναι ενεργή τότε να γίνει απενεργοποίηση"
 
-#: ../src/kylin-screensaver-command.c:87
+#: ../src/ukui-screensaver-command.c:87
 msgid "Poke the running screensaver to simulate user activity"
 msgstr "Η εκτελούμενη προστασία οθόνης να εξομοιώνει δρλασεις χρήστη"
 
-#: ../src/kylin-screensaver-command.c:91
+#: ../src/ukui-screensaver-command.c:91
 msgid ""
 "Inhibit the screensaver from activating.  Command blocks while inhibit is "
 "active."
 msgstr ""
 "Παρεμπόδιση της προστασίας οθόνης. Command blocks while inhibit is active."
 
-#: ../src/kylin-screensaver-command.c:95
+#: ../src/ukui-screensaver-command.c:95
 msgid "The calling application that is inhibiting the screensaver"
 msgstr "Η εφαρμογή που παρακωλύει την προστασία οθόνης"
 
-#: ../src/kylin-screensaver-command.c:99
+#: ../src/ukui-screensaver-command.c:99
 msgid "The reason for inhibiting the screensaver"
 msgstr "Ο λόγος για την παρακώλυση της προστασίας οθόνης."
 
-#: ../src/kylin-screensaver-command.c:103 ../src/kylin-screensaver-dialog.c:60
-#: ../src/kylin-screensaver.c:55
+#: ../src/ukui-screensaver-command.c:103 ../src/ukui-screensaver-dialog.c:60
+#: ../src/ukui-screensaver.c:55
 msgid "Version of this application"
 msgstr "Η Έκδοση αυτής της εφαρμογής"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 #, c-format
 msgid "The screensaver is %s\n"
 msgstr "Η προστασία οθόνης είναι %s\n"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "active"
 msgstr "ενεργή"
 
-#: ../src/kylin-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "inactive"
 msgstr "ανενεργή"
 
-#: ../src/kylin-screensaver-command.c:368
+#: ../src/ukui-screensaver-command.c:368
 #, c-format
 msgid "The screensaver is not inhibited\n"
 msgstr "Η προστασία οθόνης δεν παρεμποδίζεται\n"
 
-#: ../src/kylin-screensaver-command.c:376
+#: ../src/ukui-screensaver-command.c:376
 #, c-format
 msgid "The screensaver is being inhibited by:\n"
 msgstr "Η προστασία οθόνης παρεμποδίζεται από:\n"
 
-#: ../src/kylin-screensaver-command.c:411
+#: ../src/ukui-screensaver-command.c:411
 #, c-format
 msgid "The screensaver has been active for %d seconds.\n"
 msgstr "Η προστασία οθόνης ήταν ενεργή για %d δευτερόλεπτα.\n"
 
-#: ../src/kylin-screensaver-command.c:417
+#: ../src/ukui-screensaver-command.c:417
 #, c-format
 msgid "The screensaver is not currently active.\n"
 msgstr "Η προστασία οθόνης δεν είναι προς το παρόν ενεργή\n"
 
-#: ../src/kylin-screensaver-dialog.c:59
+#: ../src/ukui-screensaver-dialog.c:59
 msgid "Show debugging output"
 msgstr "Προβολή επιλογών αποσφαλμάτωσης"
 
-#: ../src/kylin-screensaver-dialog.c:61
+#: ../src/ukui-screensaver-dialog.c:61
 msgid "Show the logout button"
 msgstr "Εμφάνιση του κουμπιού αποσύνδεσης"
 
-#: ../src/kylin-screensaver-dialog.c:62
+#: ../src/ukui-screensaver-dialog.c:62
 msgid "Command to invoke from the logout button"
 msgstr "Εντολή για εκτέλεση από το κουμπί αποσύνδεσης"
 
-#: ../src/kylin-screensaver-dialog.c:63
+#: ../src/ukui-screensaver-dialog.c:63
 msgid "Show the switch user button"
 msgstr "Προβολή του κουμπιού αλλαγής χρήστη"
 
-#: ../src/kylin-screensaver-dialog.c:64
+#: ../src/ukui-screensaver-dialog.c:64
 msgid "Message to show in the dialog"
 msgstr "Μήνυμα που θα εμφανίζεται στον διάλογο"
 
-#: ../src/kylin-screensaver-dialog.c:64 ../src/kylin-screensaver-dialog.c:65
+#: ../src/ukui-screensaver-dialog.c:64 ../src/ukui-screensaver-dialog.c:65
 msgid "MESSAGE"
 msgstr "ΜΗΝΥΜΑ"
 
-#: ../src/kylin-screensaver-dialog.c:65
+#: ../src/ukui-screensaver-dialog.c:65
 msgid "Not used"
 msgstr "Δεν χρησιμοποιείται"
 
 #. login: is whacked always translate to Username:
-#: ../src/kylin-screensaver-dialog.c:167 ../src/kylin-screensaver-dialog.c:168
-#: ../src/kylin-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
+#: ../src/ukui-screensaver-dialog.c:167 ../src/ukui-screensaver-dialog.c:168
+#: ../src/ukui-screensaver-dialog.c:169 ../src/gs-auth-pam.c:745
 msgid "Username:"
 msgstr "Όνομα χρήστη:"
 
-#: ../src/kylin-screensaver-dialog.c:170 ../src/kylin-screensaver-dialog.c:171
+#: ../src/ukui-screensaver-dialog.c:170 ../src/ukui-screensaver-dialog.c:171
 #: ../src/gs-auth-pam.c:171
 msgid "Password:"
 msgstr "Κωδικός:"
 
-#: ../src/kylin-screensaver-dialog.c:172
+#: ../src/ukui-screensaver-dialog.c:172
 msgid "You are required to change your password immediately (password aged)"
 msgstr ""
 "Απαιτείται να αλλάξετε κωδικό άμεσα (ο κωδικός σας έχει ημερομηνία λήξης)"
 
-#: ../src/kylin-screensaver-dialog.c:173
+#: ../src/ukui-screensaver-dialog.c:173
 msgid "You are required to change your password immediately (root enforced)"
 msgstr "Απαιτείται να αλλάξετε κωδικό άμεσα (εξαναγκασμός από το root)"
 
-#: ../src/kylin-screensaver-dialog.c:174
+#: ../src/ukui-screensaver-dialog.c:174
 msgid "Your account has expired; please contact your system administrator"
 msgstr ""
 "Ο λογαριασμός σας έχει λήξει. Παρακαλώ επικοινωνήστε με το διαχειριστή του "
 "συστήματος σας"
 
-#: ../src/kylin-screensaver-dialog.c:175
+#: ../src/ukui-screensaver-dialog.c:175
 msgid "No password supplied"
 msgstr "Δεν δόθηκε κωδικός"
 
-#: ../src/kylin-screensaver-dialog.c:176
+#: ../src/ukui-screensaver-dialog.c:176
 msgid "Password unchanged"
 msgstr "Αναλλοίωτος κωδικός"
 
-#: ../src/kylin-screensaver-dialog.c:177
+#: ../src/ukui-screensaver-dialog.c:177
 msgid "Can not get username"
 msgstr "Αδυναμία λήψης ονόματος χρήστη"
 
-#: ../src/kylin-screensaver-dialog.c:178
+#: ../src/ukui-screensaver-dialog.c:178
 msgid "Retype new UNIX password:"
 msgstr "Επαπληκτρολόγηση νέου κωδικού UNIX:"
 
-#: ../src/kylin-screensaver-dialog.c:179
+#: ../src/ukui-screensaver-dialog.c:179
 msgid "Enter new UNIX password:"
 msgstr "Εισαγωγή νέου κωδικού UNIX:"
 
-#: ../src/kylin-screensaver-dialog.c:180
+#: ../src/ukui-screensaver-dialog.c:180
 msgid "(current) UNIX password:"
 msgstr "(τρέχων) κωδικός UNIX:"
 
-#: ../src/kylin-screensaver-dialog.c:181
+#: ../src/ukui-screensaver-dialog.c:181
 msgid "Error while changing NIS password."
 msgstr "Σφάλμα κατά την αλλαγή του κωδικού NIS"
 
-#: ../src/kylin-screensaver-dialog.c:182
+#: ../src/ukui-screensaver-dialog.c:182
 msgid "You must choose a longer password"
 msgstr "Θα πρέπει να επιλέξετε ένα μεγαλύτερο κωδικό."
 
-#: ../src/kylin-screensaver-dialog.c:183
+#: ../src/ukui-screensaver-dialog.c:183
 msgid "Password has been already used. Choose another."
 msgstr "Ο Κωδικός χρησιμοποιείται ήδη. Διαλέξτε έναν άλλο."
 
-#: ../src/kylin-screensaver-dialog.c:184
+#: ../src/ukui-screensaver-dialog.c:184
 msgid "You must wait longer to change your password"
 msgstr "Θα πρέπει να περιμένετε περισσότερο για να αλλάξετε το κωδικό σας"
 
-#: ../src/kylin-screensaver-dialog.c:185
+#: ../src/ukui-screensaver-dialog.c:185
 msgid "Sorry, passwords do not match"
 msgstr "Συγγνώμη, οι κωδικοί δεν ταιριάζουν"
 
-#: ../src/kylin-screensaver-dialog.c:256
+#: ../src/ukui-screensaver-dialog.c:256
 msgid "Checking..."
 msgstr "Έλεγχος..."
 
-#: ../src/kylin-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
+#: ../src/ukui-screensaver-dialog.c:302 ../src/gs-auth-pam.c:483
 msgid "Authentication failed."
 msgstr "Αποτυχία πιστοποίησης."
 
-#: ../src/kylin-screensaver-preferences.c:457
+#: ../src/ukui-screensaver-preferences.c:457
 msgid "Blank screen"
 msgstr "Κενή οθόνη"
 
-#: ../src/kylin-screensaver-preferences.c:463
+#: ../src/ukui-screensaver-preferences.c:463
 msgid "Random"
 msgstr "Τυχαία"
 
-#: ../src/kylin-screensaver-preferences.c:947
+#: ../src/ukui-screensaver-preferences.c:947
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d ώρα"
 msgstr[1] "%d ώρες"
 
-#: ../src/kylin-screensaver-preferences.c:950
+#: ../src/ukui-screensaver-preferences.c:950
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d λεπτό"
 msgstr[1] "%d λεπτά"
 
-#: ../src/kylin-screensaver-preferences.c:953
+#: ../src/ukui-screensaver-preferences.c:953
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -654,15 +637,15 @@ msgstr[0] "%d δευτερόλεπτο"
 msgstr[1] "%d δευτερόλεπτα"
 
 #. hour:minutes:seconds
-#: ../src/kylin-screensaver-preferences.c:961
+#: ../src/ukui-screensaver-preferences.c:961
 #, c-format
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. hour:minutes
 #. minutes:seconds
-#: ../src/kylin-screensaver-preferences.c:966
-#: ../src/kylin-screensaver-preferences.c:979
+#: ../src/ukui-screensaver-preferences.c:966
+#: ../src/ukui-screensaver-preferences.c:979
 #, c-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -670,35 +653,35 @@ msgstr "%s %s"
 #. hour
 #. minutes
 #. seconds
-#: ../src/kylin-screensaver-preferences.c:971
-#: ../src/kylin-screensaver-preferences.c:984
-#: ../src/kylin-screensaver-preferences.c:990
+#: ../src/ukui-screensaver-preferences.c:971
+#: ../src/ukui-screensaver-preferences.c:984
+#: ../src/ukui-screensaver-preferences.c:990
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: ../src/kylin-screensaver-preferences.c:1005
+#: ../src/ukui-screensaver-preferences.c:1005
 #, c-format
 msgid "Never"
 msgstr "Ποτέ"
 
-#: ../src/kylin-screensaver-preferences.c:1581
+#: ../src/ukui-screensaver-preferences.c:1581
 msgid "Could not load the main interface"
 msgstr "Αδυναμία φόρτωση της κύριας επιφάνειας χρήσης"
 
-#: ../src/kylin-screensaver-preferences.c:1583
+#: ../src/ukui-screensaver-preferences.c:1583
 msgid "Please make sure that the screensaver is properly installed"
 msgstr "Βεβαιωθείτε ότι η προστασία οθόνης έχει εγκατασταθεί σωστά"
 
-#: ../src/kylin-screensaver.c:56
+#: ../src/ukui-screensaver.c:56
 msgid "Don't become a daemon"
 msgstr "Να μη γίνει daemon"
 
-#: ../src/kylin-screensaver.c:57
+#: ../src/ukui-screensaver.c:57
 msgid "Enable debugging code"
 msgstr "Ενεργοποίηση κώδικα αποσφαλμάτωσης"
 
-#: ../src/kylin-screensaver.desktop.in.in.h:2
+#: ../src/ukui-screensaver.desktop.in.in.h:2
 msgid "Launch screensaver and locker program"
 msgstr ""
 
@@ -737,34 +720,49 @@ msgid "screensaver already running in this session"
 msgstr "η προστασία οθόνης εκτελείται ήδη σε αυτή τη συνεδρία."
 
 #. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format
-#: ../src/gs-lock-plug.c:307
+#: ../src/gs-lock-plug.c:311
 msgid "%A, %B %e"
 msgstr "%A, %B %e"
 
-#: ../src/gs-lock-plug.c:409
+#: ../src/gs-lock-plug.c:413
 msgid "Time has expired."
 msgstr "Ο χρόνος έχει λήξει."
 
-#: ../src/gs-lock-plug.c:440
+#: ../src/gs-lock-plug.c:444
 msgid "You have the Caps Lock key on."
 msgstr "Έχετε πατημένο το πλήκτρο Caps Lock."
 
-#: ../src/gs-lock-plug.c:1771
+#: ../src/gs-lock-plug.c:1775
 msgid "S_witch User..."
 msgstr "Α_λλαγή χρήστη..."
 
-#: ../src/gs-lock-plug.c:1780
+#: ../src/gs-lock-plug.c:1784
 msgid "Log _Out"
 msgstr "Α_ποσύνδεση"
 
 #. To translators: This expands to USERNAME on HOSTNAME
-#: ../src/gs-lock-plug.c:2029
+#: ../src/gs-lock-plug.c:2033
 msgid "%U on %h"
 msgstr "%U σε %h"
 
-#: ../src/gs-lock-plug.c:2056
+#: ../src/gs-lock-plug.c:2060
 msgid "_Password:"
 msgstr "_Κωδικός:"
+
+#~ msgid "_Leave Message"
+#~ msgstr "_Αφήστε μήνυμα"
+
+#~ msgid "_Switch User"
+#~ msgstr "_Αλλαγή χρήστη"
+
+#~ msgid "_Log Out"
+#~ msgstr "_Αποσύνδεση"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Ακύρωση"
+
+#~ msgid "<b>Leave a message for %R:</b>"
+#~ msgstr "<b>Αφήστε μήνυμα για %R:</b>"
 
 #~ msgid "Floating MATE"
 #~ msgstr "Ελεύθερα μετακινούμενο MATE"
