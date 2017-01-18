@@ -1,62 +1,62 @@
 Description: Add keywords key to .desktop files
 Author: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
---- a/savers/cosmos-slideshow-kylin.desktop.in.in
-+++ b/savers/cosmos-slideshow-kylin.desktop.in.in
+--- a/savers/cosmos-slideshow-ukui.desktop.in.in
++++ b/savers/cosmos-slideshow-ukui.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=KYLIN;screensaver;slideshow;cosmos;
- OnlyShowIn=KYLIN;
---- a/savers/footlogo-floaters-kylin.desktop.in.in
-+++ b/savers/footlogo-floaters-kylin.desktop.in.in
++Keywords=UKUI;screensaver;slideshow;cosmos;
+ OnlyShowIn=UKUI;
+--- a/savers/footlogo-floaters-ukui.desktop.in.in
++++ b/savers/footlogo-floaters-ukui.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=KYLIN;screensaver;logo;bubbles;
- OnlyShowIn=KYLIN;
---- a/savers/gnomelogo-floaters-kylin.desktop.in.in
-+++ b/savers/gnomelogo-floaters-kylin.desktop.in.in
++Keywords=UKUI;screensaver;logo;bubbles;
+ OnlyShowIn=UKUI;
+--- a/savers/gnomelogo-floaters-ukui.desktop.in.in
++++ b/savers/gnomelogo-floaters-ukui.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=KYLIN;screensaver;GNOME;logo;bubbles;
- OnlyShowIn=KYLIN;
---- a/savers/personal-slideshow-kylin.desktop.in.in
-+++ b/savers/personal-slideshow-kylin.desktop.in.in
++Keywords=UKUI;screensaver;GNOME;logo;bubbles;
+ OnlyShowIn=UKUI;
+--- a/savers/personal-slideshow-ukui.desktop.in.in
++++ b/savers/personal-slideshow-ukui.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=KYLIN;screensaver;custom;slideshow;pictures;folder;
- OnlyShowIn=KYLIN;
---- a/savers/popsquares-kylin.desktop.in.in
-+++ b/savers/popsquares-kylin.desktop.in.in
++Keywords=UKUI;screensaver;custom;slideshow;pictures;folder;
+ OnlyShowIn=UKUI;
+--- a/savers/popsquares-ukui.desktop.in.in
++++ b/savers/popsquares-ukui.desktop.in.in
 @@ -7,4 +7,5 @@
  Terminal=false
  Type=Application
  Categories=Screensaver;
-+Keywords=KYLIN;screensaver;grid;pulsing;colors;
- OnlyShowIn=KYLIN;
---- a/data/kylin-screensaver-preferences.desktop.in
-+++ b/data/kylin-screensaver-preferences.desktop.in
++Keywords=UKUI;screensaver;grid;pulsing;colors;
+ OnlyShowIn=UKUI;
+--- a/data/ukui-screensaver-preferences.desktop.in
++++ b/data/ukui-screensaver-preferences.desktop.in
 @@ -6,6 +6,7 @@
  Terminal=false
  Type=Application
  Categories=GTK;Settings;DesktopSettings;
-+Keywords=KYLIN;screensaver;preferences;
- OnlyShowIn=KYLIN;
++Keywords=UKUI;screensaver;preferences;
+ OnlyShowIn=UKUI;
  StartupNotify=true
- X-KYLIN-Bugzilla-Bugzilla=KYLIN
---- a/src/kylin-screensaver.desktop.in.in
-+++ b/src/kylin-screensaver.desktop.in.in
+ X-UKUI-Bugzilla-Bugzilla=UKUI
+--- a/src/ukui-screensaver.desktop.in.in
++++ b/src/ukui-screensaver.desktop.in.in
 @@ -6,6 +6,7 @@
- Exec=kylin-screensaver
- OnlyShowIn=KYLIN;
+ Exec=ukui-screensaver
+ OnlyShowIn=UKUI;
  NoDisplay=true
-+Keywords=KYLIN;screensaver;locker;
- X-KYLIN-Autostart-Phase=Application
- X-KYLIN-Autostart-Notify=true
- X-KYLIN-Bugzilla-Bugzilla=KYLIN
++Keywords=UKUI;screensaver;locker;
+ X-UKUI-Autostart-Phase=Application
+ X-UKUI-Autostart-Notify=true
+ X-UKUI-Bugzilla-Bugzilla=UKUI
