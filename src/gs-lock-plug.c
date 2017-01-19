@@ -2230,7 +2230,7 @@ load_theme (GSLockPlug *plug)
 	/* 读取图片并设置大小 */
 	GtkWidget *image;
 	GdkPixbuf *pixbuf;
-	pixbuf = gdk_pixbuf_new_from_file_at_size("/home/lihao/桌面/ukui-background.png", width, height, NULL);
+	pixbuf = gdk_pixbuf_new_from_file_at_size("/usr/share/backgrounds/ukui/ukui-background.png", width, height, NULL);
 	image = gtk_image_new_from_pixbuf(pixbuf);
 	/* 添加图片层 */
 	gtk_layout_put(GTK_LAYOUT(layout), image, 0, 0);

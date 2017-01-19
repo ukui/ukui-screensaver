@@ -1,3 +1,9 @@
+ukui-screensaver (1.16.0-1ubuntu1) yakkety; urgency=medium
+
+  * Change the file path of background image.
+
+ -- lihao <lihao@kylinos.cn>  Thu, 19 Jan 2017 16:53:14 +0800
+
 ukui-screensaver (1.16.0-1) yakkety; urgency=medium
 
   * Fork from mate-screensaver and rename it to ukui-screensaver
