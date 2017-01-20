@@ -2236,7 +2236,12 @@ load_theme (GSLockPlug *plug)
 	gtk_layout_put(GTK_LAYOUT(layout), image, 0, 0);
 	/* 重新添加已经在Glade中添加好的控件，不然所有东西都被图片盖住了 */
 	GtkWidget *hbox1 = gtk_builder_get_object(builder, "hbox1");
-	gtk_layout_put(GTK_LAYOUT(layout), hbox1, 700,500);
+	gtk_layout_put(GTK_LAYOUT(layout), hbox1, width/2 - 270, height/2 - 110);
+
+	/*
+	gchar *str = g_strdup_printf("%d %d\n", width, height);
+	g_file_set_contents("/home/lihao/桌面/log", str, -1, NULL);
+	*/
 
 	/*
 	GtkStyleContext *context = gtk_widget_get_style_context(layout);
