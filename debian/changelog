@@ -1,3 +1,10 @@
+ukui-screensaver (1.16.0.2) yakkety; urgency=medium
+
+  * Use ~/.face as the default avatar of screensaver.
+  * Use kylin-greeter background image as the default background of screensaver.
+
+ -- lihao <lihao@kylinos.cn>  Sun, 22 Jan 2017 17:39:17 +0800
+
 ukui-screensaver (1.16.0.1) yakkety; urgency=medium
 
   * Fix lintian warnings.

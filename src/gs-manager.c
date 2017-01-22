@@ -1057,7 +1057,7 @@ gs_manager_init (GSManager *manager)
 	ukui_bg_load_from_system_preferences (manager->priv->bg);
 
 	/* 以登录界面的背景图片作为默认背景 */
-	gchar *picture_filename = "/usr/share/kylin-greeter/kylin_greeter_background.png";
+	gchar *picture_filename = "/usr/share/kylin-greeter/background.png";
 	if(!g_file_test(picture_filename, G_FILE_TEST_EXISTS)){
 		/* 如果登录界面的背景图片不存在则读取桌面背景 */
 		GSettings *settings;

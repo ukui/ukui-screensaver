@@ -1048,6 +1048,12 @@ set_face_image (GSLockPlug *plug)
 	pixbuf = NULL;
 	if (check_user_file (path, uid, user_max_file, 0, 0))
 	{
+		/*
+		 * If there is no .face file in the home directory,
+		 * use default_face instead.
+		 */
+		if (!g_file_test(path, G_FILE_TEST_EXISTS))
+			path = "/usr/share/kylin-greeter/default_face.png";
 		pixbuf = gdk_pixbuf_new_from_file_at_size (path,
 		         icon_size,
 		         icon_size,
@@ -2229,7 +2235,7 @@ load_theme (GSLockPlug *plug)
 	gtk_widget_show(layout);
 
 	/* 以登录界面的背景图片作为默认背景 */
-	gchar *picture_filename = "/usr/share/kylin-greeter/kylin_greeter_background.png";
+	gchar *picture_filename = "/usr/share/kylin-greeter/background.png";
 	if(!g_file_test(picture_filename, G_FILE_TEST_EXISTS)){
 		/* 如果登录界面的背景图片不存在则读取桌面背景 */
 		GSettings *settings;
