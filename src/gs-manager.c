@@ -1055,6 +1055,26 @@ gs_manager_init (GSManager *manager)
 					  manager);
 
 	ukui_bg_load_from_system_preferences (manager->priv->bg);
+
+	/* 以登录界面的背景图片作为默认背景 */
+	gchar *picture_filename = "/usr/share/kylin-greeter/kylin_greeter_background.png";
+	if(!g_file_test(picture_filename, G_FILE_TEST_EXISTS)){
+		/* 如果登录界面的背景图片不存在则读取桌面背景 */
+		GSettings *settings;
+		settings = g_settings_new ("org.ukui.background");
+		gchar *picture_filename = g_settings_get_string(
+				settings, "picture-filename");
+		/* 防止前缀出现问题无法解析 */
+		if(g_str_has_prefix(picture_filename, "${prefix}")){
+			gint length = g_strv_length(picture_filename);
+			gchar tmp[50] = "/usr";
+			strcat(tmp, picture_filename+9);
+			g_free(picture_filename);
+			picture_filename = tmp;
+		}
+	}
+	ukui_bg_set_filename(manager->priv->bg, picture_filename);
+	//g_print("%s\n",ukui_bg_get_filename(manager->priv->bg));
 }
 
 static void

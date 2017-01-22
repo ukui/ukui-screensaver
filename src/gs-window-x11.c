@@ -29,6 +29,7 @@
 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
+#include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #if GTK_CHECK_VERSION (3, 0, 0)
 #include <gtk/gtkx.h>
@@ -1732,6 +1733,15 @@ create_lock_socket (GSWindow *window,
 	{
 		embed_keyboard (window);
 	}
+	/*
+	GtkStyleContext *context = gtk_widget_get_style_context(window);
+	GtkStateFlags flags = gtk_style_context_get_state(context);
+	GdkRGBA rgb;
+	gtk_style_context_get_background_color(context, flags, &rgb);
+	rgb.red = rgb.green = rgb.blue =0.8;
+	rgb.alpha = 1;
+	gtk_widget_override_background_color(window, flags, &rgb);
+	*/
 }
 
 static void
@@ -2809,6 +2819,16 @@ gs_window_init (GSWindow *window)
 #endif
 	gtk_widget_show (window->priv->vbox);
 	gtk_container_add (GTK_CONTAINER (window), window->priv->vbox);
+
+	/*
+	GtkStyleContext *context = gtk_widget_get_style_context(window->priv->vbox);
+	GtkStateFlags flags = gtk_style_context_get_state(context);
+	GdkRGBA rgb;
+	gtk_style_context_get_background_color(context, flags, &rgb);
+	rgb.red = rgb.green = rgb.blue =0.8;
+	rgb.alpha = 0;
+	gtk_widget_override_background_color(window->priv->vbox, flags, &rgb);
+	*/
 
 	window->priv->drawing_area = gtk_drawing_area_new ();
 	gtk_widget_show (window->priv->drawing_area);

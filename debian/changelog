@@ -1,3 +1,9 @@
+ukui-screensaver (1.16.0-1ubuntu3) yakkety; urgency=medium
+
+  * 使用 kylin-greeter 的背景或桌面背景作为锁屏的背景图片
+
+ -- lihao <lihao@kylinos.cn>  Sun, 22 Jan 2017 16:02:10 +0800
+
 ukui-screensaver (1.16.0-1ubuntu2) yakkety; urgency=medium
 
   * 根据屏幕分辨率自动调整 hbox1 在 layout 上的位置

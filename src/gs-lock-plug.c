@@ -2227,21 +2227,38 @@ load_theme (GSLockPlug *plug)
 	GtkWidget *layout = gtk_builder_get_object(builder, "layout");
 	gtk_widget_set_size_request(layout, width, height);
 	gtk_widget_show(layout);
+
+	/* 以登录界面的背景图片作为默认背景 */
+	gchar *picture_filename = "/usr/share/kylin-greeter/kylin_greeter_background.png";
+	if(!g_file_test(picture_filename, G_FILE_TEST_EXISTS)){
+		/* 如果登录界面的背景图片不存在则读取桌面背景 */
+		GSettings *settings;
+		settings = g_settings_new ("org.ukui.background");
+		gchar *picture_filename = g_settings_get_string(
+				settings, "picture-filename");
+		/* 防止前缀出现问题无法解析 */
+		if(g_str_has_prefix(picture_filename, "${prefix}")){
+			gint length = g_strv_length(picture_filename);
+			gchar tmp[50] = "/usr";
+			strcat(tmp, picture_filename+9);
+			g_free(picture_filename);
+			picture_filename = tmp;
+		}
+	}
+	//g_file_set_contents("/home/lihao/桌面/log", picture_filename, -1, NULL);
+
 	/* 读取图片并设置大小 */
 	GtkWidget *image;
 	GdkPixbuf *pixbuf;
-	pixbuf = gdk_pixbuf_new_from_file_at_size("/usr/share/backgrounds/ukui/ukui-background.png", width, height, NULL);
+	pixbuf = gdk_pixbuf_new_from_file_at_scale(
+		 picture_filename,
+		 width, height,FALSE , NULL);
 	image = gtk_image_new_from_pixbuf(pixbuf);
 	/* 添加图片层 */
 	gtk_layout_put(GTK_LAYOUT(layout), image, 0, 0);
 	/* 重新添加已经在Glade中添加好的控件，不然所有东西都被图片盖住了 */
 	GtkWidget *hbox1 = gtk_builder_get_object(builder, "hbox1");
 	gtk_layout_put(GTK_LAYOUT(layout), hbox1, width/2 - 270, height/2 - 110);
-
-	/*
-	gchar *str = g_strdup_printf("%d %d\n", width, height);
-	g_file_set_contents("/home/lihao/桌面/log", str, -1, NULL);
-	*/
 
 	/*
 	GtkStyleContext *context = gtk_widget_get_style_context(layout);
