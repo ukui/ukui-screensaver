@@ -1,3 +1,9 @@
+ukui-screensaver (1.16.0.1) yakkety; urgency=medium
+
+  * Fix lintian warnings.
+
+ -- lihao <lihao@kylinos.cn>  Sun, 22 Jan 2017 16:18:42 +0800
+
 ukui-screensaver (1.16.0-1ubuntu3) yakkety; urgency=medium
 
   * 使用 kylin-greeter 的背景或桌面背景作为锁屏的背景图片
