@@ -1963,6 +1963,12 @@ lock_command_watch (GIOChannel   *source,
 		return FALSE;
 	}
 
+	/*
+	 * gtk_widget_hide is moved from popup_dialog function to here.
+	 * Hide saver after it is covered by lock-dialog, otherwise the
+	 * background switching between window and lock-dialog is too obvious.
+	 */
+	gtk_widget_hide (window->priv->drawing_area);
 	return TRUE;
 }
 
@@ -2035,7 +2041,11 @@ popup_dialog (GSWindow *window)
 		command = g_string_append (command, " --verbose");
 	}
 
-	gtk_widget_hide (window->priv->drawing_area);
+	/*
+	 * Hide drawing_area in function lock_command_watch but not here.
+	 * This can reduce the effect of background switching between window and lock-dialog.
+	 */
+	//gtk_widget_hide (window->priv->drawing_area);
 
 #if GTK_CHECK_VERSION (3, 0, 0)
 	gs_window_clear_to_background_surface (window);

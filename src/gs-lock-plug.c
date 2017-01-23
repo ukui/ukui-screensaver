@@ -2232,7 +2232,6 @@ load_theme (GSLockPlug *plug)
 	/* 添加 Layout */
 	GtkWidget *layout = gtk_builder_get_object(builder, "layout");
 	gtk_widget_set_size_request(layout, width, height);
-	gtk_widget_show(layout);
 
 	/* 以登录界面的背景图片作为默认背景 */
 	gchar *picture_filename = "/usr/share/kylin-greeter/background.png";
@@ -2265,6 +2264,7 @@ load_theme (GSLockPlug *plug)
 	/* 重新添加已经在Glade中添加好的控件，不然所有东西都被图片盖住了 */
 	GtkWidget *hbox1 = gtk_builder_get_object(builder, "hbox1");
 	gtk_layout_put(GTK_LAYOUT(layout), hbox1, width/2 - 270, height/2 - 110);
+	gtk_widget_show(layout);
 
 	/*
 	GtkStyleContext *context = gtk_widget_get_style_context(layout);
