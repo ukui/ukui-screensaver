@@ -1,6 +1,6 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: ukui-screensaver
-Upstream-Contact: Stefano Karapetsas <stefano@karapetsas.com>
+Upstream-Contact: Hao Li <lihao@kylinos.cn>
 Source: http://git.ukui.org/ukui-screensaver/
 
 Files: savers/gs-theme-engine.c
