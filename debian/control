@@ -42,8 +42,6 @@ Depends: dbus-x11,
 Recommends: ukui-power-manager,
 Suggests: rss-glx,
           xscreensaver-data,
-Breaks: ukui-screensaver-common,
-Replaces: ukui-screensaver-common,
 Description: UKUI screen saver and locker
  ukui-screensaver is a screen saver and locker that aims to have simple,
  sane and secure defaults, and be well integrated with the UKUI desktop.
@@ -57,7 +55,6 @@ Description: UKUI screen saver and locker
 Package: ukui-screensaver-common
 Architecture: all
 Depends: ${misc:Depends},
-Breaks: ukui-screensaver,
 Description: UKUI screen saver and locker (common files)
  ukui-screensaver is a screen saver and locker that aims to have simple,
  sane and secure defaults, and be well integrated with the UKUI desktop.
