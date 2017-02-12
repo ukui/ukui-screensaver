@@ -1,3 +1,9 @@
+ukui-screensaver (1.0.0) zesty; urgency=medium
+
+  * New release. 
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Sun, 12 Feb 2017 14:46:23 +0800
+
 ukui-screensaver (0.9.6) yakkety; urgency=medium
 
   * Hide saver after it is covered by lock-dialog.
