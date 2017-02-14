@@ -2,7 +2,7 @@ dnl -*- mode: m4 -*-
 
 AC_PREREQ(2.60)
 AC_INIT([ukui-screensaver],
-        [1.16.0],
+        [1.0.0],
         [http://www.ukui.org/])
 
 AC_CONFIG_SRCDIR(src/ukui-screensaver.c)
@@ -52,9 +52,9 @@ GLIB_GSETTINGS
 DBUS_REQUIRED_VERSION=0.30
 GLIB_REQUIRED_VERSION=2.36.0
 X11_REQUIRED_VERSION=1.0
-LIBUKUI_MENU_REQUIRED_VERSION=1.5.0
-UKUI_DESKTOP_REQUIRED_VERSION=1.9.4
-LIBUKUIKBDUI_REQUIRED_VERSION=1.7.1
+LIBMATE_MENU_REQUIRED_VERSION=1.5.0
+MATE_DESKTOP_REQUIRED_VERSION=1.9.4
+LIBMATEKBDUI_REQUIRED_VERSION=1.7.1
 
 AC_MSG_CHECKING([which gtk+ version to compile against])
 AC_ARG_WITH([gtk],
@@ -91,8 +91,8 @@ PKG_CHECK_MODULES(UKUI_SCREENSAVER,
         gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION
         dbus-glib-1 >= $DBUS_REQUIRED_VERSION
         gio-2.0 >= $GLIB_REQUIRED_VERSION
-        ukui-desktop-2.0 >= $UKUI_DESKTOP_REQUIRED_VERSION
-        libukui-menu >= $LIBUKUI_MENU_REQUIRED_VERSION)
+        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
+        libmate-menu >= $LIBMATE_MENU_REQUIRED_VERSION)
 AC_SUBST(UKUI_SCREENSAVER_CFLAGS)
 AC_SUBST(UKUI_SCREENSAVER_LIBS)
 
@@ -100,15 +100,15 @@ PKG_CHECK_MODULES(UKUI_SCREENSAVER_DIALOG,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         gthread-2.0
         gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION
-        ukui-desktop-2.0 >= $UKUI_DESKTOP_REQUIRED_VERSION)
+        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION)
 AC_SUBST(UKUI_SCREENSAVER_DIALOG_CFLAGS)
 AC_SUBST(UKUI_SCREENSAVER_DIALOG_LIBS)
 
 PKG_CHECK_MODULES(UKUI_SCREENSAVER_CAPPLET,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION
-        ukui-desktop-2.0 >= $UKUI_DESKTOP_REQUIRED_VERSION
-        libukui-menu >= $LIBUKUI_MENU_REQUIRED_VERSION)
+        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
+        libmate-menu >= $LIBMATE_MENU_REQUIRED_VERSION)
 AC_SUBST(UKUI_SCREENSAVER_CAPPLET_CFLAGS)
 AC_SUBST(UKUI_SCREENSAVER_CAPPLET_LIBS)
 
@@ -126,7 +126,7 @@ SAVER_LIBS="$ALL_X_LIBS"
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
 
-UKUI_COMPILE_WARNINGS(yes)
+MATE_COMPILE_WARNINGS(yes)
 
 # Solaris requires libresolv for daemon()
 case "$host" in
@@ -166,11 +166,11 @@ AC_SUBST(PAM_PREFIX)
 
 # Desktop entry handling
 
-PKG_CHECK_MODULES(LIB_UKUI_MENU,
+PKG_CHECK_MODULES(LIB_MATE_MENU,
         gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION)
 
-AC_SUBST(LIB_UKUI_MENU_CFLAGS)
-AC_SUBST(LIB_UKUI_MENU_LIBS)
+AC_SUBST(LIB_MATE_MENU_CFLAGS)
+AC_SUBST(LIB_MATE_MENU_LIBS)
 
 dnl ---------------------------------------------------------------------------
 dnl - Where should we put documentation ?
@@ -927,18 +927,18 @@ AC_SUBST(SYSTEMD_CFLAGS)
 AC_SUBST(SYSTEMD_LIBS)
 
 dnl ---------------------------------------------------------------------------
-dnl libukuikbd
+dnl libmatekbd
 dnl ---------------------------------------------------------------------------
 
-have_libukuikbdui=no
+have_libmatekbdui=no
 AC_ARG_WITH(kbd-layout-indicator,[  --without-kbd-layout-indicator         disable keyboard layout indicator],
             [with_kbd_layout_indicator="$withval"],[with_kbd_layout_indicator=yes])
 if test x$with_kbd_layout_indicator != xno; then
-  PKG_CHECK_MODULES(LIBUKUIKBDUI, libukuikbdui >= $LIBUKUIKBDUI_REQUIRED_VERSION, have_libukuikbdui=yes, have_libukuikbdui=no)
+  PKG_CHECK_MODULES(LIBMATEKBDUI, libmatekbdui >= $LIBMATEKBDUI_REQUIRED_VERSION, have_libmatekbdui=yes, have_libmatekbdui=no)
 fi
-if test "x$have_libukuikbdui" = "xyes"; then
-  AC_SUBST(LIBUKUIKBDUI_CFLAGS)
-  AC_SUBST(LIBUKUIKBDUI_LIBS)
+if test "x$have_libmatekbdui" = "xyes"; then
+  AC_SUBST(LIBMATEKBDUI_CFLAGS)
+  AC_SUBST(LIBMATEKBDUI_LIBS)
   AC_DEFINE(WITH_KBD_LAYOUT_INDICATOR, 1, [Define if keyboard layout indicator should be built])
 fi
 

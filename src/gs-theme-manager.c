@@ -31,7 +31,7 @@
 #endif /* HAVE_UNISTD_H */
 
 #include <glib-object.h>
-#include <ukuimenu-tree.h>
+#include <matemenu-tree.h>
 
 #include "gs-theme-manager.h"
 #include "gs-debug.h"
@@ -52,7 +52,7 @@ struct _GSThemeInfo
 
 struct GSThemeManagerPrivate
 {
-	UkuiMenuTree *menu_tree;
+    MateMenuTree *menu_tree;
 };
 
 G_DEFINE_TYPE (GSThemeManager, gs_theme_manager, G_TYPE_OBJECT)
@@ -232,7 +232,7 @@ gs_theme_info_get_exec (GSThemeInfo *info)
 }
 
 static GSThemeInfo *
-gs_theme_info_new_from_ukuimenu_tree_entry (UkuiMenuTreeEntry *entry)
+gs_theme_info_new_from_matemenu_tree_entry (MateMenuTreeEntry *entry)
 {
 	GSThemeInfo *info;
 	const char     *str;
@@ -241,11 +241,11 @@ gs_theme_info_new_from_ukuimenu_tree_entry (UkuiMenuTreeEntry *entry)
 	info = g_new0 (GSThemeInfo, 1);
 
 	info->refcount = 1;
-	info->name     = g_strdup (ukuimenu_tree_entry_get_name (entry));
-	info->exec     = g_strdup (ukuimenu_tree_entry_get_exec (entry));
+	info->name     = g_strdup (matemenu_tree_entry_get_name (entry));
+	info->exec     = g_strdup (matemenu_tree_entry_get_exec (entry));
 
 	/* remove the .desktop suffix */
-	str = ukuimenu_tree_entry_get_desktop_file_id (entry);
+	str = matemenu_tree_entry_get_desktop_file_id (entry);
 	pos = g_strrstr (str, ".desktop");
 	if (pos)
 	{
@@ -260,44 +260,44 @@ gs_theme_info_new_from_ukuimenu_tree_entry (UkuiMenuTreeEntry *entry)
 }
 
 static GSThemeInfo *
-find_info_for_id (UkuiMenuTree  *tree,
+find_info_for_id (MateMenuTree  *tree,
                   const char *id)
 {
 	GSThemeInfo     *info;
-	UkuiMenuTreeDirectory *root;
+    MateMenuTreeDirectory *root;
 	GSList             *items;
 	GSList             *l;
 
-	root = ukuimenu_tree_get_root_directory (tree);
+	root = matemenu_tree_get_root_directory (tree);
 	if (root == NULL)
 	{
 		return NULL;
 	}
 
-	items = ukuimenu_tree_directory_get_contents (root);
+	items = matemenu_tree_directory_get_contents (root);
 
 	info = NULL;
 
 	for (l = items; l; l = l->next)
 	{
 		if (info == NULL
-		        && ukuimenu_tree_item_get_type (l->data) == UKUIMENU_TREE_ITEM_ENTRY)
+		        && matemenu_tree_item_get_type (l->data) == MATEMENU_TREE_ITEM_ENTRY)
 		{
-			UkuiMenuTreeEntry *entry = l->data;
+            MateMenuTreeEntry *entry = l->data;
 			const char     *file_id;
 
-			file_id = ukuimenu_tree_entry_get_desktop_file_id (entry);
+			file_id = matemenu_tree_entry_get_desktop_file_id (entry);
 			if (file_id && id && strcmp (file_id, id) == 0)
 			{
-				info = gs_theme_info_new_from_ukuimenu_tree_entry (entry);
+				info = gs_theme_info_new_from_matemenu_tree_entry (entry);
 			}
 		}
 
-		ukuimenu_tree_item_unref (l->data);
+		matemenu_tree_item_unref (l->data);
 	}
 
 	g_slist_free (items);
-	ukuimenu_tree_item_unref (root);
+	matemenu_tree_item_unref (root);
 
 	return info;
 }
@@ -321,42 +321,42 @@ gs_theme_manager_lookup_theme_info (GSThemeManager *theme_manager,
 
 static void
 theme_prepend_entry (GSList         **parent_list,
-                     UkuiMenuTreeEntry  *entry,
+                     MateMenuTreeEntry  *entry,
                      const char      *filename)
 {
 	GSThemeInfo *info;
 
-	info = gs_theme_info_new_from_ukuimenu_tree_entry (entry);
+	info = gs_theme_info_new_from_matemenu_tree_entry (entry);
 
 	*parent_list = g_slist_prepend (*parent_list, info);
 }
 
 static void
 make_theme_list (GSList             **parent_list,
-                 UkuiMenuTreeDirectory  *directory,
+                 MateMenuTreeDirectory  *directory,
                  const char          *filename)
 {
 	GSList *items;
 	GSList *l;
 
-	items = ukuimenu_tree_directory_get_contents (directory);
+	items = matemenu_tree_directory_get_contents (directory);
 
 	for (l = items; l; l = l->next)
 	{
-		switch (ukuimenu_tree_item_get_type (l->data))
+		switch (matemenu_tree_item_get_type (l->data))
 		{
 
-		case UKUIMENU_TREE_ITEM_ENTRY:
+		case MATEMENU_TREE_ITEM_ENTRY:
 			theme_prepend_entry (parent_list, l->data, filename);
 			break;
 
-		case UKUIMENU_TREE_ITEM_ALIAS:
-		case UKUIMENU_TREE_ITEM_DIRECTORY:
+		case MATEMENU_TREE_ITEM_ALIAS:
+		case MATEMENU_TREE_ITEM_DIRECTORY:
 		default:
 			break;
 		}
 
-		ukuimenu_tree_item_unref (l->data);
+		matemenu_tree_item_unref (l->data);
 	}
 
 	g_slist_free (items);
@@ -368,16 +368,16 @@ GSList *
 gs_theme_manager_get_info_list (GSThemeManager *theme_manager)
 {
 	GSList             *l = NULL;
-	UkuiMenuTreeDirectory *root;
+    MateMenuTreeDirectory *root;
 
 	g_return_val_if_fail (GS_IS_THEME_MANAGER (theme_manager), NULL);
 
-	root = ukuimenu_tree_get_root_directory (theme_manager->priv->menu_tree);
+	root = matemenu_tree_get_root_directory (theme_manager->priv->menu_tree);
 
 	if (root != NULL)
 	{
 		make_theme_list (&l, root, "ukui-screensavers.menu");
-		ukuimenu_tree_item_unref (root);
+		matemenu_tree_item_unref (root);
 	}
 
 	return l;
@@ -393,16 +393,16 @@ gs_theme_manager_class_init (GSThemeManagerClass *klass)
 	g_type_class_add_private (klass, sizeof (GSThemeManagerPrivate));
 }
 
-static UkuiMenuTree *
+static MateMenuTree *
 get_themes_tree (void)
 {
-	UkuiMenuTree *themes_tree = NULL;
+    MateMenuTree *themes_tree = NULL;
 
 	/* we only need to add the locations to the path once
 	   and since this is only run once we'll do it here */
 	add_known_engine_locations_to_path ();
 
-	themes_tree = ukuimenu_tree_lookup ("ukui-screensavers.menu", UKUIMENU_TREE_FLAGS_NONE);
+	themes_tree = matemenu_tree_lookup ("ukui-screensavers.menu", MATEMENU_TREE_FLAGS_NONE);
 
 	return themes_tree;
 }
@@ -429,7 +429,7 @@ gs_theme_manager_finalize (GObject *object)
 
 	if (theme_manager->priv->menu_tree != NULL)
 	{
-		ukuimenu_tree_unref (theme_manager->priv->menu_tree);
+		matemenu_tree_unref (theme_manager->priv->menu_tree);
 	}
 
 	G_OBJECT_CLASS (gs_theme_manager_parent_class)->finalize (object);

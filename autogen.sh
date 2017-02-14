@@ -12,13 +12,13 @@ PKG_NAME="ukui-screensaver"
     exit 1
 }
 
-which ukui-autogen || {
-    echo "You need to install ukui-common from the UKUI Git"
+which mate-autogen || {
+    echo "You need to install mate-common from the UKUI Git"
     exit 1
 }
 
 REQUIRED_AUTOMAKE_VERSION=1.9
 UKUI_DATADIR="$ukui_datadir"
 
-. ukui-autogen
+. mate-autogen
 

@@ -36,8 +36,8 @@
 
 #include <gio/gio.h>
 
-#define UKUI_DESKTOP_USE_UNSTABLE_API
-#include <libukui-desktop/ukui-desktop-utils.h>
+#define MATE_DESKTOP_USE_UNSTABLE_API
+#include <libmate-desktop/mate-desktop-utils.h>
 
 #if GTK_CHECK_VERSION (3, 0, 0)
 #include "gs-debug.h"
@@ -423,7 +423,7 @@ response_cb (GtkWidget *widget,
 
 		error = NULL;
 
-		res = ukui_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
+		res = mate_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
 		                                        GPM_COMMAND,
 		                                        &error);
 		if (! res)
