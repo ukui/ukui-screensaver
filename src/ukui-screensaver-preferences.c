@@ -51,7 +51,7 @@
 
 #define GTK_BUILDER_FILE "ukui-screensaver-preferences.ui"
 
-#define LOCKDOWN_SETTINGS_SCHEMA "org.ukui.lockdown"
+#define LOCKDOWN_SETTINGS_SCHEMA "org.mate.lockdown"
 #define KEY_LOCK_DISABLE "disable-lock-screen"
 
 #define SESSION_SETTINGS_SCHEMA "org.ukui.session"
