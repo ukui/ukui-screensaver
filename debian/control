@@ -39,7 +39,7 @@ Depends: dbus-x11,
          ukui-session-manager,
          ${misc:Depends},
          ${shlibs:Depends},
-Recommends: ukui-power-manager,
+Recommends: mate-power-manager,
 Suggests: rss-glx,
           xscreensaver-data,
 Description: UKUI screen saver and locker
