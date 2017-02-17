@@ -2238,7 +2238,7 @@ load_theme (GSLockPlug *plug)
 	if(!g_file_test(picture_filename, G_FILE_TEST_EXISTS)){
 		/* 如果登录界面的背景图片不存在则读取桌面背景 */
 		GSettings *settings;
-		settings = g_settings_new ("org.ukui.background");
+		settings = g_settings_new ("org.mate.background");
 		gchar *picture_filename = g_settings_get_string(
 				settings, "picture-filename");
 		/* 防止前缀出现问题无法解析 */
