@@ -163,7 +163,7 @@
             <row>
               <entry>in</entry>
               <entry>string</entry>
-              <entry>the application name, e.g. "ukui-power-manager"</entry>
+              <entry>the application name, e.g. "mate-power-manager"</entry>
             </row>
             <row>
               <entry>in</entry>

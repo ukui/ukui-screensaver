@@ -4,5 +4,4 @@ _Name=Screensavers
 _Comment=Screensaver themes
 Icon=screensaver
 Type=Directory
-OnlyShowIn=UKUI;
 NoDisplay=false

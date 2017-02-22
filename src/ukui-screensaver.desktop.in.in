@@ -4,7 +4,6 @@ _Name=Screensaver
 _Comment=Launch screensaver and locker program
 Icon=preferences-desktop-screensaver
 Exec=ukui-screensaver
-OnlyShowIn=UKUI;
 NoDisplay=true
 Keywords=UKUI;screensaver;locker;
 X-UKUI-Autostart-Phase=Application
