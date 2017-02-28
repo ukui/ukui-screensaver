@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: ukui-screensaver
 Upstream-Contact: Hao Li <lihao@kylinos.cn>
-Source: http://git.ukui.org/ukui-screensaver/
+Source: https://github.com/ukui/ukui-screensaver
 
 Files: savers/gs-theme-engine.c
        savers/gs-theme-engine.h
@@ -48,7 +48,8 @@ License: GPL-2+
 Files: src/gs-window-x11.c
        src/gs-manager.c
        src/gs-lock-plug.c
-Copyright: 2016, Tianjin KYLIN Information Technology Co., Ltd.
+Copyright: 2004-2008, William Jon McCann <mccann@jhu.edu>
+           2016, Tianjin KYLIN Information Technology Co., Ltd.
 License: GPL-2+
 
 Files: src/gs-auth-helper.c

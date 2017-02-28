@@ -1,6 +1,10 @@
 ukui-screensaver (1.0.0) zesty; urgency=medium
 
-  * New release. 
+  * Replace ukui-desktop with mate-desktop.
+  * Replace ukui-power-manager with mate-power-manager.
+  * Remove 'OnlyShowIn' in desktop file.
+  * Fix the error when executing ukui-screensaver-preferences.
+  * Update copyright file.
 
  -- handsome_feng <jianfengli@ubuntukylin.com>  Sun, 12 Feb 2017 14:46:23 +0800
 
