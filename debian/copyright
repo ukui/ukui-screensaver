@@ -21,9 +21,7 @@ Files: savers/gs-theme-engine.c
        src/gs-job.h
        src/gs-listener-dbus.c
        src/gs-listener-dbus.h
-       src/gs-lock-plug.c
        src/gs-lock-plug.h
-       src/gs-manager.c
        src/gs-manager.h
        src/gs-monitor.c
        src/gs-monitor.h
@@ -33,7 +31,6 @@ Files: savers/gs-theme-engine.c
        src/gs-theme-manager.h
        src/gs-visual-gl.h
        src/gs-watcher.h
-       src/gs-window-x11.c
        src/gs-window.h
        src/ukui-screensaver-command.c
        src/ukui-screensaver-dialog.c
@@ -46,7 +43,12 @@ Files: savers/gs-theme-engine.c
        src/test-watcher.c
        src/test-window.c
 Copyright: 2004-2008, William Jon McCann <mccann@jhu.edu>
-	   2016, Tianjin KYLIN Information Technology Co., Ltd.
+License: GPL-2+
+
+Files: src/gs-window-x11.c
+       src/gs-manager.c
+       src/gs-lock-plug.c
+Copyright: 2016, Tianjin KYLIN Information Technology Co., Ltd.
 License: GPL-2+
 
 Files: src/gs-auth-helper.c
@@ -163,7 +165,7 @@ Comment:
 Files: debian/*
 Copyright: 2011-2014 Stefano Karapetsas <stefano@karapetsas.com>
            2014 Mike Gabriel <sunweaver@debian.org>
-	   2016, Tianjin KYLIN Information Technology Co., Ltd.
+           2016, Tianjin KYLIN Information Technology Co., Ltd.
 License: GPL-2+ or LGPL-2+ or Expat or MIT~OldStyle
 
 License: GPL-2+
