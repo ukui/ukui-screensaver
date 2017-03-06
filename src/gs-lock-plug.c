@@ -836,7 +836,7 @@ frame_pixbuf (GdkPixbuf *source)
 	double           radius;
 	guint8          *data;
 
-	frame_width = 5;
+	frame_width = 3;
 
 	w = gdk_pixbuf_get_width (source) + frame_width * 2;
 	h = gdk_pixbuf_get_height (source) + frame_width * 2;
@@ -862,9 +862,9 @@ frame_pixbuf (GdkPixbuf *source)
 
 	/* set up image */
 	cairo_rectangle (cr, 0, 0, w, h);
-	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 0.0);
+	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
 	cairo_fill (cr);
-
+	radius = 0; // 去掉圆角
 	rounded_rectangle (cr,
 					   1.0,
 					   frame_width + 0.5,
@@ -1031,6 +1031,50 @@ check_user_file (const gchar *filename,
 	return TRUE;
 }
 
+/*  使用 DBus获取用户头像  */
+static GdkPixbuf *get_avatar_pixbuf()
+{
+	int icon_size = 140;
+	GDBusConnection *system_bus = g_bus_get_sync(G_BUS_TYPE_SYSTEM, NULL, NULL);
+	GVariant *res_tuple =
+	g_dbus_connection_call_sync(system_bus,
+				"org.freedesktop.Accounts",
+				"/org/freedesktop/Accounts",
+				"org.freedesktop.Accounts",
+				"FindUserByName",
+				g_variant_new("(s)", g_get_user_name()),
+				NULL, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+
+	GVariant *res = g_variant_get_child_value(res_tuple, 0);
+	gchar *obj_path = g_strdup(g_variant_get_string(res, NULL));
+	g_variant_unref(res);
+	g_variant_unref(res_tuple);
+	g_print("=================================%s\n",obj_path);
+	res_tuple = g_dbus_connection_call_sync(system_bus,
+				"org.freedesktop.Accounts",
+				obj_path,
+				"org.freedesktop.DBus.Properties",
+				"Get",
+				g_variant_new("(ss)", "org.freedesktop.Accounts.User", "IconFile"),
+				NULL, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+	g_free (obj_path);
+
+	res = g_variant_get_child_value(res_tuple, 0);
+	GVariant *str_res = g_variant_get_child_value(res, 0);
+	gchar *icon_file = g_strdup(g_variant_get_string(str_res, NULL));
+	g_print("=================================%s\n",icon_file);
+	g_variant_unref(res);
+	g_variant_unref(str_res);
+	g_variant_unref(res_tuple);
+
+	GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file, icon_size, icon_size, NULL);
+
+	if (icon_file)
+		g_free (icon_file);
+
+	return pixbuf;
+}
+
 static gboolean
 set_face_image (GSLockPlug *plug)
 {
@@ -1068,6 +1112,8 @@ set_face_image (GSLockPlug *plug)
 		return FALSE;
 	}
 
+	pixbuf = get_avatar_pixbuf();
+	g_print("pixbuf === = == = ===%X\n", pixbuf);
 	image_set_from_pixbuf (GTK_IMAGE (plug->priv->auth_face_image), pixbuf);
 
 	g_object_unref (pixbuf);
@@ -1632,6 +1678,11 @@ gs_lock_plug_enable_prompt (GSLockPlug *plug,
 	gtk_widget_set_sensitive (plug->priv->auth_prompt_entry, TRUE);
 	gtk_widget_show (plug->priv->auth_prompt_entry);
 
+	/* 隐藏 Unlock 按钮 */
+	gtk_widget_hide(plug->priv->auth_unlock_button);
+	/* 隐藏 auth_prompt_label */
+	gtk_widget_hide(plug->priv->auth_prompt_label);
+
 	if (! gtk_widget_has_focus (plug->priv->auth_prompt_entry))
 	{
 		gtk_widget_grab_focus (plug->priv->auth_prompt_entry);
@@ -2156,6 +2207,21 @@ get_dialog_theme_name (GSLockPlug *plug)
 	return name;
 }
 
+/* 点击箭头图标解锁，仿照 unlock_button_clicked */
+static void
+entry_icon_clicked (GtkWidget *widget,GtkEntryIconPosition icon_pos,
+		GdkEvent *event, GSLockPlug *plug)
+{
+	gs_lock_plug_response (plug, GS_LOCK_PLUG_RESPONSE_OK);
+}
+
+/* 敲回车解锁，仿照 unlock_button_clicked */
+static void
+entry_activated (GtkWidget *widget, GSLockPlug *plug)
+{
+	gs_lock_plug_response (plug, GS_LOCK_PLUG_RESPONSE_OK);
+}
+
 static gboolean
 load_theme (GSLockPlug *plug)
 {
@@ -2316,6 +2382,15 @@ load_theme (GSLockPlug *plug)
 	{
 		gtk_widget_set_no_show_all (plug->priv->auth_note_button, TRUE);
 	}
+
+	/* 设置密码输入框的第二图标 */
+	pixbuf = gdk_pixbuf_new_from_file_at_size ("/usr/share/ukui-screensaver/go-to.png",42,42,NULL);
+	gtk_entry_set_icon_from_pixbuf(GTK_ENTRY(plug->priv->auth_prompt_entry), GTK_ENTRY_ICON_SECONDARY, pixbuf);
+	gtk_entry_set_icon_activatable (plug->priv->auth_prompt_entry, GTK_ENTRY_ICON_SECONDARY, pixbuf);
+	/* 点击箭头图标解锁 */
+	g_signal_connect(plug->priv->auth_prompt_entry, "icon-press", G_CALLBACK(entry_icon_clicked), plug);
+	/* 输入框内敲回车解锁 */
+	g_signal_connect(plug->priv->auth_prompt_entry, "activate", G_CALLBACK(entry_activated), plug);
 
 	date_time_update (plug);
 	gtk_widget_show_all (lock_dialog);
