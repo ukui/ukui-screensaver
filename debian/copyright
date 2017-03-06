@@ -138,6 +138,7 @@ Files: .tx/config
        data/images/Makefile.am
        data/images/*.svg
        data/images/cosmos/*
+       data/go-to.png
        doc/*
        po/LINGUAS
        po/POTFILES.*
