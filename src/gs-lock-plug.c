@@ -1031,7 +1031,7 @@ check_user_file (const gchar *filename,
 	return TRUE;
 }
 
-/*  使用 DBus获取用户头像  */
+/* Read avatar file from DBus */
 static GdkPixbuf *get_avatar_pixbuf()
 {
 	int icon_size = 140;
@@ -1094,26 +1094,36 @@ set_face_image (GSLockPlug *plug)
 	if (check_user_file (path, uid, user_max_file, 0, 0))
 	{
 		/*
-		 * If there is no .face file in the home directory,
-		 * use default_face instead.
+		 * If the file .face exist in home directory,
+		 * then use it as avatar.
 		 */
-		if (!g_file_test(path, G_FILE_TEST_EXISTS))
-			path = "/usr/share/kylin-greeter/default_face.png";
 		pixbuf = gdk_pixbuf_new_from_file_at_size (path,
 		         icon_size,
 		         icon_size,
 		         NULL);
 	}
-
+	/*
+	 * If .face is not exist, the fallback avatar would be read from DBus.
+	 */
+	if (pixbuf == NULL)
+		pixbuf = get_avatar_pixbuf();
+	/*
+	 * If reading from DBus is failed,
+	 * then using the default_face.png as the fallback avatar.
+	 */
+	if (pixbuf == NULL) {
+		path = "/usr/share/kylin-greeter/default_face.png";
+		if (g_file_test(path, G_FILE_TEST_EXISTS))
+			pixbuf = gdk_pixbuf_new_from_file_at_size(path,
+						icon_size, icon_size, NULL);
+	}
 	g_free (path);
 
-	if (pixbuf == NULL)
-	{
-		return FALSE;
-	}
 
-	pixbuf = get_avatar_pixbuf();
-	g_print("pixbuf === = == = ===%X\n", pixbuf);
+	/* If pixbuf is still NULL, then return FALSE and the avatar would be blank */
+	if (pixbuf == NULL)
+		return FALSE;
+
 	image_set_from_pixbuf (GTK_IMAGE (plug->priv->auth_face_image), pixbuf);
 
 	g_object_unref (pixbuf);
@@ -1790,7 +1800,7 @@ get_user_display_name (void)
 
 	name = g_get_real_name ();
 
-	if (name == NULL || strcmp (name, "Unknown") == 0)
+	if (strcmp(name, "") == 0 || strcmp (name, "Unknown") == 0)
 	{
 		name = g_get_user_name ();
 	}
