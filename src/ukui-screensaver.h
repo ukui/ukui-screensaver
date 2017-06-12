@@ -23,6 +23,8 @@
 #ifndef __UKUI_SCREENSAVER_H
 #define __UKUI_SCREENSAVER_H
 
+#include <glib.h>
+
 G_BEGIN_DECLS
 
 void ukui_screensaver_quit(void);
