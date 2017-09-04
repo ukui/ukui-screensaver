@@ -350,7 +350,11 @@ preview_set_theme (GtkWidget  *widget,
 
 	if ((theme && strcmp (theme, "__blank-only") == 0))
 	{
-
+		cairo_t *cr = gdk_cairo_create(gtk_widget_get_window(widget));
+		cairo_set_source_rgba (cr, 0.0, 0.0, 0.0, 1.0);
+		cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+		cairo_paint (cr);
+		cairo_destroy(cr);
 	}
 	else if (theme && strcmp (theme, "__random") == 0)
 	{
