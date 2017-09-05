@@ -2200,6 +2200,29 @@ load_theme (GSLockPlug *plug)
 			"font_desc=\"Ubuntu 11\">%s</span>", _("Has Logged In"));
 	gtk_label_set_markup(plug->priv->auth_username_label, str);
 	g_free(str);
+	/*
+	GdkRGBA color;
+	gdk_rgba_parse(&color, "#024387");
+	gtk_widget_override_background_color(plug->priv->auth_unlock_button, GTK_STATE_FLAG_NORMAL, &color);
+	gdk_rgba_parse(&color, "#0258AD");
+	gtk_widget_override_background_color(plug->priv->auth_unlock_button, GTK_STATE_FLAG_PRELIGHT, &color);
+	gdk_rgba_parse(&color, "#013C76");
+	gtk_widget_override_background_color(plug->priv->auth_unlock_button, GTK_STATE_FLAG_ACTIVE, &color);
+	gdk_rgba_parse(&color, "#013C76");
+	gtk_widget_override_background_color(plug->priv->auth_unlock_button, GTK_STATE_FLAG_INSENSITIVE, &color);
+	*/
+	/* 按钮字体颜色 */
+	/*
+	GtkWidget *inner_label = gtk_bin_get_child(plug->priv->auth_unlock_button);
+	gdk_rgba_parse(&color, "#ffffff");
+	gtk_widget_override_color(inner_label, GTK_STATE_FLAG_NORMAL, &color);
+	gdk_rgba_parse(&color, "#ffffff");
+	gtk_widget_override_color(inner_label, GTK_STATE_FLAG_PRELIGHT, &color);
+	gdk_rgba_parse(&color, "#ffffff");
+	gtk_widget_override_color(inner_label, GTK_STATE_FLAG_ACTIVE, &color);
+	gdk_rgba_parse(&color, "#ffffff");
+	gtk_widget_override_color(inner_label, GTK_STATE_FLAG_INSENSITIVE, &color);
+	*/
 
 	date_time_update (plug);
 	gtk_widget_show_all (lock_dialog);
