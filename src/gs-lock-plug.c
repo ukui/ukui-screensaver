@@ -1555,8 +1555,6 @@ gs_lock_plug_enable_prompt (GSLockPlug *plug,
 	gtk_widget_set_sensitive (plug->priv->auth_prompt_entry, TRUE);
 	gtk_widget_show (plug->priv->auth_prompt_entry);
 
-	/* 隐藏 Unlock 按钮 */
-	gtk_widget_hide(plug->priv->auth_unlock_button);
 	/* 隐藏 auth_prompt_label */
 	gtk_widget_hide(plug->priv->auth_prompt_label);
 
@@ -2048,21 +2046,6 @@ get_dialog_theme_name (GSLockPlug *plug)
 	return name;
 }
 
-/* 点击箭头图标解锁，仿照 unlock_button_clicked */
-static void
-entry_icon_clicked (GtkWidget *widget,GtkEntryIconPosition icon_pos,
-		GdkEvent *event, GSLockPlug *plug)
-{
-	gs_lock_plug_response (plug, GS_LOCK_PLUG_RESPONSE_OK);
-}
-
-/* 敲回车解锁，仿照 unlock_button_clicked */
-static void
-entry_activated (GtkWidget *widget, GSLockPlug *plug)
-{
-	gs_lock_plug_response (plug, GS_LOCK_PLUG_RESPONSE_OK);
-}
-
 static gboolean
 load_theme (GSLockPlug *plug)
 {
@@ -2210,14 +2193,6 @@ load_theme (GSLockPlug *plug)
 		gtk_widget_set_no_show_all (plug->priv->auth_note_button, TRUE);
 	}
 
-	/* 设置密码输入框的第二图标 */
-	pixbuf = gdk_pixbuf_new_from_file_at_size ("/usr/share/ukui-screensaver/go-to.png",42,42,NULL);
-	gtk_entry_set_icon_from_pixbuf(GTK_ENTRY(plug->priv->auth_prompt_entry), GTK_ENTRY_ICON_SECONDARY, pixbuf);
-	gtk_entry_set_icon_activatable (plug->priv->auth_prompt_entry, GTK_ENTRY_ICON_SECONDARY, pixbuf);
-	/* 点击箭头图标解锁 */
-	g_signal_connect(plug->priv->auth_prompt_entry, "icon-press", G_CALLBACK(entry_icon_clicked), plug);
-	/* 输入框内敲回车解锁 */
-	g_signal_connect(plug->priv->auth_prompt_entry, "activate", G_CALLBACK(entry_activated), plug);
 
 	date_time_update (plug);
 	gtk_widget_show_all (lock_dialog);
@@ -2384,6 +2359,9 @@ gs_lock_plug_init (GSLockPlug *plug)
 	gtk_entry_set_visibility (GTK_ENTRY (plug->priv->auth_prompt_entry), FALSE);
 
 	g_signal_connect (plug->priv->auth_unlock_button, "clicked",
+	                  G_CALLBACK (unlock_button_clicked), plug);
+	/* 输入框内敲回车解锁 */
+	g_signal_connect (plug->priv->auth_prompt_entry, "activate",
 	                  G_CALLBACK (unlock_button_clicked), plug);
 
 	g_signal_connect (plug->priv->auth_cancel_button, "clicked",
