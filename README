@@ -1,7 +1,7 @@
-mate-screensaver
+ukui-screensaver
 =================
 
-mate-screensaver is a screen saver and locker that aims to have
+ukui-screensaver is a screen saver and locker that aims to have
 simple, sane, secure defaults and be well integrated with the desktop.
 It is designed to support:
 
@@ -27,9 +27,9 @@ sudo make install
 How to report bugs
 ==================
 
-Bugs should be reported to the MATE bug tracking
+Bugs should be reported to the UKUI bug tracking
 system:
-    https://github.com/mate-desktop/mate-screensaver/issues
+    https://github.com/ukui-desktop/ukui-screensaver/issues
 
 You will need to create an account if you don't have one already.
 
@@ -37,8 +37,8 @@ In the bug report please include information about your system, if possible:
 
    - What operating system and version
 
-   - What version of mate-screenaver
+   - What version of ukui-screenaver
 
-        The output of the "mate-screensaver-command --version" command.
+        The output of the "ukui-screensaver-command --version" command.
 
  
