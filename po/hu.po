@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Falu <info@falu.me>, 2015
 # Gabor Kelemen <kelemeng at mate dot hu>, 2005, 2006, 2007, 2008, 2009, 2010
@@ -12,76 +12,77 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UKUI Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 00:57+0300\n"
+"POT-Creation-Date: 2017-11-23 17:22+0800\n"
 "PO-Revision-Date: 2017-09-19 13:40+0000\n"
 "Last-Translator: monsta <monsta@inbox.ru>\n"
 "Language-Team: Hungarian (http://wiki.ukui.org/trans/hu/)\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/mate-screensaver-preferences.desktop.in.h:1
-#: ../src/mate-screensaver.desktop.in.in.h:1
+#: ../data/ukui-screensaver-preferences.desktop.in.h:1
+#: ../src/ukui-screensaver.desktop.in.in.h:1
 msgid "Screensaver"
 msgstr "Képernyővédő"
 
-#: ../data/mate-screensaver-preferences.desktop.in.h:2
+#: ../data/ukui-screensaver-preferences.desktop.in.h:2
 msgid "Set your screensaver preferences"
 msgstr "A képernyővédő tulajdonságainak beállítása"
 
-#: ../data/mate-screensaver-preferences.ui.h:1
+#: ../data/ukui-screensaver-preferences.ui.h:1
 msgid "Screensaver Preview"
 msgstr "Képernyővédő előnézete"
 
-#: ../data/mate-screensaver-preferences.ui.h:2
+#: ../data/ukui-screensaver-preferences.ui.h:2
 msgid "<b>Screensaver preview</b>"
 msgstr "<b>Képernyővédő előnézete</b>"
 
-#: ../data/mate-screensaver-preferences.ui.h:3
+#: ../data/ukui-screensaver-preferences.ui.h:3
 msgid "Screensaver Preferences"
 msgstr "Képernyővédő tulajdonságai"
 
-#: ../data/mate-screensaver-preferences.ui.h:4
+#: ../data/ukui-screensaver-preferences.ui.h:4
 msgid "Power _Management"
 msgstr "_Energiakezelés"
 
-#: ../data/mate-screensaver-preferences.ui.h:5
+#: ../data/ukui-screensaver-preferences.ui.h:5
 msgid "_Preview"
 msgstr "_Előnézet"
 
-#: ../data/mate-screensaver-preferences.ui.h:6
+#: ../data/ukui-screensaver-preferences.ui.h:6
 msgid "_Screensaver theme:"
 msgstr "Képernyő_védő-téma:"
 
-#: ../data/mate-screensaver-preferences.ui.h:7
+#: ../data/ukui-screensaver-preferences.ui.h:7
 msgid "Regard the computer as _idle after:"
 msgstr "A számítógé_p üresjáratba kerül:"
 
-#: ../data/mate-screensaver-preferences.ui.h:8
+#: ../data/ukui-screensaver-preferences.ui.h:8
 msgid "_Activate screensaver when computer is idle"
 msgstr "_Képernyővédő aktiválása üresjáratban"
 
-#: ../data/mate-screensaver-preferences.ui.h:9
+#: ../data/ukui-screensaver-preferences.ui.h:9
 msgid "_Lock screen when screensaver is active"
 msgstr "Képernyő _zárolása, ha a képernyővédő aktív"
 
-#: ../data/mate-screensaver-preferences.ui.h:10
+#: ../data/ukui-screensaver-preferences.ui.h:10
 msgid "<b>Warning: the screen will not be locked for the root user.</b>"
-msgstr "<b>Figyelmeztetés: a képernyő nem kerül zárolásra a rendszergazda számára.</b>"
+msgstr ""
+"<b>Figyelmeztetés: a képernyő nem kerül zárolásra a rendszergazda számára.</"
+"b>"
 
-#: ../data/mate-screensaver.directory.in.h:1
+#: ../data/ukui-screensaver.directory.in.h:1
 msgid "Screensavers"
 msgstr "Képernyővédők"
 
-#: ../data/mate-screensaver.directory.in.h:2
-#: ../data/org.mate.screensaver.gschema.xml.in.h:7
+#: ../data/ukui-screensaver.directory.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:7
 msgid "Screensaver themes"
 msgstr "Képernyővédő-témák"
 
-#. Translators: This is the name of a desktop background image that shows
-#. outer space images.
+#. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
 #: ../savers/cosmos-slideshow.desktop.in.in.h:1
@@ -104,7 +105,7 @@ msgstr "_Kijelentkezés"
 msgid "_Cancel"
 msgstr "Mé_gse"
 
-#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1658
+#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1659
 msgid "_Unlock"
 msgstr "_Feloldás"
 
@@ -113,149 +114,180 @@ msgstr "_Feloldás"
 msgid "<b>Leave a message for %R:</b>"
 msgstr "<b>Üzenet hagyása a következőnek: %R</b>"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:1
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:1
 msgid "Activate when idle"
 msgstr "Aktiválás üresjáratban"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:2
 msgid "Set this to TRUE to activate the screensaver when the session is idle."
-msgstr "Állítsa ezt igazra a képernyővédő aktiválásához, ha a munkamenet üresjáratban van."
+msgstr ""
+"Állítsa ezt igazra a képernyővédő aktiválásához, ha a munkamenet "
+"üresjáratban van."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:3
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:3
 msgid "Lock on activation"
 msgstr "Zárolás aktiváláskor"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:4
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:4
 msgid "Set this to TRUE to lock the screen when the screensaver goes active."
-msgstr "Állítsa ezt igazra a képernyő zárolásához a képernyővédő aktiválásakor."
+msgstr ""
+"Állítsa ezt igazra a képernyő zárolásához a képernyővédő aktiválásakor."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:5
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:5
 msgid "Screensaver theme selection mode"
 msgstr "A képernyővédő témakiválasztásának módja"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:6
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:6
 msgid ""
 "The selection mode used by screensaver. May be \"blank-only\" to enable the "
 "screensaver without using any theme on activation, \"single\" to enable "
 "screensaver using only one theme on activation (specified in \"themes\" "
 "key), and \"random\" to enable the screensaver using a random theme on "
 "activation."
-msgstr "A képernyővédő által használandó kijelölési mód. Lehetséges értékek: „blank-only” - ne használjon témákat a képernyővédő aktiválásakor, „single” - csak egy (a „themes” kulcsban megadott) téma használata a képernyővédő aktiválásakor és „random” - a képernyővédő aktiválása véletlen téma használatával."
+msgstr ""
+"A képernyővédő által használandó kijelölési mód. Lehetséges értékek: „blank-"
+"only” - ne használjon témákat a képernyővédő aktiválásakor, „single” - csak "
+"egy (a „themes” kulcsban megadott) téma használata a képernyővédő "
+"aktiválásakor és „random” - a képernyővédő aktiválása véletlen téma "
+"használatával."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:8
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:8
 msgid ""
 "This key specifies the list of themes to be used by the screensaver. It's "
 "ignored when \"mode\" key is \"blank-only\", should provide the theme name "
-"when \"mode\" is \"single\", and should provide a list of themes when "
-"\"mode\" is \"random\"."
-msgstr "Ez a kulcs megadja a képernyővédő által használandó témák listáját. Ez figyelmen kívül marad, ha a „mode” kulcs értéke „blank-only”, ha a „mode” értéke „single”, akkor a téma nevét adja meg és a témák listáját adja, ha a „mode” értéke „random”."
+"when \"mode\" is \"single\", and should provide a list of themes when \"mode"
+"\" is \"random\"."
+msgstr ""
+"Ez a kulcs megadja a képernyővédő által használandó témák listáját. Ez "
+"figyelmen kívül marad, ha a „mode” kulcs értéke „blank-only”, ha a „mode” "
+"értéke „single”, akkor a téma nevét adja meg és a témák listáját adja, ha a "
+"„mode” értéke „random”."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:9
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:9
 msgid "Time before power management baseline"
 msgstr "Az energiakezelési tevékenységig eltelő idő"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:10
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:10
 msgid ""
 "The number of seconds of inactivity before signalling to power management. "
 "This key is set and maintained by the session power management agent."
-msgstr "The number of seconds of inactivity before signalling to power management. This key is set and maintained by the session power management agent."
+msgstr ""
+"The number of seconds of inactivity before signalling to power management. "
+"This key is set and maintained by the session power management agent."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:11
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:11
 msgid "Time before theme change"
 msgstr "A témaváltásig eltelő idő"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:12
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:12
 msgid "The number of minutes to run before changing the screensaver theme."
 msgstr "A képernyővédő témájának cseréje előtt eltelő percek száma."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:13
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:13
 msgid "Time before locking"
 msgstr "A zárolásig eltelő idő"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:14
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:14
 msgid ""
-"The number of minutes after screensaver activation before locking the "
-"screen."
-msgstr "A képernyővédő aktiválásától a képernyő zárolásáig eltelő percek száma."
+"The number of minutes after screensaver activation before locking the screen."
+msgstr ""
+"A képernyővédő aktiválásától a képernyő zárolásáig eltelő percek száma."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:15
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:15
 msgid "Allow embedding a keyboard into the window"
 msgstr "Billentyűzet beágyazásának engedélyezése az ablakba"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:16
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:16
 msgid ""
 "Set this to TRUE to allow embedding a keyboard into the window when trying "
 "to unlock. The \"keyboard_command\" key must be set with the appropriate "
 "command."
-msgstr "Állítsa ezt igazra billentyűzet beágyazásához az ablakba a feloldási kísérletkor. A „keyboard_command” kulcsot be kell állítani a megfelelő parancsra."
+msgstr ""
+"Állítsa ezt igazra billentyűzet beágyazásához az ablakba a feloldási "
+"kísérletkor. A „keyboard_command” kulcsot be kell állítani a megfelelő "
+"parancsra."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:17
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:17
 msgid "Embedded keyboard command"
 msgstr "Beágyazott billentyűzet parancs"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:18
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:18
 msgid ""
 "The command that will be run, if the \"embedded_keyboard_enabled\" key is "
-"set to TRUE, to embed a keyboard widget into the window. This command should"
-" implement an XEMBED plug interface and output a window XID on the standard "
+"set to TRUE, to embed a keyboard widget into the window. This command should "
+"implement an XEMBED plug interface and output a window XID on the standard "
 "output."
-msgstr "A billentyűzet felületi elem ablakba ágyazásához futtatandó parancs, ha az „embedded_keyboard_enabled” kulcs be van állítva. A parancsnak meg kell valósítania egy XEMBED csatolófelületet és egy ablak XID-t kell kimenetként előállítania a szabványos kimenetre."
+msgstr ""
+"A billentyűzet felületi elem ablakba ágyazásához futtatandó parancs, ha az "
+"„embedded_keyboard_enabled” kulcs be van állítva. A parancsnak meg kell "
+"valósítania egy XEMBED csatolófelületet és egy ablak XID-t kell kimenetként "
+"előállítania a szabványos kimenetre."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:19
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:19
 msgid "Allow logout"
 msgstr "Kijelentkezés engedélyezése"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:20
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:20
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to allow logging "
 "out after a delay. The delay is specified in the \"logout_delay\" key."
-msgstr "Set this to TRUE to offer an option in the unlock dialog to allow logging out after a delay. The delay is specified in the \"logout_delay\" key."
+msgstr ""
+"Set this to TRUE to offer an option in the unlock dialog to allow logging "
+"out after a delay. The delay is specified in the \"logout_delay\" key."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:21
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:21
 msgid "Time before logout option"
 msgstr "A kijelentkezési lehetőség megjelenéséig eltelő idő"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:22
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:22
 msgid ""
 "The number of minutes after the screensaver activation before a logout "
 "option will appear in the unlock dialog. This key has effect only if the "
 "\"logout_enable\" key is set to TRUE."
-msgstr "A képernyővédő aktiválásától a kijelentkezés lehetőségének megjelenéséig eltelő percek száma a zárolás feloldása párbeszédablakban. Ez a kulcs csak akkor hatásos, ha a „logout_enable” kulcs értéke igaz."
+msgstr ""
+"A képernyővédő aktiválásától a kijelentkezés lehetőségének megjelenéséig "
+"eltelő percek száma a zárolás feloldása párbeszédablakban. Ez a kulcs csak "
+"akkor hatásos, ha a „logout_enable” kulcs értéke igaz."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:23
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:23
 msgid "Logout command"
 msgstr "Kijelentkezési parancs"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:24
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:24
 msgid ""
-"The command to invoke when the logout button is clicked. This command should"
-" simply log the user out without any interaction. This key has effect only "
-"if the \"logout_enable\" key is set to TRUE."
-msgstr "A kijelentkezés gomb megnyomásakor meghívandó parancs. Ennek a parancsnak egyszerűen, beavatkozás nélkül ki kell jelentkeztetnie a felhasználót. Ez a kulcs csak akkor hatásos, ha a „logout_enable” kulcs értéke igaz."
+"The command to invoke when the logout button is clicked. This command should "
+"simply log the user out without any interaction. This key has effect only if "
+"the \"logout_enable\" key is set to TRUE."
+msgstr ""
+"A kijelentkezés gomb megnyomásakor meghívandó parancs. Ennek a parancsnak "
+"egyszerűen, beavatkozás nélkül ki kell jelentkeztetnie a felhasználót. Ez a "
+"kulcs csak akkor hatásos, ha a „logout_enable” kulcs értéke igaz."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:25
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:25
 msgid "Allow user switching"
 msgstr "Felhasználóváltás engedélyezése"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:26
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:26
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to switch to a "
 "different user account."
-msgstr "Állítsa ezt igazra, ha a zárolás feloldása párbeszédablak felajánlja a felhasználóváltás lehetőségét."
+msgstr ""
+"Állítsa ezt igazra, ha a zárolás feloldása párbeszédablak felajánlja a "
+"felhasználóváltás lehetőségét."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:27
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:27
 msgid "Theme for lock dialog"
 msgstr "A zárolási párbeszédablak témája"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:28
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:28
 msgid "Theme to use for the lock dialog"
 msgstr "A zárolási párbeszédablakban használandó téma"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:29
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:29
 msgid "Allow the session status message to be displayed"
 msgstr "A munkamenet állapotüzenete megjeleníthető"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:30
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:30
 msgid ""
 "Allow the session status message to be displayed when the screen is locked."
 msgstr "A munkamenet állapotüzenete megjeleníthető, ha a képernyő zárolva van."
@@ -265,11 +297,13 @@ msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Egy diavetítés a kozmosz képeiből"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
-msgid "Floating MATE"
+#, fuzzy
+msgid "Floating UKUI"
 msgstr "Lebegő MATE"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
-msgid "Bubbles the MATE logo around the screen"
+#, fuzzy
+msgid "Bubbles the UKUI logo around the screen"
 msgstr "A MATE logót lebegteti körbe a képernyőn"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
@@ -296,7 +330,7 @@ msgstr "Pop art négyzetek"
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "Pulzáló színek pop-artos rácsa"
 
-#: ../savers/popsquares.c:49 ../savers/floaters.c:1187
+#: ../savers/popsquares.c:49 ../savers/floaters.c:1188
 #, c-format
 msgid "%s. See --help for usage information.\n"
 msgstr "%s. Használati információkért lásd a --help kapcsolót.\n"
@@ -335,14 +369,17 @@ msgstr "A használandó forráskép"
 
 #. translators: the word "image" here
 #. * represents a command line argument
-#: ../savers/floaters.c:1181
+#.
+#: ../savers/floaters.c:1182
 msgid "image - floats images around the screen"
 msgstr "kép – képeket lebegtet körbe a képernyőn"
 
-#: ../savers/floaters.c:1196
+#: ../savers/floaters.c:1197
 #, c-format
 msgid "You must specify one image.  See --help for usage information.\n"
-msgstr "Meg kell adnia egy képet. Használati információkért lásd a --help kapcsolót.\n"
+msgstr ""
+"Meg kell adnia egy képet. Használati információkért lásd a --help "
+"kapcsolót.\n"
 
 #: ../savers/slideshow.c:55
 msgid "Location to get images from"
@@ -372,294 +409,307 @@ msgstr "Ne próbálja nyújtani a képeket a képernyőn"
 msgid "Copying files"
 msgstr "Fájlok másolása"
 
-#: ../src/copy-theme-dialog.c:233
+#: ../src/copy-theme-dialog.c:234
 msgid "From:"
 msgstr "Forrás:"
 
-#: ../src/copy-theme-dialog.c:237
+#: ../src/copy-theme-dialog.c:238
 msgid "To:"
 msgstr "Cél:"
 
-#: ../src/copy-theme-dialog.c:258
+#: ../src/copy-theme-dialog.c:259
 msgid "Copying themes"
 msgstr "Témák másolása"
 
-#: ../src/copy-theme-dialog.c:301
+#: ../src/copy-theme-dialog.c:302
 msgid "Invalid screensaver theme"
 msgstr "Érvénytelen képernyővédő téma"
 
-#: ../src/copy-theme-dialog.c:304
+#: ../src/copy-theme-dialog.c:305
 #, c-format
 msgid "%s does not appear to be a valid screensaver theme."
 msgstr "A fájl (%s) nem tűnik érvényes képernyővédő témának."
 
-#: ../src/copy-theme-dialog.c:484
+#: ../src/copy-theme-dialog.c:485
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "Fájl másolása: %u/%u"
 
-#: ../src/mate-screensaver-command.c:59
+#: ../src/ukui-screensaver-command.c:59
 msgid "Causes the screensaver to exit gracefully"
 msgstr "A képernyővédő „elegáns” bezárása"
 
-#: ../src/mate-screensaver-command.c:63
+#: ../src/ukui-screensaver-command.c:63
 msgid "Query the state of the screensaver"
 msgstr "A képernyővédő állapotának lekérdezése"
 
-#: ../src/mate-screensaver-command.c:67
+#: ../src/ukui-screensaver-command.c:67
 msgid "Query the length of time the screensaver has been active"
 msgstr "Azon időtartam lekérdezése, amíg a képernyővédő aktív volt"
 
-#: ../src/mate-screensaver-command.c:71
+#: ../src/ukui-screensaver-command.c:71
 msgid "Tells the running screensaver process to lock the screen immediately"
 msgstr "A futó képernyővédő-folyamatot kéri a képernyő azonnali zárolására"
 
-#: ../src/mate-screensaver-command.c:75
+#: ../src/ukui-screensaver-command.c:75
 msgid "If the screensaver is active then switch to another graphics demo"
 msgstr "Ha a képernyővédő aktív, akkor egy másik grafikus demóba váltson"
 
-#: ../src/mate-screensaver-command.c:79
+#: ../src/ukui-screensaver-command.c:79
 msgid "Turn the screensaver on (blank the screen)"
 msgstr "Képernyővédő bekapcsolása (képernyő elsötétítése)"
 
-#: ../src/mate-screensaver-command.c:83
+#: ../src/ukui-screensaver-command.c:83
 msgid "If the screensaver is active then deactivate it (un-blank the screen)"
 msgstr "Ha a képernyővédő aktív, akkor deaktiválja (képernyő visszaállítása)"
 
-#: ../src/mate-screensaver-command.c:87
+#: ../src/ukui-screensaver-command.c:87
 msgid "Poke the running screensaver to simulate user activity"
 msgstr "A futó képernyőkímélő szimuláljon felhasználói aktivitást"
 
-#: ../src/mate-screensaver-command.c:91
+#: ../src/ukui-screensaver-command.c:91
 msgid ""
 "Inhibit the screensaver from activating.  Command blocks while inhibit is "
 "active."
-msgstr "A képernyővédő aktiválásának felfüggesztése. A parancs blokkolásra kerül, amíg a felfüggesztés aktív."
+msgstr ""
+"A képernyővédő aktiválásának felfüggesztése. A parancs blokkolásra kerül, "
+"amíg a felfüggesztés aktív."
 
-#: ../src/mate-screensaver-command.c:95
+#: ../src/ukui-screensaver-command.c:95
 msgid "The calling application that is inhibiting the screensaver"
 msgstr "A képernyővédőt felfüggesztő hívó alkalmazás"
 
-#: ../src/mate-screensaver-command.c:99
+#: ../src/ukui-screensaver-command.c:99
 msgid "The reason for inhibiting the screensaver"
 msgstr "A képernyővédő felfüggesztésének oka"
 
-#: ../src/mate-screensaver-command.c:103 ../src/mate-screensaver-dialog.c:58
-#: ../src/mate-screensaver.c:55
+#: ../src/ukui-screensaver-command.c:103 ../src/ukui-screensaver-dialog.c:58
+#: ../src/ukui-screensaver.c:55
 msgid "Version of this application"
 msgstr "Ezen alkalmazás verziója"
 
-#: ../src/mate-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 #, c-format
 msgid "The screensaver is %s\n"
 msgstr "A képernyővédő %s\n"
 
-#: ../src/mate-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "active"
 msgstr "aktív"
 
-#: ../src/mate-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "inactive"
 msgstr "inaktív"
 
-#: ../src/mate-screensaver-command.c:368
+#: ../src/ukui-screensaver-command.c:368
 #, c-format
 msgid "The screensaver is not inhibited\n"
 msgstr "A képernyővédő nincs korlátozva\n"
 
-#: ../src/mate-screensaver-command.c:376
+#: ../src/ukui-screensaver-command.c:376
 #, c-format
 msgid "The screensaver is being inhibited by:\n"
 msgstr "A képernyővédőt korlátozza:\n"
 
-#: ../src/mate-screensaver-command.c:411
+#: ../src/ukui-screensaver-command.c:411
 #, c-format
 msgid "The screensaver has been active for %d seconds.\n"
 msgstr "A képernyővédő %d másodpercig volt aktív.\n"
 
-#: ../src/mate-screensaver-command.c:417
+#: ../src/ukui-screensaver-command.c:417
 #, c-format
 msgid "The screensaver is not currently active.\n"
 msgstr "A képernyővédő jelenleg nem aktív.\n"
 
-#: ../src/mate-screensaver-dialog.c:57
+#: ../src/ukui-screensaver-dialog.c:57
 msgid "Show debugging output"
 msgstr "Hibakeresési kimenet megjelenítése"
 
-#: ../src/mate-screensaver-dialog.c:59
+#: ../src/ukui-screensaver-dialog.c:59
 msgid "Show the logout button"
 msgstr "Kijelentkezés gomb megjelenítése"
 
-#: ../src/mate-screensaver-dialog.c:60
+#: ../src/ukui-screensaver-dialog.c:60
 msgid "Command to invoke from the logout button"
 msgstr "A kijelentkezés gomb által meghívandó parancs"
 
-#: ../src/mate-screensaver-dialog.c:61
+#: ../src/ukui-screensaver-dialog.c:61
 msgid "Show the switch user button"
 msgstr "Felhasználóváltás gomb megjelenítése"
 
-#: ../src/mate-screensaver-dialog.c:62
+#: ../src/ukui-screensaver-dialog.c:62
 msgid "Message to show in the dialog"
 msgstr "A párbeszédablakban megjelenítendő üzenet"
 
-#: ../src/mate-screensaver-dialog.c:62 ../src/mate-screensaver-dialog.c:63
+#: ../src/ukui-screensaver-dialog.c:62 ../src/ukui-screensaver-dialog.c:63
 msgid "MESSAGE"
 msgstr "ÜZENET"
 
-#: ../src/mate-screensaver-dialog.c:63
+#: ../src/ukui-screensaver-dialog.c:63
 msgid "Not used"
 msgstr "Nincs használatban"
 
 #. login: is whacked always translate to Username:
-#: ../src/mate-screensaver-dialog.c:165 ../src/mate-screensaver-dialog.c:166
-#: ../src/mate-screensaver-dialog.c:167 ../src/gs-auth-pam.c:745
+#: ../src/ukui-screensaver-dialog.c:165 ../src/ukui-screensaver-dialog.c:166
+#: ../src/ukui-screensaver-dialog.c:167 ../src/gs-auth-pam.c:745
 msgid "Username:"
 msgstr "Felhasználónév:"
 
-#: ../src/mate-screensaver-dialog.c:168 ../src/mate-screensaver-dialog.c:169
+#: ../src/ukui-screensaver-dialog.c:168 ../src/ukui-screensaver-dialog.c:169
 #: ../src/gs-auth-pam.c:171
 msgid "Password:"
 msgstr "Jelszó:"
 
-#: ../src/mate-screensaver-dialog.c:170
+#: ../src/ukui-screensaver-dialog.c:170
 msgid "You are required to change your password immediately (password aged)"
 msgstr "Azonnal meg kell változtatnia a jelszavát (a régi jelszó lejárt)"
 
-#: ../src/mate-screensaver-dialog.c:171
+#: ../src/ukui-screensaver-dialog.c:171
 msgid "You are required to change your password immediately (root enforced)"
 msgstr "Azonnal meg kell változtatnia a jelszavát (a rendszergazda kérése)"
 
-#: ../src/mate-screensaver-dialog.c:172
+#: ../src/ukui-screensaver-dialog.c:172
 msgid "Your account has expired; please contact your system administrator"
-msgstr "Az Ön felhasználói fiókja lejárt; lépjen kapcsolatba a rendszergazdával"
+msgstr ""
+"Az Ön felhasználói fiókja lejárt; lépjen kapcsolatba a rendszergazdával"
 
-#: ../src/mate-screensaver-dialog.c:173
+#: ../src/ukui-screensaver-dialog.c:173
 msgid "No password supplied"
 msgstr "Nincs jelszó megadva"
 
-#: ../src/mate-screensaver-dialog.c:174
+#: ../src/ukui-screensaver-dialog.c:174
 msgid "Password unchanged"
 msgstr "A jelszó nem változott"
 
-#: ../src/mate-screensaver-dialog.c:175
+#: ../src/ukui-screensaver-dialog.c:175
 msgid "Can not get username"
 msgstr "A felhasználónév nem található"
 
-#: ../src/mate-screensaver-dialog.c:176
+#: ../src/ukui-screensaver-dialog.c:176
 msgid "Retype new UNIX password:"
 msgstr "Adja meg ismét az új UNIX jelszót:"
 
-#: ../src/mate-screensaver-dialog.c:177
+#: ../src/ukui-screensaver-dialog.c:177
 msgid "Enter new UNIX password:"
 msgstr "Adja meg az új UNIX jelszót:"
 
-#: ../src/mate-screensaver-dialog.c:178
+#: ../src/ukui-screensaver-dialog.c:178
 msgid "(current) UNIX password:"
 msgstr "(jelenlegi) UNIX jelszó:"
 
-#: ../src/mate-screensaver-dialog.c:179
+#: ../src/ukui-screensaver-dialog.c:179
 msgid "Error while changing NIS password."
 msgstr "Hiba a NIS jelszó módosítása közben."
 
-#: ../src/mate-screensaver-dialog.c:180
+#: ../src/ukui-screensaver-dialog.c:180
 msgid "You must choose a longer password"
 msgstr "Válasszon hosszabb jelszót"
 
-#: ../src/mate-screensaver-dialog.c:181
+#: ../src/ukui-screensaver-dialog.c:181
 msgid "Password has been already used. Choose another."
 msgstr "A megadott jelszót már használta. Adjon meg egy másikat."
 
-#: ../src/mate-screensaver-dialog.c:182
+#: ../src/ukui-screensaver-dialog.c:182
 msgid "You must wait longer to change your password"
 msgstr "Még várnia kell a jelszó megváltoztatásával"
 
-#: ../src/mate-screensaver-dialog.c:183
+#: ../src/ukui-screensaver-dialog.c:183
 msgid "Sorry, passwords do not match"
 msgstr "Sajnálom, a megadott jelszavak nem egyeznek meg"
 
-#: ../src/mate-screensaver-dialog.c:254
+#: ../src/ukui-screensaver-dialog.c:254
 msgid "Checking..."
 msgstr "Ellenőrzés…"
 
-#: ../src/mate-screensaver-dialog.c:300 ../src/gs-auth-pam.c:483
+#: ../src/ukui-screensaver-dialog.c:300 ../src/gs-auth-pam.c:483
 msgid "Authentication failed."
 msgstr "A hitelesítés meghiúsult."
 
-#: ../src/mate-screensaver-preferences.c:448
+#: ../src/ukui-screensaver-preferences.c:461
 msgid "Blank screen"
 msgstr "Üres képernyő"
 
-#: ../src/mate-screensaver-preferences.c:454
+#: ../src/ukui-screensaver-preferences.c:467
 msgid "Random"
 msgstr "Véletlen"
 
-#: ../src/mate-screensaver-preferences.c:938
+#: ../src/ukui-screensaver-preferences.c:953
+#: ../src/ukui-screensaver-preferences.c:963
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d óra"
 msgstr[1] "%d óra"
 
-#: ../src/mate-screensaver-preferences.c:941
+#: ../src/ukui-screensaver-preferences.c:956
+#: ../src/ukui-screensaver-preferences.c:965
+#: ../src/ukui-screensaver-preferences.c:974
+#: ../src/ukui-screensaver-preferences.c:977
+#: ../src/ukui-screensaver-preferences.c:982
+#: ../src/ukui-screensaver-preferences.c:985
+#: ../src/ukui-screensaver-preferences.c:990
+#: ../src/ukui-screensaver-preferences.c:993
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d perc"
 msgstr[1] "%d perc"
 
-#: ../src/mate-screensaver-preferences.c:944
+#: ../src/ukui-screensaver-preferences.c:959
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d másodperc"
 msgstr[1] "%d másodperc"
 
-#. hour:minutes:seconds
-#: ../src/mate-screensaver-preferences.c:952
-#, c-format
-msgid "%s %s %s"
-msgstr "%s.%s.%s"
-
 #. hour:minutes
 #. minutes:seconds
-#: ../src/mate-screensaver-preferences.c:957
-#: ../src/mate-screensaver-preferences.c:970
+#: ../src/ukui-screensaver-preferences.c:962
+#: ../src/ukui-screensaver-preferences.c:1009
+#: ../src/ukui-screensaver-preferences.c:1022
 #, c-format
 msgid "%s %s"
 msgstr "%s.%s"
 
+#. hour:minutes:seconds
+#: ../src/ukui-screensaver-preferences.c:1004
+#, c-format
+msgid "%s %s %s"
+msgstr "%s.%s.%s"
+
 #. hour
 #. minutes
 #. seconds
-#: ../src/mate-screensaver-preferences.c:962
-#: ../src/mate-screensaver-preferences.c:975
-#: ../src/mate-screensaver-preferences.c:981
+#: ../src/ukui-screensaver-preferences.c:1014
+#: ../src/ukui-screensaver-preferences.c:1027
+#: ../src/ukui-screensaver-preferences.c:1063
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: ../src/mate-screensaver-preferences.c:996
+#: ../src/ukui-screensaver-preferences.c:1078
 #, c-format
 msgid "Never"
 msgstr "Soha"
 
-#: ../src/mate-screensaver-preferences.c:1480
+#: ../src/ukui-screensaver-preferences.c:1567
 msgid "Could not load the main interface"
 msgstr "A fő kezelőfelület nem tölthető be"
 
-#: ../src/mate-screensaver-preferences.c:1482
+#: ../src/ukui-screensaver-preferences.c:1569
 msgid "Please make sure that the screensaver is properly installed"
-msgstr "Kérem győződjön meg arról, hogy a képernyővédő megfelelően telepítve van-e"
+msgstr ""
+"Kérem győződjön meg arról, hogy a képernyővédő megfelelően telepítve van-e"
 
-#: ../src/mate-screensaver.c:56
+#: ../src/ukui-screensaver.c:56
 msgid "Don't become a daemon"
 msgstr "Ne démonként fusson"
 
-#: ../src/mate-screensaver.c:57
+#: ../src/ukui-screensaver.c:57
 msgid "Enable debugging code"
 msgstr "Hibakeresési kód engedélyezése"
 
-#: ../src/mate-screensaver.desktop.in.in.h:2
+#: ../src/ukui-screensaver.desktop.in.in.h:2
 msgid "Launch screensaver and locker program"
 msgstr "Képernyővédő és zároló program indítása"
 
@@ -697,8 +747,7 @@ msgstr "nincs kapcsolat az üzenetbusszal"
 msgid "screensaver already running in this session"
 msgstr "már fut képernyővédő ebben a munkamenetben"
 
-#. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-
-#. GDateTime.html#g-date-time-format
+#. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format
 #: ../src/gs-lock-plug.c:304
 msgid "%A, %B %e"
 msgstr "%A, %B %e"
@@ -711,19 +760,19 @@ msgstr "Az idő lejárt."
 msgid "You have the Caps Lock key on."
 msgstr "A Caps Lock be van kapcsolva."
 
-#: ../src/gs-lock-plug.c:1638
+#: ../src/gs-lock-plug.c:1639
 msgid "S_witch User..."
 msgstr "Felhasználó_váltás…"
 
-#: ../src/gs-lock-plug.c:1647
+#: ../src/gs-lock-plug.c:1648
 msgid "Log _Out"
 msgstr "_Kijelentkezés"
 
 #. To translators: This expands to USERNAME on HOSTNAME
-#: ../src/gs-lock-plug.c:1872
+#: ../src/gs-lock-plug.c:1873
 msgid "%U on %h"
 msgstr "%U ezen: %h"
 
-#: ../src/gs-lock-plug.c:1891
+#: ../src/gs-lock-plug.c:1892
 msgid "_Password:"
 msgstr "_Jelszó:"

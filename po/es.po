@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Adolfo Jayme Barrientos, 2015
 # Adolfo Jayme Barrientos, 2014
@@ -16,76 +16,75 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UKUI Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 00:57+0300\n"
+"POT-Creation-Date: 2017-11-23 17:22+0800\n"
 "PO-Revision-Date: 2017-09-19 13:39+0000\n"
 "Last-Translator: ZenWalker <scow@riseup.net>\n"
 "Language-Team: Spanish (http://wiki.ukui.org/trans/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/mate-screensaver-preferences.desktop.in.h:1
-#: ../src/mate-screensaver.desktop.in.in.h:1
+#: ../data/ukui-screensaver-preferences.desktop.in.h:1
+#: ../src/ukui-screensaver.desktop.in.in.h:1
 msgid "Screensaver"
 msgstr "Salvapantallas"
 
-#: ../data/mate-screensaver-preferences.desktop.in.h:2
+#: ../data/ukui-screensaver-preferences.desktop.in.h:2
 msgid "Set your screensaver preferences"
 msgstr "Configure su salvapantallas"
 
-#: ../data/mate-screensaver-preferences.ui.h:1
+#: ../data/ukui-screensaver-preferences.ui.h:1
 msgid "Screensaver Preview"
 msgstr "Vista previa del salvapantallas"
 
-#: ../data/mate-screensaver-preferences.ui.h:2
+#: ../data/ukui-screensaver-preferences.ui.h:2
 msgid "<b>Screensaver preview</b>"
 msgstr "<b>Vista previa del salvapantallas</b>"
 
-#: ../data/mate-screensaver-preferences.ui.h:3
+#: ../data/ukui-screensaver-preferences.ui.h:3
 msgid "Screensaver Preferences"
 msgstr "Preferencias del salvapantallas"
 
-#: ../data/mate-screensaver-preferences.ui.h:4
+#: ../data/ukui-screensaver-preferences.ui.h:4
 msgid "Power _Management"
 msgstr "Gestión de _energía"
 
-#: ../data/mate-screensaver-preferences.ui.h:5
+#: ../data/ukui-screensaver-preferences.ui.h:5
 msgid "_Preview"
 msgstr "Vista _previa"
 
-#: ../data/mate-screensaver-preferences.ui.h:6
+#: ../data/ukui-screensaver-preferences.ui.h:6
 msgid "_Screensaver theme:"
 msgstr "Tema del _salvapantallas:"
 
-#: ../data/mate-screensaver-preferences.ui.h:7
+#: ../data/ukui-screensaver-preferences.ui.h:7
 msgid "Regard the computer as _idle after:"
 msgstr "Considerar que el equipo está _inactivo después de:"
 
-#: ../data/mate-screensaver-preferences.ui.h:8
+#: ../data/ukui-screensaver-preferences.ui.h:8
 msgid "_Activate screensaver when computer is idle"
 msgstr "_Activar el salvapantallas cuando el equipo esté inactivo"
 
-#: ../data/mate-screensaver-preferences.ui.h:9
+#: ../data/ukui-screensaver-preferences.ui.h:9
 msgid "_Lock screen when screensaver is active"
 msgstr "_Bloquear pantalla cuando el salvapantallas esté activo"
 
-#: ../data/mate-screensaver-preferences.ui.h:10
+#: ../data/ukui-screensaver-preferences.ui.h:10
 msgid "<b>Warning: the screen will not be locked for the root user.</b>"
 msgstr "<b>Atención: la pantalla no se bloqueará para el usuario root.</b>"
 
-#: ../data/mate-screensaver.directory.in.h:1
+#: ../data/ukui-screensaver.directory.in.h:1
 msgid "Screensavers"
 msgstr "Salvapantallas"
 
-#: ../data/mate-screensaver.directory.in.h:2
-#: ../data/org.mate.screensaver.gschema.xml.in.h:7
+#: ../data/ukui-screensaver.directory.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:7
 msgid "Screensaver themes"
 msgstr "Temas del salvapantallas"
 
-#. Translators: This is the name of a desktop background image that shows
-#. outer space images.
+#. Translators: This is the name of a desktop background image that shows outer space images.
 #. You might want to translate it into the equivalent words of your language
 #: ../data/images/cosmos/cosmos.xml.in.in.h:3
 #: ../savers/cosmos-slideshow.desktop.in.in.h:1
@@ -108,7 +107,7 @@ msgstr "Cerrar la _sesión"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1658
+#: ../data/lock-dialog-default.ui.h:5 ../src/gs-lock-plug.c:1659
 msgid "_Unlock"
 msgstr "_Desbloquear"
 
@@ -117,163 +116,202 @@ msgstr "_Desbloquear"
 msgid "<b>Leave a message for %R:</b>"
 msgstr "<b>Deje un mensaje para %R:</b>"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:1
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:1
 msgid "Activate when idle"
 msgstr "Activar cuando esté inactivo"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:2
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:2
 msgid "Set this to TRUE to activate the screensaver when the session is idle."
-msgstr "Active esto para activar el salvapantallas cuando la sesión esté inactiva."
+msgstr ""
+"Active esto para activar el salvapantallas cuando la sesión esté inactiva."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:3
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:3
 msgid "Lock on activation"
 msgstr "Bloquear al activar"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:4
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:4
 msgid "Set this to TRUE to lock the screen when the screensaver goes active."
-msgstr "Active esto para bloquear la pantalla cuando se activa el salvapantallas."
+msgstr ""
+"Active esto para bloquear la pantalla cuando se activa el salvapantallas."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:5
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:5
 msgid "Screensaver theme selection mode"
 msgstr "Modo de selección del tema del salvapantallas"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:6
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:6
 msgid ""
 "The selection mode used by screensaver. May be \"blank-only\" to enable the "
 "screensaver without using any theme on activation, \"single\" to enable "
 "screensaver using only one theme on activation (specified in \"themes\" "
 "key), and \"random\" to enable the screensaver using a random theme on "
 "activation."
-msgstr "El modo de selección usado por el salvapantallas. Puede ser \"blank-only\" para activar el salvapantallas sin usar ningún tema, \"single\" para activar el salvapantallas usando sólo un tema (especificado en la clave \"themes\" ), y \"random\" para activar el salvapantallas usando un tema aleatorio."
+msgstr ""
+"El modo de selección usado por el salvapantallas. Puede ser \"blank-only\" "
+"para activar el salvapantallas sin usar ningún tema, \"single\" para activar "
+"el salvapantallas usando sólo un tema (especificado en la clave \"themes"
+"\" ), y \"random\" para activar el salvapantallas usando un tema aleatorio."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:8
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:8
 msgid ""
 "This key specifies the list of themes to be used by the screensaver. It's "
 "ignored when \"mode\" key is \"blank-only\", should provide the theme name "
-"when \"mode\" is \"single\", and should provide a list of themes when "
-"\"mode\" is \"random\"."
-msgstr "Esta clave especifica la lista de temas que usará el salvapantallas. Se ignora cuando la clave \"mode\" sea \"blank-only\", debería proporcionar el nombre del tema cuando \"mode\" es \"single\", y debería proporcionar una lista de temas cuando \"mode\" es \"random\"."
+"when \"mode\" is \"single\", and should provide a list of themes when \"mode"
+"\" is \"random\"."
+msgstr ""
+"Esta clave especifica la lista de temas que usará el salvapantallas. Se "
+"ignora cuando la clave \"mode\" sea \"blank-only\", debería proporcionar el "
+"nombre del tema cuando \"mode\" es \"single\", y debería proporcionar una "
+"lista de temas cuando \"mode\" es \"random\"."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:9
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:9
 msgid "Time before power management baseline"
 msgstr "Tiempo antes del minimo de la gestión de energía"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:10
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:10
 msgid ""
 "The number of seconds of inactivity before signalling to power management. "
 "This key is set and maintained by the session power management agent."
-msgstr "El número de segundos de inactividad antes de dar la alerta a la gestión de energía. Esta clave se establece y mantiene por el agente de sesión de gestión de energía."
+msgstr ""
+"El número de segundos de inactividad antes de dar la alerta a la gestión de "
+"energía. Esta clave se establece y mantiene por el agente de sesión de "
+"gestión de energía."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:11
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:11
 msgid "Time before theme change"
 msgstr "Tiempo antes de cambiar el tema"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:12
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:12
 msgid "The number of minutes to run before changing the screensaver theme."
-msgstr "El número de minutos que se ejecuta antes de cambiar el tema del salvapantallas."
+msgstr ""
+"El número de minutos que se ejecuta antes de cambiar el tema del "
+"salvapantallas."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:13
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:13
 msgid "Time before locking"
 msgstr "Tiempo antes de bloquear"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:14
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:14
 msgid ""
-"The number of minutes after screensaver activation before locking the "
-"screen."
-msgstr "El número de minutos tras la activación del salvapantallas antes de bloquear la pantalla."
+"The number of minutes after screensaver activation before locking the screen."
+msgstr ""
+"El número de minutos tras la activación del salvapantallas antes de bloquear "
+"la pantalla."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:15
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:15
 msgid "Allow embedding a keyboard into the window"
 msgstr "Permitir empotrar un teclado en la ventana"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:16
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:16
 msgid ""
 "Set this to TRUE to allow embedding a keyboard into the window when trying "
 "to unlock. The \"keyboard_command\" key must be set with the appropriate "
 "command."
-msgstr "Establezca esto a TRUE para permitir embeber un teclado en la ventana al intentar desbloquear. La clave \"keyboard_command\" debe estar establecida con el comando apropiado."
+msgstr ""
+"Establezca esto a TRUE para permitir embeber un teclado en la ventana al "
+"intentar desbloquear. La clave \"keyboard_command\" debe estar establecida "
+"con el comando apropiado."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:17
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:17
 msgid "Embedded keyboard command"
 msgstr "Comando de teclado empotrado"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:18
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:18
 msgid ""
 "The command that will be run, if the \"embedded_keyboard_enabled\" key is "
-"set to TRUE, to embed a keyboard widget into the window. This command should"
-" implement an XEMBED plug interface and output a window XID on the standard "
+"set to TRUE, to embed a keyboard widget into the window. This command should "
+"implement an XEMBED plug interface and output a window XID on the standard "
 "output."
-msgstr "El comando que se ejecutará, si la clave \"embadded_keyboard_enabled\" está activada, para embeber un widget de teclado dentro de la ventana. Este comando debería implementar un interfaz XEMBED y sacar una ventana XID en la salida estándar."
+msgstr ""
+"El comando que se ejecutará, si la clave \"embadded_keyboard_enabled\" está "
+"activada, para embeber un widget de teclado dentro de la ventana. Este "
+"comando debería implementar un interfaz XEMBED y sacar una ventana XID en la "
+"salida estándar."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:19
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:19
 msgid "Allow logout"
 msgstr "Permitir cerrar sesión"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:20
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:20
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to allow logging "
 "out after a delay. The delay is specified in the \"logout_delay\" key."
-msgstr "Active esto para ofrecer una opción en el diálogo de desbloqueo para cerrar la sesión después de un intervalo de tiempo. El retardo se especifica en la clave \"logout_delay\"."
+msgstr ""
+"Active esto para ofrecer una opción en el diálogo de desbloqueo para cerrar "
+"la sesión después de un intervalo de tiempo. El retardo se especifica en la "
+"clave \"logout_delay\"."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:21
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:21
 msgid "Time before logout option"
 msgstr "Tiempo antes de la opción de cierre de sesión"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:22
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:22
 msgid ""
 "The number of minutes after the screensaver activation before a logout "
 "option will appear in the unlock dialog. This key has effect only if the "
 "\"logout_enable\" key is set to TRUE."
-msgstr "El número de minutos después de la activación del salvapantallas y antes de que se muestre la opción de cerrar sesión en el diálogo de desbloqueo. Esta clave tiene efecto sólo si la clave \"logout_enable\" está activada."
+msgstr ""
+"El número de minutos después de la activación del salvapantallas y antes de "
+"que se muestre la opción de cerrar sesión en el diálogo de desbloqueo. Esta "
+"clave tiene efecto sólo si la clave \"logout_enable\" está activada."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:23
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:23
 msgid "Logout command"
 msgstr "Comando de cierre de sesión"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:24
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:24
 msgid ""
-"The command to invoke when the logout button is clicked. This command should"
-" simply log the user out without any interaction. This key has effect only "
-"if the \"logout_enable\" key is set to TRUE."
-msgstr "El comando que invocar cuando se pulsa el botón de cierre de sesión. Este comando simplemente debe cerrar la sesión del usuario sin ninguna interacción. Esta clave tiene efecto sólo si la clave \"logout_enable\" está activada."
+"The command to invoke when the logout button is clicked. This command should "
+"simply log the user out without any interaction. This key has effect only if "
+"the \"logout_enable\" key is set to TRUE."
+msgstr ""
+"El comando que invocar cuando se pulsa el botón de cierre de sesión. Este "
+"comando simplemente debe cerrar la sesión del usuario sin ninguna "
+"interacción. Esta clave tiene efecto sólo si la clave \"logout_enable\" está "
+"activada."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:25
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:25
 msgid "Allow user switching"
 msgstr "Permitir cambiar usuario"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:26
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:26
 msgid ""
 "Set this to TRUE to offer an option in the unlock dialog to switch to a "
 "different user account."
-msgstr "Active esto para ofrecer una opción en el diálogo de desbloqueo para cambiar a una cuenta de usuario diferente."
+msgstr ""
+"Active esto para ofrecer una opción en el diálogo de desbloqueo para cambiar "
+"a una cuenta de usuario diferente."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:27
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:27
 msgid "Theme for lock dialog"
 msgstr "Tema para el diálogo de bloqueo"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:28
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:28
 msgid "Theme to use for the lock dialog"
 msgstr "Tema para usar en el diálogo de bloqueo."
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:29
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:29
 msgid "Allow the session status message to be displayed"
 msgstr "Permitir que se muestren los mensajes de estado de la sesión"
 
-#: ../data/org.mate.screensaver.gschema.xml.in.h:30
+#: ../data/org.ukui.screensaver.gschema.xml.in.h:30
 msgid ""
 "Allow the session status message to be displayed when the screen is locked."
-msgstr "Permitir que se muestren los mensajes de estado de la sesión cuando la pantalla está bloqueada."
+msgstr ""
+"Permitir que se muestren los mensajes de estado de la sesión cuando la "
+"pantalla está bloqueada."
 
 #: ../savers/cosmos-slideshow.desktop.in.in.h:2
 msgid "Display a slideshow of pictures of the cosmos"
 msgstr "Muestra una serie de imágenes del cosmos"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
-msgid "Floating MATE"
+#, fuzzy
+msgid "Floating UKUI"
 msgstr "MATE flotante"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
-msgid "Bubbles the MATE logo around the screen"
+#, fuzzy
+msgid "Bubbles the UKUI logo around the screen"
 msgstr "Burbujas del logo MATE alrededor de la pantalla"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
@@ -300,7 +338,7 @@ msgstr "Cuadrados pop art"
 msgid "A pop-art-ish grid of pulsing colors."
 msgstr "Esto dibuja una rejilla de cuadros pop-art de colores pulsantes."
 
-#: ../savers/popsquares.c:49 ../savers/floaters.c:1187
+#: ../savers/popsquares.c:49 ../savers/floaters.c:1188
 #, c-format
 msgid "%s. See --help for usage information.\n"
 msgstr "%s. Vea --help para la información de uso.\n"
@@ -339,11 +377,12 @@ msgstr "La imagen de origen a usar"
 
 #. translators: the word "image" here
 #. * represents a command line argument
-#: ../savers/floaters.c:1181
+#.
+#: ../savers/floaters.c:1182
 msgid "image - floats images around the screen"
 msgstr "imagen - las imágenes flotan alrededor de la pantalla"
 
-#: ../savers/floaters.c:1196
+#: ../savers/floaters.c:1197
 #, c-format
 msgid "You must specify one image.  See --help for usage information.\n"
 msgstr "Debe especificar una imagen. Vea --help para la información de uso.\n"
@@ -376,294 +415,313 @@ msgstr "No intentar estirar las imágenes en la pantalla"
 msgid "Copying files"
 msgstr "Copiando archivos"
 
-#: ../src/copy-theme-dialog.c:233
+#: ../src/copy-theme-dialog.c:234
 msgid "From:"
 msgstr "De:"
 
-#: ../src/copy-theme-dialog.c:237
+#: ../src/copy-theme-dialog.c:238
 msgid "To:"
 msgstr "A:"
 
-#: ../src/copy-theme-dialog.c:258
+#: ../src/copy-theme-dialog.c:259
 msgid "Copying themes"
 msgstr "Copiando temas"
 
-#: ../src/copy-theme-dialog.c:301
+#: ../src/copy-theme-dialog.c:302
 msgid "Invalid screensaver theme"
 msgstr "Tema del salvapantallas inválido"
 
-#: ../src/copy-theme-dialog.c:304
+#: ../src/copy-theme-dialog.c:305
 #, c-format
 msgid "%s does not appear to be a valid screensaver theme."
 msgstr "%s no parece ser un tema válido del salvapantallas."
 
-#: ../src/copy-theme-dialog.c:484
+#: ../src/copy-theme-dialog.c:485
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "Copiando archivo: %u de %u"
 
-#: ../src/mate-screensaver-command.c:59
+#: ../src/ukui-screensaver-command.c:59
 msgid "Causes the screensaver to exit gracefully"
 msgstr "Hace que el salvapantallas termine de forma correcta"
 
-#: ../src/mate-screensaver-command.c:63
+#: ../src/ukui-screensaver-command.c:63
 msgid "Query the state of the screensaver"
 msgstr "Consulta el estado del salvapantallas"
 
-#: ../src/mate-screensaver-command.c:67
+#: ../src/ukui-screensaver-command.c:67
 msgid "Query the length of time the screensaver has been active"
 msgstr "Consultar cuanto tiempo ha estado activo el salvapantallas"
 
-#: ../src/mate-screensaver-command.c:71
+#: ../src/ukui-screensaver-command.c:71
 msgid "Tells the running screensaver process to lock the screen immediately"
-msgstr "Le dice al proceso del salvapantallas en ejecución que bloquee la pantalla inmediatamente"
+msgstr ""
+"Le dice al proceso del salvapantallas en ejecución que bloquee la pantalla "
+"inmediatamente"
 
-#: ../src/mate-screensaver-command.c:75
+#: ../src/ukui-screensaver-command.c:75
 msgid "If the screensaver is active then switch to another graphics demo"
 msgstr "Si el salvapantallas está activo, cambiar a otra demo gráfica"
 
-#: ../src/mate-screensaver-command.c:79
+#: ../src/ukui-screensaver-command.c:79
 msgid "Turn the screensaver on (blank the screen)"
 msgstr "Activar el salvapantallas (ennegrecer la pantalla)"
 
-#: ../src/mate-screensaver-command.c:83
+#: ../src/ukui-screensaver-command.c:83
 msgid "If the screensaver is active then deactivate it (un-blank the screen)"
-msgstr "Si el salvapantallas está activo entonces lo desactiva (desenegrece la pantalla)"
+msgstr ""
+"Si el salvapantallas está activo entonces lo desactiva (desenegrece la "
+"pantalla)"
 
-#: ../src/mate-screensaver-command.c:87
+#: ../src/ukui-screensaver-command.c:87
 msgid "Poke the running screensaver to simulate user activity"
-msgstr "Similar el salvapantallas en ejecución para similar la actividad del usuario"
+msgstr ""
+"Similar el salvapantallas en ejecución para similar la actividad del usuario"
 
-#: ../src/mate-screensaver-command.c:91
+#: ../src/ukui-screensaver-command.c:91
 msgid ""
 "Inhibit the screensaver from activating.  Command blocks while inhibit is "
 "active."
-msgstr "Inhibir la activación del salvapantallas. La orden se bloquea cuando se activa la inhibición."
+msgstr ""
+"Inhibir la activación del salvapantallas. La orden se bloquea cuando se "
+"activa la inhibición."
 
-#: ../src/mate-screensaver-command.c:95
+#: ../src/ukui-screensaver-command.c:95
 msgid "The calling application that is inhibiting the screensaver"
 msgstr "La aplicación llamante que está inhibiendo el salvapantallas"
 
-#: ../src/mate-screensaver-command.c:99
+#: ../src/ukui-screensaver-command.c:99
 msgid "The reason for inhibiting the screensaver"
 msgstr "La razón para inhibir el salvapantallas"
 
-#: ../src/mate-screensaver-command.c:103 ../src/mate-screensaver-dialog.c:58
-#: ../src/mate-screensaver.c:55
+#: ../src/ukui-screensaver-command.c:103 ../src/ukui-screensaver-dialog.c:58
+#: ../src/ukui-screensaver.c:55
 msgid "Version of this application"
 msgstr "Versión de esta aplicación"
 
-#: ../src/mate-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 #, c-format
 msgid "The screensaver is %s\n"
 msgstr "El salvapantallas es %s\n"
 
-#: ../src/mate-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "active"
 msgstr "activo"
 
-#: ../src/mate-screensaver-command.c:352
+#: ../src/ukui-screensaver-command.c:352
 msgid "inactive"
 msgstr "inactivo"
 
-#: ../src/mate-screensaver-command.c:368
+#: ../src/ukui-screensaver-command.c:368
 #, c-format
 msgid "The screensaver is not inhibited\n"
 msgstr "El salvapantallas no está inhibido\n"
 
-#: ../src/mate-screensaver-command.c:376
+#: ../src/ukui-screensaver-command.c:376
 #, c-format
 msgid "The screensaver is being inhibited by:\n"
 msgstr "El salvapantallas está siendo inhibido por:\n"
 
-#: ../src/mate-screensaver-command.c:411
+#: ../src/ukui-screensaver-command.c:411
 #, c-format
 msgid "The screensaver has been active for %d seconds.\n"
-msgstr "El salvapantallas ha estado activo durante %d segundos.\n\n"
+msgstr ""
+"El salvapantallas ha estado activo durante %d segundos.\n"
+"\n"
 
-#: ../src/mate-screensaver-command.c:417
+#: ../src/ukui-screensaver-command.c:417
 #, c-format
 msgid "The screensaver is not currently active.\n"
 msgstr "Actualmente el salvapantallas no está activo.\n"
 
-#: ../src/mate-screensaver-dialog.c:57
+#: ../src/ukui-screensaver-dialog.c:57
 msgid "Show debugging output"
 msgstr "Mostrar la salida de depuración"
 
-#: ../src/mate-screensaver-dialog.c:59
+#: ../src/ukui-screensaver-dialog.c:59
 msgid "Show the logout button"
 msgstr "Mostrar el botón de cerrar sesión"
 
-#: ../src/mate-screensaver-dialog.c:60
+#: ../src/ukui-screensaver-dialog.c:60
 msgid "Command to invoke from the logout button"
 msgstr "Orden que invocar con el botón de cierre de sesión"
 
-#: ../src/mate-screensaver-dialog.c:61
+#: ../src/ukui-screensaver-dialog.c:61
 msgid "Show the switch user button"
 msgstr "Mostrar el botón de cambio de usuario"
 
-#: ../src/mate-screensaver-dialog.c:62
+#: ../src/ukui-screensaver-dialog.c:62
 msgid "Message to show in the dialog"
 msgstr "Mensaje para mostrar en el diálogo"
 
-#: ../src/mate-screensaver-dialog.c:62 ../src/mate-screensaver-dialog.c:63
+#: ../src/ukui-screensaver-dialog.c:62 ../src/ukui-screensaver-dialog.c:63
 msgid "MESSAGE"
 msgstr "MENSAJE"
 
-#: ../src/mate-screensaver-dialog.c:63
+#: ../src/ukui-screensaver-dialog.c:63
 msgid "Not used"
 msgstr "No usado"
 
 #. login: is whacked always translate to Username:
-#: ../src/mate-screensaver-dialog.c:165 ../src/mate-screensaver-dialog.c:166
-#: ../src/mate-screensaver-dialog.c:167 ../src/gs-auth-pam.c:745
+#: ../src/ukui-screensaver-dialog.c:165 ../src/ukui-screensaver-dialog.c:166
+#: ../src/ukui-screensaver-dialog.c:167 ../src/gs-auth-pam.c:745
 msgid "Username:"
 msgstr "Usuario:"
 
-#: ../src/mate-screensaver-dialog.c:168 ../src/mate-screensaver-dialog.c:169
+#: ../src/ukui-screensaver-dialog.c:168 ../src/ukui-screensaver-dialog.c:169
 #: ../src/gs-auth-pam.c:171
 msgid "Password:"
 msgstr "Contraseña:"
 
-#: ../src/mate-screensaver-dialog.c:170
+#: ../src/ukui-screensaver-dialog.c:170
 msgid "You are required to change your password immediately (password aged)"
 msgstr "Tiene que cambiar la contraseña inmediatamente (la contraseña caducó)"
 
-#: ../src/mate-screensaver-dialog.c:171
+#: ../src/ukui-screensaver-dialog.c:171
 msgid "You are required to change your password immediately (root enforced)"
-msgstr "Tiene que cambiar la contraseña inmediatamente (forzado por el administrador)"
+msgstr ""
+"Tiene que cambiar la contraseña inmediatamente (forzado por el administrador)"
 
-#: ../src/mate-screensaver-dialog.c:172
+#: ../src/ukui-screensaver-dialog.c:172
 msgid "Your account has expired; please contact your system administrator"
 msgstr "Su cuenta ha caducado. Contacte con su administrador de sistemas"
 
-#: ../src/mate-screensaver-dialog.c:173
+#: ../src/ukui-screensaver-dialog.c:173
 msgid "No password supplied"
 msgstr "No introdujo ninguna contraseña"
 
-#: ../src/mate-screensaver-dialog.c:174
+#: ../src/ukui-screensaver-dialog.c:174
 msgid "Password unchanged"
 msgstr "Contraseña no cambiada"
 
-#: ../src/mate-screensaver-dialog.c:175
+#: ../src/ukui-screensaver-dialog.c:175
 msgid "Can not get username"
 msgstr "No se puede obtener el nombre de usuario"
 
-#: ../src/mate-screensaver-dialog.c:176
+#: ../src/ukui-screensaver-dialog.c:176
 msgid "Retype new UNIX password:"
 msgstr "Vuelva a teclear la contraseña de UNIX nueva:"
 
-#: ../src/mate-screensaver-dialog.c:177
+#: ../src/ukui-screensaver-dialog.c:177
 msgid "Enter new UNIX password:"
 msgstr "Introduzca una contraseña UNIX nueva:"
 
-#: ../src/mate-screensaver-dialog.c:178
+#: ../src/ukui-screensaver-dialog.c:178
 msgid "(current) UNIX password:"
 msgstr "Contraseña UNIX (actual):"
 
-#: ../src/mate-screensaver-dialog.c:179
+#: ../src/ukui-screensaver-dialog.c:179
 msgid "Error while changing NIS password."
 msgstr "Error al cambiar la contraseña NIS."
 
-#: ../src/mate-screensaver-dialog.c:180
+#: ../src/ukui-screensaver-dialog.c:180
 msgid "You must choose a longer password"
 msgstr "Debe elegir una contraseña más larga"
 
-#: ../src/mate-screensaver-dialog.c:181
+#: ../src/ukui-screensaver-dialog.c:181
 msgid "Password has been already used. Choose another."
 msgstr "La contraseña ya ha sido usada. Elija otra."
 
-#: ../src/mate-screensaver-dialog.c:182
+#: ../src/ukui-screensaver-dialog.c:182
 msgid "You must wait longer to change your password"
 msgstr "Debe esperar más para cambiar su contraseña"
 
-#: ../src/mate-screensaver-dialog.c:183
+#: ../src/ukui-screensaver-dialog.c:183
 msgid "Sorry, passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../src/mate-screensaver-dialog.c:254
+#: ../src/ukui-screensaver-dialog.c:254
 msgid "Checking..."
 msgstr "Comprobando…"
 
-#: ../src/mate-screensaver-dialog.c:300 ../src/gs-auth-pam.c:483
+#: ../src/ukui-screensaver-dialog.c:300 ../src/gs-auth-pam.c:483
 msgid "Authentication failed."
 msgstr "La autenticación ha fallado."
 
-#: ../src/mate-screensaver-preferences.c:448
+#: ../src/ukui-screensaver-preferences.c:461
 msgid "Blank screen"
 msgstr "Oscurecer pantalla"
 
-#: ../src/mate-screensaver-preferences.c:454
+#: ../src/ukui-screensaver-preferences.c:467
 msgid "Random"
 msgstr "Aleatorio"
 
-#: ../src/mate-screensaver-preferences.c:938
+#: ../src/ukui-screensaver-preferences.c:953
+#: ../src/ukui-screensaver-preferences.c:963
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d hora"
 msgstr[1] "%d horas"
 
-#: ../src/mate-screensaver-preferences.c:941
+#: ../src/ukui-screensaver-preferences.c:956
+#: ../src/ukui-screensaver-preferences.c:965
+#: ../src/ukui-screensaver-preferences.c:974
+#: ../src/ukui-screensaver-preferences.c:977
+#: ../src/ukui-screensaver-preferences.c:982
+#: ../src/ukui-screensaver-preferences.c:985
+#: ../src/ukui-screensaver-preferences.c:990
+#: ../src/ukui-screensaver-preferences.c:993
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
 msgstr[1] "%d minutos"
 
-#: ../src/mate-screensaver-preferences.c:944
+#: ../src/ukui-screensaver-preferences.c:959
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d segundo"
 msgstr[1] "%d segundos"
 
-#. hour:minutes:seconds
-#: ../src/mate-screensaver-preferences.c:952
-#, c-format
-msgid "%s %s %s"
-msgstr "%s %s %s"
-
 #. hour:minutes
 #. minutes:seconds
-#: ../src/mate-screensaver-preferences.c:957
-#: ../src/mate-screensaver-preferences.c:970
+#: ../src/ukui-screensaver-preferences.c:962
+#: ../src/ukui-screensaver-preferences.c:1009
+#: ../src/ukui-screensaver-preferences.c:1022
 #, c-format
 msgid "%s %s"
 msgstr "%s %s"
 
+#. hour:minutes:seconds
+#: ../src/ukui-screensaver-preferences.c:1004
+#, c-format
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
 #. hour
 #. minutes
 #. seconds
-#: ../src/mate-screensaver-preferences.c:962
-#: ../src/mate-screensaver-preferences.c:975
-#: ../src/mate-screensaver-preferences.c:981
+#: ../src/ukui-screensaver-preferences.c:1014
+#: ../src/ukui-screensaver-preferences.c:1027
+#: ../src/ukui-screensaver-preferences.c:1063
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: ../src/mate-screensaver-preferences.c:996
+#: ../src/ukui-screensaver-preferences.c:1078
 #, c-format
 msgid "Never"
 msgstr "Nunca"
 
-#: ../src/mate-screensaver-preferences.c:1480
+#: ../src/ukui-screensaver-preferences.c:1567
 msgid "Could not load the main interface"
 msgstr "No se pudo cargar el interfaz principal"
 
-#: ../src/mate-screensaver-preferences.c:1482
+#: ../src/ukui-screensaver-preferences.c:1569
 msgid "Please make sure that the screensaver is properly installed"
 msgstr "Asegúrese de que el salvapantallas está instalado apropiadamente"
 
-#: ../src/mate-screensaver.c:56
+#: ../src/ukui-screensaver.c:56
 msgid "Don't become a daemon"
 msgstr "No convertirse en un demonio"
 
-#: ../src/mate-screensaver.c:57
+#: ../src/ukui-screensaver.c:57
 msgid "Enable debugging code"
 msgstr "Activar código de depuración"
 
-#: ../src/mate-screensaver.desktop.in.in.h:2
+#: ../src/ukui-screensaver.desktop.in.in.h:2
 msgid "Launch screensaver and locker program"
 msgstr "Lanzar el salvapantallas y el programa de bloqueo"
 
@@ -701,8 +759,7 @@ msgstr "no conectado al bus de mensajes"
 msgid "screensaver already running in this session"
 msgstr "ya se está ejecutando el salvapantallas en esta sesión"
 
-#. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-
-#. GDateTime.html#g-date-time-format
+#. Translators: Date format, see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format
 #: ../src/gs-lock-plug.c:304
 msgid "%A, %B %e"
 msgstr "%A, %e de %B"
@@ -715,19 +772,19 @@ msgstr "Tiempo agotado."
 msgid "You have the Caps Lock key on."
 msgstr "Tiene la tecla «Bloq. Mayúsculas» pulsada."
 
-#: ../src/gs-lock-plug.c:1638
+#: ../src/gs-lock-plug.c:1639
 msgid "S_witch User..."
 msgstr "_Cambiar usuario…"
 
-#: ../src/gs-lock-plug.c:1647
+#: ../src/gs-lock-plug.c:1648
 msgid "Log _Out"
 msgstr "Cerrar _sesión"
 
 #. To translators: This expands to USERNAME on HOSTNAME
-#: ../src/gs-lock-plug.c:1872
+#: ../src/gs-lock-plug.c:1873
 msgid "%U on %h"
 msgstr "%U en %h"
 
-#: ../src/gs-lock-plug.c:1891
+#: ../src/gs-lock-plug.c:1892
 msgid "_Password:"
 msgstr "_Contraseña:"
