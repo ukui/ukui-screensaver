@@ -28,8 +28,8 @@
 
 #include <gio/gio.h>
 
-#define UKUI_DESKTOP_USE_UNSTABLE_API
-#include <libukui-desktop/ukui-bg.h>
+#define MATE_DESKTOP_USE_UNSTABLE_API
+#include <libmate-desktop/mate-bg.h>
 
 #include "gs-prefs.h"        /* for GSSaverMode */
 
@@ -53,7 +53,7 @@ struct GSManagerPrivate
 	GHashTable  *jobs;
 
 	GSThemeManager *theme_manager;
-	UkuiBG        *bg;
+	MateBG        *bg;
 
 	/* Policy */
 	glong        lock_timeout;
@@ -1032,7 +1032,7 @@ gs_manager_class_init (GSManagerClass *klass)
 }
 
 static void
-on_bg_changed (UkuiBG   *bg,
+on_bg_changed (MateBG   *bg,
                GSManager *manager)
 {
 	gs_debug ("background changed");
@@ -1047,14 +1047,14 @@ gs_manager_init (GSManager *manager)
 	manager->priv->grab = gs_grab_new ();
 	manager->priv->theme_manager = gs_theme_manager_new ();
 
-	manager->priv->bg = ukui_bg_new ();
+	manager->priv->bg = mate_bg_new ();
 
 	g_signal_connect (manager->priv->bg,
 					  "changed",
 					  G_CALLBACK (on_bg_changed),
 					  manager);
 
-	ukui_bg_load_from_preferences (manager->priv->bg);
+	mate_bg_load_from_preferences (manager->priv->bg);
 }
 
 static void
@@ -1310,7 +1310,7 @@ apply_background_to_window (GSManager *manager,
 	int              width;
 	int              height;
 
-        ukui_bg_load_from_preferences (manager->priv->bg);
+        mate_bg_load_from_preferences (manager->priv->bg);
 
 	if (manager->priv->bg == NULL)
 	{
@@ -1325,7 +1325,7 @@ apply_background_to_window (GSManager *manager,
 				 &width, &height);
 
 	gs_debug ("Creating background w:%d h:%d", width, height);
-	surface = ukui_bg_create_surface (manager->priv->bg,
+	surface = mate_bg_create_surface (manager->priv->bg,
 	                                  gs_window_get_gdk_window (window),
 	                                  width,
 	                                  height,

@@ -2,7 +2,7 @@ dnl -*- mode: m4 -*-
 
 AC_PREREQ(2.60)
 AC_INIT([ukui-screensaver],
-        [1.19.0],
+        [1.0.0],
         [http://www.ukui-desktop.org/])
 
 AC_CONFIG_SRCDIR(src/ukui-screensaver.c)
@@ -51,9 +51,9 @@ DBUS_REQUIRED_VERSION=0.30
 GLIB_REQUIRED_VERSION=2.36.0
 GTK_REQUIRED_VERSION=3.14.0
 X11_REQUIRED_VERSION=1.0
-LIBUKUI_MENU_REQUIRED_VERSION=1.10.0
-UKUI_DESKTOP_REQUIRED_VERSION=1.17.0
-LIBUKUIKBDUI_REQUIRED_VERSION=1.17.0
+LIBUKUI_MENU_REQUIRED_VERSION=1.0.0
+MATE_DESKTOP_REQUIRED_VERSION=1.17.0
+LIBMATEKBDUI_REQUIRED_VERSION=1.17.0
 
 AC_CHECK_HEADERS(unistd.h)
 AC_CHECK_HEADERS(crypt.h sys/select.h)
@@ -69,7 +69,7 @@ PKG_CHECK_MODULES(UKUI_SCREENSAVER,
         gtk+-3.0 >= $GTK_REQUIRED_VERSION
         dbus-glib-1 >= $DBUS_REQUIRED_VERSION
         gio-2.0 >= $GLIB_REQUIRED_VERSION
-        ukui-desktop-2.0 >= $UKUI_DESKTOP_REQUIRED_VERSION
+        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
         libukui-menu >= $LIBUKUI_MENU_REQUIRED_VERSION)
 AC_SUBST(UKUI_SCREENSAVER_CFLAGS)
 AC_SUBST(UKUI_SCREENSAVER_LIBS)
@@ -78,14 +78,14 @@ PKG_CHECK_MODULES(UKUI_SCREENSAVER_DIALOG,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         gthread-2.0
         gtk+-3.0 >= $GTK_REQUIRED_VERSION
-        ukui-desktop-2.0 >= $UKUI_DESKTOP_REQUIRED_VERSION)
+        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION)
 AC_SUBST(UKUI_SCREENSAVER_DIALOG_CFLAGS)
 AC_SUBST(UKUI_SCREENSAVER_DIALOG_LIBS)
 
 PKG_CHECK_MODULES(UKUI_SCREENSAVER_CAPPLET,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         gtk+-3.0 >= $GTK_REQUIRED_VERSION
-        ukui-desktop-2.0 >= $UKUI_DESKTOP_REQUIRED_VERSION
+        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
         libukui-menu >= $LIBUKUI_MENU_REQUIRED_VERSION)
 AC_SUBST(UKUI_SCREENSAVER_CAPPLET_CFLAGS)
 AC_SUBST(UKUI_SCREENSAVER_CAPPLET_LIBS)
@@ -104,7 +104,7 @@ SAVER_LIBS="$ALL_X_LIBS"
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
 
-UKUI_COMPILE_WARNINGS(yes)
+MATE_COMPILE_WARNINGS(yes)
 
 # Solaris requires libresolv for daemon()
 case "$host" in
@@ -950,18 +950,18 @@ AC_SUBST(SYSTEMD_CFLAGS)
 AC_SUBST(SYSTEMD_LIBS)
 
 dnl ---------------------------------------------------------------------------
-dnl libukuikbd
+dnl libmatekbd
 dnl ---------------------------------------------------------------------------
 
-have_libukuikbdui=no
+have_libmatekbdui=no
 AC_ARG_WITH(kbd-layout-indicator,[  --without-kbd-layout-indicator         disable keyboard layout indicator],
             [with_kbd_layout_indicator="$withval"],[with_kbd_layout_indicator=yes])
 if test x$with_kbd_layout_indicator != xno; then
-  PKG_CHECK_MODULES(LIBUKUIKBDUI, libukuikbdui >= $LIBUKUIKBDUI_REQUIRED_VERSION, have_libukuikbdui=yes, have_libukuikbdui=no)
+  PKG_CHECK_MODULES(LIBMATEKBDUI, libmatekbdui >= $LIBMATEKBDUI_REQUIRED_VERSION, have_libmatekbdui=yes, have_libmatekbdui=no)
 fi
-if test "x$have_libukuikbdui" = "xyes"; then
-  AC_SUBST(LIBUKUIKBDUI_CFLAGS)
-  AC_SUBST(LIBUKUIKBDUI_LIBS)
+if test "x$have_libmatekbdui" = "xyes"; then
+  AC_SUBST(LIBMATEKBDUI_CFLAGS)
+  AC_SUBST(LIBMATEKBDUI_LIBS)
   AC_DEFINE(WITH_KBD_LAYOUT_INDICATOR, 1, [Define if keyboard layout indicator should be built])
 fi
 

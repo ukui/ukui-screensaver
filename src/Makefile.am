@@ -29,7 +29,7 @@ AM_CPPFLAGS =							\
 	$(AUTH_CFLAGS)						\
 	$(DEBUG_CFLAGS)						\
 	$(DBUS_CFLAGS)						\
-	$(LIBUKUIKBDUI_CFLAGS)					\
+	$(LIBMATEKBDUI_CFLAGS)					\
 	$(LIBNOTIFY_CFLAGS)					\
 	$(SYSTEMD_CFLAGS)					\
 	$(NULL)
@@ -155,7 +155,7 @@ ukui_screensaver_dialog_LDADD =	\
 	$(UKUI_SCREENSAVER_DIALOG_LIBS)\
 	$(SAVER_LIBS)			\
 	$(AUTH_LIBS)			\
-	$(LIBUKUIKBDUI_LIBS)		\
+	$(LIBMATEKBDUI_LIBS)		\
 	$(LIBNOTIFY_LIBS)		\
 	$(NULL)
 

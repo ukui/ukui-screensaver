@@ -36,8 +36,8 @@
 
 #include <gio/gio.h>
 
-#define UKUI_DESKTOP_USE_UNSTABLE_API
-#include <libukui-desktop/ukui-desktop-utils.h>
+#define MATE_DESKTOP_USE_UNSTABLE_API
+#include <libmate-desktop/mate-desktop-utils.h>
 
 #include "gs-debug.h"
 
@@ -427,7 +427,7 @@ response_cb (GtkWidget *widget,
 
 		error = NULL;
 
-		res = ukui_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
+		res = mate_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
 		                                        GPM_COMMAND,
 		                                        &error);
 		if (! res)
@@ -959,7 +959,7 @@ time_to_string_text (long time)
 	secs = g_strdup_printf (ngettext ("%d second",
 	                                  "%d seconds", sec), sec);
 
-	inc_len = strlen (g_strdup_printf (_("%s %s"), 
+	inc_len = strlen (g_strdup_printf (_("%s %s"),
 	                  g_strdup_printf (ngettext ("%d hour",
 	                                             "%d hours", 1), 1),
 	                  g_strdup_printf (ngettext ("%d minute",
