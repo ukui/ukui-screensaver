@@ -21,7 +21,7 @@ StartupNotify=false
 Terminal=false
 Type=Application
 Categories=Screensaver;
-OnlyShowIn=MATE;
+OnlyShowIn=UKUI;
 </xsl:template>
 
 </xsl:stylesheet>
