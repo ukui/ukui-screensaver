@@ -36,8 +36,8 @@
 
 #include <gio/gio.h>
 
-#define MATE_DESKTOP_USE_UNSTABLE_API
-#include <libmate-desktop/mate-desktop-utils.h>
+#define UKUI_DESKTOP_USE_UNSTABLE_API
+#include <libukui-desktop/ukui-desktop-utils.h>
 
 #include "gs-debug.h"
 
@@ -47,15 +47,15 @@
 #include "gs-job.h"
 #include "gs-prefs.h" /* for GS_MODE enum */
 
-#define GTK_BUILDER_FILE "mate-screensaver-preferences.ui"
+#define GTK_BUILDER_FILE "ukui-screensaver-preferences.ui"
 
-#define LOCKDOWN_SETTINGS_SCHEMA "org.mate.lockdown"
+#define LOCKDOWN_SETTINGS_SCHEMA "org.ukui.lockdown"
 #define KEY_LOCK_DISABLE "disable-lock-screen"
 
-#define SESSION_SETTINGS_SCHEMA "org.mate.session"
+#define SESSION_SETTINGS_SCHEMA "org.ukui.session"
 #define KEY_IDLE_DELAY "idle-delay"
 
-#define GSETTINGS_SCHEMA "org.mate.screensaver"
+#define GSETTINGS_SCHEMA "org.ukui.screensaver"
 #define KEY_LOCK "lock-enabled"
 #define KEY_IDLE_ACTIVATION_ENABLED "idle-activation-enabled"
 #define KEY_MODE "mode"
@@ -63,7 +63,7 @@
 #define KEY_CYCLE_DELAY "cycle-delay"
 #define KEY_THEMES "themes"
 
-#define GPM_COMMAND "mate-power-preferences"
+#define GPM_COMMAND "ukui-power-preferences"
 
 enum
 {
@@ -389,11 +389,11 @@ help_display (void)
 	error = NULL;
 #if GTK_CHECK_VERSION (3, 22, 0)
 	gtk_show_uri_on_window (NULL,
-                                "help:mate-user-guide/prefs-screensaver",
+                                "help:ukui-user-guide/prefs-screensaver",
                                 GDK_CURRENT_TIME,
                                 &error);
 #else
-	gtk_show_uri (NULL, "help:mate-user-guide/prefs-screensaver", GDK_CURRENT_TIME, &error);
+	gtk_show_uri (NULL, "help:ukui-user-guide/prefs-screensaver", GDK_CURRENT_TIME, &error);
 #endif
 
 	if (error != NULL)
@@ -427,7 +427,7 @@ response_cb (GtkWidget *widget,
 
 		error = NULL;
 
-		res = mate_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
+		res = ukui_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
 		                                        GPM_COMMAND,
 		                                        &error);
 		if (! res)
@@ -849,7 +849,7 @@ drag_leave_cb (GtkWidget      *widget,
 	gtk_widget_queue_draw (widget);
 }
 
-/* GIO has no version of mate_vfs_uri_list_parse(), so copy from MateVFS
+/* GIO has no version of ukui_vfs_uri_list_parse(), so copy from UkuiVFS
  * and re-work to create GFiles.
 **/
 static GList *
@@ -1438,7 +1438,7 @@ get_best_visual_for_display (GdkDisplay *display)
 	visual = NULL;
 	screen = gdk_display_get_default_screen (display);
 
-	command = g_build_filename (LIBEXECDIR, "mate-screensaver-gl-helper", NULL);
+	command = g_build_filename (LIBEXECDIR, "ukui-screensaver-gl-helper", NULL);
 
 	error = NULL;
 	std_output = NULL;
@@ -1723,7 +1723,7 @@ main (int    argc,
 {
 
 #ifdef ENABLE_NLS
-	bindtextdomain (GETTEXT_PACKAGE, MATELOCALEDIR);
+	bindtextdomain (GETTEXT_PACKAGE, UKUILOCALEDIR);
 # ifdef HAVE_BIND_TEXTDOMAIN_CODESET
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 # endif

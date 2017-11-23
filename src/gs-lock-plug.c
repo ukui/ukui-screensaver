@@ -39,11 +39,11 @@
 #include <gtk/gtkx.h>
 #include <gio/gio.h>
 
-#define MATE_DESKTOP_USE_UNSTABLE_API
-#include <libmate-desktop/mate-desktop-utils.h>
+#define UKUI_DESKTOP_USE_UNSTABLE_API
+#include <libukui-desktop/ukui-desktop-utils.h>
 
 #ifdef WITH_KBD_LAYOUT_INDICATOR
-#include <libmatekbd/matekbd-indicator.h>
+#include <libukuikbd/ukuikbd-indicator.h>
 #endif
 
 #ifdef WITH_LIBNOTIFY
@@ -54,7 +54,7 @@
 
 #include "gs-debug.h"
 
-#define GSETTINGS_SCHEMA "org.mate.screensaver"
+#define GSETTINGS_SCHEMA "org.ukui.screensaver"
 
 #define KEY_LOCK_DIALOG_THEME "lock-dialog-theme"
 
@@ -216,7 +216,7 @@ do_user_switch (GSLockPlug *plug)
 								   MDM_FLEXISERVER_ARGS);
 
 		error = NULL;
-		res = mate_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
+		res = ukui_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
 												command,
 												&error);
 
@@ -236,7 +236,7 @@ do_user_switch (GSLockPlug *plug)
 								   GDM_FLEXISERVER_ARGS);
 
 		error = NULL;
-		res = mate_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
+		res = ukui_gdk_spawn_command_line_on_screen (gdk_screen_get_default (),
 												command,
 												&error);
 
@@ -2107,7 +2107,7 @@ gs_lock_plug_init (GSLockPlug *plug)
 	clear_clipboards (plug);
 
 #ifdef WITH_LIBNOTIFY
-	notify_init ("mate-screensaver-dialog");
+	notify_init ("ukui-screensaver-dialog");
 	plug->priv->leave_note_enabled = TRUE;
 #else
 	plug->priv->leave_note_enabled = FALSE;
@@ -2159,8 +2159,8 @@ gs_lock_plug_init (GSLockPlug *plug)
 		{
 			GtkWidget *layout_indicator;
 
-			layout_indicator = matekbd_indicator_new ();
-			matekbd_indicator_set_parent_tooltips (MATEKBD_INDICATOR (layout_indicator), TRUE);
+			layout_indicator = ukuikbd_indicator_new ();
+			ukuikbd_indicator_set_parent_tooltips (UKUIKBD_INDICATOR (layout_indicator), TRUE);
 			gtk_box_pack_start (GTK_BOX (plug->priv->auth_prompt_kbd_layout_indicator),
 			                    layout_indicator,
 			                    FALSE,
