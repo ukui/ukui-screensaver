@@ -4,7 +4,7 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="mate-screensaver"
+PKG_NAME="ukui-screensaver"
 
 (test -f $srcdir/configure.ac) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
@@ -12,13 +12,13 @@ PKG_NAME="mate-screensaver"
     exit 1
 }
 
-which mate-autogen || {
-    echo "You need to install mate-common from the MATE Git"
+which ukui-autogen || {
+    echo "You need to install ukui-common from the UKUI Git"
     exit 1
 }
 
 REQUIRED_AUTOMAKE_VERSION=1.9
-MATE_DATADIR="$mate_datadir"
+UKUI_DATADIR="$ukui_datadir"
 
-. mate-autogen
+. ukui-autogen
 

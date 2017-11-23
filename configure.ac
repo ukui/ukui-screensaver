@@ -1,11 +1,11 @@
 dnl -*- mode: m4 -*-
 
 AC_PREREQ(2.60)
-AC_INIT([mate-screensaver],
+AC_INIT([ukui-screensaver],
         [1.19.0],
-        [http://www.mate-desktop.org/])
+        [http://www.ukui-desktop.org/])
 
-AC_CONFIG_SRCDIR(src/mate-screensaver.c)
+AC_CONFIG_SRCDIR(src/ukui-screensaver.c)
 AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-xz check-news])
@@ -33,7 +33,7 @@ ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
 AC_DEFINE([GLIB_VERSION_MIN_REQUIRED], [GLIB_VERSION_2_36],
 	[Warn on use of APIs deprecated before GLib 2.36])
 
-GETTEXT_PACKAGE=mate-screensaver
+GETTEXT_PACKAGE=ukui-screensaver
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Name of default gettext domain])
 
@@ -51,9 +51,9 @@ DBUS_REQUIRED_VERSION=0.30
 GLIB_REQUIRED_VERSION=2.36.0
 GTK_REQUIRED_VERSION=3.14.0
 X11_REQUIRED_VERSION=1.0
-LIBMATE_MENU_REQUIRED_VERSION=1.10.0
-MATE_DESKTOP_REQUIRED_VERSION=1.17.0
-LIBMATEKBDUI_REQUIRED_VERSION=1.17.0
+LIBUKUI_MENU_REQUIRED_VERSION=1.10.0
+UKUI_DESKTOP_REQUIRED_VERSION=1.17.0
+LIBUKUIKBDUI_REQUIRED_VERSION=1.17.0
 
 AC_CHECK_HEADERS(unistd.h)
 AC_CHECK_HEADERS(crypt.h sys/select.h)
@@ -63,38 +63,38 @@ AC_CHECK_FUNCS(getresuid)
 AC_TYPE_UID_T
 
 AC_CHECK_FUNCS([setresuid setenv unsetenv clearenv])
-PKG_CHECK_MODULES(MATE_SCREENSAVER,
+PKG_CHECK_MODULES(UKUI_SCREENSAVER,
         x11 >= $X11_REQUIRED_VERSION
         xscrnsaver
         gtk+-3.0 >= $GTK_REQUIRED_VERSION
         dbus-glib-1 >= $DBUS_REQUIRED_VERSION
         gio-2.0 >= $GLIB_REQUIRED_VERSION
-        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
-        libmate-menu >= $LIBMATE_MENU_REQUIRED_VERSION)
-AC_SUBST(MATE_SCREENSAVER_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_LIBS)
+        ukui-desktop-2.0 >= $UKUI_DESKTOP_REQUIRED_VERSION
+        libukui-menu >= $LIBUKUI_MENU_REQUIRED_VERSION)
+AC_SUBST(UKUI_SCREENSAVER_CFLAGS)
+AC_SUBST(UKUI_SCREENSAVER_LIBS)
 
-PKG_CHECK_MODULES(MATE_SCREENSAVER_DIALOG,
+PKG_CHECK_MODULES(UKUI_SCREENSAVER_DIALOG,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         gthread-2.0
         gtk+-3.0 >= $GTK_REQUIRED_VERSION
-        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION)
-AC_SUBST(MATE_SCREENSAVER_DIALOG_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_DIALOG_LIBS)
+        ukui-desktop-2.0 >= $UKUI_DESKTOP_REQUIRED_VERSION)
+AC_SUBST(UKUI_SCREENSAVER_DIALOG_CFLAGS)
+AC_SUBST(UKUI_SCREENSAVER_DIALOG_LIBS)
 
-PKG_CHECK_MODULES(MATE_SCREENSAVER_CAPPLET,
+PKG_CHECK_MODULES(UKUI_SCREENSAVER_CAPPLET,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         gtk+-3.0 >= $GTK_REQUIRED_VERSION
-        mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
-        libmate-menu >= $LIBMATE_MENU_REQUIRED_VERSION)
-AC_SUBST(MATE_SCREENSAVER_CAPPLET_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_CAPPLET_LIBS)
+        ukui-desktop-2.0 >= $UKUI_DESKTOP_REQUIRED_VERSION
+        libukui-menu >= $LIBUKUI_MENU_REQUIRED_VERSION)
+AC_SUBST(UKUI_SCREENSAVER_CAPPLET_CFLAGS)
+AC_SUBST(UKUI_SCREENSAVER_CAPPLET_LIBS)
 
-PKG_CHECK_MODULES(MATE_SCREENSAVER_COMMAND,
+PKG_CHECK_MODULES(UKUI_SCREENSAVER_COMMAND,
         gobject-2.0 >= $GLIB_REQUIRED_VERSION
         dbus-glib-1 >= $DBUS_REQUIRED_VERSION)
-AC_SUBST(MATE_SCREENSAVER_COMMAND_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_COMMAND_LIBS)
+AC_SUBST(UKUI_SCREENSAVER_COMMAND_CFLAGS)
+AC_SUBST(UKUI_SCREENSAVER_COMMAND_LIBS)
 
 AC_PATH_XTRA
 
@@ -104,12 +104,12 @@ SAVER_LIBS="$ALL_X_LIBS"
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
 
-MATE_COMPILE_WARNINGS(yes)
+UKUI_COMPILE_WARNINGS(yes)
 
 # Solaris requires libresolv for daemon()
 case "$host" in
 	*-*-solaris*)
-		AC_CHECK_LIB(resolv, daemon, [MATE_SCREENSAVER_LIBS="$MATE_SCREENSAVER_LIBS -lresolv"])
+		AC_CHECK_LIB(resolv, daemon, [UKUI_SCREENSAVER_LIBS="$UKUI_SCREENSAVER_LIBS -lresolv"])
 	;;
 esac
 
@@ -117,9 +117,9 @@ esac
 
 SAVER_MODULES="gthread-2.0 gtk+-3.0 >= $GTK_REQUIRED_VERSION gobject-2.0 >= $GLIB_REQUIRED_VERSION"
 
-PKG_CHECK_MODULES(MATE_SCREENSAVER_SAVER, $SAVER_MODULES)
-AC_SUBST(MATE_SCREENSAVER_SAVER_CFLAGS)
-AC_SUBST(MATE_SCREENSAVER_SAVER_LIBS)
+PKG_CHECK_MODULES(UKUI_SCREENSAVER_SAVER, $SAVER_MODULES)
+AC_SUBST(UKUI_SCREENSAVER_SAVER_CFLAGS)
+AC_SUBST(UKUI_SCREENSAVER_SAVER_LIBS)
 
 # Find out where the session service file goes
 # The sad sed hack is recomended by section 27.10 of the automake manual.
@@ -144,11 +144,11 @@ AC_SUBST(PAM_PREFIX)
 
 # Desktop entry handling
 
-PKG_CHECK_MODULES(LIB_MATE_MENU,
+PKG_CHECK_MODULES(LIB_UKUI_MENU,
         gtk+-3.0 >= $GTK_REQUIRED_VERSION)
 
-AC_SUBST(LIB_MATE_MENU_CFLAGS)
-AC_SUBST(LIB_MATE_MENU_LIBS)
+AC_SUBST(LIB_UKUI_MENU_CFLAGS)
+AC_SUBST(LIB_UKUI_MENU_LIBS)
 
 dnl ---------------------------------------------------------------------------
 dnl - Where should we put documentation ?
@@ -157,9 +157,9 @@ AC_ARG_WITH(doc-dir,
               [AC_HELP_STRING([--with-doc-dir=<dir>],
               [directory to install documentation])])
 if ! test -z "$with_doc_dir"; then
-   DOCDIR="$with_doc_dir/mate-screensaver-$VERSION"
+   DOCDIR="$with_doc_dir/ukui-screensaver-$VERSION"
 else
-   DOCDIR="$datadir/doc/mate-screensaver-$VERSION"
+   DOCDIR="$datadir/doc/ukui-screensaver-$VERSION"
 fi
 AC_SUBST(DOCDIR)
 
@@ -950,18 +950,18 @@ AC_SUBST(SYSTEMD_CFLAGS)
 AC_SUBST(SYSTEMD_LIBS)
 
 dnl ---------------------------------------------------------------------------
-dnl libmatekbd
+dnl libukuikbd
 dnl ---------------------------------------------------------------------------
 
-have_libmatekbdui=no
+have_libukuikbdui=no
 AC_ARG_WITH(kbd-layout-indicator,[  --without-kbd-layout-indicator         disable keyboard layout indicator],
             [with_kbd_layout_indicator="$withval"],[with_kbd_layout_indicator=yes])
 if test x$with_kbd_layout_indicator != xno; then
-  PKG_CHECK_MODULES(LIBMATEKBDUI, libmatekbdui >= $LIBMATEKBDUI_REQUIRED_VERSION, have_libmatekbdui=yes, have_libmatekbdui=no)
+  PKG_CHECK_MODULES(LIBUKUIKBDUI, libukuikbdui >= $LIBUKUIKBDUI_REQUIRED_VERSION, have_libukuikbdui=yes, have_libukuikbdui=no)
 fi
-if test "x$have_libmatekbdui" = "xyes"; then
-  AC_SUBST(LIBMATEKBDUI_CFLAGS)
-  AC_SUBST(LIBMATEKBDUI_LIBS)
+if test "x$have_libukuikbdui" = "xyes"; then
+  AC_SUBST(LIBUKUIKBDUI_CFLAGS)
+  AC_SUBST(LIBUKUIKBDUI_LIBS)
   AC_DEFINE(WITH_KBD_LAYOUT_INDICATOR, 1, [Define if keyboard layout indicator should be built])
 fi
 
@@ -1100,23 +1100,23 @@ SLIDESHOW_COSMOS_DIR="${EXPANDED_DATADIR}/backgrounds/cosmos"
 
 AC_SUBST(SLIDESHOW_COSMOS_DIR)
 
-FLOATERS_FOOT_LOGO_IMAGE="${EXPANDED_DATADIR}/pixmaps/mate-logo-white.svg"
+FLOATERS_FOOT_LOGO_IMAGE="${EXPANDED_DATADIR}/pixmaps/ukui-logo-white.svg"
 AC_SUBST(FLOATERS_FOOT_LOGO_IMAGE)
 FLOATERS_FOOT_GNOME_LOGO_IMAGE="${EXPANDED_DATADIR}/pixmaps/gnome-logo-white.svg"
 AC_SUBST(FLOATERS_FOOT_GNOME_LOGO_IMAGE)
 
 # Menu stuff
 
-MATE_SCREENSAVER_THEMES_DIR="${EXPANDED_DATADIR}/applications/screensavers"
-AC_SUBST(MATE_SCREENSAVER_THEMES_DIR)
+UKUI_SCREENSAVER_THEMES_DIR="${EXPANDED_DATADIR}/applications/screensavers"
+AC_SUBST(UKUI_SCREENSAVER_THEMES_DIR)
 
 # Special directories
 # Used for .pc.in file
 
-privlibexecdir='${libexecdir}'/mate-screensaver
+privlibexecdir='${libexecdir}'/ukui-screensaver
 AC_SUBST(privlibexecdir)
 
-privdatadir='${datadir}'/mate-screensaver
+privdatadir='${datadir}'/ukui-screensaver
 AC_SUBST(privdatadir)
 
 themesdir='${datadir}'/applications/screensavers
@@ -1129,21 +1129,21 @@ AC_OUTPUT([
 Makefile
 po/Makefile.in
 src/Makefile
-src/mate-screensaver.desktop.in
+src/ukui-screensaver.desktop.in
 data/Makefile
-data/mate-screensavers.menu
-data/mate-screensaver.pc
-data/org.mate.ScreenSaver.service
-data/org.mate.screensaver.gschema.xml
+data/ukui-screensavers.menu
+data/ukui-screensaver.pc
+data/org.ukui.ScreenSaver.service
+data/org.ukui.screensaver.gschema.xml
 data/images/Makefile
 data/images/cosmos/Makefile
 savers/Makefile
 doc/Makefile
-doc/mate-screensaver.xml
+doc/ukui-screensaver.xml
 ])
 
 echo "
-                    mate-screensaver $VERSION
+                    ukui-screensaver $VERSION
                     ========================
 
         prefix:                   ${prefix}
@@ -1157,7 +1157,7 @@ echo "
         source code location:     ${srcdir}
         compiler:                 ${CC}
         cflags:                   ${CFLAGS}
-        Base libs:                ${MATE_SCREENSAVER_LIBS}
+        Base libs:                ${UKUI_SCREENSAVER_LIBS}
         Extension libs:           ${SAVER_LIBS}
         Maintainer mode:          ${USE_MAINTAINER_MODE}
         Docs enabled:             ${enable_docbook_docs}
