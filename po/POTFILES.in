@@ -1,11 +1,11 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/mate-screensaver-preferences.desktop.in
-[type: gettext/glade]data/mate-screensaver-preferences.ui
-data/mate-screensaver.directory.in
+data/ukui-screensaver-preferences.desktop.in
+[type: gettext/glade]data/ukui-screensaver-preferences.ui
+data/ukui-screensaver.directory.in
 data/images/cosmos/cosmos.xml.in.in
 [type: gettext/glade]data/lock-dialog-default.ui
-[type: gettext/gsettings]data/org.mate.screensaver.gschema.xml.in
+[type: gettext/gsettings]data/org.ukui.screensaver.gschema.xml.in
 savers/cosmos-slideshow.desktop.in.in
 savers/footlogo-floaters.desktop.in.in
 savers/gnomelogo-floaters.desktop.in.in
@@ -15,11 +15,11 @@ savers/popsquares.c
 savers/floaters.c
 savers/slideshow.c
 src/copy-theme-dialog.c
-src/mate-screensaver-command.c
-src/mate-screensaver-dialog.c
-src/mate-screensaver-preferences.c
-src/mate-screensaver.c
-src/mate-screensaver.desktop.in.in
+src/ukui-screensaver-command.c
+src/ukui-screensaver-dialog.c
+src/ukui-screensaver-preferences.c
+src/ukui-screensaver.c
+src/ukui-screensaver.desktop.in.in
 src/gs-auth-pam.c
 src/gs-listener-dbus.c
 src/gs-lock-plug.c
