@@ -2078,6 +2078,9 @@ load_theme (GSLockPlug *plug)
 	gtk_widget_hide(widget_backup);
 	/* Hide auth_prompt_label which is use to display PAM message */
 	gtk_widget_hide(plug->priv->auth_prompt_label);
+	/* Set widget size of the password entry and the unlock button */
+	gtk_widget_set_size_request(plug->priv->auth_prompt_entry,276,34);
+	gtk_widget_set_size_request(plug->priv->auth_unlock_button,60,37);
 
 	return TRUE;
 }
