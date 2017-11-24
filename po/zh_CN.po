@@ -751,3 +751,7 @@ msgstr "%h 上的 %U"
 #: ../src/gs-lock-plug.c:1892
 msgid "_Password:"
 msgstr "密码(_P)："
+
+#: ../src/gs-lock-plug.c:2084
+msgid "Has Logged in"
+msgstr "已登录"

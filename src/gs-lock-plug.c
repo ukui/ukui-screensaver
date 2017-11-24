@@ -2081,6 +2081,11 @@ load_theme (GSLockPlug *plug)
 	/* Set widget size of the password entry and the unlock button */
 	gtk_widget_set_size_request(plug->priv->auth_prompt_entry,276,34);
 	gtk_widget_set_size_request(plug->priv->auth_unlock_button,60,37);
+	/* Requisition the auth_username_label to display the login status */
+	char *str;
+	str = g_strdup_printf ("<span color=\"white\" font_desc=\"Ubuntu 11\">%s</span>", _("Has Logged In"));
+	gtk_label_set_markup(plug->priv->auth_username_label, str);
+	g_free(str);
 
 	return TRUE;
 }
