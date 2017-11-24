@@ -2074,6 +2074,10 @@ load_theme (GSLockPlug *plug)
 
 	plug->priv->status_message_label = GTK_WIDGET (gtk_builder_get_object(builder, "status-message-label"));
 
+	/* Hide the widget_backup box which contains some widgets we don't use currently */
+	GtkWidget *widget_backup = GTK_WIDGET (gtk_builder_get_object(builder, "widget_backup"));
+	gtk_widget_hide(widget_backup);
+
 	return TRUE;
 }
 
