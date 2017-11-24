@@ -300,12 +300,12 @@ msgstr "Показує слайди космічних малюнків"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Пляваючий MATE"
+msgstr "Пляваючий UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Логотипи MATE, що виринають по усьому екрану"
+msgstr "Логотипи UKUI, що виринають по усьому екрану"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

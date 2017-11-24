@@ -309,12 +309,12 @@ msgstr "Προβολή μιας παρουσίασης εικόνων του cos
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Ελεύθερα μετακινούμενο MATE"
+msgstr "Ελεύθερα μετακινούμενο UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Φούσκες του λογότυπου του MATE στην οθόνη"
+msgstr "Φούσκες του λογότυπου του UKUI στην οθόνη"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

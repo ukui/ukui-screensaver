@@ -293,12 +293,12 @@ msgstr "Viser et billedeshow af billeder af kosmos"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Flydende MATE"
+msgstr "Flydende UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Bobler MATE-logoet omkring på skærmen"
+msgstr "Bobler UKUI-logoet omkring på skærmen"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

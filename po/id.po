@@ -298,12 +298,12 @@ msgstr "Tampilkan slideshow dari gambar cosmos"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "MATE Mengapung"
+msgstr "UKUI Mengapung"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Balonkan logo MATE di sekitar layar"
+msgstr "Balonkan logo UKUI di sekitar layar"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"
@@ -311,7 +311,7 @@ msgstr "GNOME Mengapung"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
-msgstr "Balonkan logo kaki MATE di sekitar layar"
+msgstr "Balonkan logo kaki UKUI di sekitar layar"
 
 #: ../savers/personal-slideshow.desktop.in.in.h:1
 msgid "Pictures folder"

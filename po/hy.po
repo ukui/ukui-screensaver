@@ -294,12 +294,12 @@ msgstr "Ցուցադրել սլայդցուցադրումը պատկերներո
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Փոփոխական MATE"
+msgstr "Փոփոխական UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "MATE լոգոյի պղպջակները էկրանի շուրջը"
+msgstr "UKUI լոգոյի պղպջակները էկրանի շուրջը"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

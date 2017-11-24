@@ -297,12 +297,12 @@ msgstr "Показва прожекция със снимки от космос�
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Плаващ MATE"
+msgstr "Плаващ UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Балончета по екрана с логото на MATE"
+msgstr "Балончета по екрана с логото на UKUI"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

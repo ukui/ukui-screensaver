@@ -261,7 +261,7 @@ msgstr ""
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "MATE flotant"
+msgstr "UKUI flotant"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 msgid "Bubbles the UKUI logo around the screen"

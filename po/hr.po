@@ -302,12 +302,12 @@ msgstr "Prikaži klizni slikokaz svemira"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Plutajući MATE"
+msgstr "Plutajući UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Ispušta zaštitni znak MATE po zaslonu"
+msgstr "Ispušta zaštitni znak UKUI po zaslonu"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

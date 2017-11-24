@@ -311,12 +311,12 @@ msgstr "Eine Diaschau mit Weltraumbildern anzeigen"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Schwebendes Mate"
+msgstr "Schwebendes Ukui"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Das MATE-Logo auf dem Bildschirm rumschweben lassen"
+msgstr "Das UKUI-Logo auf dem Bildschirm rumschweben lassen"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

@@ -262,7 +262,7 @@ msgstr "Lysbiletvising med bileta frå verdensrommet"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Flytande MATE"
+msgstr "Flytande UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy

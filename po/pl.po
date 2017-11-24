@@ -301,12 +301,12 @@ msgstr "Wyświetla pokaz zdjęć kosmosu"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Latające MATE"
+msgstr "Latające UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Wyświetla na ekranie logo MATE"
+msgstr "Wyświetla na ekranie logo UKUI"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

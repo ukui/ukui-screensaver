@@ -297,16 +297,16 @@ msgstr "Rodyti kosmoso paveikslų skaidrių rodymą"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Plaukiojantis MATE"
+msgstr "Plaukiojantis UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "MATE logotipas „burbuliuoja“ ekrane"
+msgstr "UKUI logotipas „burbuliuoja“ ekrane"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"
-msgstr "Plaukiojantis MATE"
+msgstr "Plaukiojantis UKUI"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"

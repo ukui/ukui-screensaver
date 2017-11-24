@@ -305,12 +305,12 @@ msgstr "Показывает слайд-шоу космических рисун
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Плавающий MATE"
+msgstr "Плавающий UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Всплывающие по всему экрану логотипы MATE"
+msgstr "Всплывающие по всему экрану логотипы UKUI"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

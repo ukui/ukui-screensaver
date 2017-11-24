@@ -304,12 +304,12 @@ msgstr "Kozmosun resimlerini slayt gösterisi şeklinde göster"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Yüzen MATE"
+msgstr "Yüzen UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Ekran üzerinde MATE logosu baloncukları oluşturur"
+msgstr "Ekran üzerinde UKUI logosu baloncukları oluşturur"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

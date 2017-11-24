@@ -282,12 +282,12 @@ msgstr "แสดงภาพสไลด์ของภาพจากอวก
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Floating MATE"
+msgstr "Floating UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "เลื่อนโลโก้ของ MATE ไปรอบๆหน้าจอ"
+msgstr "เลื่อนโลโก้ของ UKUI ไปรอบๆหน้าจอ"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

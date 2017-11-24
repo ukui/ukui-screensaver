@@ -307,12 +307,12 @@ msgstr "Dit toont een diapresentatie met foto's van de ruimte"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "MATE-logo's"
+msgstr "UKUI-logo's"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Toont vliegende MATE-logo's op het scherm"
+msgstr "Toont vliegende UKUI-logo's op het scherm"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

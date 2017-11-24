@@ -306,12 +306,12 @@ msgstr "Apresenta um conjunto de fotografias do cosmos"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "MATE Flutuante"
+msgstr "UKUI Flutuante"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Bolhas com o logótipo do MATE por todo o ecrã"
+msgstr "Bolhas com o logótipo do UKUI por todo o ecrã"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

@@ -300,12 +300,12 @@ msgstr "Zobrazovat obrázky z kosmu jako prezentaci"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Plovoucí logo MATE"
+msgstr "Plovoucí logo UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Bublinky loga MATE po obrazovce"
+msgstr "Bublinky loga UKUI po obrazovce"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

@@ -289,12 +289,12 @@ msgstr "Kosmosepiltide slaidiesituse kuvamine"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Hõljuv MATE"
+msgstr "Hõljuv UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "MATE logod ekraanil ringi hõljumas"
+msgstr "UKUI logod ekraanil ringi hõljumas"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

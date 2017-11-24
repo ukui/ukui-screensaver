@@ -289,12 +289,12 @@ msgstr "Sýna skjásýningu með myndum af stjörnuþokum"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Fljótandi MATE"
+msgstr "Fljótandi UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Freyðir MATE-merkinu um skjáinn"
+msgstr "Freyðir UKUI-merkinu um skjáinn"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

@@ -265,12 +265,12 @@ msgstr "顯示宇宙圖片的幻燈片放映"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "浮動的 MATE"
+msgstr "浮動的 UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "畫面上四處移動的 MATE 圖標泡泡"
+msgstr "畫面上四處移動的 UKUI 圖標泡泡"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

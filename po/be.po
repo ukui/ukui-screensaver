@@ -264,12 +264,12 @@ msgstr "Паказвае слайд-шоў з выявамі космасу"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "MATE плавае"
+msgstr "UKUI плавае"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Бурбалкі з лагатыпам MATE па ўсім экране"
+msgstr "Бурбалкі з лагатыпам UKUI па ўсім экране"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

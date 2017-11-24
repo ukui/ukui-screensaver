@@ -308,12 +308,12 @@ msgstr "Mostra una projecció amb diapositives d'imatges del cosmos"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "MATE flotant"
+msgstr "UKUI flotant"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Bambolles amb el logotip del MATE per tota la pantalla"
+msgstr "Bambolles amb el logotip del UKUI per tota la pantalla"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

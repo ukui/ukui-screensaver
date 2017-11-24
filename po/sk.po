@@ -297,12 +297,12 @@ msgstr "Zobraziť prezentáciu z obrázkov vesmíru"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Lietajúce MATE"
+msgstr "Lietajúce UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Bublinkovať logo MATE po obrazovke"
+msgstr "Bublinkovať logo UKUI po obrazovke"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

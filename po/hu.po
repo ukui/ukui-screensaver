@@ -299,20 +299,20 @@ msgstr "Egy diavetítés a kozmosz képeiből"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Lebegő MATE"
+msgstr "Lebegő UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "A MATE logót lebegteti körbe a képernyőn"
+msgstr "A UKUI logót lebegteti körbe a képernyőn"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"
-msgstr "Lebegő MATE"
+msgstr "Lebegő UKUI"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:2
 msgid "Bubbles the GNOME logo around the screen"
-msgstr "A MATE logót lebegteti körbe a képernyőn"
+msgstr "A UKUI logót lebegteti körbe a képernyőn"
 
 #: ../savers/personal-slideshow.desktop.in.in.h:1
 msgid "Pictures folder"

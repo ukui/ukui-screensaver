@@ -263,12 +263,12 @@ msgstr "اسلایدهایی از تصاویر کیهان نمایش داده ش
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "MATE معلق"
+msgstr "UKUI معلق"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "حباب‌پراکنی از لوگوی MATE در اطراف صفحهٔ نمایش"
+msgstr "حباب‌پراکنی از لوگوی UKUI در اطراف صفحهٔ نمایش"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

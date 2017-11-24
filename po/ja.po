@@ -300,12 +300,12 @@ msgstr "\"宇宙の画像\" をスライドショー形式で表示します"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "フローティング MATE"
+msgstr "フローティング UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "画面の回りに MATE のロゴが浮かびます"
+msgstr "画面の回りに UKUI のロゴが浮かびます"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"
@@ -696,7 +696,7 @@ msgstr "Glade インタフェースを読み込めませんでした"
 
 #: ../src/ukui-screensaver-preferences.c:1569
 msgid "Please make sure that the screensaver is properly installed"
-msgstr "mate-screensaver が正しくインストールされているか確認して下さい。"
+msgstr "ukui-screensaver が正しくインストールされているか確認して下さい。"
 
 #: ../src/ukui-screensaver.c:56
 msgid "Don't become a daemon"

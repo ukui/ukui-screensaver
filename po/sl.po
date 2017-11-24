@@ -295,12 +295,12 @@ msgstr "Prikaži predstavitev slik vesolja"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Lebdeči MATE"
+msgstr "Lebdeči UKUI"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Premikanje mehurčkov z logotipom MATE po zaslonu"
+msgstr "Premikanje mehurčkov z logotipom UKUI po zaslonu"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

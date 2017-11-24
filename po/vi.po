@@ -293,12 +293,12 @@ msgstr "Hiển thị trình diễn các ảnh của vũ trụ"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr "Biểu tượng MATE lơ lửng"
+msgstr "Biểu tượng UKUI lơ lửng"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Thổi bong bóng biểu tượng MATE xung quanh màn hình"
+msgstr "Thổi bong bóng biểu tượng UKUI xung quanh màn hình"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"

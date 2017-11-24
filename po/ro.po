@@ -273,12 +273,12 @@ msgstr "Arată o diaporamă cu imagini din Cosmos"
 #: ../savers/footlogo-floaters.desktop.in.in.h:1
 #, fuzzy
 msgid "Floating UKUI"
-msgstr " MATE plutitor"
+msgstr " UKUI plutitor"
 
 #: ../savers/footlogo-floaters.desktop.in.in.h:2
 #, fuzzy
 msgid "Bubbles the UKUI logo around the screen"
-msgstr "Plimbă sigla MATE pe ecran"
+msgstr "Plimbă sigla UKUI pe ecran"
 
 #: ../savers/gnomelogo-floaters.desktop.in.in.h:1
 msgid "Floating GNOME"
