@@ -241,7 +241,7 @@ do_user_switch (GSLockPlug *plug)
 												&error);
 
 		g_free (command);
-		
+
 		if (! res) {
 			gs_debug ("Unable to start GDM greeter: %s", error->message);
 			g_error_free (error);
@@ -821,11 +821,11 @@ frame_pixbuf (GdkPixbuf *source)
 	double           radius;
 	guint8          *data;
 
-	frame_width = 5;
+	frame_width = 3; /* Set border width */
 
 	w = gdk_pixbuf_get_width (source) + frame_width * 2;
 	h = gdk_pixbuf_get_height (source) + frame_width * 2;
-	radius = w / 10;
+	radius = 0; /* Set radius of rounded rectangle */
 
 	dest = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
 						   TRUE,
@@ -945,7 +945,7 @@ set_face_image (GSLockPlug *plug)
 	GdkPixbuf    *pixbuf;
 	const char   *homedir;
 	char         *path;
-	int           icon_size = 96;
+	int           icon_size = 128; /* Set avatar size */
 	gsize         user_max_file = 65536;
 	uid_t         uid;
 
