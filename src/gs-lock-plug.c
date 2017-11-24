@@ -1483,7 +1483,6 @@ gs_lock_plug_enable_prompt (GSLockPlug *plug,
 	gtk_widget_show (plug->priv->auth_unlock_button);
 	gtk_widget_grab_default (plug->priv->auth_unlock_button);
 	gtk_label_set_text (GTK_LABEL (plug->priv->auth_prompt_label), message);
-	gtk_widget_show (plug->priv->auth_prompt_label);
 	gtk_entry_set_visibility (GTK_ENTRY (plug->priv->auth_prompt_entry), visible);
 	gtk_widget_set_sensitive (plug->priv->auth_prompt_entry, TRUE);
 	gtk_widget_show (plug->priv->auth_prompt_entry);
@@ -2077,6 +2076,8 @@ load_theme (GSLockPlug *plug)
 	/* Hide the widget_backup box which contains some widgets we don't use currently */
 	GtkWidget *widget_backup = GTK_WIDGET (gtk_builder_get_object(builder, "widget_backup"));
 	gtk_widget_hide(widget_backup);
+	/* Hide auth_prompt_label which is use to display PAM message */
+	gtk_widget_hide(plug->priv->auth_prompt_label);
 
 	return TRUE;
 }
