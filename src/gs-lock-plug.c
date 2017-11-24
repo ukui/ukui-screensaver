@@ -2086,6 +2086,9 @@ load_theme (GSLockPlug *plug)
 	str = g_strdup_printf ("<span color=\"white\" font_desc=\"Ubuntu 11\">%s</span>", _("Has Logged In"));
 	gtk_label_set_markup(plug->priv->auth_username_label, str);
 	g_free(str);
+	/* Set the style of username */
+	str = "<span color=\"white\" font_desc=\"Ubuntu 23\">%R</span>";
+	gtk_label_set_markup(plug->priv->auth_realname_label, str);
 
 	return TRUE;
 }
