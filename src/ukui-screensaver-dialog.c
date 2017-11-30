@@ -43,6 +43,12 @@
 
 #include "gs-debug.h"
 
+#define MATE_DESKTOP_USE_UNSTABLE_API
+#include <libmate-desktop/mate-bg.h>
+/* Used by draw_cb */
+GdkPixbuf *plug_pixbuf = 0;
+GdkRectangle monitor_rect;
+
 #define MAX_FAILURES 5
 
 static gboolean verbose = FALSE;
@@ -376,13 +382,76 @@ static void show_cb(GtkWidget* widget, gpointer data)
 	print_id(widget);
 }
 
+/*
+ * After calling gtk_widget_show, the "show" and "draw" signal will
+ * be triggered successively.
+ * NOTE: This function will be called several times during the "show"
+ * signal, but the reason is unknown.
+ */
+static gboolean draw_cb(GtkWidget *widget, cairo_t *cairoContext, gpointer userdata)
+{
+	GtkAllocation size; /* Plug size */
+	gtk_widget_get_allocation(widget, &size);
+
+	cairo_t *cr = gdk_cairo_create(gtk_widget_get_window(widget));
+	int x,y;
+	x = (monitor_rect.width - size.width) / 2;
+	y = (monitor_rect.height - size.height) / 2;
+	/* Move the background image toward the top left corner */
+	gdk_cairo_set_source_pixbuf(cr, plug_pixbuf, -x, -y);
+	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+	cairo_paint (cr);
+	cairo_destroy(cr);
+
+	return FALSE;
+}
+
+static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer userdata)
+{
+	GdkScreen *screen = gtk_widget_get_screen(widget);
+	GdkVisual *visual = gdk_screen_get_rgba_visual(screen);
+	gtk_widget_set_visual(widget, visual);
+}
+
+/*
+ * Initialize the global variable monitor_rect and plug_pixbuf
+ * in preparation for calling draw_cb
+ */
+static void prepare_for_set_background()
+{
+	/*
+	 * The screensaver will appear on the monitor where the pointer is.
+	 * Get the size of this monitor.
+	 */
+	GdkDisplay *display = gdk_display_get_default ();
+	GdkScreen  *screen;
+	int pointer_x, pointer_y;
+	gdk_display_get_pointer (display, &screen, &pointer_x, &pointer_y, NULL);
+	int monitor_idx;
+	monitor_idx = gdk_screen_get_monitor_at_point (screen, pointer_x, pointer_y);
+	gdk_screen_get_monitor_geometry(screen, monitor_idx, &monitor_rect);
+
+	/* Load the background image */
+	MateBG *bg = mate_bg_new ();
+	mate_bg_load_from_preferences(bg);
+	plug_pixbuf = gdk_pixbuf_new_from_file_at_scale(mate_bg_get_filename(bg),
+			monitor_rect.width, monitor_rect.height, FALSE, NULL);
+}
+
 static gboolean popup_dialog_idle(void)
 {
+	/*
+	 * Initialize data structures used by draw_cb in advance.
+	 * This will speed up the process of drawing and reduce the white splash.
+	 */
+	prepare_for_set_background();
+
 	GtkWidget* widget;
 
 	gs_profile_start(NULL);
 
 	widget = gs_lock_plug_new();
+	gtk_widget_set_app_paintable(widget, TRUE);
 
 	if (enable_logout)
 	{
@@ -407,7 +476,12 @@ static gboolean popup_dialog_idle(void)
 	g_signal_connect(GS_LOCK_PLUG(widget), "response", G_CALLBACK(response_cb), NULL);
 	g_signal_connect(widget, "show", G_CALLBACK(show_cb), NULL);
 
+	g_signal_connect(widget, "draw", G_CALLBACK(draw_cb), NULL);
+	g_signal_connect(widget, "screen-changed", G_CALLBACK(screen_changed), NULL);
+	screen_changed(widget, NULL, NULL);
+
 	gtk_widget_realize(widget);
+	draw_cb(widget, NULL, NULL);
 
 	g_idle_add((GSourceFunc) auth_check_idle, widget);
 
