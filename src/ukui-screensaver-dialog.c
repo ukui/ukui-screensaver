@@ -46,7 +46,7 @@
 #define MATE_DESKTOP_USE_UNSTABLE_API
 #include <libmate-desktop/mate-bg.h>
 /* Used by draw_cb */
-GdkPixbuf *plug_pixbuf = 0;
+cairo_surface_t *plug_surface;
 GdkRectangle monitor_rect;
 
 #define MAX_FAILURES 5
@@ -388,36 +388,27 @@ static void show_cb(GtkWidget* widget, gpointer data)
  * NOTE: This function will be called several times during the "show"
  * signal, but the reason is unknown.
  */
-static gboolean draw_cb(GtkWidget *widget, cairo_t *cairoContext, gpointer userdata)
+static gboolean draw_cb(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
 	GtkAllocation size; /* Plug size */
 	gtk_widget_get_allocation(widget, &size);
 
-	cairo_t *cr = gdk_cairo_create(gtk_widget_get_window(widget));
 	int x,y;
 	x = (monitor_rect.width - size.width) / 2;
 	y = (monitor_rect.height - size.height) / 2;
 	/* Move the background image toward the top left corner */
-	gdk_cairo_set_source_pixbuf(cr, plug_pixbuf, -x, -y);
-	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+	cairo_set_source_surface (cr, plug_surface, -x, -y);
+	cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
 	cairo_paint (cr);
-	cairo_destroy(cr);
 
 	return FALSE;
 }
 
-static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer userdata)
-{
-	GdkScreen *screen = gtk_widget_get_screen(widget);
-	GdkVisual *visual = gdk_screen_get_rgba_visual(screen);
-	gtk_widget_set_visual(widget, visual);
-}
-
 /*
- * Initialize the global variable monitor_rect and plug_pixbuf
+ * Initialize the global variable monitor_rect and plug_surface
  * in preparation for calling draw_cb
  */
-static void prepare_for_set_background()
+static void prepare_for_set_background(GtkWidget *widget)
 {
 	/*
 	 * The screensaver will appear on the monitor where the pointer is.
@@ -431,21 +422,19 @@ static void prepare_for_set_background()
 	monitor_idx = gdk_screen_get_monitor_at_point (screen, pointer_x, pointer_y);
 	gdk_screen_get_monitor_geometry(screen, monitor_idx, &monitor_rect);
 
-	/* Load the background image */
+	/*
+	 * Use desktop API to load the background image and return a
+	 * pointer to cairo_surface_t
+	 */
 	MateBG *bg = mate_bg_new ();
 	mate_bg_load_from_preferences(bg);
-	plug_pixbuf = gdk_pixbuf_new_from_file_at_scale(mate_bg_get_filename(bg),
-			monitor_rect.width, monitor_rect.height, FALSE, NULL);
+	plug_surface = mate_bg_create_surface(bg, gtk_widget_get_window(widget),
+				    monitor_rect.width, monitor_rect.height, FALSE);
 }
+
 
 static gboolean popup_dialog_idle(void)
 {
-	/*
-	 * Initialize data structures used by draw_cb in advance.
-	 * This will speed up the process of drawing and reduce the white splash.
-	 */
-	prepare_for_set_background();
-
 	GtkWidget* widget;
 
 	gs_profile_start(NULL);
@@ -477,11 +466,13 @@ static gboolean popup_dialog_idle(void)
 	g_signal_connect(widget, "show", G_CALLBACK(show_cb), NULL);
 
 	g_signal_connect(widget, "draw", G_CALLBACK(draw_cb), NULL);
-	g_signal_connect(widget, "screen-changed", G_CALLBACK(screen_changed), NULL);
-	screen_changed(widget, NULL, NULL);
 
 	gtk_widget_realize(widget);
-	draw_cb(widget, NULL, NULL);
+	/*
+	 * Initialize data structures used by draw_cb in advance.
+	 * This will speed up the process of drawing and reduce the black splash.
+	 */
+	prepare_for_set_background(widget);
 
 	g_idle_add((GSourceFunc) auth_check_idle, widget);
 
