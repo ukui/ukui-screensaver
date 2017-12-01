@@ -2081,6 +2081,14 @@ load_theme (GSLockPlug *plug)
 	/* Set widget size of the password entry and the unlock button */
 	gtk_widget_set_size_request(plug->priv->auth_prompt_entry,276,34);
 	gtk_widget_set_size_request(plug->priv->auth_unlock_button,60,37);
+	/*
+	 * From the log information printed in gs_window_move_resize_window(gs-window-x11.c),
+	 * we can learn that under 1920x1080 resolution the initial size of plug is
+	 * 418x200 and its final size is 536x200. This behavior may make gs-window-x11
+	 * calculate the location of lock_box incorrectly, so the lock_box can't be
+	 * centered on the screen. To avoid this situation, fix the size of plug.
+	 */
+	gtk_widget_set_size_request(plug, 536, 200);
 	/* Requisition the auth_username_label to display the login status */
 	char *str;
 	str = g_strdup_printf ("<span color=\"white\" font_desc=\"Ubuntu 11\">%s</span>", _("Has Logged In"));

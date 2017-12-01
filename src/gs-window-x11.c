@@ -41,6 +41,8 @@
 #include <X11/extensions/shape.h>
 #endif
 
+gboolean move_lock_box(gpointer pointer);
+
 static void gs_window_class_init (GSWindowClass *klass);
 static void gs_window_init       (GSWindow      *window);
 static void gs_window_finalize   (GObject       *object);
@@ -396,6 +398,21 @@ update_geometry (GSWindow *window)
 	window->priv->geometry.y = geometry.y;
 	window->priv->geometry.width = geometry.width;
 	window->priv->geometry.height = geometry.height;
+
+	/*
+	 * GSWindow uses GtkFixed as its layout, so the child widget can't fill
+	 * the space automatically. We must set the position and the size of
+	 * drawing_area manually after getting the position and the size of
+	 * GSWindow.
+	 * NOTE: The update_geometry function will be called several times, so we
+	 * need to check if the drawing_area has been added to GSWindow already,
+	 * in case it is added redundantly.
+	 */
+	if (!gtk_widget_get_parent(window->priv->drawing_area)) {
+		gtk_widget_set_size_request(window->priv->drawing_area,
+			window->priv->geometry.width, window->priv->geometry.height);
+		gtk_fixed_put(GTK_FIXED(window->priv->vbox),  window->priv->drawing_area, 0, 0);
+	}
 }
 
 static void
@@ -446,6 +463,14 @@ gs_window_move_resize_window (GSWindow *window,
 		gdk_window_resize (gdkwindow,
 		                   window->priv->geometry.width,
 		                   window->priv->geometry.height);
+	}
+	/* Print the size of plug area */
+	if (window->priv->lock_box) {
+		GtkRequisition size1, size2;
+		gtk_widget_get_preferred_size(window->priv->lock_box, &size1, &size2);
+		g_print("\n=========================> "
+			"the size of lock_box(lock_socket or plug) is %d %d\n\n",
+			size1.width, size1.height);
 	}
 }
 
@@ -1172,6 +1197,11 @@ lock_plug_added (GtkWidget *widget,
                  GSWindow  *window)
 {
 	gtk_widget_show (widget);
+	/*
+	 * Move lock_box to the center of screen after 50ms.
+	 * This can reduce the black splash.
+	 */
+	g_timeout_add(50, move_lock_box, window);
 }
 
 static gboolean
@@ -1280,7 +1310,8 @@ create_keyboard_socket (GSWindow *window,
 	height = sc_height / 4;
 
 	window->priv->keyboard_socket = gtk_socket_new ();
-	gtk_widget_set_size_request (window->priv->keyboard_socket, -1, height);
+	gtk_widget_set_size_request(window->priv->keyboard_socket,
+					window->priv->geometry.width, height);
 
 	g_signal_connect (window->priv->keyboard_socket, "destroy",
 	                  G_CALLBACK (keyboard_socket_destroyed), window);
@@ -1288,7 +1319,8 @@ create_keyboard_socket (GSWindow *window,
 	                  G_CALLBACK (keyboard_plug_added), window);
 	g_signal_connect (window->priv->keyboard_socket, "plug_removed",
 	                  G_CALLBACK (keyboard_plug_removed), window);
-	gtk_box_pack_start (GTK_BOX (window->priv->vbox), window->priv->keyboard_socket, FALSE, FALSE, 0);
+	gtk_fixed_put(GTK_FIXED(window->priv->vbox),  window->priv->keyboard_socket,
+				0, window->priv->geometry.height - height);
 	gtk_socket_add_id (GTK_SOCKET (window->priv->keyboard_socket), id);
 }
 
@@ -1445,6 +1477,19 @@ embed_keyboard (GSWindow *window)
 	}
 }
 
+/* Move lock_box to the center of screen */
+gboolean move_lock_box(gpointer pointer)
+{
+	GSWindow *window = pointer;
+	GtkRequisition size1, size2;
+	gtk_widget_get_preferred_size(window->priv->lock_box, &size1, &size2);
+	int x,y;
+	x = (window->priv->geometry.width - size1.width) / 2;
+	y = (window->priv->geometry.height - size1.height) / 2;
+	gtk_fixed_move(window->priv->vbox, window->priv->lock_box, x, y);
+	return FALSE;
+}
+
 static void
 create_lock_socket (GSWindow *window,
                     guint32   id)
@@ -1456,7 +1501,14 @@ create_lock_socket (GSWindow *window,
 	gtk_widget_set_valign (GTK_WIDGET (window->priv->lock_box),
 	                       GTK_ALIGN_CENTER);
 	gtk_widget_show (window->priv->lock_box);
-	gtk_box_pack_start (GTK_BOX (window->priv->vbox), window->priv->lock_box, TRUE, TRUE, 0);
+	/*
+	 * Move lock_box out of the visible range temporarily. It will be moved
+	 * to the center of the screen in lock_plug_added function after the
+	 * plug is plugged onto the socket.
+	 * This will reduce the black splash when cairo draws background
+	 * image on plug.
+	 */
+	gtk_fixed_put(GTK_FIXED(window->priv->vbox),  window->priv->lock_box, -900, -900);
 
 	gtk_container_add (GTK_CONTAINER (window->priv->lock_box), window->priv->lock_socket);
 
@@ -2501,7 +2553,11 @@ create_info_bar (GSWindow *window)
 {
 	window->priv->info_bar = gtk_info_bar_new ();
 	gtk_widget_set_no_show_all (window->priv->info_bar, TRUE);
-	gtk_box_pack_end (GTK_BOX (window->priv->vbox), window->priv->info_bar, FALSE, FALSE, 0);
+	/*
+	 * This widget is used to display the leaving message.
+	 * Since this feature has been removed, we can comment this line directly.
+	 */
+	//gtk_box_pack_end (GTK_BOX (window->priv->vbox), window->priv->info_bar, FALSE, FALSE, 0);
 }
 
 static gboolean
@@ -2549,7 +2605,7 @@ gs_window_init (GSWindow *window)
 	                       | GDK_ENTER_NOTIFY_MASK
 	                       | GDK_LEAVE_NOTIFY_MASK);
 
-	window->priv->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+	window->priv->vbox = gtk_fixed_new();
 	gtk_widget_show (window->priv->vbox);
 	gtk_container_add (GTK_CONTAINER (window), window->priv->vbox);
 
@@ -2562,6 +2618,10 @@ gs_window_init (GSWindow *window)
 	                  "draw",
 	                  G_CALLBACK (on_drawing_area_draw),
 	                  NULL);
+	/*
+	 * The code which add drawing_area to vbox has been moved into
+	 * the update_geometry function
+	 */
 	create_info_bar (window);
 
 }
