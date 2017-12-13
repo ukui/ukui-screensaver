@@ -39,9 +39,7 @@
 #define MATE_DESKTOP_USE_UNSTABLE_API
 #include <libmate-desktop/mate-desktop-utils.h>
 
-#if GTK_CHECK_VERSION (3, 0, 0)
 #include "gs-debug.h"
-#endif
 
 #include "copy-theme-dialog.h"
 
@@ -299,22 +297,6 @@ config_set_lock (gboolean lock)
 }
 
 static void
-preview_clear (GtkWidget *widget)
-{
-#if GTK_CHECK_VERSION (3, 0, 0)
-	GdkRGBA black = { 0.0, 0.0, 0.0, 1.0 };
-
-	gdk_window_set_background_rgba (gtk_widget_get_window (widget), &black);
-	gtk_widget_queue_draw (widget);
-#else
-	GdkColor black = { 0, 0x0000, 0x0000, 0x0000 };
-
-	gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, &black);
-	gdk_window_clear (gtk_widget_get_window (widget));
-#endif
-}
-
-static void
 job_set_theme (GSJob      *job,
                const char *theme)
 {
@@ -337,6 +319,21 @@ job_set_theme (GSJob      *job,
 	}
 }
 
+static gboolean
+preview_on_draw (GtkWidget *widget,
+                 cairo_t   *cr,
+                 gpointer   data)
+{
+	if (job == NULL || !gs_job_is_running (job))
+	{
+		cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+		cairo_set_source_rgb (cr, 0, 0, 0);
+		cairo_paint (cr);
+	}
+
+	return FALSE;
+}
+
 static void
 preview_set_theme (GtkWidget  *widget,
                    const char *theme,
@@ -350,7 +347,7 @@ preview_set_theme (GtkWidget  *widget,
 		gs_job_stop (job);
 	}
 
-	preview_clear (widget);
+	gtk_widget_queue_draw (widget);
 
 	label = GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_theme_label"));
 	markup = g_markup_printf_escaped ("<i>%s</i>", name);
@@ -390,7 +387,14 @@ help_display (void)
 	GError *error;
 
 	error = NULL;
+#if GTK_CHECK_VERSION (3, 22, 0)
+	gtk_show_uri_on_window (NULL,
+                                "help:mate-user-guide/prefs-screensaver",
+                                GDK_CURRENT_TIME,
+                                &error);
+#else
 	gtk_show_uri (NULL, "help:mate-user-guide/prefs-screensaver", GDK_CURRENT_TIME, &error);
+#endif
 
 	if (error != NULL)
 	{
@@ -938,6 +942,8 @@ time_to_string_text (long time)
 	char *secs, *mins, *hours, *string;
 	int   sec, min, hour;
 
+	int n, inc_len, len_minutes;
+
 	sec = time % 60;
 	time = time - sec;
 	min = (time % (60 * 60)) / 60;
@@ -952,6 +958,43 @@ time_to_string_text (long time)
 
 	secs = g_strdup_printf (ngettext ("%d second",
 	                                  "%d seconds", sec), sec);
+
+	inc_len = strlen (g_strdup_printf (_("%s %s"), 
+	                  g_strdup_printf (ngettext ("%d hour",
+	                                             "%d hours", 1), 1),
+	                  g_strdup_printf (ngettext ("%d minute",
+	                                             "%d minutes", 59), 59))) - 1;
+
+	len_minutes = 0;
+
+	for (n = 2; n < 60; n++)
+	{
+		if (n < 10)
+		{
+			if ((strlen (g_str_to_ascii (g_strdup_printf (ngettext ("%d minute",
+	                                                                        "%d minutes", n), n), NULL)) - 2) > len_minutes)
+
+				len_minutes = strlen (g_str_to_ascii (g_strdup_printf (ngettext ("%d minute",
+	                                                                                         "%d minutes", n), n), NULL)) - 2;
+		}
+		else
+		{
+			if ((strlen (g_str_to_ascii (g_strdup_printf (ngettext ("%d minute",
+	                                                                        "%d minutes", n), n), NULL)) - 3) > len_minutes)
+
+				len_minutes = strlen (g_str_to_ascii (g_strdup_printf (ngettext ("%d minute",
+	                                                                                         "%d minutes", n), n), NULL)) - 3;
+		}
+	}
+
+	if ((strlen (g_str_to_ascii (g_strdup_printf (ngettext ("%d minute",
+	                                                        "%d minutes", 1), 1), NULL)) - 2) > len_minutes)
+
+		len_minutes = strlen (g_str_to_ascii (g_strdup_printf (ngettext ("%d minute",
+	                                                                         "%d minutes", 1), 1), NULL)) - 2;
+
+	if (len_minutes < 1)
+		len_minutes = 1;
 
 	if (hour > 0)
 	{
@@ -982,6 +1025,36 @@ time_to_string_text (long time)
 		{
 			/* minutes */
 			string = g_strdup_printf (_("%s"), mins);
+
+			if (min < 10)
+			{
+				if (min == 1)
+					while (strlen (string) != (len_minutes + inc_len + 3))
+					{
+						if (strlen (string) % 2 == 0)
+							string = g_strconcat (string, " ", NULL);
+						else
+							string = g_strconcat (" " , string, NULL);
+					}
+				else
+					while (strlen (string) != (len_minutes + inc_len))
+					{
+						if (strlen (string) % 2 == 0)
+							string = g_strconcat (string, " ", NULL);
+						else
+							string = g_strconcat (" " , string, NULL);
+					}
+			}
+			else
+			{
+				while (strlen (string) != (len_minutes + inc_len - 1))
+				{
+					if (strlen (string) % 2 == 0)
+						string = g_strconcat (string, " ", NULL);
+					else
+						string = g_strconcat (" " , string, NULL);
+				}
+			}
 		}
 	}
 	else
@@ -1170,7 +1243,7 @@ fullscreen_preview_cancelled_cb (GtkWidget *button,
 	gs_job_set_widget (job, preview_area);
 
 	fullscreen_preview_area = GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_area"));
-	preview_clear (fullscreen_preview_area);
+	gtk_widget_queue_draw (fullscreen_preview_area);
 
 	fullscreen_preview_window = GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_window"));
 	gtk_widget_hide (fullscreen_preview_window);
@@ -1200,7 +1273,7 @@ fullscreen_preview_start_cb (GtkWidget *widget,
 	gtk_widget_grab_focus (fullscreen_preview_window);
 
 	fullscreen_preview_area = GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_area"));
-	preview_clear (fullscreen_preview_area);
+	gtk_widget_queue_draw (fullscreen_preview_area);
 	gs_job_set_widget (job, fullscreen_preview_area);
 }
 
@@ -1211,16 +1284,15 @@ constrain_list_size (GtkWidget      *widget,
 {
 	GtkRequisition req;
 	int            max_height;
+	int            sc_height;
 
 	/* constrain height to be the tree height up to a max */
-	max_height = (gdk_screen_get_height (gtk_widget_get_screen (widget))) / 4;
+	gdk_window_get_geometry (gdk_screen_get_root_window (gtk_widget_get_screen (widget)),
+				 NULL, NULL, NULL, &sc_height);
 
-#if GTK_CHECK_VERSION(3, 0, 0)
+	max_height = sc_height / 4;
+
 	gtk_widget_get_preferred_size (to_size, &req, NULL);
-#else
-	gtk_widget_size_request (to_size, &req);
-#endif
-
 	allocation->height = MIN (req.height, max_height);
 }
 
@@ -1274,71 +1346,19 @@ setup_for_root_user (void)
 	gtk_widget_show (label);
 }
 
-static GdkVisual *
-get_best_visual (void)
-{
-	char         *command;
-	char         *std_output;
-	int           exit_status;
-	GError       *error;
-	unsigned long v;
-	char          c;
-	GdkVisual    *visual;
-	gboolean      res;
-
-	visual = NULL;
-
-	command = g_build_filename (LIBEXECDIR, "mate-screensaver-gl-helper", NULL);
-
-	error = NULL;
-	res = g_spawn_command_line_sync (command,
-	                                 &std_output,
-	                                 NULL,
-	                                 &exit_status,
-	                                 &error);
-
-	if (! res)
-	{
-		g_debug ("Could not run command '%s': %s", command, error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	if (1 == sscanf (std_output, "0x%lx %c", &v, &c))
-	{
-		if (v != 0)
-		{
-			VisualID      visual_id;
-
-			visual_id = (VisualID) v;
-			visual = gdk_x11_screen_lookup_visual (gdk_screen_get_default (), visual_id);
-
-			g_debug ("Found best visual for GL: 0x%x",
-			         (unsigned int) visual_id);
-		}
-	}
-
-out:
-	g_free (std_output);
-	g_free (command);
-
-	return visual;
-}
-
-#if GTK_CHECK_VERSION (3, 0, 0)
 /* copied from gs-window-x11.c */
 extern char **environ;
 
 static gchar **
-spawn_make_environment_for_screen (GdkScreen  *screen,
-                                   gchar     **envp)
+spawn_make_environment_for_display (GdkDisplay *display,
+                                    gchar     **envp)
 {
 	gchar **retval = NULL;
-	gchar  *display_name;
+	const gchar *display_name;
 	gint    display_index = -1;
 	gint    i, env_len;
 
-	g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
+	g_return_val_if_fail (GDK_IS_DISPLAY (display), NULL);
 
 	if (envp == NULL)
 		envp = environ;
@@ -1350,7 +1370,7 @@ spawn_make_environment_for_screen (GdkScreen  *screen,
 	retval = g_new (char *, env_len + 1);
 	retval[env_len] = NULL;
 
-	display_name = gdk_screen_make_display_name (screen);
+	display_name = gdk_display_get_name (display);
 
 	for (i = 0; i < env_len; i++)
 		if (i == display_index)
@@ -1360,18 +1380,16 @@ spawn_make_environment_for_screen (GdkScreen  *screen,
 
 	g_assert (i == env_len);
 
-	g_free (display_name);
-
 	return retval;
 }
 
 static gboolean
-spawn_command_line_on_screen_sync (GdkScreen    *screen,
-                                   const gchar  *command_line,
-                                   char        **standard_output,
-                                   char        **standard_error,
-                                   int          *exit_status,
-                                   GError      **error)
+spawn_command_line_on_display_sync (GdkDisplay  *display,
+                                    const gchar  *command_line,
+                                    char        **standard_output,
+                                    char        **standard_error,
+                                    int          *exit_status,
+                                    GError      **error)
 {
 	char     **argv = NULL;
 	char     **envp = NULL;
@@ -1384,7 +1402,7 @@ spawn_command_line_on_screen_sync (GdkScreen    *screen,
 		return FALSE;
 	}
 
-	envp = spawn_make_environment_for_screen (screen, NULL);
+	envp = spawn_make_environment_for_display (display, NULL);
 
 	retval = g_spawn_sync (NULL,
 	                       argv,
@@ -1405,8 +1423,9 @@ spawn_command_line_on_screen_sync (GdkScreen    *screen,
 
 
 static GdkVisual *
-get_best_visual_for_screen (GdkScreen *screen)
+get_best_visual_for_display (GdkDisplay *display)
 {
+	GdkScreen    *screen;
 	char         *command;
 	char         *std_output;
 	int           exit_status;
@@ -1417,12 +1436,13 @@ get_best_visual_for_screen (GdkScreen *screen)
 	gboolean      res;
 
 	visual = NULL;
+	screen = gdk_display_get_default_screen (display);
 
 	command = g_build_filename (LIBEXECDIR, "mate-screensaver-gl-helper", NULL);
 
 	error = NULL;
 	std_output = NULL;
-	res = spawn_command_line_on_screen_sync (screen,
+	res = spawn_command_line_on_display_sync (display,
 	        command,
 	        &std_output,
 	        NULL,
@@ -1444,8 +1464,8 @@ get_best_visual_for_screen (GdkScreen *screen)
 			visual_id = (VisualID) v;
 			visual = gdk_x11_screen_lookup_visual (screen, visual_id);
 
-			gs_debug ("Found best GL visual for screen %d: 0x%x",
-			          gdk_screen_get_number (screen),
+			gs_debug ("Found best GL visual for display %s: 0x%x",
+			          gdk_display_get_name (display),
 			          (unsigned int) visual_id);
 		}
 	}
@@ -1464,48 +1484,13 @@ widget_set_best_visual (GtkWidget *widget)
 
 	g_return_if_fail (widget != NULL);
 
-	visual = get_best_visual_for_screen (gtk_widget_get_screen (widget));
+	visual = get_best_visual_for_display (gtk_widget_get_display (widget));
 	if (visual != NULL)
 	{
 		gtk_widget_set_visual (widget, visual);
 		g_object_unref (visual);
 	}
 }
-#else
-static GdkColormap *
-get_best_colormap_for_screen (GdkScreen *screen)
-{
-	GdkColormap *colormap;
-	GdkVisual   *visual;
-
-	g_return_val_if_fail (screen != NULL, NULL);
-
-	visual = get_best_visual ();
-
-	colormap = NULL;
-	if (visual != NULL)
-	{
-		colormap = gdk_colormap_new (visual, FALSE);
-	}
-
-	return colormap;
-}
-
-static void
-widget_set_best_colormap (GtkWidget *widget)
-{
-	GdkColormap *colormap;
-
-	g_return_if_fail (widget != NULL);
-
-	colormap = get_best_colormap_for_screen (gtk_widget_get_screen (widget));
-	if (colormap != NULL)
-	{
-		gtk_widget_set_colormap (widget, colormap);
-		g_object_unref (colormap);
-	}
-}
-#endif
 
 static gboolean
 setup_treeview_idle (gpointer data)
@@ -1553,6 +1538,7 @@ init_capplet (void)
 	GtkWidget *preview_button;
 	GtkWidget *gpm_button;
 	GtkWidget *fullscreen_preview_window;
+	GtkWidget *fullscreen_preview_area;
 	GtkWidget *fullscreen_preview_previous;
 	GtkWidget *fullscreen_preview_next;
 	GtkWidget *fullscreen_preview_close;
@@ -1601,7 +1587,7 @@ init_capplet (void)
 	preview_button     = GTK_WIDGET (gtk_builder_get_object (builder, "preview_button"));
 	gpm_button         = GTK_WIDGET (gtk_builder_get_object (builder, "gpm_button"));
 	fullscreen_preview_window = GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_window"));
-	GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_area"));
+	fullscreen_preview_area = GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_area"));
 	fullscreen_preview_close = GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_close"));
 	fullscreen_preview_previous = GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_previous_button"));
 	fullscreen_preview_next = GTK_WIDGET (gtk_builder_get_object (builder, "fullscreen_preview_next_button"));
@@ -1612,11 +1598,7 @@ init_capplet (void)
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), treeview);
 
 	gtk_widget_set_no_show_all (root_warning_label, TRUE);
-#if GTK_CHECK_VERSION (3, 0, 0)
 	widget_set_best_visual (preview);
-#else
-	widget_set_best_colormap (preview);
-#endif
 
 	if (! is_program_in_path (GPM_COMMAND))
 	{
@@ -1673,6 +1655,10 @@ init_capplet (void)
 	gtk_window_set_icon_name (GTK_WINDOW (dialog), "preferences-desktop-screensaver");
 	gtk_window_set_icon_name (GTK_WINDOW (fullscreen_preview_window), "screensaver");
 
+	g_signal_connect (fullscreen_preview_area,
+	                  "draw", G_CALLBACK (preview_on_draw),
+	                  NULL);
+
 	gtk_drag_dest_set (dialog, GTK_DEST_DEFAULT_ALL,
 	                   drop_types, G_N_ELEMENTS (drop_types),
 	                   GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
@@ -1695,7 +1681,7 @@ init_capplet (void)
 		g_strfreev (list);
 	}
 
-	preview_clear (preview);
+	g_signal_connect (preview, "draw", G_CALLBACK (preview_on_draw), NULL);
 	gs_job_set_widget (job, preview);
 
 	if (check_is_root_user ())

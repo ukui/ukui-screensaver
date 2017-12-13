@@ -107,56 +107,15 @@ gs_theme_engine_get_property (GObject            *object,
 	}
 }
 
-static void
-gs_theme_engine_clear (GtkWidget *widget)
-{
-#if GTK_CHECK_VERSION (3, 0, 0)
-	GdkRGBA color = { 0.0, 0.0, 0.0, 1.0 };
-	GtkStateFlags state;
-#else
-	GdkColor     color = { 0, 0x0000, 0x0000, 0x0000 };
-	GdkColormap  *colormap;
-	GtkStyle     *style;
-	GtkStateType state;
-#endif
-
-	g_return_if_fail (GS_IS_THEME_ENGINE (widget));
-
-	if (! gtk_widget_get_visible (widget))
-	{
-		return;
-	}
-
-#if GTK_CHECK_VERSION (3, 0, 0)
-	state = gtk_widget_get_state_flags (widget);
-	gtk_widget_override_background_color (widget, state, &color);
-	gdk_window_set_background_rgba (gtk_widget_get_window (widget), &color);
-#else
-	style = gtk_widget_get_style (widget);
-	state = (GtkStateType) 0;
-	while (state < (GtkStateType) G_N_ELEMENTS (style->bg))
-	{
-		gtk_widget_modify_bg (widget, state, &color);
-		state++;
-	}
-
-	colormap = gdk_drawable_get_colormap (gtk_widget_get_window (widget));
-	gdk_colormap_alloc_color (colormap, &color, FALSE, TRUE);
-	gdk_window_set_background (gtk_widget_get_window (widget), &color);
-	gdk_window_clear (gtk_widget_get_window (widget));
-#endif
-	gdk_flush ();
-}
-
 static gboolean
-gs_theme_engine_real_map_event (GtkWidget   *widget,
-                                GdkEventAny *event)
+gs_theme_engine_real_draw (GtkWidget *widget,
+                           cairo_t   *cr)
 {
-	gboolean handled = FALSE;
+	cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+	cairo_set_source_rgb (cr, 0, 0, 0);
+	cairo_paint (cr);
 
-	gs_theme_engine_clear (widget);
-
-	return handled;
+	return FALSE;
 }
 
 static void
@@ -171,7 +130,7 @@ gs_theme_engine_class_init (GSThemeEngineClass *klass)
 	object_class->get_property = gs_theme_engine_get_property;
 	object_class->set_property = gs_theme_engine_set_property;
 
-	widget_class->map_event = gs_theme_engine_real_map_event;
+	widget_class->draw = gs_theme_engine_real_draw;
 
 	g_type_class_add_private (klass, sizeof (GSThemeEnginePrivate));
 }
@@ -222,12 +181,7 @@ gs_theme_engine_get_window_size (GSThemeEngine *engine,
 	                         NULL,
 	                         NULL,
 	                         width,
-#if !GTK_CHECK_VERSION (3, 0, 0)
-	                         height,
-				 NULL);
-#else
 	                         height);
-#endif
 }
 
 GdkWindow *

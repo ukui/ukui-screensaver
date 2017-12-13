@@ -2,7 +2,7 @@ dnl -*- mode: m4 -*-
 
 AC_PREREQ(2.60)
 AC_INIT([mate-screensaver],
-        [1.16.0],
+        [1.19.0],
         [http://www.mate-desktop.org/])
 
 AC_CONFIG_SRCDIR(src/mate-screensaver.c)
@@ -29,9 +29,7 @@ AC_SUBST(VERSION)
 # Save flags to aclocal
 ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
 
-# GLib min/max required versions
-AC_DEFINE([GLIB_VERSION_MAX_ALLOWED], [GLIB_VERSION_2_36],
-	[Warn on use of APIs added after GLib 2.36])
+# GLib min required versions
 AC_DEFINE([GLIB_VERSION_MIN_REQUIRED], [GLIB_VERSION_2_36],
 	[Warn on use of APIs deprecated before GLib 2.36])
 
@@ -51,31 +49,11 @@ GLIB_GSETTINGS
 
 DBUS_REQUIRED_VERSION=0.30
 GLIB_REQUIRED_VERSION=2.36.0
+GTK_REQUIRED_VERSION=3.14.0
 X11_REQUIRED_VERSION=1.0
-LIBMATE_MENU_REQUIRED_VERSION=1.5.0
-MATE_DESKTOP_REQUIRED_VERSION=1.9.4
-LIBMATEKBDUI_REQUIRED_VERSION=1.7.1
-
-AC_MSG_CHECKING([which gtk+ version to compile against])
-AC_ARG_WITH([gtk],
-  [AS_HELP_STRING([--with-gtk=2.0|3.0],[which gtk+ version to compile against (default: 2.0)])],
-  [case "$with_gtk" in
-     2.0|3.0) ;;
-     *) AC_MSG_ERROR([invalid gtk version specified]) ;;
-   esac],
-  [with_gtk=2.0])
-AC_MSG_RESULT([$with_gtk])
-
-case "$with_gtk" in
-  2.0) GTK_API_VERSION=2.0
-       GTK_REQUIRED_VERSION=2.24.0
-       ;;
-  3.0) GTK_API_VERSION=3.0
-       GTK_REQUIRED_VERSION=3.0.0
-       ;;
-esac
-
-AC_SUBST(GTK_API_VERSION)
+LIBMATE_MENU_REQUIRED_VERSION=1.10.0
+MATE_DESKTOP_REQUIRED_VERSION=1.17.0
+LIBMATEKBDUI_REQUIRED_VERSION=1.17.0
 
 AC_CHECK_HEADERS(unistd.h)
 AC_CHECK_HEADERS(crypt.h sys/select.h)
@@ -88,7 +66,7 @@ AC_CHECK_FUNCS([setresuid setenv unsetenv clearenv])
 PKG_CHECK_MODULES(MATE_SCREENSAVER,
         x11 >= $X11_REQUIRED_VERSION
         xscrnsaver
-        gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION
+        gtk+-3.0 >= $GTK_REQUIRED_VERSION
         dbus-glib-1 >= $DBUS_REQUIRED_VERSION
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
@@ -99,14 +77,14 @@ AC_SUBST(MATE_SCREENSAVER_LIBS)
 PKG_CHECK_MODULES(MATE_SCREENSAVER_DIALOG,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
         gthread-2.0
-        gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION
+        gtk+-3.0 >= $GTK_REQUIRED_VERSION
         mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION)
 AC_SUBST(MATE_SCREENSAVER_DIALOG_CFLAGS)
 AC_SUBST(MATE_SCREENSAVER_DIALOG_LIBS)
 
 PKG_CHECK_MODULES(MATE_SCREENSAVER_CAPPLET,
         gio-2.0 >= $GLIB_REQUIRED_VERSION
-        gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION
+        gtk+-3.0 >= $GTK_REQUIRED_VERSION
         mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED_VERSION
         libmate-menu >= $LIBMATE_MENU_REQUIRED_VERSION)
 AC_SUBST(MATE_SCREENSAVER_CAPPLET_CFLAGS)
@@ -137,7 +115,7 @@ esac
 
 # Optional dependencies for the theme engines
 
-SAVER_MODULES="gthread-2.0 gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION gobject-2.0 >= $GLIB_REQUIRED_VERSION"
+SAVER_MODULES="gthread-2.0 gtk+-3.0 >= $GTK_REQUIRED_VERSION gobject-2.0 >= $GLIB_REQUIRED_VERSION"
 
 PKG_CHECK_MODULES(MATE_SCREENSAVER_SAVER, $SAVER_MODULES)
 AC_SUBST(MATE_SCREENSAVER_SAVER_CFLAGS)
@@ -167,7 +145,7 @@ AC_SUBST(PAM_PREFIX)
 # Desktop entry handling
 
 PKG_CHECK_MODULES(LIB_MATE_MENU,
-        gtk+-$GTK_API_VERSION >= $GTK_REQUIRED_VERSION)
+        gtk+-3.0 >= $GTK_REQUIRED_VERSION)
 
 AC_SUBST(LIB_MATE_MENU_CFLAGS)
 AC_SUBST(LIB_MATE_MENU_LIBS)
@@ -552,6 +530,44 @@ if test "x$have_libgl" = "xyes"; then
 fi
 
 dnl ---------------------------------------------------------------------------
+dnl - Check for bsd_auth(3) (OpenBSD)
+dnl ---------------------------------------------------------------------------
+have_bsdauth=no
+with_bsdauth_req=unspecified
+NEED_SETUID=no
+
+case "$host" in
+  *-openbsd*)
+    with_bsdauth=yes
+    AUTH_SCHEME=bsdauth
+    NEED_SETUID=no
+    if test "x$enable_locking" = "xyes"; then
+      with_bsdauth_req=yes
+      NEED_SETUID=yes
+    fi
+esac
+
+if test "$with_bsdauth" = yes ; then
+  AC_CACHE_CHECK([for BSD Authentication], ac_cv_bsdauth,
+    [AC_TRY_X_COMPILE([#include <stdlib.h>
+                       #include <unistd.h>
+                       #include <sys/types.h>
+                       #include <bsd_auth.h>],
+      [int ok = auth_userokay("x", 0, "x", "x");],
+      [ac_cv_bsdauth=yes],
+      [ac_cv_bsdauth=no])])
+  if test "$ac_cv_bsdauth" = yes; then
+    have_bsdauth=yes
+  fi
+fi
+
+if test "$have_bsdauth" = yes; then
+  AC_DEFINE(HAVE_BSDAUTH, 1, [Define to 1 if using bsd_auth(3) authentication])
+fi
+
+AC_SUBST(NEED_SETUID)
+
+dnl ---------------------------------------------------------------------------
 dnl - Check for PAM
 dnl ---------------------------------------------------------------------------
 
@@ -560,7 +576,7 @@ AC_ARG_ENABLE(pam, AC_HELP_STRING([--enable-pam],
                    [Enable PAM support @<:@default=auto@:>@],
                    ),,enable_pam=auto)
 
-if test "x$enable_locking" = "xyes" -a  "x$enable_pam" != "xno"; then
+if test "x$enable_locking" = "xyes" -a "x$enable_pam" != "xno" -a "x$have_bsdauth" = "xno"; then
 AC_CHECK_LIB(pam, pam_start, have_pam=yes)
 fi
 if test "x$have_pam" = "xyes"; then
@@ -843,7 +859,7 @@ dnl  Authentication scheme
 dnl ---------------------------------------------------------------------------
 
 AC_ARG_ENABLE(authentication-scheme,
-  [  --enable-authentication-scheme=[auto/pam/helper/pwent]  Choose a specific
+  [  --enable-authentication-scheme=[auto/pam/helper/pwent/bsdauth]  Choose a specific
                           authentication scheme [default=auto]],,
   enable_authentication_scheme=auto)
 
@@ -855,6 +871,9 @@ fi
 if test x$enable_authentication_scheme = xhelper -a x$have_passwd_helper = xno ; then
 	AC_MSG_ERROR(Password helper support requested but not available)
 fi
+if test x$enable_authentication_scheme = xbsdauth -a x$have_bsdauth = xno ; then
+	AC_MSG_ERROR(bsd_auth(3) support requested but not available)
+fi
 
 if test x$enable_authentication_scheme = xpam ; then
         AUTH_SCHEME="pam"
@@ -862,11 +881,15 @@ elif test x$enable_authentication_scheme = xhelper ; then
         AUTH_SCHEME="helper"
 elif test x$enable_authentication_scheme = xpwent ; then
         AUTH_SCHEME="pwent"
+elif test x$enable_authentication_scheme = xbsdauth ; then
+	AUTH_SCHEME="bsdauth"
 elif test x$enable_authentication_scheme = xauto ; then
 	if test x$have_pam != xno ; then
 		AUTH_SCHEME="pam"
 	elif test x$have_passwd_helper != xno ; then
 		AUTH_SCHEME="helper"
+	elif test x$have_bsdauth != xno ; then
+		AUTH_SCHEME="bsdauth"
 	else
 		AUTH_SCHEME="pwent"
         fi
@@ -1140,7 +1163,6 @@ echo "
         Docs enabled:             ${enable_docbook_docs}
 
         GL:                       ${have_libgl}
-        GTK+ API version:         ${GTK_API_VERSION}
 
         Screen locking enabled:   ${enable_locking}
         Show keyboard indicator:  ${with_kbd_layout_indicator}
@@ -1148,6 +1170,7 @@ echo "
         ConsoleKit support:       ${use_console_kit}
         libnotify support:        ${have_libnotify}
         PAM support:              ${have_pam}
+        bsd_auth(3) support:      ${have_bsdauth}
         Have shadow passwords:    ${have_shadow}
         Have adjunct shadow:      ${have_shadow_adjunct}
         Have enhanced shadow:     ${have_shadow_enhanced}

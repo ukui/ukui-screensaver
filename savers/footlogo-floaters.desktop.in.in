@@ -7,5 +7,4 @@ StartupNotify=false
 Terminal=false
 Type=Application
 Categories=Screensaver;
-Keywords=MATE;screensaver;logo;bubbles;
 OnlyShowIn=MATE;

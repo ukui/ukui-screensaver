@@ -6,7 +6,6 @@ Icon=preferences-desktop-screensaver
 Exec=mate-screensaver
 OnlyShowIn=MATE;
 NoDisplay=true
-Keywords=MATE;screensaver;locker;
 X-MATE-Autostart-Phase=Application
 X-MATE-Autostart-Notify=true
 X-MATE-Bugzilla-Bugzilla=MATE

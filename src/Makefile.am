@@ -148,6 +148,7 @@ EXTRA_mate_screensaver_dialog_SOURCES = \
 	gs-auth-pam.c		\
 	gs-auth-helper.c	\
 	gs-auth-pwent.c		\
+	gs-auth-bsdauth.c	\
 	$(NULL)
 
 mate_screensaver_dialog_LDADD =	\
@@ -256,9 +257,13 @@ install-exec-hook:
 	@if [ "x@NEED_SETUID@" = "xyes" ]; then \
 	    echo "***" ; \
 	    echo "***  Warning: mate-screensaver has been compiled with support for" ; \
-	    echo "***           shadow passwords.  If your system actually uses shadow" ; \
-	    echo "***           passwords then it must be installed as a setuid root" ; \
-	    echo "***           program in order for locking to work.  To do this, you" ; \
+	    if [ "x@AUTH_SCHEME@" = "xbsdauth" ]; then \
+		echo "***           bsd_auth(3) and must be installed as a setuid root" ; \
+	    else \
+	        echo "***           shadow passwords. If your system actually uses shadow" ; \
+	        echo "***           passwords then it must be installed as a setuid root" ; \
+	    fi; \
+	    echo "***           program in order for locking to work. To do this, you" ; \
 	    echo "***           must run:" ; \
 	    echo "***" ; \
 	    echo "***           chown root $(DESTDIR)$(libexecdir)/mate-screensaver-dialog" ; \
