@@ -3,12 +3,11 @@
 data/ukui-screensaver-preferences.desktop.in
 [type: gettext/glade]data/ukui-screensaver-preferences.ui
 data/ukui-screensaver.directory.in
-data/images/cosmos/cosmos.xml.in.in
+data/images/ukui-cosmos/cosmos.xml.in.in
 [type: gettext/glade]data/lock-dialog-default.ui
 [type: gettext/gsettings]data/org.ukui.screensaver.gschema.xml.in
 savers/cosmos-slideshow.desktop.in.in
 savers/footlogo-floaters.desktop.in.in
-savers/gnomelogo-floaters.desktop.in.in
 savers/personal-slideshow.desktop.in.in
 savers/popsquares.desktop.in.in
 savers/popsquares.c

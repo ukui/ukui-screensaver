@@ -1096,18 +1096,16 @@ AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 
 # Saver engine stuff
-SLIDESHOW_COSMOS_DIR="${EXPANDED_DATADIR}/backgrounds/cosmos"
+SLIDESHOW_COSMOS_DIR="${EXPANDED_DATADIR}/backgrounds/ukui-cosmos"
 
 AC_SUBST(SLIDESHOW_COSMOS_DIR)
 
 FLOATERS_FOOT_LOGO_IMAGE="${EXPANDED_DATADIR}/pixmaps/ukui-logo-white.svg"
 AC_SUBST(FLOATERS_FOOT_LOGO_IMAGE)
-FLOATERS_FOOT_GNOME_LOGO_IMAGE="${EXPANDED_DATADIR}/pixmaps/gnome-logo-white.svg"
-AC_SUBST(FLOATERS_FOOT_GNOME_LOGO_IMAGE)
 
 # Menu stuff
 
-UKUI_SCREENSAVER_THEMES_DIR="${EXPANDED_DATADIR}/applications/screensavers"
+UKUI_SCREENSAVER_THEMES_DIR="${EXPANDED_DATADIR}/applications/ukui-screensavers"
 AC_SUBST(UKUI_SCREENSAVER_THEMES_DIR)
 
 # Special directories
@@ -1119,7 +1117,7 @@ AC_SUBST(privlibexecdir)
 privdatadir='${datadir}'/ukui-screensaver
 AC_SUBST(privdatadir)
 
-themesdir='${datadir}'/applications/screensavers
+themesdir='${datadir}'/applications/ukui-screensavers
 AC_SUBST(themesdir)
 
 
@@ -1136,7 +1134,7 @@ data/ukui-screensaver.pc
 data/org.ukui.ScreenSaver.service
 data/org.ukui.screensaver.gschema.xml
 data/images/Makefile
-data/images/cosmos/Makefile
+data/images/ukui-cosmos/Makefile
 savers/Makefile
 doc/Makefile
 doc/ukui-screensaver.xml
