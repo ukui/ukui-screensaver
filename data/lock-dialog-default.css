@@ -1,0 +1,17 @@
+#auth-unlock-button {
+    background-image: image(#024387);
+    border-style: none;
+    text-shadow: none;
+}
+#auth-unlock-button label {
+    color: white;
+}
+#auth-unlock-button:hover {
+    background-image: image(#0258AD);
+}
+#auth-unlock-button:active {
+    background-image: image(#013C76);
+}
+#auth-unlock-button:disabled {
+    background-image: image(#013C76);
+}

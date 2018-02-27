@@ -32,6 +32,7 @@ gtkbuilderdir = $(pkgdatadir)
 gtkbuilder_DATA = 					\
 	ukui-screensaver-preferences.ui	\
 	lock-dialog-default.ui		\
+	lock-dialog-default.css		\
 	$(NULL)
 
 pkgconfigdir = $(libdir)/pkgconfig

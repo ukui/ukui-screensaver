@@ -2012,6 +2012,10 @@ load_theme (GSLockPlug *plug)
 	{
 		GtkCssProvider *style_provider = gtk_css_provider_get_default ();
 		gtk_css_provider_load_from_path (style_provider, css, NULL);
+		GdkScreen *screen = gdk_display_get_default_screen(gdk_display_get_default ());
+		gtk_style_context_add_provider_for_screen (screen,
+						GTK_STYLE_PROVIDER(style_provider),
+						GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	}
 	g_free (css);
 
@@ -2043,6 +2047,7 @@ load_theme (GSLockPlug *plug)
 	plug->priv->auth_capslock_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-capslock-label"));
 	plug->priv->auth_message_label = GTK_WIDGET (gtk_builder_get_object(builder, "auth-status-label"));
 	plug->priv->auth_unlock_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-unlock-button"));
+	gtk_widget_set_name(plug->priv->auth_unlock_button, "auth-unlock-button");
 	plug->priv->auth_cancel_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-cancel-button"));
 	plug->priv->auth_logout_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-logout-button"));
 	plug->priv->auth_switch_button = GTK_WIDGET (gtk_builder_get_object(builder, "auth-switch-button"));
