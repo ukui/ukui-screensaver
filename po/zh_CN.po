@@ -753,5 +753,5 @@ msgid "_Password:"
 msgstr "密码(_P)："
 
 #: ../src/gs-lock-plug.c:2084
-msgid "Has Logged in"
+msgid "Has Logged In"
 msgstr "已登录"
