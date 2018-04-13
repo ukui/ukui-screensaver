@@ -7,7 +7,7 @@ namespace Ui {
 class MainWindow;
 }
 
-enum State {
+enum ScreenState {
 	LOCKSCREEN,
 	XSCREENSAVER
 };
@@ -30,12 +30,16 @@ private:
 	void switchToLockScreen();
 	void switchToXScreensaver();
 	bool eventFilter(QObject *watched, QEvent *event);
+	void constructUI();
+
+public slots:
+	void FSMTransition(); /* Transition FSM states according to signal */
 
 private:
 	Ui::MainWindow *ui;
 	QWidget *widgetXScreensaver;
 	unsigned long int winId;
-	enum State currentState;
+	enum ScreenState screenState;
 	int xscreensaverPID;
 };
 

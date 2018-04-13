@@ -11,19 +11,29 @@ MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow)
 {
-	ui->setupUi(this);
-	createXScreensaverWidgets();
-	currentState = LOCKSCREEN;
-	xscreensaverPID = -1;
-	setXScreensaverVisible(false);
-	setRealTimeMouseTracking();
-	/* Install event filter to capture keyboard and mouse event */
-	installEventFilter(this);
 }
 
 MainWindow::~MainWindow()
 {
 	delete ui;
+}
+
+void MainWindow::constructUI()
+{
+	ui->setupUi(this);
+	createXScreensaverWidgets();
+	screenState = LOCKSCREEN;
+	xscreensaverPID = -1;
+	setXScreensaverVisible(false);
+	setRealTimeMouseTracking();
+	/* Install event filter to capture keyboard and mouse event */
+	installEventFilter(this);
+	show();
+}
+
+void MainWindow::FSMTransition()
+{
+	constructUI();
 }
 
 void MainWindow::createXScreensaverWidgets()
@@ -66,7 +76,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 /* Key Press Event */
 void MainWindow::handleKeyPressEvent(QKeyEvent *event)
 {
-	if (currentState == LOCKSCREEN) {
+	if (screenState == LOCKSCREEN) {
 		if (event->key() == Qt::Key_Escape)
 			switchToXScreensaver();
 	} else { /* currentState == XSCREENSAVER */
@@ -78,7 +88,7 @@ void MainWindow::handleKeyPressEvent(QKeyEvent *event)
 void MainWindow::handleMouseMoveEvent(QMouseEvent *event)
 {
 	(void)event;
-	if (currentState == LOCKSCREEN)
+	if (screenState == LOCKSCREEN)
 		return;
 	switchToLockScreen();
 }
@@ -93,7 +103,7 @@ void MainWindow::switchToLockScreen()
 	waitpid(xscreensaverPID, &childStatus, 0);
 	xscreensaverPID = -1;
 	setXScreensaverVisible(false);
-	currentState = LOCKSCREEN;
+	screenState = LOCKSCREEN;
 }
 
 /* Start a xscreensaver process and embed it onto the widgetXScreensaver widget */
@@ -101,7 +111,7 @@ void MainWindow::switchToXScreensaver()
 {
 	embedXScreensaver();
 	setXScreensaverVisible(true);
-	currentState = XSCREENSAVER;
+	screenState = XSCREENSAVER;
 }
 
 void MainWindow::setXScreensaverVisible(bool visible)

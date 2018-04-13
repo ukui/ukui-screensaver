@@ -24,11 +24,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp
+	main.cpp \
+	mainwindow.cpp \
+    unixsignallistener.cpp
 
 HEADERS += \
-        mainwindow.h
+	mainwindow.h \
+    unixsignallistener.h
 
 FORMS += \
-        mainwindow.ui
+	mainwindow.ui
