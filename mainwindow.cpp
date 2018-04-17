@@ -8,8 +8,7 @@
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
-	QMainWindow(parent),
-	ui(new Ui::MainWindow)
+	QMainWindow(parent)
 {
 }
 
@@ -18,8 +17,22 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+	hide();
+	delete ui;
+	ui = NULL;
+	widgetXScreensaver->deleteLater();
+	widgetXScreensaver = NULL;
+	removeEventFilter(this);
+
+	event->ignore(); /* No further processing */
+	return;
+}
+
 void MainWindow::constructUI()
 {
+	ui = new Ui::MainWindow;
 	ui->setupUi(this);
 	createXScreensaverWidgets();
 	screenState = LOCKSCREEN;

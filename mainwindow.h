@@ -31,6 +31,7 @@ private:
 	void switchToXScreensaver();
 	bool eventFilter(QObject *watched, QEvent *event);
 	void constructUI();
+	void closeEvent(QCloseEvent *event);
 
 public slots:
 	void FSMTransition(); /* Transition FSM states according to signal */
