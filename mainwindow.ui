@@ -101,6 +101,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QLabel" name="lblPrompt">
+           <property name="text">
+            <string>Prompt Label</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <layout class="QHBoxLayout" name="hLayoutPWD">
            <item>
             <widget class="QLineEdit" name="lineEditPassword"/>

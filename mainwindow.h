@@ -12,6 +12,14 @@ enum ScreenState {
 	XSCREENSAVER
 };
 
+enum ProgramState {
+	IDLE,
+	SHOW_PAM_MESSAGE,
+	GET_PASSWORD,
+	WAIT_AUTH_STATUS,
+	AUTH_FAILED
+};
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -32,9 +40,14 @@ private:
 	bool eventFilter(QObject *watched, QEvent *event);
 	void constructUI();
 	void closeEvent(QCloseEvent *event);
+	void uiGetReady(bool ready);
 
 public slots:
 	void FSMTransition(); /* Transition FSM states according to signal */
+
+private slots:
+	void onUnlockClicked();
+	void onPasswordEnter();
 
 private:
 	Ui::MainWindow *ui;
@@ -42,6 +55,10 @@ private:
 	unsigned long int winId;
 	enum ScreenState screenState;
 	int xscreensaverPID;
+	enum ProgramState programState;
+	int toAuthChild[2];
+	int toParent[2];
+	int authPID;
 };
 
 #endif // MAINWINDOW_H
