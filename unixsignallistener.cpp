@@ -17,14 +17,16 @@ void UnixSignalListener::usr1SignalHandler(int unused)
 {
 	(void)unused;
 	char a = 1;
-	::write(sigusr1Fd[0], &a, sizeof(a));
+	int ignore = ::write(sigusr1Fd[0], &a, sizeof(a));
+	(void)ignore;
 }
 
 void UnixSignalListener::handleSigUsr1()
 {
 	snUsr1->setEnabled(false);
 	char tmp;
-	::read(sigusr1Fd[1], &tmp, sizeof(tmp));
+	int ignore = ::read(sigusr1Fd[1], &tmp, sizeof(tmp));
+	(void)ignore;
 
 	/* Do Qt stuff */
 	emit transition();

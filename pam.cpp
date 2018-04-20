@@ -40,7 +40,9 @@ void authenticate(int toParent[2], int toAuthChild[2])
 	kill(getppid(), SIGUSR1);
 	char buffer[2];
 	sprintf(buffer, "%d", auth_status);
-	write(toParent[1], buffer, strlen(buffer));
+	PIPE_OPS_SAFE(
+		write(toParent[1], buffer, strlen(buffer))
+	);
 	printf("Auth status has been written to pipe.\n");
 	::close(toParent[1]);
 	::close(toAuthChild[0]);
@@ -75,13 +77,17 @@ int pam_conversation(int num_msg, const struct pam_message **msg,
 		struct pam_message_object pam_msg_obj;
 		pam_msg_obj.msg_style = (*msg)->msg_style;
 		strncpy(pam_msg_obj.msg, (*msg)->msg, MAX_MSG_LENGTH);
-		write(write_to_parent, &pam_msg_obj, sizeof(pam_msg_obj));
+		PIPE_OPS_SAFE(
+			write(write_to_parent, &pam_msg_obj, sizeof(pam_msg_obj));
+		);
 		printf("PAM message has been written to pipe.\n");
 		kill(getppid(), SIGUSR1);
 
 		if ((*msg)->msg_style == PAM_PROMPT_ECHO_OFF
 				|| (*msg)->msg_style == PAM_PROMPT_ECHO_ON){
-			read(read_from_parent, password, MAX_PASSWORD_LENGTH);
+			PIPE_OPS_SAFE(
+				read(read_from_parent, password, MAX_PASSWORD_LENGTH);
+			);
 			printf("Password has been read from pipe.\n");
 			(*resp)->resp = password;
 			(*resp)->resp_retcode = 0;

@@ -12,4 +12,11 @@ struct pam_message_object {
 	char msg[MAX_MSG_LENGTH + 1];
 } __attribute__((packed));
 
+#define PIPE_OPS_SAFE(statement) do { \
+	int return_value = statement; \
+	if (return_value == -1) \
+		printf("%s:%s(...):%d: PIPE write/read error\n", \
+						__FILE__, __func__, __LINE__); \
+} while (0)
+
 #endif // PAM_H

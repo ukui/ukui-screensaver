@@ -88,7 +88,9 @@ void MainWindow::FSMTransition()
 		}
 		break;
 	case SHOW_PAM_MESSAGE: /* Triggered by conversation function in pam.c */
-		read(toParent[0], &pam_msg_obj, sizeof(pam_msg_obj));
+		PIPE_OPS_SAFE(
+			::read(toParent[0], &pam_msg_obj, sizeof(pam_msg_obj));
+		);
 		ui->lblPrompt->setText(QString::fromUtf8(pam_msg_obj.msg));
 		if (pam_msg_obj.msg_style == PAM_PROMPT_ECHO_OFF) {
 			ui->lineEditPassword->setEchoMode(QLineEdit::Password);
@@ -104,7 +106,9 @@ void MainWindow::FSMTransition()
 		break;
 	case GET_PASSWORD: /* Triggered by ENTER */
 		password = ui->lineEditPassword->text().toLocal8Bit().data();
-		write(toAuthChild[1], password, strlen(password));
+		PIPE_OPS_SAFE(
+			::write(toAuthChild[1], password, strlen(password));
+		);
 		programState = WAIT_AUTH_STATUS;
 		qDebug() << "User has input the password. Next state: WAIT_AUTH_STATUS.";
 		break;
