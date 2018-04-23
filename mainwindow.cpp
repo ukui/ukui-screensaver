@@ -4,6 +4,8 @@
 #include <QKeyEvent>
 #include <QHBoxLayout>
 #include <QTimer>
+#include <QDesktopWidget>
+#include <QScreen>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -27,8 +29,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 	hide();
 	delete ui;
 	ui = NULL;
-	widgetXScreensaver->deleteLater();
-	widgetXScreensaver = NULL;
 	removeEventFilter(this);
 
 	event->ignore(); /* No further processing */
@@ -41,14 +41,34 @@ void MainWindow::constructUI()
 	ui->setupUi(this);
 	connect(ui->lineEditPassword, &QLineEdit::returnPressed, this, &MainWindow::onPasswordEnter);
 	connect(ui->btnUnlock, &QPushButton::clicked, this, &MainWindow::onUnlockClicked);
-	createXScreensaverWidgets();
 	screenState = LOCKSCREEN;
-	xscreensaverPID = -1;
-	setXScreensaverVisible(false);
 	setRealTimeMouseTracking();
 	/* Install event filter to capture keyboard and mouse event */
 	installEventFilter(this);
+	setWindowStyle();
 	show();
+	/*
+	 * After setting X11BypassWindowManagerHint flag, setFocus can't make
+	 * LineEdit get focus, so we need to activate window manually.
+	 */
+	activateWindow();
+}
+
+void MainWindow::setWindowStyle()
+{
+	/* Calculate the total size of multi-head screen */
+	int totalWidth = 0, totalHeight = 0;
+	foreach (QScreen *screen, QGuiApplication::screens()) {
+		totalWidth += screen->geometry().width();
+		totalHeight += screen->geometry().height();
+	}
+	setGeometry(0, 0, totalWidth, totalWidth); /* Full screen */
+
+	/* Move lockscreen according to cursor position */
+	lockscreenFollowCursor(QCursor::pos());
+
+	setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
+						| Qt::X11BypassWindowManagerHint);
 }
 
 #define AUTH_STATUS_LENGTH 3
@@ -174,12 +194,7 @@ void MainWindow::uiGetReady(bool ready)
  * XScreensaver
  */
 
-void MainWindow::createXScreensaverWidgets()
-{
-	widgetXScreensaver = new QWidget();
-	ui->hLayoutCentralWidget->addWidget(widgetXScreensaver);
-	winId = widgetXScreensaver->winId();
-}
+
 
 void MainWindow::setRealTimeMouseTracking()
 {
@@ -191,7 +206,6 @@ void MainWindow::setRealTimeMouseTracking()
 	 */
 	setMouseTracking(true);
 	ui->centralWidget->setMouseTracking(true);
-	widgetXScreensaver->setMouseTracking(true);
 }
 
 /* All events are dispatched in this function */
@@ -226,21 +240,44 @@ void MainWindow::handleKeyPressEvent(QKeyEvent *event)
 void MainWindow::handleMouseMoveEvent(QMouseEvent *event)
 {
 	(void)event;
-	if (screenState == LOCKSCREEN)
-		return;
-	switchToLockScreen();
+	if (screenState == LOCKSCREEN) {
+		lockscreenFollowCursor(event->pos());
+	} else {
+		switchToLockScreen();
+	}
+}
+
+/* lockscreen follows cursor */
+void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
+{
+	QScreen *screen = NULL;
+	foreach (screen, QGuiApplication::screens()) {
+		if (screen->geometry().contains(cursorPoint))
+			break;
+	}
+	int x = screen->geometry().x() + (screen->geometry().width() -
+				ui->widgetLockScreen->geometry().width()) / 2;
+	int y = 0 + (screen->geometry().height() -
+				ui->widgetLockScreen->geometry().height()) / 2;
+	ui->widgetLockScreen->move(x, y);
 }
 
 /* Kill the xscreensaver process and show the lock screen */
 void MainWindow::switchToLockScreen()
 {
 	int childStatus;
-	if (xscreensaverPID == -1) /* Just in case */
-		return;
-	kill(xscreensaverPID, SIGKILL);
-	waitpid(xscreensaverPID, &childStatus, 0);
-	xscreensaverPID = -1;
-	setXScreensaverVisible(false);
+	foreach (int xscreensaverPID, xscreensaverPIDList) {
+		kill(xscreensaverPID, SIGKILL);
+		waitpid(xscreensaverPID, &childStatus, 0);
+	}
+	xscreensaverPIDList.clear();
+	foreach (QWidget *widgetXScreensaver, widgetXScreensaverList) {
+		widgetXScreensaver->deleteLater();
+	}
+	widgetXScreensaverList.clear();
+
+	ui->widgetLockScreen->show();
+	ui->lineEditPassword->setFocus();
 	screenState = LOCKSCREEN;
 }
 
@@ -248,34 +285,40 @@ void MainWindow::switchToLockScreen()
 void MainWindow::switchToXScreensaver()
 {
 	embedXScreensaver();
-	setXScreensaverVisible(true);
-	screenState = XSCREENSAVER;
-}
-
-void MainWindow::setXScreensaverVisible(bool visible)
-{
-	widgetXScreensaver->setVisible(visible);
-	ui->widgetLockScreen->setVisible(!visible);
+	ui->widgetLockScreen->hide();
 	/*
 	 * Move focus from lineedit to MainWindow object when xscreensaver is
 	 * started, otherwise the eventFilter won't be invoked.
 	 */
-	if (visible)
-		this->setFocus();
-	else
-		ui->lineEditPassword->setFocus();
+	this->setFocus();
+	screenState = XSCREENSAVER;
 }
 
+/* Embed xscreensavers to each screen */
 void MainWindow::embedXScreensaver()
 {
-	char winIdStr[16] = {0};
-	sprintf(winIdStr, "%lu", winId);
-	xscreensaverPID = fork();
-	if (xscreensaverPID == 0) {
-		execl("/usr/lib/xscreensaver/binaryring", "xscreensaver",
-					"-window-id", winIdStr, (char *)0);
-		qDebug() << "execle failed. Can't start xscreensaver.";
-	} else {
-		qDebug() << "xscreensaver child pid=" << xscreensaverPID;
+	for (int i = 0; i < QGuiApplication::screens().count(); i++) {
+		/* Create widget for embedding the xscreensaver */
+		QWidget *widgetXScreensaver = new QWidget(ui->centralWidget);
+		widgetXScreensaverList.append(widgetXScreensaver);
+		widgetXScreensaver->show();
+		widgetXScreensaver->setMouseTracking(true);
+		/* Move to top left corner at screen */
+		QScreen *screen = QGuiApplication::screens()[i];
+		widgetXScreensaver->setGeometry(screen->geometry());
+		/* Get winId from widget */
+		unsigned long winId = widgetXScreensaver->winId();
+		char winIdStr[16] = {0};
+		sprintf(winIdStr, "%lu", winId);
+		/* Fork and execl */
+		int xscreensaverPID = fork();
+		if (xscreensaverPID == 0) {
+			execl("/usr/lib/xscreensaver/binaryring", "xscreensaver",
+			      "-window-id", winIdStr, (char *)0);
+			qDebug() << "execle failed. Can't start xscreensaver.";
+		} else {
+			xscreensaverPIDList.append(xscreensaverPID);
+			qDebug() << "xscreensaver child pid=" << xscreensaverPID;
+		}
 	}
 }

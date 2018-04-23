@@ -29,18 +29,18 @@ public:
 	~MainWindow();
 
 private:
-	void createXScreensaverWidgets();
 	void setRealTimeMouseTracking();
 	void embedXScreensaver();
 	void handleKeyPressEvent(QKeyEvent *event);
 	void handleMouseMoveEvent(QMouseEvent *event);
-	void setXScreensaverVisible(bool visible);
 	void switchToLockScreen();
 	void switchToXScreensaver();
 	bool eventFilter(QObject *watched, QEvent *event);
 	void constructUI();
 	void closeEvent(QCloseEvent *event);
 	void uiGetReady(bool ready);
+	void setWindowStyle();
+	void lockscreenFollowCursor(QPoint cursorPosition);
 
 public slots:
 	void FSMTransition(); /* Transition FSM states according to signal */
@@ -51,10 +51,10 @@ private slots:
 
 private:
 	Ui::MainWindow *ui;
-	QWidget *widgetXScreensaver;
 	unsigned long int winId;
 	enum ScreenState screenState;
-	int xscreensaverPID;
+	QList<int> xscreensaverPIDList;
+	QList<QWidget *> widgetXScreensaverList;
 	enum ProgramState programState;
 	int toAuthChild[2];
 	int toParent[2];
