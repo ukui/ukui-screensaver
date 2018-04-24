@@ -33,13 +33,15 @@ SOURCES += \
 	mainwindow.cpp \
     unixsignallistener.cpp \
     pam.cpp \
-    gsettings.cpp
+    gsettings.cpp \
+    auxiliary.cpp
 
 HEADERS += \
 	mainwindow.h \
     unixsignallistener.h \
     pam.h \
-    gsettings.h
+    gsettings.h \
+    auxiliary.h
 
 FORMS += \
 	mainwindow.ui

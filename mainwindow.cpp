@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "pam.h"
+#include "auxiliary.h"
 #include <QKeyEvent>
 #include <QHBoxLayout>
 #include <QTimer>
@@ -124,10 +125,11 @@ void MainWindow::FSMTransition()
 		}
 		break;
 	case GET_PASSWORD: /* Triggered by ENTER */
-		password = ui->lineEditPassword->text().toLocal8Bit().data();
+		password = get_char_pointer(ui->lineEditPassword->text());
 		PIPE_OPS_SAFE(
 			::write(toAuthChild[1], password, strlen(password) + 1);
 		);
+		free(password);
 		programState = WAIT_AUTH_STATUS;
 		qDebug() << "User has input the password. Next state: WAIT_AUTH_STATUS.";
 		break;
