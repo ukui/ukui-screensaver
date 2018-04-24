@@ -315,6 +315,17 @@ void MainWindow::embedXScreensaver()
 		/* Move to top left corner at screen */
 		QScreen *screen = QGuiApplication::screens()[i];
 		widgetXScreensaver->setGeometry(screen->geometry());
+		/*
+		 * If the screensaver is black screen, we don't need to fork a
+		 * separate process. What we need is just setting the background
+		 * color of widgetXScreensaver. When switching to lockscreen,
+		 * no process will be killed because xscreensaverPIDList is empty.
+		 */
+		if (strcmp(xscreensaver_path, "blank-only") == 0) {
+			widgetXScreensaver->setStyleSheet(
+						"background-color: black;");
+			continue;
+		}
 		/* Get winId from widget */
 		unsigned long winId = widgetXScreensaver->winId();
 		char winIdStr[16] = {0};
@@ -344,6 +355,10 @@ QString MainWindow::getXScreensaver()
 	} else if (mode == "random"){
 		int randomIndex = qrand() % (themes.count());
 		selectedTheme = themes[randomIndex];
+	} else if (mode == "blank-only") { /* Note: blank not black */
+		return QString("blank-only");
+	} else {
+		qDebug() << "Fatal error: unrecognized screensaver mode";
 	}
 	/* screensavers-binaryring => binaryring */
 	selectedTheme = selectedTheme.split("-")[1];
