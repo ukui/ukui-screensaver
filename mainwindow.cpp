@@ -15,9 +15,15 @@ extern "C" {
 	#include <security/_pam_types.h>
 }
 
+#define GSETTINGS_SCHEMA "org.ukui.screensaver"
+#define KEY_MODE "mode"
+#define KEY_THEMES "themes"
+#define XSCREENSAVER_DIRNAME "/usr/lib/xscreensaver"
+
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent)
 {
+	qgsettings = new QGSettings(GSETTINGS_SCHEMA);
 }
 
 MainWindow::~MainWindow()
@@ -299,6 +305,7 @@ void MainWindow::switchToXScreensaver()
 /* Embed xscreensavers to each screen */
 void MainWindow::embedXScreensaver()
 {
+	char *xscreensaver_path = get_char_pointer(getXScreensaver());
 	for (int i = 0; i < QGuiApplication::screens().count(); i++) {
 		/* Create widget for embedding the xscreensaver */
 		QWidget *widgetXScreensaver = new QWidget(ui->centralWidget);
@@ -315,12 +322,30 @@ void MainWindow::embedXScreensaver()
 		/* Fork and execl */
 		int xscreensaverPID = fork();
 		if (xscreensaverPID == 0) {
-			execl("/usr/lib/xscreensaver/binaryring", "xscreensaver",
-			      "-window-id", winIdStr, (char *)0);
+			execl(xscreensaver_path, "xscreensaver", "-window-id",
+							winIdStr, (char *)0);
 			qDebug() << "execle failed. Can't start xscreensaver.";
 		} else {
 			xscreensaverPIDList.append(xscreensaverPID);
 			qDebug() << "xscreensaver child pid=" << xscreensaverPID;
 		}
 	}
+	free(xscreensaver_path);
+}
+
+/* Get xscreensaver path */
+QString MainWindow::getXScreensaver()
+{
+	QString mode = qgsettings->getString(KEY_MODE);
+	QList<QString> themes = qgsettings->getStringList(KEY_THEMES);
+	QString selectedTheme;
+	if (mode == "single") {
+		selectedTheme = themes[0];
+	} else if (mode == "random"){
+		int randomIndex = qrand() % (themes.count());
+		selectedTheme = themes[randomIndex];
+	}
+	/* screensavers-binaryring => binaryring */
+	selectedTheme = selectedTheme.split("-")[1];
+	return QString("%1/%2").arg(XSCREENSAVER_DIRNAME, selectedTheme);
 }

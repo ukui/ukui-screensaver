@@ -5,6 +5,7 @@
 #define QT_NO_KEYWORDS
 #endif
 
+#include <gsettings.h>
 #include <QMainWindow>
 
 namespace Ui {
@@ -45,6 +46,7 @@ private:
 	void uiGetReady(bool ready);
 	void setWindowStyle();
 	void lockscreenFollowCursor(QPoint cursorPosition);
+	QString getXScreensaver();
 
 public Q_SLOTS:
 	void FSMTransition(); /* Transition FSM states according to signal */
@@ -63,6 +65,7 @@ private:
 	int toAuthChild[2];
 	int toParent[2];
 	int authPID;
+	QGSettings *qgsettings;
 };
 
 #endif // MAINWINDOW_H
