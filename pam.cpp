@@ -38,10 +38,10 @@ void authenticate(int toParent[2], int toAuthChild[2])
 	}
 	printf("PAM ended successfully.\n");
 	kill(getppid(), SIGUSR1);
-	char buffer[2];
+	char buffer[16];
 	sprintf(buffer, "%d", auth_status);
 	PIPE_OPS_SAFE(
-		write(toParent[1], buffer, strlen(buffer))
+		write(toParent[1], buffer, strlen(buffer) + 1)
 	);
 	printf("Auth status has been written to pipe.\n");
 	::close(toParent[1]);

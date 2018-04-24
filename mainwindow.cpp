@@ -71,12 +71,11 @@ void MainWindow::setWindowStyle()
 						| Qt::X11BypassWindowManagerHint);
 }
 
-#define AUTH_STATUS_LENGTH 3
+#define AUTH_STATUS_LENGTH 16
 void MainWindow::FSMTransition()
 {
 	struct pam_message_object pam_msg_obj;
 	char auth_status_buffer[AUTH_STATUS_LENGTH];
-	int read_count;
 	int auth_status;
 	char *password;
 	switch (programState) { /* Current program state */
@@ -127,14 +126,15 @@ void MainWindow::FSMTransition()
 	case GET_PASSWORD: /* Triggered by ENTER */
 		password = ui->lineEditPassword->text().toLocal8Bit().data();
 		PIPE_OPS_SAFE(
-			::write(toAuthChild[1], password, strlen(password));
+			::write(toAuthChild[1], password, strlen(password) + 1);
 		);
 		programState = WAIT_AUTH_STATUS;
 		qDebug() << "User has input the password. Next state: WAIT_AUTH_STATUS.";
 		break;
 	case WAIT_AUTH_STATUS: /* pam_authenticate has returned */
-		read_count = read(toParent[0], auth_status_buffer, AUTH_STATUS_LENGTH);
-		auth_status_buffer[read_count] = 0;
+		PIPE_OPS_SAFE(
+			::read(toParent[0], auth_status_buffer, AUTH_STATUS_LENGTH);
+		);
 		sscanf(auth_status_buffer, "%d", &auth_status);
 		qDebug() << "auth_status:" << auth_status;
 		if (auth_status == PAM_SUCCESS) {
