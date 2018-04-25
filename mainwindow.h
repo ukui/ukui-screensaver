@@ -50,6 +50,7 @@ private:
 
 public Q_SLOTS:
 	void FSMTransition(); /* Transition FSM states according to signal */
+	void onConfigurationChanged(QString key);
 
 private Q_SLOTS:
 	void onUnlockClicked();

@@ -1,9 +1,20 @@
 #include "gsettings.h"
 #include "auxiliary.h"
 
-QGSettings::QGSettings(QString schema)
+QGSettings::QGSettings(QString schema, QObject *parent) : QObject(parent)
 {
 	gsettings = g_settings_new(schema.toLocal8Bit().data());
+	g_signal_connect(gsettings, "changed",
+				G_CALLBACK(QGSettings::changedCallback), this);
+}
+
+/* value changed callback */
+void QGSettings::changedCallback(GSettings *gsettings, const gchar *key,
+							gpointer user_data)
+{
+	(void)gsettings;
+	QGSettings *qgsettings = (QGSettings *)user_data;
+	Q_EMIT qgsettings->valueChanged(QString::fromLocal8Bit(key));
 }
 
 /*

@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent)
 {
 	qgsettings = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER);
+	connect(qgsettings, &QGSettings::valueChanged, this, &MainWindow::onConfigurationChanged);
 }
 
 MainWindow::~MainWindow()
@@ -363,4 +364,16 @@ QString MainWindow::getXScreensaver()
 	/* screensavers-binaryring => binaryring */
 	selectedTheme = selectedTheme.split("-")[1];
 	return QString("%1/%2").arg(XSCREENSAVER_DIRNAME, selectedTheme);
+}
+
+
+
+/*
+ * GSettings
+ */
+
+
+
+void MainWindow::onConfigurationChanged(QString key)
+{
 }

@@ -11,10 +11,12 @@ extern "C" {
 	#include <gio/gio.h>
 }
 
-class QGSettings
+class QGSettings : public QObject
 {
+	Q_OBJECT
+
 public:
-	QGSettings(QString schema);
+	explicit QGSettings(QString schema, QObject *parent = nullptr);
 
 public:
 	QString getString(QString key);
@@ -26,6 +28,11 @@ public:
 	bool setInt(QString key, int value);
 	bool setBool(QString key, bool value);
 	bool setStringList(QString key, QList<QString> value);
+	static void changedCallback(GSettings *gsettings, const gchar *key,
+							gpointer user_data);
+
+Q_SIGNALS:
+	void valueChanged(QString key);
 
 private:
 	GSettings *gsettings;
