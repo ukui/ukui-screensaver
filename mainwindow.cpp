@@ -15,16 +15,10 @@ extern "C" {
 	#include <security/_pam_types.h>
 }
 
-#define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
-#define KEY_MODE "mode"
-#define KEY_THEMES "themes"
-#define XSCREENSAVER_DIRNAME "/usr/lib/xscreensaver"
-
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent)
 {
-	qgsettings = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER);
-	connect(qgsettings, &QGSettings::valueChanged, this, &MainWindow::onConfigurationChanged);
+	configuration = new Configuration();
 	programState = IDLE;
 }
 
@@ -307,7 +301,8 @@ void MainWindow::switchToXScreensaver()
 /* Embed xscreensavers to each screen */
 void MainWindow::embedXScreensaver()
 {
-	char *xscreensaver_path = get_char_pointer(getXScreensaver());
+	char *xscreensaver_path = get_char_pointer(
+					configuration->getXScreensaver());
 	for (int i = 0; i < QGuiApplication::screens().count(); i++) {
 		/* Create widget for embedding the xscreensaver */
 		QWidget *widgetXScreensaver = new QWidget(ui->centralWidget);
@@ -344,37 +339,4 @@ void MainWindow::embedXScreensaver()
 		}
 	}
 	free(xscreensaver_path);
-}
-
-/* Get xscreensaver path */
-QString MainWindow::getXScreensaver()
-{
-	QString mode = qgsettings->getString(KEY_MODE);
-	QList<QString> themes = qgsettings->getStringList(KEY_THEMES);
-	QString selectedTheme;
-	if (mode == "single") {
-		selectedTheme = themes[0];
-	} else if (mode == "random"){
-		int randomIndex = qrand() % (themes.count());
-		selectedTheme = themes[randomIndex];
-	} else if (mode == "blank-only") { /* Note: blank not black */
-		return QString("blank-only");
-	} else {
-		qDebug() << "Fatal error: unrecognized screensaver mode";
-	}
-	/* screensavers-binaryring => binaryring */
-	selectedTheme = selectedTheme.split("-")[1];
-	return QString("%1/%2").arg(XSCREENSAVER_DIRNAME, selectedTheme);
-}
-
-
-
-/*
- * GSettings
- */
-
-
-
-void MainWindow::onConfigurationChanged(QString key)
-{
 }

@@ -7,6 +7,7 @@
 
 #include <gsettings.h>
 #include <QMainWindow>
+#include "configuration.h"
 
 namespace Ui {
 class MainWindow;
@@ -46,11 +47,9 @@ private:
 	void uiGetReady(bool ready);
 	void setWindowStyle();
 	void lockscreenFollowCursor(QPoint cursorPosition);
-	QString getXScreensaver();
 
 public Q_SLOTS:
 	void FSMTransition(); /* Transition FSM states according to signal */
-	void onConfigurationChanged(QString key);
 
 private Q_SLOTS:
 	void onUnlockClicked();
@@ -66,7 +65,7 @@ private:
 	int toAuthChild[2];
 	int toParent[2];
 	int authPID;
-	QGSettings *qgsettings;
+	Configuration *configuration;
 };
 
 #endif // MAINWINDOW_H
