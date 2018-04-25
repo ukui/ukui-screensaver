@@ -1,6 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#ifndef QT_NO_KEYWORDS
+#define QT_NO_KEYWORDS
+#endif
+
 #include <QMainWindow>
 
 namespace Ui {
@@ -42,10 +46,10 @@ private:
 	void setWindowStyle();
 	void lockscreenFollowCursor(QPoint cursorPosition);
 
-public slots:
+public Q_SLOTS:
 	void FSMTransition(); /* Transition FSM states according to signal */
 
-private slots:
+private Q_SLOTS:
 	void onUnlockClicked();
 	void onPasswordEnter();
 

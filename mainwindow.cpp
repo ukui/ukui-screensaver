@@ -59,7 +59,7 @@ void MainWindow::setWindowStyle()
 {
 	/* Calculate the total size of multi-head screen */
 	int totalWidth = 0, totalHeight = 0;
-	foreach (QScreen *screen, QGuiApplication::screens()) {
+	Q_FOREACH (QScreen *screen, QGuiApplication::screens()) {
 		totalWidth += screen->geometry().width();
 		totalHeight += screen->geometry().height();
 	}
@@ -253,7 +253,7 @@ void MainWindow::handleMouseMoveEvent(QMouseEvent *event)
 void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
 {
 	QScreen *screen = NULL;
-	foreach (screen, QGuiApplication::screens()) {
+	Q_FOREACH (screen, QGuiApplication::screens()) {
 		if (screen->geometry().contains(cursorPoint))
 			break;
 	}
@@ -268,12 +268,12 @@ void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
 void MainWindow::switchToLockScreen()
 {
 	int childStatus;
-	foreach (int xscreensaverPID, xscreensaverPIDList) {
+	Q_FOREACH (int xscreensaverPID, xscreensaverPIDList) {
 		kill(xscreensaverPID, SIGKILL);
 		waitpid(xscreensaverPID, &childStatus, 0);
 	}
 	xscreensaverPIDList.clear();
-	foreach (QWidget *widgetXScreensaver, widgetXScreensaverList) {
+	Q_FOREACH (QWidget *widgetXScreensaver, widgetXScreensaverList) {
 		widgetXScreensaver->deleteLater();
 	}
 	widgetXScreensaverList.clear();

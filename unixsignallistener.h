@@ -1,6 +1,10 @@
 #ifndef UNIXSIGNALLISTENER_H
 #define UNIXSIGNALLISTENER_H
 
+#ifndef QT_NO_KEYWORDS
+#define QT_NO_KEYWORDS
+#endif
+
 #include <QObject>
 #include <QSocketNotifier>
 
@@ -14,10 +18,10 @@ public:
 	/* Unix signal handlers. */
 	static void usr1SignalHandler(int unused);
 
-signals:
+Q_SIGNALS:
 	void transition(); /* Finite State Machine Driven Signal */
 
-public slots:
+public Q_SLOTS:
 	/* Qt signal handlers. */
 	void handleSigUsr1();
 

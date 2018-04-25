@@ -29,7 +29,7 @@ void UnixSignalListener::handleSigUsr1()
 	(void)ignore;
 
 	/* Do Qt stuff */
-	emit transition();
+	Q_EMIT transition();
 
 	snUsr1->setEnabled(true);
 }
