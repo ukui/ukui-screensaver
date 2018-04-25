@@ -15,7 +15,7 @@ extern "C" {
 	#include <security/_pam_types.h>
 }
 
-#define GSETTINGS_SCHEMA "org.ukui.screensaver"
+#define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
 #define KEY_MODE "mode"
 #define KEY_THEMES "themes"
 #define XSCREENSAVER_DIRNAME "/usr/lib/xscreensaver"
@@ -23,7 +23,7 @@ extern "C" {
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent)
 {
-	qgsettings = new QGSettings(GSETTINGS_SCHEMA);
+	qgsettings = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER);
 }
 
 MainWindow::~MainWindow()
