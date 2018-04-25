@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	qgsettings = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER);
 	connect(qgsettings, &QGSettings::valueChanged, this, &MainWindow::onConfigurationChanged);
+	programState = IDLE;
 }
 
 MainWindow::~MainWindow()
