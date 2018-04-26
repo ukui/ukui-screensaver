@@ -14,6 +14,7 @@ class MainWindow;
 }
 
 enum ScreenState {
+	UNDEFINED,
 	LOCKSCREEN,
 	XSCREENSAVER
 };

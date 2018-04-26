@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	configuration = new Configuration();
 	programState = IDLE;
+	screenState = UNDEFINED;
 }
 
 MainWindow::~MainWindow()
@@ -250,10 +251,13 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 void MainWindow::handleKeyPressEvent(QKeyEvent *event)
 {
 	if (screenState == LOCKSCREEN) {
-		if (event->key() == Qt::Key_Escape)
+		if (event->key() == Qt::Key_Escape) {
 			switchToXScreensaver();
+			screenState = XSCREENSAVER;
+		}
 	} else { /* currentState == XSCREENSAVER */
 		switchToLockscreen();
+		screenState = LOCKSCREEN;
 	}
 }
 
@@ -265,6 +269,7 @@ void MainWindow::handleMouseMoveEvent(QMouseEvent *event)
 		lockscreenFollowCursor(event->pos());
 	} else {
 		switchToLockscreen();
+		screenState = LOCKSCREEN;
 	}
 }
 
@@ -299,7 +304,6 @@ void MainWindow::switchToLockscreen()
 
 	ui->widgetLockscreen->show();
 	ui->lineEditPassword->setFocus();
-	screenState = LOCKSCREEN;
 }
 
 /* Start a xscreensaver process and embed it onto the widgetXScreensaver widget */
@@ -312,7 +316,6 @@ void MainWindow::switchToXScreensaver()
 	 * started, otherwise the eventFilter won't be invoked.
 	 */
 	this->setFocus();
-	screenState = XSCREENSAVER;
 }
 
 /* Embed xscreensavers to each screen */
