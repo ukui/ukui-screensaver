@@ -394,7 +394,7 @@ void MainWindow::sessionStatusChanged(unsigned int status)
 		if (configuration->xscreensaverActivatedWhenIdle() &&
 			configuration->lockWhenXScreensaverActivated()) {
 			/* Start authentication and construct UI */
-			::raise(SIGUSR1);
+			FSMTransition();
 			switchToXScreensaver();
 			screenState = XSCREENSAVER;
 		} else if (configuration->xscreensaverActivatedWhenIdle()) {
