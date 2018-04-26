@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="widgetLockScreen" native="true">
+   <widget class="QWidget" name="widgetLockscreen" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>

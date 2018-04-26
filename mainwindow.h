@@ -39,7 +39,7 @@ private:
 	void embedXScreensaver();
 	void handleKeyPressEvent(QKeyEvent *event);
 	void handleMouseMoveEvent(QMouseEvent *event);
-	void switchToLockScreen();
+	void switchToLockscreen();
 	void switchToXScreensaver();
 	bool eventFilter(QObject *watched, QEvent *event);
 	void constructUI();

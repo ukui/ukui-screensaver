@@ -236,7 +236,7 @@ void MainWindow::handleKeyPressEvent(QKeyEvent *event)
 		if (event->key() == Qt::Key_Escape)
 			switchToXScreensaver();
 	} else { /* currentState == XSCREENSAVER */
-		switchToLockScreen();
+		switchToLockscreen();
 	}
 }
 
@@ -247,7 +247,7 @@ void MainWindow::handleMouseMoveEvent(QMouseEvent *event)
 	if (screenState == LOCKSCREEN) {
 		lockscreenFollowCursor(event->pos());
 	} else {
-		switchToLockScreen();
+		switchToLockscreen();
 	}
 }
 
@@ -260,14 +260,14 @@ void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
 			break;
 	}
 	int x = screen->geometry().x() + (screen->geometry().width() -
-				ui->widgetLockScreen->geometry().width()) / 2;
+				ui->widgetLockscreen->geometry().width()) / 2;
 	int y = 0 + (screen->geometry().height() -
-				ui->widgetLockScreen->geometry().height()) / 2;
-	ui->widgetLockScreen->move(x, y);
+				ui->widgetLockscreen->geometry().height()) / 2;
+	ui->widgetLockscreen->move(x, y);
 }
 
 /* Kill the xscreensaver process and show the lock screen */
-void MainWindow::switchToLockScreen()
+void MainWindow::switchToLockscreen()
 {
 	int childStatus;
 	Q_FOREACH (int xscreensaverPID, xscreensaverPIDList) {
@@ -280,7 +280,7 @@ void MainWindow::switchToLockScreen()
 	}
 	widgetXScreensaverList.clear();
 
-	ui->widgetLockScreen->show();
+	ui->widgetLockscreen->show();
 	ui->lineEditPassword->setFocus();
 	screenState = LOCKSCREEN;
 }
@@ -289,7 +289,7 @@ void MainWindow::switchToLockScreen()
 void MainWindow::switchToXScreensaver()
 {
 	embedXScreensaver();
-	ui->widgetLockScreen->hide();
+	ui->widgetLockscreen->hide();
 	/*
 	 * Move focus from lineedit to MainWindow object when xscreensaver is
 	 * started, otherwise the eventFilter won't be invoked.
