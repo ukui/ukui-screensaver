@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <QDebug>
+#include <QtDBus/QDBusReply>
 extern "C" {
 	#include <security/_pam_types.h>
 }
@@ -56,6 +57,12 @@ void MainWindow::constructUI()
 	ui = new Ui::MainWindow;
 	ui->setupUi(this);
 	pixmap.load(configuration->getBackground());
+	/* Set avatar, password entry, button ... */
+	QPixmap avatarPixmap;
+	avatarPixmap.load(getUserAvatarPath(QString::fromLocal8Bit(getlogin())));
+	avatarPixmap = avatarPixmap.scaled(128, 128, Qt::IgnoreAspectRatio);
+	ui->lblAvatar->setPixmap(avatarPixmap);
+
 	connect(ui->lineEditPassword, &QLineEdit::returnPressed, this, &MainWindow::onPasswordEnter);
 	connect(ui->btnUnlock, &QPushButton::clicked, this, &MainWindow::onUnlockClicked);
 	screenState = LOCKSCREEN;
@@ -407,4 +414,46 @@ void MainWindow::sessionStatusChanged(unsigned int status)
 	default:
 		break;
 	}
+}
+
+
+
+/*
+ * Others
+ */
+
+
+
+QString MainWindow::getUserAvatarPath(QString username)
+{
+	QString iconPath;
+	QDBusInterface userIface( "org.freedesktop.Accounts",
+					"/org/freedesktop/Accounts",
+					"org.freedesktop.Accounts",
+					QDBusConnection::systemBus());
+	if (!userIface.isValid())
+		qDebug() << "userIface is invalid";
+	QDBusReply<QDBusObjectPath> userReply = userIface.call("FindUserByName",
+								username);
+	if (!userReply.isValid()) {
+		qDebug() << "userReply is invalid";
+		iconPath = "/usr/share/kylin-greeter/default_face.png";
+	}
+	QDBusInterface iconIface( "org.freedesktop.Accounts",
+					userReply.value().path(),
+					"org.freedesktop.DBus.Properties",
+					QDBusConnection::systemBus());
+	if (!iconIface.isValid())
+		qDebug() << "IconIface is invalid";
+	QDBusReply<QDBusVariant> iconReply = iconIface.call("Get",
+				"org.freedesktop.Accounts.User", "IconFile");
+	if (!iconReply.isValid()) {
+		qDebug() << "iconReply is invalid";
+		iconPath = "/usr/share/kylin-greeter/default_face.png";
+	}
+	iconPath = iconReply.value().variant().toString();
+	if (access(get_char_pointer(iconPath), R_OK) != 0) /* No Access Permission */
+		qDebug() << "Can't access user avatar:" << iconPath
+						<< "No access permission.";
+	return iconPath;
 }

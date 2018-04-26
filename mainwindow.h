@@ -59,6 +59,7 @@ private:
 	void uiGetReady(bool ready);
 	void setWindowStyle();
 	void lockscreenFollowCursor(QPoint cursorPosition);
+	QString getUserAvatarPath(QString username);
 
 protected:
 	void paintEvent(QPaintEvent *event);
