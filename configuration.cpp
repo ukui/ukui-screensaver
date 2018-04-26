@@ -8,13 +8,13 @@
 
 Configuration::Configuration(QObject *parent) : QObject(parent)
 {
-	qgsettings = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER);
-	connect(qgsettings, &QGSettings::valueChanged,
+	qgsettingsScreensaver = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER);
+	connect(qgsettingsScreensaver, &QGSettings::valueChanged,
 				this, &Configuration::onConfigurationChanged);
 
 	/* Initiailization */
-	mode = qgsettings->getString(KEY_MODE);
-	themes = qgsettings->getStringList(KEY_THEMES);
+	mode = qgsettingsScreensaver->getString(KEY_MODE);
+	themes = qgsettingsScreensaver->getStringList(KEY_THEMES);
 }
 
 /* Update member value when GSettings changed */
@@ -22,9 +22,9 @@ void Configuration::onConfigurationChanged(QString key)
 {
 	qDebug() << "GSettings value changed, key = " << key;
 	if (key == KEY_MODE)
-		mode = qgsettings->getString(KEY_MODE);
+		mode = qgsettingsScreensaver->getString(KEY_MODE);
 	else if (key == KEY_THEMES)
-		themes = qgsettings->getStringList(KEY_THEMES);
+		themes = qgsettingsScreensaver->getStringList(KEY_THEMES);
 }
 
 

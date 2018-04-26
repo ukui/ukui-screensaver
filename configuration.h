@@ -22,7 +22,7 @@ public Q_SLOTS:
 	void onConfigurationChanged(QString key);
 
 private:
-	QGSettings *qgsettings;
+	QGSettings *qgsettingsScreensaver;
 	QString mode;
 	QList<QString> themes;
 };
