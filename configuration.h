@@ -19,6 +19,8 @@ public:
 	QString getXScreensaver();
 	QString getBackground();
 	int getIdleDelay();
+	bool xscreensaverActivatedWhenIdle();
+	bool lockWhenXScreensaverActivated();
 
 public Q_SLOTS:
 	void onConfigurationChanged(QString key);
@@ -31,6 +33,8 @@ private:
 	QList<QString> themes;
 	QString background;
 	int idleDelay;
+	bool idleActivationEnabled;
+	bool lockEnabled;
 };
 
 #endif // CONFIGURATION_H

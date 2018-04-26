@@ -4,6 +4,8 @@
 #define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
 #define KEY_MODE "mode"
 #define KEY_THEMES "themes"
+#define KEY_IDLE_ACTIVATION_ENABLED "idle-activation-enabled"
+#define KEY_LOCK_ENABLED "lock-enabled"
 #define XSCREENSAVER_DIRNAME "/usr/lib/xscreensaver"
 
 #define GSETTINGS_SCHEMA_BACKGROUND "org.mate.background"
@@ -35,6 +37,9 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
 	themes = qgsettingsScreensaver->getStringList(KEY_THEMES);
 	background = qgsettingsBackground->getString(KEY_PICTURE_FILENAME);
 	idleDelay = qgsettingsSession->getInt(KEY_IDLE_DELAY);
+	idleActivationEnabled = qgsettingsScreensaver->getBool(
+						KEY_IDLE_ACTIVATION_ENABLED);
+	lockEnabled = qgsettingsScreensaver->getBool(KEY_LOCK_ENABLED);
 }
 
 /* Update member value when GSettings changed */
@@ -49,6 +54,12 @@ void Configuration::onConfigurationChanged(QString key)
 		background = qgsettingsBackground->getString(KEY_PICTURE_FILENAME);
 	else if (key == KEY_IDLE_DELAY)
 		idleDelay = qgsettingsSession->getInt(KEY_IDLE_DELAY);
+	else if (key == KEY_IDLE_ACTIVATION_ENABLED)
+		idleActivationEnabled = qgsettingsScreensaver->getBool(
+						KEY_IDLE_ACTIVATION_ENABLED);
+	else if (key == KEY_LOCK_ENABLED)
+		lockEnabled = qgsettingsScreensaver->getBool(
+							KEY_LOCK_ENABLED);
 }
 
 /*
@@ -83,4 +94,14 @@ QString Configuration::getBackground()
 int Configuration::getIdleDelay()
 {
 	return idleDelay;
+}
+
+bool Configuration::xscreensaverActivatedWhenIdle()
+{
+	return idleActivationEnabled;
+}
+
+bool Configuration::lockWhenXScreensaverActivated()
+{
+	return lockEnabled;
 }
