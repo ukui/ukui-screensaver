@@ -16,12 +16,23 @@ extern "C" {
 	#include <security/_pam_types.h>
 }
 
+#define DBUS_SESSION_MANAGER_SERVICE "org.gnome.SessionManager"
+#define DBUS_SESSION_MANAGER_PATH "/org/gnome/SessionManager/Presence"
+#define DBUS_SESSION_MANAGER_INTERFACE "org.gnome.SessionManager.Presence"
+
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent)
 {
 	configuration = new Configuration();
 	programState = IDLE;
 	screenState = UNDEFINED;
+	/* Listen to SessionManager StatusChanged signal for idle activation */
+	interface = new QDBusInterface(DBUS_SESSION_MANAGER_SERVICE,
+					DBUS_SESSION_MANAGER_PATH,
+					DBUS_SESSION_MANAGER_INTERFACE,
+					QDBusConnection::sessionBus());
+	connect(interface, SIGNAL(StatusChanged(unsigned int)),
+				this, SLOT(sessionStatusChanged(unsigned int)));
 }
 
 MainWindow::~MainWindow()
@@ -255,9 +266,13 @@ void MainWindow::handleKeyPressEvent(QKeyEvent *event)
 			switchToXScreensaver();
 			screenState = XSCREENSAVER;
 		}
-	} else { /* currentState == XSCREENSAVER */
+	} else if (screenState == XSCREENSAVER){
 		switchToLockscreen();
 		screenState = LOCKSCREEN;
+	} else { /* currentState == XSCREENSAVER_BY_IDLE */
+		switchToLockscreen(); /* Destroy xscreensaver widgets */
+		close(); /* Destroy lockscreen widgets */
+		screenState = UNDEFINED;
 	}
 }
 
@@ -267,9 +282,13 @@ void MainWindow::handleMouseMoveEvent(QMouseEvent *event)
 	(void)event;
 	if (screenState == LOCKSCREEN) {
 		lockscreenFollowCursor(event->pos());
-	} else {
+	} else if (screenState == XSCREENSAVER){
 		switchToLockscreen();
 		screenState = LOCKSCREEN;
+	} else { /* screenState == XSCREENSAVER_BY_IDLE */
+		switchToLockscreen(); /* Destroy xscreensaver widgets */
+		close(); /* Destroy lockscreen widgets */
+		screenState = UNDEFINED;
 	}
 }
 
@@ -359,4 +378,33 @@ void MainWindow::embedXScreensaver()
 		}
 	}
 	free(xscreensaver_path);
+}
+
+/* Listen to SessionManager StatusChanged D-Bus signal */
+void MainWindow::sessionStatusChanged(unsigned int status)
+{
+	switch (status) {
+	case SESSION_AVAILABLE:
+		break;
+	case SESSION_INVISIBLE:
+		break;
+	case SESSION_BUSY:
+		break;
+	case SESSION_IDLE:
+		if (configuration->xscreensaverActivatedWhenIdle() &&
+			configuration->lockWhenXScreensaverActivated()) {
+			/* Start authentication and construct UI */
+			::raise(SIGUSR1);
+			switchToXScreensaver();
+			screenState = XSCREENSAVER;
+		} else if (configuration->xscreensaverActivatedWhenIdle()) {
+			/* Only construct UI without start authentication */
+			constructUI();
+			switchToXScreensaver();
+			screenState = XSCREENSAVER_BY_IDLE;
+		}
+		break;
+	default:
+		break;
+	}
 }

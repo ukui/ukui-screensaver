@@ -7,6 +7,7 @@
 
 #include <gsettings.h>
 #include <QMainWindow>
+#include <QtDBus/QDBusInterface>
 #include "configuration.h"
 
 namespace Ui {
@@ -16,7 +17,8 @@ class MainWindow;
 enum ScreenState {
 	UNDEFINED,
 	LOCKSCREEN,
-	XSCREENSAVER
+	XSCREENSAVER,
+	XSCREENSAVER_BY_IDLE /* Xscreensaver is activated by session idle */
 };
 
 enum ProgramState {
@@ -25,6 +27,14 @@ enum ProgramState {
 	GET_PASSWORD,
 	WAIT_AUTH_STATUS,
 	AUTH_FAILED
+};
+
+/* https://www.narf.ssji.net/~shtrom/wiki/projets/gnomescreensavernosession */
+enum SessionStatus {
+	SESSION_AVAILABLE = 0,
+	SESSION_INVISIBLE = 1,
+	SESSION_BUSY = 2,
+	SESSION_IDLE = 3
 };
 
 class MainWindow : public QMainWindow
@@ -42,6 +52,7 @@ private:
 	void handleMouseMoveEvent(QMouseEvent *event);
 	void switchToLockscreen();
 	void switchToXScreensaver();
+	void startXScreensaverWithoutAuth();
 	bool eventFilter(QObject *watched, QEvent *event);
 	void constructUI();
 	void closeEvent(QCloseEvent *event);
@@ -58,6 +69,7 @@ public Q_SLOTS:
 private Q_SLOTS:
 	void onUnlockClicked();
 	void onPasswordEnter();
+	void sessionStatusChanged(unsigned int status);
 
 private:
 	Ui::MainWindow *ui;
@@ -71,6 +83,7 @@ private:
 	int authPID;
 	Configuration *configuration;
 	QPixmap pixmap;
+	QDBusInterface *interface;
 };
 
 #endif // MAINWINDOW_H
