@@ -48,6 +48,9 @@ private:
 	void setWindowStyle();
 	void lockscreenFollowCursor(QPoint cursorPosition);
 
+protected:
+	void paintEvent(QPaintEvent *event);
+
 public Q_SLOTS:
 	void FSMTransition(); /* Transition FSM states according to signal */
 
@@ -66,6 +69,7 @@ private:
 	int toParent[2];
 	int authPID;
 	Configuration *configuration;
+	QPixmap pixmap;
 };
 
 #endif // MAINWINDOW_H

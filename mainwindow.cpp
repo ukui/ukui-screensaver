@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QDesktopWidget>
 #include <QScreen>
+#include <QPainter>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -42,6 +43,7 @@ void MainWindow::constructUI()
 {
 	ui = new Ui::MainWindow;
 	ui->setupUi(this);
+	pixmap.load(configuration->getBackground());
 	connect(ui->lineEditPassword, &QLineEdit::returnPressed, this, &MainWindow::onPasswordEnter);
 	connect(ui->btnUnlock, &QPushButton::clicked, this, &MainWindow::onUnlockClicked);
 	screenState = LOCKSCREEN;
@@ -73,6 +75,21 @@ void MainWindow::setWindowStyle()
 	setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
 						| Qt::X11BypassWindowManagerHint);
 }
+
+/* Draw background image */
+void MainWindow::paintEvent(QPaintEvent *event)
+{
+	(void)event;
+	/*
+	 * MainWindow is stretched to all screens. We can draw background image
+	 * on it based on geometry of each screen.
+	 */
+	Q_FOREACH (QScreen *screen, QGuiApplication::screens()) {
+		QPainter painter(this);
+		painter.drawPixmap(screen->geometry(), pixmap);
+	}
+}
+
 
 #define AUTH_STATUS_LENGTH 16
 void MainWindow::FSMTransition()
