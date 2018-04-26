@@ -17,14 +17,20 @@ public:
 
 public:
 	QString getXScreensaver();
+	QString getBackground();
+	int getIdleDelay();
 
 public Q_SLOTS:
 	void onConfigurationChanged(QString key);
 
 private:
 	QGSettings *qgsettingsScreensaver;
+	QGSettings *qgsettingsBackground;
+	QGSettings *qgsettingsSession;
 	QString mode;
 	QList<QString> themes;
+	QString background;
+	int idleDelay;
 };
 
 #endif // CONFIGURATION_H
