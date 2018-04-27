@@ -407,6 +407,7 @@ void MainWindow::sessionStatusChanged(unsigned int status)
 		} else if (configuration->xscreensaverActivatedWhenIdle()) {
 			/* Only construct UI without start authentication */
 			constructUI();
+			setCursor(Qt::ArrowCursor);
 			switchToXScreensaver();
 			screenState = XSCREENSAVER_BY_IDLE;
 		}
