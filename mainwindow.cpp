@@ -62,6 +62,26 @@ void MainWindow::constructUI()
 	avatarPixmap.load(getUserAvatarPath(QString::fromLocal8Bit(getlogin())));
 	avatarPixmap = avatarPixmap.scaled(128, 128, Qt::IgnoreAspectRatio);
 	ui->lblAvatar->setPixmap(avatarPixmap);
+	ui->lineEditPassword->setFixedSize(300, 40);
+	ui->btnUnlock->setFixedHeight(40);
+	ui->lblUsername->setStyleSheet("color: white; font-size: 23px;");
+	ui->lblLogged->setStyleSheet("color: white; font-size: 13px;");
+	ui->lblPrompt->setStyleSheet("color: white; font-size: 13px;");
+	ui->btnUnlock->setStyleSheet(
+				"QPushButton {"
+					"color: black;"
+					"background-color: #0078d7;"
+				"}"
+				"QPushButton:hover {"
+					"background-color: #3f8de0;"
+				"}"
+				"QPushButton:active {"
+					"background-color: #2367b9;"
+				"}"
+				"QPushButton:disabled {"
+					"background-color: #013C76;"
+				"}");
+	ui->widgetLockscreen->adjustSize();
 
 	connect(ui->lineEditPassword, &QLineEdit::returnPressed, this, &MainWindow::onPasswordEnter);
 	connect(ui->btnUnlock, &QPushButton::clicked, this, &MainWindow::onUnlockClicked);
