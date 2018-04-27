@@ -169,16 +169,20 @@ void MainWindow::FSMTransition()
 		PIPE_OPS_SAFE(
 			::read(toParent[0], &pam_msg_obj, sizeof(pam_msg_obj));
 		);
-		ui->lblPrompt->setText(QString::fromUtf8(pam_msg_obj.msg));
 		if (pam_msg_obj.msg_style == PAM_PROMPT_ECHO_OFF) {
 			ui->lineEditPassword->setEchoMode(QLineEdit::Password);
+			ui->lineEditPassword->setPlaceholderText(
+					QString::fromUtf8(pam_msg_obj.msg));
 			programState = GET_PASSWORD;
 			qDebug() << "PAM messages has been shown. Next state: GET_PASSWORD.";
 		} else if (pam_msg_obj.msg_style == PAM_PROMPT_ECHO_ON){
 			ui->lineEditPassword->setEchoMode(QLineEdit::Normal);
+			ui->lineEditPassword->setPlaceholderText(
+					QString::fromUtf8(pam_msg_obj.msg));
 			programState = GET_PASSWORD;
 			qDebug() << "PAM messages has been shown. Next state: GET_PASSWORD.";
 		} else {
+			ui->lblPrompt->setText(QString::fromUtf8(pam_msg_obj.msg));
 			qDebug() << "PAM only want to show message. Next state is still SHOW_PAM_MESSAGE.";
 		}
 		break;
@@ -205,6 +209,7 @@ void MainWindow::FSMTransition()
 			QTimer::singleShot(0, [this]{
 				::raise(SIGUSR1);
 			});
+			ui->lblPrompt->setText(tr("Password Incorrect"));
 			programState = AUTH_FAILED;
 			qDebug() << "Authenticate unsuccessfully. Next state: AUTH_FAILED.";
 		}
