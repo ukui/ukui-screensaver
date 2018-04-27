@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [ "$1" == "-l" ]; then
+	ps aux | grep ukui-screensaver | grep -v grep | awk '{print $2}' | xargs kill -SIGUSR1
+fi
