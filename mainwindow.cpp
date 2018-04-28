@@ -131,7 +131,7 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
 
 #define AUTH_STATUS_LENGTH 16
-void MainWindow::FSMTransition(int pid)
+void MainWindow::FSMTransition(int signalSenderPID)
 {
 	struct pam_message_object pam_msg_obj;
 	char auth_status_buffer[AUTH_STATUS_LENGTH];
