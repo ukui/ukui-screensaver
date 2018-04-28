@@ -65,7 +65,7 @@ protected:
 	void paintEvent(QPaintEvent *event);
 
 public Q_SLOTS:
-	void FSMTransition(); /* Transition FSM states according to signal */
+	void FSMTransition(int pid); /* Transition FSM states according to signal */
 
 private Q_SLOTS:
 	void onUnlockClicked();

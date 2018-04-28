@@ -21,10 +21,10 @@ static int setup_unix_signal_handlers()
 {
     struct sigaction usr1;
 
-    usr1.sa_handler = UnixSignalListener::usr1SignalHandler;
+    usr1.sa_sigaction = UnixSignalListener::usr1SignalAction;
     sigemptyset(&usr1.sa_mask);
     usr1.sa_flags = 0;
-    usr1.sa_flags |= SA_RESTART;
+    usr1.sa_flags |= SA_SIGINFO;
 
     if (sigaction(SIGUSR1, &usr1, 0))
        return 1;

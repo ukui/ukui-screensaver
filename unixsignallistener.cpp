@@ -13,23 +13,27 @@ UnixSignalListener::UnixSignalListener(QObject *parent) : QObject(parent)
 	connect(snUsr1, &QSocketNotifier::activated, this, &UnixSignalListener::handleSigUsr1);
 }
 
-void UnixSignalListener::usr1SignalHandler(int unused)
+void UnixSignalListener::usr1SignalAction(int sig, siginfo_t *siginfo, void *ucontext)
 {
-	(void)unused;
-	char a = 1;
-	int ignore = ::write(sigusr1Fd[0], &a, sizeof(a));
+	(void)sig;
+	(void)ucontext;
+	char buffer[16];
+	sprintf(buffer, "%d", siginfo->si_pid);
+	int ignore = ::write(sigusr1Fd[0], buffer, strlen(buffer) + 1);
 	(void)ignore;
 }
 
 void UnixSignalListener::handleSigUsr1()
 {
 	snUsr1->setEnabled(false);
-	char tmp;
-	int ignore = ::read(sigusr1Fd[1], &tmp, sizeof(tmp));
+	char buffer[16];
+	int pid;
+	int ignore = ::read(sigusr1Fd[1], buffer, sizeof(buffer));
+	sscanf(buffer, "%d", &pid);
 	(void)ignore;
 
 	/* Do Qt stuff */
-	Q_EMIT transition();
+	Q_EMIT transition(pid);
 
 	snUsr1->setEnabled(true);
 }

@@ -131,7 +131,7 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
 
 #define AUTH_STATUS_LENGTH 16
-void MainWindow::FSMTransition()
+void MainWindow::FSMTransition(int pid)
 {
 	struct pam_message_object pam_msg_obj;
 	char auth_status_buffer[AUTH_STATUS_LENGTH];
@@ -426,7 +426,7 @@ void MainWindow::sessionStatusChanged(unsigned int status)
 		if (configuration->xscreensaverActivatedWhenIdle() &&
 			configuration->lockWhenXScreensaverActivated()) {
 			/* Start authentication and construct UI */
-			FSMTransition();
+			FSMTransition(getpid());
 			switchToXScreensaver();
 			screenState = XSCREENSAVER;
 		} else if (configuration->xscreensaverActivatedWhenIdle()) {

@@ -7,6 +7,7 @@
 
 #include <QObject>
 #include <QSocketNotifier>
+#include <signal.h>
 
 class UnixSignalListener : public QObject
 {
@@ -16,10 +17,11 @@ public:
 
 public:
 	/* Unix signal handlers. */
-	static void usr1SignalHandler(int unused);
+	static void usr1SignalAction(int sig, siginfo_t *siginfo, void *ucontext);
 
 Q_SIGNALS:
-	void transition(); /* Finite State Machine Driven Signal */
+	/* pid is the sending process id */
+	void transition(int pid); /* Finite State Machine Driven Signal */
 
 public Q_SLOTS:
 	/* Qt signal handlers. */
