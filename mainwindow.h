@@ -60,6 +60,7 @@ private:
 	void setWindowStyle();
 	void lockscreenFollowCursor(QPoint cursorPosition);
 	QString getUserAvatarPath(QString username);
+	bool signalSenderFilter(int signalSenderPID);
 
 protected:
 	void paintEvent(QPaintEvent *event);

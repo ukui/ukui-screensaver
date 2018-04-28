@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 #include <QDebug>
 #include <QtDBus/QDBusReply>
 extern "C" {
@@ -130,6 +131,43 @@ void MainWindow::paintEvent(QPaintEvent *event)
 }
 
 
+/* Verify if the sender of SIGUSR1 is correct or not */
+bool MainWindow::signalSenderFilter(int senderSenderPid)
+{
+	if (senderSenderPid == getpid() || senderSenderPid == authPID)
+		return true;
+	/*
+	 * If the sender is neither the current process nor the authentication
+	 * child process, then we should check the programState.
+	 * If programState is IDLE and we can read a number from a fifo and the
+	 * data is the pid of the current process, then the signal is sent by
+	 * ukui-screensaver-command.
+	 */
+	FILE *fp;
+	int filedata;
+	const char *file = "/tmp/ukui-screensaver-lock";
+	if (programState == IDLE) {
+		fp = fopen(file, "r");
+		if (!fp) {
+			qDebug() << "Can't open file";
+			perror("Details: ");
+			return false;
+		}
+		fscanf(fp, "%d", &filedata);
+		if (filedata == getpid()) {
+			qDebug() << "ukui-screensaver-command request for locking";
+			return true;
+		} else {
+			qDebug() << "File data do not match the pid of ukui-screensaver";
+			return false;
+		}
+	} else {
+		qDebug() << "Receive a SIGUSR1 but programState is not IDLE."
+				"Ignore it!";
+		return false;
+	}
+}
+
 #define AUTH_STATUS_LENGTH 16
 void MainWindow::FSMTransition(int signalSenderPID)
 {
@@ -137,6 +175,10 @@ void MainWindow::FSMTransition(int signalSenderPID)
 	char auth_status_buffer[AUTH_STATUS_LENGTH];
 	int auth_status;
 	char *password;
+
+	if(!signalSenderFilter(signalSenderPID))
+		return;
+
 	switch (programState) { /* Current program state */
 	case IDLE: /* Idle in background */
 	case AUTH_FAILED: /* Re-Authenticate */
