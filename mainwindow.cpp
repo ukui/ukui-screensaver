@@ -57,19 +57,37 @@ void MainWindow::constructUI()
 {
 	ui = new Ui::MainWindow;
 	ui->setupUi(this);
+    /* Put the button in the LineEdit */
+    QHBoxLayout *hLayoutPwd = new QHBoxLayout;
+    hLayoutPwd->setSpacing(0);
+    hLayoutPwd->setContentsMargins(1, 1, 1, 1);
+    hLayoutPwd->addStretch();
+    hLayoutPwd->addWidget(ui->btnUnlock);
+    ui->btnUnlock->setFixedSize(70, 38);
+    ui->btnUnlock->setFlat(true);
+    ui->btnUnlock->setCursor(Qt::PointingHandCursor);
+    ui->lineEditPassword->setLayout(hLayoutPwd);
+    ui->lineEditPassword->setTextMargins(1, 1, ui->btnUnlock->width(), 1);
+    ui->lineEditPassword->setCursor(Qt::IBeamCursor);
+
 	pixmap.load(configuration->getBackground());
 	/* Set avatar, password entry, button ... */
+    QString username = ::getenv("USER");
 	QPixmap avatarPixmap;
-	avatarPixmap.load(getUserAvatarPath(QString::fromLocal8Bit(getlogin())));
+    avatarPixmap.load(getUserAvatarPath(username));
 	avatarPixmap = avatarPixmap.scaled(128, 128, Qt::IgnoreAspectRatio);
 	ui->lblAvatar->setPixmap(avatarPixmap);
-	ui->lineEditPassword->setFixedSize(300, 40);
+    ui->lblUsername->setText(username);
+    ui->lineEditPassword->setFixedSize(350, 40);
 	ui->btnUnlock->setFixedHeight(40);
+    ui->lblAvatar->setStyleSheet("border:2px solid white");
 	ui->lblUsername->setStyleSheet("color: white; font-size: 23px;");
 	ui->lblLogged->setStyleSheet("color: white; font-size: 13px;");
 	ui->lblPrompt->setStyleSheet("color: white; font-size: 13px;");
+    ui->lineEditPassword->setStyleSheet("border:1px solid #026096");
 	ui->btnUnlock->setStyleSheet(
 				"QPushButton {"
+                    "border:0px;"
 					"color: black;"
 					"background-color: #0078d7;"
 				"}"
