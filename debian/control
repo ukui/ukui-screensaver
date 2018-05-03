@@ -1,0 +1,15 @@
+Source: ukui-screensaver
+Section: x11
+Priority: optional
+Maintainer: lihao <lihao@kylinos.cn>
+Build-Depends: debhelper (>= 11),
+	       qtbase5-dev,
+	       libpam0g-dev,
+	       qttools5-dev-tools
+Standards-Version: 3.9.5
+
+Package: ukui-screensaver
+Architecture: amd64 arm64
+Depends: ${misc:Depends}
+Conflicts:
+Description: A screensaver written by Qt.
