@@ -110,6 +110,9 @@ void MainWindow::constructUI()
 	installEventFilter(this);
 	setWindowStyle();
 	show();
+    /* grab control of the mouse and keyboard events in lockscreen window  */
+    if(!establishGrab())
+        qWarning("can't grab mouse or keyboard");
 	/*
 	 * After setting X11BypassWindowManagerHint flag, setFocus can't make
 	 * LineEdit get focus, so we need to activate window manually.
@@ -264,6 +267,8 @@ void MainWindow::FSMTransition(int signalSenderPID)
 		if (auth_status == PAM_SUCCESS) {
 			close();
 			programState = IDLE;
+            /* ungrab the control of mouse and keyboard events */
+            closeGrab();
 			qDebug() << "Authenticate successfully. Next state: IDLE";
 		} else {
 			QTimer::singleShot(0, [this]{

@@ -1,10 +1,10 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include "unixsignallistener.h"
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/types.h>
+#include "unixsignallistener.h"
 
 #define PID_FILE "/tmp/ukui-screensaver.pid"
 
@@ -66,7 +66,7 @@ static void check_exist()
 
     /* write this process ID */
     sprintf(buf, "%d\n", getpid());
-    if(write(fd, buf, strlen(buf)) != strlen(buf))
+    if(write(fd, buf, strlen(buf)) != (ssize_t)strlen(buf))
         qFatal("write error to the pid file: %s", strerror(errno));
 
     /* set close-on-exec flag for descriptor */
