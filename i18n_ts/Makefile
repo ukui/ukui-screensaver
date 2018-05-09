@@ -1,4 +1,4 @@
-INSTALL_DIR = /usr/local/ukui-screensaver
+INSTALL_DIR_DATA = /usr/share/ukui-screensaver
 
 all: zh_CN.qm
 
@@ -9,7 +9,7 @@ clean:
 	rm -f zh_CN.qm
 
 install:
-	install -D zh_CN.qm $(DESTDIR)$(INSTALL_DIR)/i18n_qm/zh_CN.qm
+	install -m 666 -D zh_CN.qm $(DESTDIR)$(INSTALL_DIR_DATA)/i18n_qm/zh_CN.qm
 
 uninstall:
-	rm -rf $(DESTDIR)$(INSTALL_DIR)/i18n_qm
+	rm -f $(DESTDIR)$(INSTALL_DIR_DATA)/i18n_qm/zh_CN.qm

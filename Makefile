@@ -6,9 +6,7 @@ CXX = g++
 
 # Source file directory
 I18N_SRC = i18n_ts/
-
-# QDBus XML file and the installation directory
-INSTALL_DIR = /usr/local/ukui-screensaver
+MAN_SRC = man/
 
 # bin file installation directory
 BIN_DIR = /usr/bin
@@ -26,7 +24,7 @@ else
 endif
 
 # Target
-all: gui i18n command
+all: gui i18n command man
 
 #
 # Compilation
@@ -44,11 +42,14 @@ i18n:
 command:
 	$(CC) ukui-screensaver-command.c -o ukui-screensaver-command
 
+man:
+	$(MAKE) -C $(MAN_SRC)
+
 #
 # Installation
 #
 
-install: install-gui install-i18n install-data
+install: install-gui install-i18n install-data install-man
 
 install-gui:
 	# Install GUI
@@ -62,6 +63,9 @@ install-i18n:
 install-data:
 	# Install gsettings file
 	install -D data/org.ukui.screensaver.gschema.xml $(DESTDIR)$(GSETTINGS_DIR)/org.ukui.screensaver.gschema.xml
+
+install-man:
+	$(MAKE) -C $(MAN_SRC) install
 
 #
 # Uninstallation
@@ -82,6 +86,9 @@ uninstall-data:
 	# Uninstall data
 	rm -rf $(DESTDIR)$(GSETTINGS_DIR)/org.ukui.screensaver.gschema.xml
 
+uninstall-man:
+	# Uinstall man
+	$(MAKE) -C $(MAN_SRC) uninstall
 #
 # Clean intermediate file
 #
@@ -92,3 +99,6 @@ clean:
 	rm -f QtMakefile .qmake.stash ukui-screensaver ukui-screensaver-command
 	# Clean i18n intermediate files
 	$(MAKE) -C $(I18N_SRC) clean
+	$(MAKE) -C $(MAN_SRC) clean
+
+.PHONY: clean man
