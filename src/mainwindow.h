@@ -5,7 +5,6 @@
 #define QT_NO_KEYWORDS
 #endif
 
-#include <gsettings.h>
 #include <QMainWindow>
 #include <QtDBus/QDBusInterface>
 #include "configuration.h"

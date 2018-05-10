@@ -5,7 +5,7 @@
 #define QT_NO_KEYWORDS
 #endif
 
-#include <gsettings.h>
+#include "gsettings.h"
 
 #include <QObject>
 

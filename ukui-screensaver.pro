@@ -30,21 +30,21 @@ PKGCONFIG += gio-2.0 x11 xcb
 
 
 SOURCES += \
-	main.cpp \
-	mainwindow.cpp \
-    unixsignallistener.cpp \
-    pam.cpp \
-    gsettings.cpp \
-    auxiliary.cpp \
-    configuration.cpp
+    src/main.cpp \
+    src/mainwindow.cpp \
+    src/unixsignallistener.cpp \
+    src/pam.cpp \
+    src/gsettings.cpp \
+    src/auxiliary.cpp \
+    src/configuration.cpp
 
 HEADERS += \
-	mainwindow.h \
-    unixsignallistener.h \
-    pam.h \
-    gsettings.h \
-    auxiliary.h \
-    configuration.h
+    src/mainwindow.h \
+    src/unixsignallistener.h \
+    src/pam.h \
+    src/gsettings.h \
+    src/auxiliary.h \
+    src/configuration.h
 
 FORMS += \
-	mainwindow.ui
+    src/mainwindow.ui

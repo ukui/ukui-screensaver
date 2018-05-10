@@ -40,7 +40,7 @@ i18n:
 	$(MAKE) -C $(I18N_SRC)
 
 command:
-	$(CC) ukui-screensaver-command.c -o ukui-screensaver-command
+	$(CC) src/ukui-screensaver-command.c -o ukui-screensaver-command
 
 man:
 	$(MAKE) -C $(MAN_SRC)
