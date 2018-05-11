@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>647</width>
+    <height>268</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,64 +19,131 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>377</width>
-      <height>196</height>
+      <width>610</width>
+      <height>200</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="hLayoutLockScreen">
-     <item>
-      <layout class="QVBoxLayout" name="vLayoutLeft">
-       <property name="rightMargin">
-        <number>10</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="lblAvatar">
-         <property name="text">
-          <string>Avatar</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="vLayoutRight">
-       <item>
-        <widget class="QLabel" name="lblUsername">
-         <property name="text">
-          <string>Username</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="lblLogged">
-         <property name="text">
-          <string>Has Logged In</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="lblPrompt">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEditPassword"/>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnUnlock">
-         <property name="text">
-          <string>Unlock</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
+    <property name="baseSize">
+     <size>
+      <width>580</width>
+      <height>200</height>
+     </size>
+    </property>
+    <widget class="QLabel" name="lblCapsLock">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>100</y>
+       <width>40</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditPassword">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>100</y>
+       <width>380</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblUsername">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>10</y>
+       <width>300</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Username</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblPrompt">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>70</y>
+       <width>300</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnUnlock">
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>100</y>
+       <width>80</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Unlock</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblLogged">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>45</y>
+       <width>100</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Has Logged In</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblAvatar">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>130</width>
+       <height>130</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Avatar</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnBiometric">
+     <property name="geometry">
+      <rect>
+       <x>565</x>
+       <y>100</y>
+       <width>40</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{border:1px solid #026096; background:transparent};
+QPushButton::hover{background-color:rgb(255, 255, 255, 50)};</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

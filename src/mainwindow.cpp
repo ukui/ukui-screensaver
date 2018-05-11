@@ -23,7 +23,8 @@ extern "C" {
 #define DBUS_SESSION_MANAGER_INTERFACE "org.gnome.SessionManager.Presence"
 
 MainWindow::MainWindow(QWidget *parent) :
-	QMainWindow(parent)
+    QMainWindow(parent),
+    widgetBioDevices(nullptr)
 {
 	configuration = new Configuration();
 	programState = IDLE;
@@ -46,7 +47,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
 	hide();
 	delete ui;
-	ui = NULL;
+    ui = nullptr;
+    widgetBioDevices = nullptr;
 	removeEventFilter(this);
 
 	event->ignore(); /* No further processing */
@@ -57,11 +59,13 @@ void MainWindow::constructUI()
 {
 	ui = new Ui::MainWindow;
 	ui->setupUi(this);
+    ui->widgetLockscreen->setFixedSize(610, 200);
     /* Put the button in the LineEdit */
     QHBoxLayout *hLayoutPwd = new QHBoxLayout;
     hLayoutPwd->setSpacing(0);
     hLayoutPwd->setContentsMargins(1, 1, 1, 1);
     hLayoutPwd->addStretch();
+    hLayoutPwd->addWidget(ui->lblCapsLock);
     hLayoutPwd->addWidget(ui->btnUnlock);
     ui->btnUnlock->setFixedSize(70, 38);
     ui->btnUnlock->setFlat(true);
@@ -69,6 +73,23 @@ void MainWindow::constructUI()
     ui->lineEditPassword->setLayout(hLayoutPwd);
     ui->lineEditPassword->setTextMargins(1, 1, ui->btnUnlock->width(), 1);
     ui->lineEditPassword->setCursor(Qt::IBeamCursor);
+    ui->lineEditPassword->hide();
+    ui->btnBiometric->setIcon(QIcon(":/resource/fingerprint-icon.png"));
+    ui->btnBiometric->setIconSize(QSize(40, 40));
+    ui->btnBiometric->hide();
+    connect(ui->btnBiometric, &QPushButton::clicked, this,[&]{
+        if(widgetBioDevices && widgetBioDevices->isHidden()) {
+            widgetBioDevices->show();
+            ui->lineEditPassword->hide();
+            ui->btnBiometric->hide();
+            programState = AUTH_FAILED;
+
+            ::close(toParent[0]);
+            ::close(toAuthChild[1]);
+            ::waitpid(authPID, NULL, 0);
+            ::raise(SIGUSR1);
+        }
+    } );
 
 	pixmap.load(configuration->getBackground());
 	/* Set avatar, password entry, button ... */
@@ -100,7 +121,14 @@ void MainWindow::constructUI()
 				"QPushButton:disabled {"
 					"background-color: #013C76;"
 				"}");
-	ui->widgetLockscreen->adjustSize();
+    ui->btnBiometric->setStyleSheet(
+                "QPushButton{"
+                    "border: none;"
+                    "outline: none;"
+                "}"
+                "QPushButton::hover{"
+                    "background-color:rgb(0, 0, 0, 50);"
+                "}");
 
 	connect(ui->lineEditPassword, &QLineEdit::returnPressed, this, &MainWindow::onPasswordEnter);
 	connect(ui->btnUnlock, &QPushButton::clicked, this, &MainWindow::onUnlockClicked);
@@ -232,6 +260,54 @@ void MainWindow::FSMTransition(int signalSenderPID)
 		PIPE_OPS_SAFE(
 			::read(toParent[0], &pam_msg_obj, sizeof(pam_msg_obj));
 		);
+        qDebug() << "PAM Message---"<< pam_msg_obj.msg;
+
+        /* Check whether the pam message is from biometric pam module */
+        if(strcmp(pam_msg_obj.msg, BIOMETRIC_PAM) == 0) {
+            BioDevices devices;
+            if(devices.featuresNum(getuid()) <= 0) {
+                qDebug() << "no avaliable device, enable password authentication";
+                PIPE_OPS_SAFE(
+                    ::write(toAuthChild[1], BIOMETRIC_IGNORE, strlen(BIOMETRIC_IGNORE) + 1);
+                );
+                programState = SHOW_PAM_MESSAGE;
+            } else {
+                qDebug() << "enable biometric authentication";
+                if(!widgetBioDevices) {
+                    widgetBioDevices = new BioDeviceView(getuid(), ui->widgetLockscreen);
+                    QRect widgetBioDevicesRect(ui->lineEditPassword->geometry().left(),
+                                               ui->lineEditPassword->geometry().top() - 2,
+                                               BIODEVICEVIEW_WIDTH, BIODEVICEVIEW_HEIGHT);
+                    widgetBioDevices->setGeometry(widgetBioDevicesRect);
+                    connect(widgetBioDevices, &BioDeviceView::backToPasswd, this, [&]{
+                        widgetBioDevices->hide();
+                        ui->btnBiometric->show();
+                        PIPE_OPS_SAFE(
+                            ::write(toAuthChild[1], BIOMETRIC_IGNORE, strlen(BIOMETRIC_IGNORE) + 1);
+                        );
+                        programState = SHOW_PAM_MESSAGE;
+                    });
+                    connect(widgetBioDevices, &BioDeviceView::notify, this, [&](const QString &text){
+                        ui->lblPrompt->setText(text);
+                    });
+                    connect(widgetBioDevices, &BioDeviceView::authenticationComplete, this, [&](bool ret){
+                       if(ret) {
+                           qDebug() << "authentication success";
+                           PIPE_OPS_SAFE(
+                               ::write(toAuthChild[1], BIOMETRIC_SUCESS, strlen(BIOMETRIC_SUCESS) + 1);
+                           );
+                           programState = WAIT_AUTH_STATUS;
+                       }
+                    });
+                }
+                widgetBioDevices->show();
+            }
+            break;
+        }
+
+        ui->lineEditPassword->show();
+        ui->lineEditPassword->setFocus();
+
 		if (pam_msg_obj.msg_style == PAM_PROMPT_ECHO_OFF) {
 			ui->lineEditPassword->setEchoMode(QLineEdit::Password);
 			ui->lineEditPassword->setPlaceholderText(
@@ -250,6 +326,7 @@ void MainWindow::FSMTransition(int signalSenderPID)
 		}
 		break;
 	case GET_PASSWORD: /* Triggered by ENTER */
+        qDebug() << "STATE---GET_PASSWORD";
 		password = get_char_pointer(ui->lineEditPassword->text());
 		PIPE_OPS_SAFE(
 			::write(toAuthChild[1], password, strlen(password) + 1);
@@ -279,7 +356,7 @@ void MainWindow::FSMTransition(int signalSenderPID)
 			qDebug() << "Authenticate unsuccessfully. Next state: AUTH_FAILED.";
 		}
 		::close(toParent[0]);
-		::close(toAuthChild[1]);
+        ::close(toAuthChild[1]);
 		waitpid(authPID, NULL, 0);
 		qDebug() << "All done.";
 		break;

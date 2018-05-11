@@ -24,7 +24,7 @@ void authenticate(int toParent[2], int toAuthChild[2])
 	username=getenv("USER");
 	conv.conv = pam_conversation;
 	conv.appdata_ptr = (void *)fd;
-	retval = pam_start("screensaver", username, &conv, &pamh);
+    retval = pam_start("ukui-screensaver", username, &conv, &pamh);
 	if(retval == PAM_SUCCESS)
 		printf("PAM started successfully.\n");
 	else
@@ -85,10 +85,11 @@ int pam_conversation(int num_msg, const struct pam_message **msg,
 
 		if ((*msg)->msg_style == PAM_PROMPT_ECHO_OFF
 				|| (*msg)->msg_style == PAM_PROMPT_ECHO_ON){
+            int n;
 			PIPE_OPS_SAFE(
-				read(read_from_parent, password, MAX_PASSWORD_LENGTH);
+                n = read(read_from_parent, password, MAX_PASSWORD_LENGTH);
 			);
-			printf("Password has been read from pipe.\n");
+            printf("%d bytes response received from pipe.\n", n);
 			(*resp)->resp = password;
 			(*resp)->resp_retcode = 0;
 		} else {

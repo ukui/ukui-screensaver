@@ -8,6 +8,7 @@
 #include <QMainWindow>
 #include <QtDBus/QDBusInterface>
 #include "configuration.h"
+#include "bioAuthentication/biodeviceview.h"
 
 namespace Ui {
 class MainWindow;
@@ -85,6 +86,7 @@ private:
 	Configuration *configuration;
 	QPixmap pixmap;
 	QDBusInterface *interface;
+    BioDeviceView *widgetBioDevices;
 };
 
 #endif // MAINWINDOW_H

@@ -9,6 +9,8 @@ QT       += core gui dbus x11extras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+include(src/bioAuthentication/bioAuthentication.pri)
+
 TARGET = ukui-screensaver
 TEMPLATE = app
 

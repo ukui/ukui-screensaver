@@ -95,7 +95,7 @@ uninstall-man:
 
 clean:
 	# Clean GUI intermediate files
-	rm -f *.o moc_* ui_*
+	rm -f *.o moc_* ui_* qrc_*.cpp
 	rm -f QtMakefile .qmake.stash ukui-screensaver ukui-screensaver-command
 	# Clean i18n intermediate files
 	$(MAKE) -C $(I18N_SRC) clean

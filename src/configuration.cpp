@@ -11,7 +11,7 @@
 #define GSETTINGS_SCHEMA_BACKGROUND "org.mate.background"
 #define KEY_PICTURE_FILENAME "picture-filename"
 
-#define GSETTINGS_SCHEMA_SESSION "org.ukui.session"
+#define GSETTINGS_SCHEMA_SESSION "org.mate.session"
 #define KEY_IDLE_DELAY "idle-delay"
 
 Configuration::Configuration(QObject *parent) : QObject(parent)
