@@ -33,7 +33,7 @@ void BioDevices::getDevicesList()
     /* 返回值为 i -- int 和 av -- array of variant */
     QDBusMessage msg = serviceInterface->call("GetDrvList");
     if(msg.type() == QDBusMessage::ErrorMessage){
-        qWarning() << "[BIOMETRIC_MODULT]" << msg.errorMessage();
+        LOG() << msg.errorMessage();
         return;
     }
     /* 设备数量 */
@@ -58,7 +58,7 @@ void BioDevices::getDevicesList()
 void BioDevices::getFeaturesList(qint32 uid)
 {
     if(savedDeviceInfos.contains(uid)){
-        LOG() << "[BIOMETRIC_MODULT]" << "this uid's deviceInfos saved";
+        LOG() << "this uid's deviceInfos saved";
         return;
     }
 

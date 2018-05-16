@@ -236,12 +236,12 @@ void BioDeviceView::onDeviceIconClicked(int index)
     }
 
     if(index == 0){
-        LOG() << "[BIOMETRIC_MODULT]" << "back to unlock using password";
+        LOG() << "back to unlock using password";
         Q_EMIT backToPasswd();
         return;
     }
     if(index > deviceCount){
-        LOG() << "[BIOMETRIC_MODULT]" << "test device";
+        LOG() << "test device";
         return;
     }
 
