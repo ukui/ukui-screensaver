@@ -1,7 +1,6 @@
 #include "biodeviceview.h"
 #include <QDBusInterface>
 #include <QDBusMessage>
-#include <QDebug>
 #include <QHeaderView>
 #include <QtMath>
 #include <QLabel>
@@ -53,7 +52,6 @@ void BioDeviceView::initUI()
         devicesList->itemWidget(item)->setFocus();
         setPromptText(currentIndex);
     });
-    devicesList->setStyleSheet("QListWidget{background:transparent;border:none;}");
 
 
     int itemSize;
@@ -83,8 +81,8 @@ void BioDeviceView::initUI()
         iconLabel->installEventFilter(this);
         iconLabel->setFixedSize(LABEL_WIDTH, ITEM_SIZE);
         iconLabel->setStyleSheet("QLabel{border:1px solid #026096;}"
-                                 "QLabel::hover{background:rgb(255, 255, 255, 100);}"
-                                 "QLabel::focus{background:white;}");
+                                 "QLabel::hover{background:rgb(255, 255, 255, 80);}"
+                                 "QLabel::focus{background:rgb(255, 255, 255, 120);}");
         QPixmap icon(iconName);
         icon = icon.scaled(ICON_SIZE, ICON_SIZE, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
         iconLabel->setPixmap(icon);
@@ -128,7 +126,15 @@ void BioDeviceView::initUI()
         QRect nextBtnRect(prevBtnRect.right(), prevBtnRect.top(),
                           ARROW_SIZE, ARROW_SIZE);
         nextButton->setGeometry(nextBtnRect);
+
+        prevButton->setStyleSheet("QPushButton{background:url(:/resource/tri-prev.png);border:none}"
+                                  "QPushButton::hover{background:url(:/resource/tri-prev_hl.png)}");
+        nextButton->setStyleSheet("QPushButton{background:url(:/resource/tri-next.png);border:none}"
+                                  "QPushButton::hover{background:url(:/resource/tri-next_hl.png)}");
     }
+
+    devicesList->setStyleSheet("QListWidget{background:transparent;border:none;}");
+    promptLabel->setStyleSheet("QLabel{font-family:'droid mono';font-size:12px;color:white;}");
 
     resize(BIODEVICEVIEW_WIDTH, BIODEVICEVIEW_HEIGHT);
 }
@@ -230,12 +236,12 @@ void BioDeviceView::onDeviceIconClicked(int index)
     }
 
     if(index == 0){
-        qDebug() << "[BIOMETRIC_MODULT]" << "back to unlock using password";
+        LOG() << "[BIOMETRIC_MODULT]" << "back to unlock using password";
         Q_EMIT backToPasswd();
         return;
     }
     if(index > deviceCount){
-        qDebug() << "[BIOMETRIC_MODULT]" << "test device";
+        LOG() << "[BIOMETRIC_MODULT]" << "test device";
         return;
     }
 

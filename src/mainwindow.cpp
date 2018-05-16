@@ -51,6 +51,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
     widgetBioDevices = nullptr;
 	removeEventFilter(this);
 
+    BioDevices devices;
+    devices.clear();
+
 	event->ignore(); /* No further processing */
 	return;
 }
@@ -516,6 +519,7 @@ void MainWindow::embedXScreensaver()
 {
 	char *xscreensaver_path = get_char_pointer(
 					configuration->getXScreensaver());
+    qDebug() << "screensaver path---" << xscreensaver_path;
 	for (int i = 0; i < QGuiApplication::screens().count(); i++) {
 		/* Create widget for embedding the xscreensaver */
 		QWidget *widgetXScreensaver = new QWidget(ui->centralWidget);
@@ -565,13 +569,16 @@ void MainWindow::sessionStatusChanged(unsigned int status)
 	case SESSION_BUSY:
 		break;
 	case SESSION_IDLE:
+        qDebug() << "session idle";
 		if (configuration->xscreensaverActivatedWhenIdle() &&
 			configuration->lockWhenXScreensaverActivated()) {
+            qDebug() << "run screensaver and lockscreen";
 			/* Start authentication and construct UI */
 			FSMTransition(getpid());
 			switchToXScreensaver();
 			screenState = XSCREENSAVER;
 		} else if (configuration->xscreensaverActivatedWhenIdle()) {
+            qDebug() << "only run screensaver";
 			/* Only construct UI without start authentication */
 			constructUI();
 			setCursor(Qt::ArrowCursor);

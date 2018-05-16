@@ -8,6 +8,10 @@
 #define BIOMETRIC_IGNORE    "BIOMETRIC_IGNORE"
 #define BIOMETRIC_SUCESS    "BIOMETRIC_SUCCESS"
 
+#ifdef LOG
+#undef LOG
+#endif
+#define LOG() qDebug() << "[BIOMETRIC MODULE]"
 
 /* the type of device */
 enum BioType {

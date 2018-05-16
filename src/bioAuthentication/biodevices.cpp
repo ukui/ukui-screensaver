@@ -45,7 +45,7 @@ void BioDevices::getDevicesList()
     argument >> infos;
     for(int i = 0; i < deviceNum; i++) {
         DeviceInfo *deviceInfo = new DeviceInfo;
-        infos.at(0).value<QDBusArgument>() >> *deviceInfo;
+        infos.at(i).value<QDBusArgument>() >> *deviceInfo;
 
         if(deviceInfo->device_available > 0)     //设备可用
             deviceInfos.push_back(deviceInfo);
@@ -58,7 +58,7 @@ void BioDevices::getDevicesList()
 void BioDevices::getFeaturesList(qint32 uid)
 {
     if(savedDeviceInfos.contains(uid)){
-        qDebug() << "[BIOMETRIC_MODULT]" << "this uid's deviceInfos saved";
+        LOG() << "[BIOMETRIC_MODULT]" << "this uid's deviceInfos saved";
         return;
     }
 
@@ -69,7 +69,7 @@ void BioDevices::getFeaturesList(qint32 uid)
         QDBusMessage msg = serviceInterface->call("GetFeatureList", QVariant(deviceInfo->device_id),
                                QVariant(uid), QVariant(0), QVariant(-1));
         if(msg.type() == QDBusMessage::ErrorMessage){
-            qDebug() << msg.errorMessage();
+            LOG() << msg.errorMessage();
             continue;
         }
         int featuresNum = msg.arguments().at(0).toInt();
@@ -77,8 +77,8 @@ void BioDevices::getFeaturesList(qint32 uid)
         if(featuresNum > 0 && !savedDeviceInfos[uid].contains(*deviceInfo))
             savedDeviceInfos[uid].push_back(*deviceInfo);
     }
-    qDebug() << "[BIOMETRIC_MODULT]" << "there are" << savedDeviceInfos[uid].size()
-             << "devices enrolled features";
+    LOG() << "there are" << savedDeviceInfos[uid].size()
+          << "devices enrolled features";
 }
 
 int BioDevices::deviceCount()
@@ -96,4 +96,13 @@ QList<DeviceInfo> BioDevices::getAvaliableDevices(qint32 uid)
 {
     getFeaturesList(uid);
     return savedDeviceInfos[uid];
+}
+
+void BioDevices::clear()
+{
+    isFirst = true;
+    for(int i = 0; i < deviceInfos.size(); i++)
+        delete(deviceInfos.at(i));
+    deviceInfos.clear();
+    savedDeviceInfos.clear();
 }
