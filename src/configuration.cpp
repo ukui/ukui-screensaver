@@ -16,8 +16,17 @@
 
 Configuration::Configuration(QObject *parent) : QObject(parent)
 {
+    QString screensaverSchema, sessionSchema;
+    QString deskotpSession = QString::fromLocal8Bit(qgetenv("DESKTOP_SESSION"));
+    if(deskotpSession == "mate") {
+        screensaverSchema = "org.mate.screensaver";
+        sessionSchema = "org.mate.session";
+    } else if(deskotpSession == "ukui") {
+        screensaverSchema = "org.ukui.screensaver";
+        sessionSchema = "org.ukui.session";
+    }
 	/* QGSettings for screensaver */
-	qgsettingsScreensaver = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER);
+    qgsettingsScreensaver = new QGSettings(screensaverSchema);
 	connect(qgsettingsScreensaver, &QGSettings::valueChanged,
 				this, &Configuration::onConfigurationChanged);
 
@@ -27,7 +36,7 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
 				this, &Configuration::onConfigurationChanged);
 
 	/* QGSettings for session */
-	qgsettingsSession = new QGSettings(GSETTINGS_SCHEMA_SESSION);
+    qgsettingsSession = new QGSettings(sessionSchema);
 	connect(qgsettingsSession, &QGSettings::valueChanged,
 				this, &Configuration::onConfigurationChanged);
 
