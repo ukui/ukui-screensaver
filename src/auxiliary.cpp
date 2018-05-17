@@ -1,6 +1,7 @@
 #include "auxiliary.h"
 #include <QX11Info>
 #include <X11/Xlib.h>
+#include <X11/XKBlib.h>
 #include <xcb/xcb.h>
 
 char *get_char_pointer(QString string)
@@ -72,4 +73,17 @@ bool closeGrab()
     XUngrabPointer(QX11Info::display(), CurrentTime);
     XFlush(QX11Info::display());
     return true;
+}
+
+bool checkCapsLockState()
+{
+    //判断大写键状态
+    Display *display = XOpenDisplay(NULL);
+    bool capsState = false;
+    if(display) {
+        unsigned int n;
+        XkbGetIndicatorState(display, XkbUseCoreKbd, &n);
+        capsState = (n & 0x01) == 1;
+    }
+    return capsState;
 }

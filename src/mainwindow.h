@@ -53,17 +53,19 @@ private:
 	void switchToLockscreen();
 	void switchToXScreensaver();
 	void startXScreensaverWithoutAuth();
-	bool eventFilter(QObject *watched, QEvent *event);
 	void constructUI();
-	void closeEvent(QCloseEvent *event);
 	void uiGetReady(bool ready);
 	void setWindowStyle();
 	void lockscreenFollowCursor(QPoint cursorPosition);
 	QString getUserAvatarPath(QString username);
 	bool signalSenderFilter(int signalSenderPID);
+    void setPasswordVisible(bool visible);
+    void setCapsLockWarn();
 
 protected:
 	void paintEvent(QPaintEvent *event);
+    void closeEvent(QCloseEvent *event);
+    bool eventFilter(QObject *watched, QEvent *event);
 
 public Q_SLOTS:
 	void FSMTransition(int signalSenderPID); /* Transition FSM states according to signal */

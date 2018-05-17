@@ -69,17 +69,24 @@ void MainWindow::constructUI()
     hLayoutPwd->setContentsMargins(1, 1, 1, 1);
     hLayoutPwd->addStretch();
     hLayoutPwd->addWidget(ui->lblCapsLock);
+    hLayoutPwd->addWidget(ui->btnHidePwd);
     hLayoutPwd->addWidget(ui->btnUnlock);
     ui->btnUnlock->setFixedSize(70, 38);
     ui->btnUnlock->setFlat(true);
     ui->btnUnlock->setCursor(Qt::PointingHandCursor);
     ui->lineEditPassword->setLayout(hLayoutPwd);
-    ui->lineEditPassword->setTextMargins(1, 1, ui->btnUnlock->width(), 1);
+    ui->lineEditPassword->setTextMargins(1, 1, ui->btnUnlock->width() +
+                                         ui->btnHidePwd->width(), 1);
     ui->lineEditPassword->setCursor(Qt::IBeamCursor);
+    ui->lineEditPassword->setFocusPolicy(Qt::NoFocus);
     ui->lineEditPassword->hide();
+    ui->lineEditPassword->installEventFilter(this);
     ui->btnBiometric->setIcon(QIcon(":/resource/fingerprint-icon.png"));
     ui->btnBiometric->setIconSize(QSize(40, 40));
     ui->btnBiometric->hide();
+    ui->btnHidePwd->setFocusPolicy(Qt::NoFocus);
+    ui->btnHidePwd->setCursor(Qt::ArrowCursor);
+    ui->lblCapsLock->setPixmap(QPixmap(":/image/warn.png"));
     connect(ui->btnBiometric, &QPushButton::clicked, this,[&]{
         if(widgetBioDevices && widgetBioDevices->isHidden()) {
             widgetBioDevices->show();
@@ -132,9 +139,17 @@ void MainWindow::constructUI()
                 "QPushButton::hover{"
                     "background-color:rgb(0, 0, 0, 50);"
                 "}");
+    ui->btnHidePwd->setStyleSheet(
+                "QPushButton{"
+                    "border: none;"
+                    "outline: none;"
+                "}");
 
 	connect(ui->lineEditPassword, &QLineEdit::returnPressed, this, &MainWindow::onPasswordEnter);
 	connect(ui->btnUnlock, &QPushButton::clicked, this, &MainWindow::onUnlockClicked);
+    connect(ui->btnHidePwd, &QPushButton::clicked, this, [&]{
+        setPasswordVisible(ui->lineEditPassword->echoMode() == QLineEdit::Password);
+    });
 	screenState = LOCKSCREEN;
 	setRealTimeMouseTracking();
 	/* Install event filter to capture keyboard and mouse event */
@@ -218,6 +233,17 @@ bool MainWindow::signalSenderFilter(int senderSenderPid)
 				"Ignore it!";
 		return false;
 	}
+}
+
+void MainWindow::setPasswordVisible(bool visible)
+{
+    if(visible) {
+        ui->lineEditPassword->setEchoMode(QLineEdit::Normal);
+        ui->btnHidePwd->setIcon(QIcon(":/image/show-password.png"));
+    } else {
+        ui->lineEditPassword->setEchoMode(QLineEdit::Password);
+        ui->btnHidePwd->setIcon(QIcon(":/image/hide-password.png"));
+    }
 }
 
 #define AUTH_STATUS_LENGTH 16
@@ -312,13 +338,13 @@ void MainWindow::FSMTransition(int signalSenderPID)
         ui->lineEditPassword->setFocus();
 
 		if (pam_msg_obj.msg_style == PAM_PROMPT_ECHO_OFF) {
-			ui->lineEditPassword->setEchoMode(QLineEdit::Password);
+            setPasswordVisible(false);
 			ui->lineEditPassword->setPlaceholderText(
 					QString::fromUtf8(pam_msg_obj.msg));
 			programState = GET_PASSWORD;
 			qDebug() << "PAM messages has been shown. Next state: GET_PASSWORD.";
 		} else if (pam_msg_obj.msg_style == PAM_PROMPT_ECHO_ON){
-			ui->lineEditPassword->setEchoMode(QLineEdit::Normal);
+            setPasswordVisible(true);
 			ui->lineEditPassword->setPlaceholderText(
 					QString::fromUtf8(pam_msg_obj.msg));
 			programState = GET_PASSWORD;
@@ -398,7 +424,14 @@ void MainWindow::uiGetReady(bool ready)
 		ui->lineEditPassword->setFocus();
 }
 
-
+void MainWindow::setCapsLockWarn()
+{
+    bool state = checkCapsLockState();
+    ui->lblCapsLock->setVisible(state);
+    int textMargin = ui->btnUnlock->width() + ui->btnHidePwd->width() +
+            (state ? ui->lblCapsLock->width() : 0);
+    ui->lineEditPassword->setTextMargins(1, 1, textMargin, 1);
+}
 
 /*
  * XScreensaver
@@ -421,7 +454,6 @@ void MainWindow::setRealTimeMouseTracking()
 /* All events are dispatched in this function */
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
-	(void)watched;
 	switch (event->type()) {
 	case QEvent::KeyPress:
 		handleKeyPressEvent((QKeyEvent *)event);
@@ -429,6 +461,14 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 	case QEvent::MouseMove:
 		handleMouseMoveEvent((QMouseEvent *)event);
 		break;
+    case QEvent::KeyRelease:
+        if(((QKeyEvent*)event)->key() == Qt::Key_CapsLock)
+            setCapsLockWarn();
+        break;
+    case QEvent::FocusIn:
+        if(watched == ui->lineEditPassword)
+            setCapsLockWarn();
+        break;
 	default:
 		break;
 	}

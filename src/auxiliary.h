@@ -6,5 +6,6 @@
 char *get_char_pointer(QString string);
 bool establishGrab();
 bool closeGrab();
+bool checkCapsLockState();
 
 #endif // AUXILIARY_H
