@@ -500,6 +500,7 @@ void MainWindow::switchToLockscreen()
 
 	ui->widgetLockscreen->show();
 	ui->lineEditPassword->setFocus();
+    setCursor(Qt::ArrowCursor);
 }
 
 /* Start a xscreensaver process and embed it onto the widgetXScreensaver widget */
@@ -512,6 +513,8 @@ void MainWindow::switchToXScreensaver()
 	 * started, otherwise the eventFilter won't be invoked.
 	 */
 	this->setFocus();
+
+    setCursor(Qt::BlankCursor);
 }
 
 /* Embed xscreensavers to each screen */
