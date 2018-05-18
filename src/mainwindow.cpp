@@ -152,8 +152,6 @@ void MainWindow::constructUI()
     });
 	screenState = LOCKSCREEN;
 	setRealTimeMouseTracking();
-	/* Install event filter to capture keyboard and mouse event */
-	installEventFilter(this);
 	setWindowStyle();
 	show();
     /* grab control of the mouse and keyboard events in lockscreen window  */
@@ -455,12 +453,6 @@ void MainWindow::setRealTimeMouseTracking()
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
 	switch (event->type()) {
-	case QEvent::KeyPress:
-		handleKeyPressEvent((QKeyEvent *)event);
-		break;
-	case QEvent::MouseMove:
-		handleMouseMoveEvent((QMouseEvent *)event);
-		break;
     case QEvent::KeyRelease:
         if(((QKeyEvent*)event)->key() == Qt::Key_CapsLock)
             setCapsLockWarn();
@@ -472,11 +464,11 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 	default:
 		break;
 	}
-	return false;
+    return false;
 }
 
 /* Key Press Event */
-void MainWindow::handleKeyPressEvent(QKeyEvent *event)
+void MainWindow::keyPressEvent(QKeyEvent *event)
 {
 	if (screenState == LOCKSCREEN) {
 		if (event->key() == Qt::Key_Escape) {
@@ -491,10 +483,11 @@ void MainWindow::handleKeyPressEvent(QKeyEvent *event)
 		close(); /* Destroy lockscreen widgets */
 		screenState = UNDEFINED;
 	}
+    return QMainWindow::keyReleaseEvent(event);
 }
 
 /* Mouse Move Event */
-void MainWindow::handleMouseMoveEvent(QMouseEvent *event)
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
 	(void)event;
 	if (screenState == LOCKSCREEN) {
@@ -507,6 +500,7 @@ void MainWindow::handleMouseMoveEvent(QMouseEvent *event)
 		close(); /* Destroy lockscreen widgets */
 		screenState = UNDEFINED;
 	}
+    return QMainWindow::mouseMoveEvent(event);
 }
 
 /* lockscreen follows cursor */
@@ -527,6 +521,7 @@ void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
 /* Kill the xscreensaver process and show the lock screen */
 void MainWindow::switchToLockscreen()
 {
+    qDebug() << "switch to lockscreen";
 	int childStatus;
 	Q_FOREACH (int xscreensaverPID, xscreensaverPIDList) {
 		kill(xscreensaverPID, SIGKILL);

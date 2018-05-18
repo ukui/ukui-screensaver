@@ -65,6 +65,8 @@ private:
 protected:
 	void paintEvent(QPaintEvent *event);
     void closeEvent(QCloseEvent *event);
+    void keyPressEvent(QKeyEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
     bool eventFilter(QObject *watched, QEvent *event);
 
 public Q_SLOTS:
