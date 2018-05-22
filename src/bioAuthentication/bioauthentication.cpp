@@ -20,7 +20,7 @@ void BioAuthentication::startAuthentication()
     QList<QVariant> args;
     args << QVariant(deviceInfo.device_id) << QVariant(uid)
          << QVariant(0) << QVariant(-1);
-    QDBusPendingCall call = serviceInterface->asyncCallWithArgumentList("Search", args);
+    QDBusPendingCall call = serviceInterface->asyncCallWithArgumentList("Identify", args);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
     connect(watcher, &QDBusPendingCallWatcher::finished, this, &BioAuthentication::onSearchResult);
 }
@@ -33,16 +33,14 @@ void BioAuthentication::stopAuthentication()
 
 void BioAuthentication::onSearchResult(QDBusPendingCallWatcher *watcher)
 {
-    QDBusPendingReply<qint32, qint32, qint32, QString> reply = *watcher;
+    QDBusPendingReply<qint32, qint32> reply = *watcher;
     if(reply.isError()){
         LOG() << reply.error();
         return;
     }
     qint32 result = reply.argumentAt(0).toInt();
     qint32 retUid = reply.argumentAt(1).toInt();
-    qint32 idx = reply.argumentAt(2).toInt();
-    QString idxName = reply.argumentAt(3).toString();
-    LOG() << result << " " << retUid << " " << idx << " " << idxName;
+    LOG() << result << " " << retUid;
 
     /* 识别生物特征成功，发送认证结果 */
     if(result == DBUS_RESULT_SUCCESS && retUid == uid)
