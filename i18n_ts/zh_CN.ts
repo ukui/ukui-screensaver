@@ -1,37 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="zh_CN">
+<context>
+    <name>BioDeviceView</name>
+    <message>
+        <location filename="../src/bioAuthentication/biodeviceview.cpp" line="207"/>
+        <source>password login</source>
+        <translation>密码</translation>
+    </message>
+    <message>
+        <location filename="../src/bioAuthentication/biodeviceview.cpp" line="213"/>
+        <source>fingerprint</source>
+        <translation>指纹</translation>
+    </message>
+    <message>
+        <location filename="../src/bioAuthentication/biodeviceview.cpp" line="216"/>
+        <source>fingerevin</source>
+        <translation>指静脉</translation>
+    </message>
+    <message>
+        <location filename="../src/bioAuthentication/biodeviceview.cpp" line="219"/>
+        <source>iris</source>
+        <translation>虹膜</translation>
+    </message>
+</context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
+        <location filename="../src/mainwindow.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="35"/>
+        <location filename="../src/mainwindow.ui" line="124"/>
         <source>Avatar</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="49"/>
+        <location filename="../src/mainwindow.ui" line="72"/>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="56"/>
+        <location filename="../src/mainwindow.ui" line="111"/>
         <source>Has Logged In</source>
-        <translation type="unfinished"></translation>
+        <translation>已登录</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="73"/>
+        <location filename="../src/mainwindow.ui" line="98"/>
         <source>Unlock</source>
-        <translation type="unfinished"></translation>
+        <translation>解锁</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="272"/>
+        <location filename="../src/mainwindow.cpp" line="381"/>
         <source>Password Incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>密码错误</translation>
     </message>
 </context>
 </TS>
