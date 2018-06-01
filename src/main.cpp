@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QTranslator>
+#include <QLocale>
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -11,6 +13,7 @@
 static int setup_unix_signal_handlers();
 static void check_exist();
 
+#define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
 int main(int argc, char *argv[])
 {
     check_exist();
@@ -18,6 +21,16 @@ int main(int argc, char *argv[])
 	setup_unix_signal_handlers();
 	QApplication a(argc, argv);
 	UnixSignalListener unixSignalListener;
+
+	QLocale::Language language;
+    language = QLocale::system().language();
+
+    //加载翻译文件
+    QTranslator translator;
+    if(language == QLocale::Chinese) {
+        translator.load(WORKING_DIRECTORY"/i18n_qm/zh_CN.qm");
+    }
+    a.installTranslator(&translator);
 	MainWindow w;
 	QObject::connect(&unixSignalListener, &UnixSignalListener::transition,
 			&w, &MainWindow::FSMTransition);

@@ -14,6 +14,9 @@ BIN_DIR = /usr/bin
 # gsettings xml file
 GSETTINGS_DIR = /usr/share/glib-2.0/schemas
 
+# desktop file
+DESKTOP_DIR = /etc/xdg/autostart
+
 # Set build options
 ifeq ($(mode), debug)
 	# Compile with debugging information
