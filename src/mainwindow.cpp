@@ -55,6 +55,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
     devices.clear();
 
 	event->ignore(); /* No further processing */
+
+    /* ungrab the control of mouse and keyboard events */
+    closeGrab();
+
 	return;
 }
 
@@ -371,8 +375,6 @@ void MainWindow::FSMTransition(int signalSenderPID)
 		if (auth_status == PAM_SUCCESS) {
 			close();
 			programState = IDLE;
-            /* ungrab the control of mouse and keyboard events */
-            closeGrab();
 			qDebug() << "Authenticate successfully. Next state: IDLE";
 		} else {
 			QTimer::singleShot(0, [this]{
