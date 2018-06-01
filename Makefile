@@ -66,6 +66,7 @@ install-i18n:
 install-data:
 	# Install gsettings file
 	install -D data/org.ukui.screensaver.gschema.xml $(DESTDIR)$(GSETTINGS_DIR)/org.ukui.screensaver.gschema.xml
+	install -D data/ukui-screensaver.desktop $(DESTDIR)$(DESKTOP_DIR)/ukui-screensaver.desktop
 
 install-man:
 	$(MAKE) -C $(MAN_SRC) install
@@ -88,6 +89,7 @@ uninstall-i18n:
 uninstall-data:
 	# Uninstall data
 	rm -rf $(DESTDIR)$(GSETTINGS_DIR)/org.ukui.screensaver.gschema.xml
+	rm -rf $(DESTDIR)$(DESKTOP_DIR)/ukui-screensaver.desktop
 
 uninstall-man:
 	# Uinstall man

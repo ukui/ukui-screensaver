@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Name=Screensaver
+Name[zh_CN]=屏幕保护程序
+Name[zh_HK]=螢幕保護程式
+Name[zh_TW]=螢幕保護程式
+Comment[zh_CN]=运行屏幕保护及锁定程序
+Comment[zh_TW]=啟動螢幕保護程式以及鎖定程式
+Exec=ukui-screensaver
+NoDisplay=true
+X-UKUI-Autostart-Phase=Application
+X-UKUI-Autostart-Notify=true
+X-UKUI-Bugzilla-Bugzilla=UKUI
+X-UKUI-Bugzilla-Product=ukui-screensaver
+X-UKUI-Bugzilla-Component=general
+X-UKUI-Bugzilla-Version=1.0.0
