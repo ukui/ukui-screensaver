@@ -91,7 +91,8 @@ QString Configuration::getXScreensaver()
 		return QString("blank-only");
 	}
 	/* screensavers-ukui-binaryring => binaryring */
-	selectedTheme = selectedTheme.split("-")[2];
+    QStringList strs = selectedTheme.split("-");
+    selectedTheme = strs.at(strs.size() - 1);
 	return QString("%1/%2").arg(XSCREENSAVER_DIRNAME, selectedTheme);
 }
 
