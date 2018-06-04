@@ -318,6 +318,7 @@ void MainWindow::FSMTransition(int signalSenderPID)
                     connect(widgetBioDevices, &BioDeviceView::backToPasswd, this, [&]{
                         widgetBioDevices->hide();
                         ui->btnBiometric->show();
+                        ui->lblPrompt->setText("");
                         PIPE_OPS_SAFE(
                             ::write(toAuthChild[1], BIOMETRIC_IGNORE, strlen(BIOMETRIC_IGNORE) + 1);
                         );
