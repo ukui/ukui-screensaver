@@ -24,7 +24,8 @@ extern "C" {
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    widgetBioDevices(nullptr)
+    widgetBioDevices(nullptr),
+    isActivated(false)
 {
 	configuration = new Configuration();
 	programState = IDLE;
@@ -58,6 +59,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     /* ungrab the control of mouse and keyboard events */
     closeGrab();
+
+    isActivated = false;
 
 	return;
 }
@@ -258,6 +261,8 @@ void MainWindow::FSMTransition(int signalSenderPID)
 
 	if(!signalSenderFilter(signalSenderPID))
 		return;
+
+    isActivated = true;
 
 	switch (programState) { /* Current program state */
 	case IDLE: /* Idle in background */
@@ -610,6 +615,9 @@ void MainWindow::sessionStatusChanged(unsigned int status)
 		break;
 	case SESSION_IDLE:
         qDebug() << "session idle";
+        /* skip if the lock window is show */
+        if(isActivated)
+            break;
 		if (configuration->xscreensaverActivatedWhenIdle() &&
 			configuration->lockWhenXScreensaverActivated()) {
             qDebug() << "run screensaver and lockscreen";

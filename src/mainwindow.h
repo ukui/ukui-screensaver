@@ -91,6 +91,7 @@ private:
 	QPixmap pixmap;
 	QDBusInterface *interface;
     BioDeviceView *widgetBioDevices;
+    bool isActivated;
 };
 
 #endif // MAINWINDOW_H
