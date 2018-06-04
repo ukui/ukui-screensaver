@@ -40,17 +40,26 @@ int main(int argc, char *argv[])
 
 static int setup_unix_signal_handlers()
 {
-    struct sigaction usr1;
+    struct sigaction usr1, chld;
+    int ret = 0;
 
     usr1.sa_sigaction = UnixSignalListener::usr1SignalAction;
     sigemptyset(&usr1.sa_mask);
     usr1.sa_flags = 0;
     usr1.sa_flags |= SA_SIGINFO;
 
-    if (sigaction(SIGUSR1, &usr1, 0))
-       return 1;
+    chld.sa_sigaction = UnixSignalListener::chldSignalAction;
+    sigemptyset(&chld.sa_mask);
+    chld.sa_flags = 0;
+    chld.sa_flags |= SA_SIGINFO;
 
-    return 0;
+    if (sigaction(SIGUSR1, &usr1, 0))
+       ret = 1;
+
+    if (sigaction(SIGCHLD, &chld, 0))
+       ret = 2;
+
+    return ret;
 }
 
 /*

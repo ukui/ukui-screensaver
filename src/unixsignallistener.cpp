@@ -1,6 +1,8 @@
 #include "unixsignallistener.h"
 #include <sys/socket.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <wait.h>
 #include <QDebug>
 
 int UnixSignalListener::sigusr1Fd[2];
@@ -21,6 +23,11 @@ void UnixSignalListener::usr1SignalAction(int sig, siginfo_t *siginfo, void *uco
 	sprintf(buffer, "%d", siginfo->si_pid);
 	int ignore = ::write(sigusr1Fd[0], buffer, strlen(buffer) + 1);
 	(void)ignore;
+}
+
+void UnixSignalListener::chldSignalAction(int /*sig*/, siginfo_t */*siginfo*/, void */*ucontext*/)
+{
+    ::waitpid(-1, NULL, 0);
 }
 
 void UnixSignalListener::handleSigUsr1()

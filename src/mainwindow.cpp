@@ -104,7 +104,7 @@ void MainWindow::constructUI()
 
             ::close(toParent[0]);
             ::close(toAuthChild[1]);
-            ::waitpid(authPID, NULL, 0);
+//            ::waitpid(authPID, NULL, 0);
             ::raise(SIGUSR1);
         }
     } );

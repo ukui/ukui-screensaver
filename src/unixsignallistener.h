@@ -18,6 +18,7 @@ public:
 public:
 	/* Unix signal handlers. */
 	static void usr1SignalAction(int sig, siginfo_t *siginfo, void *ucontext);
+    static void chldSignalAction(int sig, siginfo_t *siginfo, void *ucontext);
 
 Q_SIGNALS:
 	/* pid is the sending process id */
