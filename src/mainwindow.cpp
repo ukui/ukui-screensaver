@@ -25,7 +25,8 @@ extern "C" {
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     widgetBioDevices(nullptr),
-    isActivated(false)
+    isActivated(false),
+    isPasswdFailed(false)
 {
 	configuration = new Configuration();
 	programState = IDLE;
@@ -299,7 +300,7 @@ void MainWindow::FSMTransition(int signalSenderPID)
         qDebug() << "PAM Message---"<< pam_msg_obj.msg;
 
         /* Check whether the pam message is from biometric pam module */
-        if(strcmp(pam_msg_obj.msg, BIOMETRIC_PAM) == 0) {
+        if(!isPasswdFailed && strcmp(pam_msg_obj.msg, BIOMETRIC_PAM) == 0) {
             BioDevices devices;
             if(devices.featuresNum(getuid()) <= 0) {
                 qDebug() << "no avaliable device, enable password authentication";
@@ -387,6 +388,8 @@ void MainWindow::FSMTransition(int signalSenderPID)
 				::raise(SIGUSR1);
 			});
 			ui->lblPrompt->setText(tr("Password Incorrect"));
+            ui->lineEditPassword->hide();
+            isPasswdFailed = true;
 			programState = AUTH_FAILED;
 			qDebug() << "Authenticate unsuccessfully. Next state: AUTH_FAILED.";
 		}

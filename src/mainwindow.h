@@ -92,6 +92,7 @@ private:
 	QDBusInterface *interface;
     BioDeviceView *widgetBioDevices;
     bool isActivated;
+    bool isPasswdFailed;
 };
 
 #endif // MAINWINDOW_H
