@@ -533,10 +533,10 @@ void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
 void MainWindow::switchToLockscreen()
 {
     qDebug() << "switch to lockscreen";
-	int childStatus;
+//	int childStatus;
 	Q_FOREACH (int xscreensaverPID, xscreensaverPIDList) {
 		kill(xscreensaverPID, SIGKILL);
-		waitpid(xscreensaverPID, &childStatus, 0);
+//		waitpid(xscreensaverPID, &childStatus, 0);
 	}
 	xscreensaverPIDList.clear();
 	Q_FOREACH (QWidget *widgetXScreensaver, widgetXScreensaverList) {
