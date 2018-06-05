@@ -11,22 +11,10 @@
 #define GSETTINGS_SCHEMA_BACKGROUND "org.mate.background"
 #define KEY_PICTURE_FILENAME "picture-filename"
 
-#define GSETTINGS_SCHEMA_SESSION "org.mate.session"
-#define KEY_IDLE_DELAY "idle-delay"
-
 Configuration::Configuration(QObject *parent) : QObject(parent)
 {
-    QString screensaverSchema, sessionSchema;
-    QString deskotpSession = QString::fromLocal8Bit(qgetenv("DESKTOP_SESSION"));
-    if(deskotpSession == "mate") {
-        screensaverSchema = "org.mate.screensaver";
-        sessionSchema = "org.mate.session";
-    } else if(deskotpSession == "ukui") {
-        screensaverSchema = "org.ukui.screensaver";
-        sessionSchema = "org.ukui.session";
-    }
 	/* QGSettings for screensaver */
-    qgsettingsScreensaver = new QGSettings(screensaverSchema);
+    qgsettingsScreensaver = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER);
 	connect(qgsettingsScreensaver, &QGSettings::valueChanged,
 				this, &Configuration::onConfigurationChanged);
 
@@ -35,17 +23,10 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
 	connect(qgsettingsBackground, &QGSettings::valueChanged,
 				this, &Configuration::onConfigurationChanged);
 
-	/* QGSettings for session */
-    qgsettingsSession = new QGSettings(sessionSchema);
-	connect(qgsettingsSession, &QGSettings::valueChanged,
-				this, &Configuration::onConfigurationChanged);
-
-
 	/* Initiailization */
 	mode = qgsettingsScreensaver->getString(KEY_MODE);
 	themes = qgsettingsScreensaver->getStringList(KEY_THEMES);
 	background = qgsettingsBackground->getString(KEY_PICTURE_FILENAME);
-	idleDelay = qgsettingsSession->getInt(KEY_IDLE_DELAY);
 	idleActivationEnabled = qgsettingsScreensaver->getBool(
 						KEY_IDLE_ACTIVATION_ENABLED);
 	lockEnabled = qgsettingsScreensaver->getBool(KEY_LOCK_ENABLED);
@@ -61,8 +42,6 @@ void Configuration::onConfigurationChanged(QString key)
 		themes = qgsettingsScreensaver->getStringList(KEY_THEMES);
 	else if (key == KEY_PICTURE_FILENAME)
 		background = qgsettingsBackground->getString(KEY_PICTURE_FILENAME);
-	else if (key == KEY_IDLE_DELAY)
-		idleDelay = qgsettingsSession->getInt(KEY_IDLE_DELAY);
 	else if (key == KEY_IDLE_ACTIVATION_ENABLED)
 		idleActivationEnabled = qgsettingsScreensaver->getBool(
 						KEY_IDLE_ACTIVATION_ENABLED);
@@ -99,11 +78,6 @@ QString Configuration::getXScreensaver()
 QString Configuration::getBackground()
 {
 	return background;
-}
-
-int Configuration::getIdleDelay()
-{
-	return idleDelay;
 }
 
 bool Configuration::xscreensaverActivatedWhenIdle()

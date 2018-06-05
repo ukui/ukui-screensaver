@@ -18,7 +18,6 @@ public:
 public:
 	QString getXScreensaver();
 	QString getBackground();
-	int getIdleDelay();
 	bool xscreensaverActivatedWhenIdle();
 	bool lockWhenXScreensaverActivated();
 
@@ -28,11 +27,9 @@ public Q_SLOTS:
 private:
 	QGSettings *qgsettingsScreensaver;
 	QGSettings *qgsettingsBackground;
-	QGSettings *qgsettingsSession;
 	QString mode;
 	QList<QString> themes;
 	QString background;
-	int idleDelay;
 	bool idleActivationEnabled;
 	bool lockEnabled;
 };
