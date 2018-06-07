@@ -2,13 +2,14 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QLocale>
+#include <QDir>
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include "unixsignallistener.h"
 
-#define PID_FILE "/tmp/ukui-screensaver.pid"
+#define CACHE_DIR "/.cache/ukui-screensaver/"
 
 static int setup_unix_signal_handlers();
 static void check_exist();
@@ -69,8 +70,21 @@ static void check_exist()
 {
     int     fd, val;
     char    buf[16] = {0};
-    if( (fd = open(PID_FILE, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR)) < 0)
+    char    pid_file_path[1024] = {0};
+    QDir    dir;
+
+    int n = snprintf(pid_file_path, sizeof(pid_file_path), "%s"CACHE_DIR, getenv("HOME"));
+    if(!dir.exists(pid_file_path)){
+        if(!dir.mkdir(pid_file_path)){
+            printf("%s\n", pid_file_path);
+            perror("mkdir");
+            exit(EXIT_FAILURE);
+        }
+    }
+    snprintf(pid_file_path+n, sizeof(pid_file_path), "pid");
+    if( (fd = open(pid_file_path, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR)) == -1) {
         qFatal("open pid file failed: %s", strerror(errno));
+    }
 
     /* try and set a write lock on the pid file */
     struct flock lock;

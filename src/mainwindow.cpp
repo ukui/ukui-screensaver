@@ -218,7 +218,8 @@ bool MainWindow::signalSenderFilter(int senderSenderPid)
 	 */
 	FILE *fp;
 	int filedata;
-	const char *file = "/tmp/ukui-screensaver-lock";
+    char file[1024];
+    snprintf(file, sizeof(file), "%s/.cache/ukui-screensaver/lock", getenv("HOME"));
 	if (programState == IDLE) {
 		fp = fopen(file, "r");
 		if (!fp) {
