@@ -17,6 +17,12 @@ GSETTINGS_DIR = /usr/share/glib-2.0/schemas
 # desktop file
 DESKTOP_DIR = /etc/xdg/autostart
 
+# directory file
+DIRECTORY_DIR = /usr/share/desktop-directories
+
+# menus file
+MENUS_DIR = /etc/xdg/menus
+
 # Set build options
 ifeq ($(mode), debug)
 	# Compile with debugging information
@@ -67,6 +73,8 @@ install-data:
 	# Install gsettings file
 	install -D data/org.ukui.screensaver.gschema.xml $(DESTDIR)$(GSETTINGS_DIR)/org.ukui.screensaver.gschema.xml
 	install -D data/ukui-screensaver.desktop $(DESTDIR)$(DESKTOP_DIR)/ukui-screensaver.desktop
+	install -D data/ukui-screensavers.menu $(DESTDIR)$(MENUS_DIR)/ukui-screensavers.menu
+	install -D data/ukui-screensaver.directory $(DESTDIR)$(DIRECTORY_DIR)/ukui-screensaver.directory
 
 install-man:
 	$(MAKE) -C $(MAN_SRC) install
@@ -90,6 +98,8 @@ uninstall-data:
 	# Uninstall data
 	rm -rf $(DESTDIR)$(GSETTINGS_DIR)/org.ukui.screensaver.gschema.xml
 	rm -rf $(DESTDIR)$(DESKTOP_DIR)/ukui-screensaver.desktop
+	rm -rf $(DESTDIR)$(MENUS_DIR)/ukui-screensavers.menu
+	rm -rf $(DESTDIR)$(DIRECTORY_DIR)/ukui-screensaver.directory
 
 uninstall-man:
 	# Uinstall man
