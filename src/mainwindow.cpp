@@ -301,14 +301,15 @@ void MainWindow::FSMTransition(int signalSenderPID)
         qDebug() << "PAM Message---"<< pam_msg_obj.msg;
 
         /* Check whether the pam message is from biometric pam module */
-        if(!isPasswdFailed && strcmp(pam_msg_obj.msg, BIOMETRIC_PAM) == 0) {
+        if(strcmp(pam_msg_obj.msg, BIOMETRIC_PAM) == 0) {
             BioDevices devices;
-            if(devices.featuresNum(getuid()) <= 0) {
+            if(isPasswdFailed || devices.featuresNum(getuid()) <= 0) {
                 qDebug() << "no avaliable device, enable password authentication";
                 PIPE_OPS_SAFE(
                     ::write(toAuthChild[1], BIOMETRIC_IGNORE, strlen(BIOMETRIC_IGNORE) + 1);
                 );
                 programState = SHOW_PAM_MESSAGE;
+                isPasswdFailed = false;
             } else {
                 qDebug() << "enable biometric authentication";
                 if(!widgetBioDevices) {
