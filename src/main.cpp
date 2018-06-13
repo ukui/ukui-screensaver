@@ -13,15 +13,18 @@
 
 static int setup_unix_signal_handlers();
 static void check_exist();
+static void redirect(int fd, char *filename);
+static void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
 int main(int argc, char *argv[])
 {
     check_exist();
-
 	setup_unix_signal_handlers();
 	QApplication a(argc, argv);
 	UnixSignalListener unixSignalListener;
+
+    qInstallMessageHandler(messageOutput);
 
 	QLocale::Language language;
     language = QLocale::system().language();
@@ -70,18 +73,19 @@ static void check_exist()
 {
     int     fd, val;
     char    buf[16] = {0};
+    char    cache_directory[1024] = {0};
     char    pid_file_path[1024] = {0};
+    char    log_file_path[1024] = {0};
     QDir    dir;
 
-    int n = snprintf(pid_file_path, sizeof(pid_file_path), "%s"CACHE_DIR, getenv("HOME"));
-    if(!dir.exists(pid_file_path)){
-        if(!dir.mkdir(pid_file_path)){
-            printf("%s\n", pid_file_path);
+    snprintf(cache_directory, sizeof(cache_directory), "%s" CACHE_DIR, getenv("HOME"));
+    if(!dir.exists(cache_directory)){
+        if(!dir.mkdir(cache_directory)){
             perror("mkdir");
             exit(EXIT_FAILURE);
         }
     }
-    snprintf(pid_file_path+n, sizeof(pid_file_path), "pid");
+    snprintf(pid_file_path, sizeof(pid_file_path), "%spid", cache_directory);
     if( (fd = open(pid_file_path, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR)) == -1) {
         qFatal("open pid file failed: %s", strerror(errno));
     }
@@ -112,4 +116,40 @@ static void check_exist()
     if(fcntl(fd, F_SETFD, val) < 0)
         qFatal("fcntl F_SETFD error: %s", strerror(errno));
 
+    snprintf(log_file_path, sizeof(log_file_path), "%slog", cache_directory);
+    redirect(STDERR_FILENO, log_file_path);
+}
+
+static void redirect(int fd, char *filename)
+{
+    int newfd = open(filename, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+    if(newfd == -1)
+        qFatal("open %s failed: %s", filename, strerror(errno));
+    if( dup2(newfd, fd) == -1)
+        qFatal("dup2 failed: %s", strerror(errno));
+}
+
+static void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    Q_UNUSED(context)
+    QDateTime dateTime = QDateTime::currentDateTime();
+    QByteArray time = QString("[%1] ").arg(dateTime.toString("MM-dd hh:mm:ss.zzz")).toLocal8Bit();
+    QByteArray localMsg = msg.toLocal8Bit();
+    switch(type) {
+    case QtDebugMsg:
+        fprintf(stderr, "%s Debug: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        break;
+    case QtInfoMsg:
+        fprintf(stderr, "%s Info: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        break;
+    case QtWarningMsg:
+        fprintf(stderr, "%s Warnning: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        break;
+    case QtCriticalMsg:
+        fprintf(stderr, "%s Critical: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        break;
+    case QtFatalMsg:
+        fprintf(stderr, "%s Fatal: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        abort();
+    }
 }

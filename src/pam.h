@@ -3,6 +3,7 @@
 
 #include <errno.h>
 #include <string.h>
+#include <QDebug>
 
 void authenticate(int toParent[2], int toAuthChild[2]);
 
@@ -18,8 +19,7 @@ struct pam_message_object {
 #define PIPE_OPS_SAFE(statement) do { \
 	int return_value = statement; \
     if (return_value == -1)\
-        printf("%s:%s:%d: PIPE write/read error: %s\n", \
-               __FILE__, __func__, __LINE__, strerror(errno)); \
+        qWarning("PIPE write/read error: %s", strerror(errno)); \
 } while (0)
 
 #endif // PAM_H

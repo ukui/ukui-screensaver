@@ -26,27 +26,27 @@ void authenticate(int toParent[2], int toAuthChild[2])
 	conv.appdata_ptr = (void *)fd;
     retval = pam_start("ukui-screensaver", username, &conv, &pamh);
 	if(retval == PAM_SUCCESS)
-		printf("PAM started successfully.\n");
+        qDebug("PAM started successfully.");
 	else
-		printf("PAM started unsuccessfully.\n");
-	printf("Invoke pam authentication.\n");
+        qDebug("PAM started unsuccessfully.");
+    qDebug("Invoke pam authentication.");
 	auth_status = pam_authenticate(pamh, 0);
-	printf("Complete pam authentication.\n");
+    qDebug("Complete pam authentication.");
 	if(pam_end(pamh, retval) != PAM_SUCCESS){
-		printf("Failed to terminate PAM.\n");
+        qDebug("Failed to terminate PAM.");
 		_exit(1);
 	}
-	printf("PAM ended successfully.\n");
+    qDebug("PAM ended successfully.");
 	kill(getppid(), SIGUSR1);
 	char buffer[16];
 	sprintf(buffer, "%d", auth_status);
 	PIPE_OPS_SAFE(
 		write(toParent[1], buffer, strlen(buffer) + 1)
 	);
-	printf("Auth status has been written to pipe.\n");
+    qDebug("Auth status has been written to pipe.");
 	::close(toParent[1]);
 	::close(toAuthChild[0]);
-	printf("Authenticate child process now exits.\n");
+    qDebug("Authenticate child process now exits.");
 	_exit(0);
 }
 
@@ -61,7 +61,7 @@ int pam_conversation(int num_msg, const struct pam_message **msg,
 	char *password;
 	struct pam_response *tmp_save;
 
-	printf("Into pam_conversation\n");
+    qDebug("Into pam_conversation");
 
 	fd = (unsigned long)appdata_ptr;
 	read_from_parent = (fd >> TO_AUTHCHILD_RD_SHIFT) & PIPE_FD_MASK;
@@ -72,7 +72,7 @@ int pam_conversation(int num_msg, const struct pam_message **msg,
 						sizeof(struct pam_response));
 	tmp_save = (struct pam_response *)(*resp);
 	memset(*resp, 0, num_msg * sizeof(struct pam_response));
-	printf("Resolve PAM messages.\n");
+    qDebug("Resolve PAM messages.");
 	while(count-- >= 1){
 		struct pam_message_object pam_msg_obj;
 		pam_msg_obj.msg_style = (*msg)->msg_style;
@@ -80,7 +80,7 @@ int pam_conversation(int num_msg, const struct pam_message **msg,
 		PIPE_OPS_SAFE(
 			write(write_to_parent, &pam_msg_obj, sizeof(pam_msg_obj));
 		);
-		printf("PAM message has been written to pipe.\n");
+        qDebug("PAM message has been written to pipe.");
 		kill(getppid(), SIGUSR1);
 
 		if ((*msg)->msg_style == PAM_PROMPT_ECHO_OFF
@@ -89,7 +89,7 @@ int pam_conversation(int num_msg, const struct pam_message **msg,
 			PIPE_OPS_SAFE(
                 n = read(read_from_parent, password, MAX_PASSWORD_LENGTH);
 			);
-            printf("%d bytes response received from pipe.\n", n);
+            qDebug("%d bytes response received from pipe.", n);
 			(*resp)->resp = password;
 			(*resp)->resp_retcode = 0;
 		} else {
@@ -103,7 +103,7 @@ int pam_conversation(int num_msg, const struct pam_message **msg,
 
 	(*resp) = tmp_save;
 
-	printf("Out pam_conversation.\n");
+    qDebug("Out pam_conversation.");
 	return PAM_SUCCESS;
 }
 
