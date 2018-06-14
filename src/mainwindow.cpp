@@ -622,8 +622,13 @@ void MainWindow::sessionStatusChanged(unsigned int status)
 	case SESSION_IDLE:
         qDebug() << "session idle";
         /* skip if the lock window is show */
-        if(isActivated)
+        if(isActivated) {
+            if(screenState == LOCKSCREEN) {
+                switchToXScreensaver();
+                screenState = XSCREENSAVER;
+            }
             break;
+        }
 		if (configuration->xscreensaverActivatedWhenIdle() &&
 			configuration->lockWhenXScreensaverActivated()) {
             qDebug() << "run screensaver and lockscreen";
