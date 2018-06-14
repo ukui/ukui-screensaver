@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>647</width>
-    <height>268</height>
+    <height>430</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -155,6 +155,42 @@ QPushButton::hover{background-color:rgb(255, 255, 255, 50)};</string>
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="widgetTime" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>220</y>
+      <width>300</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="lblDate">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>90</y>
+       <width>280</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblTime">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>11</y>
+       <width>280</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
      </property>
     </widget>
    </widget>

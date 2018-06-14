@@ -93,6 +93,7 @@ private:
     BioDeviceView *widgetBioDevices;
     bool isActivated;
     bool isPasswdFailed;
+    QTimer *timer;
 };
 
 #endif // MAINWINDOW_H

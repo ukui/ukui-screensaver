@@ -63,6 +63,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     isActivated = false;
 
+    timer->stop();
+
 	return;
 }
 
@@ -161,6 +163,25 @@ void MainWindow::constructUI()
 	screenState = LOCKSCREEN;
 	setRealTimeMouseTracking();
 	setWindowStyle();
+
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, [&]{
+        QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
+        ui->lblTime->setText(time);
+    });
+
+    QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
+    ui->lblTime->setText(time);
+    ui->lblTime->setStyleSheet("QLabel{color:white; font-size: 55px;}");
+    ui->lblTime->adjustSize();
+    timer->start(1000);
+
+    QString date = QDate::currentDate().toString("yyyy/MM/dd dddd");
+    qDebug() << "current date: " << date;
+    ui->lblDate->setText(date);
+    ui->lblDate->setStyleSheet("QLabel{color:white; font-size: 20px;}");
+    ui->lblDate->adjustSize();
+
 	show();
     /* grab control of the mouse and keyboard events in lockscreen window  */
     if(!establishGrab())
@@ -187,6 +208,7 @@ void MainWindow::setWindowStyle()
 
 	setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
 						| Qt::X11BypassWindowManagerHint);
+    setAttribute(Qt::WA_DeleteOnClose);
 }
 
 /* Draw background image */
@@ -529,6 +551,10 @@ void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
 	int y = 0 + (screen->geometry().height() -
 				ui->widgetLockscreen->geometry().height()) / 2;
 	ui->widgetLockscreen->move(x, y);
+
+    x = screen->geometry().x();
+    y = screen->geometry().y() + screen->geometry().height() - 150;
+    ui->widgetTime->move(x, y);
 }
 
 /* Kill the xscreensaver process and show the lock screen */
@@ -547,6 +573,7 @@ void MainWindow::switchToLockscreen()
 	widgetXScreensaverList.clear();
 
 	ui->widgetLockscreen->show();
+    ui->widgetTime->show();
 	ui->lineEditPassword->setFocus();
     setCursor(Qt::ArrowCursor);
 }
@@ -556,6 +583,7 @@ void MainWindow::switchToXScreensaver()
 {
 	embedXScreensaver();
 	ui->widgetLockscreen->hide();
+    ui->widgetTime->hide();
 	/*
 	 * Move focus from lineedit to MainWindow object when xscreensaver is
 	 * started, otherwise the eventFilter won't be invoked.
