@@ -71,10 +71,10 @@ install-i18n:
 
 install-data:
 	# Install gsettings file
-	install -D data/org.ukui.screensaver.gschema.xml $(DESTDIR)$(GSETTINGS_DIR)/org.ukui.screensaver.gschema.xml
-	install -D data/ukui-screensaver.desktop $(DESTDIR)$(DESKTOP_DIR)/ukui-screensaver.desktop
-	install -D data/ukui-screensavers.menu $(DESTDIR)$(MENUS_DIR)/ukui-screensavers.menu
-	install -D data/ukui-screensaver.directory $(DESTDIR)$(DIRECTORY_DIR)/ukui-screensaver.directory
+	install -D -m 644 data/org.ukui.screensaver.gschema.xml $(DESTDIR)$(GSETTINGS_DIR)/org.ukui.screensaver.gschema.xml
+	install -D -m 644 data/ukui-screensaver.desktop $(DESTDIR)$(DESKTOP_DIR)/ukui-screensaver.desktop
+	install -D -m 644 data/ukui-screensavers.menu $(DESTDIR)$(MENUS_DIR)/ukui-screensavers.menu
+	install -D -m 644 data/ukui-screensaver.directory $(DESTDIR)$(DIRECTORY_DIR)/ukui-screensaver.directory
 
 install-man:
 	$(MAKE) -C $(MAN_SRC) install

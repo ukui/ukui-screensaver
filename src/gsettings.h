@@ -23,6 +23,7 @@ public:
 	int getInt(QString key);
 	bool getBool(QString key);
 	QList<QString> getStringList(QString key);
+    int getEnum(QString key);
 
 	bool setString(QString key, QString value);
 	bool setInt(QString key, int value);

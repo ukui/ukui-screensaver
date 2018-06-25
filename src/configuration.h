@@ -8,6 +8,7 @@
 #include "gsettings.h"
 
 #include <QObject>
+#include "screensaver.h"
 
 class Configuration : public QObject
 {
@@ -16,7 +17,7 @@ public:
 	explicit Configuration(QObject *parent = nullptr);
 
 public:
-	QString getXScreensaver();
+    ScreenSaver *getScreensaver();
 	QString getBackground();
 	bool xscreensaverActivatedWhenIdle();
 	bool lockWhenXScreensaverActivated();
@@ -25,13 +26,18 @@ public Q_SLOTS:
 	void onConfigurationChanged(QString key);
 
 private:
+    QString getXScreensaverPath(const QString &theme);
+
+private:
 	QGSettings *qgsettingsScreensaver;
 	QGSettings *qgsettingsBackground;
-	QString mode;
+    int mode;
 	QList<QString> themes;
 	QString background;
 	bool idleActivationEnabled;
 	bool lockEnabled;
+    int imageTSEffect;
+    int imageSwitchInterval;
 };
 
 #endif // CONFIGURATION_H

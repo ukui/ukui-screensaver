@@ -14,6 +14,8 @@
 #include <fcntl.h>
 #include <QDebug>
 #include <QtDBus/QDBusReply>
+#include "screensaverwidget.h"
+
 extern "C" {
 	#include <security/_pam_types.h>
 }
@@ -21,6 +23,8 @@ extern "C" {
 #define DBUS_SESSION_MANAGER_SERVICE "org.gnome.SessionManager"
 #define DBUS_SESSION_MANAGER_PATH "/org/gnome/SessionManager/Presence"
 #define DBUS_SESSION_MANAGER_INTERFACE "org.gnome.SessionManager.Presence"
+
+QString screenStates[] = {"UNDEFINED", "LOCKSCREEN", "XSCREENSAVER", "XSCREENSAVER_BY_IDLE"};
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -87,7 +91,7 @@ void MainWindow::constructUI()
     ui->lineEditPassword->setLayout(hLayoutPwd);
     ui->lineEditPassword->setTextMargins(1, 1, ui->btnUnlock->width() +
                                          ui->btnHidePwd->width(), 1);
-    ui->lineEditPassword->setCursor(Qt::IBeamCursor);
+//    ui->lineEditPassword->setCursor(Qt::IBeamCursor);
     ui->lineEditPassword->setFocusPolicy(Qt::NoFocus);
     ui->lineEditPassword->hide();
     ui->lineEditPassword->installEventFilter(this);
@@ -249,7 +253,8 @@ bool MainWindow::signalSenderFilter(int senderSenderPid)
 			perror("Details: ");
 			return false;
 		}
-		fscanf(fp, "%d", &filedata);
+        int i = fscanf(fp, "%d", &filedata);
+        (void)i;    //eliminate warning
 		if (filedata == getpid()) {
 			qDebug() << "ukui-screensaver-command request for locking";
 			return true;
@@ -408,7 +413,7 @@ void MainWindow::FSMTransition(int signalSenderPID)
 			programState = IDLE;
 			qDebug() << "Authenticate successfully. Next state: IDLE";
 		} else {
-			QTimer::singleShot(0, [this]{
+            QTimer::singleShot(0, [&]{
 				::raise(SIGUSR1);
 			});
 			ui->lblPrompt->setText(tr("Password Incorrect"));
@@ -445,12 +450,12 @@ void MainWindow::uiGetReady(bool ready)
 {
 	ui->lineEditPassword->setEnabled(ready);
 	ui->btnUnlock->setEnabled(ready);
-	if (ready)
-		setCursor(Qt::ArrowCursor);
-	else
-		setCursor(Qt::BusyCursor);
 
-	if (ready)
+
+    if (ready)//	if (ready)
+        //		setCursor(Qt::ArrowCursor);
+        //	else
+        //		setCursor(Qt::BusyCursor);
 		ui->lineEditPassword->clear();
 
 	if (ready)
@@ -507,34 +512,19 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
 	if (screenState == LOCKSCREEN) {
 		if (event->key() == Qt::Key_Escape) {
+            screenState = XSCREENSAVER;
 			switchToXScreensaver();
-			screenState = XSCREENSAVER;
 		}
-	} else if (screenState == XSCREENSAVER){
-		switchToLockscreen();
-		screenState = LOCKSCREEN;
-	} else { /* currentState == XSCREENSAVER_BY_IDLE */
-		switchToLockscreen(); /* Destroy xscreensaver widgets */
-		close(); /* Destroy lockscreen widgets */
-		screenState = UNDEFINED;
-	}
+    }
     return QMainWindow::keyReleaseEvent(event);
 }
 
 /* Mouse Move Event */
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
-	(void)event;
-	if (screenState == LOCKSCREEN) {
-		lockscreenFollowCursor(event->pos());
-	} else if (screenState == XSCREENSAVER){
-		switchToLockscreen();
-		screenState = LOCKSCREEN;
-	} else { /* screenState == XSCREENSAVER_BY_IDLE */
-		switchToLockscreen(); /* Destroy xscreensaver widgets */
-		close(); /* Destroy lockscreen widgets */
-		screenState = UNDEFINED;
-	}
+    if (screenState == LOCKSCREEN) {
+        lockscreenFollowCursor(event->pos());
+    }
     return QMainWindow::mouseMoveEvent(event);
 }
 
@@ -557,84 +547,54 @@ void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
     ui->widgetTime->move(x, y);
 }
 
+
 /* Kill the xscreensaver process and show the lock screen */
 void MainWindow::switchToLockscreen()
 {
     qDebug() << "switch to lockscreen";
-//	int childStatus;
-	Q_FOREACH (int xscreensaverPID, xscreensaverPIDList) {
-		kill(xscreensaverPID, SIGKILL);
-//		waitpid(xscreensaverPID, &childStatus, 0);
-	}
-	xscreensaverPIDList.clear();
-	Q_FOREACH (QWidget *widgetXScreensaver, widgetXScreensaverList) {
-		widgetXScreensaver->deleteLater();
-	}
-	widgetXScreensaverList.clear();
 
 	ui->widgetLockscreen->show();
     ui->widgetTime->show();
 	ui->lineEditPassword->setFocus();
     setCursor(Qt::ArrowCursor);
+
+    screenState = LOCKSCREEN;
 }
 
 /* Start a xscreensaver process and embed it onto the widgetXScreensaver widget */
 void MainWindow::switchToXScreensaver()
 {
-	embedXScreensaver();
 	ui->widgetLockscreen->hide();
     ui->widgetTime->hide();
+    embedXScreensaver();
 	/*
 	 * Move focus from lineedit to MainWindow object when xscreensaver is
 	 * started, otherwise the eventFilter won't be invoked.
 	 */
-	this->setFocus();
-
+//	this->setFocus();
     setCursor(Qt::BlankCursor);
 }
 
 /* Embed xscreensavers to each screen */
 void MainWindow::embedXScreensaver()
 {
-	char *xscreensaver_path = get_char_pointer(
-					configuration->getXScreensaver());
-    qDebug() << "screensaver path---" << xscreensaver_path;
+    qDebug() << "embedXScreensaver";
+    ScreenSaver *saver = configuration->getScreensaver();
 	for (int i = 0; i < QGuiApplication::screens().count(); i++) {
-		/* Create widget for embedding the xscreensaver */
-		QWidget *widgetXScreensaver = new QWidget(ui->centralWidget);
-		widgetXScreensaverList.append(widgetXScreensaver);
-		widgetXScreensaver->show();
-		widgetXScreensaver->setMouseTracking(true);
-		/* Move to top left corner at screen */
-		QScreen *screen = QGuiApplication::screens()[i];
-		widgetXScreensaver->setGeometry(screen->geometry());
-		/*
-		 * If the screensaver is black screen, we don't need to fork a
-		 * separate process. What we need is just setting the background
-		 * color of widgetXScreensaver. When switching to lockscreen,
-		 * no process will be killed because xscreensaverPIDList is empty.
-		 */
-		if (strcmp(xscreensaver_path, "blank-only") == 0) {
-			widgetXScreensaver->setStyleSheet(
-						"background-color: black;");
-			continue;
-		}
-		/* Get winId from widget */
-		unsigned long winId = widgetXScreensaver->winId();
-		char winIdStr[16] = {0};
-		sprintf(winIdStr, "%lu", winId);
-		/* Fork and execl */
-		int xscreensaverPID = fork();
-		if (xscreensaverPID == 0) {
-			execl(xscreensaver_path, "xscreensaver", "-window-id",
-							winIdStr, (char *)0);
-			qDebug() << "execle failed. Can't start xscreensaver.";
-		} else {
-			xscreensaverPIDList.append(xscreensaverPID);
-			qDebug() << "xscreensaver child pid=" << xscreensaverPID;
-		}
+        ScreenSaverWidget *saverWidget = new ScreenSaverWidget(saver, this);
+        widgetXScreensaverList.push_back(saverWidget);
+        qDebug() << QGuiApplication::screens()[i]->geometry();
+        saverWidget->setGeometry(QGuiApplication::screens()[i]->geometry());
+        connect(saverWidget, &ScreenSaverWidget::closed, this, [&]{
+            if (screenState == XSCREENSAVER){
+                switchToLockscreen();
+            } else if(screenState == XSCREENSAVER_BY_IDLE) {
+                switchToLockscreen(); /* Destroy xscreensaver widgets */
+                close(); /* Destroy lockscreen widgets */
+                screenState = UNDEFINED;
+            }
+        });
 	}
-	free(xscreensaver_path);
 }
 
 /* Listen to SessionManager StatusChanged D-Bus signal */
@@ -668,7 +628,6 @@ void MainWindow::sessionStatusChanged(unsigned int status)
             qDebug() << "only run screensaver";
 			/* Only construct UI without start authentication */
 			constructUI();
-			setCursor(Qt::ArrowCursor);
 			switchToXScreensaver();
 			screenState = XSCREENSAVER_BY_IDLE;
 		}

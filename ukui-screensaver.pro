@@ -39,7 +39,9 @@ SOURCES += \
     src/pam.cpp \
     src/gsettings.cpp \
     src/auxiliary.cpp \
-    src/configuration.cpp
+    src/configuration.cpp \
+    src/screensaverwidget.cpp \
+    src/screensaver.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -47,7 +49,9 @@ HEADERS += \
     src/pam.h \
     src/gsettings.h \
     src/auxiliary.h \
-    src/configuration.h
+    src/configuration.h \
+    src/screensaverwidget.h \
+    src/screensaver.h
 
 FORMS += \
     src/mainwindow.ui

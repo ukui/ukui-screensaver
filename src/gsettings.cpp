@@ -18,7 +18,7 @@ void QGSettings::changedCallback(GSettings *gsettings, const gchar *key,
 }
 
 /*
- * Setter
+ * Getter
  */
 
 QString QGSettings::getString(QString key)
@@ -61,6 +61,15 @@ QList<QString> QGSettings::getStringList(QString key)
 	for (; *value; value++)
 		list.append(QString::fromLocal8Bit(*value));
 	return list;
+}
+
+int QGSettings::getEnum(QString key)
+{
+    char *key_str;
+    int value;
+    key_str = get_char_pointer(key);
+    value = g_settings_get_enum(gsettings, key_str);
+    return value;
 }
 
 
