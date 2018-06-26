@@ -31,6 +31,8 @@ Build-Depends: debhelper (>= 11),
                xmlto,
 Standards-Version: 4.1.4
 Homepage: http://www.ukui.org/
+Vcs-Git: https://github.com/ukui/ukui-screensaver.git
+Vcs-Browser: https://github.com/ukui/ukui-screensaver
 
 Package: ukui-screensaver
 Architecture: any

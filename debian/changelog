@@ -2,7 +2,7 @@ ukui-screensaver (1.1.2-1) unstable; urgency=medium
 
   * Set object name of auth_prompt_entry.
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Sun, 01 Apr 2018 15:33:12 +0800
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 26 Jun 2018 16:10:33 +0800
 
 ukui-screensaver (1.1.1-1) unstable; urgency=medium
 
@@ -48,4 +48,3 @@ ukui-screensaver (1.0.2-1) unstable; urgency=medium
   * Initial release (Closes: #872968)
 
  -- Aron Xu <aron@debian.org>  Sat, 26 Aug 2017 15:26:45 +0800
-
