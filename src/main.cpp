@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
     check_exist();
 	setup_unix_signal_handlers();
 	QApplication a(argc, argv);
+    QApplication::setSetuidAllowed(true);
+
 	UnixSignalListener unixSignalListener;
 
     qInstallMessageHandler(messageOutput);
