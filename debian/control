@@ -1,7 +1,7 @@
 Source: ukui-screensaver
 Section: x11
 Priority: optional
-Maintainer: Kylin Team <pkg-kylin-devel@lists.alioth.debian.org>
+Maintainer: Kylin Team <team+kylin@tracker.debian.org>
 Uploaders: Aron Xu <aron@debian.org>,
            handsome_feng <jianfengli@ubuntukylin.com>
 Build-Depends: debhelper (>= 11),
@@ -29,7 +29,7 @@ Build-Depends: debhelper (>= 11),
                x11proto-xext-dev,
                x11proto-xf86vidmode-dev,
                xmlto,
-Standards-Version: 4.1.4
+Standards-Version: 4.1.5
 Homepage: http://www.ukui.org/
 Vcs-Git: https://github.com/ukui/ukui-screensaver.git
 Vcs-Browser: https://github.com/ukui/ukui-screensaver
