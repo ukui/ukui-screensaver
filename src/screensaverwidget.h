@@ -11,18 +11,14 @@ class ScreenSaverWidget : public QWidget
 public:
     ScreenSaverWidget(ScreenSaver *screensaver,
                       QWidget *parent = nullptr);
+    ~ScreenSaverWidget() {qDebug() << "~ScreenSaverWidget";}
 
 protected:
     void closeEvent(QCloseEvent *);
     void paintEvent(QPaintEvent *event);
-    void keyPressEvent(QKeyEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
 
 private:
     void embedXScreensaver(const QString &path);
-
-Q_SIGNALS:
-    void closed();
 
 private Q_SLOTS:
     void onBackgroundChanged(const QString &path);

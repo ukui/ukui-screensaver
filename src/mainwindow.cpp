@@ -74,6 +74,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::constructUI()
 {
+    qDebug() << "MainWindow::constructUI";
 	ui = new Ui::MainWindow;
 	ui->setupUi(this);
     ui->widgetLockscreen->setFixedSize(610, 200);
@@ -115,7 +116,8 @@ void MainWindow::constructUI()
         }
     } );
 
-	pixmap.load(configuration->getBackground());
+    qDebug() << "Background: " << configuration->getBackground();
+    pixmap.load(configuration->getBackground());
 	/* Set avatar, password entry, button ... */
     QString username = ::getenv("USER");
 	QPixmap avatarPixmap;
@@ -225,8 +227,9 @@ void MainWindow::paintEvent(QPaintEvent *event)
 	 */
 	Q_FOREACH (QScreen *screen, QGuiApplication::screens()) {
 		QPainter painter(this);
-		painter.drawPixmap(screen->geometry(), pixmap);
+        painter.drawPixmap(screen->geometry(), pixmap);
 	}
+    return QWidget::paintEvent(event);
 }
 
 
@@ -452,14 +455,10 @@ void MainWindow::uiGetReady(bool ready)
 	ui->btnUnlock->setEnabled(ready);
 
 
-    if (ready)//	if (ready)
-        //		setCursor(Qt::ArrowCursor);
-        //	else
-        //		setCursor(Qt::BusyCursor);
+    if (ready) {
 		ui->lineEditPassword->clear();
-
-	if (ready)
 		ui->lineEditPassword->setFocus();
+    }
 }
 
 void MainWindow::setCapsLockWarn()
@@ -515,6 +514,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             screenState = XSCREENSAVER;
 			switchToXScreensaver();
 		}
+    } else if (screenState == XSCREENSAVER) {
+        switchToLockscreen();
+    } else if (screenState == XSCREENSAVER_BY_IDLE) {
+        close();
+        screenState = UNDEFINED;
     }
     return QMainWindow::keyReleaseEvent(event);
 }
@@ -524,6 +528,12 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
     if (screenState == LOCKSCREEN) {
         lockscreenFollowCursor(event->pos());
+    } else if (screenState == XSCREENSAVER) {
+        switchToLockscreen();
+    } else if (screenState == XSCREENSAVER_BY_IDLE) {
+        switchToLockscreen();
+        close();
+        screenState = UNDEFINED;
     }
     return QMainWindow::mouseMoveEvent(event);
 }
@@ -552,11 +562,14 @@ void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
 void MainWindow::switchToLockscreen()
 {
     qDebug() << "switch to lockscreen";
+    for(auto widget : widgetXScreensaverList) {
+        widget->close();
+    }
+    qDebug() << "show LockScreen";
 
-	ui->widgetLockscreen->show();
-    ui->widgetTime->show();
 	ui->lineEditPassword->setFocus();
     setCursor(Qt::ArrowCursor);
+    ui->lineEditPassword->grabKeyboard();
 
     screenState = LOCKSCREEN;
 }
@@ -564,14 +577,7 @@ void MainWindow::switchToLockscreen()
 /* Start a xscreensaver process and embed it onto the widgetXScreensaver widget */
 void MainWindow::switchToXScreensaver()
 {
-	ui->widgetLockscreen->hide();
-    ui->widgetTime->hide();
     embedXScreensaver();
-	/*
-	 * Move focus from lineedit to MainWindow object when xscreensaver is
-	 * started, otherwise the eventFilter won't be invoked.
-	 */
-//	this->setFocus();
     setCursor(Qt::BlankCursor);
 }
 
@@ -579,21 +585,14 @@ void MainWindow::switchToXScreensaver()
 void MainWindow::embedXScreensaver()
 {
     qDebug() << "embedXScreensaver";
+    widgetXScreensaverList.clear();
     ScreenSaver *saver = configuration->getScreensaver();
 	for (int i = 0; i < QGuiApplication::screens().count(); i++) {
         ScreenSaverWidget *saverWidget = new ScreenSaverWidget(saver, this);
         widgetXScreensaverList.push_back(saverWidget);
+
         qDebug() << QGuiApplication::screens()[i]->geometry();
         saverWidget->setGeometry(QGuiApplication::screens()[i]->geometry());
-        connect(saverWidget, &ScreenSaverWidget::closed, this, [&]{
-            if (screenState == XSCREENSAVER){
-                switchToLockscreen();
-            } else if(screenState == XSCREENSAVER_BY_IDLE) {
-                switchToLockscreen(); /* Destroy xscreensaver widgets */
-                close(); /* Destroy lockscreen widgets */
-                screenState = UNDEFINED;
-            }
-        });
 	}
 }
 

@@ -47,9 +47,9 @@ ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
     show();
 }
 
-void ScreenSaverWidget::closeEvent(QCloseEvent */*event*/)
+void ScreenSaverWidget::closeEvent(QCloseEvent *event)
 {
-    qDebug() << "ScreenSaverWidget::closeEvent";
+    qDebug() << "ScreenSaverWidget::closeEvent---beginStop";
     if(xscreensaverPid > 0)
         kill(xscreensaverPid, SIGKILL);
 
@@ -61,8 +61,9 @@ void ScreenSaverWidget::closeEvent(QCloseEvent */*event*/)
             timer->stop();
         releaseKeyboard();
         releaseMouse();
-        Q_EMIT closed();
     }
+    qDebug() << "ScreenSaverWidget::closeEvent---endStop";
+    return QWidget::closeEvent(event);
 }
 
 void ScreenSaverWidget::paintEvent(QPaintEvent *event)
@@ -136,13 +137,3 @@ void ScreenSaverWidget::onBackgroundChanged(const QString &/*path*/)
     }
 }
 
-void ScreenSaverWidget::keyPressEvent(QKeyEvent */*event*/)
-{
-    close();
-}
-
-void ScreenSaverWidget::mouseMoveEvent(QMouseEvent */*event*/)
-{
-    qDebug() << "ScreenSaverWidget::mouseMoveEvent";
-    close();
-}
