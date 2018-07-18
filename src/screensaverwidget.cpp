@@ -17,19 +17,18 @@ ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
     setMouseTracking(true);
     setFocus();
 
+    QPalette plt;
+    plt.setBrush(QPalette::Window, Qt::black);
+    setPalette(plt);
+    setAutoFillBackground(true);
+
     switch(screensaver->mode) {
     case SAVER_RANDOM:
     case SAVER_SINGLE:
         embedXScreensaver(screensaver->path);
         break;
     case SAVER_BLANK_ONLY:
-    {
-        QPalette plt;
-        plt.setBrush(QPalette::Window, Qt::black);
-        setPalette(plt);
-        setAutoFillBackground(true);
         break;
-    }
     case SAVER_IMAGE:
     {
         setAutoFillBackground(true);
