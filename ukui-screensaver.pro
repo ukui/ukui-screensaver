@@ -21,10 +21,10 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS \
            QT_MESSAGELOGCONTEXT
 
-LIBS += -lpam -lpam_misc
+LIBS += -lpam -lpam_misc -lX11 -lXext -lXtst
 
 CONFIG += link_pkgconfig
-PKGCONFIG += gio-2.0 x11 xcb
+PKGCONFIG += gio-2.0 x11 xcb xtst
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -41,7 +41,8 @@ SOURCES += \
     src/auxiliary.cpp \
     src/configuration.cpp \
     src/screensaverwidget.cpp \
-    src/screensaver.cpp
+    src/screensaver.cpp \
+    src/event_monitor.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -51,7 +52,8 @@ HEADERS += \
     src/auxiliary.h \
     src/configuration.h \
     src/screensaverwidget.h \
-    src/screensaver.h
+    src/screensaver.h \
+    src/event_monitor.h
 
 FORMS += \
     src/mainwindow.ui

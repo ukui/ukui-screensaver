@@ -8,6 +8,8 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include "unixsignallistener.h"
+#include "event_monitor.h"
+#include <QLabel>
 
 #define CACHE_DIR "/.cache/ukui-screensaver/"
 
@@ -24,11 +26,11 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
 
-	UnixSignalListener unixSignalListener;
+    UnixSignalListener unixSignalListener;
 
     qInstallMessageHandler(messageOutput);
 
-	QLocale::Language language;
+    QLocale::Language language;
     language = QLocale::system().language();
 
     //加载翻译文件
@@ -37,9 +39,15 @@ int main(int argc, char *argv[])
         translator.load(WORKING_DIRECTORY"/i18n_qm/zh_CN.qm");
     }
     a.installTranslator(&translator);
-	MainWindow w;
-	QObject::connect(&unixSignalListener, &UnixSignalListener::transition,
-			&w, &MainWindow::FSMTransition);
+    MainWindow *window = new MainWindow();
+    QObject::connect(&unixSignalListener, &UnixSignalListener::transition,
+            window, &MainWindow::FSMTransition);
+
+    EventMonitor *monitor = new EventMonitor;
+    monitor->start();
+
+    QObject::connect(monitor, &EventMonitor::keyPress, window, &MainWindow::onGlobalKeyPress);
+    QObject::connect(monitor, &EventMonitor::buttonDrag, window, &MainWindow::onGlobalMouseMove);
 
 	return a.exec();
 }

@@ -2,11 +2,11 @@
 #include "ui_mainwindow.h"
 #include "pam.h"
 #include "auxiliary.h"
-#include <QKeyEvent>
 #include <QHBoxLayout>
 #include <QTimer>
 #include <QDesktopWidget>
 #include <QScreen>
+#include <QKeyEvent>
 #include <QPainter>
 #include <unistd.h>
 #include <sys/types.h>
@@ -26,11 +26,11 @@ extern "C" {
 
 QString screenStates[] = {"UNDEFINED", "LOCKSCREEN", "XSCREENSAVER", "XSCREENSAVER_BY_IDLE"};
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    widgetBioDevices(nullptr),
-    isActivated(false),
-    isPasswdFailed(false)
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent),
+      widgetBioDevices(nullptr),
+      isActivated(false),
+      isPasswdFailed(false)
 {
 	configuration = new Configuration();
 	programState = IDLE;
@@ -491,7 +491,7 @@ void MainWindow::setRealTimeMouseTracking()
 /* All events are dispatched in this function */
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
-	switch (event->type()) {
+    switch (event->type()) {
     case QEvent::KeyRelease:
         if(((QKeyEvent*)event)->key() == Qt::Key_CapsLock)
             setCapsLockWarn();
@@ -500,9 +500,9 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
         if(watched == ui->lineEditPassword)
             setCapsLockWarn();
         break;
-	default:
-		break;
-	}
+    default:
+        break;
+    }
     return false;
 }
 
@@ -514,11 +514,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             screenState = XSCREENSAVER;
 			switchToXScreensaver();
 		}
-    } else if (screenState == XSCREENSAVER) {
-        switchToLockscreen();
-    } else if (screenState == XSCREENSAVER_BY_IDLE) {
-        close();
-        screenState = UNDEFINED;
     }
     return QMainWindow::keyReleaseEvent(event);
 }
@@ -528,14 +523,28 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
     if (screenState == LOCKSCREEN) {
         lockscreenFollowCursor(event->pos());
-    } else if (screenState == XSCREENSAVER) {
+    }
+    return QMainWindow::mouseMoveEvent(event);
+}
+
+void MainWindow::onGlobalKeyPress()
+{
+    if (screenState == XSCREENSAVER) {
         switchToLockscreen();
     } else if (screenState == XSCREENSAVER_BY_IDLE) {
-        switchToLockscreen();
         close();
         screenState = UNDEFINED;
     }
-    return QMainWindow::mouseMoveEvent(event);
+}
+
+void MainWindow::onGlobalMouseMove()
+{
+    if (screenState == XSCREENSAVER) {
+        switchToLockscreen();
+    } else if (screenState == XSCREENSAVER_BY_IDLE) {
+        close();
+        screenState = UNDEFINED;
+    }
 }
 
 /* lockscreen follows cursor */

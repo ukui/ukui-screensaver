@@ -76,6 +76,9 @@ private Q_SLOTS:
 	void onUnlockClicked();
 	void onPasswordEnter();
 	void sessionStatusChanged(unsigned int status);
+public Q_SLOTS:
+    void onGlobalKeyPress();
+    void onGlobalMouseMove();
 
 private:
 	Ui::MainWindow *ui;
