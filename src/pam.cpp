@@ -24,7 +24,7 @@ void authenticate(int toParent[2], int toAuthChild[2])
 	username=getenv("USER");
 	conv.conv = pam_conversation;
 	conv.appdata_ptr = (void *)fd;
-    retval = pam_start("ukui-screensaver", username, &conv, &pamh);
+    retval = pam_start("ukui-screensaver-qt", username, &conv, &pamh);
 	if(retval == PAM_SUCCESS)
         qDebug("PAM started successfully.");
 	else
