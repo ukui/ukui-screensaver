@@ -65,8 +65,8 @@ private:
 protected:
 	void paintEvent(QPaintEvent *event);
     void closeEvent(QCloseEvent *event);
-    void keyPressEvent(QKeyEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
+//    void keyReleaseEvent(QKeyEvent *event);
+//    void mouseMoveEvent(QMouseEvent *event);
     bool eventFilter(QObject *watched, QEvent *event);
 
 public Q_SLOTS:
@@ -77,8 +77,8 @@ private Q_SLOTS:
 	void onPasswordEnter();
 	void sessionStatusChanged(unsigned int status);
 public Q_SLOTS:
-    void onGlobalKeyPress();
-    void onGlobalMouseMove();
+    void onGlobalKeyPress(int keyId);
+    void onGlobalMouseMove(int x, int y);
 
 private:
 	Ui::MainWindow *ui;

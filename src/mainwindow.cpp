@@ -414,6 +414,7 @@ void MainWindow::FSMTransition(int signalSenderPID)
 		if (auth_status == PAM_SUCCESS) {
 			close();
 			programState = IDLE;
+            screenState = UNDEFINED;
 			qDebug() << "Authenticate successfully. Next state: IDLE";
 		} else {
             QTimer::singleShot(0, [&]{
@@ -506,30 +507,35 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 
-/* Key Press Event */
-void MainWindow::keyPressEvent(QKeyEvent *event)
+///* Key Press Event */
+//void MainWindow::keyReleaseEvent(QKeyEvent *event)
+//{
+//	if (screenState == LOCKSCREEN) {
+//        if (event->key() == Qt::Key_Escape) {
+//            screenState = XSCREENSAVER;
+//			switchToXScreensaver();
+//		}
+//    }
+//    return QMainWindow::keyReleaseEvent(event);
+//}
+
+///* Mouse Move Event */
+//void MainWindow::mouseMoveEvent(QMouseEvent *event)
+//{
+//    if (screenState == LOCKSCREEN) {
+//        lockscreenFollowCursor(event->pos());
+//    }
+//    return QMainWindow::mouseMoveEvent(event);
+//}
+
+void MainWindow::onGlobalKeyPress(int keyId)
 {
-	if (screenState == LOCKSCREEN) {
-		if (event->key() == Qt::Key_Escape) {
+    if(screenState == LOCKSCREEN){
+        if(keyId == 9) {    // ESC
             screenState = XSCREENSAVER;
-			switchToXScreensaver();
-		}
-    }
-    return QMainWindow::keyReleaseEvent(event);
-}
-
-/* Mouse Move Event */
-void MainWindow::mouseMoveEvent(QMouseEvent *event)
-{
-    if (screenState == LOCKSCREEN) {
-        lockscreenFollowCursor(event->pos());
-    }
-    return QMainWindow::mouseMoveEvent(event);
-}
-
-void MainWindow::onGlobalKeyPress()
-{
-    if (screenState == XSCREENSAVER) {
+            switchToXScreensaver();
+        }
+    } else if (screenState == XSCREENSAVER) {
         switchToLockscreen();
     } else if (screenState == XSCREENSAVER_BY_IDLE) {
         close();
@@ -537,9 +543,12 @@ void MainWindow::onGlobalKeyPress()
     }
 }
 
-void MainWindow::onGlobalMouseMove()
+void MainWindow::onGlobalMouseMove(int x, int y)
 {
-    if (screenState == XSCREENSAVER) {
+    if (screenState == LOCKSCREEN) {
+        qDebug() << "----";
+        lockscreenFollowCursor(QPoint(x, y));
+    } else if (screenState == XSCREENSAVER) {
         switchToLockscreen();
     } else if (screenState == XSCREENSAVER_BY_IDLE) {
         close();
