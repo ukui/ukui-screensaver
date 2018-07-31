@@ -58,8 +58,6 @@ void ScreenSaverWidget::closeEvent(QCloseEvent *event)
         delete screensaver;
         if(timer && timer->isActive())
             timer->stop();
-        releaseKeyboard();
-        releaseMouse();
     }
     qDebug() << "ScreenSaverWidget::closeEvent---endStop";
     return QWidget::closeEvent(event);

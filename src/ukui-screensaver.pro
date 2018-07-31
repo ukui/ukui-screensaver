@@ -9,9 +9,9 @@ QT       += core gui dbus x11extras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-include(src/bioAuthentication/bioAuthentication.pri)
+include(bioAuthentication/bioAuthentication.pri)
 
-TARGET = ukui-screensaver
+TARGET = ukui-screensaver-dialog
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -33,30 +33,35 @@ PKGCONFIG += gio-2.0 x11 xcb xtst
 
 
 SOURCES += \
-    src/main.cpp \
-    src/mainwindow.cpp \
-    src/unixsignallistener.cpp \
-    src/pam.cpp \
-    src/gsettings.cpp \
-    src/auxiliary.cpp \
-    src/configuration.cpp \
-    src/screensaverwidget.cpp \
-    src/screensaver.cpp \
-    src/event_monitor.cpp
+    main.cpp \
+    mainwindow.cpp \
+    unixsignallistener.cpp \
+    pam.cpp \
+    gsettings.cpp \
+    auxiliary.cpp \
+    configuration.cpp \
+    screensaverwidget.cpp \
+    screensaver.cpp \
+    event_monitor.cpp
 
 HEADERS += \
-    src/mainwindow.h \
-    src/unixsignallistener.h \
-    src/pam.h \
-    src/gsettings.h \
-    src/auxiliary.h \
-    src/configuration.h \
-    src/screensaverwidget.h \
-    src/screensaver.h \
-    src/event_monitor.h
+    mainwindow.h \
+    unixsignallistener.h \
+    pam.h \
+    gsettings.h \
+    auxiliary.h \
+    configuration.h \
+    screensaverwidget.h \
+    screensaver.h \
+    event_monitor.h
 
 FORMS += \
-    src/mainwindow.ui
+    mainwindow.ui
 
 RESOURCES += \
-    src/image.qrc
+    image.qrc \
+    ../assets.qrc
+
+target.path = /usr/bin/
+
+INSTALLS += target

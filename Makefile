@@ -41,8 +41,12 @@ all: gui i18n command man
 
 # Compile GUI
 gui:
-	qmake $(QMAKE_OPTIONS) -o QtMakefile
-	make -f QtMakefile
+	qmake src/ $(QMAKE_OPTIONS) -o Saver_Makefile
+	$(MAKE) -f Saver_Makefile
+	qmake backend/ $(QMAKE_OPTIONS) -o Backend_Makefile
+	$(MAKE) -f Backend_Makefile
+	qmake command/ $(QMAKE_OPTIONS) -o Command_Makefile
+	$(MAKE) -f Command_Makefile
 
 # Generate Qt translation file
 i18n:
@@ -58,12 +62,13 @@ man:
 # Installation
 #
 
-install: install-gui install-i18n install-data install-man
+install: install-target install-i18n install-data install-man
 
-install-gui:
-	# Install GUI
-	install -D ukui-screensaver $(DESTDIR)$(BIN_DIR)/ukui-screensaver
-	install -D ukui-screensaver-command $(DESTDIR)$(BIN_DIR)/ukui-screensaver-command
+install-target:
+	# Install target
+	$(MAKE) -f Saver_Makefile install INSTALL_ROOT=$(DESTDIR)/
+	$(MAKE) -f Backend_Makefile install INSTALL_ROOT=$(DESTDIR)/
+	$(MAKE) -f Command_Makefile install INSTALL_ROOT=$(DESTDIR)/
 
 install-i18n:
 	# Install i18n
@@ -83,12 +88,13 @@ install-man:
 # Uninstallation
 #
 
-uninstall: uninstall-gui uninstall-i18n uninstall-data
+uninstall: uninstall-target uninstall-i18n uninstall-data uninstall-man
 
-uninstall-gui:
-	# Uninstall GUI and scripts
-	rm -rf $(DESTDIR)$(BIN_DIR)/ukui-screensaver
-	rm -rf $(DESTDIR)$(BIN_DIR)/ukui-screensaver-command
+uninstall-target:
+	# Uninstall target
+	$(MAKE) -f Saver_Makefile uninstall
+	$(MAKE) -f Backend_Makefile uninstall
+	$(MAKE) -f Command_Makefile uninstall
 
 uninstall-i18n:
 	# Uninstall i18n
@@ -111,7 +117,8 @@ uninstall-man:
 clean:
 	# Clean GUI intermediate files
 	rm -f *.o moc_* ui_* qrc_*.cpp
-	rm -f QtMakefile .qmake.stash ukui-screensaver ukui-screensaver-command
+	rm -f Saver_Makefile Backend_Makefile Command_Makefile .qmake.stash
+	rm -f ukui-screensaver-dialog ukui-screensaver-command ukui-screensaver-backend
 	# Clean i18n intermediate files
 	$(MAKE) -C $(I18N_SRC) clean
 	$(MAKE) -C $(MAN_SRC) clean

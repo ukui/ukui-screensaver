@@ -1,0 +1,45 @@
+QPushButton {
+    border: none;
+    outline: none;
+}
+
+/* 解锁按钮 */
+#btnUnlock {
+    color: black;
+    background-color: #0078d7;
+}
+#btnUnlock:hover {
+    background-color: #3f8de0;
+}
+#btnUnlock:active {
+    background-color: #2367b9;
+}
+#btnUnlock:disabled {
+    background-color: #013C76;
+}
+
+/* 生物识别按钮*/
+#btnBiometric::hover{
+    background-color:rgb(0, 0, 0, 50);
+}
+
+/* 密码框 */
+#lineEditPassword {
+    border:1px solid #026096;
+}
+
+/* 提示 */
+#lblLogged, #lblPrompt {
+    color: white; font-size: 13px;
+}
+
+#lblUsername {
+    font-size: 20px;
+    color: white;
+}
+
+/* 头像 */
+#lblAvatar {
+    border:2px solid white;
+}
+

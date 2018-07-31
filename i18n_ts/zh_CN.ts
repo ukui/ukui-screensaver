@@ -37,6 +37,12 @@
         <translation></translation>
     </message>
     <message>
+        <location filename="../src/mainwindow.ui" line="180"/>
+        <location filename="../src/mainwindow.ui" line="193"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/mainwindow.ui" line="72"/>
         <source>Username</source>
         <translation></translation>
@@ -52,9 +58,27 @@
         <translation>解锁</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="381"/>
+        <location filename="../src/mainwindow.cpp" line="424"/>
         <source>Password Incorrect</source>
         <translation>密码错误</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../src/main.cpp" line="30"/>
+        <source>Dialog for the ukui ScreenSaver.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="35"/>
+        <source>lock the screen immediately</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="37"/>
+        <source>show saver</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

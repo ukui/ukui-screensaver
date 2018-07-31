@@ -21,10 +21,25 @@ static void messageOutput(QtMsgType type, const QMessageLogContext &context, con
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
 int main(int argc, char *argv[])
 {
-    check_exist();
+//    check_exist();
 	setup_unix_signal_handlers();
+
 	QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
+
+    //命令行参数解析
+    QCommandLineParser parser;
+    parser.setApplicationDescription(QCoreApplication::translate("main", "Dialog for the ukui ScreenSaver."));
+    parser.addHelpOption();
+    parser.addVersionOption();
+
+    QCommandLineOption lockOption(QStringLiteral("lock"),
+                                  QCoreApplication::translate("main", "lock the screen immediately"));
+    QCommandLineOption sessionIdleOption(QStringLiteral("session-idle"),
+                                       QCoreApplication::translate("main", "activated by session idle signal"));
+    parser.addOptions({lockOption, sessionIdleOption});
+    parser.process(a);
+
 
     UnixSignalListener unixSignalListener;
 
@@ -39,6 +54,7 @@ int main(int argc, char *argv[])
         translator.load(WORKING_DIRECTORY"/i18n_qm/zh_CN.qm");
     }
     a.installTranslator(&translator);
+
     MainWindow *window = new MainWindow();
     QObject::connect(&unixSignalListener, &UnixSignalListener::transition,
             window, &MainWindow::FSMTransition);
@@ -48,6 +64,15 @@ int main(int argc, char *argv[])
 
     QObject::connect(monitor, &EventMonitor::keyPress, window, &MainWindow::onGlobalKeyPress);
     QObject::connect(monitor, &EventMonitor::buttonDrag, window, &MainWindow::onGlobalMouseMove);
+
+    QObject::connect(window, &MainWindow::closed, &a, [&] {
+        a.exit(EXIT_SUCCESS);
+    });
+
+    if(parser.isSet(sessionIdleOption)) {
+        window->setShowSaver(true);
+    }
+    window->showDialog();
 
 	return a.exec();
 }
@@ -162,4 +187,5 @@ static void messageOutput(QtMsgType type, const QMessageLogContext &context, con
         fprintf(stderr, "%s Fatal: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
         abort();
     }
+    fflush(stderr);
 }

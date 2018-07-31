@@ -44,6 +44,8 @@ class MainWindow : public QMainWindow
 public:
 	explicit MainWindow(QWidget *parent = 0);
 	~MainWindow();
+    void setShowSaver(bool showSaver);
+    void showDialog();
 
 private:
 	void setRealTimeMouseTracking();
@@ -69,13 +71,16 @@ protected:
 //    void mouseMoveEvent(QMouseEvent *event);
     bool eventFilter(QObject *watched, QEvent *event);
 
+Q_SIGNALS:
+    void closed();
+
 public Q_SLOTS:
 	void FSMTransition(int signalSenderPID); /* Transition FSM states according to signal */
 
 private Q_SLOTS:
 	void onUnlockClicked();
 	void onPasswordEnter();
-	void sessionStatusChanged(unsigned int status);
+    void onSessionIdle();
 public Q_SLOTS:
     void onGlobalKeyPress(int keyId);
     void onGlobalMouseMove(int x, int y);
@@ -97,6 +102,7 @@ private:
     bool isActivated;
     bool isPasswdFailed;
     QTimer *timer;
+    bool showSaver;
 };
 
 #endif // MAINWINDOW_H

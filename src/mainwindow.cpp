@@ -30,23 +30,38 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       widgetBioDevices(nullptr),
       isActivated(false),
-      isPasswdFailed(false)
+      isPasswdFailed(false),
+      showSaver(false)
 {
 	configuration = new Configuration();
 	programState = IDLE;
 	screenState = UNDEFINED;
 	/* Listen to SessionManager StatusChanged signal for idle activation */
-	interface = new QDBusInterface(DBUS_SESSION_MANAGER_SERVICE,
-					DBUS_SESSION_MANAGER_PATH,
-					DBUS_SESSION_MANAGER_INTERFACE,
-					QDBusConnection::sessionBus());
-	connect(interface, SIGNAL(StatusChanged(unsigned int)),
-				this, SLOT(sessionStatusChanged(unsigned int)));
+    interface = new QDBusInterface("cn.kylinos.ScreenSaver",
+                                   "/",
+                                   "cn.kylinos.ScreenSaver",
+                                   QDBusConnection::sessionBus());
+    connect(interface, SIGNAL(SessionIdle()), this, SLOT(onSessionIdle()));
 }
 
 MainWindow::~MainWindow()
 {
 	delete ui;
+}
+
+void MainWindow::setShowSaver(bool showSaver)
+{
+    this->showSaver = showSaver;
+}
+
+void MainWindow::showDialog()
+{
+    qDebug() << "MainWindow::show";
+    if(showSaver) {
+        onSessionIdle();
+    } else {
+        FSMTransition(getpid());
+    }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -69,6 +84,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     timer->stop();
 
+    Q_EMIT closed();
 	return;
 }
 
@@ -93,7 +109,7 @@ void MainWindow::constructUI()
     ui->lineEditPassword->setTextMargins(1, 1, ui->btnUnlock->width() +
                                          ui->btnHidePwd->width(), 1);
 //    ui->lineEditPassword->setCursor(Qt::IBeamCursor);
-    ui->lineEditPassword->setFocusPolicy(Qt::NoFocus);
+//    ui->lineEditPassword->setFocusPolicy(Qt::NoFocus);
     ui->lineEditPassword->hide();
     ui->lineEditPassword->installEventFilter(this);
     ui->btnBiometric->setIcon(QIcon(":/resource/fingerprint-icon.png"));
@@ -127,39 +143,39 @@ void MainWindow::constructUI()
     ui->lblUsername->setText(username);
     ui->lineEditPassword->setFixedSize(350, 40);
 	ui->btnUnlock->setFixedHeight(40);
-    ui->lblAvatar->setStyleSheet("border:2px solid white");
-	ui->lblUsername->setStyleSheet("color: white; font-size: 23px;");
-	ui->lblLogged->setStyleSheet("color: white; font-size: 13px;");
-	ui->lblPrompt->setStyleSheet("color: white; font-size: 13px;");
-    ui->lineEditPassword->setStyleSheet("border:1px solid #026096");
-	ui->btnUnlock->setStyleSheet(
-				"QPushButton {"
-                    "border:0px;"
-					"color: black;"
-					"background-color: #0078d7;"
-				"}"
-				"QPushButton:hover {"
-					"background-color: #3f8de0;"
-				"}"
-				"QPushButton:active {"
-					"background-color: #2367b9;"
-				"}"
-				"QPushButton:disabled {"
-					"background-color: #013C76;"
-				"}");
-    ui->btnBiometric->setStyleSheet(
-                "QPushButton{"
-                    "border: none;"
-                    "outline: none;"
-                "}"
-                "QPushButton::hover{"
-                    "background-color:rgb(0, 0, 0, 50);"
-                "}");
-    ui->btnHidePwd->setStyleSheet(
-                "QPushButton{"
-                    "border: none;"
-                    "outline: none;"
-                "}");
+//    ui->lblAvatar->setStyleSheet("border:2px solid white");
+//	ui->lblUsername->setStyleSheet("color: white; font-size: 23px;");
+//	ui->lblLogged->setStyleSheet("color: white; font-size: 13px;");
+//	ui->lblPrompt->setStyleSheet("color: white; font-size: 13px;");
+//    ui->lineEditPassword->setStyleSheet("border:1px solid #026096");
+//	ui->btnUnlock->setStyleSheet(
+//				"QPushButton {"
+//                    "border:0px;"
+//					"color: black;"
+//					"background-color: #0078d7;"
+//				"}"
+//				"QPushButton:hover {"
+//					"background-color: #3f8de0;"
+//				"}"
+//				"QPushButton:active {"
+//					"background-color: #2367b9;"
+//				"}"
+//				"QPushButton:disabled {"
+//					"background-color: #013C76;"
+//				"}");
+//    ui->btnBiometric->setStyleSheet(
+//                "QPushButton{"
+//                    "border: none;"
+//                    "outline: none;"
+//                "}"
+//                "QPushButton::hover{"
+//                    "background-color:rgb(0, 0, 0, 50);"
+//                "}");
+//    ui->btnHidePwd->setStyleSheet(
+//                "QPushButton{"
+//                    "border: none;"
+//                    "outline: none;"
+//                "}");
 
 	connect(ui->lineEditPassword, &QLineEdit::returnPressed, this, &MainWindow::onPasswordEnter);
 	connect(ui->btnUnlock, &QPushButton::clicked, this, &MainWindow::onUnlockClicked);
@@ -188,15 +204,22 @@ void MainWindow::constructUI()
     ui->lblDate->setStyleSheet("QLabel{color:white; font-size: 20px;}");
     ui->lblDate->adjustSize();
 
-	show();
     /* grab control of the mouse and keyboard events in lockscreen window  */
     if(!establishGrab())
         qWarning("can't grab mouse or keyboard");
+
+    show();
 	/*
 	 * After setting X11BypassWindowManagerHint flag, setFocus can't make
 	 * LineEdit get focus, so we need to activate window manually.
 	 */
 	activateWindow();
+
+    QFile qssFile(":/qss/assets/authdialog.qss");
+    if(qssFile.open(QIODevice::ReadOnly)) {
+        setStyleSheet(qssFile.readAll());
+    }
+    qssFile.close();
 }
 
 void MainWindow::setWindowStyle()
@@ -286,6 +309,7 @@ void MainWindow::setPasswordVisible(bool visible)
 #define AUTH_STATUS_LENGTH 16
 void MainWindow::FSMTransition(int signalSenderPID)
 {
+    qDebug() << "FSMTransition";
 	struct pam_message_object pam_msg_obj;
 	char auth_status_buffer[AUTH_STATUS_LENGTH];
 	int auth_status;
@@ -323,6 +347,7 @@ void MainWindow::FSMTransition(int signalSenderPID)
 			/* Child process will invoke pam and will not return */
 			authenticate(toParent, toAuthChild);
 		}
+        qDebug() << "-----";
 		break;
 	case SHOW_PAM_MESSAGE: /* Triggered by conversation function in pam.c */
 		PIPE_OPS_SAFE(
@@ -546,7 +571,6 @@ void MainWindow::onGlobalKeyPress(int keyId)
 void MainWindow::onGlobalMouseMove(int x, int y)
 {
     if (screenState == LOCKSCREEN) {
-        qDebug() << "----";
         lockscreenFollowCursor(QPoint(x, y));
     } else if (screenState == XSCREENSAVER) {
         switchToLockscreen();
@@ -605,6 +629,7 @@ void MainWindow::embedXScreensaver()
     qDebug() << "embedXScreensaver";
     widgetXScreensaverList.clear();
     ScreenSaver *saver = configuration->getScreensaver();
+
 	for (int i = 0; i < QGuiApplication::screens().count(); i++) {
         ScreenSaverWidget *saverWidget = new ScreenSaverWidget(saver, this);
         widgetXScreensaverList.push_back(saverWidget);
@@ -615,43 +640,32 @@ void MainWindow::embedXScreensaver()
 }
 
 /* Listen to SessionManager StatusChanged D-Bus signal */
-void MainWindow::sessionStatusChanged(unsigned int status)
+void MainWindow::onSessionIdle()
 {
-	switch (status) {
-	case SESSION_AVAILABLE:
-		break;
-	case SESSION_INVISIBLE:
-		break;
-	case SESSION_BUSY:
-		break;
-	case SESSION_IDLE:
-        qDebug() << "session idle";
-        /* skip if the lock window is show */
-        if(isActivated) {
-            if(screenState == LOCKSCREEN) {
-                switchToXScreensaver();
-                screenState = XSCREENSAVER;
-            }
-            break;
+    qDebug() << "session idle";
+    /* skip if the lock window is show */
+    if(isActivated) {
+        qDebug() << "Lock Screen is activated";
+        if(screenState == LOCKSCREEN) {
+            switchToXScreensaver();
+            screenState = XSCREENSAVER;
         }
-		if (configuration->xscreensaverActivatedWhenIdle() &&
-			configuration->lockWhenXScreensaverActivated()) {
-            qDebug() << "run screensaver and lockscreen";
-			/* Start authentication and construct UI */
-			FSMTransition(getpid());
-			switchToXScreensaver();
-			screenState = XSCREENSAVER;
-		} else if (configuration->xscreensaverActivatedWhenIdle()) {
-            qDebug() << "only run screensaver";
-			/* Only construct UI without start authentication */
-			constructUI();
-			switchToXScreensaver();
-			screenState = XSCREENSAVER_BY_IDLE;
-		}
-		break;
-	default:
-		break;
-	}
+        return;
+    }
+    if (configuration->xscreensaverActivatedWhenIdle() &&
+        configuration->lockWhenXScreensaverActivated()) {
+        qDebug() << "run screensaver and lockscreen";
+        /* Start authentication and construct UI */
+        FSMTransition(getpid());
+        switchToXScreensaver();
+        screenState = XSCREENSAVER;
+    } else if (configuration->xscreensaverActivatedWhenIdle()) {
+        qDebug() << "only run screensaver";
+        /* Only construct UI without start authentication */
+        constructUI();
+        switchToXScreensaver();
+        screenState = XSCREENSAVER_BY_IDLE;
+    }
 }
 
 
