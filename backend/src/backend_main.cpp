@@ -27,6 +27,12 @@ int main(int argc, char *argv[])
     SessionWatcher *watcher = new SessionWatcher;
     QObject::connect(watcher, &SessionWatcher::sessionIdle,
                      interface, &Interface::onSessionIdleReceived);
+    QObject::connect(watcher, &SessionWatcher::sessionIdle,
+                     &a, [&]{
+        QDBusMessage message = QDBusMessage::createSignal("/", "cn.kylinos.ScreenSaver", "SessionIdle");
+        service.send(message);
+    });
+
 
 
     return a.exec();

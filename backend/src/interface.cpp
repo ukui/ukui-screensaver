@@ -1,6 +1,7 @@
 #include "interface.h"
 #include <QDebug>
 #include <QDBusConnection>
+#include <QDBusMessage>
 #include <unistd.h>
 
 Interface::Interface(QObject *parent)
@@ -19,7 +20,7 @@ void Interface::Lock()
 
 void Interface::onSessionIdleReceived()
 {
-    Q_EMIT SessionIdle();
+    qDebug() << "emit SessionIdle";
 
     if(!checkExistChild())
         runLocker(true);
