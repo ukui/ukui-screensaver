@@ -567,6 +567,7 @@ void MainWindow::onGlobalKeyPress(int keyId)
     } else if (screenState == XSCREENSAVER) {
         switchToLockscreen();
     } else if (screenState == XSCREENSAVER_BY_IDLE) {
+        clearSavers();
         close();
         screenState = UNDEFINED;
     }
@@ -579,6 +580,7 @@ void MainWindow::onGlobalMouseMove(int x, int y)
     } else if (screenState == XSCREENSAVER) {
         switchToLockscreen();
     } else if (screenState == XSCREENSAVER_BY_IDLE) {
+        clearSavers();
         close();
         screenState = UNDEFINED;
     }
@@ -608,10 +610,8 @@ void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
 void MainWindow::switchToLockscreen()
 {
     qDebug() << "switch to lockscreen";
-    for(auto widget : widgetXScreensaverList) {
-        widget->close();
-    }
-    qDebug() << "show LockScreen";
+
+    clearSavers();
 
 	ui->lineEditPassword->setFocus();
     setCursor(Qt::ArrowCursor);
@@ -641,6 +641,15 @@ void MainWindow::embedXScreensaver()
         qDebug() << QGuiApplication::screens()[i]->geometry();
         saverWidget->setGeometry(QGuiApplication::screens()[i]->geometry());
 	}
+}
+
+void MainWindow::clearSavers()
+{
+    qDebug() << "clear savers";
+
+    for(auto widget : widgetXScreensaverList) {
+        widget->close();
+    }
 }
 
 /* Listen to SessionManager StatusChanged D-Bus signal */

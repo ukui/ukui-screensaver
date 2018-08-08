@@ -63,6 +63,7 @@ private:
 	bool signalSenderFilter(int signalSenderPID);
     void setPasswordVisible(bool visible);
     void setCapsLockWarn();
+    void clearSavers();
 
 protected:
 	void paintEvent(QPaintEvent *event);
