@@ -65,16 +65,19 @@ int main(int argc, char *argv[])
     QObject::connect(monitor, &EventMonitor::keyPress, window, &MainWindow::onGlobalKeyPress);
     QObject::connect(monitor, &EventMonitor::buttonDrag, window, &MainWindow::onGlobalMouseMove);
 
+    //当主窗口关闭时，退出
     QObject::connect(window, &MainWindow::closed, &a, [&] {
-        a.exit(EXIT_SUCCESS);
+        qDebug() << "MainWindow closed, exit " << getpid();
+        exit(EXIT_SUCCESS);
     });
 
-    if(parser.isSet(sessionIdleOption)) {
+    if(parser.isSet(sessionIdleOption))
         window->setShowSaver(true);
-    }
-    window->showDialog();
 
-	return a.exec();
+    if(parser.isSet(lockOption)) {
+        window->showDialog();
+        return a.exec();
+    }
 }
 
 static int setup_unix_signal_handlers()

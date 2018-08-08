@@ -28,9 +28,11 @@ QString screenStates[] = {"UNDEFINED", "LOCKSCREEN", "XSCREENSAVER", "XSCREENSAV
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
+      ui(nullptr),
       widgetBioDevices(nullptr),
       isActivated(false),
       isPasswdFailed(false),
+      timer(nullptr),
       showSaver(false)
 {
 	configuration = new Configuration();
@@ -67,7 +69,8 @@ void MainWindow::showDialog()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
 	hide();
-	delete ui;
+    if(ui)
+        delete ui;
     ui = nullptr;
     widgetBioDevices = nullptr;
 	removeEventFilter(this);
@@ -82,7 +85,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     isActivated = false;
 
-    timer->stop();
+    if(timer && timer->isActive())
+        timer->stop();
 
     Q_EMIT closed();
 	return;
@@ -665,6 +669,9 @@ void MainWindow::onSessionIdle()
         constructUI();
         switchToXScreensaver();
         screenState = XSCREENSAVER_BY_IDLE;
+    } else {
+        qDebug() << "Don't run screensaver and lockscreen";
+        close();
     }
 }
 
