@@ -21,11 +21,12 @@ static void messageOutput(QtMsgType type, const QMessageLogContext &context, con
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
 int main(int argc, char *argv[])
 {
-//    check_exist();
-	setup_unix_signal_handlers();
+//    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+    setup_unix_signal_handlers();
 
-	QApplication a(argc, argv);
+    QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
+
 
     //命令行参数解析
     QCommandLineParser parser;

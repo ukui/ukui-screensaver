@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>647</width>
+    <width>825</width>
     <height>430</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>610</width>
+      <width>761</width>
       <height>200</height>
      </rect>
     </property>
@@ -32,7 +32,7 @@
     <widget class="QLabel" name="lblCapsLock">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>535</x>
        <y>100</y>
        <width>40</width>
        <height>40</height>
@@ -49,7 +49,7 @@ background-color:transparent;</string>
     <widget class="QLineEdit" name="lineEditPassword">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>315</x>
        <y>100</y>
        <width>380</width>
        <height>40</height>
@@ -62,7 +62,7 @@ background-color:transparent;</string>
     <widget class="QLabel" name="lblUsername">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>315</x>
        <y>10</y>
        <width>300</width>
        <height>30</height>
@@ -75,7 +75,7 @@ background-color:transparent;</string>
     <widget class="QLabel" name="lblPrompt">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>315</x>
        <y>70</y>
        <width>300</width>
        <height>25</height>
@@ -88,11 +88,14 @@ background-color:transparent;</string>
     <widget class="QPushButton" name="btnUnlock">
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>615</x>
        <y>100</y>
        <width>80</width>
        <height>40</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>Unlock</string>
@@ -101,7 +104,7 @@ background-color:transparent;</string>
     <widget class="QLabel" name="lblLogged">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>315</x>
        <y>45</y>
        <width>100</width>
        <height>25</height>
@@ -114,7 +117,7 @@ background-color:transparent;</string>
     <widget class="QLabel" name="lblAvatar">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>145</x>
        <y>10</y>
        <width>130</width>
        <height>130</height>
@@ -130,11 +133,14 @@ background-color:transparent;</string>
     <widget class="QPushButton" name="btnBiometric">
      <property name="geometry">
       <rect>
-       <x>565</x>
+       <x>700</x>
        <y>100</y>
        <width>40</width>
        <height>40</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton{border:1px solid #026096; background:transparent};
@@ -147,14 +153,46 @@ QPushButton::hover{background-color:rgb(255, 255, 255, 50)};</string>
     <widget class="QPushButton" name="btnHidePwd">
      <property name="geometry">
       <rect>
-       <x>458</x>
+       <x>593</x>
        <y>110</y>
        <width>22</width>
        <height>22</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnSwitchUser">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>32</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblSwitchUser">
+     <property name="geometry">
+      <rect>
+       <x>38</x>
+       <y>5</y>
+       <width>81</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Switch User</string>
      </property>
     </widget>
    </widget>

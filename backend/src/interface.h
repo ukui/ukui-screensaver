@@ -26,6 +26,8 @@ public Q_SLOTS:
 
     void onSessionIdleReceived();
 
+    void onNameLost(const QString&);
+
 private:
     void runLocker(bool sessionIdle);
     bool checkExistChild();

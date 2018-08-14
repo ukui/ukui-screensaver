@@ -37,8 +37,13 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="180"/>
-        <location filename="../src/mainwindow.ui" line="193"/>
+        <location filename="../src/mainwindow.ui" line="186"/>
+        <source>Switch User</source>
+        <translation>切换用户</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.ui" line="209"/>
+        <location filename="../src/mainwindow.ui" line="222"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -58,7 +63,7 @@
         <translation>解锁</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="424"/>
+        <location filename="../src/mainwindow.cpp" line="421"/>
         <source>Password Incorrect</source>
         <translation>密码错误</translation>
     </message>
@@ -66,18 +71,18 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../src/main.cpp" line="30"/>
+        <location filename="../src/main.cpp" line="33"/>
         <source>Dialog for the ukui ScreenSaver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="35"/>
+        <location filename="../src/main.cpp" line="38"/>
         <source>lock the screen immediately</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="37"/>
-        <source>show saver</source>
+        <location filename="../src/main.cpp" line="40"/>
+        <source>activated by session idle signal</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

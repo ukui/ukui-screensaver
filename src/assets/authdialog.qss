@@ -3,6 +3,10 @@ QPushButton {
     outline: none;
 }
 
+QLabel {
+    color: white;
+}
+
 /* 解锁按钮 */
 #btnUnlock {
     color: black;
@@ -26,6 +30,7 @@ QPushButton {
 /* 密码框 */
 #lineEditPassword {
     border:1px solid #026096;
+    font-size: 14px
 }
 
 /* 提示 */
@@ -41,5 +46,25 @@ QPushButton {
 /* 头像 */
 #lblAvatar {
     border:2px solid white;
+}
+
+/* 返回按钮 */
+#btnSwitchUser{
+    background: url(:/image/assets/arrow_left.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#btnSwitchUser::hover{
+    background: url(:/image/assets/arrow_left_prelight.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#btnKeyboard::hover, #btnPower::hover {
+    background-color: rgb(255, 255, 255, 50);
+}
+
+#btnKeyboard::pressed, #btnPower::pressed {
+    background: rgb(255, 255, 255, 150);
 }
 

@@ -9,6 +9,8 @@
 #include <QtDBus/QDBusInterface>
 #include "configuration.h"
 #include "bioAuthentication/biodeviceview.h"
+#include <QWindow>
+#include <stdio.h>
 
 namespace Ui {
 class MainWindow;
@@ -82,6 +84,9 @@ private Q_SLOTS:
 	void onUnlockClicked();
 	void onPasswordEnter();
     void onSessionIdle();
+
+    void on_btnSwitchUser_clicked();
+
 public Q_SLOTS:
     void onGlobalKeyPress(int keyId);
     void onGlobalMouseMove(int x, int y);

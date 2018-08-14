@@ -10,11 +10,12 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     // 检查该程序是否已经有实例在运行
-    QDBusInterface checkInterface("org.freedesktop.DBus",
-                                  "/org/freedesktop/DBus",
-                                  "org.freedesktop.DBus",
-                                  QDBusConnection::sessionBus());
-    QDBusReply<bool> ret = checkInterface.call("NameHasOwner",
+    QDBusInterface *checkInterface =
+            new QDBusInterface("org.freedesktop.DBus",
+                               "/org/freedesktop/DBus",
+                               "org.freedesktop.DBus",
+                               QDBusConnection::sessionBus());
+    QDBusReply<bool> ret = checkInterface->call("NameHasOwner",
                                                "cn.kylinos.ScreenSaver");
     if(ret.value()) {
         qDebug() << "There is an instance running";
@@ -36,6 +37,7 @@ int main(int argc, char *argv[])
         qDebug() << service.lastError().message();
         exit(EXIT_FAILURE);
     }
+    qDebug() << service.baseService();
 
     // 发送DBus信号
     SessionWatcher *watcher = new SessionWatcher;
@@ -49,6 +51,9 @@ int main(int argc, char *argv[])
         service.send(message);
     });
 
+
+    QObject::connect(checkInterface, SIGNAL(NameLost(QString)),
+                     interface, SLOT(onNameLost(QString)));
 
 
     return a.exec();

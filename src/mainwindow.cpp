@@ -97,7 +97,7 @@ void MainWindow::constructUI()
     qDebug() << "MainWindow::constructUI";
 	ui = new Ui::MainWindow;
 	ui->setupUi(this);
-    ui->widgetLockscreen->setFixedSize(610, 200);
+    ui->widgetLockscreen->setFixedSize(710, 200);
     /* Put the button in the LineEdit */
     QHBoxLayout *hLayoutPwd = new QHBoxLayout;
     hLayoutPwd->setSpacing(0);
@@ -121,7 +121,7 @@ void MainWindow::constructUI()
     ui->btnBiometric->hide();
     ui->btnHidePwd->setFocusPolicy(Qt::NoFocus);
     ui->btnHidePwd->setCursor(Qt::ArrowCursor);
-    ui->lblCapsLock->setPixmap(QPixmap(":/image/warn.png"));
+    ui->lblCapsLock->setPixmap(QPixmap(":/image/assets/warn.png"));
     connect(ui->btnBiometric, &QPushButton::clicked, this,[&]{
         if(widgetBioDevices && widgetBioDevices->isHidden()) {
             widgetBioDevices->show();
@@ -147,39 +147,6 @@ void MainWindow::constructUI()
     ui->lblUsername->setText(username);
     ui->lineEditPassword->setFixedSize(350, 40);
 	ui->btnUnlock->setFixedHeight(40);
-//    ui->lblAvatar->setStyleSheet("border:2px solid white");
-//	ui->lblUsername->setStyleSheet("color: white; font-size: 23px;");
-//	ui->lblLogged->setStyleSheet("color: white; font-size: 13px;");
-//	ui->lblPrompt->setStyleSheet("color: white; font-size: 13px;");
-//    ui->lineEditPassword->setStyleSheet("border:1px solid #026096");
-//	ui->btnUnlock->setStyleSheet(
-//				"QPushButton {"
-//                    "border:0px;"
-//					"color: black;"
-//					"background-color: #0078d7;"
-//				"}"
-//				"QPushButton:hover {"
-//					"background-color: #3f8de0;"
-//				"}"
-//				"QPushButton:active {"
-//					"background-color: #2367b9;"
-//				"}"
-//				"QPushButton:disabled {"
-//					"background-color: #013C76;"
-//				"}");
-//    ui->btnBiometric->setStyleSheet(
-//                "QPushButton{"
-//                    "border: none;"
-//                    "outline: none;"
-//                "}"
-//                "QPushButton::hover{"
-//                    "background-color:rgb(0, 0, 0, 50);"
-//                "}");
-//    ui->btnHidePwd->setStyleSheet(
-//                "QPushButton{"
-//                    "border: none;"
-//                    "outline: none;"
-//                "}");
 
 	connect(ui->lineEditPassword, &QLineEdit::returnPressed, this, &MainWindow::onPasswordEnter);
 	connect(ui->btnUnlock, &QPushButton::clicked, this, &MainWindow::onUnlockClicked);
@@ -190,6 +157,7 @@ void MainWindow::constructUI()
 	setRealTimeMouseTracking();
 	setWindowStyle();
 
+    // display systime time
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [&]{
         QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
@@ -224,6 +192,7 @@ void MainWindow::constructUI()
         setStyleSheet(qssFile.readAll());
     }
     qssFile.close();
+
 }
 
 void MainWindow::setWindowStyle()
@@ -239,8 +208,8 @@ void MainWindow::setWindowStyle()
 	/* Move lockscreen according to cursor position */
 	lockscreenFollowCursor(QCursor::pos());
 
-	setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
-						| Qt::X11BypassWindowManagerHint);
+    setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
+                        | Qt::X11BypassWindowManagerHint);
     setAttribute(Qt::WA_DeleteOnClose);
 }
 
@@ -303,10 +272,10 @@ void MainWindow::setPasswordVisible(bool visible)
 {
     if(visible) {
         ui->lineEditPassword->setEchoMode(QLineEdit::Normal);
-        ui->btnHidePwd->setIcon(QIcon(":/image/show-password.png"));
+        ui->btnHidePwd->setIcon(QIcon(":/image/assets/show-password.png"));
     } else {
         ui->lineEditPassword->setEchoMode(QLineEdit::Password);
-        ui->btnHidePwd->setIcon(QIcon(":/image/hide-password.png"));
+        ui->btnHidePwd->setIcon(QIcon(":/image/assets/hide-password.png"));
     }
 }
 
@@ -724,4 +693,23 @@ QString MainWindow::getUserAvatarPath(QString username)
 		qDebug() << "Can't access user avatar:" << iconPath
 						<< "No access permission.";
 	return iconPath;
+}
+
+void MainWindow::on_btnSwitchUser_clicked()
+{
+    QString seatPath = qgetenv("XDG_SEAT_PATH");
+    QDBusInterface interface("org.freedesktop.DisplayManager",
+                                                   seatPath,
+                                                   "org.freedesktop.DisplayManager.Seat",
+                                                   QDBusConnection::systemBus());
+    if(!interface.isValid()) {
+        qWarning() << "XDG_SEAT_PATH is invalid";
+    }
+
+    QDBusMessage msg = interface.call("SwitchToGreeter");
+    if(msg.type() == QDBusMessage::ErrorMessage) {
+        qWarning() << "SwitchToGreeter: " << msg.errorMessage();
+    } else {
+//        exit(0);
+    }
 }

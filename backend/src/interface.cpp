@@ -53,3 +53,9 @@ bool Interface::checkExistChild()
 
     return num > 0;
 }
+
+void Interface::onNameLost(const QString &serviceName)
+{
+    if(serviceName == "cn.kylinos.ScreenSaver")
+        exit(0);
+}
