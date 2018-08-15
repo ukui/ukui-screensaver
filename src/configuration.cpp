@@ -1,5 +1,6 @@
 #include "configuration.h"
 #include <QDebug>
+#include <QFile>
 
 #define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
 #define KEY_MODE "mode"
@@ -8,6 +9,7 @@
 #define KEY_LOCK_ENABLED "lock-enabled"
 #define KEY_IMAGE_TRANSITION_EFFECT "image-transition-effect"
 #define KEY_IMAGE_SWITCH_INTERVAL "image-switch-interval"
+#define KEY_BACKGROUND "background"
 #define XSCREENSAVER_DIRNAME "/usr/lib/xscreensaver"
 
 #define GSETTINGS_SCHEMA_BACKGROUND "org.mate.background"
@@ -28,12 +30,16 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
 	/* Initiailization */
     mode = qgsettingsScreensaver->getEnum(KEY_MODE);
 	themes = qgsettingsScreensaver->getStringList(KEY_THEMES);
-	background = qgsettingsBackground->getString(KEY_PICTURE_FILENAME);
 	idleActivationEnabled = qgsettingsScreensaver->getBool(
 						KEY_IDLE_ACTIVATION_ENABLED);
 	lockEnabled = qgsettingsScreensaver->getBool(KEY_LOCK_ENABLED);
     imageSwitchInterval = qgsettingsScreensaver->getInt(KEY_IMAGE_SWITCH_INTERVAL);
     imageTSEffect = qgsettingsScreensaver->getEnum(KEY_IMAGE_TRANSITION_EFFECT);
+
+    background = qgsettingsScreensaver->getString(KEY_BACKGROUND);
+    QFile file(background);
+    if(!file.exists())
+        background = qgsettingsBackground->getString(KEY_PICTURE_FILENAME);
 
     qDebug() << imageSwitchInterval << imageTSEffect;
 }
