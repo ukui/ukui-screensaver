@@ -4,6 +4,8 @@
 #include "interface.h"
 #include "sessionwatcher.h"
 #include "interfaceAdaptor.h"
+#include <signal.h>
+#include <unistd.h>
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +23,24 @@ int main(int argc, char *argv[])
         qDebug() << "There is an instance running";
         exit(EXIT_FAILURE);
     }
+
+    // 如果已经有实例在运行则kill, 主要是针对注销后重新登录时之前的实例没有被kill掉
+    char cmd[128] = {0};
+    char str[16];
+    FILE *fp;
+    int pid;
+
+    sprintf(cmd, "ps aux | grep ukui-screensaver-backend | grep %s | grep -v grep | awk '{print $2}'", getenv("USER"));
+
+    fp = popen(cmd, "r");
+    while(fgets(str, sizeof(str)-1, fp)) {
+        pid = atoi(str);
+        qDebug() << "existing instance pid: " << pid;
+        if(pid > 0 && pid != getpid())
+            kill(pid, SIGKILL);
+    }
+    pclose(fp);
+
 
     // 注册DBus
     Interface *interface = new Interface();
