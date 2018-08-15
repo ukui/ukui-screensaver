@@ -2,6 +2,7 @@
 #define SESSIONWATCHER_H
 
 #include <QObject>
+#include <QDBusObjectPath>
 
 class SessionWatcher : public QObject
 {
@@ -14,6 +15,10 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void onStatusChanged(unsigned int status);
+    void onSessionRemoved(const QDBusObjectPath &objectPath);
+
+private:
+    QString sessionPath;
 };
 
 #endif // SESSIONWATCHER_H
