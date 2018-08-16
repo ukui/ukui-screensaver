@@ -24,7 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS \
 LIBS += -lpam -lpam_misc -lX11 -lXext -lXtst
 
 CONFIG += link_pkgconfig
-PKGCONFIG += gio-2.0 x11 xcb xtst liblightdm-qt5-3
+PKGCONFIG += gio-2.0 x11 xcb xtst
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
