@@ -58,6 +58,9 @@ int main(int argc, char *argv[])
     }
     pclose(fp);
 
+    // for PowerManager
+    popen("xset s 0 0", "r");
+
 
     // 注册DBus
     Interface *interface = new Interface();
