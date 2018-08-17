@@ -6,9 +6,24 @@
 #include "interfaceAdaptor.h"
 #include <signal.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <stdio.h>
+
+void sig_chld(int /*signo*/)
+{
+    pid_t pid;
+    while( (pid = waitpid(-1, NULL, WNOHANG)) > 0)
+        qDebug() << "child" << pid << "terminated";
+    return;
+}
 
 int main(int argc, char *argv[])
 {
+    if(signal(SIGCHLD, sig_chld) == SIG_ERR) {
+        perror("signal error");
+        exit(EXIT_FAILURE);
+    }
+
     QCoreApplication a(argc, argv);
 
     // 检查该程序是否已经有实例在运行
@@ -35,9 +50,11 @@ int main(int argc, char *argv[])
     fp = popen(cmd, "r");
     while(fgets(str, sizeof(str)-1, fp)) {
         pid = atoi(str);
-        qDebug() << "existing instance pid: " << pid;
-        if(pid > 0 && pid != getpid())
+
+        if(pid > 0 && pid != getpid()) {
+            qDebug() << "existing instance pid: " << pid;
             kill(pid, SIGKILL);
+        }
     }
     pclose(fp);
 
