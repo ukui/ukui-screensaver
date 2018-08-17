@@ -42,7 +42,8 @@ SOURCES += \
     configuration.cpp \
     screensaverwidget.cpp \
     screensaver.cpp \
-    event_monitor.cpp
+    event_monitor.cpp \
+    monitorwatcher.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -53,7 +54,8 @@ HEADERS += \
     configuration.h \
     screensaverwidget.h \
     screensaver.h \
-    event_monitor.h
+    event_monitor.h \
+    monitorwatcher.h
 
 FORMS += \
     mainwindow.ui

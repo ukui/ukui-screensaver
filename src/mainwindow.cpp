@@ -14,7 +14,9 @@
 #include <fcntl.h>
 #include <QDebug>
 #include <QtDBus/QDBusReply>
+#include <QProcess>
 #include "screensaverwidget.h"
+#include "monitorwatcher.h"
 
 extern "C" {
 	#include <security/_pam_types.h>
@@ -44,6 +46,15 @@ MainWindow::MainWindow(QWidget *parent)
                                    "cn.kylinos.ScreenSaver",
                                    QDBusConnection::sessionBus());
     connect(interface, SIGNAL(SessionIdle()), this, SLOT(onSessionIdle()));
+
+    monitorWatcher = new MonitorWatcher();
+    connect(monitorWatcher, &MonitorWatcher::monitorCountChanged, this, &MainWindow::onScreenCountChanged);
+
+    QDesktopWidget *desktop = QApplication::desktop();
+    connect(desktop, &QDesktopWidget::workAreaResized, this, &MainWindow::onScreenResized);
+    connect(desktop, &QDesktopWidget::resized, this, &MainWindow::onScreenResized);
+
+    monitorWatcher->start();
 }
 
 MainWindow::~MainWindow()
@@ -600,10 +611,9 @@ void MainWindow::switchToXScreensaver()
 void MainWindow::embedXScreensaver()
 {
     qDebug() << "embedXScreensaver";
-    widgetXScreensaverList.clear();
-    ScreenSaver *saver = configuration->getScreensaver();
 
 	for (int i = 0; i < QGuiApplication::screens().count(); i++) {
+        ScreenSaver *saver = configuration->getScreensaver();
         ScreenSaverWidget *saverWidget = new ScreenSaverWidget(saver, this);
         widgetXScreensaverList.push_back(saverWidget);
 
@@ -619,6 +629,7 @@ void MainWindow::clearSavers()
     for(auto widget : widgetXScreensaverList) {
         widget->close();
     }
+    widgetXScreensaverList.clear();
 }
 
 /* Listen to SessionManager StatusChanged D-Bus signal */
@@ -712,4 +723,21 @@ void MainWindow::on_btnSwitchUser_clicked()
     } else {
 //        exit(0);
     }
+}
+
+void MainWindow::onScreenResized(int )
+{
+    QDesktopWidget *desktop = QApplication::desktop();
+    resize(QSize(desktop->geometry().width(),
+                 desktop->geometry().height()));
+    repaint();
+}
+
+
+void MainWindow::onScreenCountChanged()
+{
+    QSize newSize = monitorWatcher->getVirtualSize();
+    resize(newSize);
+    repaint();
+    clearSavers();
 }

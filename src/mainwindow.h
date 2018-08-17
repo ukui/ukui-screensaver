@@ -10,7 +10,8 @@
 #include "configuration.h"
 #include "bioAuthentication/biodeviceview.h"
 #include <QWindow>
-#include <stdio.h>
+#include <QScreen>
+#include "monitorwatcher.h"
 
 namespace Ui {
 class MainWindow;
@@ -79,6 +80,8 @@ Q_SIGNALS:
 
 public Q_SLOTS:
 	void FSMTransition(int signalSenderPID); /* Transition FSM states according to signal */
+    void onScreenResized(int);
+    void onScreenCountChanged();
 
 private Q_SLOTS:
 	void onUnlockClicked();
@@ -109,6 +112,7 @@ private:
     bool isPasswdFailed;
     QTimer *timer;
     bool showSaver;
+    MonitorWatcher *monitorWatcher;
 };
 
 #endif // MAINWINDOW_H
