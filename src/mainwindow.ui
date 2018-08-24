@@ -65,7 +65,7 @@ background-color:transparent;</string>
        <x>315</x>
        <y>10</y>
        <width>300</width>
-       <height>30</height>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -76,9 +76,9 @@ background-color:transparent;</string>
      <property name="geometry">
       <rect>
        <x>315</x>
-       <y>70</y>
+       <y>65</y>
        <width>300</width>
-       <height>25</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="text">
@@ -105,7 +105,7 @@ background-color:transparent;</string>
      <property name="geometry">
       <rect>
        <x>315</x>
-       <y>45</y>
+       <y>40</y>
        <width>100</width>
        <height>25</height>
       </rect>

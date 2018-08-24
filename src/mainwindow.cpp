@@ -354,7 +354,7 @@ void MainWindow::FSMTransition(int signalSenderPID)
                 if(!widgetBioDevices) {
                     widgetBioDevices = new BioDeviceView(getuid(), ui->widgetLockscreen);
                     QRect widgetBioDevicesRect(ui->lineEditPassword->geometry().left(),
-                                               ui->lineEditPassword->geometry().top() - 2,
+                                               ui->lineEditPassword->geometry().top() + 2,
                                                BIODEVICEVIEW_WIDTH, BIODEVICEVIEW_HEIGHT);
                     widgetBioDevices->setGeometry(widgetBioDevicesRect);
                     connect(widgetBioDevices, &BioDeviceView::backToPasswd, this, [&]{
