@@ -44,7 +44,8 @@ bool Interface::checkExistChild()
     sprintf(cmd, "ps -aux | grep ukui-screensaver-dialog | grep %s | grep -v grep | wc -l", getenv("USER"));
 
     fp = popen(cmd, "r");
-    fgets(str, sizeof(str)-1, fp);
+    if(fgets(str, sizeof(str)-1, fp) == NULL)
+        qDebug() << "fgets: " << strerror(errno);
     pclose(fp);
 
     num = atoi(str);

@@ -33,7 +33,8 @@ void MonitorWatcher::run()
             iter = drms.erase(iter);
     }
 
-    popen("xrandr", "r");
+    FILE * fp = popen("xrandr", "r");
+    Q_UNUSED(fp)
 
     /* 每隔3秒遍历一次显卡接口的连接状态 */
     while(!isInterruptionRequested()) {
@@ -68,7 +69,8 @@ void MonitorWatcher::run()
                     Q_EMIT monitorCountChanged(count);
                 }
             }
-            popen("xrandr", "r");
+            FILE *fp = popen("xrandr", "r");
+            Q_UNUSED(fp)
         }
 
         virtualSize = QSize(width, height);
@@ -81,7 +83,7 @@ void MonitorWatcher::run()
  */
 QSize MonitorWatcher::getMonitorMaxSize(const QString &drm)
 {
-    int width, height;
+    int width = 0, height = 0;
     QFile drmModeFile(DRM_DIR + drm + "/modes");
     if(drmModeFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in2(&drmModeFile);

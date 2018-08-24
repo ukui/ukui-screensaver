@@ -41,8 +41,8 @@ Q_SIGNALS:
     void imagePathChanged(const QString &path);
 
 public:
-    ScreenSaver(QObject *parent=nullptr);
-    ScreenSaver(const ScreenSaver &screensaver);
+    explicit ScreenSaver(QObject *parent=nullptr);
+    explicit ScreenSaver(const ScreenSaver &screensaver);
     ScreenSaver(ScreenSaver &&screensaver) noexcept;
     void startSwitchImages();
     void stopSwitchImages();

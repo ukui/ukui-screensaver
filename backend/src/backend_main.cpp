@@ -45,7 +45,8 @@ int main(int argc, char *argv[])
     FILE *fp;
     int pid;
 
-    sprintf(cmd, "ps aux | grep ukui-screensaver-backend | grep %s | grep -v grep | awk '{print $2}'", getenv("USER"));
+    int n = sprintf(cmd, "ps aux | grep ukui-screensaver-backend | grep %s | grep -v grep | awk '{print $2}'", getenv("USER"));
+    Q_UNUSED(n)
 
     fp = popen(cmd, "r");
     while(fgets(str, sizeof(str)-1, fp)) {
@@ -59,7 +60,8 @@ int main(int argc, char *argv[])
     pclose(fp);
 
     // for PowerManager
-    popen("xset s 0 0", "r");
+    fp = popen("xset s 0 0", "r");
+//    Q_UNUSED(fp)
 
 
     // 注册DBus
