@@ -1,0 +1,70 @@
+QPushButton {
+    border: none;
+    outline: none;
+}
+
+QLabel {
+    color: white;
+}
+
+/* 解锁按钮 */
+#btnUnlock {
+    color: black;
+    background-color: #0078d7;
+}
+#btnUnlock:hover {
+    background-color: #3f8de0;
+}
+#btnUnlock:active {
+    background-color: #2367b9;
+}
+#btnUnlock:disabled {
+    background-color: #013C76;
+}
+
+/* 生物识别按钮*/
+#btnBiometric::hover{
+    background-color:rgb(0, 0, 0, 50);
+}
+
+/* 密码框 */
+#lineEditPassword {
+    border:1px solid #026096;
+    font-size: 14px
+}
+
+/* 提示 */
+#lblLogged, #lblPrompt {
+    color: white; font-size: 13px;
+}
+
+#lblUsername {
+    font-size: 20px;
+    color: white;
+}
+
+/* 头像 */
+#lblAvatar {
+    border:2px solid white;
+}
+
+/* 返回按钮 */
+#btnSwitchUser{
+    background: url(:/image/assets/arrow_left.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#btnSwitchUser::hover{
+    background: url(:/image/assets/arrow_left_prelight.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#btnKeyboard::hover, #btnPower::hover {
+    background-color: rgb(255, 255, 255, 50);
+}
+
+#btnKeyboard::pressed, #btnPower::pressed {
+    background: rgb(255, 255, 255, 150);
+}
+
