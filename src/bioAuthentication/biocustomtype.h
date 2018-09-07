@@ -8,6 +8,10 @@
 #define BIOMETRIC_IGNORE    "BIOMETRIC_IGNORE"
 #define BIOMETRIC_SUCESS    "BIOMETRIC_SUCCESS"
 
+#define DBUS_SERVICE "org.ukui.Biometric"
+#define DBUS_PATH "/org/ukui/Biometric"
+#define DBUS_INTERFACE "org.ukui.Biometric"
+
 #ifdef LOG
 #undef LOG
 #endif
