@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2011 ~ 2017 Deepin, Inc.
  *               2011 ~ 2017 Wang Yong
+ * Copyright (C) 2018 Tianjin KYLIN Information Technology Co., Ltd.
  *
  * Author:     Wang Yong <wangyong@deepin.com>
  * Maintainer: Wang Yong <wangyong@deepin.com>

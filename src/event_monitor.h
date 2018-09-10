@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2011 ~ 2017 Deepin, Inc.
  *               2011 ~ 2017 Wang Yong
+ * Copyright (C) 2018 Tianjin KYLIN Information Technology Co., Ltd.
  *
  * Author:     Wang Yong <wangyong@deepin.com>
  * Maintainer: Wang Yong <wangyong@deepin.com>
@@ -30,15 +31,15 @@
 
 
 // Virtual button codes that are not defined by X11.
-#define Button1			1
-#define Button2			2
-#define Button3			3
-#define WheelUp			4
-#define WheelDown		5
-#define WheelLeft		6
-#define WheelRight		7
-#define XButton1		8
-#define XButton2		9
+#define Button1            1
+#define Button2            2
+#define Button3            3
+#define WheelUp            4
+#define WheelDown        5
+#define WheelLeft        6
+#define WheelRight        7
+#define XButton1        8
+#define XButton2        9
 
 class EventMonitor : public QThread
 {
