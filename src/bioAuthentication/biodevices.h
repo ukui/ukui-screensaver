@@ -50,7 +50,7 @@ private:
 
     static bool                             isFirst;
     static QList<DeviceInfo*>               deviceInfos;        //the list of al device info
-    static QMap<int, QList<DeviceInfo>>     savedDeviceInfos;   //[uid, avaliable DeviceInfos]
+    static QMap<int, QList<DeviceInfo>>     savedDeviceInfos;   //[uid, available DeviceInfos]
 };
 
 

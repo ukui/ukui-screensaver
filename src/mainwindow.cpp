@@ -360,7 +360,7 @@ void MainWindow::FSMTransition(int signalSenderPID)
         if(strcmp(pam_msg_obj.msg, BIOMETRIC_PAM) == 0) {
             BioDevices devices;
             if(isPasswdFailed || devices.featuresNum(getuid()) <= 0) {
-                qDebug() << "no avaliable device, enable password authentication";
+                qDebug() << "no available device, enable password authentication";
                 PIPE_OPS_SAFE(
                     ::write(toAuthChild[1], BIOMETRIC_IGNORE, strlen(BIOMETRIC_IGNORE) + 1);
                 );
