@@ -19,6 +19,7 @@
 #define BIOAUTHENTICATION_H
 
 #include <QObject>
+#include <QTimer>
 #include "biocustomtype.h"
 
 class QDBusInterface;
@@ -49,7 +50,7 @@ private:
 
     qint32              uid;
     DeviceInfo          deviceInfo;
-
+    QTimer              *timer;
 };
 
 #endif // BIOAUTHENTICATION_H
