@@ -139,12 +139,14 @@ background-color:transparent;</string>
        <height>40</height>
       </rect>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton{border:1px solid #026096; background:transparent};
-QPushButton::hover{background-color:rgb(255, 255, 255, 50)};</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string/>

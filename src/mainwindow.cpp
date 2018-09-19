@@ -125,7 +125,7 @@ void MainWindow::constructUI()
     qDebug() << "MainWindow::constructUI";
 	ui = new Ui::MainWindow;
 	ui->setupUi(this);
-    ui->widgetLockscreen->setFixedSize(710, 200);
+    ui->widgetLockscreen->setFixedSize(750, 200);
     /* Put the button in the LineEdit */
     QHBoxLayout *hLayoutPwd = new QHBoxLayout;
     hLayoutPwd->setSpacing(0);
