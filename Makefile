@@ -6,7 +6,6 @@ CXX = g++
 
 # Source file directory
 I18N_SRC = i18n_ts/
-MAN_SRC = man/
 
 # bin file installation directory
 BIN_DIR = /usr/bin
@@ -33,7 +32,7 @@ else
 endif
 
 # Target
-all: gui i18n command man
+all: gui i18n command
 
 #
 # Compilation
@@ -55,14 +54,12 @@ i18n:
 command:
 	$(CC) src/ukui-screensaver-command.c -o ukui-screensaver-command
 
-man:
-	$(MAKE) -C $(MAN_SRC)
 
 #
 # Installation
 #
 
-install: install-target install-i18n install-data install-man
+install: install-target install-i18n install-data
 
 install-target:
 	# Install target
@@ -81,14 +78,12 @@ install-data:
 	install -D -m 644 data/ukui-screensavers.menu $(DESTDIR)$(MENUS_DIR)/ukui-screensavers.menu
 	install -D -m 644 data/ukui-screensaver.directory $(DESTDIR)$(DIRECTORY_DIR)/ukui-screensaver.directory
 
-install-man:
-	$(MAKE) -C $(MAN_SRC) install
 
 #
 # Uninstallation
 #
 
-uninstall: uninstall-target uninstall-i18n uninstall-data uninstall-man
+uninstall: uninstall-target uninstall-i18n uninstall-data
 
 uninstall-target:
 	# Uninstall target
@@ -107,9 +102,6 @@ uninstall-data:
 	rm -rf $(DESTDIR)$(MENUS_DIR)/ukui-screensavers.menu
 	rm -rf $(DESTDIR)$(DIRECTORY_DIR)/ukui-screensaver.directory
 
-uninstall-man:
-	# Uinstall man
-	$(MAKE) -C $(MAN_SRC) uninstall
 #
 # Clean intermediate file
 #
@@ -121,6 +113,4 @@ clean:
 	rm -f ukui-screensaver-dialog ukui-screensaver-command ukui-screensaver-backend
 	# Clean i18n intermediate files
 	$(MAKE) -C $(I18N_SRC) clean
-	$(MAKE) -C $(MAN_SRC) clean
 
-.PHONY: clean man
