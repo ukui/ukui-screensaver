@@ -1,0 +1,29 @@
+Source: ukui-screensaver
+Section: x11
+Priority: optional
+Maintainer: Kylin Team <pkg-kylin-devel@lists.alioth.debian.org>
+Uploaders: handsome_feng <jianfengli@ubuntukylin.com>
+Build-Depends: debhelper (>= 11),
+               qtbase5-dev,
+               libqt5x11extras5-dev,
+               libpam0g-dev,
+               qttools5-dev-tools,
+               libglib2.0-dev,
+               libx11-dev,
+               libxtst-dev
+Standards-Version: 4.2.1
+Homepage: https://www.github.com/ukui/ukui-screensaver
+Vcs-Git: https://github.com/ukui/ukui-screensaver.git
+Vcs-Browser: https://github.com/ukui/ukui-screensaver
+
+Package: ukui-screensaver
+Architecture: amd64 arm64
+Depends: ${misc:Depends}, ${shlibs:Depends},
+         ukui-session-manager | mate-session-manager,
+         mate-desktop-common,
+         libxtst6
+Replaces: ukui-screensaver-common(<=1.1.2)
+Description: Sreensaver for UKUI desktop environment
+ A simple and lightweight screensaver written by Qt5.
+ The screensaver supports biometric auhentication which is
+ provided by biometric-auth service.
