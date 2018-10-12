@@ -63,15 +63,14 @@ int main(int argc, char *argv[])
 
     qInstallMessageHandler(messageOutput);
 
-    QLocale::Language language;
-    language = QLocale::system().language();
 
     //加载翻译文件
+    QString locale = QLocale::system().name();
     QTranslator translator;
-    if(language == QLocale::Chinese) {
-        translator.load(WORKING_DIRECTORY"/i18n_qm/zh_CN.qm");
-    }
+    QString qmFile = QString(WORKING_DIRECTORY"/i18n_qm/%1.qm").arg(locale);
+    translator.load(qmFile);
     a.installTranslator(&translator);
+    qDebug() << "load translation file " << qmFile;
 
     MainWindow *window = new MainWindow();
     QObject::connect(&unixSignalListener, &UnixSignalListener::transition,

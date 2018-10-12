@@ -3,8 +3,6 @@
 # Project created by QtCreator 2018-04-09T11:40:40
 #
 #-------------------------------------------------
-
-TRANSLATIONS = ../i18n_ts/zh_CN.ts
 QT       += core gui dbus x11extras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -62,6 +60,11 @@ FORMS += \
 
 RESOURCES += \
     assets.qrc
+
+TRANSLATIONS = ../i18n_ts/zh_CN.ts \
+            ../i18n_ts/ru.ts \
+            ../i18n_ts/fr.ts \
+            ../i18n_ts/pt.ts
 
 target.path = /usr/bin/
 
