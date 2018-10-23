@@ -7,7 +7,7 @@ ukui-screensaver (2.0.2-1) unstable; urgency=medium
 ukui-screensaver (2.0.1-1) UNRELEASED; urgency=medium
 
   * Update translation.
-  * Change Architecture to any. 
+  * Change Architecture to any.
   * New design implemneted with Qt5.
 
  -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 29 Sep 2018 17:01:12 +0800
