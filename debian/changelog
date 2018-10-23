@@ -1,17 +1,31 @@
-ukui-screensaver (1.1.2-1) unstable; urgency=medium
+ukui-screensaver (2.0.2-1) unstable; urgency=medium
+
+  * Add fr.po, pt.po, ru.po.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 23 Oct 2018 14:14:18 +0800
+
+ukui-screensaver (2.0.1-1) UNRELEASED; urgency=medium
+
+  * Update translation.
+  * Change Architecture to any. 
+  * New design implemneted with Qt5.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 29 Sep 2018 17:01:12 +0800
+
+ukui-screensaver (1.1.2-1) UNRELEASED; urgency=medium
 
   * Set object name of auth_prompt_entry.
 
  -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 26 Jun 2018 16:10:33 +0800
 
-ukui-screensaver (1.1.1-1) unstable; urgency=medium
+ukui-screensaver (1.1.1-1) UNRELEASED; urgency=medium
 
   * Fix a translation file typo
   * Add "Modified by:" to three files
 
  -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 17 Mar 2018 14:01:48 +0800
 
-ukui-screensaver (1.1.0-1) unstable; urgency=medium
+ukui-screensaver (1.1.0-1) UNRELEASED; urgency=medium
 
   * Optimize the lock-dialog rendering process.
   * Remove frame shadow from the lock-dialog.
@@ -21,7 +35,7 @@ ukui-screensaver (1.1.0-1) unstable; urgency=medium
 
  -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 27 Feb 2018 15:41:35 +0800
 
-ukui-screensaver (1.0.3-1) unstable; urgency=medium
+ukui-screensaver (1.0.3-1) UNRELEASED; urgency=medium
 
   * [Fixed] screensaver-preferences can't preview "Blank Screen" correctly.
   * [Improved] Change the unlock arrow to button.
