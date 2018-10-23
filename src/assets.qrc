@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/qss">
+        <file>assets/authdialog.qss</file>
+    </qresource>
+    <qresource prefix="/image">
+        <file>assets/show-password.png</file>
+        <file>assets/warn.png</file>
+        <file>assets/arrow_left.png</file>
+        <file>assets/arrow_left_prelight.png</file>
+        <file>assets/arrow_left_active.png</file>
+        <file>assets/hide-password.png</file>
+    </qresource>
+</RCC>
