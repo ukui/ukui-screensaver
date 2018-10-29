@@ -34,6 +34,7 @@
 #include <QProcess>
 #include "screensaverwidget.h"
 #include "monitorwatcher.h"
+#include "virtualkeyboard.h"
 
 extern "C" {
 	#include <security/_pam_types.h>
@@ -52,7 +53,8 @@ MainWindow::MainWindow(QWidget *parent)
       isActivated(false),
       isPasswdFailed(false),
       timer(nullptr),
-      showSaver(false)
+      showSaver(false),
+      vKeyboard(nullptr)
 {
 	configuration = new Configuration();
 	programState = IDLE;
@@ -183,7 +185,6 @@ void MainWindow::constructUI()
     });
 	screenState = LOCKSCREEN;
 	setRealTimeMouseTracking();
-	setWindowStyle();
 
     // display systime time
     timer = new QTimer(this);
@@ -203,6 +204,19 @@ void MainWindow::constructUI()
     ui->lblDate->setText(date);
     ui->lblDate->setStyleSheet("QLabel{color:white; font-size: 20px;}");
     ui->lblDate->adjustSize();
+
+    //虚拟键盘
+    vKeyboard = new VirtualKeyboard(this);
+    vKeyboard->hide();
+    connect(vKeyboard, &VirtualKeyboard::aboutToClose, vKeyboard, &VirtualKeyboard::hide);
+
+    ui->btnKeyboard->setIcon(QIcon(":/image/assets/keyboard.png"));
+    ui->btnKeyboard->setFixedSize(39, 39);
+    ui->btnKeyboard->setIconSize(QSize(39, 39));
+    ui->btnKeyboard->setFocusPolicy(Qt::NoFocus);
+    connect(ui->btnKeyboard, &QPushButton::clicked, vKeyboard, &VirtualKeyboard::show);
+
+    setWindowStyle();
 
     /* grab control of the mouse and keyboard events in lockscreen window  */
     if(!establishGrab())
@@ -600,6 +614,10 @@ void MainWindow::lockscreenFollowCursor(QPoint cursorPoint)
     x = screen->geometry().x();
     y = screen->geometry().y() + screen->geometry().height() - 150;
     ui->widgetTime->move(x, y);
+
+    x = x + screen->geometry().width() - 100;
+    y = screen->geometry().y() + screen->geometry().height() - 100;
+    ui->btnKeyboard->move(x, y);
 }
 
 

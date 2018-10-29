@@ -57,6 +57,8 @@ enum SessionStatus {
 	SESSION_IDLE = 3
 };
 
+class VirtualKeyboard;
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -130,6 +132,7 @@ private:
     QTimer *timer;
     bool showSaver;
     MonitorWatcher *monitorWatcher;
+    VirtualKeyboard *vKeyboard;
 };
 
 #endif // MAINWINDOW_H

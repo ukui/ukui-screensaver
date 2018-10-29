@@ -68,3 +68,10 @@ QLabel {
     background: rgb(255, 255, 255, 150);
 }
 
+#btnKeyboard {
+    border: 1px solid gray;
+}
+#btnKeyboard::pressed{
+    background: rgba(0, 0, 0, 200);
+}
+

@@ -234,6 +234,19 @@ background-color:transparent;</string>
      </property>
     </widget>
    </widget>
+   <widget class="QPushButton" name="btnKeyboard">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>370</y>
+      <width>80</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
