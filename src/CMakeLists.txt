@@ -49,7 +49,8 @@ set(EXTRA_LIBS
 	)
 
 qt5_wrap_ui(dialog_SRC
-	mainwindow.ui)
+        mainwindow.ui
+        )
 
 qt5_add_resources(dialog_SRC
 	assets.qrc
@@ -63,7 +64,7 @@ qt5_wrap_cpp(dialog_SRC
 
 set(dialog_SRC
 	${dialog_SRC}
-	main.cpp
+        ukui-screensaver-dialog.cpp
 	mainwindow.cpp
 	unixsignallistener.cpp
 	pam.cpp
@@ -91,16 +92,17 @@ target_link_libraries(ukui-screensaver-dialog
 	)
 
 set(backend_SRC
-	backend_main.cpp
+    ukui-screensaver-backend.cpp
     interface.cpp
     sessionwatcher.cpp
     interfaceAdaptor.cpp
-	)
+    )
 add_executable(ukui-screensaver-backend ${backend_SRC})
 target_link_libraries(ukui-screensaver-backend Qt5::Core Qt5::DBus)
 
 set(command_SRC
-	command_main.cpp)
+    ukui-screensaver-command.cpp
+    )
 add_executable(ukui-screensaver-command ${command_SRC})
 target_link_libraries(ukui-screensaver-command Qt5::Core Qt5::DBus)
 
