@@ -13,10 +13,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
- *
+ * 
 **/
-#include "biocustomtype.h"
+#include "biotypes.h"
 #include <QDBusInterface>
+
 
 QDBusArgument &operator<<(QDBusArgument &argument, const DeviceInfo &deviceInfo)
 {
@@ -52,4 +53,28 @@ bool DeviceInfo::operator==(const DeviceInfo& deviceInfo) const
        this->device_available == deviceInfo.device_available)
         return true;
     return false;
+}
+
+QDebug& operator<<(QDebug &stream, const DeviceInfo &deviceInfo)
+{
+    stream << deviceInfo.device_id << deviceInfo.device_shortname
+           << deviceInfo.biotype << deviceInfo.device_available;
+    return stream;
+}
+
+QString bioTypeToString(int type)
+{
+    switch(type) {
+    case BIOTYPE_FINGERPRINT:
+        return ("FingerPrint");
+    case BIOTYPE_FINGERVEIN:
+        return ("FingerVein");
+    case BIOTYPE_IRIS:
+        return ("Iris");
+    case BIOTYPE_FACE:
+        return ("Face");
+    case BIOTYPE_VOICEPRINT:
+        return ("VoicePrint");
+    }
+    return QString();
 }

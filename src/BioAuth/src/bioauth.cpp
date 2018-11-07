@@ -13,71 +13,100 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
- *
+ * 
 **/
-#include "bioauthentication.h"
+#include "bioauth.h"
 #include <QList>
 
-BioAuthentication::BioAuthentication(qint32 uid, const DeviceInfo &deviceInfo, QObject *parent)
+BioAuth::BioAuth(qint32 uid, const DeviceInfo &deviceInfo, QObject *parent)
     : QObject(parent),
       uid(uid),
-      deviceInfo(deviceInfo)
+      deviceInfo(deviceInfo),
+      isInAuthentication(false)
 {
-    serviceInterface = new QDBusInterface(DBUS_SERVICE,
-                                          DBUS_PATH,
-                                          DBUS_INTERFACE,
+    serviceInterface = new QDBusInterface(BIO_DBUS_SERVICE,
+                                          BIO_DBUS_PATH,
+                                          BIO_DBUS_INTERFACE,
                                           QDBusConnection::systemBus());
+
     connect(serviceInterface, SIGNAL(StatusChanged(int, int)),
             this, SLOT(onStatusChanged(int,int)));
     serviceInterface->setTimeout(2147483647);
 }
 
-void BioAuthentication::startAuthentication()
+BioAuth::~BioAuth()
 {
+    stopAuth();
+}
+
+void BioAuth::setDevice(const DeviceInfo &deviceInfo)
+{
+    this->deviceInfo = deviceInfo;
+}
+
+void BioAuth::startAuth()
+{
+    if(isInAuthentication)
+        stopAuth();
+
     /* 开始认证识别 */
     LOG() << "start biometric verification";
     QList<QVariant> args;
     args << QVariant(deviceInfo.device_id) << QVariant(uid)
          << QVariant(0) << QVariant(-1);
+    isInAuthentication = true;
+
     QDBusPendingCall call = serviceInterface->asyncCallWithArgumentList("Identify", args);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, &BioAuthentication::onSearchResult);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, &BioAuth::onIdentityComplete);
 }
 
 
-void BioAuthentication::stopAuthentication()
+void BioAuth::stopAuth()
 {
-    serviceInterface->asyncCall("StopOps", QVariant(deviceInfo.device_id), QVariant(5));
+    QDBusReply<int> reply = serviceInterface->call("StopOps", QVariant(deviceInfo.device_id), QVariant(5));
+
+
+    if(!reply.isValid())
+        qWarning() << "StopOps error: " << reply.error();
+
+    isInAuthentication = false;
 }
 
-void BioAuthentication::onSearchResult(QDBusPendingCallWatcher *watcher)
+bool BioAuth::isAuthenticating()
 {
+    return isInAuthentication;
+}
+
+void BioAuth::onIdentityComplete(QDBusPendingCallWatcher *watcher)
+{
+
+
     QDBusPendingReply<qint32, qint32> reply = *watcher;
     if(reply.isError()){
+        isInAuthentication = false;
         LOG() << reply.error();
+        Q_EMIT authComplete(-1, false);
         return;
     }
     qint32 result = reply.argumentAt(0).toInt();
     qint32 retUid = reply.argumentAt(1).toInt();
-    LOG() << result << " " << retUid;
+    LOG() << "Identify complete: " << result << " " << retUid;
 
     /* 识别生物特征成功，发送认证结果 */
-    if(result == DBUS_RESULT_SUCCESS && retUid == uid)
-        Q_EMIT authenticationComplete(true);
-    else {
-        Q_EMIT notify(tr("authentication failed, restart after 2 seconds"));
-        timer = new QTimer();
-        connect(timer, &QTimer::timeout, this, [&]{
-            startAuthentication();
-            timer->deleteLater();
-        });
-        timer->setSingleShot(true);
-        timer->start(2000);
+    if(isInAuthentication){
+
+        isInAuthentication = false;
+
+        if(result == DBUS_RESULT_SUCCESS && retUid == uid)
+            Q_EMIT authComplete(retUid, true);
+        else
+            Q_EMIT authComplete(retUid, false);
     }
 }
 
 
-void BioAuthentication::onStatusChanged(int deviceId, int statusType)
+void BioAuth::onStatusChanged(int deviceId, int statusType)
 {
     if(statusType != STATUS_NOTIFY)
         return;

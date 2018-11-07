@@ -20,13 +20,17 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QDir>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+#include <QDateTime>
+
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/types.h>
+
 #include "unixsignallistener.h"
 #include "event_monitor.h"
-#include <QLabel>
 
 #define CACHE_DIR "/.cache/ukui-screensaver/"
 
@@ -73,14 +77,14 @@ int main(int argc, char *argv[])
     qDebug() << "load translation file " << qmFile;
 
     MainWindow *window = new MainWindow();
-    QObject::connect(&unixSignalListener, &UnixSignalListener::transition,
-            window, &MainWindow::FSMTransition);
+//    QObject::connect(&unixSignalListener, &UnixSignalListener::transition,
+//            window, &MainWindow::FSMTransition);
 
     EventMonitor *monitor = new EventMonitor;
     monitor->start();
 
-    QObject::connect(monitor, &EventMonitor::keyPress, window, &MainWindow::onGlobalKeyPress);
-    QObject::connect(monitor, &EventMonitor::buttonDrag, window, &MainWindow::onGlobalMouseMove);
+//    QObject::connect(monitor, &EventMonitor::keyPress, window, &MainWindow::onGlobalKeyPress);
+//    QObject::connect(monitor, &EventMonitor::buttonDrag, window, &MainWindow::onGlobalMouseMove);
 
     //当主窗口关闭时，退出
     QObject::connect(window, &MainWindow::closed, &a, [&] {
@@ -88,13 +92,16 @@ int main(int argc, char *argv[])
         exit(EXIT_SUCCESS);
     });
 
-    if(parser.isSet(sessionIdleOption))
-        window->setShowSaver(true);
+//    if(parser.isSet(sessionIdleOption))
+//        window->setShowSaver(true);
 
-    if(parser.isSet(lockOption)) {
-        window->showDialog();
-        return a.exec();
-    }
+//    if(parser.isSet(lockOption)) {
+//        window->showDialog();
+//        return a.exec();
+//    }
+    window->show();
+    window->activateWindow();
+    return a.exec();
 }
 
 static int setup_unix_signal_handlers()

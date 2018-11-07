@@ -13,16 +13,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
- *
+ * 
 **/
-#ifndef AUXILIARY_H
-#define AUXILIARY_H
+#ifndef BIOMETRIC_H
+#define BIOMETRIC_H
 
-#include <QObject>
+#include "bioauth.h"
+#include "biodevices.h"
+#include "bioauthwidget.h"
+#include "biodeviceswidget.h"
 
-char *get_char_pointer(QString string);
-bool establishGrab();
-bool closeGrab();
-bool checkCapsLockState();
-
-#endif // AUXILIARY_H
+#endif // BIOMETRIC_H

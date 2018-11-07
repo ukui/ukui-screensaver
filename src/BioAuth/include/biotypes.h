@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
- *
+ * 
 **/
 #ifndef BIOCUSTOMTYPE_H
 #define BIOCUSTOMTYPE_H
@@ -21,24 +21,26 @@
 #include <QObject>
 #include <QtDBus>
 
-#define BIOMETRIC_PAM       "BIOMETRIC_PAM"
-#define BIOMETRIC_IGNORE    "BIOMETRIC_IGNORE"
-#define BIOMETRIC_SUCESS    "BIOMETRIC_SUCCESS"
+#define BIO_DBUS_SERVICE "org.ukui.Biometric"
+#define BIO_DBUS_PATH "/org/ukui/Biometric"
+#define BIO_DBUS_INTERFACE "org.ukui.Biometric"
 
-#define DBUS_SERVICE "org.ukui.Biometric"
-#define DBUS_PATH "/org/ukui/Biometric"
-#define DBUS_INTERFACE "org.ukui.Biometric"
+
+#define DEFAULT_DEVICE "DefaultDevice"
+
 
 #ifdef LOG
 #undef LOG
 #endif
-#define LOG() qDebug() << "[BIOMETRIC MODULE]"
+#define LOG() qDebug() << "[BIOMETRIC]"
 
 /* the type of device */
 enum BioType {
     BIOTYPE_FINGERPRINT,
     BIOTYPE_FINGERVEIN,
     BIOTYPE_IRIS,
+    BIOTYPE_FACE,
+    BIOTYPE_VOICEPRINT,
     __MAX_NR_BIOTYPES
 };
 
@@ -76,11 +78,20 @@ struct DeviceInfo {
     int ops_status;
 
     bool operator==(const DeviceInfo&) const;
+
+    bool operator !=(const DeviceInfo &deviceInfo) const
+    {
+        return !(*this == deviceInfo);
+    }
+    friend QDebug& operator<<(QDebug &stream, const DeviceInfo &deviceInfo);
+
 };
 Q_DECLARE_METATYPE(DeviceInfo)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const DeviceInfo &deviceInfo);
 const QDBusArgument &operator>>(const QDBusArgument &argument, DeviceInfo &deviceInfo);
+
+QString bioTypeToString(int type);
 
 
 #endif // BIOCUSTOMTYPE_H

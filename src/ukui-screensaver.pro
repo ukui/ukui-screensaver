@@ -7,7 +7,7 @@ QT       += core gui dbus x11extras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-include(bioAuthentication/bioAuthentication.pri)
+include(BioAuth/bioauth.pri)
 include(VirtualKeyboard/VirtualKeyboard.pri)
 
 TARGET = ukui-screensaver-dialog
@@ -32,12 +32,14 @@ PKGCONFIG += gio-2.0 x11 xcb xtst
 
 INCLUDEPATH += \
     VirtualKeyboard/src/
+    BioAuth/include/
 
 SOURCES += \
-    main.cpp \
+    ukui-screensaver-dialog.cpp \
     mainwindow.cpp \
     unixsignallistener.cpp \
-    pam.cpp \
+    auth-pam.cpp \
+    authdialog.cpp \
     gsettings.cpp \
     auxiliary.cpp \
     configuration.cpp \
@@ -49,7 +51,9 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     unixsignallistener.h \
-    pam.h \
+    auth-pam.h \
+    auth.h \
+    authdialog.h \
     gsettings.h \
     auxiliary.h \
     configuration.h \
@@ -59,7 +63,8 @@ HEADERS += \
     monitorwatcher.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    authdialog.ui
 
 RESOURCES += \
     assets.qrc

@@ -1,6 +1,13 @@
 QPushButton {
-    border: none;
+    border: 1px solid white;
     outline: none;
+    color: white;
+}
+QPushButton::hover {
+    background: rgba(0, 0, 0, 50);
+}
+QPushButton::pressed {
+    background: rgba(0, 0, 0, 120);
 }
 
 QLabel {
@@ -9,6 +16,7 @@ QLabel {
 
 /* 解锁按钮 */
 #btnUnlock {
+    border: none;
     color: black;
     background-color: #0078d7;
 }
@@ -28,7 +36,7 @@ QLabel {
 }
 
 /* 密码框 */
-#lineEditPassword {
+#lineEditPasswd {
     border:1px solid #026096;
     font-size: 14px
 }
@@ -38,7 +46,7 @@ QLabel {
     color: white; font-size: 13px;
 }
 
-#lblUsername {
+#lblUserName {
     font-size: 20px;
     color: white;
 }
@@ -75,3 +83,56 @@ QLabel {
     background: rgba(0, 0, 0, 200);
 }
 
+#listWidgetMessage {
+    background: transparent;
+}
+/*
+#btnMoreDevices, #btnToPassword, #btnToBiometric{
+    border: 1px solid white;
+    color: white;
+    font-size: 12px;
+}
+
+#btnMoreDevices::hover, #btnToPassword::hover,
+#btnToBiometric::hover{
+    background: rgba(0, 0, 0, 50);
+}
+
+#btnMoreDevices::pressed, #btnToPassword::pressed,
+#btnToBiometric::pressed{
+    background: rgba(0, 0, 0, 120);
+}*/
+
+#widgetPasswd{
+/*background: yellow;*/
+}
+#lblBioNotify{
+    font-size: 12px;
+}
+
+/* devices' widget */
+QComboBox{
+    border: 1px solid white;
+    background: rgba(0, 0, 0, 20);
+    font:18px;
+    color:white;
+    height: 50px;
+}
+QComboBox QAbstractItemView{
+    border: 1px solid white;
+    outline: 0px;
+    height: 100px;
+    background: rgb(1, 58, 80);
+    font: 22px;
+    color: white;
+}
+QComboBox QAbstractItemView::item:selected{
+    background-color: rgba(54, 98, 180);
+}
+QComboBox::down-arrow{
+    image:url(:/images/images/arrow_down.svg);
+}
+QComboBox::drop-down{
+    width: 30px;
+    border: none;
+}

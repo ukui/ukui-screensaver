@@ -28,6 +28,9 @@ void AuthPAM::authenticate(const QString &userName)
 {
     pid_t pid;
 
+    messageList.clear();
+    responseList.clear();
+
     if(pipe(toParent) || pipe(toChild))
         qDebug()<< "create pipe failed: " << strerror(errno);
     if((pid = fork()) < 0)
@@ -63,14 +66,16 @@ void AuthPAM::respond(const QString &response)
             if(message.msg_style == PAM_PROMPT_ECHO_OFF
                     || message.msg_style == PAM_PROMPT_ECHO_ON)
             {
-                int respLength = responseList[i].length() + 1;
+                int respLength = responseList[j].length() + 1;
                 r->resp = (char *)malloc(sizeof(char) * respLength);
-                memcpy(r->resp, responseList[i].toLocal8Bit().data(), respLength);
+                memcpy(r->resp, responseList[j].toLocal8Bit().data(), respLength);
                 j++;
             }
         }
          _respond(resp);
          free(resp);
+         messageList.clear();
+         responseList.clear();
     }
 }
 
@@ -213,7 +218,7 @@ void AuthPAM::_authenticate(const char *userName)
         qDebug() << "failed to get username";
     }
     free(newUser);
-    printf("authentication result: %d\n", authRet);
+    fprintf(stderr, "authentication result: %d\n", authRet);
 
     // 发送认证结果
     int authComplete = 1;
@@ -257,7 +262,6 @@ pam_conversation(int msgLength, const struct pam_message **msg,
         PAM_RESPONSE *r = &response[i];
         readData(toChild[0], &r->resp_retcode, sizeof(r->resp_retcode));
         r->resp = readString(toChild[0]);
-        printf("--- %s\n", r->resp);
     }
     *resp = response;
     return PAM_SUCCESS;

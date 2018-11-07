@@ -16,7 +16,7 @@
  *
 **/
 #include "gsettings.h"
-#include "auxiliary.h"
+#include "util.h"
 
 QGSettings::QGSettings(QString schema, QObject *parent) : QObject(parent)
 {

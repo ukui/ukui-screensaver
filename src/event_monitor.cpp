@@ -25,6 +25,7 @@
 #include "event_monitor.h"
 #include <iostream>
 #include <X11/Xlibint.h>
+#include <X11/XKBlib.h>
 
 EventMonitor::EventMonitor(QObject *parent)
     : QThread(parent)
@@ -91,6 +92,7 @@ void EventMonitor::callback(XPointer ptr, XRecordInterceptData* data)
 
 void EventMonitor::handleRecordEvent(XRecordInterceptData* data)
 {
+    Display *display = XOpenDisplay(NULL);
     if (data->category == XRecordFromServer) {
         xEvent * event = (xEvent *)data->data;
         switch (event->u.u.type) {
@@ -119,18 +121,30 @@ void EventMonitor::handleRecordEvent(XRecordInterceptData* data)
             
             break;
         case KeyPress:
-            Q_EMIT keyPress(((unsigned char*) data->data)[1]);
+        {
+            int keyCode = event->u.u.detail;
+            KeySym keySym = XkbKeycodeToKeysym(display, event->u.u.detail, 0, 0);
+            char *keyStr = XKeysymToString(keySym);
+            Q_EMIT keyPress(keyCode);
+            Q_EMIT keyPress(QString(keyStr));
             
             break;
+        }
         case KeyRelease:
-            Q_EMIT keyRelease(((unsigned char*) data->data)[1]);
+        {
+            int keyCode = event->u.u.detail;
+            KeySym keySym = XkbKeycodeToKeysym(display, event->u.u.detail, 0, 0);
+            char *keyStr = XKeysymToString(keySym);
+            Q_EMIT keyRelease(keyCode);
+            Q_EMIT keyRelease(QString(keyStr));
             
             break;
+        }
         default:
             break;
         }
     }
-
+    XCloseDisplay(display);
     fflush(stdout);
     XRecordFreeData(data);
 }

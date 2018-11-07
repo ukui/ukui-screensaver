@@ -18,15 +18,28 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-namespace ScreenSaver {
-
-enum SessionStatus {
+/* https://www.narf.ssji.net/~shtrom/wiki/projets/gnomescreensavernosession */
+enum SessionStatus
+{
     SESSION_AVAILABLE = 0,
     SESSION_INVISIBLE = 1,
     SESSION_BUSY = 2,
     SESSION_IDLE = 3
 };
 
-}
+
+#define DBUS_SESSION_MANAGER_SERVICE "org.gnome.SessionManager"
+#define DBUS_SESSION_MANAGER_PATH "/org/gnome/SessionManager/Presence"
+#define DBUS_SESSION_MANAGER_INTERFACE "org.gnome.SessionManager.Presence"
+
+#define BIO_ERROR -1
+#define BIO_FAILED 0
+#define BIO_SUCCESS 1
+#define BIO_IGNORE 2
+
+#define BIOMETRIC_PAM       "BIOMETRIC_PAM"
+#define BIOMETRIC_IGNORE    "BIOMETRIC_IGNORE"
+#define BIOMETRIC_SUCCESS    "BIOMETRIC_SUCCESS"
+#define BIOMETRIC_FAILED    "BIOMETRIC_FAILED"
 
 #endif // TYPES_H

@@ -13,36 +13,38 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
- *
+ * 
 **/
-#ifndef BIOAUTHENTICATION_H
-#define BIOAUTHENTICATION_H
+#ifndef BIOAUTH_H
+#define BIOAUTH_H
 
 #include <QObject>
-#include <QTimer>
-#include "biocustomtype.h"
+#include "biotypes.h"
 
 class QDBusInterface;
 
 /*!
- * \brief The BioAuthentication class
- * 负责真正的生物识别操作，通过startAuthentication开始认证，
- * 认证完成后会发出携带结果的authenticationComplete信号
+ * \brief The BioAuth class
+ * 负责真正的生物识别操作，通过startAuth开始认证，
+ * 认证完成后会发出携带结果的authComplete信号
  */
-class BioAuthentication : public QObject
+class BioAuth : public QObject
 {
     Q_OBJECT
 public:
-    explicit BioAuthentication(qint32 uid, const DeviceInfo &deviceInfo, QObject *parent = nullptr);
-    void startAuthentication();
-    void stopAuthentication();
+    explicit BioAuth(qint32 uid, const DeviceInfo &deviceInfo, QObject *parent = nullptr);
+    ~BioAuth();
+    void setDevice(const DeviceInfo& deviceInfo);
+    void startAuth();
+    void stopAuth();
+    bool isAuthenticating();
 
-signals:
-    void authenticationComplete(bool result);
+Q_SIGNALS:
+    void authComplete(uid_t uid, bool result);
     void notify(const QString &message);
 
-private slots:
-    void onSearchResult(QDBusPendingCallWatcher *watcher);
+private Q_SLOTS:
+    void onIdentityComplete(QDBusPendingCallWatcher *watcher);
     void onStatusChanged(int deviceId, int statusType);
 
 private:
@@ -50,7 +52,7 @@ private:
 
     qint32              uid;
     DeviceInfo          deviceInfo;
-    QTimer              *timer;
+    bool isInAuthentication;
 };
 
-#endif // BIOAUTHENTICATION_H
+#endif // BIOAUTH_H

@@ -25,9 +25,9 @@ endif()
 add_compile_options(-fPIC)
 
 include_directories(${PROJECT_SOURCE_DIR}/src/VirtualKeyboard/src)
-include_directories(${PROJECT_SOURCE_DIR}/src/bioAuthentication)
+include_directories(${PROJECT_SOURCE_DIR}/src/BioAuth/include)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/src/bioAuthentication)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/BioAuth)
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/VirtualKeyboard)
 
 include_directories(
@@ -50,6 +50,7 @@ set(EXTRA_LIBS
 
 qt5_wrap_ui(dialog_SRC
         mainwindow.ui
+        authdialog.ui
         )
 
 qt5_add_resources(dialog_SRC
@@ -58,29 +59,39 @@ qt5_add_resources(dialog_SRC
 
 # 头文件中包含了Xlib.h，需要单独拿出来处理，不知道原因
 qt5_wrap_cpp(dialog_SRC
+	mainwindow.h
+	unixsignallistener.h
+	auth.h
+	auth-pam.h
+	authdialog.h
 	gsettings.h
+	configuration.h
+	screensaverwidget.h
+	screensaver.h
 	event_monitor.h
+	monitorwatcher.h
 	)
 
 set(dialog_SRC
 	${dialog_SRC}
-        ukui-screensaver-dialog.cpp
+	ukui-screensaver-dialog.cpp
 	mainwindow.cpp
 	unixsignallistener.cpp
-	pam.cpp
+	auth-pam.cpp
+	authdialog.cpp
 	gsettings.cpp
-	auxiliary.cpp
+	util.cpp
+	grab-x11.cpp
 	configuration.cpp
 	screensaverwidget.cpp
 	screensaver.cpp
 	event_monitor.cpp
 	monitorwatcher.cpp
 	)
-
 add_executable(ukui-screensaver-dialog
 	${dialog_SRC}
 	$<TARGET_OBJECTS:VirtualKeyboard>
-	$<TARGET_OBJECTS:bioAuthentication>
+	$<TARGET_OBJECTS:BioAuth>
 	)
 
 target_link_libraries(ukui-screensaver-dialog

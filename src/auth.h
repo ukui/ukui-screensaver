@@ -1,6 +1,10 @@
 #ifndef AUTH_H
 #define AUTH_H
 
+#ifndef QT_NO_KEYWORDS
+#define QT_NO_KEYWORDS
+#endif
+
 #include <QObject>
 
 class Auth : public QObject

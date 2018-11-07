@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
- *
+ * 
 **/
 #ifndef BIODEVICES_H
 #define BIODEVICES_H
@@ -21,7 +21,7 @@
 #include <QObject>
 #include <QMap>
 #include <QList>
-#include "biocustomtype.h"
+#include "biotypes.h"
 
 class QDBusInterface;
 
@@ -35,22 +35,29 @@ class BioDevices : public QObject
     Q_OBJECT
 public:
     explicit BioDevices(QObject *parent = nullptr);
-    int deviceCount();
-    int featuresNum(qint32 uid);
-    QList<DeviceInfo> getAvaliableDevices(qint32 uid);
-    void clear();
+
+    int count();
+    QMap<int, QList<DeviceInfo>> getAllDevices();
+    QList<DeviceInfo> getDevices(int type);
+    DeviceInfo* getDefaultDevice(uid_t uid);
+    DeviceInfo* findDevice(const QString &deviceName);
+    DeviceInfo* getFirstDevice();
+
+    static QString bioTypeToString_tr(int type);
 
 private:
     void connectToService();
     void getDevicesList();
-    void getFeaturesList(qint32 uid);
+
+Q_SIGNALS:
+    void deviceCountChanged(int newNum);
+
+private Q_SLOTS:
+    void onUSBDeviceHotPlug(int deviceId, int action, int devNumNow);
 
 private:
-    QDBusInterface                          *serviceInterface;
-
-    static bool                             isFirst;
-    static QList<DeviceInfo*>               deviceInfos;        //the list of al device info
-    static QMap<int, QList<DeviceInfo>>     savedDeviceInfos;   //[uid, available DeviceInfos]
+    QDBusInterface                  *serviceInterface;
+    QList<DeviceInfo*>               deviceInfos;        //the list of al device info
 };
 
 

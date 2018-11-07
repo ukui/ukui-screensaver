@@ -55,7 +55,7 @@ void SessionWatcher::onStatusChanged(unsigned int status)
 {
     qDebug() << "Session Status: " << status;
 
-    if(status == ScreenSaver::SESSION_IDLE) {
+    if(status == SESSION_IDLE) {
         Q_EMIT sessionIdle();
     }
 }

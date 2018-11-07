@@ -1,255 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <widget class="QWidget" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>825</width>
-    <height>430</height>
+    <width>748</width>
+    <height>433</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Form</string>
   </property>
-  <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="widgetLockscreen" native="true">
+  <widget class="QPushButton" name="btnKeyboard">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>350</y>
+     <width>80</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QWidget" name="widgetTime" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>280</y>
+     <width>300</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="lblDate">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>761</width>
-      <height>200</height>
-     </rect>
-    </property>
-    <property name="baseSize">
-     <size>
-      <width>580</width>
-      <height>200</height>
-     </size>
-    </property>
-    <widget class="QLabel" name="lblCapsLock">
-     <property name="geometry">
-      <rect>
-       <x>535</x>
-       <y>100</y>
-       <width>40</width>
-       <height>40</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border:none;
-background-color:transparent;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEditPassword">
-     <property name="geometry">
-      <rect>
-       <x>315</x>
-       <y>100</y>
-       <width>380</width>
-       <height>40</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblUsername">
-     <property name="geometry">
-      <rect>
-       <x>315</x>
-       <y>10</y>
-       <width>300</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Username</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblPrompt">
-     <property name="geometry">
-      <rect>
-       <x>315</x>
-       <y>65</y>
-       <width>300</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnUnlock">
-     <property name="geometry">
-      <rect>
-       <x>615</x>
-       <y>100</y>
-       <width>80</width>
-       <height>40</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string>Unlock</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblLogged">
-     <property name="geometry">
-      <rect>
-       <x>315</x>
-       <y>40</y>
-       <width>100</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Has Logged In</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblAvatar">
-     <property name="geometry">
-      <rect>
-       <x>145</x>
-       <y>10</y>
-       <width>130</width>
-       <height>130</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Avatar</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnBiometric">
-     <property name="geometry">
-      <rect>
-       <x>700</x>
-       <y>100</y>
-       <width>40</width>
-       <height>40</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnHidePwd">
-     <property name="geometry">
-      <rect>
-       <x>593</x>
-       <y>110</y>
-       <width>22</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnSwitchUser">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>32</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblSwitchUser">
-     <property name="geometry">
-      <rect>
-       <x>38</x>
-       <y>5</y>
-       <width>81</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Switch User</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="widgetTime" native="true">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>220</y>
-      <width>300</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <widget class="QLabel" name="lblDate">
-     <property name="geometry">
-      <rect>
-       <x>13</x>
-       <y>90</y>
-       <width>280</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblTime">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>11</y>
-       <width>280</width>
-       <height>60</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="btnKeyboard">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>370</y>
-      <width>80</width>
-      <height>26</height>
+      <x>13</x>
+      <y>90</y>
+      <width>280</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>Date</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblTime">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>11</y>
+      <width>280</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Time</string>
     </property>
    </widget>
   </widget>
  </widget>
- <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>

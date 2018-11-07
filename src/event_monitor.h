@@ -53,8 +53,10 @@ Q_SIGNALS:
     void buttonPress(int x, int y);
     void buttonDrag(int x, int y);
     void buttonRelease(int x, int y);
-    void keyPress(int code);
-    void keyRelease(int code);
+    void keyPress(int keyCode);
+    void keyRelease(int keyCode);
+    void keyPress(const QString &key);
+    void keyRelease(const QString &key);
 
 protected:
     bool filterWheelEvent(int detail);
