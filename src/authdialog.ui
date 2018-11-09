@@ -55,6 +55,9 @@
         <height>16777215</height>
        </size>
       </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
       <property name="text">
        <string>More Devices</string>
       </property>
@@ -74,6 +77,9 @@
         <height>16777215</height>
        </size>
       </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
       <property name="text">
        <string>Biometric</string>
       </property>
@@ -92,6 +98,9 @@
         <width>110</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
       </property>
       <property name="text">
        <string>Password</string>
@@ -117,6 +126,9 @@
         <width>110</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
       </property>
       <property name="text">
        <string>Retry</string>
@@ -165,7 +177,7 @@
       </size>
      </property>
      <property name="text">
-      <string>BioImage</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -181,7 +193,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>BioNotify</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignBottom|Qt::AlignHCenter</set>
@@ -200,7 +212,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Device:</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -367,7 +379,7 @@
       </font>
      </property>
      <property name="text">
-      <string>UserName</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -395,7 +407,7 @@
       </size>
      </property>
      <property name="text">
-      <string>Avatar</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

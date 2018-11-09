@@ -36,7 +36,9 @@ Q_SIGNALS:
 
 public:
     virtual void authenticate(const QString &userName) = 0;
+    virtual void stopAuth() = 0;
     virtual void respond(const QString &response) = 0;
+    virtual bool isAuthenticating() = 0;
     virtual bool isAuthenticated() = 0;
 };
 

@@ -43,7 +43,7 @@ private:
 
 Q_SIGNALS:
     void back();
-    void deviceChanged(const DeviceInfo &device);
+    void deviceChanged(DeviceInfo *device);
     void deviceCountChanged(int count);
 
 private Q_SLOTS:
@@ -55,7 +55,7 @@ private Q_SLOTS:
 private:
     Ui::BioDevicesWidget *ui;
     BioDevices bioDevices;
-    QMap<int, QList<DeviceInfo>> devicesMap;
+    QMap<int, QList<DeviceInfo*>> devicesMap;
     QButtonGroup *btnGroup;
     QListWidget *lwDevices;
     uid_t uid;

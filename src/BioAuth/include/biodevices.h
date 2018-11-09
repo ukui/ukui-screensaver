@@ -37,7 +37,7 @@ public:
     explicit BioDevices(QObject *parent = nullptr);
 
     int count();
-    QMap<int, QList<DeviceInfo>> getAllDevices();
+    QMap<int, QList<DeviceInfo*>> getAllDevices();
     QList<DeviceInfo> getDevices(int type);
     DeviceInfo* getDefaultDevice(uid_t uid);
     DeviceInfo* findDevice(const QString &deviceName);

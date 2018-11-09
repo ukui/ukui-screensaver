@@ -15,58 +15,45 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
 **/
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef LOCKWIDGET_H
+#define LOCKWIDGET_H
 
 #ifndef QT_NO_KEYWORDS
 #define QT_NO_KEYWORDS
 #endif
 
 #include <QWidget>
-#include <QtDBus/QDBusInterface>
-#include "configuration.h"
-//#include "bioAuthentication/biodeviceview.h"
-#include <QWindow>
-#include <QScreen>
-#include <QDateTime>
-#include "monitorwatcher.h"
-#include "types.h"
 
 namespace Ui {
-class MainWindow;
+class LockWidget;
 }
 
 class VirtualKeyboard;
 class AuthDialog;
 
-class MainWindow : public QWidget
+class LockWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-    void paintEvent(QPaintEvent *event);
+    explicit LockWidget(QWidget *parent = 0);
+    ~LockWidget();
+    void resizeEvent(QResizeEvent *event);
+    void startAuth();
+    void stopAuth();
 
 Q_SIGNALS:
     void closed();
-
-private Q_SLOTS:
-//    void onScreenResized(int);
-//    void onScreenCountChanged();
+    void capsLockChanged();
 
 private:
     void initUI();
-    void lockscreenFollowCursor(QPoint cursorPosition);
 
 private:
-    Ui::MainWindow      *ui;
+    Ui::LockWidget      *ui;
     AuthDialog          *authDialog;
     VirtualKeyboard     *vKeyboard;
-    Configuration       *configuration;
-    MonitorWatcher      *monitorWatcher;
     QTimer              *timer;
-    QPixmap             pixmap;
 };
 
-#endif // MAINWINDOW_H
+#endif // LOCKWIDGET_H

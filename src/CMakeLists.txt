@@ -49,7 +49,7 @@ set(EXTRA_LIBS
 	)
 
 qt5_wrap_ui(dialog_SRC
-        mainwindow.ui
+        lockwidget.ui
         authdialog.ui
         )
 
@@ -59,7 +59,7 @@ qt5_add_resources(dialog_SRC
 
 # 头文件中包含了Xlib.h，需要单独拿出来处理，不知道原因
 qt5_wrap_cpp(dialog_SRC
-	mainwindow.h
+	lockwidget.h
 	unixsignallistener.h
 	auth.h
 	auth-pam.h
@@ -68,14 +68,15 @@ qt5_wrap_cpp(dialog_SRC
 	configuration.h
 	screensaverwidget.h
 	screensaver.h
-	event_monitor.h
+	xeventmonitor.h
 	monitorwatcher.h
+	fullbackgroundwidget.h
 	)
 
 set(dialog_SRC
 	${dialog_SRC}
 	ukui-screensaver-dialog.cpp
-	mainwindow.cpp
+	lockwidget.cpp
 	unixsignallistener.cpp
 	auth-pam.cpp
 	authdialog.cpp
@@ -85,8 +86,9 @@ set(dialog_SRC
 	configuration.cpp
 	screensaverwidget.cpp
 	screensaver.cpp
-	event_monitor.cpp
+	xeventmonitor.cpp
 	monitorwatcher.cpp
+	fullbackgroundwidget.cpp
 	)
 add_executable(ukui-screensaver-dialog
 	${dialog_SRC}

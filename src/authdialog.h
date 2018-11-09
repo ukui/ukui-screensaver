@@ -41,12 +41,15 @@ private Q_SLOTS:
     void onRespond();
     void onBioAuthStart();
     void onBioAuthStop();
+    void onBioAuthDeviceChanged(DeviceInfo *device);
 
 public Q_SLOTS:
     void switchToBiometric();
     void switchToPassword();
     void switchToDevices();
-    void onCapsLockChanged(bool state);
+    void onCapsLockChanged();
+    void startAuth();
+    void stopAuth();
 
 Q_SIGNALS:
     void authenticateCompete(bool result);
@@ -54,6 +57,7 @@ Q_SIGNALS:
 private:
     enum Page
     {
+        UNDEFINED,
         BIOMETRIC,
         PASSWORD,
         DEVICES
@@ -70,6 +74,8 @@ private:
     uid_t               userId;
     Page                page;
     bool                enableBiometric;
+    bool                firstBioAuth;
+    bool                authFailed;
 };
 
 #endif // AUTHDIALOG_H

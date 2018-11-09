@@ -15,7 +15,6 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
 **/
-#include "mainwindow.h"
 #include <QApplication>
 #include <QTranslator>
 #include <QLocale>
@@ -23,18 +22,18 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QDateTime>
+#include <QDebug>
 
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/types.h>
 
-#include "unixsignallistener.h"
-#include "event_monitor.h"
+#include "fullbackgroundwidget.h"
 
 #define CACHE_DIR "/.cache/ukui-screensaver/"
 
-static int setup_unix_signal_handlers();
+//static int setup_unix_signal_handlers();
 //static void check_exist();
 //static void redirect(int fd, char *filename);
 static void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg);
@@ -43,7 +42,7 @@ static void messageOutput(QtMsgType type, const QMessageLogContext &context, con
 int main(int argc, char *argv[])
 {
 //    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
-    setup_unix_signal_handlers();
+//    setup_unix_signal_handlers();
 
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
@@ -63,7 +62,7 @@ int main(int argc, char *argv[])
     parser.process(a);
 
 
-    UnixSignalListener unixSignalListener;
+//    UnixSignalListener unixSignalListener;
 
     qInstallMessageHandler(messageOutput);
 
@@ -76,21 +75,25 @@ int main(int argc, char *argv[])
     a.installTranslator(&translator);
     qDebug() << "load translation file " << qmFile;
 
-    MainWindow *window = new MainWindow();
+    FullBackgroundWidget *window = new FullBackgroundWidget();
 //    QObject::connect(&unixSignalListener, &UnixSignalListener::transition,
 //            window, &MainWindow::FSMTransition);
 
-    EventMonitor *monitor = new EventMonitor;
-    monitor->start();
+
+    QFile qssFile(":/qss/assets/authdialog.qss");
+    if(qssFile.open(QIODevice::ReadOnly)) {
+        a.setStyleSheet(qssFile.readAll());
+    }
+    qssFile.close();
 
 //    QObject::connect(monitor, &EventMonitor::keyPress, window, &MainWindow::onGlobalKeyPress);
 //    QObject::connect(monitor, &EventMonitor::buttonDrag, window, &MainWindow::onGlobalMouseMove);
 
     //当主窗口关闭时，退出
-    QObject::connect(window, &MainWindow::closed, &a, [&] {
-        qDebug() << "MainWindow closed, exit " << getpid();
-        exit(EXIT_SUCCESS);
-    });
+//    QObject::connect(window, &MainWindow::closed, &a, [&] {
+//        qDebug() << "MainWindow closed, exit " << getpid();
+//        exit(EXIT_SUCCESS);
+//    });
 
 //    if(parser.isSet(sessionIdleOption))
 //        window->setShowSaver(true);
@@ -104,29 +107,29 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
-static int setup_unix_signal_handlers()
-{
-    struct sigaction usr1, chld;
-    int ret = 0;
+//static int setup_unix_signal_handlers()
+//{
+//    struct sigaction usr1, chld;
+//    int ret = 0;
 
-    usr1.sa_sigaction = UnixSignalListener::usr1SignalAction;
-    sigemptyset(&usr1.sa_mask);
-    usr1.sa_flags = 0;
-    usr1.sa_flags |= SA_SIGINFO;
+//    usr1.sa_sigaction = UnixSignalListener::usr1SignalAction;
+//    sigemptyset(&usr1.sa_mask);
+//    usr1.sa_flags = 0;
+//    usr1.sa_flags |= SA_SIGINFO;
 
-    chld.sa_sigaction = UnixSignalListener::chldSignalAction;
-    sigemptyset(&chld.sa_mask);
-    chld.sa_flags = 0;
-    chld.sa_flags |= SA_SIGINFO;
+//    chld.sa_sigaction = UnixSignalListener::chldSignalAction;
+//    sigemptyset(&chld.sa_mask);
+//    chld.sa_flags = 0;
+//    chld.sa_flags |= SA_SIGINFO;
 
-    if (sigaction(SIGUSR1, &usr1, 0))
-       ret = 1;
+//    if (sigaction(SIGUSR1, &usr1, 0))
+//       ret = 1;
 
-    if (sigaction(SIGCHLD, &chld, 0))
-       ret = 2;
+//    if (sigaction(SIGCHLD, &chld, 0))
+//       ret = 2;
 
-    return ret;
-}
+//    return ret;
+//}
 
 ///*
 // * check whether there is a process running or not
@@ -197,21 +200,27 @@ static void messageOutput(QtMsgType type, const QMessageLogContext &context, con
     QDateTime dateTime = QDateTime::currentDateTime();
     QByteArray time = QString("[%1] ").arg(dateTime.toString("MM-dd hh:mm:ss.zzz")).toLocal8Bit();
     QByteArray localMsg = msg.toLocal8Bit();
+
+    QString filePath(context.file);
+    int seprator = filePath.lastIndexOf('/');
+    QString fileName = filePath.right(filePath.length() - seprator - 1);
+    const char *file = fileName.toLocal8Bit().data();
+
     switch(type) {
     case QtDebugMsg:
-        fprintf(stderr, "%s Debug: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        fprintf(stderr, "%s Debug: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         break;
     case QtInfoMsg:
-        fprintf(stderr, "%s Info: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        fprintf(stderr, "%s Info: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         break;
     case QtWarningMsg:
-        fprintf(stderr, "%s Warnning: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        fprintf(stderr, "%s Warnning: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         break;
     case QtCriticalMsg:
-        fprintf(stderr, "%s Critical: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        fprintf(stderr, "%s Critical: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         break;
     case QtFatalMsg:
-        fprintf(stderr, "%s Fatal: %s:%u: %s\n", time.constData(), context.file, context.line, localMsg.constData());
+        fprintf(stderr, "%s Fatal: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         abort();
     }
     fflush(stderr);

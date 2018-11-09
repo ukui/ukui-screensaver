@@ -3,6 +3,7 @@
 #include <QDebug>
 
 #include <unistd.h>
+#include <wait.h>
 
 
 #define PAM_SERVICE_NAME "ukui-screensaver-qt"
@@ -16,18 +17,23 @@ static int readData(int fd, void *buf, size_t count);
 static char * readString(int fd);
 static int pam_conversation(int msgLength, const struct pam_message **msg,
                 PAM_RESPONSE **resp, void *appData);
-
+static void sigchld_handler(int signo);
 
 AuthPAM::AuthPAM(QObject *parent)
-    : Auth(parent)
+    : Auth(parent),
+      pid(0),
+      _isAuthenticated(false),
+      _isAuthenticating(false)
 {
-
+    signal(SIGCHLD, sigchld_handler);
 }
 
 void AuthPAM::authenticate(const QString &userName)
 {
-    pid_t pid;
-
+    if(pid != 0)
+    {
+        stopAuth();
+    }
     messageList.clear();
     responseList.clear();
 
@@ -43,9 +49,15 @@ void AuthPAM::authenticate(const QString &userName)
     }
     else
     {
+        _isAuthenticating = true;
         notifier = new QSocketNotifier(toParent[0], QSocketNotifier::Read);
         connect(notifier, &QSocketNotifier::activated, this, &AuthPAM::onSockRead);
     }
+}
+
+void AuthPAM::stopAuth()
+{
+    ::kill(pid, SIGKILL);
 }
 
 void AuthPAM::respond(const QString &response)
@@ -84,6 +96,11 @@ bool AuthPAM::isAuthenticated()
     return _isAuthenticated;
 }
 
+bool AuthPAM::isAuthenticating()
+{
+    return _isAuthenticating;
+}
+
 
 void AuthPAM::onSockRead()
 {
@@ -98,7 +115,8 @@ void AuthPAM::onSockRead()
         if(readData(toParent[0], (void*)&authRet, sizeof(authRet)) <= 0)
             qDebug() << "get authentication result failed: " << strerror(errno);
         qDebug() << "result: " << authRet;
-        _isAuthenticated = authRet == PAM_SUCCESS;
+        _isAuthenticated = (authRet == PAM_SUCCESS);
+        _isAuthenticating = false;
         Q_EMIT authenticateComplete();
 
     }
@@ -265,4 +283,12 @@ pam_conversation(int msgLength, const struct pam_message **msg,
     }
     *resp = response;
     return PAM_SUCCESS;
+}
+
+void sigchld_handler(int signo)
+{
+    if(signo == SIGCHLD)
+    {
+        ::waitpid(-1, NULL, WNOHANG);
+    }
 }

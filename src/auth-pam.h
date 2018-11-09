@@ -16,8 +16,10 @@ public:
     AuthPAM(QObject *parent = nullptr);
 
     void authenticate(const QString &userName);
+    void stopAuth();
     void respond(const QString &response);
     bool isAuthenticated();
+    bool isAuthenticating();
 
 private:
     void _authenticate(const char *userName);
@@ -28,11 +30,13 @@ private Q_SLOTS:
 
 private:
     QString userName;
+    pid_t pid;
     QSocketNotifier *notifier;
     int nPrompts;
     QStringList responseList;
     QList<PAM_MESSAGE> messageList;
-    bool _isAuthenticated;
+    bool _isAuthenticated;  //认证结果
+    bool _isAuthenticating;
 };
 
 #endif // AUTHPAM_H

@@ -96,12 +96,12 @@ int BioDevices::count()
 }
 
 
-QMap<int, QList<DeviceInfo>> BioDevices::getAllDevices()
+QMap<int, QList<DeviceInfo*>> BioDevices::getAllDevices()
 {
-    QMap<int, QList<DeviceInfo>> devices;
+    QMap<int, QList<DeviceInfo*>> devices;
 
     for(auto deviceInfo : deviceInfos) {
-        devices[deviceInfo->biotype].push_back(*deviceInfo);
+        devices[deviceInfo->biotype].push_back(deviceInfo);
     }
 
     return devices;

@@ -22,32 +22,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-#ifndef EVENTMONITOR_H
-#define EVENTMONITOR_H
+#ifndef XEVENTMONITOR_H
+#define XEVENTMONITOR_H
 
 #include <QThread>
-#include <X11/Xlib.h>
-#include <X11/extensions/record.h>
+#include <QMetaMethod>
+#include <QDebug>
 
-
-// Virtual button codes that are not defined by X11.
-#define Button1            1
-#define Button2            2
-#define Button3            3
-#define WheelUp            4
-#define WheelDown        5
-#define WheelLeft        6
-#define WheelRight        7
-#define XButton1        8
-#define XButton2        9
-
-class EventMonitor : public QThread
+class XEventMonitorPrivate;
+class XEventMonitor : public QThread
 {
     Q_OBJECT
 
 public:
-    EventMonitor(QObject *parent = 0);
-    ~EventMonitor();
+    XEventMonitor(QObject *parent = 0);
+    ~XEventMonitor();
     
 Q_SIGNALS:
     void buttonPress(int x, int y);
@@ -59,13 +48,11 @@ Q_SIGNALS:
     void keyRelease(const QString &key);
 
 protected:
-    bool filterWheelEvent(int detail);
-    static void callback(XPointer trash, XRecordInterceptData* data);
-    void handleRecordEvent(XRecordInterceptData *);
     void run();
     
 private:
-    bool isPress;
+    XEventMonitorPrivate *d_ptr;
+    Q_DECLARE_PRIVATE(XEventMonitor)
 };
 
 #endif

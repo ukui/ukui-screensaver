@@ -21,13 +21,18 @@ AuthDialog::AuthDialog(QWidget *parent) :
     ui(new Ui::AuthDialog),
     auth(new AuthPAM(this)),
     bioAuth(nullptr),
+    deviceInfo(nullptr),
     bioDevices(new BioDevices(this)),
     widgetDevices(nullptr),
     movie(nullptr),
-    enableBiometric(false)
+    page(Page::UNDEFINED),
+    enableBiometric(false),
+    firstBioAuth(true),
+    authFailed(false)
 {
     ui->setupUi(this);
 
+    //要认证的用户
     userId = getuid();
     struct passwd *pwd = getpwuid(userId);
     userName = QString(pwd->pw_name);
@@ -38,12 +43,32 @@ AuthDialog::AuthDialog(QWidget *parent) :
     connect(auth, &Auth::showPrompt, this, &AuthDialog::onShowPrompt);
     connect(auth, &Auth::authenticateComplete, this, &AuthDialog::onAuthComplete);
 
-    auth->authenticate(userName);
 }
 
 AuthDialog::~AuthDialog()
 {
     delete ui;
+}
+
+void AuthDialog::startAuth()
+{
+    qDebug() << page;
+    if(!auth->isAuthenticating())
+    {
+        auth->authenticate(userName);
+    }
+    else if(page == BIOMETRIC)
+    {
+        onBioAuthStart();
+    }
+}
+
+void AuthDialog::stopAuth()
+{
+    if(page == BIOMETRIC)
+    {
+        onBioAuthStop();
+    }
 }
 
 void AuthDialog::initUI()
@@ -72,7 +97,7 @@ void AuthDialog::initUI()
     connect(ui->lineEditPasswd, &QLineEdit::returnPressed, this, &AuthDialog::onRespond);
     connect(ui->btnUnlock, &QPushButton::clicked, this, &AuthDialog::onRespond);
 
-    onCapsLockChanged(checkCapsLockState());
+    ui->lblCapsLock->setVisible(checkCapsLockState());
 
 
     //对话框切换按钮
@@ -82,6 +107,7 @@ void AuthDialog::initUI()
     connect(ui->btnRetry, &QPushButton::clicked, this, &AuthDialog::onBioAuthStart);
 
     ui->widgetSwitch->hide();
+    setFocusProxy(ui->lineEditPasswd);
 }
 
 void AuthDialog::resizeEvent(QResizeEvent *event)
@@ -159,6 +185,7 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
     }
     else
     {
+        authFailed = false;
         page = PASSWORD;
         switchToPassword();
 
@@ -178,22 +205,29 @@ void AuthDialog::onAuthComplete()
     }
     else
     {
-        onShowMessage(tr("Password Incorrect, Please try again"), Auth::MessageTypeError);
+        onShowMessage(tr("Password Incorrect, Please try again"),
+                      Auth::MessageTypeError);
+        //认证失败，重新认证
+        authFailed = true;
+        ui->lineEditPasswd->clear();
+        auth->authenticate(userName);
     }
 }
 
 void AuthDialog::onRespond()
 {
+    ui->listWidgetMessage->clear();
     auth->respond(ui->lineEditPasswd->text());
 }
 
-void AuthDialog::onCapsLockChanged(bool state)
+void AuthDialog::onCapsLockChanged()
 {
-    ui->lblCapsLock->setVisible(state);
+    ui->lblCapsLock->setVisible(!ui->lblCapsLock->isVisible());
 }
 
 void AuthDialog::switchToPassword()
 {
+    qDebug() << "switch to password auth";
     ui->widgetUser->show();
     ui->widgetBiometric->hide();
     ui->widgetPassword->show();
@@ -202,29 +236,30 @@ void AuthDialog::switchToPassword()
         widgetDevices->hide();
     }
 
-    setSwitchButton();
-
     if(bioAuth && bioAuth->isAuthenticating())
         bioAuth->stopAuth();
 
     if(page == BIOMETRIC)
         auth->respond(BIOMETRIC_IGNORE);
+
+    page = PASSWORD;
+    setSwitchButton();
 }
 
 void AuthDialog::switchToBiometric()
-{   
-    ui->widgetUser->show();
-    ui->widgetPassword->hide();
-    ui->widgetBiometric->show();
-    if(widgetDevices)
-    {
-        widgetDevices->hide();
-    }
-
+{
     //是从密码认证切换到生物识别认证的，需要从头开始走PAM流程
     if(page == PASSWORD)
     {
         auth->authenticate(userName);
+        return;
+    }
+
+    //使用密码认证，失败后，从新开始认证，则跳过生物识别认证
+    if(authFailed)
+    {
+        auth->respond(BIOMETRIC_IGNORE);
+        switchToPassword();
         return;
     }
 
@@ -239,38 +274,54 @@ void AuthDialog::switchToBiometric()
     }
     enableBiometric = true;
 
-    setSwitchButton();
-
-    deviceInfo = bioDevices->getDefaultDevice(userId);
-    if(!deviceInfo)
+    qDebug() << "switch to biometric auth";
+    ui->widgetUser->show();
+    ui->widgetPassword->hide();
+    ui->widgetBiometric->show();
+    if(widgetDevices)
     {
-       return;
+        widgetDevices->hide();
     }
 
-    bioAuth = new BioAuth(userId, *deviceInfo, this);
-    connect(bioAuth, &BioAuth::notify, this, [&](const QString &notify){
-        ui->lblBioNotify->setText(notify);
-    });
-    connect(bioAuth, &BioAuth::authComplete, this, [&](uid_t uid, bool ret){
-        if(uid == userId && ret)
+    //第一次接收到生物识别认证的PAM消息时，如果没有配置默认设备，则直接跳过生物识别认证
+    if(firstBioAuth)
+    {
+        firstBioAuth = false;
+        deviceInfo = bioDevices->getDefaultDevice(userId);
+        if(!deviceInfo)
         {
-            Q_EMIT authenticateCompete(true);
+           switchToPassword();
+           return;
         }
-        else
-        {
-            onBioAuthStop();
-//            QTimer::singleShot(2000, this, SLOT(onBioAuthStart()));
-        }
-    });
+    }
+    else if(!deviceInfo)
+    {
+        deviceInfo = bioDevices->getFirstDevice();
+    }
+    qDebug() << deviceInfo->device_shortname;
+
+    page = BIOMETRIC;
+    setSwitchButton();
     onBioAuthStart();
 }
 
 void AuthDialog::switchToDevices()
 {
+    onBioAuthStop();
+
     if(!widgetDevices)
     {
         widgetDevices = new BioDevicesWidget(this);
+        connect(widgetDevices, &BioDevicesWidget::deviceChanged,
+                this, &AuthDialog::onBioAuthDeviceChanged);
+        connect(widgetDevices, &BioDevicesWidget::back,
+                this, [&]{
+            widgetDevices->hide();
+            ui->widgetUser->show();
+            ui->widgetBiometric->show();
+        });
     }
+    page = DEVICES;
     setSwitchButton();
     ui->widgetUser->hide();
     ui->widgetPassword->hide();
@@ -282,6 +333,7 @@ void AuthDialog::switchToDevices()
 
 void AuthDialog::setSwitchButton()
 {
+    qDebug() << page;
     ui->widgetSwitch->show();
     ui->btnMoreDevices->hide();
     ui->btnToBiometric->hide();
@@ -291,9 +343,11 @@ void AuthDialog::setSwitchButton()
     if(page == PASSWORD)
     {
         if(enableBiometric)
+        {
             ui->btnToBiometric->show();
-        if(bioDevices->count() > 1)
-            ui->btnMoreDevices->show();
+            if(bioDevices->count() > 1)
+                ui->btnMoreDevices->show();
+        }
     }
     else if(page == BIOMETRIC)
     {
@@ -312,6 +366,24 @@ void AuthDialog::setSwitchButton()
 
 void AuthDialog::onBioAuthStart()
 {
+    if(!bioAuth)
+    {
+        bioAuth = new BioAuth(userId, *deviceInfo, this);
+        connect(bioAuth, &BioAuth::notify, this, [&](const QString &notify){
+            ui->lblBioNotify->setText(notify);
+        });
+        connect(bioAuth, &BioAuth::authComplete, this, [&](uid_t uid, bool ret){
+            if(uid == userId && ret)
+            {
+                auth->respond(BIOMETRIC_SUCCESS);
+            }
+            else
+            {
+                onBioAuthStop();
+    //            QTimer::singleShot(2000, this, SLOT(onBioAuthStart()));
+            }
+        });
+    }
     bioAuth->startAuth();
     setBioImage(true);
     setSwitchButton();
@@ -319,13 +391,21 @@ void AuthDialog::onBioAuthStart()
 
 void AuthDialog::onBioAuthStop()
 {
-    bioAuth->stopAuth();
+    if(bioAuth && bioAuth->isAuthenticating())
+    {
+        bioAuth->stopAuth();
+    }
     setBioImage(false);
     setSwitchButton();
 }
 
 void AuthDialog::setBioImage(bool isGif)
 {
+    if(!deviceInfo)
+    {
+        return;
+    }
+
     QString deviceName = deviceInfo->device_shortname;
     QString type = BioDevices::bioTypeToString_tr(deviceInfo->biotype);
     QString imagePath;
@@ -350,4 +430,13 @@ void AuthDialog::setBioImage(bool isGif)
         ui->lblBioImage->setPixmap(image);
     }
     ui->lblBioDeviceName->setText("Current Device: " + deviceName);
+}
+
+void AuthDialog::onBioAuthDeviceChanged(DeviceInfo *device)
+{
+    deviceInfo = device;
+    qDebug() << deviceInfo->device_shortname;
+    bioAuth->deleteLater();
+    bioAuth = nullptr;
+    onBioAuthStart();
 }

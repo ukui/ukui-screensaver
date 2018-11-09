@@ -32,8 +32,8 @@ BioDevicesWidget::BioDevicesWidget(QWidget *parent) :
     connect(&bioDevices, &BioDevices::deviceCountChanged,
             this, &BioDevicesWidget::onDeviceCountChanged);
     devicesMap = bioDevices.getAllDevices();
-    QMap<int, QList<DeviceInfo>> devicesMap = getTestDevices();
-    setDevices(devicesMap);
+//    QMap<int, QList<DeviceInfo>> devicesMap = getTestDevices();
+//    setDevices(devicesMap);
 
     ui->cmbDeviceName->setModel(lwDevices->model());
     ui->cmbDeviceName->setView(lwDevices);
@@ -48,7 +48,7 @@ void BioDevicesWidget::setDevices(const QMap<int, QList<DeviceInfo> > &devices)
 {
     for(int type : devices.keys())
     {
-        devicesMap[type].append(devices[type]);
+//        devicesMap[type].append(devices[type]);
     }
 }
 
@@ -57,14 +57,16 @@ void BioDevicesWidget::init(uid_t uid)
     this->uid = uid;
 //    devicesMap = bioDevices.getAllDevices();
 
-    qDebug() << devicesMap;
-
     ui->cmbDeviceName->clear();
 
     addTypeButtons();
 
     /* set the default device as current device */
     DeviceInfo *device = bioDevices.getDefaultDevice(uid);
+    if(!device)
+    {
+        device = bioDevices.getFirstDevice();
+    }
     if(device)
     {
         QPushButton *btn = dynamic_cast<QPushButton*>(btnGroup->button(device->biotype));
@@ -113,7 +115,6 @@ void BioDevicesWidget::addTypeButtons()
             yPos = yStart + h + 10;
         }
         btn->setGeometry(xPos, yPos, w, h);
-        qDebug() << btn->geometry();
         i++;
     }
 
@@ -131,10 +132,10 @@ void BioDevicesWidget::onDeviceTypeChanged()
     ui->cmbDeviceName->clear();
     lwDevices->clear();
 
-    QList<DeviceInfo> &deviceList = devicesMap[type];
+    QList<DeviceInfo*> &deviceList = devicesMap[type];
     for(auto deviceInfo : deviceList)
     {
-        lwDevices->addItem(deviceInfo.device_shortname);
+        lwDevices->addItem(deviceInfo->device_shortname);
     }
 
 }
@@ -167,8 +168,9 @@ void BioDevicesWidget::changeButtonStyle()
 void BioDevicesWidget::on_btnOK_clicked()
 {
     int index = ui->cmbDeviceName->currentIndex();
-    const DeviceInfo &device = devicesMap[type].at(index);
+    DeviceInfo *device = devicesMap[type].at(index);
     Q_EMIT deviceChanged(device);
+    Q_EMIT back();
 }
 
 void BioDevicesWidget::on_btnBack_clicked()

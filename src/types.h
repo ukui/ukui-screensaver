@@ -27,10 +27,16 @@ enum SessionStatus
     SESSION_IDLE = 3
 };
 
+enum ScreenStatus
+{
+    UNDEFINED = 0,
+    SCREEN_SAVER = 1,
+    SCREEN_LOCK = 2
+};
 
-#define DBUS_SESSION_MANAGER_SERVICE "org.gnome.SessionManager"
-#define DBUS_SESSION_MANAGER_PATH "/org/gnome/SessionManager/Presence"
-#define DBUS_SESSION_MANAGER_INTERFACE "org.gnome.SessionManager.Presence"
+#define SM_DBUS_SERVICE     "org.gnome.SessionManager"
+#define SM_DBUS_PATH        "/org/gnome/SessionManager/Presence"
+#define SM_DBUS_INTERFACE   "org.gnome.SessionManager.Presence"
 
 #define BIO_ERROR -1
 #define BIO_FAILED 0
@@ -39,7 +45,7 @@ enum SessionStatus
 
 #define BIOMETRIC_PAM       "BIOMETRIC_PAM"
 #define BIOMETRIC_IGNORE    "BIOMETRIC_IGNORE"
-#define BIOMETRIC_SUCCESS    "BIOMETRIC_SUCCESS"
+#define BIOMETRIC_SUCCESS   "BIOMETRIC_SUCCESS"
 #define BIOMETRIC_FAILED    "BIOMETRIC_FAILED"
 
 #endif // TYPES_H
