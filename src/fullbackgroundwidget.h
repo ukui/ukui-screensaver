@@ -24,14 +24,17 @@ public:
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);
     void lock();
+    void showLockWidget();
     void showScreensaver();
+    void onSessionStatusChanged(uint status);
 
 private:
     void init();
     void clearScreensavers();
 
 private Q_SLOTS:
-    void onSessionStatusChanged(uint status);
+    void onScreenCountChanged(int);
+    void onDesktopResized();
     void onGlobalKeyPress(const QString &key);
     void onGlobalKeyRelease(const QString &key);
     void onGlobalButtonDrag(int xPos, int yPos);

@@ -5,6 +5,8 @@
 #include <QDBusInterface>
 #include <QDebug>
 #include <QPainter>
+#include <QApplication>
+#include <QDesktopWidget>
 
 #include "lockwidget.h"
 #include "xeventmonitor.h"
@@ -12,6 +14,7 @@
 #include "configuration.h"
 #include "screensaver.h"
 #include "screensaverwidget.h"
+#include "grab-x11.h"
 
 FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
     : QWidget(parent),
@@ -22,9 +25,17 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       isLocked(false),
       screenStatus(UNDEFINED)
 {
-    qDebug() << "init " << screenStatus;
+    qDebug() << "init - screenStatus: " << screenStatus;
+
+    connect(monitorWatcher, &MonitorWatcher::monitorCountChanged,
+            this, &FullBackgroundWidget::onScreenCountChanged);
+    QDesktopWidget *desktop = QApplication::desktop();
+    connect(desktop, &QDesktopWidget::workAreaResized,
+            this, &FullBackgroundWidget::onDesktopResized);
+    connect(desktop, &QDesktopWidget::resized,
+            this, &FullBackgroundWidget::onDesktopResized);
+
     init();
-    onSessionStatusChanged(SESSION_IDLE);
 }
 
 void FullBackgroundWidget::paintEvent(QPaintEvent *event)
@@ -89,23 +100,35 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
     }
 }
 
-
 void FullBackgroundWidget::lock()
 {
-    screenStatus = (ScreenStatus)(screenStatus | SCREEN_LOCK);
-    qDebug() << "lock " << screenStatus;
-    isLocked = true;
-    lockWidget = new LockWidget(this);
-    connect(lockWidget, &LockWidget::closed,
-            this, &FullBackgroundWidget::close);
-    onCursorMoved(cursor().pos());
+    showLockWidget();
 
+    lockWidget->startAuth();;
+}
+
+
+void FullBackgroundWidget::showLockWidget()
+{
+    screenStatus = (ScreenStatus)(screenStatus | SCREEN_LOCK);
+    qDebug() << "showLockWidget - screenStatus: " << screenStatus;
+
+    if(!lockWidget)
+    {
+
+        lockWidget = new LockWidget(this);
+        connect(lockWidget, &LockWidget::closed,
+                this, &FullBackgroundWidget::close);
+        onCursorMoved(cursor().pos());
+    }
+    lockWidget->setFocus();
 }
 
 void FullBackgroundWidget::showScreensaver()
 {
     screenStatus = (ScreenStatus)(screenStatus | SCREEN_SAVER);
-    qDebug() << "showsaver " << screenStatus;
+    qDebug() << "showScreensaver - screenStatus: " << screenStatus;
+
     for(auto screen : QGuiApplication::screens())
     {
         ScreenSaver *saver = configuration->getScreensaver();
@@ -115,6 +138,8 @@ void FullBackgroundWidget::showScreensaver()
         saverWidget->setGeometry(screen->geometry());
     }
     setCursor(Qt::BlankCursor);
+
+    //显示屏保时，停止认证（主要针对生物识别）
     if(lockWidget)
     {
         lockWidget->stopAuth();
@@ -123,23 +148,25 @@ void FullBackgroundWidget::showScreensaver()
 
 void FullBackgroundWidget::clearScreensavers()
 {
+    screenStatus = (ScreenStatus)(screenStatus & ~SCREEN_SAVER);
+
     for(auto widget : widgetXScreensaverList)
     {
         widget->close();
     }
     widgetXScreensaverList.clear();
-    screenStatus = (ScreenStatus)(screenStatus & ~SCREEN_SAVER);
-    qDebug() << "clear saver " << screenStatus;
-    lockWidget->setFocus();
+
+    qDebug() << "clearScreensavers - screenStatus: " << screenStatus;
+
 
     unsetCursor();
-//    if(screenStatus == UNDEFINED)
-//    {
-//        close();
-//    }
-    if(lockWidget)
+    if(screenStatus == UNDEFINED)
     {
-        lockWidget->startAuth();
+        close();
+    }
+    else
+    {
+        lock();
     }
 }
 
@@ -151,35 +178,35 @@ void FullBackgroundWidget::onSessionStatusChanged(uint status)
         //当前session没有处于空闲状态
         return;
     }
+    qDebug() << "onSessionStatusChanged - screenStatus: " << screenStatus;
 
-    if(screenStatus == SCREEN_LOCK)
+    if(screenStatus & SCREEN_SAVER)
     {
-        //当前处于锁屏界面
-        showScreensaver();
         return;
     }
-
-    if(configuration->xscreensaverActivatedWhenIdle() &&
-            configuration->lockWhenXScreensaverActivated())
+    else if(screenStatus & SCREEN_LOCK)
     {
-        //显示锁屏和屏保
-        lock();
         showScreensaver();
     }
-    else if(configuration->xscreensaverActivatedWhenIdle())
+    else if(screenStatus == UNDEFINED)
     {
-        //只显示屏保
-        showScreensaver();
-    }
-    else
-    {
-
+        if(configuration->xscreensaverActivatedWhenIdle() &&
+                configuration->lockWhenXScreensaverActivated())
+        {
+            //显示锁屏和屏保
+            showLockWidget();
+            showScreensaver();
+        }
+        else if(configuration->xscreensaverActivatedWhenIdle())
+        {
+            //只显示屏保
+            showScreensaver();
+        }
     }
 }
 
 void FullBackgroundWidget::onGlobalKeyPress(const QString &key)
 {
-//    qDebug() << key << "pressed";
 
 }
 
@@ -201,9 +228,25 @@ void FullBackgroundWidget::onGlobalKeyRelease(const QString &key)
 
 void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
 {
-//    qDebug() << "button move to " << xPos << yPos;
     if(screenStatus & SCREEN_SAVER)
     {
         clearScreensavers();
     }
+}
+
+
+void FullBackgroundWidget::onScreenCountChanged(int)
+{
+    QSize newSize = monitorWatcher->getVirtualSize();
+    setGeometry(0, 0, newSize.width(), newSize.height());
+    repaint();
+    clearScreensavers();
+}
+
+void FullBackgroundWidget::onDesktopResized()
+{
+    QDesktopWidget *desktop = QApplication::desktop();
+    setGeometry(desktop->geometry());
+    repaint();
+    clearScreensavers();
 }
