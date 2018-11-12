@@ -30,12 +30,7 @@ AuthPAM::AuthPAM(QObject *parent)
 
 void AuthPAM::authenticate(const QString &userName)
 {
-    if(pid != 0)
-    {
-        stopAuth();
-    }
-    messageList.clear();
-    responseList.clear();
+    stopAuth();
 
     if(pipe(toParent) || pipe(toChild))
         qDebug()<< "create pipe failed: " << strerror(errno);
@@ -57,7 +52,17 @@ void AuthPAM::authenticate(const QString &userName)
 
 void AuthPAM::stopAuth()
 {
-    ::kill(pid, SIGKILL);
+    if(pid != 0)
+    {
+        messageList.clear();
+        responseList.clear();
+        _isAuthenticating = false;
+        _isAuthenticated = false;
+
+        ::kill(pid, SIGKILL);
+
+        pid = 0;
+    }
 }
 
 void AuthPAM::respond(const QString &response)

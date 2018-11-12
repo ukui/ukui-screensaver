@@ -26,6 +26,7 @@ public:
     explicit AuthDialog(QWidget *parent = 0);
     ~AuthDialog();
     void resizeEvent(QResizeEvent *event);
+    void closeEvent(QCloseEvent *event);
 
 private:
     void initUI();

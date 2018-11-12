@@ -120,6 +120,22 @@ void AuthDialog::resizeEvent(QResizeEvent *event)
     ui->widgetSwitch->move(0, height() - 60);
 }
 
+void AuthDialog::closeEvent(QCloseEvent *event)
+{
+    qDebug() << "AuthDialog::closeEvent";
+    if(bioAuth && bioAuth->isAuthenticating())
+    {
+        bioAuth->stopAuth();
+    }
+
+    if(auth && auth->isAuthenticating())
+    {
+        auth->stopAuth();
+    }
+    return QWidget::closeEvent(event);
+}
+
+
 void AuthDialog::setEchoMode(bool visible)
 {
     if(visible) {

@@ -28,6 +28,13 @@ LockWidget::~LockWidget()
     delete ui;
 }
 
+void LockWidget::closeEvent(QCloseEvent *event)
+{
+    qDebug() << "LockWidget::closeEvent";
+    authDialog->close();
+    return QWidget::closeEvent(event);
+}
+
 void LockWidget::startAuth()
 {
     if(authDialog)

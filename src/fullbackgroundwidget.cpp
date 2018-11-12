@@ -7,6 +7,7 @@
 #include <QPainter>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QCloseEvent>
 
 #include "lockwidget.h"
 #include "xeventmonitor.h"
@@ -48,6 +49,17 @@ void FullBackgroundWidget::paintEvent(QPaintEvent *event)
     return QWidget::paintEvent(event);
 }
 
+void FullBackgroundWidget::closeEvent(QCloseEvent *event)
+{
+    qDebug() << "FullBackgroundWidget::closeEvent";
+    for(auto obj: children())
+    {
+        QWidget *widget = dynamic_cast<QWidget*>(obj);
+        if(widget)
+            widget->close();
+    }
+    return QWidget::closeEvent(event);
+}
 
 void FullBackgroundWidget::init()
 {

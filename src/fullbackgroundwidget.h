@@ -20,6 +20,7 @@ class FullBackgroundWidget : public QWidget
 public:
     explicit FullBackgroundWidget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event);
+    void closeEvent(QCloseEvent *event);
 
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);

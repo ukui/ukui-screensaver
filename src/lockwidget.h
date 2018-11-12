@@ -39,6 +39,7 @@ public:
     explicit LockWidget(QWidget *parent = 0);
     ~LockWidget();
     void resizeEvent(QResizeEvent *event);
+    void closeEvent(QCloseEvent *event);
     void startAuth();
     void stopAuth();
 
