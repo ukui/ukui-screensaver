@@ -8,6 +8,7 @@
 #include <QWidget>
 #include "auth-pam.h"
 #include "types.h"
+#include "users.h"
 
 namespace Ui {
 class AuthDialog;
@@ -18,20 +19,21 @@ class BioAuth;
 class BioDevices;
 class DeviceInfo;
 class BioDevicesWidget;
+
 class AuthDialog : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit AuthDialog(QWidget *parent = 0);
+    explicit AuthDialog(const UserItem &user, QWidget *parent = 0);
     ~AuthDialog();
     void resizeEvent(QResizeEvent *event);
     void closeEvent(QCloseEvent *event);
+    void setUserOfAuth();
 
 private:
     void initUI();
     void setEchoMode(bool visible);
-    QString getUserAvatarPath(const QString &username);
     void setBioImage(bool isGif);
     void setSwitchButton();
 
@@ -65,14 +67,13 @@ private:
     };
 
     Ui::AuthDialog      *ui;
+    UserItem            user;
     Auth                *auth;
     BioAuth             *bioAuth;
     DeviceInfo          *deviceInfo;
     BioDevices          *bioDevices;
     BioDevicesWidget    *widgetDevices;
-    QMovie              *movie;
-    QString             userName;
-    uid_t               userId;
+    QMovie              *movie; 
     Page                page;
     bool                enableBiometric;
     bool                firstBioAuth;

@@ -1,8 +1,6 @@
 #include "authdialog.h"
 #include "ui_authdialog.h"
 
-#include <QDBusInterface>
-#include <QDBusReply>
 #include <QDebug>
 #include <QMovie>
 #include <QPixmap>
@@ -11,14 +9,16 @@
 #include <unistd.h>
 #include <pwd.h>
 
+#include "users.h"
 #include "util.h"
 #include "bioauth.h"
 #include "biodevices.h"
 #include "biodeviceswidget.h"
 
-AuthDialog::AuthDialog(QWidget *parent) :
+AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AuthDialog),
+    user(user),
     auth(new AuthPAM(this)),
     bioAuth(nullptr),
     deviceInfo(nullptr),
@@ -31,11 +31,6 @@ AuthDialog::AuthDialog(QWidget *parent) :
     authFailed(false)
 {
     ui->setupUi(this);
-
-    //要认证的用户
-    userId = getuid();
-    struct passwd *pwd = getpwuid(userId);
-    userName = QString(pwd->pw_name);
 
     initUI();
 
@@ -55,7 +50,7 @@ void AuthDialog::startAuth()
     qDebug() << page;
     if(!auth->isAuthenticating())
     {
-        auth->authenticate(userName);
+        auth->authenticate(user.name);
     }
     else if(page == BIOMETRIC)
     {
@@ -73,12 +68,11 @@ void AuthDialog::stopAuth()
 
 void AuthDialog::initUI()
 {
-    QPixmap avatar(getUserAvatarPath(userName));
-
     /* set user's name and avatar */
+    QPixmap avatar(user.icon);
     avatar = avatar.scaled(128, 128);//ui->lblAvatar->width(), ui->lblAvatar->height());
     ui->lblAvatar->setPixmap(avatar);
-    ui->lblUserName->setText(userName);
+    ui->lblUserName->setText(user.realName);
 
     /* Put the button in the LineEdit */
     QHBoxLayout *hLayoutPwd = new QHBoxLayout;
@@ -147,39 +141,6 @@ void AuthDialog::setEchoMode(bool visible)
     }
 }
 
-QString AuthDialog::getUserAvatarPath(const QString &username)
-{
-    QString iconPath;
-    QDBusInterface userIface( "org.freedesktop.Accounts",
-                    "/org/freedesktop/Accounts",
-                    "org.freedesktop.Accounts",
-                    QDBusConnection::systemBus());
-    if (!userIface.isValid())
-        qDebug() << "userIface is invalid";
-    QDBusReply<QDBusObjectPath> userReply = userIface.call("FindUserByName",
-                                username);
-    if (!userReply.isValid()) {
-        qDebug() << "userReply is invalid";
-        iconPath = "/usr/share/kylin-greeter/default_face.png";
-    }
-    QDBusInterface iconIface( "org.freedesktop.Accounts",
-                    userReply.value().path(),
-                    "org.freedesktop.DBus.Properties",
-                    QDBusConnection::systemBus());
-    if (!iconIface.isValid())
-        qDebug() << "IconIface is invalid";
-    QDBusReply<QDBusVariant> iconReply = iconIface.call("Get",
-                "org.freedesktop.Accounts.User", "IconFile");
-    if (!iconReply.isValid()) {
-        qDebug() << "iconReply is invalid";
-        iconPath = "/usr/share/kylin-greeter/default_face.png";
-    }
-    iconPath = iconReply.value().variant().toString();
-    if (access(iconPath.toLocal8Bit().data(), R_OK) != 0) /* No Access Permission */
-        qDebug() << "Can't access user avatar:" << iconPath
-                        << "No access permission.";
-    return iconPath;
-}
 
 void AuthDialog::onShowMessage(const QString &message, Auth::MessageType type)
 {
@@ -226,7 +187,7 @@ void AuthDialog::onAuthComplete()
         //认证失败，重新认证
         authFailed = true;
         ui->lineEditPasswd->clear();
-        auth->authenticate(userName);
+        auth->authenticate(user.name);
     }
 }
 
@@ -267,7 +228,7 @@ void AuthDialog::switchToBiometric()
     //是从密码认证切换到生物识别认证的，需要从头开始走PAM流程
     if(page == PASSWORD)
     {
-        auth->authenticate(userName);
+        auth->authenticate(user.name);
         return;
     }
 
@@ -303,7 +264,7 @@ void AuthDialog::switchToBiometric()
     if(firstBioAuth)
     {
         firstBioAuth = false;
-        deviceInfo = bioDevices->getDefaultDevice(userId);
+        deviceInfo = bioDevices->getDefaultDevice(user.uid);
         if(!deviceInfo)
         {
            switchToPassword();
@@ -344,7 +305,7 @@ void AuthDialog::switchToDevices()
     ui->widgetBiometric->hide();
     widgetDevices->show();
     widgetDevices->move(0, 100);
-    widgetDevices->init(userId);
+    widgetDevices->init(user.uid);
 }
 
 void AuthDialog::setSwitchButton()
@@ -384,12 +345,12 @@ void AuthDialog::onBioAuthStart()
 {
     if(!bioAuth)
     {
-        bioAuth = new BioAuth(userId, *deviceInfo, this);
+        bioAuth = new BioAuth(user.uid, *deviceInfo, this);
         connect(bioAuth, &BioAuth::notify, this, [&](const QString &notify){
             ui->lblBioNotify->setText(notify);
         });
         connect(bioAuth, &BioAuth::authComplete, this, [&](uid_t uid, bool ret){
-            if(uid == userId && ret)
+            if(user.uid == uid && ret)
             {
                 auth->respond(BIOMETRIC_SUCCESS);
             }

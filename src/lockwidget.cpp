@@ -15,12 +15,13 @@ LockWidget::LockWidget(QWidget *parent)
     : QWidget(parent),
       ui(new Ui::LockWidget),
       usersMenu(nullptr),
-      users(nullptr),
+      users(new Users(this)),
       displayManager(new DisplayManager(this))
 {
     ui->setupUi(this);
 
-    authDialog = new AuthDialog(this);
+    UserItem user = users->getUserByName(getenv("USER"));
+    authDialog = new AuthDialog(user, this);
     connect(authDialog, &AuthDialog::authenticateCompete,
             this, &LockWidget::closed);
     connect(this, &LockWidget::capsLockChanged,
@@ -115,12 +116,8 @@ void LockWidget::initUserMenu()
                 this, &LockWidget::onUserMenuTrigged);
     }
 
-    if(!users)
-    {
-        users = new Users(this);
-        connect(users, &Users::userAdded, this, &LockWidget::onUserAdded);
-        connect(users, &Users::userDeleted, this, &LockWidget::onUserDeleted);
-    }
+    connect(users, &Users::userAdded, this, &LockWidget::onUserAdded);
+    connect(users, &Users::userDeleted, this, &LockWidget::onUserDeleted);
 
     for(auto user : users->getUsers())
     {
