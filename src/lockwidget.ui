@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="btnKeyboard">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>350</y>
+     <x>660</x>
+     <y>10</y>
      <width>80</width>
      <height>26</height>
     </rect>
@@ -64,6 +64,22 @@
      <string>Time</string>
     </property>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="btnSwitchUser">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>10</y>
+     <width>80</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>

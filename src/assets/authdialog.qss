@@ -56,56 +56,40 @@ QLabel {
     border:2px solid white;
 }
 
-/* 返回按钮 */
-#btnSwitchUser{
-    background: url(:/image/assets/arrow_left.png);
-    background-repeat: no-repeat;
-    background-position: center;
+
+QPushButton::menu-indicator{
+    image:none;
 }
-#btnSwitchUser::hover{
-    background: url(:/image/assets/arrow_left_prelight.png);
-    background-repeat: no-repeat;
-    background-position: center;
+QMenu{
+    background-color: rgb(89,87,87);
+    border: 1px solid black;
+    color: white;
+    font-size: 14px;
+}
+QMenu::item:selected {
+    background-color:rgb(235,110,36);
+}
+QMenu::item:pressed {
+    background-color: rgb(220,80,6);
 }
 
-#btnKeyboard::hover, #btnPower::hover {
-    background-color: rgb(255, 255, 255, 50);
-}
 
-#btnKeyboard::pressed, #btnPower::pressed {
-    background: rgb(255, 255, 255, 150);
-}
 
-#btnKeyboard {
+#btnKeyboard, #btnSwitchUser {
     border: 1px solid gray;
 }
-#btnKeyboard::pressed{
-    background: rgba(0, 0, 0, 200);
+#btnKeyboard::hover, #btnSwitchUser::hover {
+    background-color: rgb(0, 0, 0, 50);
+}
+#btnKeyboard::pressed, #btnSwitchUser::pressed{
+    background: rgba(0, 0, 0, 100);
 }
 
 #listWidgetMessage {
     background: transparent;
 }
-/*
-#btnMoreDevices, #btnToPassword, #btnToBiometric{
-    border: 1px solid white;
-    color: white;
-    font-size: 12px;
-}
 
-#btnMoreDevices::hover, #btnToPassword::hover,
-#btnToBiometric::hover{
-    background: rgba(0, 0, 0, 50);
-}
 
-#btnMoreDevices::pressed, #btnToPassword::pressed,
-#btnToBiometric::pressed{
-    background: rgba(0, 0, 0, 120);
-}*/
-
-#widgetPasswd{
-/*background: yellow;*/
-}
 #lblBioNotify{
     font-size: 12px;
 }

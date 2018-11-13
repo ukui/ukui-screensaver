@@ -59,36 +59,36 @@ qt5_add_resources(dialog_SRC
 
 # 头文件中包含了Xlib.h，需要单独拿出来处理，不知道原因
 qt5_wrap_cpp(dialog_SRC
+	fullbackgroundwidget.h
 	lockwidget.h
-	unixsignallistener.h
+	authdialog.h
+	screensaverwidget.h
 	auth.h
 	auth-pam.h
-	authdialog.h
 	gsettings.h
-	configuration.h
-	screensaverwidget.h
 	screensaver.h
 	xeventmonitor.h
 	monitorwatcher.h
-	fullbackgroundwidget.h
+	configuration.h
 	)
 
 set(dialog_SRC
 	${dialog_SRC}
 	ukui-screensaver-dialog.cpp
+	fullbackgroundwidget.cpp
 	lockwidget.cpp
-	unixsignallistener.cpp
-	auth-pam.cpp
 	authdialog.cpp
+	screensaverwidget.cpp
+	auth-pam.cpp
+	xeventmonitor.cpp
+	monitorwatcher.cpp
 	gsettings.cpp
 	util.cpp
 	grab-x11.cpp
 	configuration.cpp
-	screensaverwidget.cpp
 	screensaver.cpp
-	xeventmonitor.cpp
-	monitorwatcher.cpp
-	fullbackgroundwidget.cpp
+	users.cpp
+	displaymanager.cpp
 	)
 add_executable(ukui-screensaver-dialog
 	${dialog_SRC}
@@ -125,3 +125,10 @@ install(TARGETS
 	ukui-screensaver-backend
 	ukui-screensaver-command
 	DESTINATION bin)
+
+set(test-act_SRC
+	users.cpp
+	test-accounts.cpp
+	)
+add_executable(test-accounts ${test-act_SRC})
+target_link_libraries(test-accounts Qt5::Core Qt5::DBus)

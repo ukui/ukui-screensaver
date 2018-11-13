@@ -10,5 +10,6 @@
         <file>assets/arrow_left_active.png</file>
         <file>assets/hide-password.png</file>
         <file>assets/keyboard.png</file>
+        <file>assets/avatar.png</file>
     </qresource>
 </RCC>

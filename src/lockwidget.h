@@ -30,6 +30,10 @@ class LockWidget;
 
 class VirtualKeyboard;
 class AuthDialog;
+class Users;
+class UserItem;
+class DisplayManager;
+class QMenu;
 
 class LockWidget : public QWidget
 {
@@ -49,12 +53,21 @@ Q_SIGNALS:
 
 private:
     void initUI();
+    void initUserMenu();
+
+private Q_SLOTS:
+    void onUserAdded(const UserItem &user);
+    void onUserDeleted(const UserItem &user);
+    void onUserMenuTrigged(QAction *action);
 
 private:
     Ui::LockWidget      *ui;
     AuthDialog          *authDialog;
     VirtualKeyboard     *vKeyboard;
     QTimer              *timer;
+    QMenu               *usersMenu;
+    Users               *users;
+    DisplayManager      *displayManager;
 };
 
 #endif // LOCKWIDGET_H
