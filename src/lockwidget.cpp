@@ -14,6 +14,7 @@
 LockWidget::LockWidget(QWidget *parent)
     : QWidget(parent),
       ui(new Ui::LockWidget),
+      usersMenu(nullptr),
       users(nullptr),
       displayManager(new DisplayManager(this))
 {
@@ -88,7 +89,10 @@ void LockWidget::initUI()
     ui->btnKeyboard->setFixedSize(39, 39);
     ui->btnKeyboard->setIconSize(QSize(39, 39));
     connect(ui->btnKeyboard, &QPushButton::clicked,
-            vKeyboard, &VirtualKeyboard::show);
+            this, [&]{
+        qDebug() << vKeyboard->isHidden();
+        vKeyboard->setVisible(vKeyboard->isHidden());
+    });
 
     //用户切换
     if(displayManager->canSwitch())
