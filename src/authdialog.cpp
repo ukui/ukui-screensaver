@@ -88,17 +88,23 @@ void AuthDialog::initUI()
                                          ui->btnEchoMode->width(), 1);
     ui->lineEditPasswd->setFocus();
     ui->widgetInput->hide();
-    connect(ui->lineEditPasswd, &QLineEdit::returnPressed, this, &AuthDialog::onRespond);
-    connect(ui->btnUnlock, &QPushButton::clicked, this, &AuthDialog::onRespond);
+    connect(ui->lineEditPasswd, &QLineEdit::returnPressed,
+            this, &AuthDialog::onRespond);
+    connect(ui->btnUnlock, &QPushButton::clicked,
+            this, &AuthDialog::onRespond);
 
     ui->lblCapsLock->setVisible(checkCapsLockState());
 
 
     //对话框切换按钮
-    connect(ui->btnMoreDevices, &QPushButton::clicked, this, &AuthDialog::switchToDevices);
-    connect(ui->btnToPassword, &QPushButton::clicked, this, &AuthDialog::switchToPassword);
-    connect(ui->btnToBiometric, &QPushButton::clicked, this, &AuthDialog::switchToBiometric);
-    connect(ui->btnRetry, &QPushButton::clicked, this, &AuthDialog::onBioAuthStart);
+    connect(ui->btnMoreDevices, &QPushButton::clicked,
+            this, &AuthDialog::switchToDevices);
+    connect(ui->btnToPassword, &QPushButton::clicked,
+            this, &AuthDialog::switchToPassword);
+    connect(ui->btnToBiometric, &QPushButton::clicked,
+            this, &AuthDialog::switchToBiometric);
+    connect(ui->btnRetry, &QPushButton::clicked,
+            this, &AuthDialog::onBioAuthStart);
 
     ui->widgetSwitch->hide();
     setFocusProxy(ui->lineEditPasswd);
@@ -284,6 +290,7 @@ void AuthDialog::switchToBiometric()
 
 void AuthDialog::switchToDevices()
 {
+    qDebug() << "switch to select device";
     onBioAuthStop();
 
     if(!widgetDevices)
@@ -298,6 +305,7 @@ void AuthDialog::switchToDevices()
             ui->widgetBiometric->show();
         });
     }
+    Page pageSaved = page;
     page = DEVICES;
     setSwitchButton();
     ui->widgetUser->hide();
@@ -306,6 +314,9 @@ void AuthDialog::switchToDevices()
     widgetDevices->show();
     widgetDevices->move(0, 100);
     widgetDevices->init(user.uid);
+
+    //还原原来的page，防止切换认证模式时出错
+    page = pageSaved;
 }
 
 void AuthDialog::setSwitchButton()
