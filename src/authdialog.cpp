@@ -279,7 +279,15 @@ void AuthDialog::switchToBiometric()
     }
     else if(!deviceInfo)
     {
-        deviceInfo = bioDevices->getFirstDevice();
+        if(widgetDevices)
+        {
+            deviceInfo = widgetDevices->getSelectedDevice();
+            qDebug() << "-----" << deviceInfo->device_shortname;
+        }
+        if(!deviceInfo)
+        {
+            deviceInfo = bioDevices->getFirstDevice();
+        }
     }
     qDebug() << deviceInfo->device_shortname;
 
@@ -293,17 +301,11 @@ void AuthDialog::switchToDevices()
     qDebug() << "switch to select device";
     onBioAuthStop();
 
+    deviceInfo = nullptr;
+
     if(!widgetDevices)
     {
         widgetDevices = new BioDevicesWidget(this);
-        connect(widgetDevices, &BioDevicesWidget::deviceChanged,
-                this, &AuthDialog::onBioAuthDeviceChanged);
-        connect(widgetDevices, &BioDevicesWidget::back,
-                this, [&]{
-            widgetDevices->hide();
-            ui->widgetUser->show();
-            ui->widgetBiometric->show();
-        });
     }
     Page pageSaved = page;
     page = DEVICES;
@@ -312,7 +314,7 @@ void AuthDialog::switchToDevices()
     ui->widgetPassword->hide();
     ui->widgetBiometric->hide();
     widgetDevices->show();
-    widgetDevices->move(0, 100);
+    widgetDevices->move(0, 150);
     widgetDevices->init(user.uid);
 
     //还原原来的page，防止切换认证模式时出错
@@ -354,6 +356,11 @@ void AuthDialog::setSwitchButton()
 
 void AuthDialog::onBioAuthStart()
 {
+    if(bioAuth)
+    {
+        bioAuth->deleteLater();
+        bioAuth = nullptr;
+    }
     if(!bioAuth)
     {
         bioAuth = new BioAuth(user.uid, *deviceInfo, this);
@@ -418,13 +425,4 @@ void AuthDialog::setBioImage(bool isGif)
         ui->lblBioImage->setPixmap(image);
     }
     ui->lblBioDeviceName->setText("Current Device: " + deviceName);
-}
-
-void AuthDialog::onBioAuthDeviceChanged(DeviceInfo *device)
-{
-    deviceInfo = device;
-    qDebug() << deviceInfo->device_shortname;
-    bioAuth->deleteLater();
-    bioAuth = nullptr;
-    onBioAuthStart();
 }

@@ -44,7 +44,6 @@ private Q_SLOTS:
     void onRespond();
     void onBioAuthStart();
     void onBioAuthStop();
-    void onBioAuthDeviceChanged(DeviceInfo *device);
 
 public Q_SLOTS:
     void switchToBiometric();

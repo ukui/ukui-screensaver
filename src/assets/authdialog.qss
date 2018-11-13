@@ -96,7 +96,7 @@ QMenu::item:pressed {
 
 /* devices' widget */
 QComboBox{
-    border: 1px solid white;
+    border: 1px solid rgb(255, 255, 255, 100);
     background: rgba(0, 0, 0, 20);
     font:18px;
     color:white;
@@ -119,4 +119,10 @@ QComboBox::down-arrow{
 QComboBox::drop-down{
     width: 30px;
     border: none;
+}
+
+#btnFingerPrint, #btnFingerVein, #btnIris,
+#btnFace, #btnVoicePrint
+{
+    border: 1px solid rgb(255, 255, 255, 100);
 }

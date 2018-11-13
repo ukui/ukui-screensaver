@@ -27,6 +27,8 @@ namespace Ui {
 class BioDevicesWidget;
 }
 
+QMap<int, QList<DeviceInfo*>> getTestDevices();
+
 class BioDevicesWidget : public QWidget
 {
     Q_OBJECT
@@ -35,22 +37,19 @@ public:
     explicit BioDevicesWidget(QWidget *parent = 0);
     ~BioDevicesWidget();
     void init(uid_t uid);
-    void setDevices(const QMap<int, QList<DeviceInfo>> &devices);
+    void setDevices(const QMap<int, QList<DeviceInfo *> > &devices);
+    DeviceInfo *getSelectedDevice();
 
 private:
     void addTypeButtons();
     void changeButtonStyle();
 
 Q_SIGNALS:
-    void back();
-    void deviceChanged(DeviceInfo *device);
     void deviceCountChanged(int count);
 
 private Q_SLOTS:
     void onDeviceTypeChanged();
     void onDeviceCountChanged();
-    void on_btnOK_clicked();
-    void on_btnBack_clicked();
 
 private:
     Ui::BioDevicesWidget *ui;

@@ -19,8 +19,6 @@
 #include "ui_biodeviceswidget.h"
 #include <QPushButton>
 
-static QMap<int, QList<DeviceInfo>> getTestDevices();
-
 BioDevicesWidget::BioDevicesWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BioDevicesWidget),
@@ -32,8 +30,8 @@ BioDevicesWidget::BioDevicesWidget(QWidget *parent) :
     connect(&bioDevices, &BioDevices::deviceCountChanged,
             this, &BioDevicesWidget::onDeviceCountChanged);
     devicesMap = bioDevices.getAllDevices();
-//    QMap<int, QList<DeviceInfo>> devicesMap = getTestDevices();
-//    setDevices(devicesMap);
+    QMap<int, QList<DeviceInfo*>> devicesMap = getTestDevices();
+    setDevices(devicesMap);
 
     ui->cmbDeviceName->setModel(lwDevices->model());
     ui->cmbDeviceName->setView(lwDevices);
@@ -44,18 +42,18 @@ BioDevicesWidget::~BioDevicesWidget()
     delete ui;
 }
 
-void BioDevicesWidget::setDevices(const QMap<int, QList<DeviceInfo> > &devices)
+void BioDevicesWidget::setDevices(const QMap<int, QList<DeviceInfo*> > &devices)
 {
     for(int type : devices.keys())
     {
-//        devicesMap[type].append(devices[type]);
+        devicesMap[type].append(devices[type]);
     }
 }
 
 void BioDevicesWidget::init(uid_t uid)
 {
     this->uid = uid;
-//    devicesMap = bioDevices.getAllDevices();
+    devicesMap = bioDevices.getAllDevices();
 
     ui->cmbDeviceName->clear();
 
@@ -75,6 +73,17 @@ void BioDevicesWidget::init(uid_t uid)
             btn->click();
         }
     }
+}
+
+DeviceInfo *BioDevicesWidget::getSelectedDevice()
+{
+    QList<DeviceInfo*> &deviceList = devicesMap[type];
+    for(auto deviceInfo : deviceList)
+    {
+        if(deviceInfo->device_shortname == ui->cmbDeviceName->currentText())
+            return deviceInfo;
+    }
+    return nullptr;
 }
 
 void BioDevicesWidget::addTypeButtons()
@@ -120,8 +129,6 @@ void BioDevicesWidget::addTypeButtons()
 
     ui->lblDeviceName->move(ui->lblDeviceName->x(), yPos + h + 20);
     ui->cmbDeviceName->move(ui->cmbDeviceName->x(), yPos + h + 20);
-    ui->btnOK->move(ui->btnOK->x(), ui->cmbDeviceName->geometry().bottom() + 20);
-    ui->btnBack->move(ui->btnBack->x(), ui->cmbDeviceName->geometry().bottom() + 20);
 }
 
 void BioDevicesWidget::onDeviceTypeChanged()
@@ -165,47 +172,39 @@ void BioDevicesWidget::changeButtonStyle()
     }
 }
 
-void BioDevicesWidget::on_btnOK_clicked()
+QMap<int, QList<DeviceInfo*>> getTestDevices()
 {
-    int index = ui->cmbDeviceName->currentIndex();
-    DeviceInfo *device = devicesMap[type].at(index);
-    Q_EMIT deviceChanged(device);
-    Q_EMIT back();
-}
+    QMap<int, QList<DeviceInfo*>> devicesMap;
+    QList<DeviceInfo*> fpList, feList, iiList, fcList, vpList;
+    DeviceInfo *fpDevice1, *feDevice1, *iiDevice1, *fcDevice1, *vpDevice1;
 
-void BioDevicesWidget::on_btnBack_clicked()
-{
-    Q_EMIT back();
-}
-
-static QMap<int, QList<DeviceInfo>> getTestDevices()
-{
-    QMap<int, QList<DeviceInfo>> devicesMap;
-    QList<DeviceInfo> fpList, feList, iiList, fcList, vpList;
-    DeviceInfo fpDevice1, feDevice1, iiDevice1, fcDevice1, vpDevice1;
-
-    fpDevice1.biotype = BIOTYPE_FINGERPRINT;
-    fpDevice1.device_shortname = "fpDevice1";
+    fpDevice1 = new DeviceInfo;
+    fpDevice1->biotype = BIOTYPE_FINGERPRINT;
+    fpDevice1->device_shortname = "fpDevice1";
     fpList.push_back(fpDevice1);
     devicesMap[BIOTYPE_FINGERPRINT] = fpList;
 
-    feDevice1.biotype = BIOTYPE_FINGERVEIN;
-    feDevice1.device_shortname = "feDevice1";
+    feDevice1 = new DeviceInfo;
+    feDevice1->biotype = BIOTYPE_FINGERVEIN;
+    feDevice1->device_shortname = "feDevice1";
     feList.push_back(feDevice1);
     devicesMap[BIOTYPE_FINGERVEIN] = feList;
 
-    iiDevice1.biotype = BIOTYPE_IRIS;
-    iiDevice1.device_shortname = "iiDevice1";
+    iiDevice1 = new DeviceInfo;
+    iiDevice1->biotype = BIOTYPE_IRIS;
+    iiDevice1->device_shortname = "iiDevice1";
     iiList.push_back(iiDevice1);
     devicesMap[BIOTYPE_IRIS] = iiList;
 
-    fcDevice1.biotype = BIOTYPE_FACE;
-    fcDevice1.device_shortname = "fcDevice1";
+    fcDevice1 = new DeviceInfo;
+    fcDevice1->biotype = BIOTYPE_FACE;
+    fcDevice1->device_shortname = "fcDevice1";
     fcList.push_back(fcDevice1);
     devicesMap[BIOTYPE_FACE] = fcList;
 
-    vpDevice1.biotype = BIOTYPE_VOICEPRINT;
-    vpDevice1.device_shortname = "vpDevice1";
+    vpDevice1 = new DeviceInfo;
+    vpDevice1->biotype = BIOTYPE_VOICEPRINT;
+    vpDevice1->device_shortname = "vpDevice1";
     vpList.push_back(vpDevice1);
     devicesMap[BIOTYPE_VOICEPRINT] = vpList;
 
