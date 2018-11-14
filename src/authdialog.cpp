@@ -2,7 +2,6 @@
 #include "ui_authdialog.h"
 
 #include <QDebug>
-#include <QMovie>
 #include <QPixmap>
 #include <QHBoxLayout>
 
@@ -24,7 +23,7 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     deviceInfo(nullptr),
     bioDevices(new BioDevices(this)),
     widgetDevices(nullptr),
-    movie(nullptr),
+    movieTimer(nullptr),
     page(Page::UNDEFINED),
     enableBiometric(false),
     firstBioAuth(true),
@@ -358,7 +357,7 @@ void AuthDialog::onBioAuthStart()
 {
     if(bioAuth)
     {
-        bioAuth->deleteLater();
+        delete bioAuth;
         bioAuth = nullptr;
     }
     if(!bioAuth)
@@ -394,6 +393,8 @@ void AuthDialog::onBioAuthStop()
     setSwitchButton();
 }
 
+static int count = 0;
+
 void AuthDialog::setBioImage(bool isGif)
 {
     if(!deviceInfo)
@@ -401,28 +402,44 @@ void AuthDialog::setBioImage(bool isGif)
         return;
     }
 
-    QString deviceName = deviceInfo->device_shortname;
-    QString type = BioDevices::bioTypeToString_tr(deviceInfo->biotype);
-    QString imagePath;
     if(isGif)
     {
-        if(movie)
+        if(!movieTimer)
         {
-            movie->deleteLater();
+            movieTimer = new QTimer(this);
+            movieTimer->setInterval(100);
+            connect(movieTimer, &QTimer::timeout, this, &AuthDialog::setBioMovieImage);
         }
-
-        imagePath = QString("/usr/share/ukui-biometric/images/%1.gif").arg(type);
-        movie = new QMovie(imagePath, "", this);
-        movie->setScaledSize(QSize(ui->lblBioImage->width(), ui->lblBioImage->height()));
-        movie->start();
-        ui->lblBioImage->setMovie(movie);
+        count = 0;
+        movieTimer->start();
     }
     else
     {
-        imagePath = QString("/usr/share/ukui-biometric/images/%1.png").arg(type);
+        QString type = bioTypeToString(deviceInfo->biotype);
+        QString imagePath = QString("/usr/share/ukui-biometric/images/%1.png").arg(type);
         QPixmap image(imagePath);
         image = image.scaled(QSize(ui->lblBioImage->width(), ui->lblBioImage->height()));
         ui->lblBioImage->setPixmap(image);
+        movieTimer->stop();
     }
+
+    QString deviceName = deviceInfo->device_shortname;
     ui->lblBioDeviceName->setText("Current Device: " + deviceName);
+}
+
+void AuthDialog::setBioMovieImage()
+{
+    count++;
+    QString type = bioTypeToString(deviceInfo->biotype);
+    QString fileName = (count < 10 ? "0" : "") + QString::number(count);
+    QString imagePath = QString("/usr/share/ukui-biometric/images/%1/%2.png")
+            .arg(type).arg(fileName);
+    QPixmap image(imagePath);
+    image = image.scaled(QSize(ui->lblBioImage->width(), ui->lblBioImage->height()));
+    ui->lblBioImage->setPixmap(image);
+
+    if(count == 18)
+    {
+        count = 0;
+    }
 }

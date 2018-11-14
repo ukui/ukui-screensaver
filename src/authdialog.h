@@ -44,6 +44,7 @@ private Q_SLOTS:
     void onRespond();
     void onBioAuthStart();
     void onBioAuthStop();
+    void setBioMovieImage();
 
 public Q_SLOTS:
     void switchToBiometric();
@@ -72,7 +73,7 @@ private:
     DeviceInfo          *deviceInfo;
     BioDevices          *bioDevices;
     BioDevicesWidget    *widgetDevices;
-    QMovie              *movie; 
+    QTimer              *movieTimer;
     Page                page;
     bool                enableBiometric;
     bool                firstBioAuth;
