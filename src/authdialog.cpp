@@ -241,7 +241,6 @@ void AuthDialog::switchToBiometric()
     //使用密码认证，失败后，从新开始认证，则跳过生物识别认证
     if(authFailed)
     {
-        auth->respond(BIOMETRIC_IGNORE);
         switchToPassword();
         return;
     }
@@ -346,6 +345,7 @@ void AuthDialog::setSwitchButton()
         if(bioDevices->count() > 1)
             ui->btnMoreDevices->show();
         ui->btnToPassword->show();
+        ui->listWidgetMessage->clear();
     }
     else if(page == DEVICES)
     {
