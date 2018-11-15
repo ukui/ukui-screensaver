@@ -8,6 +8,7 @@ pkg_check_modules(X11 REQUIRED x11)
 pkg_check_modules(XEXT REQUIRED xext)
 pkg_check_modules(XTST REQUIRED xtst)
 pkg_check_modules(XCB REQUIRED xcb)
+pkg_check_modules(QGS REQUIRED gsettings-qt)
 
 find_library(PAM_LIBRARIES pam)
 
@@ -36,6 +37,7 @@ include_directories(
 	${XEXT_INCLUDE_DIRS}
 	${XTST_INCLUDE_DIRS}
 	${XCB_INCLUDE_DIRS}
+	${QGS_INCLUDE_DIRS}
 	)
 
 set(EXTRA_LIBS
@@ -46,6 +48,7 @@ set(EXTRA_LIBS
 	${XEXT_LIBRARIES}
 	${XTST_LIBRARIES}
 	${XCB_LIBRARIES}
+	${QGS_LIBRARIES}
 	)
 
 qt5_wrap_ui(dialog_SRC
@@ -65,7 +68,6 @@ qt5_wrap_cpp(dialog_SRC
 	screensaverwidget.h
 	auth.h
 	auth-pam.h
-	gsettings.h
 	screensaver.h
 	xeventmonitor.h
 	monitorwatcher.h
@@ -82,7 +84,6 @@ set(dialog_SRC
 	auth-pam.cpp
 	xeventmonitor.cpp
 	monitorwatcher.cpp
-	gsettings.cpp
 	util.cpp
 	grab-x11.cpp
 	configuration.cpp

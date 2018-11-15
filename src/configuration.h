@@ -22,10 +22,12 @@
 #define QT_NO_KEYWORDS
 #endif
 
-#include "gsettings.h"
+//#include "gsettings.h"
 
 #include <QObject>
 #include "screensaver.h"
+
+class QGSettings;
 
 class Configuration : public QObject
 {
@@ -46,9 +48,8 @@ private:
     QString getXScreensaverPath(const QString &theme);
 
 private:
-	QGSettings *qgsettingsScreensaver;
-	QGSettings *qgsettingsBackground;
-    int mode;
+    QGSettings *gsettings;
+    QString mode;
 	QList<QString> themes;
 	QString background;
 	bool idleActivationEnabled;

@@ -18,6 +18,7 @@
 #include "configuration.h"
 #include <QDebug>
 #include <QFile>
+#include <QGSettings>
 
 #define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
 #define KEY_MODE "mode"
@@ -29,35 +30,24 @@
 #define KEY_BACKGROUND "background"
 #define XSCREENSAVER_DIRNAME "/usr/lib/xscreensaver"
 
-#define GSETTINGS_SCHEMA_BACKGROUND "org.mate.background"
-#define KEY_PICTURE_FILENAME "picture-filename"
-
 Configuration::Configuration(QObject *parent) : QObject(parent)
 {
 	/* QGSettings for screensaver */
-    qgsettingsScreensaver = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER);
-	connect(qgsettingsScreensaver, &QGSettings::valueChanged,
-				this, &Configuration::onConfigurationChanged);
-
-	/* QGSettings for background */
-	qgsettingsBackground = new QGSettings(GSETTINGS_SCHEMA_BACKGROUND);
-	connect(qgsettingsBackground, &QGSettings::valueChanged,
-				this, &Configuration::onConfigurationChanged);
+    gsettings = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER, "", this);
+    connect(gsettings, &QGSettings::changed,
+            this, &Configuration::onConfigurationChanged);
 
 	/* Initiailization */
-    mode = qgsettingsScreensaver->getEnum(KEY_MODE);
-	themes = qgsettingsScreensaver->getStringList(KEY_THEMES);
-	idleActivationEnabled = qgsettingsScreensaver->getBool(
-						KEY_IDLE_ACTIVATION_ENABLED);
-	lockEnabled = qgsettingsScreensaver->getBool(KEY_LOCK_ENABLED);
-    imageSwitchInterval = qgsettingsScreensaver->getInt(KEY_IMAGE_SWITCH_INTERVAL);
-    imageTSEffect = qgsettingsScreensaver->getEnum(KEY_IMAGE_TRANSITION_EFFECT);
+    mode = gsettings->get(KEY_MODE).toString();
+    themes = gsettings->get(KEY_THEMES).toStringList();
+    idleActivationEnabled = gsettings->get(
+                        KEY_IDLE_ACTIVATION_ENABLED).toBool();
+    lockEnabled = gsettings->get(KEY_LOCK_ENABLED).toBool();
+    imageSwitchInterval = gsettings->get(KEY_IMAGE_SWITCH_INTERVAL).toInt();
+    imageTSEffect = gsettings->get(KEY_IMAGE_TRANSITION_EFFECT).toInt();
+    background = gsettings->get(KEY_BACKGROUND).toString();
 
-    background = qgsettingsScreensaver->getString(KEY_BACKGROUND);
-    QFile file(background);
-    if(!file.exists())
-        background = qgsettingsBackground->getString(KEY_PICTURE_FILENAME);
-
+    qDebug() << mode << themes;
     qDebug() << imageSwitchInterval << imageTSEffect;
 }
 
@@ -66,20 +56,17 @@ void Configuration::onConfigurationChanged(QString key)
 {
 	qDebug() << "GSettings value changed, key = " << key;
 	if (key == KEY_MODE)
-        mode = qgsettingsScreensaver->getEnum(KEY_MODE);
+        mode = gsettings->get(KEY_MODE).toString();
 	else if (key == KEY_THEMES)
-		themes = qgsettingsScreensaver->getStringList(KEY_THEMES);
-	else if (key == KEY_PICTURE_FILENAME)
-		background = qgsettingsBackground->getString(KEY_PICTURE_FILENAME);
+        themes = gsettings->get(KEY_THEMES).toStringList();
 	else if (key == KEY_IDLE_ACTIVATION_ENABLED)
-		idleActivationEnabled = qgsettingsScreensaver->getBool(
-						KEY_IDLE_ACTIVATION_ENABLED);
+        idleActivationEnabled = gsettings->get(KEY_IDLE_ACTIVATION_ENABLED).toBool();
 	else if (key == KEY_LOCK_ENABLED)
-        lockEnabled = qgsettingsScreensaver->getBool(KEY_LOCK_ENABLED);
+        lockEnabled = gsettings->get(KEY_LOCK_ENABLED).toBool();
     else if(key == KEY_IMAGE_TRANSITION_EFFECT)
-        imageTSEffect = qgsettingsScreensaver->getEnum(KEY_IMAGE_TRANSITION_EFFECT);
+        imageTSEffect = gsettings->get(KEY_IMAGE_TRANSITION_EFFECT).toInt();
     else if(key == KEY_IMAGE_SWITCH_INTERVAL)
-        imageSwitchInterval = qgsettingsScreensaver->getInt(KEY_IMAGE_SWITCH_INTERVAL);
+        imageSwitchInterval = gsettings->get(KEY_IMAGE_SWITCH_INTERVAL).toInt();
 }
 
 /*
@@ -89,27 +76,13 @@ void Configuration::onConfigurationChanged(QString key)
 /* Get the executable path of xscreensaver */
 ScreenSaver *Configuration::getScreensaver()
 {
-//	QString selectedTheme;
-//	if (mode == "single") {
-//		selectedTheme = themes[0];
-//	} else if (mode == "random"){
-//		int randomIndex = qrand() % (themes.count());
-//		selectedTheme = themes[randomIndex];
-//	} else if (mode == "blank-only") { /* Note: blank not black */
-//		return QString("blank-only");
-//	} else {
-//		qDebug() << "Fatal error: unrecognized screensaver mode";
-//		return QString("blank-only");
-//	}
-//	/* screensavers-ukui-binaryring => binaryring */
-//    QStringList strs = selectedTheme.split("-");
-//    selectedTheme = strs.at(strs.size() - 1);
-//	return QString("%1/%2").arg(XSCREENSAVER_DIRNAME, selectedTheme);
+    QStringList modeStr{"blank-only", "random", "single", "image"};
 
     ScreenSaver *saver = new ScreenSaver;
-    saver->mode = SaverMode(mode);
+    int index = modeStr.indexOf(mode);
+    saver->mode = SaverMode(index);
 
-    switch(mode){
+    switch(index){
     case SAVER_BLANK_ONLY:
         break;
     case SAVER_RANDOM:
