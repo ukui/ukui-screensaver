@@ -115,7 +115,8 @@ void AuthDialog::resizeEvent(QResizeEvent *event)
                               ui->widgetUser->geometry().bottom());
     ui->widgetPassword->move(ui->widgetPassword->x(),
                              ui->widgetUser->geometry().bottom());
-    ui->widgetMain->move(0, (height() - ui->widgetMain->height()) / 2);
+    ui->widgetMain->move(0, (height() - (ui->widgetUser->height()
+                                         + ui->widgetBiometric->height())) / 2);
     ui->widgetSwitch->move(0, height() - 60);
 }
 
