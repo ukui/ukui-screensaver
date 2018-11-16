@@ -21,13 +21,14 @@
 #include <QObject>
 #include <QDBusContext>
 #include <QProcess>
+#include "types.h"
 
 
 class Interface : public QObject, protected QDBusContext
 {
     Q_OBJECT
 
-    Q_CLASSINFO("D-Bus Interface", "cn.kylinos.ScreenSaver")
+    Q_CLASSINFO("D-Bus Interface", SS_DBUS_SERVICE)
 
 public:
     explicit Interface(QObject *parent = nullptr);
@@ -46,7 +47,6 @@ public Q_SLOTS:
     void onNameLost(const QString&);
 
 private:
-    void runLocker(bool sessionIdle);
     bool checkExistChild();
 
 private:

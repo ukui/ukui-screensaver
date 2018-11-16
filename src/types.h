@@ -39,6 +39,8 @@ enum ScreenStatus
 #define SM_DBUS_INTERFACE   "org.gnome.SessionManager.Presence"
 
 #define DM_DBUS_SERVICE     "org.freedesktop.DisplayManager"
+#define DM_DBUS_PATH        "/org/freedesktop/DisplayManager"
+#define DM_DBUS_INTERFACE   "org.freedesktop.DisplayManager"
 #define DM_SEAT_INTERFACE   "org.freedesktop.DisplayManager.Seat"
 
 #define ACT_DBUS_SERVICE    "org.freedesktop.Accounts"
@@ -47,6 +49,10 @@ enum ScreenStatus
 #define ACT_USER_INTERFACE  "org.freedesktop.Accounts.User"
 
 #define DBUS_PROP_INTERFACE "org.freedesktop.DBus.Properties"
+
+#define SS_DBUS_SERVICE     "org.ukui.ScreenSaver"
+#define SS_DBUS_PATH        "/"
+#define SS_DBUS_INTERFACE   "org.ukui.ScreenSaver"
 
 #define BIO_ERROR -1
 #define BIO_FAILED 0

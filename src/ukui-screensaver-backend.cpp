@@ -18,13 +18,17 @@
 #include <QCoreApplication>
 #include <QDBusConnection>
 #include <QDebug>
+
 #include "interface.h"
 #include "sessionwatcher.h"
 #include "interfaceAdaptor.h"
+#include "types.h"
+
 #include <signal.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include <stdio.h>
+
 
 void sig_chld(int /*signo*/)
 {
@@ -86,11 +90,11 @@ int main(int argc, char *argv[])
     ScreenSaverAdaptor adaptor(interface);
 
     QDBusConnection service = QDBusConnection::sessionBus();
-    if(!service.registerService("cn.kylinos.ScreenSaver")) {
+    if(!service.registerService(SS_DBUS_SERVICE)) {
         qDebug() << service.lastError().message();
         exit(EXIT_FAILURE);
     }
-    if(!service.registerObject("/", "cn.kylinos.ScreenSaver", &adaptor,
+    if(!service.registerObject(SS_DBUS_PATH, SS_DBUS_SERVICE, &adaptor,
                                QDBusConnection::ExportAllSlots |
                                QDBusConnection::ExportAllSignals)) {
         qDebug() << service.lastError().message();
@@ -104,8 +108,8 @@ int main(int argc, char *argv[])
                      interface, &Interface::onSessionIdleReceived);
     QObject::connect(watcher, &SessionWatcher::sessionIdle,
                      &a, [&]{
-        QDBusMessage message = QDBusMessage::createSignal("/",
-                                                          "cn.kylinos.ScreenSaver",
+        QDBusMessage message = QDBusMessage::createSignal(SS_DBUS_PATH,
+                                                          SS_DBUS_INTERFACE,
                                                           "SessionIdle");
         service.send(message);
     });

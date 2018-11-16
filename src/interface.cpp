@@ -32,7 +32,12 @@ void Interface::Lock()
     qDebug() << "Lock requested";
 
     if(!checkExistChild())
-        runLocker(false);
+    {
+        QString cmd = QString("/usr/bin/ukui-screensaver-dialog --lock");
+        qDebug() << cmd;
+
+        process.startDetached(cmd);
+    }
 }
 
 void Interface::onSessionIdleReceived()
@@ -40,15 +45,12 @@ void Interface::onSessionIdleReceived()
     qDebug() << "emit SessionIdle";
 
     if(!checkExistChild())
-        runLocker(true);
-}
+    {
+        QString cmd = QString("/usr/bin/ukui-screensaver-dialog --session-idle");
+        qDebug() << cmd;
 
-void Interface::runLocker(bool sessionIdle)
-{
-    QString cmd = QString("/usr/bin/ukui-screensaver-dialog --lock %1").arg(sessionIdle ? "--session-idle" : "");
-    qDebug() << cmd;
-
-    process.startDetached(cmd);
+        process.startDetached(cmd);
+    }
 }
 
 bool Interface::checkExistChild()
