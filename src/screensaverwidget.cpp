@@ -82,6 +82,11 @@ void ScreenSaverWidget::closeEvent(QCloseEvent *event)
 
 void ScreenSaverWidget::paintEvent(QPaintEvent *event)
 {
+    if(!screensaver->exists())
+    {
+        QPainter painter(this);
+        painter.fillRect(geometry(), Qt::black);
+    }
     if(screensaver->mode == SAVER_IMAGE) {
         switch(screensaver->effect) {
         case TRANSITION_NONE:
