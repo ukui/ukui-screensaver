@@ -20,7 +20,7 @@
 #include <QDBusMessage>
 #include <QCommandLineParser>
 #include <QDebug>
-
+#include "types.h"
 
 int main(int argc, char **argv)
 {
@@ -39,9 +39,9 @@ int main(int argc, char **argv)
     if(!parser.isSet(lockOption))
         return -1;
 
-    QDBusInterface *interface = new QDBusInterface("cn.kylinos.ScreenSaver",
-                                                   "/",
-                                                   "cn.kylinos.ScreenSaver");
+    QDBusInterface *interface = new QDBusInterface(SS_DBUS_SERVICE,
+                                                   SS_DBUS_PATH,
+                                                   SS_DBUS_INTERFACE);
     QDBusMessage msg = interface->call("Lock");
     if(msg.type() == QDBusMessage::ErrorMessage)
         qDebug() << msg.errorMessage();
