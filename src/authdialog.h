@@ -47,6 +47,7 @@ private Q_SLOTS:
     void onBioAuthStart();
     void onBioAuthStop();
     void setBioMovieImage();
+    void updateIcon();
 
 public Q_SLOTS:
     void switchToBiometric();

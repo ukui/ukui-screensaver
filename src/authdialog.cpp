@@ -455,20 +455,16 @@ void AuthDialog::setBioMovieImage()
     }
 }
 
+
 void AuthDialog::startWaiting()
 {
     if(!waitTimer)
     {
         waitTimer = new QTimer(this);
-        waitTimer->setInterval(100);
-        waitImage.load(":/image/assets/waiting.png");
+        connect(waitTimer, &QTimer::timeout, this, &AuthDialog::updateIcon);
     }
-    connect(waitTimer, &QTimer::timeout, this, [&] {
-        QMatrix matrix;
-        matrix.rotate(90.0);
-        waitImage = waitImage.transformed(matrix, Qt::FastTransformation);
-        ui->btnUnlock->setIcon(QIcon(waitImage));
-    });
+    waitTimer->setInterval(100);
+    waitImage.load(":/image/assets/waiting.png");
     waitTimer->start();
 }
 
@@ -479,4 +475,12 @@ void AuthDialog::stopWaiting()
         waitTimer->stop();
         ui->btnUnlock->setIcon(QIcon());
     }
+}
+
+void AuthDialog::updateIcon()
+{
+    QMatrix matrix;
+    matrix.rotate(90.0);
+    waitImage = waitImage.transformed(matrix, Qt::FastTransformation);
+    ui->btnUnlock->setIcon(QIcon(waitImage));
 }
