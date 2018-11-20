@@ -36,6 +36,8 @@ private:
     void setEchoMode(bool visible);
     void setBioImage(bool isGif);
     void setSwitchButton();
+    void startWaiting();
+    void stopWaiting();
 
 private Q_SLOTS:
     void onShowMessage(const QString &message, Auth::MessageType type);
@@ -74,6 +76,8 @@ private:
     BioDevices          *bioDevices;
     BioDevicesWidget    *widgetDevices;
     QTimer              *movieTimer;
+    QTimer              *waitTimer;
+    QPixmap             waitImage;
     Page                page;
     bool                enableBiometric;
     bool                firstBioAuth;

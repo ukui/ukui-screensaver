@@ -24,6 +24,7 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     bioDevices(new BioDevices(this)),
     widgetDevices(nullptr),
     movieTimer(nullptr),
+    waitTimer(nullptr),
     page(Page::UNDEFINED),
     enableBiometric(false),
     firstBioAuth(true),
@@ -91,6 +92,9 @@ void AuthDialog::initUI()
             this, &AuthDialog::onRespond);
     connect(ui->btnUnlock, &QPushButton::clicked,
             this, &AuthDialog::onRespond);
+    connect(ui->btnEchoMode, &QPushButton::clicked, this, [&]{
+        setEchoMode(ui->lineEditPasswd->echoMode() != QLineEdit::Normal);
+    });
 
     ui->lblCapsLock->setVisible(checkCapsLockState());
 
@@ -161,6 +165,8 @@ void AuthDialog::onShowMessage(const QString &message, Auth::MessageType type)
 
 void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
 {
+    stopWaiting();
+
     if(prompt == BIOMETRIC_PAM)
     {
         page = BIOMETRIC;
@@ -170,6 +176,7 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
     {
         authFailed = false;
         page = PASSWORD;
+        ui->widgetInput->setEnabled(true);
         switchToPassword();
 
         ui->widgetInput->show();
@@ -200,6 +207,9 @@ void AuthDialog::onAuthComplete()
 void AuthDialog::onRespond()
 {
     ui->listWidgetMessage->clear();
+    startWaiting();
+    ui->widgetInput->setEnabled(false);
+
     auth->respond(ui->lineEditPasswd->text());
 }
 
@@ -442,5 +452,31 @@ void AuthDialog::setBioMovieImage()
     if(count == 18)
     {
         count = 0;
+    }
+}
+
+void AuthDialog::startWaiting()
+{
+    if(!waitTimer)
+    {
+        waitTimer = new QTimer(this);
+        waitTimer->setInterval(100);
+        waitImage.load(":/image/assets/waiting.png");
+    }
+    connect(waitTimer, &QTimer::timeout, this, [&] {
+        QMatrix matrix;
+        matrix.rotate(90.0);
+        waitImage = waitImage.transformed(matrix, Qt::FastTransformation);
+        ui->btnUnlock->setIcon(QIcon(waitImage));
+    });
+    waitTimer->start();
+}
+
+void AuthDialog::stopWaiting()
+{
+    if(waitTimer && waitTimer->isActive())
+    {
+        waitTimer->stop();
+        ui->btnUnlock->setIcon(QIcon());
     }
 }

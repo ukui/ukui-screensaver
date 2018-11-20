@@ -8,5 +8,6 @@
         <file>assets/hide-password.png</file>
         <file>assets/keyboard.png</file>
         <file>assets/avatar.png</file>
+        <file>assets/waiting.png</file>
     </qresource>
 </RCC>
