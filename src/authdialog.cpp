@@ -21,7 +21,7 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     auth(new AuthPAM(this)),
     bioAuth(nullptr),
     deviceInfo(nullptr),
-    bioDevices(new BioDevices(this)),
+    bioDevices(nullptr),
     widgetDevices(nullptr),
     movieTimer(nullptr),
     waitTimer(nullptr),
@@ -255,6 +255,10 @@ void AuthDialog::switchToBiometric()
         return;
     }
 
+    if(!bioDevices)
+    {
+        bioDevices = new BioDevices(this);
+    }
     //没有可用的生物识别设备，跳过生物识别认证，进入下一个PAM模块
     if(bioDevices->count() <= 0)
     {
