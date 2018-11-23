@@ -1,17 +1,14 @@
 qt5_wrap_ui(BioAuth_SRC
-	src/bioauthwidget.ui
 	src/biodeviceswidget.ui
 	)
 
 qt5_wrap_cpp(BioAuth_SRC
 	include/bioauth.h
 	include/biodevices.h
-	include/biotypes.h
-	include/biometric.h
 	include/biodeviceswidget.h
 	)
 qt5_add_resources(BioAuth_SRC
-	bio-assets.qrc
+	bioauth.qrc
 	)
 
 set(BioAuth_SRC
@@ -30,16 +27,17 @@ include_directories(
 	)
 
 
-add_library(BioAuth OBJECT ${BioAuth_SRC})
+add_library(BioAuth STATIC ${BioAuth_SRC})
+target_link_libraries(BioAuth Qt5::Core Qt5::DBus Qt5::Widgets)
 
-set(test_SRC
-	${BioAuth_SRC}
-	tests/test_biodeviceswidget.cpp
-	)
-
-add_executable(test-devicewidget ${test_SRC})
-target_link_libraries(test-devicewidget
-	Qt5::Core
-	Qt5::Widgets
-	Qt5::DBus
-	)
+#set(test_SRC
+#	${BioAuth_SRC}
+#	tests/test_biodeviceswidget.cpp
+#	)
+#
+#add_executable(test-devicewidget ${test_SRC})
+#target_link_libraries(test-devicewidget
+#	Qt5::Core
+#	Qt5::Widgets
+#	Qt5::DBus
+#	)

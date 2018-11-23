@@ -25,6 +25,8 @@ BioDevicesWidget::BioDevicesWidget(QWidget *parent) :
     btnGroup(new QButtonGroup(this)),
     lwDevices(new QListWidget(this))
 {
+    Q_INIT_RESOURCE(bioauth);
+
     ui->setupUi(this);
 
     connect(&bioDevices, &BioDevices::deviceCountChanged,

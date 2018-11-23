@@ -1,9 +1,3 @@
-cmake_minimum_required(VERSION 3.0)
-
-find_package(Qt5 COMPONENTS Core Widgets DBus X11Extras)
-find_package(PkgConfig REQUIRED)
-
-pkg_check_modules(GIO REQUIRED gio-2.0>=2.40)
 pkg_check_modules(X11 REQUIRED x11)
 pkg_check_modules(XEXT REQUIRED xext)
 pkg_check_modules(XTST REQUIRED xtst)
@@ -12,27 +6,10 @@ pkg_check_modules(QGS REQUIRED gsettings-qt)
 
 find_library(PAM_LIBRARIES pam)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_CXX_STANDARD 11)
-
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTORCC ON)
-
-set(Debug ON)
-if(Debug)
-	set(CMAKE_BUILD_TYPE "Debug")
-endif()
-add_compile_options(-fPIC)
-
-include_directories(${PROJECT_SOURCE_DIR}/src/VirtualKeyboard/src)
-include_directories(${PROJECT_SOURCE_DIR}/src/BioAuth/include)
-
-add_subdirectory(${PROJECT_SOURCE_DIR}/src/BioAuth)
-add_subdirectory(${PROJECT_SOURCE_DIR}/src/VirtualKeyboard)
+include_directories(${PROJECT_SOURCE_DIR}/VirtualKeyboard/src)
+include_directories(${PROJECT_SOURCE_DIR}/BioAuth/include)
 
 include_directories(
-	${GIO_INCLUDE_DIRS}
 	${X11_INCLUDE_DIRS}
 	${XEXT_INCLUDE_DIRS}
 	${XTST_INCLUDE_DIRS}
@@ -43,7 +20,6 @@ include_directories(
 set(EXTRA_LIBS
 	${EXTRA_LIBS}
 	${PAM_LIBRARIES}
-	${GIO_LIBRARIES}
 	${X11_LIBRARIES}
 	${XEXT_LIBRARIES}
 	${XTST_LIBRARIES}
@@ -72,6 +48,8 @@ qt5_wrap_cpp(dialog_SRC
 	xeventmonitor.h
 	monitorwatcher.h
 	configuration.h
+    users.h
+    displaymanager.h
 	)
 
 set(dialog_SRC
@@ -91,11 +69,7 @@ set(dialog_SRC
 	users.cpp
 	displaymanager.cpp
 	)
-add_executable(ukui-screensaver-dialog
-	${dialog_SRC}
-	$<TARGET_OBJECTS:VirtualKeyboard>
-	$<TARGET_OBJECTS:BioAuth>
-	)
+add_executable(ukui-screensaver-dialog ${dialog_SRC})
 
 target_link_libraries(ukui-screensaver-dialog
 	Qt5::Core
@@ -103,9 +77,16 @@ target_link_libraries(ukui-screensaver-dialog
 	Qt5::DBus
 	Qt5::X11Extras
 	${EXTRA_LIBS}
+    BioAuth VirtualKeyboard
 	)
 
+qt5_wrap_cpp(backend_SRC
+    interface.h
+    sessionwatcher.h
+    interfaceAdaptor.h
+    )
 set(backend_SRC
+    ${backend_SRC}
     ukui-screensaver-backend.cpp
     interface.cpp
     sessionwatcher.cpp
@@ -127,9 +108,9 @@ install(TARGETS
 	ukui-screensaver-command
 	DESTINATION bin)
 
-set(test-act_SRC
-	users.cpp
-	test-accounts.cpp
-	)
-add_executable(test-accounts ${test-act_SRC})
-target_link_libraries(test-accounts Qt5::Core Qt5::DBus)
+#set(test-act_SRC
+#	users.cpp
+#	test-accounts.cpp
+#	)
+#add_executable(test-accounts ${test-act_SRC})
+#target_link_libraries(test-accounts Qt5::Core Qt5::DBus)
