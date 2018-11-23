@@ -111,6 +111,7 @@ void BioDevicesWidget::addTypeButtons()
         QIcon icon(iconName);
         QPushButton *btn = new QPushButton(icon, text, this);
         btn->setObjectName("btn" + bioType);
+        btn->setCursor(Qt::PointingHandCursor);
         btn->show();
         btnGroup->addButton(btn, type);
         connect(btn, &QPushButton::clicked, this, &BioDevicesWidget::onDeviceTypeChanged);

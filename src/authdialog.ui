@@ -55,6 +55,9 @@
         <height>16777215</height>
        </size>
       </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
@@ -77,6 +80,9 @@
         <height>16777215</height>
        </size>
       </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
@@ -98,6 +104,9 @@
         <width>110</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
@@ -126,6 +135,9 @@
         <width>110</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>

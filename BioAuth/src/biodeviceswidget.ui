@@ -79,6 +79,9 @@
      <height>30</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
   </widget>
  </widget>
  <resources/>

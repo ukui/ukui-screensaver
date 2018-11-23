@@ -22,6 +22,9 @@
      <height>26</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="focusPolicy">
     <enum>Qt::NoFocus</enum>
    </property>
@@ -73,6 +76,9 @@
      <width>80</width>
      <height>26</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="focusPolicy">
     <enum>Qt::NoFocus</enum>
