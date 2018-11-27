@@ -264,7 +264,6 @@ void AuthDialog::switchToBiometric()
     {
         enableBiometric = false;
         qDebug() << "hasn't available device";
-        auth->respond(BIOMETRIC_IGNORE);
         switchToPassword();
         return;
     }

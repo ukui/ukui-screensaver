@@ -22,6 +22,7 @@ static void sigchld_handler(int signo);
 AuthPAM::AuthPAM(QObject *parent)
     : Auth(parent),
       pid(0),
+      nPrompts(0),
       _isAuthenticated(false),
       _isAuthenticating(false)
 {
@@ -58,6 +59,7 @@ void AuthPAM::stopAuth()
         responseList.clear();
         _isAuthenticating = false;
         _isAuthenticated = false;
+        nPrompts = 0;
 
         ::kill(pid, SIGKILL);
 
@@ -69,6 +71,11 @@ void AuthPAM::respond(const QString &response)
 {
     nPrompts--;
     responseList.push_back(response);
+
+//    for(auto msg : messageList)
+//        qDebug() << msg.msg;
+//    qDebug() << responseList;
+//    qDebug() << nPrompts;
 
     if(nPrompts == 0)
     {
@@ -130,7 +137,6 @@ void AuthPAM::onSockRead()
         readData(toParent[0], &msgLength, sizeof(msgLength));
         qDebug() << "message length: " << msgLength;
 
-        nPrompts = 0;
         for(int i = 0; i < msgLength; i++)
         {
             //读取message
