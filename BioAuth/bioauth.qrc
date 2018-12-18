@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/images">
-        <file>images/fingerprint-icon.png</file>
-        <file>images/fingervein-icon.png</file>
-        <file>images/iris-icon.png</file>
-        <file>images/arrow_down.svg</file>
-    </qresource>
-</RCC>

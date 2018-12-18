@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
         window->onSessionStatusChanged(SESSION_IDLE);
     }
 
-    window->show();
+    window->showFullScreen();
     window->activateWindow();
 
     return a.exec();

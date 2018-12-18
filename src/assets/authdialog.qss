@@ -1,5 +1,5 @@
 QPushButton {
-    border: 1px solid white;
+    border: none;
     outline: none;
     color: white;
 }
@@ -14,51 +14,82 @@ QLabel {
     color: white;
 }
 
-/* 解锁按钮 */
-#btnUnlock {
-    border: none;
-    color: black;
-    background-color: #0078d7;
+#userWidget{
+/*    background: rgba(255, 0, 255, 30%);*/
 }
-#btnUnlock:hover {
-    background-color: #3f8de0;
-}
-#btnUnlock:active {
-    background-color: #2367b9;
-}
-#btnUnlock:disabled {
-    background-color: #013C76;
+/* 头像 */
+#faceLabel {
+    border:2px solid white;
 }
 
-#btnEchoMode:hover {
-    background-color: transparent;
+/* 用户名 */
+#login_nameLabel{
+    font-size: 28px;
 }
 
-/* 生物识别按钮*/
-#btnBiometric::hover{
-    background-color:rgb(0, 0, 0, 50);
+/* 密码输入框 */
+QLineEdit {
+    background: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    font-size: 14px;
+    lineedit-password-character:9679;
+}
+QLineEdit::disabled {
+    background: lightgray;
+}
+QLineEdit::hover {
+    border: 1px solid #00FFFF;
+}
+QLineEdit::focus{
+    background: #CDDDEC;
+    border: #CDDDEC;
+
+}
+/* 大写提示 */
+#capsIconLabel{
+    background: url(:/image/assets/capslock.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    max-width: 22px;
+    max-height: 22px;
+    min-width: 22px;
+    min-height: 22px;
 }
 
-/* 密码框 */
-#lineEditPasswd {
-    border:1px solid #026096;
-    font-size: 14px
+/* echo mode */
+#echoModeButton {
+    background: transparent;
+    image: url(:/image/assets/hide-password.png);
+    max-width: 22px;
+    max-height: 22px;
+    margin-right: 5px;
 }
-
-/* 提示 */
-#lblLogged, #lblPrompt {
-    color: white; font-size: 13px;
+#echoModeButton::checked {
+    image: url(:/image/assets/show-password.png);
 }
-
-#lblUserName {
-    font-size: 20px;
+/* 登录按钮 */
+#loginButton{
+    background: #559BE2;
+/*    image: url(:/image/assets/login-button.png);*/
+    min-width: 26px;
+    max-width: 26px;
+    min-height: 26px;
+    max-height: 26px;
+    margin-right: 4px;
+    icon-size: 26px;
+}
+#loginButton::hover{
+    background: #1172D5;
+}
+#loginButton::pressed{
+    background: #0653A1;
+}
+/* PAM message提示*/
+#messageLabel {
+    font-size: 16px;
     color: white;
 }
 
-/* 头像 */
-#lblAvatar {
-    border:2px solid white;
-}
 
 /* 切换用户 */
 QPushButton::menu-indicator{
@@ -77,64 +108,89 @@ QMenu::item:pressed {
     background-color: rgb(220,80,6);
 }
 
-
-/* 虚拟键盘开启按钮 */
+/* 虚拟键盘开启按钮、用户切换按钮 */
+#btnSwitchUser, #btnKeyboard {
+    border: 1px solid gray;
+}
 #btnKeyboard, #btnSwitchUser {
     border: 1px solid gray;
 }
 #btnKeyboard::hover, #btnSwitchUser::hover {
-    background-color: rgb(0, 0, 0, 50);
+    background-color: rgb(255, 255, 255, 20%);
 }
 #btnKeyboard::pressed, #btnSwitchUser::pressed{
-    background: rgba(0, 0, 0, 100);
+    background: rgba(0, 0, 0, 30%);
 }
 
 
-#listWidgetMessage {
-    background: transparent;
-}
 
-#listWidgetMessage::item:hover{
+/********************** 下拉选项 *************************/
 
-}
-#listWidgetMessage::item:selected{
-
-}
-
-
-#lblBioNotify{
-    font-size: 12px;
-}
-
-/* devices' widget */
 QComboBox{
-    border: 1px solid rgb(255, 255, 255, 100);
-    background: rgba(0, 0, 0, 20);
-    font:18px;
-    color:white;
-    height: 50px;
-}
-QComboBox QAbstractItemView{
-    border: 1px solid white;
-    outline: 0px;
-    height: 100px;
-    background: rgb(1, 58, 80);
-    font: 22px;
+    background: rgba(255, 255, 255, 20);
+    border: 1px solid rgb(255, 255, 255, 30);
+    font-size:18px;
     color: white;
+    combobox-popup: 0;  /* 配合setMaxVisibleItems设置下拉框显示的条数，超过的滚动显示 */
 }
-QComboBox QAbstractItemView::item:selected{
-    background-color: rgba(54, 98, 180);
-}
+
 QComboBox::down-arrow{
-    image:url(:/images/images/arrow_down.svg);
+    image:url(:/image/assets/combobox_down.png);
 }
 QComboBox::drop-down{
     width: 30px;
     border: none;
 }
 
-#btnFingerPrint, #btnFingerVein, #btnIris,
-#btnFace, #btnVoicePrint
+QComboBox QListView{
+    border: 1px solid #5187bd;
+    background: #4682B4;
+    background: rgba(255, 255, 255, 30%);
+    font-size: 18px;
+    color: white;
+}
+QComboBox QListView::item:hover{
+    background: rgba(255, 255, 255, 20%);
+
+}
+QComboBox QListView::item:selected{
+    background-color: rgba(255, 255, 255, 30%);
+}
+
+/********************** 生物识别切换按钮 **************************/
+#biometricButton, #passwordButton,
+#otherDeviceButton, #retryButton,
+#OKButton
 {
-    border: 1px solid rgb(255, 255, 255, 100);
+    background: rgba(255, 255, 255, 20%);
+    font-size: 14px;
+    border: 1px solid rgba(255, 255, 255, 30%);
+    color: white;
+}
+
+#biometricButton::hover, #passwordButton::hover,
+#otherDeviceButton::hover, #retryButton::hover,
+#OKButton::hover
+{
+    background: rgba(255, 255, 255, 35%);
+    border: 1px solid rgba(255, 255, 255, 50%);
+}
+
+#biometricButton::pressed, #passwordButton::pressed,
+#otherDeviceButton::pressed, #retryButton::pressed,
+#OKButton::pressed
+{
+    background: rgba(0, 0, 0, 15%);
+    border: 1px solid rgba(255, 255, 255, 20%);
+}
+
+
+/********************** 生物识别设备选择界面 ************************/
+#lblBioetricDevicesPrompt {
+    font-size: 30px;
+}
+
+#lblDeviceType, #lblDeviceName,
+#cmbDeviceType, #cmbDeviceName{
+    font-size: 18px;
 }

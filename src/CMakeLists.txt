@@ -7,7 +7,7 @@ pkg_check_modules(QGS REQUIRED gsettings-qt)
 find_library(PAM_LIBRARIES pam)
 
 include_directories(${PROJECT_SOURCE_DIR}/VirtualKeyboard/src)
-include_directories(${PROJECT_SOURCE_DIR}/BioAuth/include)
+include_directories(${PROJECT_SOURCE_DIR}/BiometricAuth)
 
 include_directories(
 	${X11_INCLUDE_DIRS}
@@ -29,7 +29,6 @@ set(EXTRA_LIBS
 
 qt5_wrap_ui(dialog_SRC
         lockwidget.ui
-        authdialog.ui
         )
 
 qt5_add_resources(dialog_SRC
@@ -50,6 +49,7 @@ qt5_wrap_cpp(dialog_SRC
 	configuration.h
     users.h
     displaymanager.h
+	iconedit.h
 	)
 
 set(dialog_SRC
@@ -62,12 +62,12 @@ set(dialog_SRC
 	auth-pam.cpp
 	xeventmonitor.cpp
 	monitorwatcher.cpp
-	util.cpp
 	grab-x11.cpp
 	configuration.cpp
 	screensaver.cpp
 	users.cpp
 	displaymanager.cpp
+	iconedit.cpp
 	)
 add_executable(ukui-screensaver-dialog ${dialog_SRC})
 
@@ -77,7 +77,7 @@ target_link_libraries(ukui-screensaver-dialog
 	Qt5::DBus
 	Qt5::X11Extras
 	${EXTRA_LIBS}
-    BioAuth VirtualKeyboard
+    BiometricAuth VirtualKeyboard
 	)
 
 qt5_wrap_cpp(backend_SRC

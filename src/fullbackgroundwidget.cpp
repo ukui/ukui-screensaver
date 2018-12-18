@@ -58,14 +58,16 @@ void FullBackgroundWidget::closeEvent(QCloseEvent *event)
         if(widget)
             widget->close();
     }
+    closeGrab();
     return QWidget::closeEvent(event);
 }
 
 void FullBackgroundWidget::init()
 {
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
-                   | Qt::X11BypassWindowManagerHint);
+                   /*| Qt::X11BypassWindowManagerHint*/);
 //    setAttribute(Qt::WA_DeleteOnClose);
+    establishGrab();
 
     // 监听session信号
     smInterface = new QDBusInterface(SM_DBUS_SERVICE,

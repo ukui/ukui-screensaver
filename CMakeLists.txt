@@ -31,10 +31,11 @@ if(Debug)
     set(CMAKE_BUILD_TYPE "Debug")                                                                                                     
 endif()
 
-add_subdirectory(BioAuth)
+#add_subdirectory(BioAuth)
+add_subdirectory(BiometricAuth)
 add_subdirectory(VirtualKeyboard)
 add_subdirectory(src)
 add_subdirectory(i18n_ts)
 add_subdirectory(data)
 
-add_dependencies(ukui-screensaver-dialog BioAuth VirtualKeyboard)
+add_dependencies(ukui-screensaver-dialog BiometricAuth VirtualKeyboard)

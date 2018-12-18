@@ -116,7 +116,7 @@ bool AuthPAM::isAuthenticating()
 
 void AuthPAM::onSockRead()
 {
-    qDebug() << "has message";
+//    qDebug() << "has message";
     int msgLength;
     int authComplete;
     readData(toParent[0], &authComplete, sizeof(authComplete));
@@ -135,7 +135,7 @@ void AuthPAM::onSockRead()
     else
     {
         readData(toParent[0], &msgLength, sizeof(msgLength));
-        qDebug() << "message length: " << msgLength;
+//        qDebug() << "message length: " << msgLength;
 
         for(int i = 0; i < msgLength; i++)
         {
@@ -173,6 +173,7 @@ void AuthPAM::onSockRead()
             PAM_RESPONSE *response = (PAM_RESPONSE*)calloc(messageList.size(), sizeof(PAM_RESPONSE));
             _respond(response);
             free(response);
+            messageList.clear();
         }
     }
 }

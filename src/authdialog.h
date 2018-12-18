@@ -9,16 +9,21 @@
 #include "auth-pam.h"
 #include "types.h"
 #include "users.h"
+#include "biometricdeviceinfo.h"
+
 
 namespace Ui {
 class AuthDialog;
 }
 
+class QLabel;
+class QPushButton;
+class IconEdit;
 class Auth;
-class BioAuth;
-class BioDevices;
-class DeviceInfo;
-class BioDevicesWidget;
+class BiometricProxy;
+class BiometricAuthWidget;
+class BiometricDevicesWidget;
+
 
 class AuthDialog : public QWidget
 {
@@ -26,33 +31,46 @@ class AuthDialog : public QWidget
 
 public:
     explicit AuthDialog(const UserItem &user, QWidget *parent = 0);
-    ~AuthDialog();
     void resizeEvent(QResizeEvent *event);
     void closeEvent(QCloseEvent *event);
     void setUserOfAuth();
 
 private:
     void initUI();
-    void setEchoMode(bool visible);
-    void setBioImage(bool isGif);
-    void setSwitchButton();
     void startWaiting();
     void stopWaiting();
+    void clearMessage();
+    void performBiometricAuth();
+    void skipBiometricAuth();
+    void initBiometricWidget();
+    void initBiometricButtonWidget();
+    void setChildrenGeometry();
+    void setBiometricWidgetGeometry();
+    void setBiometricButtonWidgetGeometry();
+    void showPasswordAuthWidget();
+    void showBiometricAuthWidget();
+    void showBiometricDeviceWidget();
 
 private Q_SLOTS:
     void onShowMessage(const QString &message, Auth::MessageType type);
     void onShowPrompt(const QString &prompt, Auth::PromptType type);
     void onAuthComplete();
-    void onRespond();
-    void onBioAuthStart();
-    void onBioAuthStop();
-    void setBioMovieImage();
-    void updateIcon();
+    void onRespond(const QString &text);
+//    void onBioAuthStart();
+//    void onBioAuthStop();
+//    void setBioMovieImage();
+//    void updateIcon();
+    void onDeviceChanged(const DeviceInfoPtr &deviceInfo);
+    void onBiometricAuthComplete(bool result);
+    void onBiometricButtonClicked();
+    void onPasswordButtonClicked();
+    void onOtherDevicesButtonClicked();
+    void onRetryButtonClicked();
 
 public Q_SLOTS:
-    void switchToBiometric();
-    void switchToPassword();
-    void switchToDevices();
+//    void switchToBiometric();
+//    void switchToPassword();
+//    void switchToDevices();
     void onCapsLockChanged();
     void startAuth();
     void stopAuth();
@@ -61,28 +79,36 @@ Q_SIGNALS:
     void authenticateCompete(bool result);
 
 private:
-    enum Page
-    {
-        UNDEFINED,
-        BIOMETRIC,
-        PASSWORD,
-        DEVICES
-    };
-
-    Ui::AuthDialog      *ui;
     UserItem            user;
     Auth                *auth;
-    BioAuth             *bioAuth;
-    DeviceInfo          *deviceInfo;
-    BioDevices          *bioDevices;
-    BioDevicesWidget    *widgetDevices;
-    QTimer              *movieTimer;
-    QTimer              *waitTimer;
-    QPixmap             waitImage;
-    Page                page;
-    bool                enableBiometric;
-    bool                firstBioAuth;
-    bool                authFailed;
+
+    enum AuthMode { PASSWORD, BIOMETRIC, UNKNOWN };
+
+    AuthMode            authMode;
+
+    // biometric auth
+    int                     m_deviceCount;
+    QString                 m_deviceName;
+    DeviceInfoPtr           m_deviceInfo;
+    BiometricProxy          *m_biometricProxy;
+    BiometricAuthWidget     *m_biometricAuthWidget;
+    BiometricDevicesWidget  *m_biometricDevicesWidget;
+    QWidget                 *m_buttonsWidget;
+    QPushButton             *m_biometricButton;
+    QPushButton             *m_passwordButton;
+    QPushButton             *m_otherDeviceButton;
+    QPushButton             *m_retryButton;
+
+    // UI
+//    QPushButton     *m_backButton;         //返回用户列表
+    QWidget         *m_userWidget;         //放置用户信息Label
+    QLabel          *m_faceLabel;          //头像
+    QLabel          *m_nameLabel;          //用户名
+//    QLabel          *m_isLoginLabel;       //提示是否已登录
+
+    QWidget         *m_passwdWidget;        //放置密码输入框和信息列表
+    IconEdit        *m_passwordEdit;       //密码输入框
+    QLabel          *m_messageLabel;         //PAM消息显示
 };
 
 #endif // AUTHDIALOG_H
