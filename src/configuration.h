@@ -49,6 +49,7 @@ private:
 
 private:
     QGSettings *gsettings;
+    QGSettings *bgGsettings;
     QString mode;
 	QList<QString> themes;
 	QString background;

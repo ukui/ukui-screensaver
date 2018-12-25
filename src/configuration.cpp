@@ -49,6 +49,25 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
 
     qDebug() << mode << themes;
     qDebug() << imageSwitchInterval << imageTSEffect;
+
+    //如果org.ukui.screensaver background中的背景图片为空，则设为桌面背景
+    if(background.isEmpty())
+    {
+        QString currentDesktop = qgetenv("XDG_CURRENT_DESKTOP");
+        if(currentDesktop == "UKUI" || currentDesktop == "MATE")
+        {
+            bgGsettings = new QGSettings("org.mate.background");
+            background = bgGsettings->get("picture-filename").toString();
+        }
+        else if(currentDesktop == "ubuntu:GNOME")
+        {
+            bgGsettings = new QGSettings("org.gnome.desktop.background");
+            background = bgGsettings->get("picture-uri").toString();
+            //去除前缀：file:///usr/share/background/xxx.png
+            background.remove(0, 7);
+        }
+    }
+    qDebug() << "background: " << background;
 }
 
 /* Update member value when GSettings changed */
