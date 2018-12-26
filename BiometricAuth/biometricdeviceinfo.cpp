@@ -91,3 +91,34 @@ void registerMetaType()
     qRegisterMetaType<DeviceInfo>("DeviceInfo");
     qDBusRegisterMetaType<DeviceInfo>();
 }
+
+
+QString GetDefaultDevice(const QString &userName)
+{
+    QString configPath = QString("/home/%1/" UKUI_BIOMETRIC_CONFIG_PATH).arg(userName);
+    QSettings settings(configPath, QSettings::IniFormat);
+    qDebug() << "configure path: " << settings.fileName();
+
+    QString defaultDevice = settings.value("DefaultDevice").toString();
+    if(defaultDevice.isEmpty())
+    {
+        QSettings sysSettings(UKUI_BIOMETRIC_SYS_CONFIG_PATH, QSettings::IniFormat);
+        defaultDevice = sysSettings.value("DefaultDevice").toString();
+    }
+
+    return defaultDevice;
+}
+
+int GetMaxAutoRetry(const QString &userName)
+{
+    QString configPath = QString("/home/%1/" UKUI_BIOMETRIC_CONFIG_PATH).arg(userName);
+    QSettings settings(configPath, QSettings::IniFormat);
+
+    int maxAutoRetry = settings.value("MaxAutoRetry").toInt();
+    if(maxAutoRetry == 0)
+    {
+        QSettings sysSettings(UKUI_BIOMETRIC_SYS_CONFIG_PATH, QSettings::IniFormat);
+        maxAutoRetry = sysSettings.value("MaxAutoRetry", 3).toInt();
+    }
+    return maxAutoRetry;
+}

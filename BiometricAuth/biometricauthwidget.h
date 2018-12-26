@@ -42,6 +42,7 @@ private Q_SLOTS:
     void onIdentifyComplete(QDBusPendingCallWatcher *watcher);
     void onStatusChanged(int drvid, int status);
     void onMoviePixmapUpdate();
+    void startAuth_();
 
 private:
     void initUI();
@@ -55,9 +56,11 @@ private:
 
     BiometricProxy      *proxy;
     int                 uid;
+    QString             userName;
     DeviceInfoPtr       device;
     bool                isInAuth;
     QTimer              *movieTimer;
+    int                 failedCount;
 };
 
 #endif // BIOMETRICAUTHWIDGET_H

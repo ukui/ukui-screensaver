@@ -4,63 +4,52 @@
 <context>
     <name>AuthDialog</name>
     <message>
-        <location filename="../build/src/ui_authdialog.h" line="191"/>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../build/src/ui_authdialog.h" line="192"/>
         <source>More Devices</source>
-        <translation>选择其他设备</translation>
+        <translation type="vanished">选择其他设备</translation>
     </message>
     <message>
-        <location filename="../build/src/ui_authdialog.h" line="193"/>
         <source>Biometric</source>
-        <translation>使用生物识别认证</translation>
+        <translation type="vanished">使用生物识别认证</translation>
     </message>
     <message>
-        <location filename="../build/src/ui_authdialog.h" line="194"/>
         <source>Password</source>
-        <translation>使用密码认证</translation>
+        <translation type="vanished">使用密码认证</translation>
     </message>
     <message>
-        <location filename="../build/src/ui_authdialog.h" line="195"/>
-        <location filename="../src/authdialog.cpp" line="396"/>
+        <location filename="../src/authdialog.cpp" line="370"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
     <message>
-        <location filename="../build/src/ui_authdialog.h" line="199"/>
         <source>UnLock</source>
-        <translation>解锁</translation>
+        <translation type="vanished">解锁</translation>
     </message>
     <message>
-        <location filename="../build/src/ui_authdialog.h" line="204"/>
         <source>LoggedIn</source>
-        <translation>已登录</translation>
+        <translation type="vanished">已登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="179"/>
+        <location filename="../src/authdialog.cpp" line="169"/>
         <source>Password: </source>
         <translation>密码：</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="194"/>
+        <location filename="../src/authdialog.cpp" line="184"/>
         <source>Password Incorrect, Please try again</source>
         <translation>密码错误，请重试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="362"/>
+        <location filename="../src/authdialog.cpp" line="336"/>
         <source>Biometric Authentication</source>
         <translation>生物识别认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="374"/>
+        <location filename="../src/authdialog.cpp" line="348"/>
         <source>Password Authentication</source>
         <translation>密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="386"/>
+        <location filename="../src/authdialog.cpp" line="360"/>
         <source>Other Devices</source>
         <translation>其他设备</translation>
     </message>
@@ -106,9 +95,14 @@
 <context>
     <name>BiometricAuthWidget</name>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="66"/>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="74"/>
         <source>Current device: </source>
         <translation>当前设备：</translation>
+    </message>
+    <message>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="128"/>
+        <source>Identify failed, Please retry.</source>
+        <translation>识别失败，请重试</translation>
     </message>
 </context>
 <context>
@@ -166,7 +160,6 @@
     <name>KeyboardWidget</name>
     <message>
         <location filename="../VirtualKeyboard/src/keyboardwidget.ui" line="29"/>
-        <location filename="../build/VirtualKeyboard/VirtualKeyboard_autogen/include/ui_keyboardwidget.h" line="790"/>
         <source>KeyboardWidget</source>
         <translation></translation>
     </message>
@@ -175,19 +168,16 @@
     <name>LockWidget</name>
     <message>
         <location filename="../src/lockwidget.ui" line="14"/>
-        <location filename="../build/src/ui_lockwidget.h" line="61"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../src/lockwidget.ui" line="54"/>
-        <location filename="../build/src/ui_lockwidget.h" line="63"/>
         <source>Date</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../src/lockwidget.ui" line="67"/>
-        <location filename="../build/src/ui_lockwidget.h" line="64"/>
         <source>Time</source>
         <translation></translation>
     </message>

@@ -66,21 +66,6 @@ int BiometricProxy::GetDevCount()
     return count;
 }
 
-QString BiometricProxy::GetDefaultDevice(const QString &userName)
-{
-    QString configPath = QString("/home/%1/" UKUI_BIOMETRIC_CONFIG_PATH).arg(userName);
-    QSettings settings(configPath, QSettings::IniFormat);
-
-    QString defaultDevice = settings.value("DefaultDevice").toString();
-    if(defaultDevice.isEmpty())
-    {
-        QSettings sysSettings(UKUI_BIOMETRIC_SYS_CONFIG_PATH, QSettings::IniFormat);
-        defaultDevice = sysSettings.value("DefaultDevice").toString();
-    }
-
-    return defaultDevice;
-}
-
 QString BiometricProxy::GetDevMesg(int drvid)
 {
     QDBusMessage result = call(QStringLiteral("GetDevMesg"), drvid);

@@ -104,4 +104,17 @@ QDebug operator <<(QDebug stream, const DeviceInfo &deviceInfo);
 
 Q_DECLARE_METATYPE(DeviceInfo)
 
+/**
+ * @brief 获取默认设备
+ * @return
+ */
+QString GetDefaultDevice(const QString &userName);
+
+/**
+ * @brief 获取识别失败自动重试的最大值
+ * @param userName
+ * @return
+ */
+int GetMaxAutoRetry(const QString &userName);
+
 #endif // BIOMETRICDEVICEINFO_H

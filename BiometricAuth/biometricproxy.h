@@ -64,11 +64,6 @@ public Q_SLOTS:
      */
     int GetDevCount();
     /**
-     * @brief 获取默认设备
-     * @return
-     */
-    QString GetDefaultDevice(const QString &userName);
-    /**
      * @brief 获取设备消息
      * @param drvid 驱动id
      * @return

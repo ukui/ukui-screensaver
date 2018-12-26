@@ -258,14 +258,15 @@ void AuthDialog::performBiometricAuth()
     //获取默认设备
     if(m_deviceName.isEmpty())
     {
-        m_deviceName = m_biometricProxy->GetDefaultDevice(user.name);
+        m_deviceName = GetDefaultDevice(user.name);
     }
-
-    qDebug() << (m_deviceInfo ? m_deviceInfo->shortName : "");
+    qDebug() << m_deviceName;
+//    qDebug() << (m_deviceInfo ? m_deviceInfo->shortName : "");
 
     //如果默认设备为空的话，第一次不启动生物识别认证
     if(m_deviceName.isEmpty() && !m_deviceInfo)
     {
+        qDebug() << "No default device";
         skipBiometricAuth();
         return;
     }

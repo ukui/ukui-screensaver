@@ -1,13 +1,14 @@
 #include "biometricauthwidget.h"
 #include <QLabel>
 #include <QDebug>
-//#include "biometricproxy.h"
+#include <pwd.h>
 
 BiometricAuthWidget::BiometricAuthWidget(BiometricProxy *proxy, QWidget *parent) :
     QWidget(parent),
     proxy(proxy),
     isInAuth(false),
-    movieTimer(nullptr)
+    movieTimer(nullptr),
+    failedCount(0)
 {
     initUI();
     resize(400, 300);
@@ -62,7 +63,14 @@ void BiometricAuthWidget::startAuth(DeviceInfoPtr device, int uid)
 
     this->device = device;
     this->uid = uid;
+    this->userName = getpwuid(uid)->pw_name;
+    this->failedCount = 0;
 
+    startAuth_();
+}
+
+void BiometricAuthWidget::startAuth_()
+{
     lblDevice->setText(tr("Current device: ") + device->shortName);
 
     qDebug().noquote() << QString("Identify:[drvid: %1, uid: %2]").arg(1).arg(2);
@@ -110,7 +118,16 @@ void BiometricAuthWidget::onIdentifyComplete(QDBusPendingCallWatcher *watcher)
     else
     {
         qDebug() << "Identify failed";
-        Q_EMIT authComplete(false);
+        failedCount++;
+        if(failedCount >= GetMaxAutoRetry(userName))
+        {
+            Q_EMIT authComplete(false);
+        }
+        else
+        {
+            lblNotify->setText(tr("Identify failed, Please retry."));
+            QTimer::singleShot(1000, this, &BiometricAuthWidget::startAuth_);
+        }
     }
     updateImage(0);
 }
