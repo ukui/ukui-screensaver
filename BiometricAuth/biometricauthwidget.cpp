@@ -8,7 +8,9 @@ BiometricAuthWidget::BiometricAuthWidget(BiometricProxy *proxy, QWidget *parent)
     proxy(proxy),
     isInAuth(false),
     movieTimer(nullptr),
-    failedCount(0)
+    failedCount(0),
+    timeoutCount(0),
+    beStopped(false)
 {
     initUI();
     resize(400, 300);
@@ -65,6 +67,8 @@ void BiometricAuthWidget::startAuth(DeviceInfoPtr device, int uid)
     this->uid = uid;
     this->userName = getpwuid(uid)->pw_name;
     this->failedCount = 0;
+    this->timeoutCount = 0;
+    this->beStopped = false;
 
     startAuth_();
 }
@@ -87,6 +91,7 @@ void BiometricAuthWidget::startAuth_()
 
 void BiometricAuthWidget::stopAuth()
 {
+    beStopped = true;
     if(!isInAuth)
     {
         return;
@@ -115,11 +120,12 @@ void BiometricAuthWidget::onIdentifyComplete(QDBusPendingCallWatcher *watcher)
         qDebug() << "Identify success";
         Q_EMIT authComplete(true);
     }
-    else
+    // 特征识别不匹配
+    else if(result == DBUS_RESULT_NOTMATCH)
     {
         qDebug() << "Identify failed";
         failedCount++;
-        if(failedCount >= GetMaxAutoRetry(userName))
+        if(failedCount >= GetMaxFailedAutoRetry(userName))
         {
             Q_EMIT authComplete(false);
         }
@@ -127,6 +133,29 @@ void BiometricAuthWidget::onIdentifyComplete(QDBusPendingCallWatcher *watcher)
         {
             lblNotify->setText(tr("Identify failed, Please retry."));
             QTimer::singleShot(1000, this, &BiometricAuthWidget::startAuth_);
+        }
+    }
+    //识别发生错误
+    else if(result == DBUS_RESULT_ERROR)
+    {
+        StatusReslut ret = proxy->UpdateStatus(device->id);
+        //识别操作超时
+        if(ret.result == 0 && ret.opsStatus == IDENTIFY_TIMEOUT)
+        {
+            timeoutCount++;
+            if(timeoutCount >= GetMaxTimeoutAutoRetry(userName))
+            {
+                Q_EMIT authComplete(false);
+            }
+            else
+            {
+                QTimer::singleShot(1000, [&]{
+                    if(!beStopped)
+                    {
+                        startAuth_();
+                    }
+                });
+            }
         }
     }
     updateImage(0);

@@ -61,6 +61,8 @@ private:
     bool                isInAuth;
     QTimer              *movieTimer;
     int                 failedCount;
+    int                 timeoutCount;
+    bool                beStopped;
 };
 
 #endif // BIOMETRICAUTHWIDGET_H
