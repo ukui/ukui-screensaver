@@ -1,5 +1,4 @@
 pkg_check_modules(X11 REQUIRED x11)
-pkg_check_modules(XEXT REQUIRED xext)
 pkg_check_modules(XTST REQUIRED xtst)
 pkg_check_modules(XCB REQUIRED xcb)
 pkg_check_modules(QGS REQUIRED gsettings-qt)
@@ -11,7 +10,6 @@ include_directories(${PROJECT_SOURCE_DIR}/BiometricAuth)
 
 include_directories(
 	${X11_INCLUDE_DIRS}
-	${XEXT_INCLUDE_DIRS}
 	${XTST_INCLUDE_DIRS}
 	${XCB_INCLUDE_DIRS}
 	${QGS_INCLUDE_DIRS}
@@ -21,7 +19,6 @@ set(EXTRA_LIBS
 	${EXTRA_LIBS}
 	${PAM_LIBRARIES}
 	${X11_LIBRARIES}
-	${XEXT_LIBRARIES}
 	${XTST_LIBRARIES}
 	${XCB_LIBRARIES}
 	${QGS_LIBRARIES}
