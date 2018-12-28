@@ -15,48 +15,42 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
 **/
-#ifndef CONFIGURATION_H
-#define CONFIGURATION_H
-
-#ifndef QT_NO_KEYWORDS
-#define QT_NO_KEYWORDS
-#endif
-
-//#include "gsettings.h"
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
 #include <QObject>
-#include "screensaver.h"
+#include <QDBusContext>
+#include <QProcess>
+#include "types.h"
 
-class QGSettings;
 
-class Configuration : public QObject
+class Interface : public QObject, protected QDBusContext
 {
-	Q_OBJECT
-public:
-	explicit Configuration(QObject *parent = nullptr);
+    Q_OBJECT
+
+    Q_CLASSINFO("D-Bus Interface", SS_DBUS_SERVICE)
 
 public:
-    ScreenSaver *getScreensaver();
-	QString getBackground();
-	bool xscreensaverActivatedWhenIdle();
-	bool lockWhenXScreensaverActivated();
+    explicit Interface(QObject *parent = nullptr);
+
+Q_SIGNALS:
+    void SessionIdle();
 
 public Q_SLOTS:
-	void onConfigurationChanged(QString key);
+    /**
+     * Lock the screen
+     */
+    void Lock();
+
+    void onSessionIdleReceived();
+
+    void onNameLost(const QString&);
 
 private:
-    QString getXScreensaverPath(const QString &theme);
+    bool checkExistChild();
 
 private:
-    QGSettings *gsettings;
-    QGSettings *bgGsettings;
-    QString mode;
-	QList<QString> themes;
-	QString background;
-	bool idleActivationEnabled;
-	bool lockEnabled;
-    int imageTSEffect;
-    int imageSwitchInterval;
+    QProcess process;
 };
 
-#endif // CONFIGURATION_H
+#endif // INTERFACE_H

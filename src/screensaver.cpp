@@ -51,6 +51,20 @@ ScreenSaver::ScreenSaver(ScreenSaver &&screensaver) noexcept
 {
 }
 
+bool ScreenSaver::exists()
+{
+    switch(mode)
+    {
+    case SAVER_BLANK_ONLY:
+        return true;
+    case SAVER_RANDOM:
+    case SAVER_SINGLE:
+        return QFile(path).exists();
+    case SAVER_IMAGE:
+        return QDir(path).exists();
+    }
+}
+
 void ScreenSaver::startSwitchImages()
 {
     qDebug() << "ScreenSaver::startSwitchImages";
