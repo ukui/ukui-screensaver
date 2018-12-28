@@ -2,75 +2,148 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pt">
 <context>
-    <name>BioAuthentication</name>
+    <name>AuthDialog</name>
     <message>
-        <source>authentication failed, restart after 2 seconds</source>
-        <translation>autenticação falhou, reinicie após 2 segundos</translation>
-    </message>
-</context>
-<context>
-    <name>BioDeviceView</name>
-    <message>
-        <source>password login</source>
-        <translation>senha de acesso</translation>
+        <source>Form</source>
+        <translation>Formato</translation>
     </message>
     <message>
-        <source>fingerprint</source>
-        <translation>impressão digital</translation>
+        <source>More Devices</source>
+        <translation>Mais dispositivos</translation>
     </message>
     <message>
-        <source>fingerevin</source>
-        <translation>fingerevin</translation>
+        <source>Biometric</source>
+        <translation>Biométrico</translation>
     </message>
     <message>
-        <source>iris</source>
-        <translation>íris</translation>
-    </message>
-</context>
-<context>
-    <name>MainWindow</name>
-    <message>
-        <source>MainWindow</source>
-        <translation>Janela principal</translation>
+        <source>Password</source>
+        <translation>Senha</translation>
     </message>
     <message>
-        <source>Username</source>
-        <translation>Nome de usuário</translation>
+        <source>Retry</source>
+        <translation>Tente novamente</translation>
     </message>
     <message>
-        <source>Unlock</source>
+        <source>UnLock</source>
         <translation>Desbloquear</translation>
     </message>
     <message>
-        <source>Has Logged In</source>
-        <translation>Fez o login</translation>
+        <source>LoggedIn</source>
+        <translation>Logado</translation>
     </message>
     <message>
-        <source>Avatar</source>
-        <translation>Avatar</translation>
+        <source>Password Incorrect, Please try again</source>
+        <translation>Senha incorreta, por favor tente novamente</translation>
     </message>
+</context>
+<context>
+    <name>BioAuthWidget</name>
     <message>
-        <source>Switch User</source>
-        <translation>Mudar de utilizador</translation>
+        <source>Form</source>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>TextLabel</source>
         <translation>TextLabel</translation>
     </message>
     <message>
-        <source>Password Incorrect</source>
-        <translation>Senha incorreta</translation>
+        <source>More</source>
+        <translation>Mais</translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation>Tente novamente</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation>Senha</translation>
+    </message>
+</context>
+<context>
+    <name>BioDevices</name>
+    <message>
+        <source>FingerPrint</source>
+        <translation>Impressão digital</translation>
+    </message>
+    <message>
+        <source>FingerVein</source>
+        <translation>FingerVein</translation>
+    </message>
+    <message>
+        <source>Iris</source>
+        <translation>Íris</translation>
+    </message>
+    <message>
+        <source>Face</source>
+        <translation>Face</translation>
+    </message>
+    <message>
+        <source>VoicePrint</source>
+        <translation>VoicePrint</translation>
+    </message>
+</context>
+<context>
+    <name>BioDevicesWidget</name>
+    <message>
+        <source>Form</source>
+        <translation>Formato</translation>
+    </message>
+    <message>
+        <source>Please select other biometric devices</source>
+        <translation>Por favor, selecione outros dispositivos biométricos</translation>
+    </message>
+    <message>
+        <source>Device Type:</source>
+        <translation>Tipo de dispositivo:</translation>
+    </message>
+    <message>
+        <source>Device Name:</source>
+        <translation>Nome do dispositivo:</translation>
+    </message>
+</context>
+<context>
+    <name>KeyboardWidget</name>
+    <message>
+        <source>KeyboardWidget</source>
+        <translation>KeyboardWidget</translation>
+    </message>
+</context>
+<context>
+    <name>LockWidget</name>
+    <message>
+        <source>Form</source>
+        <translation>Formato</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Encontro</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Tempo</translation>
+    </message>
+    <message>
+        <source>Guest</source>
+        <translation>Convidado</translation>
+    </message>
+    <message>
+        <source>SwitchUser</source>
+        <translation>Mudar de utilizador</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
-        <source>Dialog for the ukui ScreenSaver.</source>
-        <translation>Diálogo para o ScreenSaver ukui.</translation>
+        <source>Start command for the ukui ScreenSaver.</source>
+        <translation>Inicie o comando para o ScreenSaver do ukui.</translation>
     </message>
     <message>
         <source>lock the screen immediately</source>
         <translation>bloquear a tela imediatamente</translation>
+    </message>
+    <message>
+        <source>Dialog for the ukui ScreenSaver.</source>
+        <translation>Diálogo para o ScreenSaver ukui.</translation>
     </message>
     <message>
         <source>activated by session idle signal</source>

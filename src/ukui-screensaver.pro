@@ -7,7 +7,8 @@ QT       += core gui dbus x11extras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-include(bioAuthentication/bioAuthentication.pri)
+include(BioAuth/bioauth.pri)
+include(VirtualKeyboard/VirtualKeyboard.pri)
 
 TARGET = ukui-screensaver-dialog
 TEMPLATE = app
@@ -29,12 +30,16 @@ PKGCONFIG += gio-2.0 x11 xcb xtst
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH += \
+    VirtualKeyboard/src/
+    BioAuth/include/
 
 SOURCES += \
-    main.cpp \
+    ukui-screensaver-dialog.cpp \
     mainwindow.cpp \
     unixsignallistener.cpp \
-    pam.cpp \
+    auth-pam.cpp \
+    authdialog.cpp \
     gsettings.cpp \
     auxiliary.cpp \
     configuration.cpp \
@@ -46,7 +51,9 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     unixsignallistener.h \
-    pam.h \
+    auth-pam.h \
+    auth.h \
+    authdialog.h \
     gsettings.h \
     auxiliary.h \
     configuration.h \
@@ -56,7 +63,8 @@ HEADERS += \
     monitorwatcher.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    authdialog.ui
 
 RESOURCES += \
     assets.qrc
@@ -64,7 +72,8 @@ RESOURCES += \
 TRANSLATIONS = ../i18n_ts/zh_CN.ts \
             ../i18n_ts/ru.ts \
             ../i18n_ts/fr.ts \
-            ../i18n_ts/pt.ts
+            ../i18n_ts/pt.ts \
+            ../i18n_ts/es.ts
 
 target.path = /usr/bin/
 

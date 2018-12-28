@@ -15,48 +15,48 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
 **/
-#ifndef CONFIGURATION_H
-#define CONFIGURATION_H
+#ifndef AUTH_H
+#define AUTH_H
 
 #ifndef QT_NO_KEYWORDS
 #define QT_NO_KEYWORDS
 #endif
 
-//#include "gsettings.h"
-
 #include <QObject>
-#include "screensaver.h"
 
-class QGSettings;
-
-class Configuration : public QObject
+class Auth : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
+
+    Q_ENUMS(PromptType MessageType)
 public:
-	explicit Configuration(QObject *parent = nullptr);
+    explicit Auth(QObject *parent = nullptr)
+        : QObject(parent)
+    {
+
+    }
+
+    enum PromptType {
+        PromptTypeQuestion,
+        PromptTypeSecret
+    };
+    enum MessageType {
+        MessageTypeInfo,
+        MessageTypeError
+    };
+
+
+Q_SIGNALS:
+    void showPrompt(const QString &prompt, Auth::PromptType type);
+    void showMessage(const QString &message, Auth::MessageType type);
+    void authenticateComplete();
 
 public:
-    ScreenSaver *getScreensaver();
-	QString getBackground();
-	bool xscreensaverActivatedWhenIdle();
-	bool lockWhenXScreensaverActivated();
-
-public Q_SLOTS:
-	void onConfigurationChanged(QString key);
-
-private:
-    QString getXScreensaverPath(const QString &theme);
-
-private:
-    QGSettings *gsettings;
-    QGSettings *bgGsettings;
-    QString mode;
-	QList<QString> themes;
-	QString background;
-	bool idleActivationEnabled;
-	bool lockEnabled;
-    int imageTSEffect;
-    int imageSwitchInterval;
+    virtual void authenticate(const QString &userName) = 0;
+    virtual void stopAuth() = 0;
+    virtual void respond(const QString &response) = 0;
+    virtual bool isAuthenticating() = 0;
+    virtual bool isAuthenticated() = 0;
 };
 
-#endif // CONFIGURATION_H
+#endif // AUTH_H

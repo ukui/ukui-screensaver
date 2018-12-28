@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.1" language="es">
 <context>
     <name>AuthDialog</name>
     <message>
         <source>Form</source>
-        <translation>Forme</translation>
+        <translation>Formar</translation>
     </message>
     <message>
         <source>More Devices</source>
-        <translation>Plus d&apos;appareils</translation>
+        <translation>Más dispositivos</translation>
     </message>
     <message>
         <source>Biometric</source>
-        <translation>Biométrique</translation>
+        <translation>Biometrico</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Mot de passe</translation>
+        <translation>Contraseña</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation>Réessayez</translation>
+        <translation>Procesar de nuevo</translation>
     </message>
     <message>
         <source>UnLock</source>
-        <translation>Ouvrir</translation>
+        <translation>Desbloquear</translation>
     </message>
     <message>
         <source>LoggedIn</source>
-        <translation>Connecté</translation>
+        <translation>Conectado</translation>
     </message>
     <message>
         <source>Password Incorrect, Please try again</source>
-        <translation>Mot de passe incorrect, veuillez réessayer</translation>
+        <translation>Contraseña incorrecta, por favor intente de nuevo</translation>
     </message>
 </context>
 <context>
     <name>BioAuthWidget</name>
     <message>
         <source>Form</source>
-        <translation>Forme</translation>
+        <translation>Formar</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -48,22 +48,22 @@
     </message>
     <message>
         <source>More</source>
-        <translation>Plus</translation>
+        <translation>Más</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation>Réessayez</translation>
+        <translation>Procesar de nuevo</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Mot de passe</translation>
+        <translation>Contraseña</translation>
     </message>
 </context>
 <context>
     <name>BioDevices</name>
     <message>
         <source>FingerPrint</source>
-        <translation>Empreinte digitale</translation>
+        <translation>Huella dactilar</translation>
     </message>
     <message>
         <source>FingerVein</source>
@@ -75,79 +75,79 @@
     </message>
     <message>
         <source>Face</source>
-        <translation>Visage</translation>
+        <translation>Cara</translation>
     </message>
     <message>
         <source>VoicePrint</source>
-        <translation>VoicePrint</translation>
+        <translation>Impresión de voz</translation>
     </message>
 </context>
 <context>
     <name>BioDevicesWidget</name>
     <message>
         <source>Form</source>
-        <translation>Forme</translation>
+        <translation>Formar</translation>
     </message>
     <message>
         <source>Please select other biometric devices</source>
-        <translation>Veuillez sélectionner d&apos;autres appareils biométriques</translation>
+        <translation>Por favor seleccione otros dispositivos biométricos</translation>
     </message>
     <message>
         <source>Device Type:</source>
-        <translation>Type d&apos;appareil:</translation>
+        <translation>Tipo de dispositivo:</translation>
     </message>
     <message>
         <source>Device Name:</source>
-        <translation>Nom de l&apos;appareil:</translation>
+        <translation>Nombre del dispositivo:</translation>
     </message>
 </context>
 <context>
     <name>KeyboardWidget</name>
     <message>
         <source>KeyboardWidget</source>
-        <translation>KeyboardWidget</translation>
+        <translation>TecladoWidget</translation>
     </message>
 </context>
 <context>
     <name>LockWidget</name>
     <message>
         <source>Form</source>
-        <translation>Forme</translation>
+        <translation>Formar</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Rendez-vous amoureux</translation>
+        <translation>Fecha</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Temps</translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>Guest</source>
-        <translation>Client</translation>
+        <translation>Huésped</translation>
     </message>
     <message>
         <source>SwitchUser</source>
-        <translation>Changer d&apos;utilisateur</translation>
+        <translation>Cambiar de usuario</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Start command for the ukui ScreenSaver.</source>
-        <translation>Commande de démarrage pour l&apos;ukui ScreenSaver.</translation>
+        <translation>Comando de inicio para el protector de pantalla de ukui.</translation>
     </message>
     <message>
         <source>lock the screen immediately</source>
-        <translation>verrouiller l&apos;écran immédiatement</translation>
+        <translation>bloquea la pantalla inmediatamente</translation>
     </message>
     <message>
         <source>Dialog for the ukui ScreenSaver.</source>
-        <translation>Boîte de dialogue pour l&apos;écran de veille ukui.</translation>
+        <translation>Diálogo para el protector de pantalla de ukui.</translation>
     </message>
     <message>
         <source>activated by session idle signal</source>
-        <translation>activé par le signal d&apos;inactivité de la session</translation>
+        <translation>activado por la señal de inactividad de la sesión</translation>
     </message>
 </context>
 </TS>
