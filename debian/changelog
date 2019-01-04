@@ -1,64 +1,209 @@
-ukui-screensaver (2.0.3-1) unstable; urgency=medium
+ukui-screensaver (0.3.1-1) juniper; urgency=medium
 
-  * Change UI.
-  * Add virtual keyboard.
-  * Add button for switching user.
+  * New UI.
+  * Add /etc/pam.d/ukui-screensaver-qt.
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Thu, 03 Jan 2019 13:45:38 +0800
+ -- yanghao <yanghao@kylinos.cn>  Fri, 04 Jan 2019 15:47:48 +0800
 
-ukui-screensaver (2.0.2-1) unstable; urgency=medium
+ukui-screensaver (0.2-rc27) juniper; urgency=medium
 
-  * Add fr.po, pt.po, ru.po.
+  * update translation
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 23 Oct 2018 14:14:18 +0800
+ -- yanghao <yanghao@kylinos.cn>  Thu, 27 Sep 2018 14:25:21 +0800
 
-ukui-screensaver (2.0.1-1) UNRELEASED; urgency=medium
+ukui-screensaver (0.2-rc26) juniper; urgency=medium
 
-  * Update translation.
-  * Change Architecture to any.
-  * New design implemneted with Qt5.
+  * moidfy .manpages file
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 29 Sep 2018 17:01:12 +0800
+ -- yanghao <yanghao@kylinos.cn>  Wed, 26 Sep 2018 17:17:02 +0800
 
-ukui-screensaver (1.1.2-1) UNRELEASED; urgency=medium
+ukui-screensaver (0.2-rc25) juniper; urgency=medium
 
-  * Set object name of auth_prompt_entry.
+  * auto restart if biometric authentication failed
+  * show current device's name when cursor leaves
+    other devices' icon
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 26 Jun 2018 16:10:33 +0800
+ -- yanghao <yanghao@kylinos.cn>  Wed, 26 Sep 2018 16:12:02 +0800
 
-ukui-screensaver (1.1.1-1) UNRELEASED; urgency=medium
+ukui-screensaver (0.2-rc24) juniper; urgency=medium
 
-  * Fix a translation file typo
-  * Add "Modified by:" to three files
+  * remove residual files belong to old screensaver
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 17 Mar 2018 14:01:48 +0800
+ -- yanghao <yanghao@kylinos.cn>  Mon, 10 Sep 2018 15:41:29 +0800
 
-ukui-screensaver (1.1.0-1) UNRELEASED; urgency=medium
+ukui-screensaver (0.2-rc23) juniper; urgency=medium
 
-  * Optimize the lock-dialog rendering process.
-  * Remove frame shadow from the lock-dialog.
-  * Add CSS stylesheets to the unlock button.
-  * Migrate gtk-2.0 to gtk-3.0.
-  * Update translation files.
+  * modify biometric dbus to 'org.ukui.Biometric'
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 27 Feb 2018 15:41:35 +0800
+ -- yanghao <yanghao@kylinos.cn>  Fri, 07 Sep 2018 17:45:51 +0800
 
-ukui-screensaver (1.0.3-1) UNRELEASED; urgency=medium
+ukui-screensaver (0.2-rc22) juniper; urgency=medium
 
-  * [Fixed] screensaver-preferences can't preview "Blank Screen" correctly.
-  * [Improved] Change the unlock arrow to button.
-  * [Improved] Set the font style of username label.
+  * fix the bug that the dialog will crash if the voiceprint
+    device has features;
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Wed, 13 Sep 2017 09:14:54 +0800
+ -- yanghao <yanghao@kylinos.cn>  Fri, 24 Aug 2018 17:36:52 +0800
 
-ukui-screensaver (1.0.2-2) unstable; urgency=medium
+ukui-screensaver (0.2-rc21) juniper; urgency=medium
 
-  * Use tracker.d.o team address (Closes: #899718)
+  * run xset when backend is started up. (rc20 is a mistake)
 
- -- Aron Xu <aron@debian.org>  Mon, 09 Jul 2018 17:09:48 +0800
+ -- yanghao <yanghao@kylinos.cn>  Fri, 17 Aug 2018 16:25:48 +0800
 
-ukui-screensaver (1.0.2-1) unstable; urgency=medium
+ukui-screensaver (0.2-rc20) juniper; urgency=medium
 
-  * Initial release (Closes: #872968)
+  * add handler for monitor hot-plug.
+  * running xset when backend is started up.
 
- -- Aron Xu <aron@debian.org>  Sat, 26 Aug 2017 15:26:45 +0800
+ -- yanghao <yanghao@kylinos.cn>  Fri, 17 Aug 2018 10:54:53 +0800
+
+ukui-screensaver (0.2-rc19) juniper; urgency=medium
+
+  * remove liblightdm-qt5-3-0 from pro file
+
+ -- yanghao <yanghao@kylinos.cn>  Thu, 16 Aug 2018 11:24:27 +0800
+
+ukui-screensaver (0.2-rc18) juniper; urgency=medium
+
+  * add SwitchUser.
+  * set background in 'org.ukui.screensaver->background'
+  * fix the bug that the process of backend doesn't exit
+    after logout.
+
+ -- yanghao <yanghao@kylinos.cn>  Thu, 16 Aug 2018 10:50:27 +0800
+
+ukui-screensaver (0.2-rc17) juniper; urgency=medium
+
+  * the dialog process will exit if xscreensaverActivatedWhenIdle
+    was not set.
+  * the backend process will check whether the dbus name exists
+    before register service.
+  * clear savers before close the dialog when it only display
+    the screensaver.
+
+ -- yanghao <yanghao@kylinos.cn>  Wed, 08 Aug 2018 09:56:32 +0800
+
+ukui-screensaver (0.2-rc16) juniper; urgency=medium
+
+  * Split the ukui-screensaver to ukui-screensaver-backend and
+    ukui-screensaver-dialog that is called by dbus.
+
+ -- yanghao <yanghao@kylinos.cn>  Tue, 31 Jul 2018 16:26:45 +0800
+
+ukui-screensaver (0.2-rc15) juniper; urgency=medium
+
+  * Use XRecord to monitor the KeyPress Event and MouseMove Event
+  * Rename pam service name to "ukui-screensaver-qt"
+
+ -- yanghao <yanghao@kylinos.cn>  Thu, 19 Jul 2018 19:24:38 +0800
+
+ukui-screensaver (0.2-rc14) juniper; urgency=medium
+
+  * Try to solve the problem that can't switch to lockscreen when
+    move the mouse or press the keyboard.
+
+ -- yanghao <yanghao@kylinos.cn>  Tue, 17 Jul 2018 15:52:07 +0800
+
+ukui-screensaver (0.2-rc13) juniper; urgency=medium
+
+  * add setSetuidAllowed to test whether still doesn't be
+    able to close the screensaver.
+
+ -- yanghao <yanghao@kylinos.cn>  Fri, 06 Jul 2018 11:29:46 +0800
+
+ukui-screensaver (0.2-rc12) juniper; urgency=medium
+
+  * add the support for displaying images as screensaver.
+
+ -- yanghao <yanghao@kylinos.cn>  Mon, 25 Jun 2018 17:03:31 +0800
+
+ukui-screensaver (0.2-rc11) juniper; urgency=medium
+
+  * add directory and menu file
+  * fix the bug that it doesn't skip biometric when there is not
+    any biometric device and input incorrect password.
+  * redirect log output to a file
+
+ -- yanghao <yanghao@kylinos.cn>  Wed, 13 Jun 2018 10:29:06 +0800
+
+ukui-screensaver (0.2-rc10) juniper; urgency=medium
+
+  * fix the bug that the other users could't run ukui-screensaver
+    once a user has run this process
+
+ -- yanghao <yanghao@kylinos.cn>  Thu, 07 Jun 2018 17:19:34 +0800
+
+ukui-screensaver (0.2-rc9) juniper; urgency=medium
+
+  * read the configuration directly from the installed gsettings
+    file and it's not necessary to judge the session's type.
+
+ -- yanghao <yanghao@kylinos.cn>  Tue, 05 Jun 2018 14:05:54 +0800
+
+ukui-screensaver (0.2-rc8) juniper; urgency=medium
+
+  * fix the bug that the interface is jammed shut when destroy
+    screensaver.
+
+ -- yanghao <yanghao@kylinos.cn>  Mon, 04 Jun 2018 17:03:33 +0800
+
+ukui-screensaver (0.2-rc7) juniper; urgency=medium
+
+  * switch to password authentication directly if input incorrect
+    password before
+  * waitpid asynchorousely so it does no longer block when switch
+    to biometric authentication
+
+ -- yanghao <yanghao@kylinos.cn>  Mon, 04 Jun 2018 14:10:42 +0800
+
+ukui-screensaver (0.2-rc6) juniper; urgency=medium
+
+  * add desktop file and load translation file in main
+  * fix the bug that desktop is jammed shut when released from the
+    state that only run screensaver.
+  * fix the bug that the process crashed when run screensaver in
+    mate session.
+
+ -- yanghao <yanghao@kylinos.cn>  Fri, 01 Jun 2018 14:21:50 +0800
+
+ukui-screensaver (0.2-rc5) juniper; urgency=medium
+
+  * modify depends (ukui-session-manager or mate-session-manager)
+
+ -- yanghao <yanghao@kylinos.cn>  Fri, 01 Jun 2018 09:10:19 +0800
+
+ukui-screensaver (0.2-rc4) juniper; urgency=medium
+
+  * add translation for chinese
+
+ -- yanghao <yanghao@kylinos.cn>  Thu, 31 May 2018 20:43:22 +0800
+
+ukui-screensaver (0.2-rc3) juniper; urgency=medium
+
+  * add libqt5x11extras5 build-depends
+
+ -- yanghao <yanghao@kylinos.cn>  Mon, 28 May 2018 10:46:59 +0800
+
+ukui-screensaver (0.2-rc2) juniper; urgency=medium
+
+  * modify debhelper's version to 9
+
+ -- yanghao <yanghao@kylinos.cn>  Mon, 28 May 2018 10:26:23 +0800
+
+ukui-screensaver (0.2-rc1) juniper; urgency=medium
+
+  * modify compat to 9
+
+ -- yanghao <yanghao@kylinos.cn>  Mon, 28 May 2018 09:47:30 +0800
+
+ukui-screensaver (0.2) juniper; urgency=medium
+
+  * add biometric authentication module
+
+ -- yanghao <yanghao@kylinos.cn>  Mon, 28 May 2018 09:30:17 +0800
+
+ukui-screensaver (0.1) bionic; urgency=medium
+
+  * Initial release.
+
+ -- lihao <lihao@kylnios.cn>  Thu, 03 May 2018 17:29:09 +0800

@@ -1,10 +1,8 @@
 Source: ukui-screensaver
 Section: x11
 Priority: optional
-Maintainer: Kylin Team <team+kylin@tracker.debian.org>
-Uploaders: Aron Xu <aron@debian.org>,
-           handsome_feng <jianfengli@ubuntukylin.com>
-Build-Depends: debhelper (>= 11),
+Maintainer: yanghao <yanghao@kylinos.cn>
+Build-Depends: debhelper (>= 9),
                cmake (>=2.6),
                qtbase5-dev,
                libqt5x11extras5-dev,
@@ -15,10 +13,8 @@ Build-Depends: debhelper (>= 11),
                libx11-dev,
                libxtst-dev,
                libgsettings-qt-dev
-Standards-Version: 4.2.1
+Standards-Version: 4.1.3
 Homepage: https://www.github.com/ukui/ukui-screensaver
-Vcs-Git: https://github.com/ukui/ukui-screensaver.git
-Vcs-Browser: https://github.com/ukui/ukui-screensaver
 
 Package: ukui-screensaver
 Architecture: any
