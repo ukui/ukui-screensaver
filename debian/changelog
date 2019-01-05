@@ -3,8 +3,13 @@ ukui-screensaver (2.0.3-1) unstable; urgency=medium
   * Change UI.
   * Add virtual keyboard.
   * Add button for switching user.
+  * Remove Xext dependency.
+  * Auto retry if identify failed.
+  * Set the button's cursor to PointingHand.
+  * Add waiting movie after respond.
+  * Show black if the saver's path doesn't exist.
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Thu, 03 Jan 2019 13:45:38 +0800
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 05 Jan 2019 16:10:25 +0800
 
 ukui-screensaver (2.0.2-1) unstable; urgency=medium
 
