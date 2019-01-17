@@ -49,8 +49,16 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
 
 }
 
+bool biometricIsStopped = false;
+
 void AuthDialog::startAuth()
 {
+    if(biometricIsStopped)
+    {
+        biometricIsStopped = false;
+        m_biometricAuthWidget->startAuth(m_deviceInfo, user.uid);
+        return;
+    }
     auth->authenticate(user.name);
 
     showPasswordAuthWidget();
@@ -64,6 +72,7 @@ void AuthDialog::stopAuth()
 
     if(m_biometricAuthWidget && m_biometricAuthWidget->isVisible())
     {
+        biometricIsStopped = true;
         m_biometricAuthWidget->stopAuth();
     }
 }

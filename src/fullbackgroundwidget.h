@@ -56,6 +56,7 @@ private Q_SLOTS:
     void onGlobalKeyPress(const QString &key);
     void onGlobalKeyRelease(const QString &key);
     void onGlobalButtonDrag(int xPos, int yPos);
+    void onPrepareForSleep(bool sleep);
 
 private:
     QDBusInterface      *smInterface;
