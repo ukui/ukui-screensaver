@@ -5,6 +5,7 @@ pkg_check_modules(QGS REQUIRED gsettings-qt)
 
 find_library(PAM_LIBRARIES pam)
 
+include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/VirtualKeyboard/src)
 include_directories(${PROJECT_SOURCE_DIR}/BiometricAuth)
 
@@ -77,17 +78,21 @@ target_link_libraries(ukui-screensaver-dialog
     BiometricAuth VirtualKeyboard
 	)
 
+qt5_add_dbus_adaptor(backend_SRC
+    org.ukui.ScreenSaver.xml
+    interface.h
+    Interface
+    )
+
 qt5_wrap_cpp(backend_SRC
     interface.h
     sessionwatcher.h
-    interfaceAdaptor.h
     )
 set(backend_SRC
     ${backend_SRC}
     ukui-screensaver-backend.cpp
     interface.cpp
     sessionwatcher.cpp
-    interfaceAdaptor.cpp
     )
 add_executable(ukui-screensaver-backend ${backend_SRC})
 target_link_libraries(ukui-screensaver-backend Qt5::Core Qt5::DBus)
