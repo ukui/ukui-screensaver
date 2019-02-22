@@ -49,8 +49,16 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
 
 }
 
+bool biometricIsStopped = false;
+
 void AuthDialog::startAuth()
 {
+    if(biometricIsStopped)
+    {
+        biometricIsStopped = false;
+        m_biometricAuthWidget->startAuth(m_deviceInfo, user.uid);
+        return;
+    }
     auth->authenticate(user.name);
 
     showPasswordAuthWidget();
@@ -62,8 +70,11 @@ void AuthDialog::stopAuth()
 {
     //这里只是为了在显示屏幕保护程序时停止生物识别认证
 
-    if(m_biometricAuthWidget)
+    if(m_biometricAuthWidget && m_biometricAuthWidget->isVisible())
+    {
+        biometricIsStopped = true;
         m_biometricAuthWidget->stopAuth();
+    }
 }
 
 void AuthDialog::initUI()
@@ -270,7 +281,9 @@ void AuthDialog::performBiometricAuth()
         return;
     }
 
+    //初始化生物识别认证UI
     initBiometricButtonWidget();
+    initBiometricWidget();
 
     //获取默认设备
     if(m_deviceName.isEmpty())
@@ -288,8 +301,6 @@ void AuthDialog::performBiometricAuth()
         return;
     }
 
-    //初始化生物识别认证UI
-    initBiometricWidget();
     clearMessage();
 
     if(!m_deviceInfo)
@@ -474,10 +485,12 @@ void AuthDialog::onBiometricButtonClicked()
     //当前没有设备，让用户选择设备
     if(!m_deviceInfo)
     {
+        qDebug() << "hasn't device, to choice device.";
         m_otherDeviceButton->click();
     }
     else
     {
+        qDebug() << "restart the PAM process";
         authMode = BIOMETRIC;
         startAuth();
     }
@@ -492,7 +505,6 @@ void AuthDialog::onPasswordButtonClicked()
 void AuthDialog::onOtherDevicesButtonClicked()
 {
     m_biometricAuthWidget->stopAuth();
-
     showBiometricDeviceWidget();
 }
 
@@ -504,6 +516,7 @@ void AuthDialog::onRetryButtonClicked()
 
 void AuthDialog::showPasswordAuthWidget()
 {
+    qDebug() << "show password authentication widget";
     m_userWidget->setVisible(true);
     m_passwdWidget->setVisible(true);
 
@@ -535,6 +548,7 @@ void AuthDialog::showPasswordAuthWidget()
 
 void AuthDialog::showBiometricAuthWidget()
 {
+    qDebug() << "show biometric authentication widget";
     m_userWidget->setVisible(true);
     m_passwdWidget->setVisible(false);
 
@@ -560,6 +574,7 @@ void AuthDialog::showBiometricAuthWidget()
 
 void AuthDialog::showBiometricDeviceWidget()
 {
+    qDebug() << "show biometric devices widget";
     m_userWidget->setVisible(false);
     m_passwdWidget->setVisible(false);
 

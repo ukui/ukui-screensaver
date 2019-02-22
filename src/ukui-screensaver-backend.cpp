@@ -21,7 +21,7 @@
 
 #include "interface.h"
 #include "sessionwatcher.h"
-#include "interfaceAdaptor.h"
+#include "screensaveradaptor.h"
 #include "types.h"
 
 #include <signal.h>
