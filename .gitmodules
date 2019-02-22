@@ -1,6 +1,3 @@
-[submodule "src/VirtualKeyboard"]
-	path = src/VirtualKeyboard
-	url = git@github.com:nackee/VirtualKeyboard.git
 [submodule "VirtualKeyboard"]
 	path = VirtualKeyboard
-	url = git@github.com:nackee/VirtualKeyboard.git
+	url = git@github.com:ukui/VirtualKeyboard.git

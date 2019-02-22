@@ -299,6 +299,9 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
     }
     else
     {
-        lockWidget->startAuth();
+        if(screenStatus & SCREEN_SAVER)
+        {
+            lockWidget->startAuth();
+        }
     }
 }
