@@ -45,6 +45,7 @@ public Q_SLOTS:
     void showLockWidget();
     void showScreensaver();
     void onSessionStatusChanged(uint status);
+    bool getIdleActivated();
 
 private:
     void init();

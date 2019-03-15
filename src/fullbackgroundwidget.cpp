@@ -305,3 +305,8 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
         }
     }
 }
+
+bool FullBackgroundWidget::getIdleActivated()
+{
+    return configuration->xscreensaverActivatedWhenIdle();
+}
