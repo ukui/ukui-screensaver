@@ -1,0 +1,69 @@
+ukui-screensaver (2.0.3-1) unstable; urgency=medium
+
+  * Change UI.
+  * Add virtual keyboard.
+  * Add button for switching user.
+  * Remove Xext dependency.
+  * Auto retry if identify failed.
+  * Set the button's cursor to PointingHand.
+  * Add waiting movie after respond.
+  * Show black if the saver's path doesn't exist.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 05 Jan 2019 16:10:25 +0800
+
+ukui-screensaver (2.0.2-1) unstable; urgency=medium
+
+  * Add fr.po, pt.po, ru.po.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 23 Oct 2018 14:14:18 +0800
+
+ukui-screensaver (2.0.1-1) UNRELEASED; urgency=medium
+
+  * Update translation.
+  * Change Architecture to any.
+  * New design implemneted with Qt5.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 29 Sep 2018 17:01:12 +0800
+
+ukui-screensaver (1.1.2-1) UNRELEASED; urgency=medium
+
+  * Set object name of auth_prompt_entry.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 26 Jun 2018 16:10:33 +0800
+
+ukui-screensaver (1.1.1-1) UNRELEASED; urgency=medium
+
+  * Fix a translation file typo
+  * Add "Modified by:" to three files
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 17 Mar 2018 14:01:48 +0800
+
+ukui-screensaver (1.1.0-1) UNRELEASED; urgency=medium
+
+  * Optimize the lock-dialog rendering process.
+  * Remove frame shadow from the lock-dialog.
+  * Add CSS stylesheets to the unlock button.
+  * Migrate gtk-2.0 to gtk-3.0.
+  * Update translation files.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 27 Feb 2018 15:41:35 +0800
+
+ukui-screensaver (1.0.3-1) UNRELEASED; urgency=medium
+
+  * [Fixed] screensaver-preferences can't preview "Blank Screen" correctly.
+  * [Improved] Change the unlock arrow to button.
+  * [Improved] Set the font style of username label.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Wed, 13 Sep 2017 09:14:54 +0800
+
+ukui-screensaver (1.0.2-2) unstable; urgency=medium
+
+  * Use tracker.d.o team address (Closes: #899718)
+
+ -- Aron Xu <aron@debian.org>  Mon, 09 Jul 2018 17:09:48 +0800
+
+ukui-screensaver (1.0.2-1) unstable; urgency=medium
+
+  * Initial release (Closes: #872968)
+
+ -- Aron Xu <aron@debian.org>  Sat, 26 Aug 2017 15:26:45 +0800
