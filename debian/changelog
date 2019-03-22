@@ -1,3 +1,13 @@
+ukui-screensaver (2.0.4-1) experimental; urgency=medium
+
+  * Add /etc/pam.d/ukui-screensaver-qt.
+  * Generate dbus adaptor in CMake file.
+  * Bugfix: failed to switch to biometric authentication if no default device.
+  * Bugfix: stop authentication before suspend and start it after wake up.
+  * Bugfix: not activated when idel-activation-enabled is false.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Fri, 22 Mar 2019 11:38:03 +0800
+
 ukui-screensaver (2.0.3-1) unstable; urgency=medium
 
   * Change UI.
