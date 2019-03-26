@@ -89,11 +89,6 @@ int main(int argc, char *argv[])
         window->onSessionStatusChanged(SESSION_IDLE);
     }
 
-    if (!window->getIdleActivated())
-    {
-        return 0;
-    }
-
     window->showFullScreen();
     window->activateWindow();
 

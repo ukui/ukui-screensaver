@@ -214,13 +214,18 @@ void FullBackgroundWidget::onSessionStatusChanged(uint status)
     if(status != SESSION_IDLE)
     {
         //当前session没有处于空闲状态
-        return;
+        return -1;
     }
     qDebug() << "onSessionStatusChanged - screenStatus: " << screenStatus;
 
+    if(!configuration->xscreensaverActivatedWhenIdle())
+    {
+	return -1;
+    }
+
     if(screenStatus & SCREEN_SAVER)
     {
-        return;
+        return -1;
     }
     else if(screenStatus & SCREEN_LOCK)
     {
@@ -241,6 +246,7 @@ void FullBackgroundWidget::onSessionStatusChanged(uint status)
             showScreensaver();
         }
     }
+    return 0;
 }
 
 void FullBackgroundWidget::onGlobalKeyPress(const QString &key)
@@ -304,9 +310,4 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
             lockWidget->startAuth();
         }
     }
-}
-
-bool FullBackgroundWidget::getIdleActivated()
-{
-    return configuration->xscreensaverActivatedWhenIdle();
 }
