@@ -208,7 +208,7 @@ void FullBackgroundWidget::clearScreensavers()
     }
 }
 
-void FullBackgroundWidget::onSessionStatusChanged(uint status)
+int FullBackgroundWidget::onSessionStatusChanged(uint status)
 {
     qDebug() << "session status changed: " << status;
     if(status != SESSION_IDLE)
