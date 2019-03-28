@@ -1,3 +1,10 @@
+ukui-screensaver (2.0.5-0ubuntu1) disco; urgency=medium
+
+  * Bugfix only:
+    - Fix the wrong activated condition. (LP: #1822037)
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Thu, 28 Mar 2019 16:38:31 +0800
+
 ukui-screensaver (2.0.4-1) experimental; urgency=medium
 
   * Add /etc/pam.d/ukui-screensaver-qt.
