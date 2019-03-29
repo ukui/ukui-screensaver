@@ -86,7 +86,8 @@ int main(int argc, char *argv[])
 
     if(parser.isSet(sessionIdleOption))
     {
-        window->onSessionStatusChanged(SESSION_IDLE);
+        if(window->onSessionStatusChanged(SESSION_IDLE) == -1)
+	    return 0;
     }
 
     window->showFullScreen();
