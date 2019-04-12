@@ -1,3 +1,11 @@
+ukui-screensaver (2.0.6-0ubuntu1) disco; urgency=medium
+
+  * Bugfix only:
+    - Fix the bug that the screensaver is still activated when
+      sessionIdleOption is unchecked.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Fri, 12 Apr 2019 14:32:26 +0800
+
 ukui-screensaver (2.0.5-0ubuntu1) disco; urgency=medium
 
   * Bugfix only:
