@@ -67,6 +67,7 @@ private:
     QList<QWidget*>     widgetXScreensaverList;
     QList<pid_t>        xscreensaverPidList;
     bool                isLocked;
+    bool                isloaded;
     ScreenStatus        screenStatus;
     QPixmap             background;
 };

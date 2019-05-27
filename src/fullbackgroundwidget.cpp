@@ -67,8 +67,16 @@ void FullBackgroundWidget::paintEvent(QPaintEvent *event)
 {
     for(auto screen : QGuiApplication::screens())
     {
-        QPainter painter(this);
-        painter.drawPixmap(screen->geometry(), background);
+	if(isloaded){
+            QPainter painter(this);
+            painter.drawPixmap(screen->geometry(), background);
+	}
+	else
+	{
+	    QPalette palette(this->palette());
+	    palette.setColor(QPalette::Background,QColor(38,105,181,255));
+	    this->setPalette(palette);
+	}
     }
     return QWidget::paintEvent(event);
 }
@@ -116,8 +124,15 @@ void FullBackgroundWidget::init()
         totalHeight += screen->geometry().height();
     }
     setGeometry(0, 0, totalWidth, totalHeight);
-
-    background.load(configuration->getBackground());
+	
+    if(background.load(configuration->getBackground()))
+    {
+    	isloaded=true;
+    }
+    else
+    {
+	isloaded=false;
+    }
 
     xEventMonitor->start();
 }
