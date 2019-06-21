@@ -25,6 +25,13 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QCloseEvent>
+#include <QX11Info>
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/keysym.h>
+#include <X11/extensions/XTest.h>
+#include <unistd.h>
 
 #include "lockwidget.h"
 #include "xeventmonitor.h"
@@ -94,12 +101,31 @@ void FullBackgroundWidget::closeEvent(QCloseEvent *event)
     return QWidget::closeEvent(event);
 }
 
+void FullBackgroundWidget::showEvent(QShowEvent *event)
+{
+    XSetWindowAttributes top_attrs;
+    top_attrs.override_redirect = False;
+    XChangeWindowAttributes(QX11Info::display(), this->winId(), CWOverrideRedirect, &top_attrs);
+    XRaiseWindow(QX11Info::display(), this->winId());
+    return QWidget::showEvent(event);
+}
+
 void FullBackgroundWidget::init()
 {
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
-                   /*| Qt::X11BypassWindowManagerHint*/);
+                   | Qt::X11BypassWindowManagerHint);
 //    setAttribute(Qt::WA_DeleteOnClose);
-    establishGrab();
+	
+    if(establishGrab())
+        qDebug()<<"establishGrab : true";
+    else {
+        qDebug()<<"establishGrab : false";
+        XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
+        XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
+        XFlush(QX11Info::display());
+        sleep(1);
+        establishGrab();
+    }
 
     // 监听session信号
     smInterface = new QDBusInterface(SM_DBUS_SERVICE,

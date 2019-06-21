@@ -38,6 +38,7 @@ public:
     explicit FullBackgroundWidget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event);
     void closeEvent(QCloseEvent *event);
+    void showEvent(QShowEvent *event);
 
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);
