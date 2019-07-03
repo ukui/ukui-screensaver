@@ -36,9 +36,51 @@
 static void
 messageOutput(QtMsgType type, const QMessageLogContext &context,const QString &msg);
 
+void checkIsRunning()
+{
+    int fd, len;
+    char buf[32];
+    struct flock lock;
+
+    const QString PID_DIR = QString("/var/run/user/%1").arg(QString::number(getuid()));
+    const QString PID_FILE = PID_DIR + "/ukui-screensaver.pid";
+
+    qDebug() << PID_DIR;
+    QDir dir(PID_DIR);
+    if(!dir.exists()) {
+        if(!dir.mkdir(PID_DIR.toLocal8Bit().data())) {
+            perror("create pid directory failed");
+            exit(1);
+        }
+    }
+    if( (fd = open(PID_FILE.toLocal8Bit().data(),
+                   O_RDWR | O_CREAT, 0666)) == -1){
+        perror("open pid file failed");
+        exit(1);
+    }
+
+    memset(&lock, 0, sizeof(struct flock));
+    lock.l_type = F_WRLCK;
+    lock.l_whence = SEEK_SET;
+
+    if(fcntl(fd, F_SETLK, &lock) < 0) {
+//        perror("fcntl F_SETLK failed");
+        printf("There is already an instance running\n");
+        exit(1);
+    }
+
+    len = snprintf(buf, sizeof(buf), "%d", getpid());
+    ftruncate(fd, 0);
+    if(write(fd, buf, len) != len) {
+        perror("write pid to lock file failed");
+        exit(1);
+    }
+}
+
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
 int main(int argc, char *argv[])
 {
+    checkIsRunning();
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
 
