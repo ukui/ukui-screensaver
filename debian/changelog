@@ -1,3 +1,11 @@
+ukui-screensaver (2.0.7-1) unstable; urgency=medium
+
+  * Set background widget on top. (LP: #1828955)
+  * Set default background color. (LP: #1828982)
+  * Fix that sometimes can't enter password.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Thu, 04 Jul 2019 20:33:06 +0800
+
 ukui-screensaver (2.0.6-0ubuntu1) disco; urgency=medium
 
   * Bugfix only:
