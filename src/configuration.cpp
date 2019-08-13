@@ -102,7 +102,7 @@ void Configuration::onConfigurationChanged(QString key)
 /* Get the executable path of xscreensaver */
 ScreenSaver *Configuration::getScreensaver()
 {
-    QStringList modeStr{"blank-only", "random", "single", "image"};
+    QStringList modeStr{"blank-only", "random", "single", "image","default"};
 
     ScreenSaver *saver = new ScreenSaver;
     int index = modeStr.indexOf(mode);
@@ -111,6 +111,9 @@ ScreenSaver *Configuration::getScreensaver()
     saver->effect = TransitionEffect(imageTSEffect);
 
     switch(index){
+    case SAVER_DEFAULT:
+        saver->path = getBackground();
+        break;
     case SAVER_BLANK_ONLY:
         break;
     case SAVER_RANDOM:
