@@ -18,7 +18,10 @@
 #include "configuration.h"
 #include <QDebug>
 #include <QFile>
+#include <QDir>
+#include <QStandardPaths>
 #include <QGSettings>
+#include <ctime>
 
 #define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
 #define KEY_MODE "mode"
@@ -40,6 +43,7 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
 	/* Initiailization */
     mode = gsettings->get(KEY_MODE).toString();
     themes = gsettings->get(KEY_THEMES).toStringList();
+
     idleActivationEnabled = gsettings->get(
                         KEY_IDLE_ACTIVATION_ENABLED).toBool();
     lockEnabled = gsettings->get(KEY_LOCK_ENABLED).toBool();
@@ -68,6 +72,9 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
         }
     }
     qDebug() << "background: " << background;
+
+    if(themes.count() == 1 && themes[0] == "kyccss-personal-slideshow")
+        mode ="image";
 }
 
 /* Update member value when GSettings changed */
@@ -100,13 +107,20 @@ ScreenSaver *Configuration::getScreensaver()
     ScreenSaver *saver = new ScreenSaver;
     int index = modeStr.indexOf(mode);
     saver->mode = SaverMode(index);
+    saver->interval = imageSwitchInterval;
+    saver->effect = TransitionEffect(imageTSEffect);
 
     switch(index){
     case SAVER_BLANK_ONLY:
         break;
     case SAVER_RANDOM:
     {
+        qsrand((unsigned)time(0));
         int index = qrand() % themes.count();
+        while(QString::compare(themes[index], "kyccss-personal-slideshow")==0)
+        {
+            index = qrand() % themes.count();
+        }
         saver->path = getXScreensaverPath(themes[index]);
         break;
     }
@@ -114,12 +128,15 @@ ScreenSaver *Configuration::getScreensaver()
         saver->path = getXScreensaverPath(themes[0]);
         break;
     case SAVER_IMAGE:
-        if(themes.size() <= 0)
-            saver->path = background;
-        else
-            saver->path = themes[0];
-        saver->interval = imageSwitchInterval;
-        saver->effect = TransitionEffect(imageTSEffect);
+        QString lang = qgetenv("LANG");
+        if (!lang.isEmpty()){
+            qDebug()<<"lang = "<<lang;
+            if (lang.contains("zh_CN")){
+                saver->path = QDir::homePath() + "/图片";
+                break;
+            }
+        }
+        saver->path = QDir::homePath() + "/" + QStandardPaths::displayName(QStandardPaths::PicturesLocation);
         break;
     }
     return saver;

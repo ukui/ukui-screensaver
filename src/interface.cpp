@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2018 Tianjin KYLIN Information Technology Co., Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -20,11 +20,38 @@
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <unistd.h>
+#include <signal.h>
 
 Interface::Interface(QObject *parent)
     : QObject(parent)
 {
+    m_logind = new LogindIntegration(this);
+    connect(m_logind, &LogindIntegration::requestLock, this,
+        [this]() {
+            this->Lock();
+        }
+    );
+    connect(m_logind, &LogindIntegration::requestUnlock, this,
+        [this]() {
+		
+        	char cmd[228] = {0};
+        	char str[16];
+        	FILE *fp;
+        	int pid;
 
+        	int n = sprintf(cmd, "ps -o ruser=abcdefghijklmnopqrstuvwxyz1234567890 -e -o pid,stime,cmd| grep ukui-screensaver-dialog | grep %s | grep -v grep | awk '{print $2}'", getenv("USER"));
+        	Q_UNUSED(n)
+
+        	fp = popen(cmd, "r");
+        	while(fgets(str, sizeof(str)-1, fp)) {
+            		pid = atoi(str);
+            		if(pid > 0 && pid != getpid()) {
+                		kill(pid, SIGKILL);
+            		}
+        	}
+        	pclose(fp);
+	}
+    );
 }
 
 void Interface::Lock()
@@ -36,7 +63,9 @@ void Interface::Lock()
         QString cmd = QString("/usr/bin/ukui-screensaver-dialog --lock");
         qDebug() << cmd;
 
+
         process.startDetached(cmd);
+
     }
 }
 
@@ -50,6 +79,7 @@ void Interface::onSessionIdleReceived()
         qDebug() << cmd;
 
         process.startDetached(cmd);
+
     }
 }
 

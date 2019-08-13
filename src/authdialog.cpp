@@ -105,6 +105,7 @@ void AuthDialog::initUI()
 
     /* 密码框 */
     m_passwordEdit = new IconEdit(m_passwdWidget);
+    m_passwdWidget->setInputMethodHints(Qt::ImhNone);
     m_passwordEdit->setObjectName(QStringLiteral("passwordEdit"));
     m_passwordEdit->setIcon(QIcon(":/image/assets/unlock-button.png"));
     m_passwordEdit->setFocusPolicy(Qt::StrongFocus);

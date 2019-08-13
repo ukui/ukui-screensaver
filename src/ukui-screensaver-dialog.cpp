@@ -28,6 +28,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/types.h>
+#include <QProcess>
 
 #include "fullbackgroundwidget.h"
 
@@ -102,6 +103,30 @@ int main(int argc, char *argv[])
     {
         return 0;
     }
+    else
+    {
+        if(parser.isSet(lockOption))
+        {
+            if("fcitx" == qgetenv("QT_IM_MODULE"))
+            {
+                qunsetenv("QT_IM_MODULE");
+//                QProcess * process = new QProcess;//不阻塞
+//                process->start("/usr/bin/ukui-screensaver-dialog --lock");
+//                exit(EXIT_SUCCESS);
+            }
+        }
+
+        if(parser.isSet(sessionIdleOption))
+        {
+            if("fcitx" == qgetenv("QT_IM_MODULE"))
+            {
+                qunsetenv("QT_IM_MODULE");
+//                QProcess * process = new QProcess;//不阻塞
+//                process->start("/usr/bin/ukui-screensaver-dialog --session-idle");
+//                exit(EXIT_SUCCESS);
+            }
+        }
+    }
 
     qInstallMessageHandler(messageOutput);
 
@@ -132,7 +157,7 @@ int main(int argc, char *argv[])
 	    return 0;
     }
 
-    window->showFullScreen();
+    window->show();
     window->activateWindow();
 
     return a.exec();

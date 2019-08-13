@@ -25,6 +25,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QCloseEvent>
+
 #include <QX11Info>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
@@ -74,16 +75,8 @@ void FullBackgroundWidget::paintEvent(QPaintEvent *event)
 {
     for(auto screen : QGuiApplication::screens())
     {
-	if(isloaded){
-            QPainter painter(this);
-            painter.drawPixmap(screen->geometry(), background);
-	}
-	else
-	{
-	    QPalette palette(this->palette());
-	    palette.setColor(QPalette::Background,QColor(38,105,181,255));
-	    this->setPalette(palette);
-	}
+        QPainter painter(this);
+        painter.drawPixmap(screen->geometry(), background);
     }
     return QWidget::paintEvent(event);
 }
@@ -105,7 +98,7 @@ void FullBackgroundWidget::showEvent(QShowEvent *event)
 {
     XSetWindowAttributes top_attrs;
     top_attrs.override_redirect = False;
-    XChangeWindowAttributes(QX11Info::display(), this->winId(), CWOverrideRedirect, &top_attrs);
+//    XChangeWindowAttributes(QX11Info::display(), this->winId(), CWOverrideRedirect, &top_attrs);
     XRaiseWindow(QX11Info::display(), this->winId());
     return QWidget::showEvent(event);
 }
@@ -115,7 +108,6 @@ void FullBackgroundWidget::init()
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
                    | Qt::X11BypassWindowManagerHint);
 //    setAttribute(Qt::WA_DeleteOnClose);
-	
     if(establishGrab())
         qDebug()<<"establishGrab : true";
     else {
@@ -126,7 +118,6 @@ void FullBackgroundWidget::init()
         sleep(1);
         establishGrab();
     }
-
     // 监听session信号
     smInterface = new QDBusInterface(SM_DBUS_SERVICE,
                                      SM_DBUS_PATH,
@@ -150,15 +141,8 @@ void FullBackgroundWidget::init()
         totalHeight += screen->geometry().height();
     }
     setGeometry(0, 0, totalWidth, totalHeight);
-	
-    if(background.load(configuration->getBackground()))
-    {
-    	isloaded=true;
-    }
-    else
-    {
-	isloaded=false;
-    }
+
+    background.load(configuration->getBackground());
 
     xEventMonitor->start();
 }
@@ -333,7 +317,8 @@ void FullBackgroundWidget::onDesktopResized()
     QDesktopWidget *desktop = QApplication::desktop();
     setGeometry(desktop->geometry());
     repaint();
-    clearScreensavers();
+//    clearScreensavers();
+    lockWidget->setGeometry(QApplication::primaryScreen()->geometry());
 }
 
 void FullBackgroundWidget::onPrepareForSleep(bool sleep)

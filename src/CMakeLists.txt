@@ -87,12 +87,14 @@ qt5_add_dbus_adaptor(backend_SRC
 qt5_wrap_cpp(backend_SRC
     interface.h
     sessionwatcher.h
+    logind.h
     )
 set(backend_SRC
     ${backend_SRC}
     ukui-screensaver-backend.cpp
     interface.cpp
     sessionwatcher.cpp
+    logind.cpp
     )
 add_executable(ukui-screensaver-backend ${backend_SRC})
 target_link_libraries(ukui-screensaver-backend Qt5::Core Qt5::DBus)

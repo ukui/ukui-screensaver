@@ -52,7 +52,7 @@ ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
         screensaver->startSwitchImages();
 
         QPalette plt;
-        plt.setBrush(QPalette::Background, Qt::transparent);
+        plt.setBrush(QPalette::Background, Qt::black);
         setPalette(plt);
 
         connect(screensaver, &ScreenSaver::imagePathChanged,

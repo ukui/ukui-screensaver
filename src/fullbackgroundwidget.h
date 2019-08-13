@@ -39,7 +39,6 @@ public:
     void paintEvent(QPaintEvent *event);
     void closeEvent(QCloseEvent *event);
     void showEvent(QShowEvent *event);
-
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);
     void lock();
@@ -68,7 +67,6 @@ private:
     QList<QWidget*>     widgetXScreensaverList;
     QList<pid_t>        xscreensaverPidList;
     bool                isLocked;
-    bool                isloaded;
     ScreenStatus        screenStatus;
     QPixmap             background;
 };

@@ -24,6 +24,8 @@
 #include <QFile>
 
 #include "types.h"
+#include <unistd.h>
+#include <sys/types.h>
 
 QDebug operator<<(QDebug stream, const UserItem &user)
 {
@@ -45,11 +47,26 @@ QList<UserItem> Users::getUsers()
 
 UserItem Users::getUserByName(const QString &name)
 {
-    auto iter = std::find_if(users.begin(), users.end(),
-                          [&](const UserItem &user){
-        return user.name == name;
-    });
-    return *iter;
+    for(int i = 0 ; i < users.size() ; i++) {
+        if(users.at(i).name == name)
+        {
+            return users.at(i);
+        }
+    }
+    UserItem user;
+    if(name == "root")
+    {
+        user.icon = "/root/.face";
+    }
+    else
+    {
+        user.icon = qgetenv("HOME")+"/.face";
+    }
+    user.name = name;
+    user.path = "";
+    user.realName = name;
+    user.uid = getuid();
+    return user;
 }
 
 QString Users::getDefaultIcon()

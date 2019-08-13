@@ -83,6 +83,8 @@ void LockWidget::initUI()
     connect(timer, &QTimer::timeout, this, [&]{
         QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
         ui->lblTime->setText(time);
+	QString date = QDate::currentDate().toString("yyyy/MM/dd dddd");
+	ui->lblDate->setText(date);
     });
 
     QString time = QDateTime::currentDateTime().toString("hh:mm:ss");

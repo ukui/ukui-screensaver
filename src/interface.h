@@ -22,7 +22,7 @@
 #include <QDBusContext>
 #include <QProcess>
 #include "types.h"
-
+#include "logind.h"
 
 class Interface : public QObject, protected QDBusContext
 {
@@ -32,7 +32,7 @@ class Interface : public QObject, protected QDBusContext
 
 public:
     explicit Interface(QObject *parent = nullptr);
-
+	 LogindIntegration *m_logind;
 Q_SIGNALS:
     void SessionIdle();
 
