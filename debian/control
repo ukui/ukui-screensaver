@@ -15,7 +15,7 @@ Build-Depends: debhelper (>= 12),
                libx11-dev,
                libxtst-dev,
                libgsettings-qt-dev
-Standards-Version: 4.3.0
+Standards-Version: 4.4.0
 Homepage: https://www.github.com/ukui/ukui-screensaver
 Vcs-Git: https://github.com/ukui/ukui-screensaver.git
 Vcs-Browser: https://github.com/ukui/ukui-screensaver
@@ -23,7 +23,7 @@ Vcs-Browser: https://github.com/ukui/ukui-screensaver
 Package: ukui-screensaver
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
-         ukui-session-manager | mate-session-manager,
+         ukui-session-manager,
          mate-desktop-common
 Replaces: ukui-screensaver-common (<< 2.0.0)
 Description: Screensaver for UKUI desktop environment
