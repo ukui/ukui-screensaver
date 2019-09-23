@@ -1,5 +1,5 @@
 install(FILES org.ukui.screensaver.gschema.xml DESTINATION /usr/share/glib-2.0/schemas)
 install(FILES ukui-screensaver.desktop DESTINATION /etc/xdg/autostart)
 install(FILES ukui-screensaver.directory DESTINATION /usr/share/desktop-directories)
-install(FILES ukui-screensavers.menu DESTINATION /etc/xdg/menu)
+install(FILES ukui-screensavers.menu DESTINATION /etc/xdg/menus)
 install(FILES ukui-screensaver-qt DESTINATION /etc/pam.d)
