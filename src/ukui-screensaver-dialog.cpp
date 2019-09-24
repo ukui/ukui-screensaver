@@ -37,6 +37,27 @@
 static void
 messageOutput(QtMsgType type, const QMessageLogContext &context,const QString &msg);
 
+void checkIslivecd()
+{
+    char cmd[128] = {0};
+    char str[1024];
+    FILE *fp;
+    int pid;
+
+    int n = sprintf(cmd, "cat /proc/cmdline");
+    Q_UNUSED(n)
+
+    fp = popen(cmd, "r");
+    while(fgets(str, sizeof(str)-1, fp)) {
+        if(strstr(str,"boot=casper"))
+        {
+                printf("is livecd\n");
+                exit(0);
+        }
+    }
+    pclose(fp);
+}
+
 void checkIsRunning()
 {
     int fd, len;
@@ -82,6 +103,7 @@ void checkIsRunning()
 int main(int argc, char *argv[])
 {
     checkIsRunning();
+    checkIslivecd();
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
 
