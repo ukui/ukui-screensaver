@@ -20,7 +20,9 @@
 #include <QFile>
 #include <QDir>
 #include <QStandardPaths>
+#include <QMimeDatabase>
 #include <QGSettings>
+#include <QMimeType>
 #include <ctime>
 
 #define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
@@ -153,9 +155,20 @@ QString Configuration::getXScreensaverPath(const QString &theme)
     return QString("%1/%2").arg(XSCREENSAVER_DIRNAME, str);
 }
 
+bool Configuration::ispicture(QString filepath)
+{
+        QMimeDatabase db;
+        QMimeType mime = db.mimeTypeForFile(filepath);
+        qDebug() << "mime: " << filepath << mime.name();
+        return mime.name().startsWith("image/");
+}
+
 QString Configuration::getBackground()
 {
-	return background;
+	if(ispicture(background))
+                return background;
+        else
+                return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
 }
 
 bool Configuration::xscreensaverActivatedWhenIdle()
