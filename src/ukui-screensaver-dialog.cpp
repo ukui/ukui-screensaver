@@ -23,7 +23,7 @@
 #include <QCommandLineOption>
 #include <QDateTime>
 #include <QDebug>
-
+#include <QDBusInterface>
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -190,6 +190,16 @@ int main(int argc, char *argv[])
         if(window->onSessionStatusChanged(SESSION_IDLE) == -1)
 	    return 0;
     }
+	
+    QString username = getenv("USER");
+    int uid = getuid();
+    QDBusInterface *interface = new QDBusInterface("cn.kylinos.Kydroid2",
+                                                   "/cn/kylinos/Kydroid2",
+                                                   "cn.kylinos.Kydroid2",
+                                                   QDBusConnection::systemBus(),
+                                                   window);
+
+    QDBusMessage msg = interface->call(QStringLiteral("SetPropOfContainer"),username, uid, "is_kydroid_on_focus", "0");
 
     window->show();
     window->activateWindow();

@@ -19,6 +19,7 @@
 
 #include <QGuiApplication>
 #include <QScreen>
+#include <QTimer>
 #include <QDBusInterface>
 #include <QDebug>
 #include <QPainter>
@@ -33,7 +34,11 @@
 #include <X11/keysym.h>
 #include <X11/extensions/XTest.h>
 #include <unistd.h>
-
+#include <sys/types.h>
+#include <pwd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/un.h>
 #include "lockwidget.h"
 #include "xeventmonitor.h"
 #include "monitorwatcher.h"
@@ -41,6 +46,75 @@
 #include "screensaver.h"
 #include "screensaverwidget.h"
 #include "grab-x11.h"
+
+enum {
+    SWITCH_TO_LINUX = 0,
+    SWITCH_TO_ANDROID = 1,
+    BACK_TO_DESKTOP = 2,
+    TEST_CONNECTION = 3,
+};
+
+int connect_to_switch(const char* path)
+{
+    int ret;
+    int connect_fd;
+    struct sockaddr_un srv_addr;
+
+    connect_fd = socket(PF_UNIX,SOCK_STREAM,0);
+    if(connect_fd < 0) {
+
+        return -1;
+    }
+
+    srv_addr.sun_family=AF_UNIX;
+    strcpy(srv_addr.sun_path, path);
+
+    ret = connect(connect_fd, (struct sockaddr*)&srv_addr, sizeof(srv_addr));
+    if(ret < 0) {
+        perror("cannot connect to the server");
+        close(connect_fd);
+        return -1;
+    }
+
+    return connect_fd;
+}
+
+int switch_to_linux(const char* container)
+{
+    int connect_fd;
+    int32_t switch_to = BACK_TO_DESKTOP;
+
+    char path[1024] = {0};
+    sprintf(path, "/var/lib/kydroid/%s/sockets/%s", container, "desktop-switch");
+    printf("path = %s\n",path);
+    connect_fd = connect_to_switch(path);
+
+    if(connect < 0)
+        return -1;
+
+    write(connect_fd, &switch_to, sizeof(switch_to));
+    close(connect_fd);
+    return 0;
+}
+
+void x11_get_screen_size(int *width,int *height)
+{
+    Display* display;
+
+    display = XOpenDisplay(NULL);
+    if (display == NULL) {
+        fprintf(stderr, "Cannot connect to X server %s/n", "simey:0");
+        exit (-1);
+    }
+    int screen_num;
+
+    screen_num = DefaultScreen(display);
+
+    *width = DisplayWidth(display, screen_num);
+    *height = DisplayHeight(display, screen_num);
+    XCloseDisplay(display);
+
+}
 
 FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
     : QWidget(parent),
@@ -67,10 +141,24 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
                                                QDBusConnection::systemBus(),
                                                this);
     connect(iface, SIGNAL(PrepareForSleep(bool)), this, SLOT(onPrepareForSleep(bool)));
-
+	
+     QTimer::singleShot(500,this,SLOT(switchToLinux()));
     init();
 }
 
+void FullBackgroundWidget::switchToLinux()
+{
+    struct passwd *pwd;
+    pwd = getpwuid(getuid());
+    char *username = pwd->pw_name;
+    int uid = pwd->pw_uid;
+    char container[100]= {0};
+
+    sprintf(container,"kydroid2-%d-%s",uid,username);
+
+    switch_to_linux(container);
+
+}
 void FullBackgroundWidget::paintEvent(QPaintEvent *event)
 {
     for(auto screen : QGuiApplication::screens())

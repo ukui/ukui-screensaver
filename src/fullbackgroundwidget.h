@@ -57,7 +57,7 @@ private Q_SLOTS:
     void onGlobalKeyRelease(const QString &key);
     void onGlobalButtonDrag(int xPos, int yPos);
     void onPrepareForSleep(bool sleep);
-
+    void switchToLinux();
 private:
     QDBusInterface      *smInterface;
     LockWidget          *lockWidget;
