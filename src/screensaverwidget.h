@@ -35,7 +35,7 @@ public:
 protected:
     void closeEvent(QCloseEvent *);
     void paintEvent(QPaintEvent *event);
-
+    bool eventFilter(QObject *obj, QEvent *event);
 private:
     void embedXScreensaver(const QString &path);
     void initUI();

@@ -28,6 +28,9 @@
 #include <QVBoxLayout>
 #include <QDateTime>
 #include <QPainter>
+#include <QKeyEvent>
+#include <QtX11Extras/QX11Info>
+#include <X11/Xlib.h>
 
 ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
     : QWidget(parent),
@@ -40,6 +43,7 @@ ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
     qDebug() << *screensaver;
     setMouseTracking(true);
     setFocus();
+     this->installEventFilter(this);
 
     QPalette plt;
     plt.setBrush(QPalette::Window, Qt::black);
@@ -165,7 +169,15 @@ void ScreenSaverWidget::paintEvent(QPaintEvent *event)
     return QWidget::paintEvent(event);
 }
 
+bool ScreenSaverWidget::eventFilter(QObject *obj, QEvent *event)
+{
+    if(event->type() == 23)
+    {
+        XSetInputFocus(QX11Info::display(),this->winId(),RevertToNone,CurrentTime);
 
+    }
+    return false;
+}
 /* Embed xscreensavers */
 void ScreenSaverWidget::embedXScreensaver(const QString &path)
 {

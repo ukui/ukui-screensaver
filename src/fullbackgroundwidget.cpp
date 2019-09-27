@@ -273,6 +273,7 @@ void FullBackgroundWidget::showLockWidget()
         onCursorMoved(cursor().pos());
     }
     lockWidget->setFocus();
+    XSetInputFocus(QX11Info::display(),this->winId(),RevertToNone,CurrentTime);
 }
 
 void FullBackgroundWidget::showScreensaver()

@@ -24,7 +24,7 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include <QTimer>
-
+#include <QtX11Extras/QX11Info>
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
 
@@ -109,6 +109,10 @@ bool IconEdit::eventFilter(QObject *obj, QEvent *event)
                 event->ignore();
                 return true;
             }
+        }
+	if(event->type() == 23)
+        {
+            XSetInputFocus(QX11Info::display(),this->winId(),RevertToNone,CurrentTime);
         }
     }
     return false;
