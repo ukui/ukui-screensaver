@@ -1,3 +1,14 @@
+ukui-screensaver (2.0.9-0ubuntu1) eoan; urgency=medium
+
+  * Bugfix only:
+    - Don't lock when in live session. (LP: #1842855)
+    - Fix the wrong background. (LP: #1836292)
+    - Fix the wrong path of ukui-screensaver.menu.
+    - Fix the errors when running Kydroid.
+    - Fix the focus issues.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Mon, 07 Oct 2019 20:10:00 +0800
+
 ukui-screensaver (2.0.7-1) unstable; urgency=medium
 
   [ Liu Yuanpeng ]

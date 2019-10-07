@@ -16,6 +16,7 @@ Build-Depends: debhelper (>= 12),
                libxtst-dev,
                libgsettings-qt-dev
 Standards-Version: 4.4.0
+Rules-Requires-Root: no
 Homepage: https://www.github.com/ukui/ukui-screensaver
 Vcs-Git: https://github.com/ukui/ukui-screensaver.git
 Vcs-Browser: https://github.com/ukui/ukui-screensaver
