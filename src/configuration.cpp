@@ -55,9 +55,19 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
 
     qDebug() << mode << themes;
     qDebug() << imageSwitchInterval << imageTSEffect;
+	
+        int FileisExist = 0;
+    if(!background.isEmpty())
+    {
+        QFileInfo file(background);
+        if(file.exists()==false)
+                FileisExist = 0;
+        else
+                FileisExist = 1;
+    }
 
     //如果org.ukui.screensaver background中的背景图片为空，则设为桌面背景
-    if(background.isEmpty())
+    if(background.isEmpty()||0==FileisExist)
     {
         QString currentDesktop = qgetenv("XDG_CURRENT_DESKTOP");
         if(currentDesktop == "UKUI" || currentDesktop == "MATE")
