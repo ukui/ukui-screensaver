@@ -156,7 +156,7 @@ UserItem Users::getUser(const QString &path)
 void Users::onUserAdded(const QDBusObjectPath& path)
 {
     int index = findUserByPath(path.path());
-    if(index != -1)
+    if(index >=0 &&index<users.count())
     {
         UserItem user = getUser(path.path());
         Q_EMIT userAdded(user);
@@ -165,7 +165,7 @@ void Users::onUserAdded(const QDBusObjectPath& path)
 void Users::onUserDeleted(const QDBusObjectPath& path)
 {
     int index = findUserByPath(path.path());
-    if(index != -1)
+    if(index >= 0 && index<users.count())
     {
         UserItem user = users.at(index);
         users.removeAt(index);

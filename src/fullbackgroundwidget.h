@@ -24,6 +24,7 @@
 
 #include <QWidget>
 #include "types.h"
+#include <QAbstractNativeEventFilter>
 
 class LockWidget;
 class XEventMonitor;
@@ -31,7 +32,7 @@ class MonitorWatcher;
 class Configuration;
 class QDBusInterface;
 
-class FullBackgroundWidget : public QWidget
+class FullBackgroundWidget : public QWidget , public QAbstractNativeEventFilter
 {
     Q_OBJECT
 public:
@@ -39,6 +40,9 @@ public:
     void paintEvent(QPaintEvent *event);
     void closeEvent(QCloseEvent *event);
     void showEvent(QShowEvent *event);
+    virtual bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
+    void mouseMoveEvent(QMouseEvent *e);
+
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);
     void lock();

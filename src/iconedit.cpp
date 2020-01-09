@@ -28,6 +28,7 @@
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
 
+
 /**
  * @brief 判断大写键状态
  * @return true: 大写锁定
@@ -90,6 +91,10 @@ IconEdit::IconEdit(QWidget *parent)
 void IconEdit::setType(QLineEdit::EchoMode type)
 {
     m_edit->setEchoMode(type);
+    if(type == 0)
+       m_modeButton->setChecked(true);
+    else
+       m_modeButton->setChecked(false);
 }
 
 
@@ -110,9 +115,9 @@ bool IconEdit::eventFilter(QObject *obj, QEvent *event)
                 return true;
             }
         }
-	if(event->type() == 23)
+        if(event->type() == 23)
         {
-            XSetInputFocus(QX11Info::display(),this->winId(),RevertToNone,CurrentTime);
+            XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
         }
     }
     return false;
@@ -120,7 +125,6 @@ bool IconEdit::eventFilter(QObject *obj, QEvent *event)
 
 void IconEdit::clicked_cb()
 {
-//    m_iconButton->setFocus();       //按回车后输入框光标会消失或者不再闪烁，先让其他控件获取焦点，就会解决该问题
     startWaiting();
     emit clicked(m_edit->text());
 }
@@ -209,6 +213,7 @@ void IconEdit::updatePixmap()
 
 void IconEdit::setEnabled(bool enabled)
 {
+    m_edit->setAttribute(Qt::WA_InputMethodEnabled, false);
     m_edit->setEnabled(enabled);
     m_iconButton->setEnabled(enabled);
 }

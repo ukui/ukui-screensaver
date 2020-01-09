@@ -163,7 +163,7 @@ QComboBox QListView::item:selected{
 #OKButton
 {
     background: rgba(255, 255, 255, 20%);
-    font-size: 14px;
+    font-size: 18px;
     border: 1px solid rgba(255, 255, 255, 30%);
     color: white;
 }

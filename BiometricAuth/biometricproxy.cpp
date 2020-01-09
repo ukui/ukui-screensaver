@@ -17,7 +17,7 @@
  * 02110-1301, USA.
 **/
 #include "biometricproxy.h"
-
+#include <QDebug>
 
 BiometricProxy::BiometricProxy(QObject *parent)
     : QDBusAbstractInterface(BIOMETRIC_DBUS_SERVICE,
@@ -34,6 +34,37 @@ QDBusPendingCall BiometricProxy::Identify(int drvid, int uid, int indexStart, in
     QList<QVariant> argList;
     argList << drvid << uid << indexStart << indexEnd;
     return asyncCallWithArgumentList(QStringLiteral("Identify"), argList);
+}
+
+int BiometricProxy::GetFeatureCount(int uid, int indexStart, int indexEnd)
+{
+    QDBusMessage result = call(QStringLiteral("GetDevList"));
+    if(result.type() == QDBusMessage::ErrorMessage)
+    {
+        qWarning() << "GetDevList error:" << result.errorMessage();
+        return 0;
+    }
+    auto dbusArg =  result.arguments().at(1).value<QDBusArgument>();
+    QList<QVariant> variantList;
+    dbusArg >> variantList;
+    int res = 0;
+    for(int i = 0; i < variantList.size(); i++)
+    {
+
+        DeviceInfoPtr pDeviceInfo = std::make_shared<DeviceInfo>();
+
+        auto arg = variantList.at(i).value<QDBusArgument>();
+        arg >> *pDeviceInfo;
+	StopOps(pDeviceInfo->id);
+        QDBusMessage FeatureResult = call(QStringLiteral("GetFeatureList"),pDeviceInfo->id,uid,indexStart,indexEnd);
+        if(FeatureResult.type() == QDBusMessage::ErrorMessage)
+        {
+                qWarning() << "GetFeatureList error:" << FeatureResult.errorMessage();
+                return 0;
+        }
+        res += FeatureResult.arguments().takeFirst().toInt();
+    }
+    return res;
 }
 
 int BiometricProxy::StopOps(int drvid, int waiting)

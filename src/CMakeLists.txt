@@ -23,6 +23,7 @@ set(EXTRA_LIBS
 	${XTST_LIBRARIES}
 	${XCB_LIBRARIES}
 	${QGS_LIBRARIES}
+        -lrt
 	)
 
 qt5_wrap_ui(dialog_SRC
@@ -35,6 +36,7 @@ qt5_add_resources(dialog_SRC
 
 # 头文件中包含了Xlib.h，需要单独拿出来处理，不知道原因
 qt5_wrap_cpp(dialog_SRC
+        pam-tally.h
 	fullbackgroundwidget.h
 	lockwidget.h
 	authdialog.h
@@ -52,6 +54,7 @@ qt5_wrap_cpp(dialog_SRC
 
 set(dialog_SRC
 	${dialog_SRC}
+        pam-tally.c
 	ukui-screensaver-dialog.cpp
 	fullbackgroundwidget.cpp
 	lockwidget.cpp

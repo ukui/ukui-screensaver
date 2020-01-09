@@ -20,6 +20,7 @@
 #include <QFile>
 #include <QDir>
 #include <QStandardPaths>
+#include <QSettings>
 #include <QMimeDatabase>
 #include <QGSettings>
 #include <QMimeType>
@@ -56,7 +57,7 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
     qDebug() << mode << themes;
     qDebug() << imageSwitchInterval << imageTSEffect;
 	
-        int FileisExist = 0;
+    int FileisExist = 0;
     if(!background.isEmpty())
     {
         QFileInfo file(background);
@@ -114,7 +115,7 @@ void Configuration::onConfigurationChanged(QString key)
 /* Get the executable path of xscreensaver */
 ScreenSaver *Configuration::getScreensaver()
 {
-    QStringList modeStr{"blank-only", "random", "single", "image","default"};
+    QStringList modeStr{"blank-only", "random", "single", "image"};
 
     ScreenSaver *saver = new ScreenSaver;
     int index = modeStr.indexOf(mode);
@@ -123,9 +124,6 @@ ScreenSaver *Configuration::getScreensaver()
     saver->effect = TransitionEffect(imageTSEffect);
 
     switch(index){
-    case SAVER_DEFAULT:
-        saver->path = getBackground();
-        break;
     case SAVER_BLANK_ONLY:
         break;
     case SAVER_RANDOM:
@@ -173,12 +171,24 @@ bool Configuration::ispicture(QString filepath)
         return mime.name().startsWith("image/");
 }
 
+QString getSystemVersion()
+{
+    QSettings settings("/etc/lsb-release", QSettings::IniFormat);
+    QString release = settings.value("DISTRIB_RELEASE").toString();
+    QString description = settings.value("DISTRIB_DESCRIPTION").toString();
+    if(description.right(3) == "LTS")
+        release = release + " LTS";
+    return release;
+}
+
 QString Configuration::getBackground()
 {
 	if(ispicture(background))
                 return background;
-        else
-                return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
+    else if(getSystemDistrib().contains("Ubuntu",Qt::CaseInsensitive))
+        return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
+    else
+        return "/usr/share/backgrounds/kylin/kylin-background.png";
 }
 
 bool Configuration::xscreensaverActivatedWhenIdle()

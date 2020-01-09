@@ -19,8 +19,7 @@
 #define SCREENSAVERWIDGET_H
 
 #include <QWidget>
-#include <QLabel>
-#include <QImage>
+
 #include "screensaver.h"
 
 
@@ -38,29 +37,16 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event);
 private:
     void embedXScreensaver(const QString &path);
-    void initUI();
-    QImage Bright1(QImage& source, int factor);
-    QString getlocktime();
 
 private Q_SLOTS:
     void onBackgroundChanged(const QString &path);
 
 private:
-
     QTimer          *timer;
-    QTimer          *tim;
-    QLabel          *lblTime;
-    QLabel          *lblDate;
-    QLabel          *lblWeek;
-    QLabel          *label;
-    QLabel          *lbllocktime;
     int             xscreensaverPid;
     ScreenSaver     *screensaver;
     bool            closing;
     float           opacity;
-    int sec = 0,minu = 0,hour = 0;
-
-
 };
 
 #endif // SCREENSAVERWIDGET_H

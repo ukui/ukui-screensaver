@@ -4,7 +4,6 @@
     <value nick="random" value="1"/>
     <value nick="single" value="2"/>
     <value nick="image" value="3"/>
-    <value nick="default" value="4"/>
   </enum>
   <enum id="org.ukui.screensaver.TransitionEffect">
     <value nick="none" value="0"/>
