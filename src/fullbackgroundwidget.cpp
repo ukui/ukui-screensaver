@@ -19,10 +19,10 @@
 
 #include <QGuiApplication>
 #include <QScreen>
-#include <QTimer>
 #include <QDBusInterface>
 #include <QDebug>
 #include <QPainter>
+#include <QTimer>
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QCloseEvent>
@@ -39,6 +39,8 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+
+#include <xcb/xcb.h>
 #include "lockwidget.h"
 #include "xeventmonitor.h"
 #include "monitorwatcher.h"
@@ -126,14 +128,16 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       screenStatus(UNDEFINED)
 {
     qDebug() << "init - screenStatus: " << screenStatus;
-
+    setMouseTracking(true);
     connect(monitorWatcher, &MonitorWatcher::monitorCountChanged,
             this, &FullBackgroundWidget::onScreenCountChanged);
     QDesktopWidget *desktop = QApplication::desktop();
-    connect(desktop, &QDesktopWidget::workAreaResized,
-            this, &FullBackgroundWidget::onDesktopResized);
+
     connect(desktop, &QDesktopWidget::resized,
             this, &FullBackgroundWidget::onDesktopResized);
+    connect(desktop, &QDesktopWidget::workAreaResized,
+            this, &FullBackgroundWidget::onDesktopResized);
+
 
     QDBusInterface *iface = new QDBusInterface("org.freedesktop.login1",
                                                "/org/freedesktop/login1",
@@ -141,9 +145,21 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
                                                QDBusConnection::systemBus(),
                                                this);
     connect(iface, SIGNAL(PrepareForSleep(bool)), this, SLOT(onPrepareForSleep(bool)));
-	
-     QTimer::singleShot(500,this,SLOT(switchToLinux()));
+
     init();
+     qApp->installNativeEventFilter(this);
+/*	
+    QString username = getenv("USER");
+    int uid = getuid();
+    QDBusInterface *interface = new QDBusInterface("cn.kylinos.Kydroid2",
+                                                   "/cn/kylinos/Kydroid2",
+                                                   "cn.kylinos.Kydroid2",
+						   QDBusConnection::systemBus(),
+						   this);
+
+    QDBusMessage msg = interface->call(QStringLiteral("SetPropOfContainer"),username, uid, "is_kydroid_on_focus", "0"); 
+*/	
+    QTimer::singleShot(500,this,SLOT(switchToLinux()));
 }
 
 void FullBackgroundWidget::switchToLinux()
@@ -159,12 +175,25 @@ void FullBackgroundWidget::switchToLinux()
     switch_to_linux(container);
 
 }
+
 void FullBackgroundWidget::paintEvent(QPaintEvent *event)
 {
-    for(auto screen : QGuiApplication::screens())
+    QDesktopWidget *desktop = QApplication::desktop();
+    if(!desktop->isVirtualDesktop())
     {
+        int width=0,height = 0;
+        x11_get_screen_size(&width,&height);
         QPainter painter(this);
-        painter.drawPixmap(screen->geometry(), background);
+        QRect rec(0,0,width,height);
+        painter.drawPixmap(rec, background);
+    }
+    else
+    {
+        for(auto screen : QGuiApplication::screens())
+        {
+            QPainter painter(this);
+            painter.drawPixmap(screen->geometry(), background);
+        }
     }
     return QWidget::paintEvent(event);
 }
@@ -184,11 +213,45 @@ void FullBackgroundWidget::closeEvent(QCloseEvent *event)
 
 void FullBackgroundWidget::showEvent(QShowEvent *event)
 {
-    XSetWindowAttributes top_attrs;
-    top_attrs.override_redirect = False;
-//    XChangeWindowAttributes(QX11Info::display(), this->winId(), CWOverrideRedirect, &top_attrs);
-    XRaiseWindow(QX11Info::display(), this->winId());
+   // XSetWindowAttributes top_attrs;
+   // top_attrs.override_redirect = False;
+   // XChangeWindowAttributes(QX11Info::display(), this->winId(), CWOverrideRedirect, &top_attrs);
+   // XRaiseWindow(QX11Info::display(), this->winId());
+  //  raise();
+
     return QWidget::showEvent(event);
+}
+
+
+bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *message, long *result)
+{
+        if (qstrcmp(eventType, "xcb_generic_event_t") != 0) {
+            return false;
+        }
+        xcb_generic_event_t *event = reinterpret_cast<xcb_generic_event_t*>(message);
+        const uint8_t responseType = event->response_type & ~0x80;
+        if (responseType == XCB_CONFIGURE_NOTIFY) {
+                xcb_configure_notify_event_t *xc = reinterpret_cast<xcb_configure_notify_event_t*>(event);
+                if (xc->event == QX11Info::appRootWindow())
+                {
+                    this->onDesktopResized();
+                    XRaiseWindow(QX11Info::display(), this->winId());
+                    XFlush(QX11Info::display());
+                }
+                return false;
+        }
+        else if(responseType == XCB_PROPERTY_NOTIFY)
+        {
+                XRaiseWindow(QX11Info::display(), this->winId());
+                XFlush(QX11Info::display());
+        }
+        return false;
+}
+
+void FullBackgroundWidget::mouseMoveEvent(QMouseEvent *e)
+{
+	onCursorMoved(cursor().pos()); 
+	return QWidget::mouseMoveEvent(e);
 }
 
 void FullBackgroundWidget::init()
@@ -196,6 +259,7 @@ void FullBackgroundWidget::init()
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
                    | Qt::X11BypassWindowManagerHint);
 //    setAttribute(Qt::WA_DeleteOnClose);
+/*捕获键盘，如果捕获失败，则可能是由于弹出菜单项已经捕获，那么模拟一次esc按键来退出菜单，如果仍捕获失败，则放弃锁屏，避免密码无法输入*/
     if(establishGrab())
         qDebug()<<"establishGrab : true";
     else {
@@ -204,7 +268,10 @@ void FullBackgroundWidget::init()
         XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
         XFlush(QX11Info::display());
         sleep(1);
-        establishGrab();
+        if(!establishGrab())
+	{
+		exit(1);
+	}
     }
     // 监听session信号
     smInterface = new QDBusInterface(SM_DBUS_SERVICE,
@@ -243,11 +310,13 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
     }
     for(auto screen : QGuiApplication::screens())
     {
-        if(screen->geometry().contains(pos))
-        {
-            lockWidget->setGeometry(screen->geometry());
-            break;
-        }
+       	if(screen->geometry().contains(pos))
+       	{
+          //  lockWidget->hide(); //避免闪屏，所以先隐藏，设置大小后再显示
+    		lockWidget->setGeometry(screen->geometry());
+           // lockWidget->show();
+    		break;
+       	}
     }
 }
 
@@ -273,7 +342,7 @@ void FullBackgroundWidget::showLockWidget()
         onCursorMoved(cursor().pos());
     }
     lockWidget->setFocus();
-    XSetInputFocus(QX11Info::display(),this->winId(),RevertToNone,CurrentTime);
+    XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 }
 
 void FullBackgroundWidget::showScreensaver()
@@ -296,6 +365,8 @@ void FullBackgroundWidget::showScreensaver()
     {
         lockWidget->stopAuth();
     }
+  //  XSetInputFocus(QX11Info::display(),this->winId(),RevertToNone,CurrentTime);
+
 }
 
 void FullBackgroundWidget::clearScreensavers()
@@ -320,6 +391,7 @@ void FullBackgroundWidget::clearScreensavers()
     {
         lock();
     }
+
 }
 
 int FullBackgroundWidget::onSessionStatusChanged(uint status)
@@ -365,7 +437,6 @@ int FullBackgroundWidget::onSessionStatusChanged(uint status)
 
 void FullBackgroundWidget::onGlobalKeyPress(const QString &key)
 {
-
 }
 
 void FullBackgroundWidget::onGlobalKeyRelease(const QString &key)
@@ -382,6 +453,7 @@ void FullBackgroundWidget::onGlobalKeyRelease(const QString &key)
     {
         clearScreensavers();
     }
+
 }
 
 void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
@@ -397,17 +469,43 @@ void FullBackgroundWidget::onScreenCountChanged(int)
 {
     QSize newSize = monitorWatcher->getVirtualSize();
     setGeometry(0, 0, newSize.width(), newSize.height());
-    repaint();
+    //repaint();
+    update();
     clearScreensavers();
 }
 
 void FullBackgroundWidget::onDesktopResized()
 {
     QDesktopWidget *desktop = QApplication::desktop();
-    setGeometry(desktop->geometry());
-    repaint();
+    if(!desktop->isVirtualDesktop())
+    {
+        int width=0,height = 0;
+        x11_get_screen_size(&width,&height);
+        if(width==0||height==0)
+        {
+            setGeometry(desktop->geometry());
+            if(lockWidget)
+	    	lockWidget->setGeometry(QApplication::primaryScreen()->geometry());
+        }
+        else
+        {
+            qDebug()<<"width = "<<width<<"height  = "<<height;
+            setGeometry(0,0,width,height);
+            if(lockWidget)
+	    	lockWidget->setGeometry(0,0,width,height);
+        }
+    }
+    else{
+        qDebug()<<"desktop"<<desktop->geometry();
+        setGeometry(desktop->geometry());
+        if(lockWidget)
+    		onCursorMoved(cursor().pos());
+    }
+
 //    clearScreensavers();
-    lockWidget->setGeometry(QApplication::primaryScreen()->geometry());
+   //repaint();
+	update();
+
 }
 
 void FullBackgroundWidget::onPrepareForSleep(bool sleep)

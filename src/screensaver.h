@@ -27,8 +27,7 @@ enum SaverMode
     SAVER_BLANK_ONLY = 0,
     SAVER_RANDOM,
     SAVER_SINGLE,
-    SAVER_IMAGE,
-    SAVER_DEFAULT
+    SAVER_IMAGE
 };
 
 enum TransitionEffect

@@ -27,6 +27,7 @@
 #include "types.h"
 #include "users.h"
 #include "biometricdeviceinfo.h"
+#include "pam-tally.h"
 
 
 namespace Ui {
@@ -67,6 +68,8 @@ private:
     void showPasswordAuthWidget();
     void showBiometricAuthWidget();
     void showBiometricDeviceWidget();
+    QPixmap PixmapToRound(const QPixmap &src, int radius);
+    QPixmap DrawRound(QPixmap &src, int radius);
 
 private Q_SLOTS:
     void onShowMessage(const QString &message, Auth::MessageType type);
@@ -105,6 +108,7 @@ private:
 
     // biometric auth
     int                     m_deviceCount;
+    int                     m_featureCount;
     QString                 m_deviceName;
     DeviceInfoPtr           m_deviceInfo;
     BiometricProxy          *m_biometricProxy;
