@@ -57,8 +57,6 @@ private:
 	bool lockEnabled;
     int imageTSEffect;
     int imageSwitchInterval;
-    bool ispicture(QString filepath);
-
 };
 
 #endif // CONFIGURATION_H

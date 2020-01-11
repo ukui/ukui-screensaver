@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.0" language="fr">
 <context>
     <name>AuthDialog</name>
     <message>
         <source>Form</source>
-        <translation>Forme</translation>
+        <translation type="obsolete">Forme</translation>
     </message>
     <message>
         <source>More Devices</source>
-        <translation>Plus d&apos;appareils</translation>
+        <translation type="obsolete">Plus d&apos;appareils</translation>
     </message>
     <message>
         <source>Biometric</source>
-        <translation>Biométrique</translation>
+        <translation type="obsolete">Biométrique</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Mot de passe</translation>
+        <translation type="obsolete">Mot de passe</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -25,80 +25,157 @@
     </message>
     <message>
         <source>UnLock</source>
-        <translation>Ouvrir</translation>
+        <translation type="obsolete">Ouvrir</translation>
     </message>
     <message>
         <source>LoggedIn</source>
-        <translation>Connecté</translation>
+        <translation type="obsolete">Connecté</translation>
     </message>
     <message>
         <source>Password Incorrect, Please try again</source>
         <translation>Mot de passe incorrect, veuillez réessayer</translation>
+    </message>
+    <message>
+        <source>Password: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account locked %1 minutes due to %2 fail attempts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentication failure,there are still %1 remaining opportunities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Biometric Authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password Authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Devices</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>BioAuthWidget</name>
     <message>
         <source>Form</source>
-        <translation>Forme</translation>
+        <translation type="obsolete">Forme</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation type="obsolete">TextLabel</translation>
     </message>
     <message>
         <source>More</source>
-        <translation>Plus</translation>
+        <translation type="obsolete">Plus</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation>Réessayez</translation>
+        <translation type="obsolete">Réessayez</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Mot de passe</translation>
+        <translation type="obsolete">Mot de passe</translation>
     </message>
 </context>
 <context>
     <name>BioDevices</name>
     <message>
         <source>FingerPrint</source>
-        <translation>Empreinte digitale</translation>
+        <translation type="obsolete">Empreinte digitale</translation>
     </message>
     <message>
         <source>FingerVein</source>
-        <translation>FingerVein</translation>
+        <translation type="obsolete">FingerVein</translation>
     </message>
     <message>
         <source>Iris</source>
-        <translation>Iris</translation>
+        <translation type="obsolete">Iris</translation>
     </message>
     <message>
         <source>Face</source>
-        <translation>Visage</translation>
+        <translation type="obsolete">Visage</translation>
     </message>
     <message>
         <source>VoicePrint</source>
-        <translation>VoicePrint</translation>
+        <translation type="obsolete">VoicePrint</translation>
     </message>
 </context>
 <context>
     <name>BioDevicesWidget</name>
     <message>
         <source>Form</source>
-        <translation>Forme</translation>
+        <translation type="obsolete">Forme</translation>
     </message>
     <message>
         <source>Please select other biometric devices</source>
-        <translation>Veuillez sélectionner d&apos;autres appareils biométriques</translation>
+        <translation type="obsolete">Veuillez sélectionner d&apos;autres appareils biométriques</translation>
     </message>
     <message>
         <source>Device Type:</source>
-        <translation>Type d&apos;appareil:</translation>
+        <translation type="obsolete">Type d&apos;appareil:</translation>
     </message>
     <message>
         <source>Device Name:</source>
-        <translation>Nom de l&apos;appareil:</translation>
+        <translation type="obsolete">Nom de l&apos;appareil:</translation>
+    </message>
+</context>
+<context>
+    <name>BiometricAuthWidget</name>
+    <message>
+        <source>Current device: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Identify failed, Please retry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BiometricDevicesWidget</name>
+    <message>
+        <source>Please select the biometric device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Device type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Device name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DeviceType</name>
+    <message>
+        <source>FingerPrint</source>
+        <translation type="unfinished">Empreinte digitale</translation>
+    </message>
+    <message>
+        <source>FingerVein</source>
+        <translation type="unfinished">FingerVein</translation>
+    </message>
+    <message>
+        <source>Iris</source>
+        <translation type="unfinished">Iris</translation>
+    </message>
+    <message>
+        <source>Face</source>
+        <translation type="unfinished">Visage</translation>
+    </message>
+    <message>
+        <source>VoicePrint</source>
+        <translation type="unfinished">VoicePrint</translation>
     </message>
 </context>
 <context>

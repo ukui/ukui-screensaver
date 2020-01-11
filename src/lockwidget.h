@@ -54,11 +54,16 @@ Q_SIGNALS:
 private:
     void initUI();
     void initUserMenu();
+    void setVirkeyboardPos();
 
 private Q_SLOTS:
     void onUserAdded(const UserItem &user);
     void onUserDeleted(const UserItem &user);
     void onUserMenuTrigged(QAction *action);
+    void showVirtualKeyboard();
+
+protected:
+     bool eventFilter(QObject *obj, QEvent *event);
 
 private:
     Ui::LockWidget      *ui;

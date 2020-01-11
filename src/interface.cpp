@@ -28,7 +28,7 @@ Interface::Interface(QObject *parent)
     m_logind = new LogindIntegration(this);
     connect(m_logind, &LogindIntegration::requestLock, this,
         [this]() {
-            this->Lock();
+            this->onSessionIdleReceived();
         }
     );
     connect(m_logind, &LogindIntegration::requestUnlock, this,
@@ -58,29 +58,22 @@ void Interface::Lock()
 {
     qDebug() << "Lock requested";
 
-    if(!checkExistChild())
-    {
-        QString cmd = QString("/usr/bin/ukui-screensaver-dialog --lock");
-        qDebug() << cmd;
+    QString cmd = QString("/usr/bin/ukui-screensaver-dialog --lock");
+    qDebug() << cmd;
 
+    process.startDetached(cmd);
 
-        process.startDetached(cmd);
-
-    }
 }
 
 void Interface::onSessionIdleReceived()
 {
     qDebug() << "emit SessionIdle";
 
-    if(!checkExistChild())
-    {
-        QString cmd = QString("/usr/bin/ukui-screensaver-dialog --session-idle");
-        qDebug() << cmd;
+    QString cmd = QString("/usr/bin/ukui-screensaver-dialog --session-idle");
+    qDebug() << cmd;
 
-        process.startDetached(cmd);
+    process.startDetached(cmd);
 
-    }
 }
 
 bool Interface::checkExistChild()

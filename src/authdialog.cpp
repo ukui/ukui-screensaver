@@ -20,9 +20,10 @@
 #include <QDebug>
 #include <QPixmap>
 #include <QHBoxLayout>
-
+#include <QPainter>
 #include <unistd.h>
 #include <pwd.h>
+#include <QBitmap>
 
 #include "users.h"
 #include "iconedit.h"
@@ -42,6 +43,8 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     m_buttonsWidget(nullptr)
 {
     initUI();
+
+    pam_tally_init();
 
     connect(auth, &Auth::showMessage, this, &AuthDialog::onShowMessage);
     connect(auth, &Auth::showPrompt, this, &AuthDialog::onShowPrompt);
@@ -77,9 +80,50 @@ void AuthDialog::stopAuth()
     }
 }
 
+QPixmap AuthDialog::DrawRound(QPixmap &src, int radius)
+{
+
+    QPixmap pixmap(src);
+
+    QPainter painter(&pixmap);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    QRect drawRect = pixmap.rect();
+    QPoint point(radius,radius);
+    QRadialGradient rg(point,drawRect.width()/2,point);
+    rg.setColorAt(0,Qt::transparent);
+    rg.setColorAt(0.93,Qt::transparent);
+    rg.setColorAt(0.94,Qt::white);
+    rg.setColorAt(1,Qt::white);
+    painter.setBrush(rg);
+    QPen pen(Qt::white);//定义画笔
+    painter.setPen(pen);
+    painter.drawEllipse(drawRect);
+
+    return pixmap;
+}
+
+QPixmap AuthDialog::PixmapToRound(const QPixmap &src, int radius)
+{
+    if (src.isNull()) {
+        return QPixmap();
+    }
+
+    QPixmap pixmapa(src);
+    QPixmap pixmap(radius*2,radius*2);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    QPainterPath path;
+    path.addEllipse(0, 0, radius*2, radius*2);
+    painter.setClipPath(path);
+    painter.drawPixmap(0, 0, radius*2, radius*2, pixmapa);
+    return pixmap;
+}
+
 void AuthDialog::initUI()
 {
     setFixedWidth(500);
+    const QString SheetStyle = "min-width: 128px; min-height: 128px;max-width:128px; max-height: 128px;border-radius: 64px;  border:0px   solid white;";
 
     m_userWidget = new QWidget(this);
     m_userWidget->setObjectName(QStringLiteral("userWidget"));
@@ -88,9 +132,15 @@ void AuthDialog::initUI()
     m_faceLabel = new QLabel(m_userWidget);
     m_faceLabel->setObjectName(QStringLiteral("faceLabel"));
     m_faceLabel->setFocusPolicy(Qt::NoFocus);
+    m_faceLabel->setStyleSheet(SheetStyle);
     QPixmap facePixmap(user.icon);
-    facePixmap = facePixmap.scaled(128, 128, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
-    m_faceLabel->setPixmap(facePixmap);
+   // facePixmap = facePixmap.scaled(120, 120, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+    QPixmap pixMap= facePixmap.scaled(128,128, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+     //50为圆形的半径
+     pixMap =  PixmapToRound(pixMap, 64);
+     pixMap =  DrawRound(pixMap,64);
+     m_faceLabel->setAlignment(Qt::AlignCenter);
+    m_faceLabel->setPixmap(pixMap);
 
     /* 用户名 */
     m_nameLabel = new QLabel(m_userWidget);
@@ -112,6 +162,7 @@ void AuthDialog::initUI()
     m_passwordEdit->installEventFilter(this);
 //    m_passwordEdit->hide(); //收到请求密码的prompt才显示出来
     m_passwordEdit->setEnabled(false);
+    m_passwordEdit->setType(QLineEdit::Password);
     connect(m_passwordEdit, SIGNAL(clicked(const QString&)),
             this, SLOT(onRespond(const QString&)));
 
@@ -138,9 +189,9 @@ void AuthDialog::setChildrenGeometry()
     // 密码框和提示信息显示位置
     m_passwdWidget->setGeometry(0, m_userWidget->geometry().bottom(), width(), 150);
     m_passwordEdit->setGeometry((m_passwdWidget->width() - 400)/2, 0, 400, 40);
-    m_messageLabel->setGeometry((m_passwdWidget->width() - 300)/2,
+    m_messageLabel->setGeometry((m_passwdWidget->width() - 600)/2,
                                 m_passwordEdit->geometry().bottom() + 25,
-                                300, 20);
+                                600, 20);
 
 
     setBiometricWidgetGeometry();
@@ -189,10 +240,6 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
             m_passwordEdit->setEnabled(true);
 
         m_passwordEdit->setFocus();
-        if(type != Auth::PromptTypeSecret)
-            m_passwordEdit->setType(QLineEdit::Normal);
-        else
-            m_passwordEdit->setType(QLineEdit::Password);
 
         if(text == "Password: ")
             text = tr("Password: ");
@@ -204,15 +251,53 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
 
 void AuthDialog::onAuthComplete()
 {
+
     if(auth->isAuthenticated())
     {
-        Q_EMIT authenticateCompete(true);
+        if(pam_tally_is_enbled() && !pam_tally_is_canUnlock())
+        {
+	    pam_tally_add_failed();
+            int unlock_time = pam_tally_unlock_time();
+            int failed_count = pam_tally_failed_count();
+            int unlock_time_min = unlock_time /60;
+    //        sprintf(msg, "您已经输错%d次，将锁定账户%d分钟", failed_count, unlock_time_min);
+    //        onShowMessage(tr(msg), Auth::MessageTypeError);
+            int deny = pam_tally_deny();
+	    onShowMessage(tr("Account locked %1 minutes due to %2 fail attempts").arg(unlock_time_min).arg(deny), Auth::MessageTypeError); 
+            authMode = PASSWORD;
+            startAuth();
+        }
+        else
+        {
+            pam_tally_clear_failed();
+            Q_EMIT authenticateCompete(true);
+        }
+
     }
     else
     {
         onShowMessage(tr("Password Incorrect, Please try again"),
                       Auth::MessageTypeError);
         //认证失败，重新认证
+
+        if(pam_tally_is_enbled())
+        {
+            pam_tally_add_failed();
+            int deny = pam_tally_deny();
+            int failed_count = pam_tally_failed_count();
+            int unlock_time = pam_tally_unlock_time();
+            int unlock_time_min = unlock_time / 60;
+
+            if (failed_count >= 0 && failed_count < deny)
+            {
+                onShowMessage(tr("Authentication failure,there are still %1 remaining opportunities").arg(deny-failed_count), Auth::MessageTypeError);
+            }
+            else if (failed_count >= deny)
+            {
+                onShowMessage(tr("Account locked %1 minutes due to %2 fail attempts").arg(unlock_time_min).arg(deny), Auth::MessageTypeError);
+            }
+        }
+
         authMode = PASSWORD;
         startAuth();
     }
@@ -278,6 +363,17 @@ void AuthDialog::performBiometricAuth()
     if(m_deviceCount < 1)
     {
         qWarning() << "No available devices";
+        skipBiometricAuth();
+        return;
+    }
+	
+    //初始化用户对应特征数量    
+    m_featureCount = m_biometricProxy->GetFeatureCount(user.uid);
+
+    qDebug()<<"m_featureCount = "<<m_featureCount;
+    //没有可用特征，不启用生物识别认证    
+    if(m_featureCount < 1)
+    {
         skipBiometricAuth();
         return;
     }
@@ -354,7 +450,7 @@ void AuthDialog::initBiometricButtonWidget()
 
     m_buttonsWidget = new QWidget(this);
     m_buttonsWidget->setObjectName(QStringLiteral("buttonsWidget"));
-    m_buttonsWidget->setFixedHeight(25);
+    m_buttonsWidget->setFixedHeight(38);
 
     QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     sizePolicy.setHorizontalStretch(0);
@@ -368,7 +464,7 @@ void AuthDialog::initBiometricButtonWidget()
     m_biometricButton->setCursor(Qt::PointingHandCursor);
     QFontMetrics fm(m_biometricButton->font(), m_biometricButton);
     int width = fm.width(m_biometricButton->text());
-    m_biometricButton->setMaximumWidth(width + 20);
+    m_biometricButton->setMaximumWidth(std::max(width + 20, 190));
     connect(m_biometricButton, &QPushButton::clicked,
             this, &AuthDialog::onBiometricButtonClicked);
 
@@ -377,7 +473,7 @@ void AuthDialog::initBiometricButtonWidget()
     m_passwordButton->setText(tr("Password Authentication"));
     fm = QFontMetrics(m_passwordButton->font(), m_passwordButton);
     width = fm.width(m_passwordButton->text());
-    m_passwordButton->setMaximumWidth(std::max(width + 20, 110));
+    m_passwordButton->setMaximumWidth(std::max(width + 20, 140));
     m_passwordButton->setSizePolicy(sizePolicy);
     m_passwordButton->setVisible(false);
     m_passwordButton->setCursor(Qt::PointingHandCursor);
@@ -388,7 +484,7 @@ void AuthDialog::initBiometricButtonWidget()
     m_otherDeviceButton->setObjectName(QStringLiteral("otherDeviceButton"));
     m_otherDeviceButton->setText(tr("Other Devices"));
     m_otherDeviceButton->setSizePolicy(sizePolicy);
-    m_otherDeviceButton->setMaximumWidth(std::max(width + 20, 110));
+    m_otherDeviceButton->setMaximumWidth(std::max(width + 20, 140));
     m_otherDeviceButton->setVisible(false);
     m_otherDeviceButton->setCursor(Qt::PointingHandCursor);
     connect(m_otherDeviceButton, &QPushButton::clicked,
@@ -438,7 +534,7 @@ void AuthDialog::setBiometricButtonWidgetGeometry()
 {
     if(m_buttonsWidget)
     {
-        m_buttonsWidget->setGeometry(0, height() - m_buttonsWidget->height() - 20,
+        m_buttonsWidget->setGeometry(0, height() - m_buttonsWidget->height() - 100,
                                      width(), m_buttonsWidget->height());
     }
 }

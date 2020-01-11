@@ -22,6 +22,9 @@
 #include <QTimer>
 #include <QDebug>
 #include <QMenu>
+#include <QtX11Extras/QX11Info>
+#include <X11/Xlib.h>
+#include <X11/XKBlib.h>
 
 #include "authdialog.h"
 #include "virtualkeyboard.h"
@@ -43,6 +46,7 @@ LockWidget::LockWidget(QWidget *parent)
             this, &LockWidget::closed);
     connect(this, &LockWidget::capsLockChanged,
             authDialog, &AuthDialog::onCapsLockChanged);
+    this->installEventFilter(this);
     initUI();
 }
 
@@ -56,6 +60,18 @@ void LockWidget::closeEvent(QCloseEvent *event)
     qDebug() << "LockWidget::closeEvent";
     authDialog->close();
     return QWidget::closeEvent(event);
+}
+
+bool LockWidget::eventFilter(QObject *obj, QEvent *event)
+{
+    if(obj == this){
+        if(event->type() == 2){
+                if(usersMenu->isVisible())
+                    usersMenu->hide();
+                return false;
+         }
+    }
+    return false;
 }
 
 void LockWidget::startAuth()
@@ -108,11 +124,14 @@ void LockWidget::initUI()
     ui->btnKeyboard->setIcon(QIcon(":/image/assets/keyboard.png"));
     ui->btnKeyboard->setFixedSize(39, 39);
     ui->btnKeyboard->setIconSize(QSize(39, 39));
-    connect(ui->btnKeyboard, &QPushButton::clicked,
+/*    connect(ui->btnKeyboard, &QPushButton::clicked,
             this, [&]{
         qDebug() << vKeyboard->isHidden();
         vKeyboard->setVisible(vKeyboard->isHidden());
     });
+*/
+    connect(ui->btnKeyboard, &QPushButton::clicked,
+            this, &LockWidget::showVirtualKeyboard);
 
     //用户切换
     if(displayManager->canSwitch())
@@ -121,18 +140,47 @@ void LockWidget::initUI()
     }
 }
 
+void LockWidget::showVirtualKeyboard()
+{
+    vKeyboard->setVisible(vKeyboard->isHidden());
+    setVirkeyboardPos();
+}
+
+void LockWidget::setVirkeyboardPos()
+{
+    if(vKeyboard)
+    {
+        vKeyboard->setGeometry(0,
+                               height() - height()/3,
+                               width(), height()/3);
+
+    }
+}
+
+
 void LockWidget::initUserMenu()
 {
     ui->btnSwitchUser->setIcon(QIcon(":/image/assets/avatar.png"));
     ui->btnSwitchUser->setIconSize(QSize(39, 39));
     ui->btnSwitchUser->setFixedSize(39, 39);
-
     if(!usersMenu)
     {
         usersMenu = new QMenu(this);
-        ui->btnSwitchUser->setMenu(usersMenu);
+
+        //如果没有设置x11属性，则由于弹出菜单受窗口管理器管理，而主窗口不受，在点击菜单又点回主窗口会闪屏。
+        usersMenu->setWindowFlags(Qt::X11BypassWindowManagerHint);
+        usersMenu->hide();
+        usersMenu->move(width() - 150, 60);
+      //  ui->btnSwitchUser->setMenu(usersMenu);
         connect(usersMenu, &QMenu::triggered,
                 this, &LockWidget::onUserMenuTrigged);
+        connect(ui->btnSwitchUser, &QPushButton::clicked,
+                this, [&]{
+                if(usersMenu->isVisible())
+                    usersMenu->hide();
+                else
+                    usersMenu->show();
+        });
     }
 
     connect(users, &Users::userAdded, this, &LockWidget::onUserAdded);
@@ -157,7 +205,7 @@ void LockWidget::initUserMenu()
         action->setData("SwitchUser");
         usersMenu->addAction(action);
     }
-
+	
 }
 
 /* lockscreen follows cursor */
@@ -174,6 +222,12 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
     ui->btnKeyboard->move(width() - 60, 20);
 
     ui->btnSwitchUser->move(width() - 120, 20);
+    
+    setVirkeyboardPos();
+    usersMenu->move(width() - 150, 60);
+     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
+
+
 }
 
 

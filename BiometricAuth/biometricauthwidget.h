@@ -81,6 +81,7 @@ private:
     int                 failedCount;
     int                 timeoutCount;
     bool                beStopped;
+    QTimer              *retrytimer;
 };
 
 #endif // BIOMETRICAUTHWIDGET_H
