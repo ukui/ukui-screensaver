@@ -1,171 +1,61 @@
+/*
+ * Copyright (C) 2020 Tianjin KYLIN Information Technology Co., Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ *
+**/
 #include "logind.h"
-
 #include <QCoreApplication>
 #include <QDebug>
 #include <QDBusConnection>
+#include <QDBusInterface>
 #include <QDBusConnectionInterface>
-#include <QDBusServiceWatcher>
 
-const static QString s_login1Service = QStringLiteral("org.freedesktop.login1");
-const static QString s_login1Path = QStringLiteral("/org/freedesktop/login1");
-const static QString s_login1ManagerInterface = QStringLiteral("org.freedesktop.login1.Manager");
-const static QString s_login1SessionInterface = QStringLiteral("org.freedesktop.login1.Session");
-
-const static QString s_consolekitService = QStringLiteral("org.freedesktop.ConsoleKit");
-const static QString s_consolekitPath = QStringLiteral("/org/freedesktop/ConsoleKit/Manager");
-const static QString s_consolekitManagerInterface = QStringLiteral("org.freedesktop.ConsoleKit.Manager");
-const static QString s_consolekitSessionInterface = QStringLiteral("org.freedesktop.ConsoleKit.Session");
-
-LogindIntegration::LogindIntegration(const QDBusConnection &connection, QObject *parent)
-    : QObject(parent)
-    , m_bus(connection)
-    , m_logindServiceWatcher(new QDBusServiceWatcher(s_login1Service,
-                                                     m_bus,
-                                                     QDBusServiceWatcher::WatchForUnregistration | QDBusServiceWatcher::WatchForRegistration,
-                                                     this))
-    , m_connected(false)
-    , m_inhibitFileDescriptor()
-    , m_service(nullptr)
-    , m_path(nullptr)
-    , m_managerInterface(nullptr)
-    , m_sessionInterface(nullptr)
-{
-    connect(m_logindServiceWatcher, &QDBusServiceWatcher::serviceRegistered, this, &LogindIntegration::logindServiceRegistered);
-    connect(m_logindServiceWatcher, &QDBusServiceWatcher::serviceUnregistered, this,
-        [this]() {
-            m_connected = false;
-            emit connectedChanged();
-        }
-    );
-
-    // check whether the logind service is registered
-    QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.DBus"),
-                                                          QStringLiteral("/"),
-                                                          QStringLiteral("org.freedesktop.DBus"),
-                                                          QStringLiteral("ListNames"));
-    QDBusPendingReply<QStringList> async = m_bus.asyncCall(message);
-    QDBusPendingCallWatcher *callWatcher = new QDBusPendingCallWatcher(async, this);
-    connect(callWatcher, &QDBusPendingCallWatcher::finished, this,
-        [this](QDBusPendingCallWatcher *self) {
-            QDBusPendingReply<QStringList> reply = *self;
-            self->deleteLater();
-            if (!reply.isValid()) {
-                return;
-            }
-            if (reply.value().contains(s_login1Service)) {
-                logindServiceRegistered();
-                // Don't register ck if we have logind
-                return;
-            }
-            if (reply.value().contains(s_consolekitService)) {
-                consolekitServiceRegistered();
-            }
-        }
-    );
-}
+const static QString login1Service = QStringLiteral("org.freedesktop.login1");
+const static QString login1Path = QStringLiteral("/org/freedesktop/login1");
+const static QString login1ManagerInterface = QStringLiteral("org.freedesktop.login1.Manager");
+const static QString login1SessionInterface = QStringLiteral("org.freedesktop.login1.Session");
 
 LogindIntegration::LogindIntegration(QObject *parent)
-    : LogindIntegration(QDBusConnection::systemBus(), parent)
+    : QObject(parent)
 {
+    QDBusInterface loginInterface(login1Service,
+                             login1Path,
+                             login1ManagerInterface,
+                             QDBusConnection::systemBus());
+    QDBusReply<QDBusObjectPath> sessionPath = loginInterface.call("GetSessionByPID",(quint32) QCoreApplication::applicationPid());
+    if(!sessionPath.isValid()){
+        qWarning()<< "Get session error:" << sessionPath.error();
+    }
+    else{
+
+        QString session = sessionPath.value().path();
+        QDBusConnection::systemBus().connect(login1Service,
+                      session,
+                      login1SessionInterface,
+                      QStringLiteral("Lock"),
+                      this,
+                      SIGNAL(requestLock()));
+        QDBusConnection::systemBus().connect(login1Service,
+                      session,
+                      login1SessionInterface,
+                      QStringLiteral("Unlock"),
+                      this,
+                      SIGNAL(requestUnlock()));
+    }
+    return;
 }
 
 LogindIntegration::~LogindIntegration() = default;
 
-void LogindIntegration::logindServiceRegistered()
-{
-    // get the current session
-    QDBusMessage message = QDBusMessage::createMethodCall(s_login1Service,
-                                                          s_login1Path,
-                                                          s_login1ManagerInterface,
-                                                          QStringLiteral("GetSessionByPID"));
-    message.setArguments(QVariantList() << (quint32) QCoreApplication::applicationPid());
-    QDBusPendingReply<QDBusObjectPath> session = m_bus.asyncCall(message);
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(session, this);
-
-    m_service = &s_login1Service;
-    m_path = &s_login1Path;
-    m_managerInterface = &s_login1ManagerInterface;
-    m_sessionInterface = &s_login1SessionInterface;
-
-    commonServiceRegistered(watcher);
-}
-
-void LogindIntegration::consolekitServiceRegistered()
-{
-    // Don't try to register with ck if we have logind
-    if (m_connected) {
-        return;
-    }
-
-    // get the current session
-    QDBusMessage message = QDBusMessage::createMethodCall(s_consolekitService,
-                                                          s_consolekitPath,
-                                                          s_consolekitManagerInterface,
-                                                          QStringLiteral("GetCurrentSession"));
-    QDBusPendingReply<QDBusObjectPath> session = m_bus.asyncCall(message);
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(session, this);
-
-    m_service = &s_consolekitService;
-    m_path = &s_consolekitPath;
-    m_managerInterface = &s_consolekitManagerInterface;
-    m_sessionInterface = &s_consolekitSessionInterface;
-
-    commonServiceRegistered(watcher);
-}
-
-void LogindIntegration::commonServiceRegistered(QDBusPendingCallWatcher *watcher)
-{
-    connect(watcher, &QDBusPendingCallWatcher::finished, this,
-        [this](QDBusPendingCallWatcher *self) {
-            QDBusPendingReply<QDBusObjectPath> reply = *self;
-            self->deleteLater();
-            if (m_connected) {
-                return;
-            }
-            if (!reply.isValid()) {
-                qDebug() << "The session is not registered: " << reply.error().message();
-                return;
-            }
-            const QString sessionPath = reply.value().path();
-            qDebug() << "Session path:" << sessionPath;
-
-            // connections need to be done this way as the object exposes both method and signal
-            // with name "Lock"/"Unlock". Qt is not able to automatically handle this.
-            m_bus.connect(*m_service,
-                          sessionPath,
-                          *m_sessionInterface,
-                          QStringLiteral("Lock"),
-                          this,
-                          SIGNAL(requestLock()));
-            m_bus.connect(*m_service,
-                          sessionPath,
-                          *m_sessionInterface,
-                          QStringLiteral("Unlock"),
-                          this,
-                          SIGNAL(requestUnlock()));
-            m_connected = true;
-            emit connectedChanged();
-        }
-    );
-
-    // connect to manager object's signals we need
-    m_bus.connect(*m_service,
-                  *m_path,
-                  *m_managerInterface,
-                  QStringLiteral("PrepareForSleep"),
-                  this,
-                  SIGNAL(prepareForSleep(bool)));
-}
-
-void LogindIntegration::uninhibit()
-{
-    if (!m_inhibitFileDescriptor.isValid()) {
-        return;
-    }
-    m_inhibitFileDescriptor = QDBusUnixFileDescriptor();
-}
-
-bool LogindIntegration::isInhibited() const
-{
-    return m_inhibitFileDescriptor.isValid();
-}
