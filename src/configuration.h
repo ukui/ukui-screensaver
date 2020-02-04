@@ -57,6 +57,8 @@ private:
 	bool lockEnabled;
     int imageTSEffect;
     int imageSwitchInterval;
+    QString getSystemDistrib();
+    bool ispicture(QString filepath);    
 };
 
 #endif // CONFIGURATION_H

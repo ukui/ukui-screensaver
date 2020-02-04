@@ -67,6 +67,11 @@ ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
     show();
 }
 
+ScreenSaverWidget::~ScreenSaverWidget()
+{
+
+}
+
 void ScreenSaverWidget::closeEvent(QCloseEvent *event)
 {
     qDebug() << "ScreenSaverWidget::closeEvent---beginStop";
