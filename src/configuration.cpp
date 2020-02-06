@@ -181,6 +181,13 @@ QString getSystemVersion()
     return release;
 }
 
+QString Configuration::getSystemDistrib()
+{
+    QSettings settings("/etc/lsb-release", QSettings::IniFormat);
+    QString distribId = settings.value("DISTRIB_ID").toString();
+    return distribId;
+}
+
 QString Configuration::getBackground()
 {
 	if(ispicture(background))
