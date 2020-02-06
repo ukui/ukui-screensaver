@@ -97,23 +97,24 @@ void LockWidget::initUI()
     //显示系统时间
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [&]{
-        QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
+        QString time = QDateTime::currentDateTime().toString("hh:mm");
         ui->lblTime->setText(time);
 	QString date = QDate::currentDate().toString("yyyy/MM/dd dddd");
 	ui->lblDate->setText(date);
     });
 
-    QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
+    QString time = QDateTime::currentDateTime().toString("hh:mm");
     ui->lblTime->setText(time);
-    ui->lblTime->setStyleSheet("QLabel{color:white; font-size: 55px;}");
-    ui->lblTime->adjustSize();
+    ui->lblTime->setStyleSheet("QLabel{color:white; font-size: 50px;}");
+    ui->lblTime->setAlignment(Qt::AlignCenter);
     timer->start(1000);
 
     QString date = QDate::currentDate().toString("yyyy/MM/dd dddd");
     qDebug() << "current date: " << date;
     ui->lblDate->setText(date);
-    ui->lblDate->setStyleSheet("QLabel{color:white; font-size: 20px;}");
-    ui->lblDate->adjustSize();
+    ui->lblDate->setStyleSheet("QLabel{color:white; font-size: 16px;}");
+    ui->lblDate->setAlignment(Qt::AlignCenter);
+    ui->widgetTime->adjustSize();
 
     //虚拟键盘
     vKeyboard = new VirtualKeyboard(this);
@@ -212,16 +213,15 @@ void LockWidget::initUserMenu()
 void LockWidget::resizeEvent(QResizeEvent */*event*/)
 {
     //认证窗口
-    authDialog->setGeometry((width()-authDialog->geometry().width())/2, 0,
+    authDialog->setGeometry((width()-authDialog->geometry().width())/2, 305,
                             authDialog->width(), height());
 
     //系统时间
-    ui->widgetTime->move(0, height() - 150);
-
+    ui->widgetTime->move((width()-ui->widgetTime->geometry().width())/2, 59);
     //虚拟键盘按钮
-    ui->btnKeyboard->move(width() - 60, 20);
+    ui->btnKeyboard->move(width() - 60, height()-50);
 
-    ui->btnSwitchUser->move(width() - 120, 20);
+    ui->btnSwitchUser->move(width() - 120, height()-50);
     
     setVirkeyboardPos();
     usersMenu->move(width() - 150, 60);

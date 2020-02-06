@@ -123,7 +123,6 @@ QPixmap AuthDialog::PixmapToRound(const QPixmap &src, int radius)
 void AuthDialog::initUI()
 {
     setFixedWidth(500);
-    const QString SheetStyle = "min-width: 128px; min-height: 128px;max-width:128px; max-height: 128px;border-radius: 64px;  border:0px   solid white;";
 
     m_userWidget = new QWidget(this);
     m_userWidget->setObjectName(QStringLiteral("userWidget"));
@@ -132,15 +131,12 @@ void AuthDialog::initUI()
     m_faceLabel = new QLabel(m_userWidget);
     m_faceLabel->setObjectName(QStringLiteral("faceLabel"));
     m_faceLabel->setFocusPolicy(Qt::NoFocus);
-    m_faceLabel->setStyleSheet(SheetStyle);
-    QPixmap facePixmap(user.icon);
-   // facePixmap = facePixmap.scaled(120, 120, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
-    QPixmap pixMap= facePixmap.scaled(128,128, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-     //50为圆形的半径
-     pixMap =  PixmapToRound(pixMap, 64);
-     pixMap =  DrawRound(pixMap,64);
-     m_faceLabel->setAlignment(Qt::AlignCenter);
-    m_faceLabel->setPixmap(pixMap);
+
+    QPixmap facePixmap(":/image/assets/iconFace.png");
+
+    m_faceLabel->setAlignment(Qt::AlignCenter);
+
+   m_faceLabel->setPixmap(facePixmap);
 
     /* 用户名 */
     m_nameLabel = new QLabel(m_userWidget);
@@ -148,6 +144,7 @@ void AuthDialog::initUI()
     m_nameLabel->setFocusPolicy(Qt::NoFocus);
     m_nameLabel->setAlignment(Qt::AlignCenter);
     m_nameLabel->setText(user.realName.isEmpty() ? user.name : user.realName);
+
 
     /* 密码框所在窗口 */
     m_passwdWidget = new QWidget(this);
@@ -180,15 +177,15 @@ void AuthDialog::resizeEvent(QResizeEvent *)
 void AuthDialog::setChildrenGeometry()
 {
     // 用户信息显示位置
-    m_userWidget->setGeometry(0, (height() - 240 - 150) / 2,
-                              width(), 240);
-    m_faceLabel->setGeometry((width() - 128) / 2, 0, 128, 128);
+    m_userWidget->setGeometry(0, 0,
+                              width(), 292);
+    m_faceLabel->setGeometry((width() - 180) / 2, 0, 180, 180);
     m_nameLabel->setGeometry(0, m_faceLabel->geometry().bottom() + 25,
                              width(), 40);
 
     // 密码框和提示信息显示位置
     m_passwdWidget->setGeometry(0, m_userWidget->geometry().bottom(), width(), 150);
-    m_passwordEdit->setGeometry((m_passwdWidget->width() - 400)/2, 0, 400, 40);
+    m_passwordEdit->setGeometry((m_passwdWidget->width() - 300)/2, 0, 300, 34);
     m_messageLabel->setGeometry((m_passwdWidget->width() - 600)/2,
                                 m_passwordEdit->geometry().bottom() + 25,
                                 600, 20);

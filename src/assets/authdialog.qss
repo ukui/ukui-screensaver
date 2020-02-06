@@ -17,14 +17,17 @@ QLabel {
 #userWidget{
 /*    background: rgba(255, 0, 255, 30%);*/
 }
+
 /* 头像 */
+/*
 #faceLabel {
     border:2px solid white;
 }
+*/
 
 /* 用户名 */
 #login_nameLabel{
-    font-size: 28px;
+    font-size: 30px;
 }
 
 /* 密码输入框 */

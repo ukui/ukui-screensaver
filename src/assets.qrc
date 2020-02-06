@@ -17,5 +17,6 @@
         <file>assets/scrollbar_up_clicked.png</file>
         <file>assets/scrollbar_up_hover.png</file>
         <file>assets/unlock-button.png</file>
+    	<file>assets/iconFace.png</file>
     </qresource>
 </RCC>
