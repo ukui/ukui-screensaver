@@ -171,7 +171,7 @@ void LockWidget::initUserMenu()
         //如果没有设置x11属性，则由于弹出菜单受窗口管理器管理，而主窗口不受，在点击菜单又点回主窗口会闪屏。
         usersMenu->setWindowFlags(Qt::X11BypassWindowManagerHint);
         usersMenu->hide();
-        usersMenu->move(width() - 150, 60);
+        usersMenu->move(width() - 150, 500);
       //  ui->btnSwitchUser->setMenu(usersMenu);
         connect(usersMenu, &QMenu::triggered,
                 this, &LockWidget::onUserMenuTrigged);
@@ -224,7 +224,7 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
     ui->btnSwitchUser->move(width() - 120, height()-50);
     
     setVirkeyboardPos();
-    usersMenu->move(width() - 150, 60);
+    usersMenu->move(width() - 150, height()-usersMenu->height()-200);
      XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 
 
