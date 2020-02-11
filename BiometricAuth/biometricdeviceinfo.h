@@ -26,7 +26,6 @@
 #define BIOMETRIC_DBUS_PATH         "/org/ukui/Biometric"
 #define BIOMETRIC_DBUS_INTERFACE    "org.ukui.Biometric"
 
-#define UKUI_SCREENSAVER_BIOMETRIC_IMAGES_PATH "/usr/share/ukui-screensaver/images/"
 #define UKUI_BIOMETRIC_IMAGES_PATH  "/usr/share/ukui-biometric/images/"
 #define UKUI_BIOMETRIC_CONFIG_PATH  ".biometric_auth/ukui_biometric.conf"
 #define UKUI_BIOMETRIC_SYS_CONFIG_PATH  "/etc/biometric-auth/ukui-biometric.conf"

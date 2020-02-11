@@ -224,9 +224,7 @@ void BiometricAuthWidget::updateImage(int type)
             movieTimer->stop();
         }
 
-   //     QString imagePath = QString(UKUI_BIOMETRIC_IMAGES_PATH "%1/01.png")
-    //            .arg(DeviceType::getDeviceType(device->deviceType));
-        QString imagePath = QString(UKUI_SCREENSAVER_BIOMETRIC_IMAGES_PATH "%1/01.png") \
+        QString imagePath = QString(UKUI_BIOMETRIC_IMAGES_PATH "%1/01.png")
                 .arg(DeviceType::getDeviceType(device->deviceType));
         setImage(imagePath);
     }
@@ -252,11 +250,8 @@ void BiometricAuthWidget::onMoviePixmapUpdate()
     }
     count++;
     QString fileName = (count < 10 ? "0" : "") + QString::number(count);
-//    QString imagePath = QString(UKUI_BIOMETRIC_IMAGES_PATH "%1/%2.png")
-//            .arg(DeviceType::getDeviceType(device->deviceType))
-//            .arg(fileName);
-    QString imagePath = QString(UKUI_SCREENSAVER_BIOMETRIC_IMAGES_PATH "%1/%2.png") \
-            .arg(DeviceType::getDeviceType(device->deviceType)) \
+    QString imagePath = QString(UKUI_BIOMETRIC_IMAGES_PATH "%1/%2.png")
+            .arg(DeviceType::getDeviceType(device->deviceType))
             .arg(fileName);
     setImage(imagePath);
 }
