@@ -14,3 +14,4 @@ X-UKUI-Bugzilla-Bugzilla=UKUI
 X-UKUI-Bugzilla-Product=ukui-screensaver
 X-UKUI-Bugzilla-Component=general
 X-UKUI-Bugzilla-Version=1.0.0
+OnlyShowIn=UKUI
