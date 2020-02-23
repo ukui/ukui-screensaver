@@ -44,8 +44,9 @@ QLineEdit::hover {
     border: 1px solid #00FFFF;
 }
 QLineEdit::focus{
-    background: #CDDDEC;
-    border: #CDDDEC;
+    background: #FFFFFF;
+    border: #FFFFFF;
+    border-radius: 4px;
 
 }
 /* 大写提示 */
