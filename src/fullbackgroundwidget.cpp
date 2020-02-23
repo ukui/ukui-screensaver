@@ -165,7 +165,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
      qApp->installNativeEventFilter(this);
 
      m_logind = new LogindIntegration(this);
-     connect(m_logind, &LogindIntegration::requestLock, this,
+     connect(m_logind, &LogindIntegration::requestUnlock, this,
          [this]() {
              qApp->quit();
          }
