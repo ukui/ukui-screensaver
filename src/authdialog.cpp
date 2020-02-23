@@ -80,46 +80,6 @@ void AuthDialog::stopAuth()
     }
 }
 
-QPixmap AuthDialog::DrawRound(QPixmap &src, int radius)
-{
-
-    QPixmap pixmap(src);
-
-    QPainter painter(&pixmap);
-    painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-    QRect drawRect = pixmap.rect();
-    QPoint point(radius,radius);
-    QRadialGradient rg(point,drawRect.width()/2,point);
-    rg.setColorAt(0,Qt::transparent);
-    rg.setColorAt(0.93,Qt::transparent);
-    rg.setColorAt(0.94,Qt::white);
-    rg.setColorAt(1,Qt::white);
-    painter.setBrush(rg);
-    QPen pen(Qt::white);//定义画笔
-    painter.setPen(pen);
-    painter.drawEllipse(drawRect);
-
-    return pixmap;
-}
-
-QPixmap AuthDialog::PixmapToRound(const QPixmap &src, int radius)
-{
-    if (src.isNull()) {
-        return QPixmap();
-    }
-
-    QPixmap pixmapa(src);
-    QPixmap pixmap(radius*2,radius*2);
-    pixmap.fill(Qt::transparent);
-    QPainter painter(&pixmap);
-    painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-    QPainterPath path;
-    path.addEllipse(0, 0, radius*2, radius*2);
-    painter.setClipPath(path);
-    painter.drawPixmap(0, 0, radius*2, radius*2, pixmapa);
-    return pixmap;
-}
-
 void AuthDialog::initUI()
 {
     setFixedWidth(500);
@@ -131,12 +91,9 @@ void AuthDialog::initUI()
     m_faceLabel = new QLabel(m_userWidget);
     m_faceLabel->setObjectName(QStringLiteral("faceLabel"));
     m_faceLabel->setFocusPolicy(Qt::NoFocus);
-
     QPixmap facePixmap(":/image/assets/iconFace.png");
-
     m_faceLabel->setAlignment(Qt::AlignCenter);
-
-   m_faceLabel->setPixmap(facePixmap);
+    m_faceLabel->setPixmap(facePixmap);
 
     /* 用户名 */
     m_nameLabel = new QLabel(m_userWidget);
@@ -412,6 +369,7 @@ void AuthDialog::performBiometricAuth()
     m_biometricAuthWidget->startAuth(m_deviceInfo, user.uid);
 
     showBiometricAuthWidget();
+
 }
 
 void AuthDialog::skipBiometricAuth()

@@ -123,8 +123,8 @@ void LockWidget::initUI()
             vKeyboard, &VirtualKeyboard::hide);
 
     ui->btnKeyboard->setIcon(QIcon(":/image/assets/keyboard.png"));
-    ui->btnKeyboard->setFixedSize(39, 39);
-    ui->btnKeyboard->setIconSize(QSize(39, 39));
+    ui->btnKeyboard->setFixedSize(52, 48);
+    ui->btnKeyboard->setIconSize(QSize(30, 30));
 /*    connect(ui->btnKeyboard, &QPushButton::clicked,
             this, [&]{
         qDebug() << vKeyboard->isHidden();
@@ -162,8 +162,8 @@ void LockWidget::setVirkeyboardPos()
 void LockWidget::initUserMenu()
 {
     ui->btnSwitchUser->setIcon(QIcon(":/image/assets/avatar.png"));
-    ui->btnSwitchUser->setIconSize(QSize(39, 39));
-    ui->btnSwitchUser->setFixedSize(39, 39);
+    ui->btnSwitchUser->setIconSize(QSize(36, 24));
+    ui->btnSwitchUser->setFixedSize(52, 48);
     if(!usersMenu)
     {
         usersMenu = new QMenu(this);
@@ -171,8 +171,6 @@ void LockWidget::initUserMenu()
         //如果没有设置x11属性，则由于弹出菜单受窗口管理器管理，而主窗口不受，在点击菜单又点回主窗口会闪屏。
         usersMenu->setWindowFlags(Qt::X11BypassWindowManagerHint);
         usersMenu->hide();
-        usersMenu->move(width() - 150, 500);
-      //  ui->btnSwitchUser->setMenu(usersMenu);
         connect(usersMenu, &QMenu::triggered,
                 this, &LockWidget::onUserMenuTrigged);
         connect(ui->btnSwitchUser, &QPushButton::clicked,
@@ -219,14 +217,18 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
     //系统时间
     ui->widgetTime->move((width()-ui->widgetTime->geometry().width())/2, 59);
     //虚拟键盘按钮
-    ui->btnKeyboard->move(width() - 60, height()-50);
+    int x=19,y=38;
+    x = 19+ui->btnKeyboard->width();
+    y = 86;
+    ui->btnKeyboard->move(width() - x, height() -  y);
 
-    ui->btnSwitchUser->move(width() - 120, height()-50);
-    
+    x = x + ui->btnSwitchUser->width();
+    ui->btnSwitchUser->move(width() - x, height() - y);
     setVirkeyboardPos();
-    usersMenu->move(width() - 150, height()-usersMenu->height()-200);
-     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
+    usersMenu->move(width() - x - usersMenu->width() , \
+                    height() - y - usersMenu->height());
 
+    XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 
 }
 
@@ -236,6 +238,7 @@ void LockWidget::onUserAdded(const UserItem &user)
     QAction *action = new QAction(QIcon(user.icon), user.realName, this);
     action->setData(user.name);
     usersMenu->addAction(action);
+    usersMenu->adjustSize();
 }
 
 void LockWidget::onUserDeleted(const UserItem &user)

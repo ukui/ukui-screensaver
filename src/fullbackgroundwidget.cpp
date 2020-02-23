@@ -56,6 +56,12 @@ enum {
     TEST_CONNECTION = 3,
 };
 
+QT_BEGIN_NAMESPACE
+extern void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0);
+QT_END_NAMESPACE
+
+#define BLUR_RADIUS 300
+
 int connect_to_switch(const char* path)
 {
     int ret;
@@ -118,6 +124,15 @@ void x11_get_screen_size(int *width,int *height)
 
 }
 
+QPixmap blurPixmap(QPixmap pixmap)
+{
+    QPainter painter(&pixmap);
+    QImage srcImg = pixmap.toImage();
+    qt_blurImage(&painter, srcImg, BLUR_RADIUS, false, false);
+    painter.end();
+    return pixmap;
+}
+
 FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
     : QWidget(parent),
       lockWidget(nullptr),
@@ -148,17 +163,14 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
 
     init();
      qApp->installNativeEventFilter(this);
-/*	
-    QString username = getenv("USER");
-    int uid = getuid();
-    QDBusInterface *interface = new QDBusInterface("cn.kylinos.Kydroid2",
-                                                   "/cn/kylinos/Kydroid2",
-                                                   "cn.kylinos.Kydroid2",
-						   QDBusConnection::systemBus(),
-						   this);
 
-    QDBusMessage msg = interface->call(QStringLiteral("SetPropOfContainer"),username, uid, "is_kydroid_on_focus", "0"); 
-*/	
+     m_logind = new LogindIntegration(this);
+     connect(m_logind, &LogindIntegration::requestLock, this,
+         [this]() {
+             qApp->quit();
+         }
+     );
+
     QTimer::singleShot(500,this,SLOT(switchToLinux()));
 }
 
@@ -298,6 +310,7 @@ void FullBackgroundWidget::init()
     setGeometry(0, 0, totalWidth, totalHeight);
 
     background.load(configuration->getBackground());
+    background = blurPixmap(background);
 
     xEventMonitor->start();
 }
