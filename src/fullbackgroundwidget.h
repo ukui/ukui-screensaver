@@ -25,6 +25,7 @@
 #include <QWidget>
 #include "types.h"
 #include <QAbstractNativeEventFilter>
+#include "logind.h"
 
 class LockWidget;
 class XEventMonitor;
@@ -62,6 +63,7 @@ private Q_SLOTS:
     void onGlobalButtonDrag(int xPos, int yPos);
     void onPrepareForSleep(bool sleep);
     void switchToLinux();
+
 private:
     QDBusInterface      *smInterface;
     LockWidget          *lockWidget;
@@ -73,6 +75,7 @@ private:
     bool                isLocked;
     ScreenStatus        screenStatus;
     QPixmap             background;
+    LogindIntegration *m_logind;
 };
 
 #endif // FULLBACKGROUNDWIDGET_H

@@ -3,15 +3,10 @@ QPushButton {
     outline: none;
     color: white;
 }
-QPushButton::hover {
-    background: rgba(0, 0, 0, 50);
-}
-QPushButton::pressed {
-    background: rgba(0, 0, 0, 120);
-}
 
 QLabel {
     color: white;
+
 }
 
 #userWidget{
@@ -37,9 +32,7 @@ QLineEdit {
     font-size: 14px;
     lineedit-password-character:9679;
 }
-QLineEdit::disabled {
-    background: lightgray;
-}
+
 QLineEdit::hover {
     border: 1px solid #00FFFF;
 }
@@ -47,8 +40,8 @@ QLineEdit::focus{
     background: #FFFFFF;
     border: #FFFFFF;
     border-radius: 4px;
-
 }
+
 /* 大写提示 */
 #capsIconLabel{
     background: url(:/image/assets/capslock.png);
@@ -73,35 +66,33 @@ QLineEdit::focus{
 }
 /* 登录按钮 */
 #loginButton{
-    background: #559BE2;
-/*    image: url(:/image/assets/login-button.png);*/
+    image: url(:/image/assets/unlock-button.png);
     min-width: 26px;
     max-width: 26px;
     min-height: 26px;
     max-height: 26px;
-    margin-right: 4px;
     icon-size: 26px;
 }
+
 #loginButton::hover{
-    background: #1172D5;
+    image: url(:/image/assets/unlock-button-hover.png);
+    icon-size: 26px;
 }
 #loginButton::pressed{
-    background: #0653A1;
+    image: url(:/image/assets/unlock-button-pressed.png);
+    icon-size: 26px;
 }
+
 /* PAM message提示*/
 #messageLabel {
     font-size: 16px;
     color: white;
 }
 
-
 /* 切换用户 */
-QPushButton::menu-indicator{
-    image:none;
-}
+
 QMenu{
-    background-color: rgb(89,87,87);
-    border: 1px solid black;
+    background-color: rgb(255,255,255,20%);
     color: white;
     font-size: 14px;
 }
@@ -114,10 +105,10 @@ QMenu::item:pressed {
 
 /* 虚拟键盘开启按钮、用户切换按钮 */
 #btnSwitchUser, #btnKeyboard {
-    border: 1px solid gray;
+
 }
 #btnKeyboard, #btnSwitchUser {
-    border: 1px solid gray;
+
 }
 #btnKeyboard::hover, #btnSwitchUser::hover {
     background-color: rgb(255, 255, 255, 20%);
@@ -132,7 +123,6 @@ QMenu::item:pressed {
 
 QComboBox{
     background: rgba(255, 255, 255, 20);
-    border: 1px solid rgb(255, 255, 255, 30);
     font-size:18px;
     color: white;
     combobox-popup: 0;  /* 配合setMaxVisibleItems设置下拉框显示的条数，超过的滚动显示 */
@@ -147,8 +137,6 @@ QComboBox::drop-down{
 }
 
 QComboBox QListView{
-    border: 1px solid #5187bd;
-    background: #4682B4;
     background: rgba(255, 255, 255, 30%);
     font-size: 18px;
     color: white;

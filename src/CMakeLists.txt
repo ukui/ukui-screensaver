@@ -47,9 +47,10 @@ qt5_wrap_cpp(dialog_SRC
 	xeventmonitor.h
 	monitorwatcher.h
 	configuration.h
-    users.h
-    displaymanager.h
+        users.h
+        displaymanager.h
 	iconedit.h
+        logind.h
 	)
 
 set(dialog_SRC
@@ -69,6 +70,7 @@ set(dialog_SRC
 	users.cpp
 	displaymanager.cpp
 	iconedit.cpp
+        logind.cpp
 	)
 add_executable(ukui-screensaver-dialog ${dialog_SRC})
 
