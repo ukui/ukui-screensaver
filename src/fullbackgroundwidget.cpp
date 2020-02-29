@@ -164,13 +164,6 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
     init();
      qApp->installNativeEventFilter(this);
 
-     m_logind = new LogindIntegration(this);
-     connect(m_logind, &LogindIntegration::requestUnlock, this,
-         [this]() {
-             qApp->quit();
-         }
-     );
-
     QTimer::singleShot(500,this,SLOT(switchToLinux()));
 }
 
