@@ -66,21 +66,14 @@ QLineEdit::focus{
 }
 /* 登录按钮 */
 #loginButton{
-    image: url(:/image/assets/unlock-button.png);
+    /*image: url(:/image/assets/unlock-button.png);*/
     min-width: 26px;
     max-width: 26px;
     min-height: 26px;
     max-height: 26px;
     icon-size: 26px;
-}
-
-#loginButton::hover{
-    image: url(:/image/assets/unlock-button-hover.png);
-    icon-size: 26px;
-}
-#loginButton::pressed{
-    image: url(:/image/assets/unlock-button-pressed.png);
-    icon-size: 26px;
+    background:#3D6BE5;
+    border-radius:13px;
 }
 
 /* PAM message提示*/
