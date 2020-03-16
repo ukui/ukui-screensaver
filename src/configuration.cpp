@@ -115,7 +115,7 @@ void Configuration::onConfigurationChanged(QString key)
 /* Get the executable path of xscreensaver */
 ScreenSaver *Configuration::getScreensaver()
 {
-    QStringList modeStr{"blank-only", "random", "single", "image"};
+    QStringList modeStr{"blank-only", "random", "single", "image","default-ukui"};
 
     ScreenSaver *saver = new ScreenSaver;
     int index = modeStr.indexOf(mode);
@@ -141,6 +141,7 @@ ScreenSaver *Configuration::getScreensaver()
         saver->path = getXScreensaverPath(themes[0]);
         break;
     case SAVER_IMAGE:
+    {
         QString lang = qgetenv("LANG");
         if (!lang.isEmpty()){
             qDebug()<<"lang = "<<lang;
@@ -150,6 +151,12 @@ ScreenSaver *Configuration::getScreensaver()
             }
         }
         saver->path = QDir::homePath() + "/" + QStandardPaths::displayName(QStandardPaths::PicturesLocation);
+        break;
+    }
+    case SAVER_DEFAULE:
+        saver->path = "/usr/lib/ukui-screensaver/ukui-screensaver-default";
+        break;
+    default:
         break;
     }
     return saver;

@@ -63,6 +63,9 @@ ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
                 this, &ScreenSaverWidget::onBackgroundChanged);
         break;
     }
+    case SAVER_DEFAULE:
+        embedXScreensaver(screensaver->path);
+        break;
     }
     show();
 }

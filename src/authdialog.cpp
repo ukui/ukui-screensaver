@@ -117,6 +117,7 @@ void AuthDialog::initUI()
 //    m_passwordEdit->hide(); //收到请求密码的prompt才显示出来
     m_passwordEdit->setEnabled(false);
     m_passwordEdit->setType(QLineEdit::Password);
+    setFocusProxy(m_passwordEdit);
     connect(m_passwordEdit, SIGNAL(clicked(const QString&)),
             this, SLOT(onRespond(const QString&)));
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_CN">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AuthDialog</name>
     <message>
@@ -16,7 +16,7 @@
         <translation type="obsolete">使用密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="486"/>
+        <location filename="../src/authdialog.cpp" line="451"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
@@ -29,38 +29,38 @@
         <translation type="obsolete">已登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="248"/>
+        <location filename="../src/authdialog.cpp" line="200"/>
         <source>Password: </source>
         <translation>密码：</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="268"/>
-        <location filename="../src/authdialog.cpp" line="299"/>
+        <location filename="../src/authdialog.cpp" line="221"/>
+        <location filename="../src/authdialog.cpp" line="252"/>
         <source>Account locked %1 minutes due to %2 fail attempts</source>
         <translation>账户锁定%1分钟由于%2次错误尝试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="281"/>
+        <location filename="../src/authdialog.cpp" line="234"/>
         <source>Password Incorrect, Please try again</source>
         <translation>密码错误，请重试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="295"/>
+        <location filename="../src/authdialog.cpp" line="248"/>
         <source>Authentication failure,there are still %1 remaining opportunities</source>
         <translation>认证失败，还剩%1次尝试机会</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="452"/>
+        <location filename="../src/authdialog.cpp" line="417"/>
         <source>Biometric Authentication</source>
         <translation>生物识别认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="464"/>
+        <location filename="../src/authdialog.cpp" line="429"/>
         <source>Password Authentication</source>
         <translation>密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="476"/>
+        <location filename="../src/authdialog.cpp" line="441"/>
         <source>Other Devices</source>
         <translation>其他设备</translation>
     </message>
@@ -106,12 +106,12 @@
 <context>
     <name>BiometricAuthWidget</name>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="96"/>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="99"/>
         <source>Current device: </source>
         <translation>当前设备：</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="152"/>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="160"/>
         <source>Identify failed, Please retry.</source>
         <translation>识别失败，请重试</translation>
     </message>
@@ -171,6 +171,7 @@
     <name>KeyboardWidget</name>
     <message>
         <location filename="../VirtualKeyboard/src/keyboardwidget.ui" line="29"/>
+        <location filename="../obj-x86_64-linux-gnu/VirtualKeyboard/VirtualKeyboard_autogen/include/ui_keyboardwidget.h" line="798"/>
         <source>KeyboardWidget</source>
         <translation></translation>
     </message>
@@ -179,28 +180,59 @@
     <name>LockWidget</name>
     <message>
         <location filename="../src/lockwidget.ui" line="14"/>
+        <location filename="../obj-x86_64-linux-gnu/src/ui_lockwidget.h" line="66"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../src/lockwidget.ui" line="54"/>
+        <location filename="../obj-x86_64-linux-gnu/src/ui_lockwidget.h" line="68"/>
         <source>Date</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../src/lockwidget.ui" line="67"/>
+        <location filename="../obj-x86_64-linux-gnu/src/ui_lockwidget.h" line="69"/>
         <source>Time</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="149"/>
+        <location filename="../src/lockwidget.cpp" line="234"/>
         <source>Guest</source>
         <translation>游客</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="156"/>
+        <location filename="../src/lockwidget.cpp" line="241"/>
         <source>SwitchUser</source>
         <translation>切换用户</translation>
+    </message>
+</context>
+<context>
+    <name>PowerManager</name>
+    <message>
+        <location filename="../src/powermanager.cpp" line="109"/>
+        <source>lock</source>
+        <translation>锁定</translation>
+    </message>
+    <message>
+        <location filename="../src/powermanager.cpp" line="124"/>
+        <source>SwitchUser</source>
+        <translation>切换用户</translation>
+    </message>
+    <message>
+        <location filename="../src/powermanager.cpp" line="138"/>
+        <source>logout</source>
+        <translation>注销</translation>
+    </message>
+    <message>
+        <location filename="../src/powermanager.cpp" line="152"/>
+        <source>reboot</source>
+        <translation>重启</translation>
+    </message>
+    <message>
+        <location filename="../src/powermanager.cpp" line="166"/>
+        <source>shutdown</source>
+        <translation>关机</translation>
     </message>
 </context>
 <context>
@@ -208,21 +240,21 @@
     <message>
         <location filename="../src/ukui-screensaver-command.cpp" line="30"/>
         <source>Start command for the ukui ScreenSaver.</source>
-        <translation type="unfinished"></translation>
+        <translation>启动锁屏到命令</translation>
     </message>
     <message>
         <location filename="../src/ukui-screensaver-command.cpp" line="35"/>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="96"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="130"/>
         <source>lock the screen immediately</source>
-        <translation type="unfinished"></translation>
+        <translation>马上锁定屏幕</translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="91"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="125"/>
         <source>Dialog for the ukui ScreenSaver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="98"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="132"/>
         <source>activated by session idle signal</source>
         <translation type="unfinished"></translation>
     </message>

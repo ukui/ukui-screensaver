@@ -8,7 +8,8 @@
 #include "powermanager.h"
 
 PowerManager::PowerManager(QWidget *parent)
- : QListWidget(parent)
+ : QListWidget(parent),
+   lasttime(QTime::currentTime())
 {
 
     resize(ITEM_WIDTH*5, ITEM_HEIGHT);
@@ -24,8 +25,13 @@ PowerManager::PowerManager(QWidget *parent)
 
 void PowerManager::powerClicked(QListWidgetItem *item)
 {
+    int interval = lasttime.msecsTo(QTime::currentTime());
+    if(interval < 200 && interval > -200)
+        return ;
+    lasttime = QTime::currentTime();
+
     int x = row(item);
-qDebug()<<"11111111111111111111111111111111111111111111111111  x = "<<x;
+
     switch (x) {
     case 0:
         lockWidgetClicked();
@@ -49,34 +55,45 @@ qDebug()<<"11111111111111111111111111111111111111111111111111  x = "<<x;
 
 void PowerManager::lockWidgetClicked()
 {
-    hide();
+    emit lock();
 }
 
 void PowerManager::switchWidgetClicked()
 {
-
+    emit switchToUser();
 }
 
 void PowerManager::shutdownWidgetClicked()
 {
-    qDebug()<<"3333333333333333333333333333333333333333333333333333333333333333";
     QDBusInterface *interface = new QDBusInterface("org.gnome.SessionManager",
-                                                   "org/gnome/SessionManager",
+                                                   "/org/gnome/SessionManager",
                                                    "org.gnome.SessionManager",
                                                    QDBusConnection::sessionBus(),
                                                    this);
 
-    QDBusMessage msg = interface->call(QStringLiteral("RequestShutdown"));
+    QDBusMessage msg = interface->call("powerOff");
 }
 
 void PowerManager::rebootWidgetClicked()
 {
+    QDBusInterface *interface = new QDBusInterface("org.gnome.SessionManager",
+                                                   "/org/gnome/SessionManager",
+                                                   "org.gnome.SessionManager",
+                                                   QDBusConnection::sessionBus(),
+                                                   this);
 
+    QDBusMessage msg = interface->call("reboot");
 }
 
 void PowerManager::logoutWidgetCliced()
 {
+    QDBusInterface *interface = new QDBusInterface("org.gnome.SessionManager",
+                                                   "/org/gnome/SessionManager",
+                                                   "org.gnome.SessionManager",
+                                                   QDBusConnection::sessionBus(),
+                                                   this);
 
+    QDBusMessage msg = interface->call("logout");
 }
 
 void PowerManager::initUI()
@@ -132,7 +149,7 @@ void PowerManager::initUI()
     rebootFace->setAlignment(Qt::AlignCenter);
     rebootLabel->setAlignment(Qt::AlignCenter);
     rebootFace->setPixmap(QPixmap(":/image/assets/reboot.png").scaled(58,58));
-    rebootLabel->setText("reboot");
+    rebootLabel->setText(tr("reboot"));
     rebootWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     QVBoxLayout *rebootlayout = new QVBoxLayout(rebootWidget);
     rebootlayout->addWidget(rebootFace);
@@ -146,7 +163,7 @@ void PowerManager::initUI()
     shutdownLabel->setAlignment(Qt::AlignCenter);
     shutdownFace->setAlignment(Qt::AlignCenter);
     shutdownFace->setPixmap(QPixmap(":/image/assets/shutdown.png").scaled(58,58));
-    shutdownLabel->setText("shutdown");
+    shutdownLabel->setText(tr("shutdown"));
     shutdownWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     QVBoxLayout *shutdownlayout = new QVBoxLayout(shutdownWidget);
     shutdownlayout->addWidget(shutdownFace);

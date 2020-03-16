@@ -90,10 +90,10 @@ QMenu{
     font-size: 14px;
 }
 QMenu::item:selected {
-    background-color:rgb(235,110,36);
+    background-color:rgb(255,255,255,30%);
 }
 QMenu::item:pressed {
-    background-color: rgb(220,80,6);
+    background-color: rgb(255,255,255,30%);
 }
 
 /* 虚拟键盘开启按钮、用户切换按钮 */

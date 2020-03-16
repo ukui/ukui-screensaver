@@ -127,6 +127,10 @@ void LockWidget::initUI()
 
     powermanager = new PowerManager(this);
     powermanager->hide();
+    connect(powermanager,SIGNAL(lock())
+            ,this,SLOT(showPowerManager()));
+    connect(powermanager,SIGNAL(switchToUser())
+            ,this,SLOT(switchToGreeter()));
 
     //虚拟键盘
     vKeyboard = new VirtualKeyboard(this);
@@ -162,6 +166,7 @@ void LockWidget::showVirtualKeyboard()
 void LockWidget::showPowerManager()
 {
     if(powermanager->isVisible()){
+        authDialog->setFocus();
         authDialog->show();
         powermanager->hide();
     }
@@ -172,6 +177,11 @@ void LockWidget::showPowerManager()
                                   (height()-ITEM_HEIGHT)/2,
                                   ITEM_WIDTH*5,ITEM_HEIGHT);
     }
+}
+
+void LockWidget::switchToGreeter()
+{
+    displayManager->switchToGreeter();;
 }
 
 void LockWidget::setVirkeyboardPos()
@@ -255,8 +265,8 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
     x = x + ui->btnSwitchUser->width();
     ui->btnSwitchUser->move(width() - x, height() - y);
     setVirkeyboardPos();
-    usersMenu->move(width() - x - usersMenu->width() , \
-                    height() - y - usersMenu->height());
+    usersMenu->move(width() - x , \
+                    height() - y - usersMenu->height() - ui->btnSwitchUser->width()/2);
 
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 

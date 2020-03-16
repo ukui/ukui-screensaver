@@ -2,6 +2,7 @@
 #define POWERMANAGER_H
 #include <QWidget>
 #include <QListWidget>
+#include <QTime>
 
 #define ITEM_WIDTH 168
 #define ITEM_HEIGHT ITEM_WIDTH
@@ -23,6 +24,7 @@ private:
     QWidget *logoutWidget;
     QWidget *rebootWidget;
     QWidget *shutdownWidget;
+    QTime lasttime;
 
 private:
     void lockWidgetClicked();

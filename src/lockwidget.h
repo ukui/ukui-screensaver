@@ -64,6 +64,7 @@ private Q_SLOTS:
     void onUserMenuTrigged(QAction *action);
     void showVirtualKeyboard();
     void showPowerManager();
+    void switchToGreeter();
 
 protected:
      bool eventFilter(QObject *obj, QEvent *event);
