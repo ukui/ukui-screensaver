@@ -20,5 +20,10 @@
 	<file>assets/unlock-button-hover.png</file>
 	<file>assets/unlock-button-pressed.png</file>
     	<file>assets/iconFace.png</file>
+	<file>assets/powerManager.png</file>
+	<file>assets/lock.png</file>
+	<file>assets/logout.png</file>
+	<file>assets/shutdown.png</file>
+	<file>assets/reboot.png</file>
     </qresource>
 </RCC>

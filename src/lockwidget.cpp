@@ -16,6 +16,7 @@
  *
 **/
 #include "lockwidget.h"
+#include "powermanager.h"
 #include "ui_lockwidget.h"
 
 #include <QDateTime>
@@ -30,6 +31,7 @@
 #include "virtualkeyboard.h"
 #include "users.h"
 #include "displaymanager.h"
+
 
 LockWidget::LockWidget(QWidget *parent)
     : QWidget(parent),
@@ -116,6 +118,16 @@ void LockWidget::initUI()
     ui->lblDate->setAlignment(Qt::AlignCenter);
     ui->widgetTime->adjustSize();
 
+    //电源管理
+    ui->btnPowerManager->setIcon(QIcon(":/image/assets/powerManager.png"));
+    ui->btnPowerManager->setFixedSize(52,48);
+    ui->btnPowerManager->setIconSize(QSize(30,30));
+    connect(ui->btnPowerManager,&QPushButton::clicked
+            ,this,&LockWidget::showPowerManager);
+
+    powermanager = new PowerManager(this);
+    powermanager->hide();
+
     //虚拟键盘
     vKeyboard = new VirtualKeyboard(this);
     vKeyboard->hide();
@@ -145,6 +157,21 @@ void LockWidget::showVirtualKeyboard()
 {
     vKeyboard->setVisible(vKeyboard->isHidden());
     setVirkeyboardPos();
+}
+
+void LockWidget::showPowerManager()
+{
+    if(powermanager->isVisible()){
+        authDialog->show();
+        powermanager->hide();
+    }
+    else{     
+        authDialog->hide();
+        powermanager->show();
+        powermanager->setGeometry((width()-ITEM_WIDTH*5)/2,
+                                  (height()-ITEM_HEIGHT)/2,
+                                  ITEM_WIDTH*5,ITEM_HEIGHT);
+    }
 }
 
 void LockWidget::setVirkeyboardPos()
@@ -180,6 +207,7 @@ void LockWidget::initUserMenu()
                 else
                     usersMenu->show();
         });
+
     }
 
     connect(users, &Users::userAdded, this, &LockWidget::onUserAdded);
@@ -216,10 +244,12 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
 
     //系统时间
     ui->widgetTime->move((width()-ui->widgetTime->geometry().width())/2, 59);
-    //虚拟键盘按钮
-    int x=19,y=38;
-    x = 19+ui->btnKeyboard->width();
-    y = 86;
+    //右下角按钮
+    int x=19,y=86;
+    x = x + ui->btnPowerManager->width();
+    ui->btnPowerManager->move(width() - x,height() - y);
+
+    x = x+ui->btnKeyboard->width();
     ui->btnKeyboard->move(width() - x, height() -  y);
 
     x = x + ui->btnSwitchUser->width();

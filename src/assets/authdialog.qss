@@ -97,16 +97,16 @@ QMenu::item:pressed {
 }
 
 /* 虚拟键盘开启按钮、用户切换按钮 */
-#btnSwitchUser, #btnKeyboard {
+#btnSwitchUser, #btnKeyboard,#btnPowerManager {
 
 }
-#btnKeyboard, #btnSwitchUser {
+#btnKeyboard, #btnSwitchUser,#btnPowerManager {
 
 }
-#btnKeyboard::hover, #btnSwitchUser::hover {
+#btnKeyboard::hover, #btnSwitchUser::hover,#btnPowerManager::hover {
     background-color: rgb(255, 255, 255, 20%);
 }
-#btnKeyboard::pressed, #btnSwitchUser::pressed{
+#btnKeyboard::pressed, #btnSwitchUser::pressed,#btnPowerManager::hover{
     background: rgba(0, 0, 0, 30%);
 }
 
@@ -179,3 +179,19 @@ QComboBox QListView::item:selected{
 #cmbDeviceType, #cmbDeviceName{
     font-size: 18px;
 }
+
+/***********************关机界面**********************************/
+QListWidget{
+    background:transparent;
+    border: 0px;
+}
+QListWidget::item:hover{
+    background:rgb(255, 255, 255, 20%);
+    border: none;
+}
+
+QListWidget::item:selected
+    background:rgb(255, 255, 255, 20%);
+    border: none;
+}
+
