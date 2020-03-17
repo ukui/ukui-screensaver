@@ -115,6 +115,7 @@ void BiometricDevicesWidget::updateDevice()
         int index = deviceMap.keys().at(0);
         setCurrentDevice(deviceMap[index].at(0));
     }
+
 }
 
 

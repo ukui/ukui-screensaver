@@ -25,5 +25,7 @@
 	<file>assets/logout.png</file>
 	<file>assets/shutdown.png</file>
 	<file>assets/reboot.png</file>
+        <file>assets/bio-login.png</file>
+	<file>assets/password-login.png</file>
     </qresource>
 </RCC>

@@ -98,6 +98,7 @@ DeviceList BiometricProxy::GetDevList()
         arg >> *pDeviceInfo;
 
         deviceList.push_back(pDeviceInfo);
+
     }
 
     return deviceList;

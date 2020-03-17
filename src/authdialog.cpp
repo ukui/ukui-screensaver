@@ -414,6 +414,7 @@ void AuthDialog::initBiometricButtonWidget()
 
     m_biometricButton = new QPushButton(m_buttonsWidget);
     m_biometricButton->setObjectName(QStringLiteral("biometricButton"));
+    m_biometricButton->setIcon(QIcon(":/image/assets/bio-login.png"));
     m_biometricButton->setText(tr("Biometric Authentication"));
     m_biometricButton->setSizePolicy(sizePolicy);
     m_biometricButton->setVisible(false);
@@ -426,6 +427,7 @@ void AuthDialog::initBiometricButtonWidget()
 
     m_passwordButton = new QPushButton(m_buttonsWidget);
     m_passwordButton->setObjectName(QStringLiteral("passwordButton"));
+    m_passwordButton->setIcon(QIcon(":/image/assets/password-login.png"));
     m_passwordButton->setText(tr("Password Authentication"));
     fm = QFontMetrics(m_passwordButton->font(), m_passwordButton);
     width = fm.width(m_passwordButton->text());
@@ -480,7 +482,7 @@ void AuthDialog::setBiometricWidgetGeometry()
     if(m_biometricDevicesWidget)
     {
         m_biometricDevicesWidget->setGeometry((width() - m_biometricDevicesWidget->width()) / 2,
-                                              (height() - m_biometricDevicesWidget->height()) / 2,
+                                              0,
                                               m_biometricDevicesWidget->width(),
                                               m_biometricDevicesWidget->height());
     }
@@ -490,7 +492,7 @@ void AuthDialog::setBiometricButtonWidgetGeometry()
 {
     if(m_buttonsWidget)
     {
-        m_buttonsWidget->setGeometry(0, height() - m_buttonsWidget->height() - 100,
+        m_buttonsWidget->setGeometry(0, height() - m_buttonsWidget->height() - y() - 100,
                                      width(), m_buttonsWidget->height());
     }
 }

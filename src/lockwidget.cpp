@@ -122,6 +122,7 @@ void LockWidget::initUI()
     ui->btnPowerManager->setIcon(QIcon(":/image/assets/powerManager.png"));
     ui->btnPowerManager->setFixedSize(52,48);
     ui->btnPowerManager->setIconSize(QSize(30,30));
+    ui->btnPowerManager->setFocusPolicy(Qt::NoFocus);
     connect(ui->btnPowerManager,&QPushButton::clicked
             ,this,&LockWidget::showPowerManager);
 
@@ -141,6 +142,7 @@ void LockWidget::initUI()
     ui->btnKeyboard->setIcon(QIcon(":/image/assets/keyboard.png"));
     ui->btnKeyboard->setFixedSize(52, 48);
     ui->btnKeyboard->setIconSize(QSize(30, 30));
+    ui->btnKeyboard->setFocusPolicy(Qt::NoFocus);
 /*    connect(ui->btnKeyboard, &QPushButton::clicked,
             this, [&]{
         qDebug() << vKeyboard->isHidden();
@@ -201,6 +203,7 @@ void LockWidget::initUserMenu()
     ui->btnSwitchUser->setIcon(QIcon(":/image/assets/avatar.png"));
     ui->btnSwitchUser->setIconSize(QSize(36, 24));
     ui->btnSwitchUser->setFixedSize(52, 48);
+    ui->btnSwitchUser->setFocusPolicy(Qt::NoFocus);
     if(!usersMenu)
     {
         usersMenu = new QMenu(this);
