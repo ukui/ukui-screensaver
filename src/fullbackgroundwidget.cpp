@@ -357,7 +357,6 @@ void FullBackgroundWidget::showScreensaver()
     for(auto screen : QGuiApplication::screens())
     {
         ScreenSaver *saver = configuration->getScreensaver();
-        qDebug() << *saver;
         ScreenSaverWidget *saverWidget = new ScreenSaverWidget(saver, this);
         widgetXScreensaverList.push_back(saverWidget);
         saverWidget->setGeometry(screen->geometry());

@@ -33,7 +33,6 @@ ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
       closing(false)
 {
     qDebug() << "ScreenSaverWidget::ScreenSaverWidget";
-    qDebug() << *screensaver;
     setMouseTracking(true);
     setFocus();
     this->installEventFilter(this);
@@ -42,7 +41,6 @@ ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
     plt.setBrush(QPalette::Window, Qt::black);
     setPalette(plt);
     setAutoFillBackground(true);
-
     switch(screensaver->mode) {
     case SAVER_RANDOM:
     case SAVER_SINGLE:
