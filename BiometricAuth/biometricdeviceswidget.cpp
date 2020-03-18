@@ -55,6 +55,8 @@ void BiometricDevicesWidget::initUI()
     QStyledItemDelegate* itemDelegate = new QStyledItemDelegate();
 
     cmbDeviceType = new QComboBox(this);
+    cmbDeviceType->view()->parentWidget()->setWindowFlags(Qt::Popup|Qt::FramelessWindowHint);
+    cmbDeviceType->view()->parentWidget()->setAttribute(Qt::WA_TranslucentBackground);
     cmbDeviceType->setObjectName(QStringLiteral("cmbDeviceType"));
     cmbDeviceType->setMaxVisibleItems(5);
     cmbDeviceType->setItemDelegate(itemDelegate);
@@ -67,6 +69,8 @@ void BiometricDevicesWidget::initUI()
     lblDeviceName->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     cmbDeviceName = new QComboBox(this);
+    cmbDeviceType->view()->parentWidget()->setWindowFlags(Qt::Popup|Qt::FramelessWindowHint);
+    cmbDeviceType->view()->parentWidget()->setAttribute(Qt::WA_TranslucentBackground);
     cmbDeviceName->setObjectName(QStringLiteral("cmbDeviceName"));
     cmbDeviceName->setMaxVisibleItems(5);
     cmbDeviceName->setItemDelegate(itemDelegate);

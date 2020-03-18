@@ -113,11 +113,13 @@ QMenu::item:pressed {
 
 
 /********************** 下拉选项 *************************/
+
 QComboBox{
     background: rgba(255, 255, 255, 20);
+    border: 1px solid rgb(255, 255, 255, 30);
     font-size:18px;
     color: white;
-    combobox-popup: 5;  /* 配合setMaxVisibleItems设置下拉框显示的条数，超过的滚动显示 */
+    combobox-popup: 0;  /* 配合setMaxVisibleItems设置下拉框显示的条数，超过的滚动显示 */
 }
 
 QComboBox::down-arrow{
@@ -129,21 +131,23 @@ QComboBox::drop-down{
 }
 
 QComboBox QListView{
+    border: 1px solid #5187bd;
+/*    background: #4682B4;*/
     background: rgba(255, 255, 255, 30%);
     font-size: 18px;
     color: white;
 }
+QComboBox QListView::item{
+    background: rgba(255, 255, 255, 0);
+}
 
 QComboBox QListView::item:hover{
-    color: white;
     background: rgba(255, 255, 255, 20%);
-
 }
+
 QComboBox QListView::item:selected{
-    color:white;
     background-color: rgba(255, 255, 255, 30%);
 }
-
 /********************** 生物识别切换按钮 **************************/
 #biometricButton, #passwordButton,
 #otherDeviceButton, #retryButton,
