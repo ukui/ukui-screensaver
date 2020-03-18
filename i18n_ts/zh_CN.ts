@@ -16,7 +16,7 @@
         <translation type="obsolete">使用密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="451"/>
+        <location filename="../src/authdialog.cpp" line="453"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
@@ -50,17 +50,17 @@
         <translation>认证失败，还剩%1次尝试机会</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="417"/>
+        <location filename="../src/authdialog.cpp" line="418"/>
         <source>Biometric Authentication</source>
         <translation>生物识别认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="429"/>
+        <location filename="../src/authdialog.cpp" line="431"/>
         <source>Password Authentication</source>
         <translation>密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="441"/>
+        <location filename="../src/authdialog.cpp" line="443"/>
         <source>Other Devices</source>
         <translation>其他设备</translation>
     </message>
@@ -106,103 +106,80 @@
 <context>
     <name>BiometricAuthWidget</name>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="99"/>
         <source>Current device: </source>
-        <translation>当前设备：</translation>
+        <translation type="vanished">当前设备：</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="160"/>
         <source>Identify failed, Please retry.</source>
-        <translation>识别失败，请重试</translation>
+        <translation type="vanished">识别失败，请重试</translation>
     </message>
 </context>
 <context>
     <name>BiometricDevicesWidget</name>
     <message>
-        <location filename="../BiometricAuth/biometricdeviceswidget.cpp" line="47"/>
         <source>Please select the biometric device</source>
-        <translation>请选择生物设备</translation>
+        <translation type="vanished">请选择生物设备</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricdeviceswidget.cpp" line="52"/>
         <source>Device type:</source>
-        <translation>设备类型：</translation>
+        <translation type="vanished">设备类型：</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricdeviceswidget.cpp" line="66"/>
         <source>Device name:</source>
-        <translation>设备型号：</translation>
+        <translation type="vanished">设备型号：</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricdeviceswidget.cpp" line="74"/>
         <source>OK</source>
-        <translation>确定</translation>
+        <translation type="vanished">确定</translation>
     </message>
 </context>
 <context>
     <name>DeviceType</name>
     <message>
-        <location filename="../BiometricAuth/biometricdeviceinfo.cpp" line="41"/>
         <source>FingerPrint</source>
-        <translation>指纹</translation>
+        <translation type="vanished">指纹</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricdeviceinfo.cpp" line="43"/>
         <source>FingerVein</source>
-        <translation>指静脉</translation>
+        <translation type="vanished">指静脉</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricdeviceinfo.cpp" line="45"/>
         <source>Iris</source>
-        <translation>虹膜</translation>
+        <translation type="vanished">虹膜</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricdeviceinfo.cpp" line="47"/>
         <source>Face</source>
-        <translation>人脸</translation>
+        <translation type="vanished">人脸</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricdeviceinfo.cpp" line="49"/>
         <source>VoicePrint</source>
-        <translation>声纹</translation>
-    </message>
-</context>
-<context>
-    <name>KeyboardWidget</name>
-    <message>
-        <location filename="../VirtualKeyboard/src/keyboardwidget.ui" line="29"/>
-        <location filename="../obj-x86_64-linux-gnu/VirtualKeyboard/VirtualKeyboard_autogen/include/ui_keyboardwidget.h" line="798"/>
-        <source>KeyboardWidget</source>
-        <translation></translation>
+        <translation type="vanished">声纹</translation>
     </message>
 </context>
 <context>
     <name>LockWidget</name>
     <message>
         <location filename="../src/lockwidget.ui" line="14"/>
-        <location filename="../obj-x86_64-linux-gnu/src/ui_lockwidget.h" line="66"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../src/lockwidget.ui" line="54"/>
-        <location filename="../obj-x86_64-linux-gnu/src/ui_lockwidget.h" line="68"/>
         <source>Date</source>
-        <translation></translation>
+        <translation>日期</translation>
     </message>
     <message>
         <location filename="../src/lockwidget.ui" line="67"/>
-        <location filename="../obj-x86_64-linux-gnu/src/ui_lockwidget.h" line="69"/>
         <source>Time</source>
-        <translation></translation>
+        <translation>时间</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="234"/>
+        <location filename="../src/lockwidget.cpp" line="237"/>
         <source>Guest</source>
         <translation>游客</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="241"/>
+        <location filename="../src/lockwidget.cpp" line="244"/>
         <source>SwitchUser</source>
         <translation>切换用户</translation>
     </message>
@@ -236,6 +213,14 @@
     </message>
 </context>
 <context>
+    <name>SleepTime</name>
+    <message>
+        <location filename="../screensaver/sleeptime.cpp" line="72"/>
+        <source>You have rested:</source>
+        <translation>您已休息:</translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <location filename="../src/ukui-screensaver-command.cpp" line="30"/>
@@ -256,6 +241,26 @@
     <message>
         <location filename="../src/ukui-screensaver-dialog.cpp" line="132"/>
         <source>activated by session idle signal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../screensaver/main.cpp" line="42"/>
+        <source>Screensaver for ukui-screensaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../screensaver/main.cpp" line="46"/>
+        <source>show on root window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../screensaver/main.cpp" line="48"/>
+        <source>show on window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../screensaver/main.cpp" line="49"/>
+        <source>window id</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

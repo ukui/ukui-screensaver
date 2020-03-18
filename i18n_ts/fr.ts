@@ -126,63 +126,33 @@
     </message>
 </context>
 <context>
-    <name>BiometricAuthWidget</name>
-    <message>
-        <source>Current device: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Identify failed, Please retry.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>BiometricDevicesWidget</name>
-    <message>
-        <source>Please select the biometric device</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Device type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Device name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DeviceType</name>
     <message>
         <source>FingerPrint</source>
-        <translation type="unfinished">Empreinte digitale</translation>
+        <translation type="obsolete">Empreinte digitale</translation>
     </message>
     <message>
         <source>FingerVein</source>
-        <translation type="unfinished">FingerVein</translation>
+        <translation type="obsolete">FingerVein</translation>
     </message>
     <message>
         <source>Iris</source>
-        <translation type="unfinished">Iris</translation>
+        <translation type="obsolete">Iris</translation>
     </message>
     <message>
         <source>Face</source>
-        <translation type="unfinished">Visage</translation>
+        <translation type="obsolete">Visage</translation>
     </message>
     <message>
         <source>VoicePrint</source>
-        <translation type="unfinished">VoicePrint</translation>
+        <translation type="obsolete">VoicePrint</translation>
     </message>
 </context>
 <context>
     <name>KeyboardWidget</name>
     <message>
         <source>KeyboardWidget</source>
-        <translation>KeyboardWidget</translation>
+        <translation type="vanished">KeyboardWidget</translation>
     </message>
 </context>
 <context>
@@ -232,6 +202,13 @@
     </message>
 </context>
 <context>
+    <name>SleepTime</name>
+    <message>
+        <source>You have rested:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <source>Start command for the ukui ScreenSaver.</source>
@@ -248,6 +225,22 @@
     <message>
         <source>activated by session idle signal</source>
         <translation>activé par le signal d&apos;inactivité de la session</translation>
+    </message>
+    <message>
+        <source>Screensaver for ukui-screensaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show on root window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show on window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>window id</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

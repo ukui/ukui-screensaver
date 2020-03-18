@@ -39,6 +39,7 @@ void SleepTime::init()
     layout = new QHBoxLayout(this);
     layout->setDirection(QBoxLayout::RightToLeft);
     layout->setSpacing(12);
+
     for(int i=0;i<2;i++)
     {
         QLabel *label = new QLabel(this);
@@ -67,11 +68,23 @@ void SleepTime::init()
         layout->addWidget(list.at(i));
     }
 
+    restTime = new QLabel(this);
+    restTime->setText(tr("You have rested:"));
+    restTime->setObjectName("restTime");
+    restTime->setAlignment(Qt::AlignBottom);
+    restTime->adjustSize();
+
+    layout->addWidget(restTime);
+
 }
 
 void SleepTime::setTime()
 {
     sleepTime+=1;
+
+    if(sleepTime>5999)
+        hide();
+
     int sec = sleepTime % 60;
     int min = sleepTime/60;
     setSeconds(sec);
@@ -97,15 +110,14 @@ void SleepTime::setSeconds(int seconds)
     int sec1 = seconds%10;
     int sec2 = seconds/10;
     list.at(0)->setText(QString::number(sec1));
-    if(sec1 == 0)
-        list.at(1)->setText(QString::number(sec2));
+    list.at(1)->setText(QString::number(sec2));
 }
 
 void SleepTime::setMinute(int minutes)
 {
+
     int min1 = minutes%10;
     int min2 = minutes/10;
     list.at(3)->setText(QString::number(min1));
-    if(min1 == 0)
-        list.at(4)->setText(QString::number(min2));
+    list.at(4)->setText(QString::number(min2));
 }

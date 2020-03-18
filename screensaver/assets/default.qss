@@ -23,3 +23,11 @@ QLabel#colon {
     font-size:24px;
     color: #ffffff;
 }
+QLabel#restTime {
+    font-size:18px;
+    color: #ffffff;
+}
+QLabel#centerLabel {
+    font-size:32px;
+    color: #ffffff;
+}

@@ -33,14 +33,14 @@
 
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
-  date(new ChineseDate())
+  date(new ChineseDate()),
+  centerWidget(nullptr)
 {
     installEventFilter(this);
     initUI();
-    updateDate();
+
     settings = new QGSettings("org.mate.background","",this);
     background = settings->get("picture-filename").toString();
-    qDebug()<<"111111111111111111111111111111111 "<<background;
 }
 
 Screensaver::~Screensaver()
@@ -76,10 +76,16 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
     int y = 50;
     timeLayout->setGeometry(x,y,timeLayout->geometry().width(),timeLayout->geometry().height());
 
-    x = this->width() - sleepTime->geometry().width();
-    y = this->height() - sleepTime->geometry().height();
+    x = this->width() - sleepTime->geometry().width() - 26;
+    y = this->height() - sleepTime->geometry().height() - 26;
 
     sleepTime->setGeometry(x,y,sleepTime->geometry().width(),sleepTime->geometry().height());
+
+//    centerWidget->adjustSize();
+//    centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
+//                              centerWidget->width(),centerWidget->height());
+
+    ubuntuKylinlogo->setGeometry(26,26,ubuntuKylinlogo->width(),ubuntuKylinlogo->height());
 }
 
 void Screensaver::initUI()
@@ -92,7 +98,10 @@ void Screensaver::initUI()
 
     setDatelayout();
     setSleeptime();
-
+    //setCenterWidget();
+    ubuntuKylinlogo = new QLabel(this);
+    ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
+    ubuntuKylinlogo->adjustSize();
 }
 
 void Screensaver::setDatelayout()
@@ -107,14 +116,14 @@ void Screensaver::setDatelayout()
     vtimeLayout->addWidget(dateOfWeek);
 
     this->dateOfLocaltime = new QLabel(this);
-    this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm:ss"));
+    this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
     this->dateOfLocaltime->setObjectName("dateOfLocaltime");
     this->dateOfLocaltime->setAlignment(Qt::AlignCenter);
     vtimeLayout->addWidget(dateOfLocaltime);
 
     QWidget *dateWidget = new QWidget(this);
     this->dateOfDay = new QLabel(this);
-    this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd"));
+    this->dateOfDay->setText(QDate::currentDate().toString("yy/MM/dd"));
     this->dateOfDay->setObjectName("dateOfDay");
     this->dateOfDay->setAlignment(Qt::AlignCenter);
     this->dateOfDay->adjustSize();
@@ -137,8 +146,16 @@ void Screensaver::setDatelayout()
 
 void Screensaver::setSleeptime()
 {
+    QString lang = qgetenv("LANG");
+    if (!lang.isEmpty()){
+        qDebug()<<"lang = "<<lang;
+        if (!lang.contains("zh_CN")){
+            return;
+        }
+    }
     sleepTime = new SleepTime(this);
     sleepTime->adjustSize();
+     updateDate();
 }
 
 void Screensaver::updateDate()
@@ -151,9 +168,31 @@ void Screensaver::updateDate()
 void Screensaver::updateTime()
 {
     this->dateOfWeek->setText(QDate::currentDate().toString("dddd"));
-    this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm:ss"));
-    this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd"));
+    this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+    this->dateOfDay->setText(QDate::currentDate().toString("yy/MM/dd"));
     if(sleepTime)
         sleepTime->setTime();
+
+}
+
+void Screensaver::setCenterWidget()
+{
+    QString lang = qgetenv("LANG");
+    if (!lang.isEmpty()){
+        qDebug()<<"lang = "<<lang;
+        if (!lang.contains("zh_CN")){
+            return;
+        }
+    }
+
+    centerWidget = new QWidget(this);
+    QVBoxLayout *layout = new QVBoxLayout(centerWidget);
+    QLabel *label1 = new QLabel("因为有悔，所以披星戴月");
+    label1->setObjectName("centerLabel");
+    QLabel *label2 = new QLabel("因为有梦，所以奋不顾身");
+    label2->setObjectName("centerLabel");
+    layout->addWidget(label1);
+    layout->addWidget(label2);
+    adjustSize();
 
 }

@@ -2,4 +2,7 @@
     <qresource prefix="/qss">
         <file>assets/default.qss</file>
     </qresource>
+    <qresource prefix="/">
+        <file>assets/logo.svg</file>
+    </qresource>
 </RCC>

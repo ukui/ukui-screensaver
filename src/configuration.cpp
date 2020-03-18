@@ -121,9 +121,7 @@ ScreenSaver *Configuration::getScreensaver()
     saver->mode = SaverMode(index);
     saver->interval = imageSwitchInterval;
     saver->effect = TransitionEffect(imageTSEffect);
-    qDebug()<<"11111111111111111111111111111 "<<saver->mode;
-    qDebug()<<"22222222222222222222222222222 "<<saver->interval;
-    qDebug()<<"3333333333333333333333333333333 "<<saver->effect;
+
     switch(index){
     case SAVER_BLANK_ONLY:
         break;

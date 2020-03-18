@@ -21,13 +21,15 @@ private:
     void initUI();
     void setDatelayout();
     void setSleeptime();
+    void setCenterWidget();
     void updateDate();
 
     QLabel *dateOfWeek;
     QLabel *dateOfLocaltime;
     QLabel *dateOfDay;
     QLabel *dateOfLunar;
-    QLabel *centerLabel;
+    QWidget *centerWidget;
+    QLabel *ubuntuKylinlogo;
     QWidget *timeLayout;
     SleepTime *sleepTime;
     QTimer *timer;

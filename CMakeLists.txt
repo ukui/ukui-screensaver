@@ -13,7 +13,7 @@ set(TS_FILES
 	)
 add_custom_command(
 	OUTPUT ${TS_FILES}
-	COMMAND lupdate src/ -ts ${TS_FILES}
+	COMMAND lupdate src/ screensaver/ -ts ${TS_FILES}
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 	)
 add_custom_target(

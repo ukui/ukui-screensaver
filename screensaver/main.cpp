@@ -18,6 +18,7 @@
 
 #include "screensaver.h"
 #include <QApplication>
+#include <QTranslator>
 #include <QWindow>
 #include <QDebug>
 #include <QLabel>
@@ -27,6 +28,7 @@
 #include <QCommandLineParser>
 #include <X11/Xlib.h>
 
+#define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +37,14 @@ int main(int argc, char *argv[])
     QString windowId;
     Screensaver s;
     XWindowAttributes xwa;
+	
+    //加载翻译文件
+    QString locale = QLocale::system().name();
+    QTranslator translator;
+    QString qmFile = QString(WORKING_DIRECTORY"/i18n_qm/%1.qm").arg(locale);
+    translator.load(qmFile);
+    a.installTranslator(&translator);
+    qDebug() << "load translation file " << qmFile;
 
     parser.setApplicationDescription("Test helper");
     parser.addHelpOption();

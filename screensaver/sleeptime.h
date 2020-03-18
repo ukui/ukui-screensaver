@@ -16,6 +16,7 @@ public:
     void setTime();
 
 private:
+    QLabel *restTime;
     QList<QLabel *> list;
     QHBoxLayout *layout;
     int sleepTime;
