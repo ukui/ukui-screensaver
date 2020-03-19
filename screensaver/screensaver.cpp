@@ -81,9 +81,9 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 
     sleepTime->setGeometry(x,y,sleepTime->geometry().width(),sleepTime->geometry().height());
 
-//    centerWidget->adjustSize();
-//    centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
-//                              centerWidget->width(),centerWidget->height());
+    centerWidget->adjustSize();
+    centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
+                              centerWidget->width(),centerWidget->height());
 
     ubuntuKylinlogo->setGeometry(26,26,ubuntuKylinlogo->width(),ubuntuKylinlogo->height());
 }
@@ -98,7 +98,9 @@ void Screensaver::initUI()
 
     setDatelayout();
     setSleeptime();
-    //setCenterWidget();
+  
+    setCenterWidget();
+
     ubuntuKylinlogo = new QLabel(this);
     ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
     ubuntuKylinlogo->adjustSize();
