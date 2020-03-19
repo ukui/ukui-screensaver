@@ -98,7 +98,9 @@ void Screensaver::initUI()
 
     setDatelayout();
     setSleeptime();
+  
     setCenterWidget();
+
     ubuntuKylinlogo = new QLabel(this);
     ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
     ubuntuKylinlogo->adjustSize();
