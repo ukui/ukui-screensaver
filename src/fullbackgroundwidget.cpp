@@ -240,15 +240,13 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
                 if (xc->event == QX11Info::appRootWindow())
                 {
                     this->onDesktopResized();
-                    XRaiseWindow(QX11Info::display(), this->winId());
-                    XFlush(QX11Info::display());
+                    raise();
                 }
                 return false;
         }
         else if(responseType == XCB_PROPERTY_NOTIFY)
         {
-                XRaiseWindow(QX11Info::display(), this->winId());
-                XFlush(QX11Info::display());
+            raise();
         }
         return false;
 }
@@ -359,7 +357,6 @@ void FullBackgroundWidget::showScreensaver()
     for(auto screen : QGuiApplication::screens())
     {
         ScreenSaver *saver = configuration->getScreensaver();
-        qDebug() << *saver;
         ScreenSaverWidget *saverWidget = new ScreenSaverWidget(saver, this);
         widgetXScreensaverList.push_back(saverWidget);
         saverWidget->setGeometry(screen->geometry());

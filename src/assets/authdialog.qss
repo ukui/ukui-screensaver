@@ -6,7 +6,7 @@ QPushButton {
 
 QLabel {
     color: white;
-
+    font-size: 16px;
 }
 
 #userWidget{
@@ -90,23 +90,23 @@ QMenu{
     font-size: 14px;
 }
 QMenu::item:selected {
-    background-color:rgb(235,110,36);
+    background-color:rgb(255,255,255,30%);
 }
 QMenu::item:pressed {
-    background-color: rgb(220,80,6);
+    background-color: rgb(255,255,255,30%);
 }
 
 /* 虚拟键盘开启按钮、用户切换按钮 */
-#btnSwitchUser, #btnKeyboard {
+#btnSwitchUser, #btnKeyboard,#btnPowerManager {
 
 }
-#btnKeyboard, #btnSwitchUser {
+#btnKeyboard, #btnSwitchUser,#btnPowerManager {
 
 }
-#btnKeyboard::hover, #btnSwitchUser::hover {
+#btnKeyboard::hover, #btnSwitchUser::hover,#btnPowerManager::hover {
     background-color: rgb(255, 255, 255, 20%);
 }
-#btnKeyboard::pressed, #btnSwitchUser::pressed{
+#btnKeyboard::pressed, #btnSwitchUser::pressed,#btnPowerManager::hover{
     background: rgba(0, 0, 0, 30%);
 }
 
@@ -116,6 +116,7 @@ QMenu::item:pressed {
 
 QComboBox{
     background: rgba(255, 255, 255, 20);
+    border: 1px solid rgb(255, 255, 255, 30);
     font-size:18px;
     color: white;
     combobox-popup: 0;  /* 配合setMaxVisibleItems设置下拉框显示的条数，超过的滚动显示 */
@@ -130,26 +131,30 @@ QComboBox::drop-down{
 }
 
 QComboBox QListView{
+    border: 1px solid #5187bd;
+/*    background: #4682B4;*/
     background: rgba(255, 255, 255, 30%);
     font-size: 18px;
     color: white;
 }
+QComboBox QListView::item{
+    background: rgba(255, 255, 255, 0);
+}
+
 QComboBox QListView::item:hover{
     background: rgba(255, 255, 255, 20%);
-
 }
+
 QComboBox QListView::item:selected{
     background-color: rgba(255, 255, 255, 30%);
 }
-
 /********************** 生物识别切换按钮 **************************/
 #biometricButton, #passwordButton,
 #otherDeviceButton, #retryButton,
 #OKButton
 {
-    background: rgba(255, 255, 255, 20%);
-    font-size: 18px;
-    border: 1px solid rgba(255, 255, 255, 30%);
+    background: rgba(255, 255, 255, 0);
+    font-size: 16px;
     color: white;
 }
 
@@ -157,25 +162,42 @@ QComboBox QListView::item:selected{
 #otherDeviceButton::hover, #retryButton::hover,
 #OKButton::hover
 {
-    background: rgba(255, 255, 255, 35%);
-    border: 1px solid rgba(255, 255, 255, 50%);
+    background: rgba(255, 255, 255, 20%);
+    border: 0px;
 }
 
 #biometricButton::pressed, #passwordButton::pressed,
 #otherDeviceButton::pressed, #retryButton::pressed,
 #OKButton::pressed
 {
-    background: rgba(0, 0, 0, 15%);
-    border: 1px solid rgba(255, 255, 255, 20%);
+    background: rgba(0, 0, 0, 20%);
+    border: 0px;
 }
 
 
 /********************** 生物识别设备选择界面 ************************/
 #lblBioetricDevicesPrompt {
     font-size: 30px;
+    color: white;
 }
 
 #lblDeviceType, #lblDeviceName,
 #cmbDeviceType, #cmbDeviceName{
     font-size: 18px;
 }
+
+/***********************关机界面**********************************/
+QListWidget{
+    background:transparent;
+    border: 0px;
+}
+QListWidget::item:hover{
+    background:rgb(255, 255, 255, 20%);
+    border: none;
+}
+
+QListWidget::item:selected
+    background:rgb(255, 255, 255, 20%);
+    border: none;
+}
+

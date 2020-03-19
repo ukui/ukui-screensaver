@@ -16,6 +16,7 @@
  *
 **/
 #include "lockwidget.h"
+#include "powermanager.h"
 #include "ui_lockwidget.h"
 
 #include <QDateTime>
@@ -30,6 +31,7 @@
 #include "virtualkeyboard.h"
 #include "users.h"
 #include "displaymanager.h"
+
 
 LockWidget::LockWidget(QWidget *parent)
     : QWidget(parent),
@@ -116,6 +118,21 @@ void LockWidget::initUI()
     ui->lblDate->setAlignment(Qt::AlignCenter);
     ui->widgetTime->adjustSize();
 
+    //电源管理
+    ui->btnPowerManager->setIcon(QIcon(":/image/assets/powerManager.png"));
+    ui->btnPowerManager->setFixedSize(52,48);
+    ui->btnPowerManager->setIconSize(QSize(30,30));
+    ui->btnPowerManager->setFocusPolicy(Qt::NoFocus);
+    connect(ui->btnPowerManager,&QPushButton::clicked
+            ,this,&LockWidget::showPowerManager);
+
+    powermanager = new PowerManager(this);
+    powermanager->hide();
+    connect(powermanager,SIGNAL(lock())
+            ,this,SLOT(showPowerManager()));
+    connect(powermanager,SIGNAL(switchToUser())
+            ,this,SLOT(switchToGreeter()));
+
     //虚拟键盘
     vKeyboard = new VirtualKeyboard(this);
     vKeyboard->hide();
@@ -125,6 +142,7 @@ void LockWidget::initUI()
     ui->btnKeyboard->setIcon(QIcon(":/image/assets/keyboard.png"));
     ui->btnKeyboard->setFixedSize(52, 48);
     ui->btnKeyboard->setIconSize(QSize(30, 30));
+    ui->btnKeyboard->setFocusPolicy(Qt::NoFocus);
 /*    connect(ui->btnKeyboard, &QPushButton::clicked,
             this, [&]{
         qDebug() << vKeyboard->isHidden();
@@ -147,6 +165,27 @@ void LockWidget::showVirtualKeyboard()
     setVirkeyboardPos();
 }
 
+void LockWidget::showPowerManager()
+{
+    if(powermanager->isVisible()){
+        authDialog->setFocus();
+        authDialog->show();
+        powermanager->hide();
+    }
+    else{     
+        authDialog->hide();
+        powermanager->show();
+        powermanager->setGeometry((width()-ITEM_WIDTH*5)/2,
+                                  (height()-ITEM_HEIGHT)/2,
+                                  ITEM_WIDTH*5,ITEM_HEIGHT);
+    }
+}
+
+void LockWidget::switchToGreeter()
+{
+    displayManager->switchToGreeter();;
+}
+
 void LockWidget::setVirkeyboardPos()
 {
     if(vKeyboard)
@@ -164,6 +203,7 @@ void LockWidget::initUserMenu()
     ui->btnSwitchUser->setIcon(QIcon(":/image/assets/avatar.png"));
     ui->btnSwitchUser->setIconSize(QSize(36, 24));
     ui->btnSwitchUser->setFixedSize(52, 48);
+    ui->btnSwitchUser->setFocusPolicy(Qt::NoFocus);
     if(!usersMenu)
     {
         usersMenu = new QMenu(this);
@@ -180,6 +220,7 @@ void LockWidget::initUserMenu()
                 else
                     usersMenu->show();
         });
+
     }
 
     connect(users, &Users::userAdded, this, &LockWidget::onUserAdded);
@@ -216,17 +257,19 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
 
     //系统时间
     ui->widgetTime->move((width()-ui->widgetTime->geometry().width())/2, 59);
-    //虚拟键盘按钮
-    int x=19,y=38;
-    x = 19+ui->btnKeyboard->width();
-    y = 86;
+    //右下角按钮
+    int x=19,y=86;
+    x = x + ui->btnPowerManager->width();
+    ui->btnPowerManager->move(width() - x,height() - y);
+
+    x = x+ui->btnKeyboard->width();
     ui->btnKeyboard->move(width() - x, height() -  y);
 
     x = x + ui->btnSwitchUser->width();
     ui->btnSwitchUser->move(width() - x, height() - y);
     setVirkeyboardPos();
-    usersMenu->move(width() - x - usersMenu->width() , \
-                    height() - y - usersMenu->height());
+    usersMenu->move(width() - x , \
+                    height() - y - usersMenu->height() - ui->btnSwitchUser->width()/2);
 
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 

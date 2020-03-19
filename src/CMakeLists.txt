@@ -50,6 +50,7 @@ qt5_wrap_cpp(dialog_SRC
         users.h
         displaymanager.h
 	iconedit.h
+	powermanager.h
         logind.h
 	)
 
@@ -67,6 +68,7 @@ set(dialog_SRC
 	grab-x11.cpp
 	configuration.cpp
 	screensaver.cpp
+	powermanager.cpp
 	users.cpp
 	displaymanager.cpp
 	iconedit.cpp

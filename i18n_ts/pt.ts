@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pt">
+<TS version="2.1" language="pt">
 <context>
     <name>AuthDialog</name>
     <message>
@@ -126,63 +126,33 @@
     </message>
 </context>
 <context>
-    <name>BiometricAuthWidget</name>
-    <message>
-        <source>Current device: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Identify failed, Please retry.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>BiometricDevicesWidget</name>
-    <message>
-        <source>Please select the biometric device</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Device type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Device name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DeviceType</name>
     <message>
         <source>FingerPrint</source>
-        <translation type="unfinished">Impressão digital</translation>
+        <translation type="obsolete">Impressão digital</translation>
     </message>
     <message>
         <source>FingerVein</source>
-        <translation type="unfinished">FingerVein</translation>
+        <translation type="obsolete">FingerVein</translation>
     </message>
     <message>
         <source>Iris</source>
-        <translation type="unfinished">Íris</translation>
+        <translation type="obsolete">Íris</translation>
     </message>
     <message>
         <source>Face</source>
-        <translation type="unfinished">Face</translation>
+        <translation type="obsolete">Face</translation>
     </message>
     <message>
         <source>VoicePrint</source>
-        <translation type="unfinished">VoicePrint</translation>
+        <translation type="obsolete">VoicePrint</translation>
     </message>
 </context>
 <context>
     <name>KeyboardWidget</name>
     <message>
         <source>KeyboardWidget</source>
-        <translation>KeyboardWidget</translation>
+        <translation type="vanished">KeyboardWidget</translation>
     </message>
 </context>
 <context>
@@ -209,6 +179,36 @@
     </message>
 </context>
 <context>
+    <name>PowerManager</name>
+    <message>
+        <source>lock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SwitchUser</source>
+        <translation type="unfinished">Mudar de utilizador</translation>
+    </message>
+    <message>
+        <source>logout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reboot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shutdown</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SleepTime</name>
+    <message>
+        <source>You have rested:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <source>Start command for the ukui ScreenSaver.</source>
@@ -225,6 +225,22 @@
     <message>
         <source>activated by session idle signal</source>
         <translation>ativado por sinal ocioso de sessão</translation>
+    </message>
+    <message>
+        <source>Screensaver for ukui-screensaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show on root window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show on window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>window id</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

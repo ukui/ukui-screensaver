@@ -24,11 +24,13 @@
 
 #include <QWidget>
 
+
 namespace Ui {
 class LockWidget;
 }
 
 class VirtualKeyboard;
+class PowerManager;
 class AuthDialog;
 class Users;
 class UserItem;
@@ -61,6 +63,8 @@ private Q_SLOTS:
     void onUserDeleted(const UserItem &user);
     void onUserMenuTrigged(QAction *action);
     void showVirtualKeyboard();
+    void showPowerManager();
+    void switchToGreeter();
 
 protected:
      bool eventFilter(QObject *obj, QEvent *event);
@@ -69,6 +73,7 @@ private:
     Ui::LockWidget      *ui;
     AuthDialog          *authDialog;
     VirtualKeyboard     *vKeyboard;
+    PowerManager        *powermanager;
     QTimer              *timer;
     QMenu               *usersMenu;
     Users               *users;
