@@ -33,10 +33,6 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QCommandLineParser parser;
-    QString windowId;
-    Screensaver s;
-    XWindowAttributes xwa;
 	
     //加载翻译文件
     QString locale = QLocale::system().name();
@@ -45,6 +41,12 @@ int main(int argc, char *argv[])
     translator.load(qmFile);
     a.installTranslator(&translator);
     qDebug() << "load translation file " << qmFile;
+
+
+    QCommandLineParser parser;
+    QString windowId;
+    Screensaver s;
+    XWindowAttributes xwa;
 
     parser.setApplicationDescription("Test helper");
     parser.addHelpOption();
