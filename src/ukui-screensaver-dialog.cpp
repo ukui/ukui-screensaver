@@ -215,8 +215,8 @@ static void messageOutput(QtMsgType type, const QMessageLogContext &context, con
     QByteArray localMsg = msg.toLocal8Bit();
 
     QString filePath(context.file);
-    int seprator = filePath.lastIndexOf('/');
-    QString fileName = filePath.right(filePath.length() - seprator - 1);
+    int separator = filePath.lastIndexOf('/');
+    QString fileName = filePath.right(filePath.length() - separator - 1);
     const char *file = fileName.toLocal8Bit().data();
 
     switch(type) {
