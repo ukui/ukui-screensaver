@@ -80,50 +80,9 @@ void AuthDialog::stopAuth()
     }
 }
 
-QPixmap AuthDialog::DrawRound(QPixmap &src, int radius)
-{
-
-    QPixmap pixmap(src);
-
-    QPainter painter(&pixmap);
-    painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-    QRect drawRect = pixmap.rect();
-    QPoint point(radius,radius);
-    QRadialGradient rg(point,drawRect.width()/2,point);
-    rg.setColorAt(0,Qt::transparent);
-    rg.setColorAt(0.93,Qt::transparent);
-    rg.setColorAt(0.94,Qt::white);
-    rg.setColorAt(1,Qt::white);
-    painter.setBrush(rg);
-    QPen pen(Qt::white);//定义画笔
-    painter.setPen(pen);
-    painter.drawEllipse(drawRect);
-
-    return pixmap;
-}
-
-QPixmap AuthDialog::PixmapToRound(const QPixmap &src, int radius)
-{
-    if (src.isNull()) {
-        return QPixmap();
-    }
-
-    QPixmap pixmapa(src);
-    QPixmap pixmap(radius*2,radius*2);
-    pixmap.fill(Qt::transparent);
-    QPainter painter(&pixmap);
-    painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-    QPainterPath path;
-    path.addEllipse(0, 0, radius*2, radius*2);
-    painter.setClipPath(path);
-    painter.drawPixmap(0, 0, radius*2, radius*2, pixmapa);
-    return pixmap;
-}
-
 void AuthDialog::initUI()
 {
     setFixedWidth(500);
-    const QString SheetStyle = "min-width: 128px; min-height: 128px;max-width:128px; max-height: 128px;border-radius: 64px;  border:0px   solid white;";
 
     m_userWidget = new QWidget(this);
     m_userWidget->setObjectName(QStringLiteral("userWidget"));
@@ -132,14 +91,9 @@ void AuthDialog::initUI()
     m_faceLabel = new QLabel(m_userWidget);
     m_faceLabel->setObjectName(QStringLiteral("faceLabel"));
     m_faceLabel->setFocusPolicy(Qt::NoFocus);
-    m_faceLabel->setStyleSheet(SheetStyle);
     QPixmap facePixmap(user.icon);
-   // facePixmap = facePixmap.scaled(120, 120, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
     QPixmap pixMap= facePixmap.scaled(128,128, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-     //50为圆形的半径
-     pixMap =  PixmapToRound(pixMap, 64);
-     pixMap =  DrawRound(pixMap,64);
-     m_faceLabel->setAlignment(Qt::AlignCenter);
+    m_faceLabel->setAlignment(Qt::AlignCenter);
     m_faceLabel->setPixmap(pixMap);
 
     /* 用户名 */
