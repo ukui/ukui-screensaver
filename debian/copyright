@@ -8,7 +8,6 @@ Files: CMakeLists.txt
        data/*
        man/*
        debian/*
-       .gitmodules
 Copyright: 2018, Tianjin KYLIN Information Technology Co., Ltd.
 License: GPL-3+
 

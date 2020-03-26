@@ -1,3 +1,24 @@
+ukui-screensaver (2.1.0-1) unstable; urgency=medium
+
+  * New upstream bugfix release.
+    - Fix the problem that the on-screen keyboard
+      is displayed incorrectly when dual screen.
+    - Fix the issue that the second-user cannot
+      use biometrics when switching users to lock the screen.
+    - Fix the lock screen issue when root user switched tty
+      back and forth.
+    - Keep lock screen stays on top.
+    - Fix that in extended mode, login interface cannot be switched
+      between two monitors with the mouse.
+    * Fix the problem that the first user could not lock
+      the screen when logging in two users at the same time
+      by user switching.
+  * debian:
+    - Bump standards-vertion to 4.5.0.
+    - Remove the missing file from copyright.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Thu, 26 Mar 2020 21:19:04 +0800
+
 ukui-screensaver (2.0.10-1) unstable; urgency=medium
 
   * New upstream release.
