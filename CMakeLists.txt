@@ -38,5 +38,7 @@ add_subdirectory(src)
 add_subdirectory(i18n_ts)
 add_subdirectory(data)
 add_subdirectory(screensaver)
+add_subdirectory(Common)
 
-add_dependencies(ukui-screensaver-dialog BiometricAuth VirtualKeyboard)
+add_dependencies(ukui-screensaver-dialog BiometricAuth VirtualKeyboard Common)
+add_dependencies(ukui-screensaver-default Common)

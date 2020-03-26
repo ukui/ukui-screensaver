@@ -8,6 +8,7 @@ find_library(PAM_LIBRARIES pam)
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/VirtualKeyboard/src)
 include_directories(${PROJECT_SOURCE_DIR}/BiometricAuth)
+include_directories(${PROJECT_SOURCE_DIR}/Common)
 
 include_directories(
 	${X11_INCLUDE_DIRS}
@@ -82,7 +83,7 @@ target_link_libraries(ukui-screensaver-dialog
 	Qt5::DBus
 	Qt5::X11Extras
 	${EXTRA_LIBS}
-    BiometricAuth VirtualKeyboard
+	BiometricAuth VirtualKeyboard Common
 	)
 
 qt5_add_dbus_adaptor(backend_SRC
