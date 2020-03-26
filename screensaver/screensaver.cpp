@@ -34,7 +34,8 @@
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
   date(new ChineseDate()),
-  centerWidget(nullptr)
+  centerWidget(nullptr),
+  dateOfLunar(nullptr)
 {
     installEventFilter(this);
     initUI();
@@ -81,9 +82,11 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 
     sleepTime->setGeometry(x,y,sleepTime->geometry().width(),sleepTime->geometry().height());
 
-    centerWidget->adjustSize();
-    centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
+    if(centerWidget){
+        centerWidget->adjustSize();
+        centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
                               centerWidget->width(),centerWidget->height());
+    }
 
     ubuntuKylinlogo->setGeometry(26,26,ubuntuKylinlogo->width(),ubuntuKylinlogo->height());
 }
@@ -130,15 +133,21 @@ void Screensaver::setDatelayout()
     this->dateOfDay->setAlignment(Qt::AlignCenter);
     this->dateOfDay->adjustSize();
 
-    this->dateOfLunar = new QLabel(this);
-    this->dateOfLunar->setText(date->getDateLunar());
-    this->dateOfLunar->setObjectName("dateOfLunar");
-    this->dateOfLunar->setAlignment(Qt::AlignCenter);
-    this->dateOfLunar->adjustSize();
-
     QHBoxLayout *hdateLayout = new QHBoxLayout(dateWidget);
     hdateLayout->addWidget(dateOfDay);
-    hdateLayout->addWidget(dateOfLunar);
+
+    QString lang = qgetenv("LANG");
+    if (!lang.isEmpty()){
+        qDebug()<<"lang = "<<lang;
+        if (lang.contains("zh_CN")){
+            this->dateOfLunar = new QLabel(this);
+            this->dateOfLunar->setText(date->getDateLunar());
+            this->dateOfLunar->setObjectName("dateOfLunar");
+            this->dateOfLunar->setAlignment(Qt::AlignCenter);
+            this->dateOfLunar->adjustSize();
+            hdateLayout->addWidget(dateOfLunar);
+        }
+    }
     dateWidget->adjustSize();
 
     vtimeLayout->addWidget(dateWidget);
@@ -148,13 +157,6 @@ void Screensaver::setDatelayout()
 
 void Screensaver::setSleeptime()
 {
-    QString lang = qgetenv("LANG");
-    if (!lang.isEmpty()){
-        qDebug()<<"lang = "<<lang;
-        if (!lang.contains("zh_CN")){
-            return;
-        }
-    }
     sleepTime = new SleepTime(this);
     sleepTime->adjustSize();
      updateDate();
