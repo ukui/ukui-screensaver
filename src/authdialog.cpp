@@ -80,6 +80,24 @@ void AuthDialog::stopAuth()
     }
 }
 
+QPixmap AuthDialog::PixmapToRound(const QPixmap &src, int radius)
+{
+    if (src.isNull()) {
+        return QPixmap();
+    }
+
+    QPixmap pixmapa(src);
+    QPixmap pixmap(radius*2,radius*2);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    QPainterPath path;
+    path.addEllipse(0, 0, radius*2, radius*2);
+    painter.setClipPath(path);
+    painter.drawPixmap(0, 0, radius*2, radius*2, pixmapa);
+    return pixmap;
+}
+
 void AuthDialog::initUI()
 {
     setFixedWidth(500);
@@ -91,7 +109,13 @@ void AuthDialog::initUI()
     m_faceLabel = new QLabel(m_userWidget);
     m_faceLabel->setObjectName(QStringLiteral("faceLabel"));
     m_faceLabel->setFocusPolicy(Qt::NoFocus);
-    QPixmap facePixmap(":/image/assets/iconFace.png");
+    const QString SheetStyle = QString("border-radius: 90px;  border:0px   solid white;");
+    m_faceLabel->setStyleSheet(SheetStyle);
+    m_faceLabel->setAlignment(Qt::AlignCenter);
+
+    QPixmap facePixmap(user.icon);
+    facePixmap = facePixmap.scaled(180,180, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    facePixmap = PixmapToRound(facePixmap, 90);
     m_faceLabel->setAlignment(Qt::AlignCenter);
     m_faceLabel->setPixmap(facePixmap);
 
@@ -137,6 +161,16 @@ void AuthDialog::setChildrenGeometry()
     // 用户信息显示位置
     m_userWidget->setGeometry(0, 0,
                               width(), 292);
+    
+    const QString SheetStyle = QString("border-radius: 90px;  border:0px   solid white;");
+    m_faceLabel->setStyleSheet(SheetStyle);
+
+    QPixmap facePixmap(user.icon);
+    facePixmap = facePixmap.scaled(180,180, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    facePixmap = PixmapToRound(facePixmap, 90);
+    m_faceLabel->setAlignment(Qt::AlignCenter);
+    m_faceLabel->setPixmap(facePixmap);
+
     m_faceLabel->setGeometry((width() - 180) / 2, 0, 180, 180);
     m_nameLabel->setGeometry(0, m_faceLabel->geometry().bottom() + 25,
                              width(), 40);
