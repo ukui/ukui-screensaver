@@ -87,21 +87,21 @@ QLineEdit::focus{
 QMenu{
     background-color: rgb(255,255,255,20%);
     color: white;
+    border-radius: 4px;
     font-size: 14px;
 }
 QMenu::item:selected {
+    border-radius: 4px;
     background-color:rgb(255,255,255,30%);
 }
 QMenu::item:pressed {
+    border-radius: 4px;
     background-color: rgb(255,255,255,30%);
 }
 
 /* 虚拟键盘开启按钮、用户切换按钮 */
 #btnSwitchUser, #btnKeyboard,#btnPowerManager {
-
-}
-#btnKeyboard, #btnSwitchUser,#btnPowerManager {
-
+    border-radius: 4px;
 }
 #btnKeyboard::hover, #btnSwitchUser::hover,#btnPowerManager::hover {
     background-color: rgb(255, 255, 255, 20%);
@@ -193,11 +193,13 @@ QListWidget{
 }
 QListWidget::item:hover{
     background:rgb(255, 255, 255, 20%);
+    border-radius: 4px;
     border: none;
 }
 
 QListWidget::item:selected
     background:rgb(255, 255, 255, 20%);
     border: none;
+    border-radius: 4px;
 }
 
