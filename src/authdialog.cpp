@@ -92,6 +92,7 @@ void AuthDialog::initUI()
     m_faceLabel->setObjectName(QStringLiteral("faceLabel"));
     m_faceLabel->setFocusPolicy(Qt::NoFocus);
     QPixmap facePixmap(user.icon);
+
     QPixmap pixMap= facePixmap.scaled(128,128, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     m_faceLabel->setAlignment(Qt::AlignCenter);
     m_faceLabel->setPixmap(pixMap);
@@ -155,7 +156,7 @@ void AuthDialog::setChildrenGeometry()
 
 
 void AuthDialog::closeEvent(QCloseEvent *event)
-{
+{冲突
     qDebug() << "AuthDialog::closeEvent";
 
     if(auth && auth->isAuthenticating())
