@@ -2,7 +2,7 @@ qt5_wrap_cpp(Common_SRC
 	autoresize.h
 	)
 
-set(BiometricAuth_SRC
+set(Common_SRC
 	${Common_SRC}
 	autoresize.cpp
 	)

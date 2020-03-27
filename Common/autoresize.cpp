@@ -1,6 +1,6 @@
 #include "autoresize.h"
 
-AutoResize::AutoResize(QWidget* obj,float baseWidth,float baseHeight):
+AutoResize::AutoResize(QWidget* obj,int baseWidth,int baseHeight):
 	obj(obj),
 	baseWidth(baseWidth),
 	baseHeight(baseHeight)
