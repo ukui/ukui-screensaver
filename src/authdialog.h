@@ -69,7 +69,6 @@ private:
     void showBiometricAuthWidget();
     void showBiometricDeviceWidget();
     QPixmap PixmapToRound(const QPixmap &src, int radius);
-    QPixmap DrawRound(QPixmap &src, int radius);
 
 private Q_SLOTS:
     void onShowMessage(const QString &message, Auth::MessageType type);

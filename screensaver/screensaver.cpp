@@ -42,6 +42,11 @@ Screensaver::Screensaver(QWidget *parent):
 
     settings = new QGSettings("org.mate.background","",this);
     background = settings->get("picture-filename").toString();
+    QList<QLabel*> labelList = this->findChildren<QLabel *>();
+    for(int i = 0;i<labelList.count();i++)
+    {
+        labelList.at(i)->setAlignment(Qt::AlignCenter);
+    }
 }
 
 Screensaver::~Screensaver()

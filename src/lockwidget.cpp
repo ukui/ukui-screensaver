@@ -269,7 +269,7 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
     ui->btnSwitchUser->move(width() - x, height() - y);
     setVirkeyboardPos();
     usersMenu->move(width() - x , \
-                    height() - y - usersMenu->height() - ui->btnSwitchUser->width()/2);
+                    height() - y - usersMenu->height() - ui->btnSwitchUser->width()/2 - 10);
 
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 
