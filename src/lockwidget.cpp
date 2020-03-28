@@ -44,6 +44,7 @@ LockWidget::LockWidget(QWidget *parent)
 
     UserItem user = users->getUserByName(getenv("USER"));
     authDialog = new AuthDialog(user, this);
+    authDialog->installEventFilter(this);
     connect(authDialog, &AuthDialog::authenticateCompete,
             this, &LockWidget::closed);
     connect(this, &LockWidget::capsLockChanged,
@@ -66,13 +67,11 @@ void LockWidget::closeEvent(QCloseEvent *event)
 
 bool LockWidget::eventFilter(QObject *obj, QEvent *event)
 {
-    if(obj == this){
-        if(event->type() == 2){
-                if(usersMenu->isVisible())
+    if(event->type() == 2){
+          if(usersMenu && usersMenu->isVisible())
                     usersMenu->hide();
-                return false;
-         }
     }
+
     return false;
 }
 
@@ -123,6 +122,7 @@ void LockWidget::initUI()
     ui->btnPowerManager->setFixedSize(52,48);
     ui->btnPowerManager->setIconSize(QSize(30,30));
     ui->btnPowerManager->setFocusPolicy(Qt::NoFocus);
+    ui->btnPowerManager->installEventFilter(this);
     connect(ui->btnPowerManager,&QPushButton::clicked
             ,this,&LockWidget::showPowerManager);
 
@@ -136,6 +136,7 @@ void LockWidget::initUI()
     //虚拟键盘
     vKeyboard = new VirtualKeyboard(this);
     vKeyboard->hide();
+
     connect(vKeyboard, &VirtualKeyboard::aboutToClose,
             vKeyboard, &VirtualKeyboard::hide);
 
@@ -143,6 +144,7 @@ void LockWidget::initUI()
     ui->btnKeyboard->setFixedSize(52, 48);
     ui->btnKeyboard->setIconSize(QSize(30, 30));
     ui->btnKeyboard->setFocusPolicy(Qt::NoFocus);
+    ui->btnKeyboard->installEventFilter(this);
 /*    connect(ui->btnKeyboard, &QPushButton::clicked,
             this, [&]{
         qDebug() << vKeyboard->isHidden();
@@ -207,7 +209,8 @@ void LockWidget::initUserMenu()
     if(!usersMenu)
     {
         usersMenu = new QMenu(this);
-
+        usersMenu->setObjectName("usersMenu");
+        usersMenu->installEventFilter(this);
         //如果没有设置x11属性，则由于弹出菜单受窗口管理器管理，而主窗口不受，在点击菜单又点回主窗口会闪屏。
         usersMenu->setWindowFlags(Qt::X11BypassWindowManagerHint);
         usersMenu->hide();
@@ -217,8 +220,10 @@ void LockWidget::initUserMenu()
                 this, [&]{
                 if(usersMenu->isVisible())
                     usersMenu->hide();
-                else
+                else{
                     usersMenu->show();
+                    usersMenu->setFocus();
+                }
         });
 
     }
