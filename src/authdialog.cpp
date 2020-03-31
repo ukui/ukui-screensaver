@@ -156,7 +156,7 @@ void AuthDialog::setChildrenGeometry()
 
 
 void AuthDialog::closeEvent(QCloseEvent *event)
-{冲突
+{
     qDebug() << "AuthDialog::closeEvent";
 
     if(auth && auth->isAuthenticating())
