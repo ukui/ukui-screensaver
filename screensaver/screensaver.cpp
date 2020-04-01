@@ -35,7 +35,8 @@ Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
   date(new ChineseDate()),
   centerWidget(nullptr),
-  dateOfLunar(nullptr)
+  dateOfLunar(nullptr),
+  flag(0)
 {
     installEventFilter(this);
     initUI();
@@ -78,19 +79,43 @@ void Screensaver::paintEvent(QPaintEvent *event)
 
 void Screensaver::resizeEvent(QResizeEvent */*event*/)
 {
+    if(width() < 800 || height()<600){
+        if(flag == 0)
+        {
+            QList<QLabel*> labelList = this->findChildren<QLabel *>();
+            for(int i = 0;i<labelList.count();i++)
+            {
+                int fontsize = labelList.at(i)->font().pixelSize();
+                const QString SheetStyle = QString("font-size:%1px;").arg(fontsize/2);
+                labelList.at(i)->setStyleSheet(SheetStyle);
+
+            }
+            timeLayout->adjustSize();
+            if(centerWidget)
+                centerWidget->adjustSize();
+        }
+        flag = 1;
+    }
+
     int x = (this->width()-timeLayout->geometry().width())/2;
     int y = 50;
+    if(height() < 600)
+	    y = 5;
     timeLayout->setGeometry(x,y,timeLayout->geometry().width(),timeLayout->geometry().height());
 
-    x = this->width() - sleepTime->geometry().width() - 26;
-    y = this->height() - sleepTime->geometry().height() - 26;
+//    x = this->width() - sleepTime->geometry().width() - 26;
+//    y = this->height() - sleepTime->geometry().height() - 26;
 
-    sleepTime->setGeometry(x,y,sleepTime->geometry().width(),sleepTime->geometry().height());
+//    sleepTime->setGeometry(x,y,sleepTime->geometry().width(),sleepTime->geometry().height());
 
     if(centerWidget){
         centerWidget->adjustSize();
         centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
                               centerWidget->width(),centerWidget->height());
+
+        if((height()-centerWidget->height())/2 < timeLayout->y() + timeLayout->height())
+            centerWidget->setGeometry((width()-centerWidget->width())/2,timeLayout->y() + timeLayout->height(),
+                                  centerWidget->width(),centerWidget->height());
     }
 
     ubuntuKylinlogo->setGeometry(26,26,ubuntuKylinlogo->width(),ubuntuKylinlogo->height());
@@ -105,7 +130,7 @@ void Screensaver::initUI()
     qssFile.close();
 
     setDatelayout();
-    setSleeptime();
+  //  setSleeptime();
   
     setCenterWidget();
 
