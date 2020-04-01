@@ -120,7 +120,7 @@ void PowerManager::initUI()
     QLabel *switchLabel =  new QLabel(this);
     switchFace->setAlignment(Qt::AlignCenter);
     switchLabel->setAlignment(Qt::AlignCenter);
-    switchFace->setPixmap(QPixmap(":/image/assets/avatar.png").scaled(58,58));
+    switchFace->setPixmap(QPixmap(":/image/assets/switchGreeter.png").scaled(58,58));
     switchLabel->setText(tr("SwitchUser"));
     switchWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     QVBoxLayout *switchlayout = new QVBoxLayout(switchWidget);

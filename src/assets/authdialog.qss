@@ -88,8 +88,23 @@ QMenu{
     background-color: rgb(255,255,255,20%);
     color: white;
     border-radius: 4px;
-    font-size: 14px;
+    width:165px;
+    font-size: 16px;
+    padding: 5px 5px 5px 5px;
 }
+
+QMenu::icon{
+     padding: 2px 5px 2px 5px;
+}
+QMenu::item
+{
+    width:135px;
+    border-radius: 4px;
+    height:36px;
+    font-size:16px;
+    padding: 2px 10px 2px 10px;
+}
+
 QMenu::item:selected {
     border-radius: 4px;
     background-color:rgb(255,255,255,30%);

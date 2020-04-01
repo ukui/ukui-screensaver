@@ -202,7 +202,7 @@ void LockWidget::setVirkeyboardPos()
 
 void LockWidget::initUserMenu()
 {
-    ui->btnSwitchUser->setIcon(QIcon(":/image/assets/avatar.png"));
+    ui->btnSwitchUser->setIcon(QIcon(":/image/assets/switchUser.png"));
     ui->btnSwitchUser->setIconSize(QSize(36, 24));
     ui->btnSwitchUser->setFixedSize(52, 48);
     ui->btnSwitchUser->setFocusPolicy(Qt::NoFocus);
@@ -274,7 +274,7 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
     ui->btnSwitchUser->move(width() - x, height() - y);
     setVirkeyboardPos();
     usersMenu->move(width() - x , \
-                    height() - y - usersMenu->height() - ui->btnSwitchUser->width()/2 - 10);
+                    height() - y - usersMenu->height() - ui->btnSwitchUser->width()/2 - 18);
 
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 
