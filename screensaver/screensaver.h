@@ -36,7 +36,7 @@ private:
     ChineseDate *date;
     QGSettings *settings;
     QString background;
-
+    int flag;
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);
