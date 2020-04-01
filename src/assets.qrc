@@ -6,7 +6,8 @@
         <file>assets/show-password.png</file>
         <file>assets/hide-password.png</file>
         <file>assets/keyboard.png</file>
-        <file>assets/avatar.png</file>
+        <file>assets/switchGreeter.png</file>
+	<file>assets/switchUser.png</file>
         <file>assets/waiting.png</file>
         <file>assets/capslock.png</file>
         <file>assets/combobox_down.png</file>
