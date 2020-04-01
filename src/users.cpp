@@ -36,7 +36,7 @@ QDebug operator<<(QDebug stream, const UserItem &user)
 
 Users::Users(QObject *parent) : QObject(parent)
 {
-    defaultIcon = ":/image/assets/iconFace.png";
+    defaultIcon = ":/image/assets/iconFace.svg";
     loadUsers();
 }
 
