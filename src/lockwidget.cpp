@@ -210,7 +210,6 @@ void LockWidget::initUserMenu()
     {
         usersMenu = new QMenu(this);
         usersMenu->setObjectName("usersMenu");
-        usersMenu->installEventFilter(this);
         //如果没有设置x11属性，则由于弹出菜单受窗口管理器管理，而主窗口不受，在点击菜单又点回主窗口会闪屏。
         usersMenu->setWindowFlags(Qt::X11BypassWindowManagerHint);
         usersMenu->hide();
