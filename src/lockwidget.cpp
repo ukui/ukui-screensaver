@@ -256,12 +256,13 @@ void LockWidget::initUserMenu()
 void LockWidget::resizeEvent(QResizeEvent */*event*/)
 {
     //认证窗口
+    //设置认证窗口左右居中，位于距窗口顶部305的距离。
     authDialog->setGeometry((width()-authDialog->geometry().width())/2, 305,
                             authDialog->width(), height());
 
     //系统时间
     ui->widgetTime->move((width()-ui->widgetTime->geometry().width())/2, 59);
-    //右下角按钮
+    //右下角按钮,x,y的初始值代表距离右下角的距离。
     int x=19,y=86;
     x = x + ui->btnPowerManager->width();
     ui->btnPowerManager->move(width() - x,height() - y);
@@ -272,6 +273,8 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
     x = x + ui->btnSwitchUser->width();
     ui->btnSwitchUser->move(width() - x, height() - y);
     setVirkeyboardPos();
+
+    //设置弹出菜单，设置弹出菜单的坐标为切换用户按钮的上方，中间保持一定间隔。
     usersMenu->move(width() - x , \
                     height() - y - usersMenu->height() - ui->btnSwitchUser->width()/2 - 18);
 
