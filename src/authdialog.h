@@ -42,7 +42,7 @@ class BiometricProxy;
 class BiometricAuthWidget;
 class BiometricDevicesWidget;
 
-
+extern float scale;
 class AuthDialog : public QWidget
 {
     Q_OBJECT
