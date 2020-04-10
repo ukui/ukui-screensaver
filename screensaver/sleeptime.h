@@ -13,15 +13,13 @@ class SleepTime : public QWidget
 public:
     explicit SleepTime(QWidget *parent = nullptr);
     ~SleepTime();
-    void setTime();
+    int setTime();
 
 private:
     QLabel *restTime;
     QList<QLabel *> list;
     QHBoxLayout *layout;
     int sleepTime;
-    int localMin;
-    int timecount;
 
     void init();
     void setSeconds(int seconds);

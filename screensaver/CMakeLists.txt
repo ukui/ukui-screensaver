@@ -22,18 +22,24 @@ qt5_add_resources(screensaver_SRC
 qt5_wrap_cpp(screensaver_SRC
     chinesedate.h
     screensaver.h
+    mbackground.h
     sleeptime.h
     )
 set(screensaver_SRC
     ${screensaver_SRC}
     main.cpp
     chinesedate.cpp
+    mbackground.cpp
     screensaver.cpp
     sleeptime.cpp
     )
 add_executable(ukui-screensaver-default ${screensaver_SRC})
-target_link_libraries(ukui-screensaver-default Qt5::Core Qt5::Widgets Qt5::X11Extras ${EXTRA_LIBS})
+target_link_libraries(ukui-screensaver-default Qt5::Core Qt5::Widgets Qt5::X11Extras Qt5::Xml ${EXTRA_LIBS})
 
 install(TARGETS
 	ukui-screensaver-default
 	DESTINATION lib/ukui-screensaver)
+
+install(FILES
+        screensaver.ini 
+        DESTINATION share/ukui-screensaver)

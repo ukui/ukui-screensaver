@@ -106,7 +106,7 @@ void PowerManager::initUI()
     lockFace->setAlignment(Qt::AlignCenter);
     lockLabel->setAlignment(Qt::AlignCenter);
     lockFace->setPixmap(QPixmap(":/image/assets/lock.png").scaled(58,58));
-    lockLabel->setText(tr("lock"));
+    lockLabel->setText(tr("Lock Screen"));
 
     lockWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     QVBoxLayout *locklayout = new QVBoxLayout(lockWidget);
@@ -121,7 +121,7 @@ void PowerManager::initUI()
     switchFace->setAlignment(Qt::AlignCenter);
     switchLabel->setAlignment(Qt::AlignCenter);
     switchFace->setPixmap(QPixmap(":/image/assets/switchGreeter.png").scaled(58,58));
-    switchLabel->setText(tr("SwitchUser"));
+    switchLabel->setText(tr("Switch User"));
     switchWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     QVBoxLayout *switchlayout = new QVBoxLayout(switchWidget);
     switchlayout->addWidget(switchFace);
@@ -135,7 +135,7 @@ void PowerManager::initUI()
     logoutFace->setAlignment(Qt::AlignCenter);
     logoutLabel->setAlignment(Qt::AlignCenter);
     logoutFace->setPixmap(QPixmap(":/image/assets/logout.png").scaled(58,58));
-    logoutLabel->setText(tr("logout"));
+    logoutLabel->setText(tr("Log Out"));
     logoutWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     QVBoxLayout *logoutlayout = new QVBoxLayout(logoutWidget);
     logoutlayout->addWidget(logoutFace);
@@ -149,7 +149,7 @@ void PowerManager::initUI()
     rebootFace->setAlignment(Qt::AlignCenter);
     rebootLabel->setAlignment(Qt::AlignCenter);
     rebootFace->setPixmap(QPixmap(":/image/assets/reboot.png").scaled(58,58));
-    rebootLabel->setText(tr("reboot"));
+    rebootLabel->setText(tr("Restart"));
     rebootWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     QVBoxLayout *rebootlayout = new QVBoxLayout(rebootWidget);
     rebootlayout->addWidget(rebootFace);
@@ -163,7 +163,7 @@ void PowerManager::initUI()
     shutdownLabel->setAlignment(Qt::AlignCenter);
     shutdownFace->setAlignment(Qt::AlignCenter);
     shutdownFace->setPixmap(QPixmap(":/image/assets/shutdown.png").scaled(58,58));
-    shutdownLabel->setText(tr("shutdown"));
+    shutdownLabel->setText(tr("Power Off"));
     shutdownWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     QVBoxLayout *shutdownlayout = new QVBoxLayout(shutdownWidget);
     shutdownlayout->addWidget(shutdownFace);
