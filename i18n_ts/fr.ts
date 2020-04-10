@@ -126,33 +126,63 @@
     </message>
 </context>
 <context>
+    <name>BiometricAuthWidget</name>
+    <message>
+        <source>Current device: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Identify failed, Please retry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BiometricDevicesWidget</name>
+    <message>
+        <source>Please select the biometric device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Device type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Device name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DeviceType</name>
     <message>
         <source>FingerPrint</source>
-        <translation type="obsolete">Empreinte digitale</translation>
+        <translation type="unfinished">Empreinte digitale</translation>
     </message>
     <message>
         <source>FingerVein</source>
-        <translation type="obsolete">FingerVein</translation>
+        <translation type="unfinished">FingerVein</translation>
     </message>
     <message>
         <source>Iris</source>
-        <translation type="obsolete">Iris</translation>
+        <translation type="unfinished">Iris</translation>
     </message>
     <message>
         <source>Face</source>
-        <translation type="obsolete">Visage</translation>
+        <translation type="unfinished">Visage</translation>
     </message>
     <message>
         <source>VoicePrint</source>
-        <translation type="obsolete">VoicePrint</translation>
+        <translation type="unfinished">VoicePrint</translation>
     </message>
 </context>
 <context>
     <name>KeyboardWidget</name>
     <message>
         <source>KeyboardWidget</source>
-        <translation type="vanished">KeyboardWidget</translation>
+        <translation>KeyboardWidget</translation>
     </message>
 </context>
 <context>
@@ -175,29 +205,44 @@
     </message>
     <message>
         <source>SwitchUser</source>
-        <translation>Changer d&apos;utilisateur</translation>
+        <translation type="vanished">Changer d&apos;utilisateur</translation>
     </message>
 </context>
 <context>
     <name>PowerManager</name>
     <message>
-        <source>lock</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>SwitchUser</source>
-        <translation type="unfinished">Changer d&apos;utilisateur</translation>
+        <translation type="obsolete">Changer d&apos;utilisateur</translation>
     </message>
     <message>
-        <source>logout</source>
+        <source>Lock Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>reboot</source>
+        <source>Switch User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>shutdown</source>
+        <source>Log Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Power Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Screensaver</name>
+    <message>
+        <source>exit(Esc)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set as desktop wallpaper</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

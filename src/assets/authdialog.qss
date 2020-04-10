@@ -27,18 +27,13 @@ QLabel {
 
 /* 密码输入框 */
 QLineEdit {
-    background: #FFFFFF;
-    border: 1px solid #FFFFFF;
     font-size: 14px;
     lineedit-password-character:9679;
 }
 
 QLineEdit::hover {
-    border: 1px solid #00FFFF;
 }
 QLineEdit::focus{
-    background: #FFFFFF;
-    border: #FFFFFF;
     border-radius: 4px;
 }
 

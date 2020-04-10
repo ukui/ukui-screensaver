@@ -22,9 +22,7 @@
 #include <QListWidget>
 
 SleepTime::SleepTime(QWidget *parent) : QWidget(parent),
-  sleepTime(0),
-  localMin(0),
-  timecount(100)
+  sleepTime(0)
 {
     init();
 }
@@ -38,13 +36,13 @@ void SleepTime::init()
 {
     layout = new QHBoxLayout(this);
     layout->setDirection(QBoxLayout::RightToLeft);
-    layout->setSpacing(12);
+    layout->setSpacing(4);
 
     for(int i=0;i<2;i++)
     {
         QLabel *label = new QLabel(this);
         label->setText("0");
-        label->setFixedSize(28,48);
+        label->setFixedSize(40,40);
         label->setObjectName("clockTime");
         list.append(label);
     }
@@ -58,7 +56,7 @@ void SleepTime::init()
     {
         QLabel *label = new QLabel(this);
         label->setText("0");
-        label->setFixedSize(28,48);
+        label->setFixedSize(40,40);
         label->setObjectName("clockTime");
         list.append(label);
     }
@@ -78,37 +76,28 @@ void SleepTime::init()
 
 }
 
-void SleepTime::setTime()
+int SleepTime::setTime()
 {
     sleepTime+=1;
 
-    if(sleepTime>5999)
+    if(sleepTime>5999){
         hide();
+        return false;
+    }
 
     int sec = sleepTime % 60;
     int min = sleepTime/60;
     setSeconds(sec);
-    if(min>localMin)
-    {
-        if(min>=timecount){
-            timecount *=10;
-            QLabel *label = new QLabel(this);
-            label->setText("0");
-            label->setFixedSize(28,48);
-            label->setObjectName("clockTime");
-            list.append(label);
-            layout->addWidget(label);
-        }
+    setMinute(min);
 
-        localMin = min;
-        setMinute(min);
-    }
+    return true;
 }
 
 void SleepTime::setSeconds(int seconds)
 {
     int sec1 = seconds%10;
     int sec2 = seconds/10;
+
     list.at(0)->setText(QString::number(sec1));
     list.at(1)->setText(QString::number(sec2));
 }

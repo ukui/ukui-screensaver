@@ -28,6 +28,7 @@
 #include <QCommandLineParser>
 #include <X11/Xlib.h>
 
+
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
 
 int main(int argc, char *argv[])

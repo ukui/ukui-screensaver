@@ -5,4 +5,22 @@
     <qresource prefix="/">
         <file>assets/logo.svg</file>
     </qresource>
+    <qresource prefix="/">
+        <file>assets/download.svg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>assets/prev.svg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>assets/next.svg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>assets/setBackground.svg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>assets/settings.svg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>assets/wallpaper.svg</file>
+    </qresource>
 </RCC>

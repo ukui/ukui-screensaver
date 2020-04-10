@@ -23,6 +23,7 @@
 #endif
 
 #include <QWidget>
+#include <QResizeEvent>
 
 
 namespace Ui {
@@ -44,7 +45,6 @@ class LockWidget : public QWidget
 public:
     explicit LockWidget(QWidget *parent = 0);
     ~LockWidget();
-    void resizeEvent(QResizeEvent *event);
     void closeEvent(QCloseEvent *event);
     void startAuth();
     void stopAuth();
@@ -68,6 +68,7 @@ private Q_SLOTS:
 
 protected:
      bool eventFilter(QObject *obj, QEvent *event);
+     void resizeEvent(QResizeEvent *event);
 
 private:
     Ui::LockWidget      *ui;

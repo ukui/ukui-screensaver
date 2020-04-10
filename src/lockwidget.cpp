@@ -32,7 +32,7 @@
 #include "users.h"
 #include "displaymanager.h"
 
-
+float scale;
 LockWidget::LockWidget(QWidget *parent)
     : QWidget(parent),
       ui(new Ui::LockWidget),
@@ -40,6 +40,7 @@ LockWidget::LockWidget(QWidget *parent)
       users(new Users(this)),
       displayManager(new DisplayManager(this))
 {
+    scale = 1.0;
     ui->setupUi(this);
 
     UserItem user = users->getUserByName(getenv("USER"));
@@ -68,8 +69,9 @@ void LockWidget::closeEvent(QCloseEvent *event)
 bool LockWidget::eventFilter(QObject *obj, QEvent *event)
 {
     if(event->type() == 2){
-          if(usersMenu && usersMenu->isVisible())
+          if(usersMenu && usersMenu->isVisible()){
                     usersMenu->hide();
+	  }
     }
 
     return false;
@@ -108,6 +110,7 @@ void LockWidget::initUI()
     ui->lblTime->setText(time);
     ui->lblTime->setStyleSheet("QLabel{color:white; font-size: 50px;}");
     ui->lblTime->setAlignment(Qt::AlignCenter);
+    ui->lblTime->adjustSize();
     timer->start(1000);
 
     QString date = QDate::currentDate().toString("yyyy/MM/dd dddd");
@@ -115,6 +118,7 @@ void LockWidget::initUI()
     ui->lblDate->setText(date);
     ui->lblDate->setStyleSheet("QLabel{color:white; font-size: 16px;}");
     ui->lblDate->setAlignment(Qt::AlignCenter);
+    ui->lblDate->adjustSize();
     ui->widgetTime->adjustSize();
 
     //电源管理
@@ -217,10 +221,12 @@ void LockWidget::initUserMenu()
                 this, &LockWidget::onUserMenuTrigged);
         connect(ui->btnSwitchUser, &QPushButton::clicked,
                 this, [&]{
-                if(usersMenu->isVisible())
+                if(usersMenu->isVisible()){
                     usersMenu->hide();
+		}
                 else{
                     usersMenu->show();
+                    usersMenu->setActiveAction(nullptr);
                     usersMenu->setFocus();
                 }
         });
@@ -243,25 +249,33 @@ void LockWidget::initUserMenu()
         usersMenu->addAction(action);
     }
 
-    {
-        QAction *action = new QAction(QIcon(users->getDefaultIcon()),
-                                      tr("SwitchUser"), this);
-        action->setData("SwitchUser");
-        usersMenu->addAction(action);
-    }
+//    {
+//        QAction *action = new QAction(QIcon(users->getDefaultIcon()),
+//                                      tr("SwitchUser"), this);
+//        action->setData("SwitchUser");
+//        usersMenu->addAction(action);
+//    }
 	
 }
 
 /* lockscreen follows cursor */
-void LockWidget::resizeEvent(QResizeEvent */*event*/)
+void LockWidget::resizeEvent(QResizeEvent *event)
 {
-    //认证窗口
-    //设置认证窗口左右居中，位于距窗口顶部305的距离。
-    authDialog->setGeometry((width()-authDialog->geometry().width())/2, 305,
-                            authDialog->width(), height());
+    QSize size = event->size();
+        //重新计算缩放比例
+    scale = QString::number(size.width() / 1920.0, 'f', 1).toFloat();
+
+    if(scale > 1)
+            scale = 1;
 
     //系统时间
-    ui->widgetTime->move((width()-ui->widgetTime->geometry().width())/2, 59);
+    ui->widgetTime->move((width()-ui->widgetTime->geometry().width())/2, 59*scale);
+
+    //认证窗口
+    //设置认证窗口左右居中
+    authDialog->setGeometry((width()-authDialog->geometry().width())/2,ui->widgetTime->geometry().bottom() + 176*scale,
+                            authDialog->width(), height());
+
     //右下角按钮,x,y的初始值代表距离右下角的距离。
     int x=19,y=86;
     x = x + ui->btnPowerManager->width();
@@ -275,8 +289,10 @@ void LockWidget::resizeEvent(QResizeEvent */*event*/)
     setVirkeyboardPos();
 
     //设置弹出菜单，设置弹出菜单的坐标为切换用户按钮的上方，中间保持一定间隔。
-    usersMenu->move(width() - x , \
-                    height() - y - usersMenu->height() - ui->btnSwitchUser->width()/2 - 18);
+    if(usersMenu){
+   	 usersMenu->move(width() - x , \
+                    height() - y - usersMenu->height() - 5);
+    }
 
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 

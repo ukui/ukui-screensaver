@@ -6,8 +6,13 @@
 #include <QTimer>
 #include <QGSettings>
 #include <QString>
+#include <QPushButton>
+#include <QSettings>
+#include <QSplitterHandle>
+#include <QSplitter>
 #include "sleeptime.h"
 #include "chinesedate.h"
+#include "mbackground.h"
 
 class Screensaver : public QWidget
 {
@@ -23,19 +28,42 @@ private:
     void setSleeptime();
     void setCenterWidget();
     void updateDate();
+    void setUpdateBackground();
+    void setUpdateCenterWidget();
 
     QLabel *dateOfWeek;
     QLabel *dateOfLocaltime;
     QLabel *dateOfDay;
     QLabel *dateOfLunar;
+
     QWidget *centerWidget;
+
     QLabel *ubuntuKylinlogo;
+
     QWidget *timeLayout;
     SleepTime *sleepTime;
     QTimer *timer;
     ChineseDate *date;
+
     QGSettings *settings;
-    QString background;
+    QPixmap background;
+    QString defaultBackground;
+
+    QPushButton *escButton;
+    QPushButton *prevButton;
+    QPushButton *nextButton;
+    QPushButton *settingsButton;
+    QPushButton *WallpaperButton;
+    QWidget *buttonWidget;
+    QSettings *qsettings;
+
+    MBackground *m_background;
+    QString m_backgroundPath;
+
+    QLabel *centerlabel1;
+    QLabel *centerlabel2;
+    QLabel *authorlabel;
+
     int flag;
 protected:
     void paintEvent(QPaintEvent *event);
@@ -44,6 +72,9 @@ protected:
 
 private Q_SLOTS:
     void updateTime();
+    void setDesktopBackground();
+    void updateBackground();
+    void updateCenterWidget();
 };
 
 #endif // MAINWINDOW_H

@@ -15,20 +15,46 @@ QLabel#dateOfLunar {
     color: #ffffff;
 }
 QLabel#clockTime {
-    border:1px solid white;
-    border-radius: 4px;
-    font-size:24pt;
+    background:rgba(255,255,255,0.15);
+    border-radius: 6px;
+    font-size:20px;
     color: #ffffff;
 }
 QLabel#colon {
-    font-size:24pt;
+    font-size:20px;
     color: #ffffff;
 }
 QLabel#restTime {
-    font-size:18pt;
+    font-size:20px;
     color: #ffffff;
+    opacity:0.6;
 }
 QLabel#centerLabel {
     font-size:36px;
     color: #ffffff;
+}
+QLabel#authorLabel {
+    font-size:28px;
+    color: #ffffff;
+}
+QPushButton{
+    background:rgba(255,255,255,0.12);
+}
+#escButton,#prevButton,#nextButton,#settingsButton{
+    background: rgba(255, 255, 255, 12%);
+    border-radius:24px;
+    color:white;
+}
+#escButton::hover,#prevButton::hover,#nextButton::hover,#settingsButton::hover,#WallpaperButton::hover
+{
+    background: rgba(255, 255, 255, 30%);
+}
+#escButton::pressed,#prevButton::pressed,#nextButton::pressed,#settingsButton::pressed,#WallpaperButton::pressed
+{
+    background: rgba(255, 255, 255, 8%);
+}
+#WallpaperButton{
+    background: rgba(255, 255, 255, 12%);
+    border-radius:4px;
+    color:white;
 }
