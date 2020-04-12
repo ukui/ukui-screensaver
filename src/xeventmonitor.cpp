@@ -84,15 +84,17 @@ void XEventMonitorPrivate::emitButtonSignal(const char *member, xEvent *event)
 
 void XEventMonitorPrivate::emitKeySignal(const char *member, xEvent *event)
 {
-    int keyCode = event->u.u.detail;
-    KeySym keySym = XkbKeycodeToKeysym(QX11Info::display(), event->u.u.detail, 0, 0);
-    char *keyStr = XKeysymToString(keySym);
-    QMetaObject::invokeMethod(q_ptr, member,
-                              Qt::AutoConnection,
-                              Q_ARG(int, keyCode));
-    QMetaObject::invokeMethod(q_ptr, member,
-                              Qt::AutoConnection,
-                              Q_ARG(QString, keyStr));
+    if(QX11Info::display()){
+        int keyCode = event->u.u.detail;
+        KeySym keySym = XkbKeycodeToKeysym(QX11Info::display(), event->u.u.detail, 0, 0);
+        char *keyStr = XKeysymToString(keySym);
+        QMetaObject::invokeMethod(q_ptr, member,
+                                  Qt::AutoConnection,
+                                  Q_ARG(int, keyCode));
+        QMetaObject::invokeMethod(q_ptr, member,
+                                  Qt::AutoConnection,
+                                  Q_ARG(QString, keyStr));
+    }
 }
 
 void XEventMonitorPrivate::run()
