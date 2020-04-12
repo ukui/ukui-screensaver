@@ -209,49 +209,13 @@ void AuthDialog::onAuthComplete()
 
     if(auth->isAuthenticated())
     {
-        if(pam_tally_is_enbled() && !pam_tally_is_canUnlock())
-        {
-	    pam_tally_add_failed();
-            int unlock_time = pam_tally_unlock_time();
-            int failed_count = pam_tally_failed_count();
-            int unlock_time_min = unlock_time /60;
-    //        sprintf(msg, "您已经输错%d次，将锁定账户%d分钟", failed_count, unlock_time_min);
-    //        onShowMessage(tr(msg), Auth::MessageTypeError);
-            int deny = pam_tally_deny();
-	    onShowMessage(tr("Account locked %1 minutes due to %2 fail attempts").arg(unlock_time_min).arg(deny), Auth::MessageTypeError); 
-            authMode = PASSWORD;
-            startAuth();
-        }
-        else
-        {
-            pam_tally_clear_failed();
             Q_EMIT authenticateCompete(true);
-        }
-
     }
     else
     {
         onShowMessage(tr("Password Incorrect, Please try again"),
                       Auth::MessageTypeError);
         //认证失败，重新认证
-
-        if(pam_tally_is_enbled())
-        {
-            pam_tally_add_failed();
-            int deny = pam_tally_deny();
-            int failed_count = pam_tally_failed_count();
-            int unlock_time = pam_tally_unlock_time();
-            int unlock_time_min = unlock_time / 60;
-
-            if (failed_count >= 0 && failed_count < deny)
-            {
-                onShowMessage(tr("Authentication failure,there are still %1 remaining opportunities").arg(deny-failed_count), Auth::MessageTypeError);
-            }
-            else if (failed_count >= deny)
-            {
-                onShowMessage(tr("Account locked %1 minutes due to %2 fail attempts").arg(unlock_time_min).arg(deny), Auth::MessageTypeError);
-            }
-        }
 
         authMode = PASSWORD;
         startAuth();

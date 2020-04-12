@@ -22,6 +22,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QX11Info>
 #include "xeventmonitor.h"
 #include <iostream>
 #include <X11/Xlibint.h>
@@ -83,17 +84,17 @@ void XEventMonitorPrivate::emitButtonSignal(const char *member, xEvent *event)
 
 void XEventMonitorPrivate::emitKeySignal(const char *member, xEvent *event)
 {
-    Display *display = XOpenDisplay(NULL);
-    int keyCode = event->u.u.detail;
-    KeySym keySym = XkbKeycodeToKeysym(display, event->u.u.detail, 0, 0);
-    char *keyStr = XKeysymToString(keySym);
-    QMetaObject::invokeMethod(q_ptr, member,
-                              Qt::AutoConnection,
-                              Q_ARG(int, keyCode));
-    QMetaObject::invokeMethod(q_ptr, member,
-                              Qt::AutoConnection,
-                              Q_ARG(QString, keyStr));
-    XCloseDisplay(display);
+    if(QX11Info::display()){
+        int keyCode = event->u.u.detail;
+        KeySym keySym = XkbKeycodeToKeysym(QX11Info::display(), event->u.u.detail, 0, 0);
+        char *keyStr = XKeysymToString(keySym);
+        QMetaObject::invokeMethod(q_ptr, member,
+                                  Qt::AutoConnection,
+                                  Q_ARG(int, keyCode));
+        QMetaObject::invokeMethod(q_ptr, member,
+                                  Qt::AutoConnection,
+                                  Q_ARG(QString, keyStr));
+    }
 }
 
 void XEventMonitorPrivate::run()
