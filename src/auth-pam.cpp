@@ -58,10 +58,14 @@ void AuthPAM::authenticate(const QString &userName)
     }
     else if(pid == 0)
     {
+        close(toParent[0]);
+        close(toChild[1]);
        _authenticate(userName.toLocal8Bit().data());
     }
     else
     {
+        close(toParent[1]);
+        close(toChild[0]);
         _isAuthenticating = true;
         notifier = new QSocketNotifier(toParent[0], QSocketNotifier::Read);
         connect(notifier, &QSocketNotifier::activated, this, &AuthPAM::onSockRead);
@@ -80,6 +84,12 @@ void AuthPAM::stopAuth()
 
         ::kill(pid, SIGKILL);
 
+        close(toParent[0]);
+        close(toChild[1]);
+        if(notifier){
+            notifier->deleteLater();
+            notifier = nullptr;
+        }
         pid = 0;
     }
 }
@@ -146,6 +156,10 @@ void AuthPAM::onSockRead()
         qDebug() << "result: " << authRet;
         _isAuthenticated = (authRet == PAM_SUCCESS);
         _isAuthenticating = false;
+        if(notifier){
+            notifier->deleteLater();
+            notifier = nullptr;
+        }
         Q_EMIT authenticateComplete();
 
     }
