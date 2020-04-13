@@ -232,11 +232,16 @@ int pam_tally_is_enbled()
 
     pam_tally *tally_ptr;
 
-    if((tally_ptr = pam_tally_memory()) == NULL)
+    if((tally_ptr = pam_tally_memory()) == NULL){
+        close(fd);
         return -1;
+    }
 
-    if(tally_ptr->deny == 0 || tally_ptr->unlock_time == 0)
-        return 0;
+    if(tally_ptr->deny == 0 || tally_ptr->unlock_time == 0){
+        close(fd);
+	return 0;
+    }
+    close(fd);
     return 1;
 }
 
