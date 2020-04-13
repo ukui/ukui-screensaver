@@ -1,3 +1,11 @@
+ukui-screensaver (2.1.1-1) unstable; urgency=medium
+
+  * New upstream bugfix release:
+    - Fix that long press the enter key will cause the crash.
+    - Set default face to avoid empty frame.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Mon, 13 Apr 2020 16:33:05 +0800
+
 ukui-screensaver (2.1.0-1) unstable; urgency=medium
 
   * New upstream bugfix release.
