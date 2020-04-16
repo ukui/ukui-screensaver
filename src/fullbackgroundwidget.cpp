@@ -184,22 +184,13 @@ void FullBackgroundWidget::switchToLinux()
 void FullBackgroundWidget::paintEvent(QPaintEvent *event)
 {
     QDesktopWidget *desktop = QApplication::desktop();
-    if(!desktop->isVirtualDesktop())
+
+    for(auto screen : QGuiApplication::screens())
     {
-        int width=0,height = 0;
-        x11_get_screen_size(&width,&height);
         QPainter painter(this);
-        QRect rec(0,0,width,height);
-        painter.drawPixmap(rec, background);
+        painter.drawPixmap(screen->geometry(), background.scaled(screen->size()));
     }
-    else
-    {
-        for(auto screen : QGuiApplication::screens())
-        {
-            QPainter painter(this);
-            painter.drawPixmap(screen->geometry(), background);
-        }
-    }
+
     return QWidget::paintEvent(event);
 }
 
