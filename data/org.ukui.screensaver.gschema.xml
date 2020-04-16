@@ -10,6 +10,13 @@
     <value nick="none" value="0"/>
     <value nick="fade-in-out" value="1"/>
   </enum>
+  <schema id="org.ukui.screensaver-default" path="/org/ukui/screensaver/">
+    <key name="automatic-switching-enabled" type="b">
+      <default>false</default>
+      <summary>Automatic switching background</summary>
+      <description>Set this to TRUE to activate the automatic switching background.</description>
+    </key>
+  </schema>
   <schema id="org.ukui.screensaver" path="/org/ukui/screensaver/">
     <key name="idle-activation-enabled" type="b">
       <default>true</default>
