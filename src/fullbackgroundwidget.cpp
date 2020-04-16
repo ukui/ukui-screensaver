@@ -334,8 +334,8 @@ void FullBackgroundWidget::showLockWidget()
         lockWidget = new LockWidget(this);
         connect(lockWidget, &LockWidget::closed,
                 this, &FullBackgroundWidget::close);
-        onCursorMoved(cursor().pos());
     }
+    onCursorMoved(cursor().pos());
     lockWidget->setFocus();
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 }
@@ -467,34 +467,12 @@ void FullBackgroundWidget::onScreenCountChanged(int)
 void FullBackgroundWidget::onDesktopResized()
 {
     QDesktopWidget *desktop = QApplication::desktop();
-    if(!desktop->isVirtualDesktop())
-    {
-        int width=0,height = 0;
-        x11_get_screen_size(&width,&height);
-        if(width==0||height==0)
-        {
-            setGeometry(desktop->geometry());
-            if(lockWidget)
-	    	lockWidget->setGeometry(QApplication::primaryScreen()->geometry());
-        }
-        else
-        {
-            qDebug()<<"width = "<<width<<"height  = "<<height;
-            setGeometry(0,0,width,height);
-            if(lockWidget)
-	    	lockWidget->setGeometry(0,0,width,height);
-        }
-    }
-    else{
-        qDebug()<<"desktop"<<desktop->geometry();
-        setGeometry(desktop->geometry());
-        if(lockWidget)
-    		onCursorMoved(cursor().pos());
-    }
-
+    setGeometry(desktop->geometry());
+    if(lockWidget)
+    	onCursorMoved(cursor().pos());
 //    clearScreensavers();
    //repaint();
-	update();
+    update();
 
 }
 
