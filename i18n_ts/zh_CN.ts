@@ -16,7 +16,7 @@
         <translation type="obsolete">使用密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="490"/>
+        <location filename="../src/authdialog.cpp" line="454"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
@@ -34,33 +34,30 @@
         <translation>密码：</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="258"/>
-        <location filename="../src/authdialog.cpp" line="289"/>
         <source>Account locked %1 minutes due to %2 fail attempts</source>
-        <translation>账户锁定%1分钟由于%2次错误尝试</translation>
+        <translation type="vanished">账户锁定%1分钟由于%2次错误尝试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="271"/>
+        <location filename="../src/authdialog.cpp" line="253"/>
         <source>Password Incorrect, Please try again</source>
         <translation>密码错误，请重试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="285"/>
         <source>Authentication failure,there are still %1 remaining opportunities</source>
-        <translation>认证失败，还剩%1次尝试机会</translation>
+        <translation type="vanished">认证失败，还剩%1次尝试机会</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="455"/>
+        <location filename="../src/authdialog.cpp" line="419"/>
         <source>Biometric Authentication</source>
         <translation>生物识别认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="468"/>
+        <location filename="../src/authdialog.cpp" line="432"/>
         <source>Password Authentication</source>
         <translation>密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="480"/>
+        <location filename="../src/authdialog.cpp" line="444"/>
         <source>Other Devices</source>
         <translation>其他设备</translation>
     </message>
@@ -253,14 +250,18 @@
 <context>
     <name>Screensaver</name>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="184"/>
         <source>exit(Esc)</source>
-        <translation>退出(Esc)</translation>
+        <translation type="vanished">退出(Esc)</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="234"/>
+        <location filename="../screensaver/screensaver.cpp" line="232"/>
         <source>Set as desktop wallpaper</source>
         <translation>设置为桌面壁纸</translation>
+    </message>
+    <message>
+        <location filename="../screensaver/screensaver.cpp" line="240"/>
+        <source>Automatic switching</source>
+        <translation>自动切换</translation>
     </message>
 </context>
 <context>

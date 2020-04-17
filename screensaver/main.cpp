@@ -74,7 +74,11 @@ int main(int argc, char *argv[])
         s.winId();
         s.windowHandle()->setParent(window);
         XGetWindowAttributes (QX11Info::display(), wid, &xwa);
-        s.resize(xwa.width,xwa.height);
+        int scale = 1;
+        if(!qgetenv("QT_SCALE_FACTOR").isNull())
+            scale = qgetenv("QT_SCALE_FACTOR").toInt();
+
+        s.resize(xwa.width/scale,xwa.height/scale);
         s.move(0,0);
         s.show();
     }

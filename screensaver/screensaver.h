@@ -13,7 +13,7 @@
 #include "sleeptime.h"
 #include "chinesedate.h"
 #include "mbackground.h"
-
+#include "checkbutton.h"
 class Screensaver : public QWidget
 {
     Q_OBJECT
@@ -64,17 +64,27 @@ private:
     QLabel *centerlabel2;
     QLabel *authorlabel;
 
+    checkButton *checkSwitch;
+    QLabel *autoSwitchLabel;
+    QFrame *autoSwitch;
+
+    QFrame *vboxFrame;
+    bool isAutoSwitch;
+    QTimer *m_timer;
+    QGSettings *defaultSettings;
+
     int flag;
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);
     bool eventFilter(QObject *obj, QEvent *event);
+    void mousePressEvent(QMouseEvent *event);
 
 private Q_SLOTS:
     void updateTime();
     void setDesktopBackground();
     void updateBackground();
-    void updateCenterWidget();
+    void updateCenterWidget(int index);
 };
 
 #endif // MAINWINDOW_H
