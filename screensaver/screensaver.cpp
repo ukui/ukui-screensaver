@@ -190,8 +190,6 @@ void Screensaver::updateCenterWidget(int index)
         centerlabel1->setText(qsettings->value("OL").toString());
         centerlabel2->hide();
         authorlabel->setText(qsettings->value("author").toString());
-        centerWidget->adjustSize();
-        centerWidget->move((width()-centerWidget->width())/2,(height() - centerWidget->height())/2);
     }
     else if(qsettings->contains("FL"))
     {
@@ -199,9 +197,16 @@ void Screensaver::updateCenterWidget(int index)
         centerlabel2->setText(qsettings->value("SL").toString());
         centerlabel2->show();
         authorlabel->setText(qsettings->value("author").toString());
-        centerWidget->adjustSize();
-        centerWidget->move((width()-centerWidget->width())/2,(height() - centerWidget->height())/2);
     }
+    
+    centerWidget->adjustSize();
+    centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
+                          centerWidget->width(),centerWidget->height());
+
+    if((height()-centerWidget->height())/2 < timeLayout->y() + timeLayout->height())
+        centerWidget->setGeometry((width()-centerWidget->width())/2,timeLayout->y() + timeLayout->height(),
+                              centerWidget->width(),centerWidget->height());
+
     qsettings->endGroup();
 
 }
