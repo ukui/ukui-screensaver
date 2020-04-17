@@ -87,6 +87,13 @@ bool Screensaver::eventFilter(QObject *obj, QEvent *event)
     return false;
 }
 
+void Screensaver::mousePressEvent(QMouseEvent *event)
+{
+    if(vboxFrame && vboxFrame->isVisible()){
+        vboxFrame->hide();
+    }
+}
+
 void Screensaver::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
