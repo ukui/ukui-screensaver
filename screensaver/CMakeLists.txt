@@ -1,4 +1,5 @@
 pkg_check_modules(X11 REQUIRED x11)
+pkg_check_modules(XTST REQUIRED xtst)
 pkg_check_modules(QGS REQUIRED gsettings-qt)
 
 include_directories(${PROJECT_BINARY_DIR})
@@ -6,12 +7,14 @@ include_directories(${PROJECT_SOURCE_DIR}/Common)
 
 include_directories(
 	${X11_INCLUDE_DIRS}
+        ${XTST_INCLUDE_DIRS}
 	${QGS_INCLUDE_DIRS}
 	)
 
 set(EXTRA_LIBS
 	${EXTRA_LIBS}
 	${X11_LIBRARIES}
+        ${XTST_LIBRARIES}
 	${QGS_LIBRARIES}
 	Common
 	)

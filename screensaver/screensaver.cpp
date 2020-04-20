@@ -36,7 +36,10 @@
 #include <QDBusReply>
 #include <QApplication>
 #include "screensaver.h"
-
+#include <X11/extensions/XTest.h>
+#include <X11/keysym.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
@@ -78,7 +81,7 @@ Screensaver::~Screensaver()
 bool Screensaver::eventFilter(QObject *obj, QEvent *event)
 {
 
-    if(event->type() == QEvent::KeyPress){
+    if(event->type() == 6){
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
         if(keyEvent->key() ==Qt::Key_Q || keyEvent->key() == Qt::Key_Escape){
             qApp->quit(); //需要 #include <QApplication> 头文件
@@ -130,6 +133,8 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
             sleepTime->hide();
         if(settingsButton)
             settingsButton->hide();
+        if(escButton)
+            escButton->hide();
         scale = 0.1;
     }
 
@@ -156,11 +161,14 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 
     ubuntuKylinlogo->setGeometry(40*scale,40*scale,127*scale,42*scale);
 
-    if(settingsButton)
-         settingsButton->setGeometry(width() - 40*scale - settingsButton->width(),31,settingsButton->width(),settingsButton->height());
+    if(escButton){
+        escButton->setGeometry(width() - 40*scale - escButton->width(),40*scale,escButton->width(),escButton->height());
+    }
+    if(settingsButton);
+         settingsButton->setGeometry(escButton->geometry().left() - 16*scale - settingsButton->width(),40*scale,settingsButton->width(),settingsButton->height());
 
     if(vboxFrame)
-        vboxFrame->setGeometry(width() - vboxFrame->width(),
+        vboxFrame->setGeometry(settingsButton->geometry().left(),
                                 settingsButton->geometry().bottom() + 12*scale,
                                 vboxFrame->width(),vboxFrame->height());
 }
@@ -228,6 +236,17 @@ void Screensaver::initUI()
     ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
     ubuntuKylinlogo->adjustSize();
     ubuntuKylinlogo->setScaledContents(true);
+
+    escButton = new QPushButton(this);
+    escButton->setObjectName("escButton");
+    escButton->setText(tr("exit"));
+    escButton->setFixedSize(152,48);
+    connect(escButton,&QPushButton::clicked,this,[&]{
+        XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
+        XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
+        XFlush(QX11Info::display());
+        qApp->quit();
+    });
 
     settingsButton = new QPushButton(this);
     settingsButton->setObjectName("settingsButton");

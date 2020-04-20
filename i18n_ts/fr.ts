@@ -237,6 +237,10 @@
         <source>Automatic switching</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>exit</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SleepTime</name>
