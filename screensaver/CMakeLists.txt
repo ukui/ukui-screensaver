@@ -45,4 +45,5 @@ install(TARGETS
 
 install(FILES
         screensaver.ini 
+	screensaver-en.ini
         DESTINATION share/ukui-screensaver)

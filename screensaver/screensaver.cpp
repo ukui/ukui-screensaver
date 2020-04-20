@@ -175,7 +175,17 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 
 void Screensaver::setUpdateCenterWidget()
 {
-    qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver.ini",QSettings::IniFormat);
+    QString lang = qgetenv("LANG");
+    if (!lang.isEmpty()){
+        qDebug()<<"lang = "<<lang;
+        if (lang.contains("zh_CN")){
+        	qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver.ini",QSettings::IniFormat);
+	}
+	else{
+		qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver-en.ini",QSettings::IniFormat);
+	}
+    }
+
     qsettings->setIniCodec(QTextCodec::codecForName("UTF-8"));
 }
 
@@ -192,7 +202,6 @@ void Screensaver::updateCenterWidget(int index)
         qsrand((unsigned)time(0));
         index = qrand() % qlist.count() + 1;
     }
-
     qsettings->beginGroup(QString::number(index));
     if(qsettings->contains("OL")){
         centerlabel1->setText(qsettings->value("OL").toString());
@@ -385,7 +394,7 @@ void Screensaver::setUpdateBackground()
             connect(m_timer, SIGNAL(timeout()), this, SLOT(updateBackground()));
         }
 
-        m_timer->start(300000);
+        m_timer->start(3000);
     }
     else{
         if(m_timer && m_timer->isActive())
@@ -405,14 +414,6 @@ void Screensaver::updateBackground()
 
 void Screensaver::setCenterWidget()
 {
-    QString lang = qgetenv("LANG");
-    if (!lang.isEmpty()){
-        qDebug()<<"lang = "<<lang;
-        if (!lang.contains("zh_CN")){
-            return;
-        }
-    }
-
     QStringList qlist = qsettings->childGroups();
     if(qlist.count()<1)
         return;
