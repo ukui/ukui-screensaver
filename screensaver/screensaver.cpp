@@ -394,7 +394,7 @@ void Screensaver::setUpdateBackground()
             connect(m_timer, SIGNAL(timeout()), this, SLOT(updateBackground()));
         }
 
-        m_timer->start(3000);
+        m_timer->start(300000);
     }
     else{
         if(m_timer && m_timer->isActive())
