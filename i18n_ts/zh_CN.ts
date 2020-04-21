@@ -254,12 +254,17 @@
         <translation type="vanished">退出(Esc)</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="232"/>
+        <location filename="../screensaver/screensaver.cpp" line="243"/>
+        <source>exit</source>
+        <translation>退出</translation>
+    </message>
+    <message>
+        <location filename="../screensaver/screensaver.cpp" line="268"/>
         <source>Set as desktop wallpaper</source>
         <translation>设置为桌面壁纸</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="240"/>
+        <location filename="../screensaver/screensaver.cpp" line="277"/>
         <source>Automatic switching</source>
         <translation>自动切换</translation>
     </message>

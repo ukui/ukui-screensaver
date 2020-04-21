@@ -448,10 +448,13 @@ void FullBackgroundWidget::onGlobalKeyRelease(const QString &key)
 
 void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
 {
-   // if(screenStatus & SCREEN_SAVER)
-   // {
-   //     clearScreensavers();
-   // }
+    if(screenStatus & SCREEN_SAVER)
+    {
+        ScreenSaver *saver = configuration->getScreensaver();
+       if(saver->path == "/usr/lib/ukui-screensaver/ukui-screensaver-default")
+               return ;
+        clearScreensavers();
+    }
 }
 
 

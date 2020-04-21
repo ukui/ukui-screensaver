@@ -46,7 +46,6 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
 	/* Initiailization */
     mode = gsettings->get(KEY_MODE).toString();
     themes = gsettings->get(KEY_THEMES).toStringList();
-
     idleActivationEnabled = gsettings->get(
                         KEY_IDLE_ACTIVATION_ENABLED).toBool();
     lockEnabled = gsettings->get(KEY_LOCK_ENABLED).toBool();
@@ -127,6 +126,10 @@ ScreenSaver *Configuration::getScreensaver()
         break;
     case SAVER_RANDOM:
     {
+	if(themes.count()==0){
+	    saver->path = "/usr/lib/ukui-screensaver/ukui-screensaver-default";
+	    break;
+	}
         qsrand((unsigned)time(0));
         int index = qrand() % themes.count();
         while(QString::compare(themes[index], "kyccss-personal-slideshow")==0)
@@ -134,7 +137,7 @@ ScreenSaver *Configuration::getScreensaver()
             index = qrand() % themes.count();
         }
         saver->path = getXScreensaverPath(themes[index]);
-        break;
+	break;
     }
     case SAVER_SINGLE:
         saver->path = getXScreensaverPath(themes[0]);

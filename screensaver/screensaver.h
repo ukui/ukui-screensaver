@@ -50,8 +50,6 @@ private:
     QString defaultBackground;
 
     QPushButton *escButton;
-    QPushButton *prevButton;
-    QPushButton *nextButton;
     QPushButton *settingsButton;
     QPushButton *WallpaperButton;
     QWidget *buttonWidget;
