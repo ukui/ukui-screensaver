@@ -27,9 +27,11 @@
 #include <QTextCodec>
 #include <QKeyEvent>
 #include <QSplitterHandle>
+#include <QCursor>
 #include <QDateTime>
 #include <QLayout>
 #include <QVBoxLayout>
+#include <QDir>
 #include <QHBoxLayout>
 #include <QX11Info>
 #include <QDBusInterface>
@@ -80,11 +82,34 @@ Screensaver::~Screensaver()
 
 bool Screensaver::eventFilter(QObject *obj, QEvent *event)
 {
-
     if(event->type() == 6){
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
         if(keyEvent->key() ==Qt::Key_Q || keyEvent->key() == Qt::Key_Escape){
             qApp->quit(); //需要 #include <QApplication> 头文件
+        }
+    }
+
+    if(obj == settingsButton){
+        if(event->type() == QEvent::Enter){
+            vboxFrame->show();
+        }else if(event->type() == QEvent::Leave){
+            s_timer->start(200);
+        }
+    }
+    if(obj == vboxFrame){
+        if(event->type() == QEvent::Enter){
+           if(s_timer)
+               s_timer->stop();
+        }else if(event->type() == QEvent::Leave){
+            vboxFrame->hide();
+        }
+    }
+    if(obj == this){
+        if(event->type()==QEvent::MouseButtonPress){
+            XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
+            XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
+            XFlush(QX11Info::display());
+            qApp->quit();
         }
     }
     return false;
@@ -133,8 +158,6 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
             sleepTime->hide();
         if(settingsButton)
             settingsButton->hide();
-        if(escButton)
-            escButton->hide();
         scale = 0.1;
     }
 
@@ -161,14 +184,11 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 
     ubuntuKylinlogo->setGeometry(40*scale,40*scale,127*scale,42*scale);
 
-    if(escButton){
-        escButton->setGeometry(width() - 40*scale - escButton->width(),40*scale,escButton->width(),escButton->height());
-    }
     if(settingsButton);
-         settingsButton->setGeometry(escButton->geometry().left() - 16*scale - settingsButton->width(),40*scale,settingsButton->width(),settingsButton->height());
+         settingsButton->setGeometry(width() - 40*scale - settingsButton->width(),40*scale,settingsButton->width(),settingsButton->height());
 
     if(vboxFrame)
-        vboxFrame->setGeometry(settingsButton->geometry().left(),
+        vboxFrame->setGeometry(width() - vboxFrame->width(),
                                 settingsButton->geometry().bottom() + 12*scale,
                                 vboxFrame->width(),vboxFrame->height());
 }
@@ -227,6 +247,11 @@ void Screensaver::updateCenterWidget(int index)
     qsettings->endGroup();
 
 }
+
+void Screensaver::hideSettings(){
+    vboxFrame->hide();
+}
+
 void Screensaver::initUI()
 {
     QFile qssFile(":/qss/assets/default.qss");
@@ -246,27 +271,21 @@ void Screensaver::initUI()
     ubuntuKylinlogo->adjustSize();
     ubuntuKylinlogo->setScaledContents(true);
 
-    escButton = new QPushButton(this);
-    escButton->setObjectName("escButton");
-    escButton->setText(tr("exit"));
-    escButton->setFixedSize(152,48);
-    connect(escButton,&QPushButton::clicked,this,[&]{
-        XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
-        XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
-        XFlush(QX11Info::display());
-        qApp->quit();
-    });
-
     settingsButton = new QPushButton(this);
     settingsButton->setObjectName("settingsButton");
     settingsButton->setFixedSize(48,48);
     settingsButton->setIcon(QIcon(":/assets/settings.svg"));
+    settingsButton->installEventFilter(this);
     connect(settingsButton,&QPushButton::clicked,this,[&]{
         if(vboxFrame->isVisible())
             vboxFrame->hide();
         else
             vboxFrame->show();
     });
+
+    s_timer = new QTimer(this);
+    s_timer->setSingleShot(true);
+    connect(s_timer, SIGNAL(timeout()), this,  SLOT(hideSettings()));
 
     WallpaperButton = new QPushButton(this);
     WallpaperButton->setObjectName("WallpaperButton");
@@ -304,6 +323,7 @@ void Screensaver::initUI()
 
     vboxFrame = new QFrame(this);
     vboxFrame->setObjectName("vboxFrame");
+    vboxFrame->installEventFilter(this);
     QVBoxLayout *vlayout = new QVBoxLayout(vboxFrame);
     vlayout->setContentsMargins(4,4,4,4);
     vlayout->setSpacing(4);
@@ -381,7 +401,8 @@ void Screensaver::updateTime()
     this->dateOfDay->setText(QDate::currentDate().toString("yy/MM/dd"));
     if(sleepTime){
         if(!sleepTime->setTime()){
-            timer->stop();
+        	sleepTime->hide();
+            sleepTime->deleteLater();
         }
     }
 }
@@ -421,6 +442,15 @@ void Screensaver::setCenterWidget()
     QDate date = QDate::currentDate();
     int days = date.daysTo(QDate(2100,1,1));
     int index = days%qlist.count()+1;
+
+    QString configPath = QDir::homePath() + "/.ukui-screensaver-default.conf";
+    QSettings settings1(configPath, QSettings::IniFormat);
+    if(settings1.value("FIRST").toString().isEmpty()){
+        settings1.setValue("FIRST",QDate::currentDate().toString("yy/MM/dd"));
+        index = 1;
+    }
+    if(settings1.value("FIRST").toString() == QDate::currentDate().toString("yy/MM/dd"))
+        index = 1;
 
     qsettings->beginGroup(QString::number(index));
     if(qsettings->contains("OL")){

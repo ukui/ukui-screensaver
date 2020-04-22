@@ -31,6 +31,7 @@ private:
     void setUpdateBackground();
     void setUpdateCenterWidget();
 
+
     QLabel *dateOfWeek;
     QLabel *dateOfLocaltime;
     QLabel *dateOfDay;
@@ -69,6 +70,7 @@ private:
     QFrame *vboxFrame;
     bool isAutoSwitch;
     QTimer *m_timer;
+    QTimer *s_timer;
     QGSettings *defaultSettings;
 
     int flag;
@@ -83,6 +85,7 @@ private Q_SLOTS:
     void setDesktopBackground();
     void updateBackground();
     void updateCenterWidget(int index);
+    void hideSettings();
 };
 
 #endif // MAINWINDOW_H
