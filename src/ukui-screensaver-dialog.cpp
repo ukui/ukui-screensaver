@@ -111,11 +111,17 @@ void checkIsRunning()
     }
 }
 
+void handler(int signum)
+{
+    qApp->quit();
+}
+
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
 int main(int argc, char *argv[])
 {
     checkIsRunning();
     checkIslivecd();
+    signal(SIGTERM,handler);
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
 
