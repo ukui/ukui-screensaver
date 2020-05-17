@@ -82,44 +82,22 @@ Screensaver::~Screensaver()
 
 bool Screensaver::eventFilter(QObject *obj, QEvent *event)
 {
+    /*	
     if(event->type() == 6){
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
         if(keyEvent->key() ==Qt::Key_Q || keyEvent->key() == Qt::Key_Escape){
             qApp->quit(); //需要 #include <QApplication> 头文件
         }
     }
-
-    if(obj == settingsButton){
-        if(event->type() == QEvent::Enter){
-            vboxFrame->show();
-        }else if(event->type() == QEvent::Leave){
-            s_timer->start(200);
-        }
-    }
-    if(obj == vboxFrame){
-        if(event->type() == QEvent::Enter){
-           if(s_timer)
-               s_timer->stop();
-        }else if(event->type() == QEvent::Leave){
-            vboxFrame->hide();
-        }
-    }
+    */ 
     if(obj == this){
         if(event->type()==QEvent::MouseButtonPress){
             XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
             XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
             XFlush(QX11Info::display());
-            qApp->quit();
         }
     }
     return false;
-}
-
-void Screensaver::mousePressEvent(QMouseEvent *event)
-{
-    if(vboxFrame && vboxFrame->isVisible()){
-        vboxFrame->hide();
-    }
 }
 
 void Screensaver::paintEvent(QPaintEvent *event)
@@ -248,10 +226,6 @@ void Screensaver::updateCenterWidget(int index)
 
 }
 
-void Screensaver::hideSettings(){
-    vboxFrame->hide();
-}
-
 void Screensaver::initUI()
 {
     QFile qssFile(":/qss/assets/default.qss");
@@ -277,15 +251,11 @@ void Screensaver::initUI()
     settingsButton->setIcon(QIcon(":/assets/settings.svg"));
     settingsButton->installEventFilter(this);
     connect(settingsButton,&QPushButton::clicked,this,[&]{
-        if(vboxFrame->isVisible())
-            vboxFrame->hide();
-        else
-            vboxFrame->show();
+        vboxFrame->setVisible(!vboxFrame->isVisible());
+
     });
 
-    s_timer = new QTimer(this);
-    s_timer->setSingleShot(true);
-    connect(s_timer, SIGNAL(timeout()), this,  SLOT(hideSettings()));
+
 
     WallpaperButton = new QPushButton(this);
     WallpaperButton->setObjectName("WallpaperButton");
