@@ -113,7 +113,7 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 {
     float scale = 1.0;
     scale = (float)width()/1920;
-    if(width() < 600 || height()<400){
+    if(width() < 600 || height()<400){//当显示在控制面板上时，字体缩小三倍。
         if(flag == 0)
         {
             QList<QLabel*> labelList = this->findChildren<QLabel *>();
@@ -239,12 +239,14 @@ void Screensaver::initUI()
   
     setCenterWidget();
 
+    //logo
     ubuntuKylinlogo = new QLabel(this);
     ubuntuKylinlogo->setObjectName("ubuntuKylinlogo");
     ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
     ubuntuKylinlogo->adjustSize();
     ubuntuKylinlogo->setScaledContents(true);
 
+    //设置按钮
     settingsButton = new QPushButton(this);
     settingsButton->setObjectName("settingsButton");
     settingsButton->setFixedSize(48,48);
@@ -256,7 +258,7 @@ void Screensaver::initUI()
     });
 
 
-
+    //设为壁纸按钮
     WallpaperButton = new QPushButton(this);
     WallpaperButton->setObjectName("WallpaperButton");
     WallpaperButton->setFixedHeight(36);
@@ -265,6 +267,7 @@ void Screensaver::initUI()
     WallpaperButton->setText(tr("Set as desktop wallpaper"));
     connect(WallpaperButton,SIGNAL(clicked()),this,SLOT(setDesktopBackground()));
 
+    //自动切换
     QFrame *autoSwitch = new QFrame(this);
     autoSwitch->setObjectName("autoSwitch");
     autoSwitch->setFixedHeight(36);
@@ -275,6 +278,7 @@ void Screensaver::initUI()
 
     checkSwitch = new checkButton(this);
 
+    //判断是否自动切换壁纸
     defaultSettings = new QGSettings("org.ukui.screensaver-default","",this);
     isAutoSwitch = defaultSettings->get("automatic-switching-enabled").toBool();
 
@@ -295,9 +299,18 @@ void Screensaver::initUI()
     vboxFrame->setObjectName("vboxFrame");
     vboxFrame->installEventFilter(this);
     QVBoxLayout *vlayout = new QVBoxLayout(vboxFrame);
+
+    //分隔线
+    QPushButton *line =new QPushButton(this);
+    line->setWindowOpacity(0.08);
+    line->setFocusPolicy(Qt::NoFocus);
+    line->setMaximumHeight(1);
+
+    //设置窗口
     vlayout->setContentsMargins(4,4,4,4);
     vlayout->setSpacing(4);
     vlayout->addWidget(WallpaperButton);
+    vlayout->addWidget(line);
     vlayout->addWidget(autoSwitch);
     vlayout->setAlignment(autoSwitch,Qt::AlignCenter);
     vboxFrame->adjustSize();

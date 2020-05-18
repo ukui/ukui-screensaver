@@ -248,6 +248,17 @@ void FullBackgroundWidget::mouseMoveEvent(QMouseEvent *e)
 	return QWidget::mouseMoveEvent(e);
 }
 
+void FullBackgroundWidget::mousePressEvent(QMouseEvent *e)
+{
+    if(screenStatus & SCREEN_SAVER)
+    {
+        ScreenSaver *saver = configuration->getScreensaver();
+        if(saver->path == "/usr/lib/ukui-screensaver/ukui-screensaver-default")
+               return ;
+        clearScreensavers();
+    }
+}
+
 void FullBackgroundWidget::init()
 {
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
@@ -439,11 +450,10 @@ void FullBackgroundWidget::onGlobalKeyRelease(const QString &key)
     {
         lockWidget->capsLockChanged();
     }
-    else if(screenStatus & SCREEN_SAVER)
+    if(screenStatus & SCREEN_SAVER)
     {
-        clearScreensavers();
+        clearScreensavers();	
     }
-
 }
 
 void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
@@ -451,7 +461,7 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
     if(screenStatus & SCREEN_SAVER)
     {
         ScreenSaver *saver = configuration->getScreensaver();
-       if(saver->path == "/usr/lib/ukui-screensaver/ukui-screensaver-default")
+        if(saver->path == "/usr/lib/ukui-screensaver/ukui-screensaver-default")
                return ;
         clearScreensavers();
     }

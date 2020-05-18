@@ -43,6 +43,7 @@ public:
     void showEvent(QShowEvent *event);
     virtual bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
     void mouseMoveEvent(QMouseEvent *e);
+    void mousePressEvent(QMouseEvent *e);
 
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);
