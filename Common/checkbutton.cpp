@@ -34,7 +34,7 @@ checkButton::checkButton(QWidget *parent)
     sliderColorOff = QColor("#cccccc");
     sliderColorOn = QColor("#ffffff");
 
-    space = 2;
+    space = 4;
 
 
     step = width() / 50;

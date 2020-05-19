@@ -166,7 +166,7 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
          settingsButton->setGeometry(width() - 40*scale - settingsButton->width(),40*scale,settingsButton->width(),settingsButton->height());
 
     if(vboxFrame)
-        vboxFrame->setGeometry(width() - vboxFrame->width(),
+        vboxFrame->setGeometry(width() - vboxFrame->width() - 40*scale,
                                 settingsButton->geometry().bottom() + 12*scale,
                                 vboxFrame->width(),vboxFrame->height());
 }
