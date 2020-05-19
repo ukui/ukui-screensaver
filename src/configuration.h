@@ -58,6 +58,7 @@ private:
     int imageTSEffect;
     int imageSwitchInterval;
     QString getSystemDistrib();
+    QString getSystemVersion();
     bool ispicture(QString filepath);    
 };
 

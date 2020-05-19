@@ -43,6 +43,13 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
+QString getSystemDistrib()
+{
+    QSettings settings("/etc/lsb-release", QSettings::IniFormat);
+    QString distribId = settings.value("DISTRIB_ID").toString();
+    return distribId;
+}
+
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
   date(new ChineseDate()),
@@ -159,8 +166,12 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
                                   centerWidget->width(),centerWidget->height());
     }
 
+    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
+         ubuntuKylinlogo->setGeometry(40*scale,40*scale,107*scale,41*scale);
+    }else{
+         ubuntuKylinlogo->setGeometry(40*scale,40*scale,127*scale,42*scale);
+    }
 
-    ubuntuKylinlogo->setGeometry(40*scale,40*scale,127*scale,42*scale);
 
     if(settingsButton);
          settingsButton->setGeometry(width() - 40*scale - settingsButton->width(),40*scale,settingsButton->width(),settingsButton->height());
@@ -245,6 +256,12 @@ void Screensaver::initUI()
     ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
     ubuntuKylinlogo->adjustSize();
     ubuntuKylinlogo->setScaledContents(true);
+
+    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
+        ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo-kylin.svg"));
+    }else{
+	ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
+    }
 
     //设置按钮
     settingsButton = new QPushButton(this);

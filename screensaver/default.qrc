@@ -23,4 +23,7 @@
     <qresource prefix="/">
         <file>assets/wallpaper.svg</file>
     </qresource>
+    <qresource prefix="/">
+        <file>assets/logo-kylin.svg</file>
+    </qresource>
 </RCC>
