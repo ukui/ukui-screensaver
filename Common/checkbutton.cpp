@@ -34,7 +34,7 @@ checkButton::checkButton(QWidget *parent)
     sliderColorOff = QColor("#cccccc");
     sliderColorOn = QColor("#ffffff");
 
-    space = 2;
+    space = 4;
 
 
     step = width() / 50;
@@ -44,7 +44,7 @@ checkButton::checkButton(QWidget *parent)
     timer = new QTimer(this);
     timer->setInterval(5);
     connect(timer, SIGNAL(timeout()), this, SLOT(updatevalue()));
-    setWindowFlag(Qt::FramelessWindowHint);
+    setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground, true);
 
 

@@ -180,7 +180,7 @@ bool Configuration::ispicture(QString filepath)
         return mime.name().startsWith("image/");
 }
 
-QString getSystemVersion()
+QString Configuration::getSystemVersion()
 {
     QSettings settings("/etc/lsb-release", QSettings::IniFormat);
     QString release = settings.value("DISTRIB_RELEASE").toString();
@@ -199,12 +199,15 @@ QString Configuration::getSystemDistrib()
 
 QString Configuration::getBackground()
 {
-	if(ispicture(background))
-                return background;
+    if(ispicture(background))
+        return background;
     else if(getSystemDistrib().contains("Ubuntu",Qt::CaseInsensitive))
+        return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
+    else if(getSystemVersion().contains("V10.1",Qt::CaseInsensitive))
         return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
     else
         return "/usr/share/backgrounds/kylin/kylin-background.png";
+
 }
 
 bool Configuration::xscreensaverActivatedWhenIdle()

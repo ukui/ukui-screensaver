@@ -43,6 +43,13 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
+QString getSystemDistrib()
+{
+    QSettings settings("/etc/lsb-release", QSettings::IniFormat);
+    QString distribId = settings.value("DISTRIB_ID").toString();
+    return distribId;
+}
+
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
   date(new ChineseDate()),
@@ -82,44 +89,22 @@ Screensaver::~Screensaver()
 
 bool Screensaver::eventFilter(QObject *obj, QEvent *event)
 {
+    /*	
     if(event->type() == 6){
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
         if(keyEvent->key() ==Qt::Key_Q || keyEvent->key() == Qt::Key_Escape){
             qApp->quit(); //需要 #include <QApplication> 头文件
         }
     }
-
-    if(obj == settingsButton){
-        if(event->type() == QEvent::Enter){
-            vboxFrame->show();
-        }else if(event->type() == QEvent::Leave){
-            s_timer->start(200);
-        }
-    }
-    if(obj == vboxFrame){
-        if(event->type() == QEvent::Enter){
-           if(s_timer)
-               s_timer->stop();
-        }else if(event->type() == QEvent::Leave){
-            vboxFrame->hide();
-        }
-    }
+    */ 
     if(obj == this){
         if(event->type()==QEvent::MouseButtonPress){
             XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
             XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
             XFlush(QX11Info::display());
-            qApp->quit();
         }
     }
     return false;
-}
-
-void Screensaver::mousePressEvent(QMouseEvent *event)
-{
-    if(vboxFrame && vboxFrame->isVisible()){
-        vboxFrame->hide();
-    }
 }
 
 void Screensaver::paintEvent(QPaintEvent *event)
@@ -135,7 +120,7 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 {
     float scale = 1.0;
     scale = (float)width()/1920;
-    if(width() < 600 || height()<400){
+    if(width() < 600 || height()<400){//当显示在控制面板上时，字体缩小三倍。
         if(flag == 0)
         {
             QList<QLabel*> labelList = this->findChildren<QLabel *>();
@@ -181,14 +166,18 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
                                   centerWidget->width(),centerWidget->height());
     }
 
+    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
+         ubuntuKylinlogo->setGeometry(40*scale,40*scale,107*scale,41*scale);
+    }else{
+         ubuntuKylinlogo->setGeometry(40*scale,40*scale,127*scale,42*scale);
+    }
 
-    ubuntuKylinlogo->setGeometry(40*scale,40*scale,127*scale,42*scale);
 
     if(settingsButton);
          settingsButton->setGeometry(width() - 40*scale - settingsButton->width(),40*scale,settingsButton->width(),settingsButton->height());
 
     if(vboxFrame)
-        vboxFrame->setGeometry(width() - vboxFrame->width(),
+        vboxFrame->setGeometry(width() - vboxFrame->width() - 40*scale,
                                 settingsButton->geometry().bottom() + 12*scale,
                                 vboxFrame->width(),vboxFrame->height());
 }
@@ -248,10 +237,6 @@ void Screensaver::updateCenterWidget(int index)
 
 }
 
-void Screensaver::hideSettings(){
-    vboxFrame->hide();
-}
-
 void Screensaver::initUI()
 {
     QFile qssFile(":/qss/assets/default.qss");
@@ -265,28 +250,32 @@ void Screensaver::initUI()
   
     setCenterWidget();
 
+    //logo
     ubuntuKylinlogo = new QLabel(this);
     ubuntuKylinlogo->setObjectName("ubuntuKylinlogo");
     ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
     ubuntuKylinlogo->adjustSize();
     ubuntuKylinlogo->setScaledContents(true);
 
+    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
+        ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo-kylin.svg"));
+    }else{
+	ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
+    }
+
+    //设置按钮
     settingsButton = new QPushButton(this);
     settingsButton->setObjectName("settingsButton");
     settingsButton->setFixedSize(48,48);
     settingsButton->setIcon(QIcon(":/assets/settings.svg"));
     settingsButton->installEventFilter(this);
     connect(settingsButton,&QPushButton::clicked,this,[&]{
-        if(vboxFrame->isVisible())
-            vboxFrame->hide();
-        else
-            vboxFrame->show();
+        vboxFrame->setVisible(!vboxFrame->isVisible());
+
     });
 
-    s_timer = new QTimer(this);
-    s_timer->setSingleShot(true);
-    connect(s_timer, SIGNAL(timeout()), this,  SLOT(hideSettings()));
 
+    //设为壁纸按钮
     WallpaperButton = new QPushButton(this);
     WallpaperButton->setObjectName("WallpaperButton");
     WallpaperButton->setFixedHeight(36);
@@ -295,6 +284,7 @@ void Screensaver::initUI()
     WallpaperButton->setText(tr("Set as desktop wallpaper"));
     connect(WallpaperButton,SIGNAL(clicked()),this,SLOT(setDesktopBackground()));
 
+    //自动切换
     QFrame *autoSwitch = new QFrame(this);
     autoSwitch->setObjectName("autoSwitch");
     autoSwitch->setFixedHeight(36);
@@ -305,6 +295,7 @@ void Screensaver::initUI()
 
     checkSwitch = new checkButton(this);
 
+    //判断是否自动切换壁纸
     defaultSettings = new QGSettings("org.ukui.screensaver-default","",this);
     isAutoSwitch = defaultSettings->get("automatic-switching-enabled").toBool();
 
@@ -325,9 +316,18 @@ void Screensaver::initUI()
     vboxFrame->setObjectName("vboxFrame");
     vboxFrame->installEventFilter(this);
     QVBoxLayout *vlayout = new QVBoxLayout(vboxFrame);
+
+    //分隔线
+    QPushButton *line =new QPushButton(this);
+    line->setWindowOpacity(0.08);
+    line->setFocusPolicy(Qt::NoFocus);
+    line->setMaximumHeight(1);
+
+    //设置窗口
     vlayout->setContentsMargins(4,4,4,4);
     vlayout->setSpacing(4);
     vlayout->addWidget(WallpaperButton);
+    vlayout->addWidget(line);
     vlayout->addWidget(autoSwitch);
     vlayout->setAlignment(autoSwitch,Qt::AlignCenter);
     vboxFrame->adjustSize();

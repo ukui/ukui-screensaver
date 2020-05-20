@@ -70,7 +70,6 @@ private:
     QFrame *vboxFrame;
     bool isAutoSwitch;
     QTimer *m_timer;
-    QTimer *s_timer;
     QGSettings *defaultSettings;
 
     int flag;
@@ -78,14 +77,12 @@ protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);
     bool eventFilter(QObject *obj, QEvent *event);
-    void mousePressEvent(QMouseEvent *event);
 
 private Q_SLOTS:
     void updateTime();
     void setDesktopBackground();
     void updateBackground();
     void updateCenterWidget(int index);
-    void hideSettings();
 };
 
 #endif // MAINWINDOW_H

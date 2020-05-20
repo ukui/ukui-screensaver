@@ -40,10 +40,10 @@ void sig_chld(int /*signo*/)
 
 int main(int argc, char *argv[])
 {
-    if(signal(SIGCHLD, sig_chld) == SIG_ERR) {
-        perror("signal error");
-        exit(EXIT_FAILURE);
-    }
+//    if(signal(SIGCHLD, sig_chld) == SIG_ERR) {
+//        perror("signal error");
+//        exit(EXIT_FAILURE);
+//    }
 
     QCoreApplication a(argc, argv);
 

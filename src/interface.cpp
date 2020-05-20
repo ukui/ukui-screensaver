@@ -28,30 +28,15 @@ Interface::Interface(QObject *parent)
     m_logind = new LogindIntegration(this);
     connect(m_logind, &LogindIntegration::requestLock, this,
         [this]() {
-            this->onSessionIdleReceived();
+            this->onShowScreensaver();
         }
     );
     connect(m_logind, &LogindIntegration::requestUnlock, this,
         [this]() {
-
-                char cmd[228] = {0};
-                char str[16];
-                FILE *fp;
-                int pid;
-
-                int n = sprintf(cmd, "ps -o ruser=abcdefghijklmnopqrstuvwxyz1234567890 -e -o pid,stime,cmd| grep ukui-screensaver-dialog | grep %s | grep -v grep | awk '{print $2}'", getenv("USER"));
-                Q_UNUSED(n)
-
-                fp = popen(cmd, "r");
-                while(fgets(str, sizeof(str)-1, fp)) {
-                        pid = atoi(str);
-                        if(pid > 0 && pid != getpid()) {
-                                kill(pid, SIGKILL);
-                        }
-                }
-                pclose(fp);
-        }
+		process.terminate();		
+	}
     );
+
 }
 
 void Interface::Lock()
@@ -61,7 +46,7 @@ void Interface::Lock()
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --lock");
     qDebug() << cmd;
 
-    process.startDetached(cmd);
+    process.start(cmd);
 
 }
 
@@ -72,7 +57,18 @@ void Interface::onSessionIdleReceived()
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --session-idle");
     qDebug() << cmd;
 
-    process.startDetached(cmd);
+    process.start(cmd);
+
+}
+
+void Interface::onShowScreensaver()
+{
+    qDebug() << "lock and show screensaver";
+
+    QString cmd = QString("/usr/bin/ukui-screensaver-dialog --screensaver");
+    qDebug() << cmd;
+
+    process.start(cmd);
 
 }
 

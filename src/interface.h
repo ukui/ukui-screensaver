@@ -43,7 +43,7 @@ public Q_SLOTS:
     void Lock();
 
     void onSessionIdleReceived();
-
+    void onShowScreensaver();
     void onNameLost(const QString&);
 
 private:
