@@ -228,6 +228,17 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <source>The screensaver is active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The screensaver is inactive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Screensaver</name>
     <message>
         <source>Set as desktop wallpaper</source>
@@ -235,10 +246,6 @@
     </message>
     <message>
         <source>Automatic switching</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>exit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -281,6 +288,10 @@
     </message>
     <message>
         <source>window id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>query the status of the screen saver</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

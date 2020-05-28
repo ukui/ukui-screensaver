@@ -248,23 +248,35 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/ukui-screensaver-command.cpp" line="66"/>
+        <source>The screensaver is active.</source>
+        <translation>屏幕保护程序已激活</translation>
+    </message>
+    <message>
+        <location filename="../src/ukui-screensaver-command.cpp" line="68"/>
+        <source>The screensaver is inactive.</source>
+        <translation>屏幕保护程序未激活</translation>
+    </message>
+</context>
+<context>
     <name>Screensaver</name>
     <message>
         <source>exit(Esc)</source>
         <translation type="vanished">退出(Esc)</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="243"/>
         <source>exit</source>
-        <translation>退出</translation>
+        <translation type="vanished">退出</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="268"/>
+        <location filename="../screensaver/screensaver.cpp" line="284"/>
         <source>Set as desktop wallpaper</source>
         <translation>设置为桌面壁纸</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="277"/>
+        <location filename="../screensaver/screensaver.cpp" line="294"/>
         <source>Automatic switching</source>
         <translation>自动切换</translation>
     </message>
@@ -280,23 +292,28 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../src/ukui-screensaver-command.cpp" line="30"/>
+        <location filename="../src/ukui-screensaver-command.cpp" line="40"/>
         <source>Start command for the ukui ScreenSaver.</source>
         <translation>启动锁屏到命令</translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-command.cpp" line="35"/>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="130"/>
+        <location filename="../src/ukui-screensaver-command.cpp" line="45"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="136"/>
         <source>lock the screen immediately</source>
         <translation>马上锁定屏幕</translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="125"/>
+        <location filename="../src/ukui-screensaver-command.cpp" line="48"/>
+        <source>query the status of the screen saver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="131"/>
         <source>Dialog for the ukui ScreenSaver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="132"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="138"/>
         <source>activated by session idle signal</source>
         <translation type="unfinished"></translation>
     </message>

@@ -126,10 +126,10 @@ ScreenSaver *Configuration::getScreensaver()
         break;
     case SAVER_RANDOM:
     {
-	if(themes.count()==0){
-	    saver->path = "/usr/lib/ukui-screensaver/ukui-screensaver-default";
-	    break;
-	}
+        if(themes.count()==0){
+            saver->path = "/usr/lib/ukui-screensaver/ukui-screensaver-default";
+            break;
+        }
         qsrand((unsigned)time(0));
         int index = qrand() % themes.count();
         while(QString::compare(themes[index], "kyccss-personal-slideshow")==0)
@@ -137,7 +137,7 @@ ScreenSaver *Configuration::getScreensaver()
             index = qrand() % themes.count();
         }
         saver->path = getXScreensaverPath(themes[index]);
-	break;
+        break;
     }
     case SAVER_SINGLE:
         saver->path = getXScreensaverPath(themes[0]);
@@ -169,7 +169,12 @@ QString Configuration::getXScreensaverPath(const QString &theme)
     /* screensavers-ukui-binaryring => binaryring */
     QStringList strs = theme.split("-");
     QString str = strs.at(strs.size() - 1);
-    return QString("%1/%2").arg(XSCREENSAVER_DIRNAME, str);
+    QString filePath = QString("%1/%2").arg(XSCREENSAVER_DIRNAME, str);
+    //除了判断gsetting值是否为空，还需要判断屏保文件是否存在，不存在就使用默认屏保。
+    if(QFile(filePath).exists())
+        return filePath;
+    else
+        return "/usr/lib/ukui-screensaver/ukui-screensaver-default";
 }
 
 bool Configuration::ispicture(QString filepath)

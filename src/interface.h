@@ -41,7 +41,7 @@ public Q_SLOTS:
      * Lock the screen
      */
     void Lock();
-
+    bool GetLockState();
     void onSessionIdleReceived();
     void onShowScreensaver();
     void onNameLost(const QString&);

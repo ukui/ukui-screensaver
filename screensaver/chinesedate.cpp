@@ -90,7 +90,7 @@ QString ChineseDate::getChineseDays(int month, int day, bool isleap)
 {
     QString res = "";
     if(isleap)
-        res = res + "润";
+        res = res + "闰";
 
     res = res + ChineseMonth.at(month) + "月";
     if(day == 10)
