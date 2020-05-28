@@ -39,6 +39,11 @@ Interface::Interface(QObject *parent)
 
 }
 
+bool Interface::GetLockState()
+{
+    return (process.state() != QProcess::NotRunning);
+}
+
 void Interface::Lock()
 {
     qDebug() << "Lock requested";
