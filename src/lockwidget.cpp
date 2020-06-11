@@ -214,7 +214,17 @@ void LockWidget::initUserMenu()
     {
         usersMenu = new QMenu(this);
         usersMenu->setObjectName("usersMenu");
-        //如果没有设置x11属性，则由于弹出菜单受窗口管理器管理，而主窗口不受，在点击菜单又点回主窗口会闪屏。
+/*
+* qt5.6上，qmenu文字以图标左方为起点，20.04上文字以图标右方为起点，所以
+* qt5.6时，左边距要设置大一点,避免与图标重合
+*/
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 7, 0))
+        usersMenu->setStyleSheet("QMenu::item{padding: 2px 10px 2px 10px;}");
+#else
+        usersMenu->setStyleSheet("QMenu::item{padding: 2px 10px 2px 30px;}");
+#endif
+
+	//如果没有设置x11属性，则由于弹出菜单受窗口管理器管理，而主窗口不受，在点击菜单又点回主窗口会闪屏。
         usersMenu->setWindowFlags(Qt::X11BypassWindowManagerHint);
         usersMenu->hide();
         connect(usersMenu, &QMenu::triggered,
