@@ -28,7 +28,7 @@ Interface::Interface(QObject *parent)
     m_logind = new LogindIntegration(this);
     connect(m_logind, &LogindIntegration::requestLock, this,
         [this]() {
-            this->onShowScreensaver();
+            this->Lock();
         }
     );
     connect(m_logind, &LogindIntegration::requestUnlock, this,
