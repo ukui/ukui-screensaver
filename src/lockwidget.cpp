@@ -68,10 +68,19 @@ void LockWidget::closeEvent(QCloseEvent *event)
 
 bool LockWidget::eventFilter(QObject *obj, QEvent *event)
 {
+    if(obj == ui->btnPowerManager && event->type() == 2){
+        showPowerManager();
+        return false;
+    }
     if(event->type() == 2){
-          if(usersMenu && usersMenu->isVisible()){
-                    usersMenu->hide();
-	  }
+        if(usersMenu && usersMenu->isVisible()){
+            usersMenu->hide();
+	    }
+ 	    if(powermanager->isVisible()){
+        	authDialog->setFocus();
+        	authDialog->show();
+        	powermanager->hide();
+        }
     }
 
     return false;
@@ -127,8 +136,6 @@ void LockWidget::initUI()
     ui->btnPowerManager->setIconSize(QSize(30,30));
     ui->btnPowerManager->setFocusPolicy(Qt::NoFocus);
     ui->btnPowerManager->installEventFilter(this);
-    connect(ui->btnPowerManager,&QPushButton::clicked
-            ,this,&LockWidget::showPowerManager);
 
     powermanager = new PowerManager(this);
     powermanager->hide();

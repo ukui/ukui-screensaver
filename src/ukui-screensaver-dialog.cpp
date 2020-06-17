@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
 {
     checkIsRunning();
     checkIslivecd();
-    signal(SIGTERM,handler);
+ //   signal(SIGTERM,handler);
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
 
