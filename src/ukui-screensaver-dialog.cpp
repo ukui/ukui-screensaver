@@ -121,6 +121,11 @@ int main(int argc, char *argv[])
 {
     checkIsRunning();
     checkIslivecd();
+#if(QT_VERSION>=QT_VERSION_CHECK(5,6,0))
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
+
  //   signal(SIGTERM,handler);
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
