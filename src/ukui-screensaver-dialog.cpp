@@ -121,7 +121,12 @@ int main(int argc, char *argv[])
 {
     checkIsRunning();
     checkIslivecd();
-    signal(SIGTERM,handler);
+#if(QT_VERSION>=QT_VERSION_CHECK(5,6,0))
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
+
+ //   signal(SIGTERM,handler);
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
 
@@ -136,10 +141,12 @@ int main(int argc, char *argv[])
                                   QCoreApplication::translate("main", "lock the screen immediately"));
     QCommandLineOption sessionIdleOption(QStringLiteral("session-idle"),
                                        QCoreApplication::translate("main", "activated by session idle signal"));
-    parser.addOptions({lockOption, sessionIdleOption});
+    QCommandLineOption screensaverOption(QStringLiteral("screensaver"),
+                                       QCoreApplication::translate("main", "lock the screen and show screensaver immediately"));
+    parser.addOptions({lockOption, sessionIdleOption , screensaverOption});
     parser.process(a);
 
-    if(!parser.isSet(sessionIdleOption) && !parser.isSet(lockOption))
+    if(!parser.isSet(sessionIdleOption) && !parser.isSet(lockOption) && !parser.isSet(screensaverOption))
     {
         return 0;
     }
@@ -196,6 +203,14 @@ int main(int argc, char *argv[])
         if(window->onSessionStatusChanged(SESSION_IDLE) == -1)
 	    return 0;
     }
+ 
+    if(parser.isSet(screensaverOption))
+    {
+    	window->onScreensaver();
+    }
+    
+    window->show();
+    window->activateWindow();
 	
     QString username = getenv("USER");
     int uid = getuid();
@@ -206,10 +221,6 @@ int main(int argc, char *argv[])
                                                    window);
 
     QDBusMessage msg = interface->call(QStringLiteral("SetPropOfContainer"),username, uid, "is_kydroid_on_focus", "0");
-
-    window->show();
-    window->activateWindow();
-
     return a.exec();
 }
 

@@ -440,6 +440,12 @@ int FullBackgroundWidget::onSessionStatusChanged(uint status)
     return 0;
 }
 
+void FullBackgroundWidget::onScreensaver()
+{
+      showLockWidget();
+      showScreensaver();
+}
+
 void FullBackgroundWidget::onGlobalKeyPress(const QString &key)
 {
 }
