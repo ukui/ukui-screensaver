@@ -10,6 +10,7 @@ set(TS_FILES
 	${CMAKE_CURRENT_SOURCE_DIR}/i18n_ts/fr.ts
 	${CMAKE_CURRENT_SOURCE_DIR}/i18n_ts/pt.ts
 	${CMAKE_CURRENT_SOURCE_DIR}/i18n_ts/ru.ts
+        ${CMAKE_CURRENT_SOURCE_DIR}/i18n_ts/tr.ts
 	)
 add_custom_command(
 	OUTPUT ${TS_FILES}
