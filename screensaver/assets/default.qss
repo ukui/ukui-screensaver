@@ -44,6 +44,7 @@ QPushButton{
     background: rgba(255, 255, 255, 12%);
     border-radius:24px;
     color:white;
+    icon-size:24px;
 }
 #escButton::hover,#prevButton::hover,#nextButton::hover,#settingsButton::hover
 {
@@ -62,6 +63,7 @@ QPushButton{
     background: rgba(255, 255, 255, 0%);
     border-radius:4px;
     color:white;
+    icon-size:24px;
 }
 #WallpaperButton::hover{
     background: rgba(61, 107, 229, 255);

@@ -70,6 +70,10 @@ int main(int argc, char *argv[])
     bool onWindow = parser.isSet("window-id");
     bool onRoot = parser.isSet("root");
 
+    double scale = 1;
+    QScreen *screen = QApplication::primaryScreen();
+    scale = screen->devicePixelRatio();
+
     if(onWindow){
         windowId = parser.value("window-id");
         WId wid =  windowId.toULong();
@@ -78,11 +82,17 @@ int main(int argc, char *argv[])
         s.winId();
         s.windowHandle()->setParent(window);
         XGetWindowAttributes (QX11Info::display(), wid, &xwa);
-        float scale = 1;
-        if(!qgetenv("QT_SCALE_FACTOR").isNull())
-            scale = qgetenv("QT_SCALE_FACTOR").toFloat();
 
-        s.resize(xwa.width/scale,xwa.height/scale);
+        //获取屏保所在屏幕对应的缩放比例。
+        for(auto screen : QGuiApplication::screens())
+        {
+            QPoint pos(xwa.x,xwa.y);
+            if(screen->geometry().contains(pos)){
+                scale = screen->devicePixelRatio();
+            }
+        }
+
+        s.resize(xwa.width/scale + 1,xwa.height/scale + 1);
         s.move(0,0);
         s.show();
     }
@@ -94,7 +104,7 @@ int main(int argc, char *argv[])
         s.windowHandle()->setParent(window);
         XGetWindowAttributes (QX11Info::display(), wid, &xwa);
         qDebug()<<"xwa.width = "<<xwa.width<<"xwa.height = "<<xwa.height;
-        s.resize(xwa.width,xwa.height);
+        s.resize(xwa.width/scale + 1,xwa.height/scale + 1);
         s.move(0,0);
         s.show();
     }
