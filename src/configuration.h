@@ -56,10 +56,7 @@ private:
 	bool idleActivationEnabled;
 	bool lockEnabled;
     int imageTSEffect;
-    int imageSwitchInterval;
-    QString getSystemDistrib();
-    QString getSystemVersion();
-    bool ispicture(QString filepath);    
+    int imageSwitchInterval;  
 };
 
 #endif // CONFIGURATION_H

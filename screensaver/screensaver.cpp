@@ -43,13 +43,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
-QString getSystemDistrib()
-{
-    QSettings settings("/etc/lsb-release", QSettings::IniFormat);
-    QString distribId = settings.value("DISTRIB_ID").toString();
-    return distribId;
-}
-
+#include "commonfunc.h"
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
   date(new ChineseDate()),

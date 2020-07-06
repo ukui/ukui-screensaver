@@ -26,6 +26,7 @@
 #include <QMimeType>
 #include <ctime>
 
+#include "commonfunc.h"
 #define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
 #define KEY_MODE "mode"
 #define KEY_THEMES "themes"
@@ -175,31 +176,6 @@ QString Configuration::getXScreensaverPath(const QString &theme)
         return filePath;
     else
         return "/usr/lib/ukui-screensaver/ukui-screensaver-default";
-}
-
-bool Configuration::ispicture(QString filepath)
-{
-        QMimeDatabase db;
-        QMimeType mime = db.mimeTypeForFile(filepath);
-        qDebug() << "mime: " << filepath << mime.name();
-        return mime.name().startsWith("image/");
-}
-
-QString Configuration::getSystemVersion()
-{
-    QSettings settings("/etc/lsb-release", QSettings::IniFormat);
-    QString release = settings.value("DISTRIB_RELEASE").toString();
-    QString description = settings.value("DISTRIB_DESCRIPTION").toString();
-    if(description.right(3) == "LTS")
-        release = release + " LTS";
-    return release;
-}
-
-QString Configuration::getSystemDistrib()
-{
-    QSettings settings("/etc/lsb-release", QSettings::IniFormat);
-    QString distribId = settings.value("DISTRIB_ID").toString();
-    return distribId;
 }
 
 QString Configuration::getBackground()
