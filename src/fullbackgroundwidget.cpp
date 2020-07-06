@@ -140,6 +140,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       monitorWatcher(new MonitorWatcher(this)),
       configuration(new Configuration(this)),
       isLocked(false),
+      lockState(false),
       screenStatus(UNDEFINED)
 {
     qDebug() << "init - screenStatus: " << screenStatus;
@@ -179,6 +180,38 @@ void FullBackgroundWidget::switchToLinux()
 
     switch_to_linux(container);
 
+}
+
+void FullBackgroundWidget::laterActivate()
+{
+    raise();
+    activateWindow();
+}
+
+void FullBackgroundWidget::setLockState()
+{
+    if(lockState == true)
+        return ;
+
+    lockState = true;
+
+    QDBusInterface *interface = new QDBusInterface(SS_DBUS_SERVICE,
+                                                      SS_DBUS_PATH,
+                                                      SS_DBUS_INTERFACE);
+    QDBusMessage msg = interface->call("SetLockState");
+    if(msg.type() == QDBusMessage::ErrorMessage)
+           qDebug() << msg.errorMessage();
+
+}
+
+bool FullBackgroundWidget::eventFilter(QObject *obj, QEvent *event)
+{
+    if(event->type() == QEvent::WindowDeactivate){
+         QTimer::singleShot(50,this,SLOT(laterActivate()));
+    }else if(event->type() == QEvent::Polish){
+        setLockState();
+    }
+    return false;
 }
 
 void FullBackgroundWidget::paintEvent(QPaintEvent *event)
@@ -348,7 +381,6 @@ void FullBackgroundWidget::showLockWidget()
     }
     onCursorMoved(cursor().pos());
     lockWidget->setFocus();
-    XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 }
 
 void FullBackgroundWidget::showScreensaver()
@@ -370,7 +402,6 @@ void FullBackgroundWidget::showScreensaver()
     {
         lockWidget->stopAuth();
     }
-  //  XSetInputFocus(QX11Info::display(),this->winId(),RevertToNone,CurrentTime);
 
 }
 

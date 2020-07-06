@@ -116,10 +116,6 @@ bool IconEdit::eventFilter(QObject *obj, QEvent *event)
                 return true;
             }
         }
-        if(event->type() == 23)
-        {
-            XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
-        }
     }
     if(obj == m_iconButton){
         if(m_timer && m_timer->isActive())
