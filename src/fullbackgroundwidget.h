@@ -27,6 +27,8 @@
 #include <QAbstractNativeEventFilter>
 #include "logind.h"
 
+void x11_get_screen_size(int *width,int *height);
+
 class LockWidget;
 class XEventMonitor;
 class MonitorWatcher;

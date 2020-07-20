@@ -30,7 +30,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <QProcess>
-
+#include <X11/Xlib.h>
 #include "fullbackgroundwidget.h"
 
 #define CACHE_DIR "/.cache/ukui-screensaver/"
@@ -122,8 +122,11 @@ int main(int argc, char *argv[])
 {
     checkIsRunning();
     checkIslivecd();
+	
+    int width = 0, height = 0;
+    x11_get_screen_size(&width,&height);
 
-if(QApplication::desktop()->width()>=2560){
+if(width>=2560){
 #if(QT_VERSION>=QT_VERSION_CHECK(5,6,0))
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
