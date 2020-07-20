@@ -221,7 +221,14 @@ void FullBackgroundWidget::paintEvent(QPaintEvent *event)
     for(auto screen : QGuiApplication::screens())
     {
         QPainter painter(this);
-        painter.drawPixmap(screen->geometry(), background.scaled(screen->size()));
+        if(background.isNull()){
+            QColor cor = "#035290";
+            painter.setBrush(cor);
+            painter.drawRect(screen->geometry());
+        }
+	else{
+            painter.drawPixmap(screen->geometry(), background.scaled(screen->size()));
+    	}
     }
 
     return QWidget::paintEvent(event);
@@ -336,8 +343,11 @@ void FullBackgroundWidget::init()
     setGeometry(0, 0, totalWidth, totalHeight);
 
     background.load(configuration->getBackground());
-    background = blurPixmap(background);
-
+    
+    if(!background.isNull()){
+        background = blurPixmap(background);
+    }
+    
     xEventMonitor->start();
 }
 
@@ -351,9 +361,7 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
     {
        	if(screen->geometry().contains(pos))
        	{
-          //  lockWidget->hide(); //避免闪屏，所以先隐藏，设置大小后再显示
     		lockWidget->setGeometry(screen->geometry());
-           // lockWidget->show();
     		break;
        	}
     }
