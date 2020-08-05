@@ -5,6 +5,8 @@
     </signal>
     <method name="Lock">
     </method>
+    <method name="SetLockState">
+    </method>
     <method name="GetLockState">
     <arg type="b" direction="out"/>
     </method>

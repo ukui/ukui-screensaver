@@ -22,6 +22,8 @@
 #include <QMimeDatabase>
 #include "mbackground.h"
 
+#include "commonfunc.h"
+
 MBackground::MBackground():
     currentIndex(0)
 {
@@ -75,20 +77,28 @@ QString MBackground::getPrev()
 void MBackground::getAllPixmap()
 {
     QDomDocument doc;
-    QFile file("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
-    if (!file.open(QIODevice::ReadOnly))
+    QFile *file;
+
+    if(getSystemDistrib().contains("Ubuntu",Qt::CaseInsensitive))
+        file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
+    else if(getSystemVersion().contains("V10.1",Qt::CaseInsensitive))
+        file = new QFile("/usr/share/mate-background-properties/kylin-background.xml");
+    else
+        file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
+
+    if (!file->open(QIODevice::ReadOnly))
     {
-        qDebug()<<file.fileName()<<" open failed";
+        qDebug()<<file->fileName()<<" open failed";
         return ;
     }
 
-    if (!doc.setContent(&file))
+    if (!doc.setContent(file))
     {
-        file.close();
+        file->close();
         return ;
     }
-    file.close();
-
+    file->close();
+    file->deleteLater();
     QDomElement root = doc.documentElement();//读取根节点
 
     QDomNode node = root.firstChild();//读取第一个子节点   QDomNode 节点

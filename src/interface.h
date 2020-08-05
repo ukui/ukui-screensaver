@@ -42,12 +42,14 @@ public Q_SLOTS:
      */
     void Lock();
     bool GetLockState();
+    void SetLockState();
     void onSessionIdleReceived();
     void onShowScreensaver();
     void onNameLost(const QString&);
 
 private:
     bool checkExistChild();
+    bool lockState;
 
 private:
     QProcess process;

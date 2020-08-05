@@ -1,12 +1,14 @@
 qt5_wrap_cpp(Common_SRC
 	autoresize.h
         checkbutton.h
+        commonfunc.h
 	)
 
 set(Common_SRC
 	${Common_SRC}
 	autoresize.cpp
         checkbutton.cpp
+        commonfunc.cpp
 	)
 
 include_directories(

@@ -27,6 +27,8 @@
 #include <QAbstractNativeEventFilter>
 #include "logind.h"
 
+void x11_get_screen_size(int *width,int *height);
+
 class LockWidget;
 class XEventMonitor;
 class MonitorWatcher;
@@ -56,6 +58,7 @@ public Q_SLOTS:
 private:
     void init();
     void clearScreensavers();
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private Q_SLOTS:
     void onScreenCountChanged(int);
@@ -65,6 +68,8 @@ private Q_SLOTS:
     void onGlobalButtonDrag(int xPos, int yPos);
     void onPrepareForSleep(bool sleep);
     void switchToLinux();
+    void laterActivate();
+    void setLockState();
 
 private:
     QDBusInterface      *smInterface;
@@ -78,6 +83,7 @@ private:
     ScreenStatus        screenStatus;
     QPixmap             background;
     LogindIntegration *m_logind;
+    bool                lockState;
 };
 
 #endif // FULLBACKGROUNDWIDGET_H

@@ -312,9 +312,6 @@ void LockWidget::resizeEvent(QResizeEvent *event)
    	 usersMenu->move(width() - x , \
                     height() - y - usersMenu->height() - 5);
     }
-
-    XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
-
 }
 
 

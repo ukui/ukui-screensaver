@@ -43,6 +43,7 @@ QPushButton{
 #escButton,#prevButton,#nextButton,#settingsButton{
     background: rgba(255, 255, 255, 12%);
     border-radius:24px;
+    border-size:0px;
     color:white;
     icon-size:24px;
 }

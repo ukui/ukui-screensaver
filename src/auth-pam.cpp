@@ -21,8 +21,7 @@
 
 #include <unistd.h>
 #include <wait.h>
-
-
+#include <sys/prctl.h>
 #define PAM_SERVICE_NAME "ukui-screensaver-qt"
 
 //通信管道的文件描述符
@@ -58,6 +57,7 @@ void AuthPAM::authenticate(const QString &userName)
     }
     else if(pid == 0)
     {
+	prctl(PR_SET_PDEATHSIG, SIGHUP);
         close(toParent[0]);
         close(toChild[1]);
        _authenticate(userName.toLocal8Bit().data());

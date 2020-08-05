@@ -25,6 +25,7 @@
 Interface::Interface(QObject *parent)
     : QObject(parent)
 {
+    lockState = false;
     m_logind = new LogindIntegration(this);
     connect(m_logind, &LogindIntegration::requestLock, this,
         [this]() {
@@ -41,13 +42,18 @@ Interface::Interface(QObject *parent)
 
 bool Interface::GetLockState()
 {
-    return (process.state() != QProcess::NotRunning);
+    return ((process.state() != QProcess::NotRunning) && lockState);
+}
+
+void Interface::SetLockState()
+{
+    lockState = true;
 }
 
 void Interface::Lock()
 {
     qDebug() << "Lock requested";
-
+    lockState = false;
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --lock");
     qDebug() << cmd;
 
@@ -58,7 +64,7 @@ void Interface::Lock()
 void Interface::onSessionIdleReceived()
 {
     qDebug() << "emit SessionIdle";
-
+    lockState = false;
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --session-idle");
     qDebug() << cmd;
 
@@ -69,7 +75,7 @@ void Interface::onSessionIdleReceived()
 void Interface::onShowScreensaver()
 {
     qDebug() << "lock and show screensaver";
-
+    lockState = false;
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --screensaver");
     qDebug() << cmd;
 

@@ -140,6 +140,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       monitorWatcher(new MonitorWatcher(this)),
       configuration(new Configuration(this)),
       isLocked(false),
+      lockState(false),
       screenStatus(UNDEFINED)
 {
     qDebug() << "init - screenStatus: " << screenStatus;
@@ -181,6 +182,38 @@ void FullBackgroundWidget::switchToLinux()
 
 }
 
+void FullBackgroundWidget::laterActivate()
+{
+    raise();
+    activateWindow();
+}
+
+void FullBackgroundWidget::setLockState()
+{
+    if(lockState == true)
+        return ;
+
+    lockState = true;
+
+    QDBusInterface *interface = new QDBusInterface(SS_DBUS_SERVICE,
+                                                      SS_DBUS_PATH,
+                                                      SS_DBUS_INTERFACE);
+    QDBusMessage msg = interface->call("SetLockState");
+    if(msg.type() == QDBusMessage::ErrorMessage)
+           qDebug() << msg.errorMessage();
+
+}
+
+bool FullBackgroundWidget::eventFilter(QObject *obj, QEvent *event)
+{
+    if(event->type() == QEvent::WindowDeactivate){
+         QTimer::singleShot(50,this,SLOT(laterActivate()));
+    }else if(event->type() == QEvent::Polish){
+        setLockState();
+    }
+    return false;
+}
+
 void FullBackgroundWidget::paintEvent(QPaintEvent *event)
 {
     QDesktopWidget *desktop = QApplication::desktop();
@@ -188,7 +221,14 @@ void FullBackgroundWidget::paintEvent(QPaintEvent *event)
     for(auto screen : QGuiApplication::screens())
     {
         QPainter painter(this);
-        painter.drawPixmap(screen->geometry(), background.scaled(screen->size()));
+        if(background.isNull()){
+            QColor cor = "#035290";
+            painter.setBrush(cor);
+            painter.drawRect(screen->geometry());
+        }
+	else{
+            painter.drawPixmap(screen->geometry(), background.scaled(screen->size()));
+    	}
     }
 
     return QWidget::paintEvent(event);
@@ -303,8 +343,11 @@ void FullBackgroundWidget::init()
     setGeometry(0, 0, totalWidth, totalHeight);
 
     background.load(configuration->getBackground());
-    background = blurPixmap(background);
-
+    
+    if(!background.isNull()){
+        background = blurPixmap(background);
+    }
+    
     xEventMonitor->start();
 }
 
@@ -318,9 +361,7 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
     {
        	if(screen->geometry().contains(pos))
        	{
-          //  lockWidget->hide(); //避免闪屏，所以先隐藏，设置大小后再显示
     		lockWidget->setGeometry(screen->geometry());
-           // lockWidget->show();
     		break;
        	}
     }
@@ -348,7 +389,6 @@ void FullBackgroundWidget::showLockWidget()
     }
     onCursorMoved(cursor().pos());
     lockWidget->setFocus();
-    XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 }
 
 void FullBackgroundWidget::showScreensaver()
@@ -370,7 +410,6 @@ void FullBackgroundWidget::showScreensaver()
     {
         lockWidget->stopAuth();
     }
-  //  XSetInputFocus(QX11Info::display(),this->winId(),RevertToNone,CurrentTime);
 
 }
 

@@ -24,7 +24,7 @@
 #include <QKeyEvent>
 #include <QtX11Extras/QX11Info>
 #include <X11/Xlib.h>
-
+#include <sys/prctl.h>
 ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
     : QWidget(parent),
       timer(nullptr),
@@ -130,11 +130,6 @@ void ScreenSaverWidget::paintEvent(QPaintEvent *event)
 
 bool ScreenSaverWidget::eventFilter(QObject *obj, QEvent *event)
 {
-    if(event->type() == 23)
-    {
-        XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
-
-    }
     return false;
 }
 
@@ -145,6 +140,7 @@ void ScreenSaverWidget::embedXScreensaver(const QString &path)
     char widStr[20] = {0};
     snprintf(widStr, sizeof(widStr), "%lu", wid);
     if((xscreensaverPid = fork()) == 0) {
+	prctl(PR_SET_PDEATHSIG, SIGHUP);
         execl(path.toStdString().c_str(), "xscreensaver", "-window-id", widStr, (char*)0);
         qWarning() << "exec " << path << "failed";
     }
