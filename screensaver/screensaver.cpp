@@ -179,17 +179,27 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 void Screensaver::setUpdateCenterWidget()
 {
     QString lang = qgetenv("LANG");
+    QString cwdPath="/usr/share/ukui-screensaver/";
+    QString languageDirPath=cwdPath+"language/";
+    QString defaultLanguageFilePath=languageDirPath+"screensaver-en_US.ini";
     if (!lang.isEmpty()){
         qDebug()<<"lang = "<<lang;
-        if (lang.contains("zh_CN")){
-        	qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver.ini",QSettings::IniFormat);
+        if(lang.contains('.')){
+            lang=lang.split('.')[0];
+            qDebug()<<"langStr = "<<lang;
+        }
+        QString languageFilePath=languageDirPath+"screensaver-"+lang+".ini";
+        qDebug()<<"langnguageFile = "<<languageFilePath;
+        QFileInfo fileInfo(languageFilePath);
+        if (fileInfo.isFile()){
+        	qsettings = new QSettings(languageFilePath,QSettings::IniFormat);
         }
         else{
-            qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver-en.ini",QSettings::IniFormat);
+            qsettings = new QSettings(defaultLanguageFilePath,QSettings::IniFormat);
 	    }
     }
     else{
-        qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver-en.ini",QSettings::IniFormat);
+        qsettings = new QSettings(defaultLanguageFilePath,QSettings::IniFormat);
     }
 
     qsettings->setIniCodec(QTextCodec::codecForName("UTF-8"));

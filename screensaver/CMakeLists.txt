@@ -44,6 +44,6 @@ install(TARGETS
 	DESTINATION lib/ukui-screensaver)
 
 install(FILES
-        screensaver.ini 
-	screensaver-en.ini
-        DESTINATION share/ukui-screensaver)
+        language/screensaver-zh_CN.ini 
+	language/screensaver-en_US.ini
+        DESTINATION share/ukui-screensaver/language)
