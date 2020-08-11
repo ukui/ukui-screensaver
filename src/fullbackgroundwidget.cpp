@@ -279,6 +279,11 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
         {
             raise();
         }
+	else if(responseType == XCB_MAP_NOTIFY)
+        {
+            raise();
+        }
+
         return false;
 }
 
@@ -389,6 +394,7 @@ void FullBackgroundWidget::showLockWidget()
     }
     onCursorMoved(cursor().pos());
     lockWidget->setFocus();
+     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 }
 
 void FullBackgroundWidget::showScreensaver()
@@ -410,7 +416,6 @@ void FullBackgroundWidget::showScreensaver()
     {
         lockWidget->stopAuth();
     }
-
 }
 
 void FullBackgroundWidget::clearScreensavers()

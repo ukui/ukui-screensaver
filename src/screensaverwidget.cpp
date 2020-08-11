@@ -130,6 +130,10 @@ void ScreenSaverWidget::paintEvent(QPaintEvent *event)
 
 bool ScreenSaverWidget::eventFilter(QObject *obj, QEvent *event)
 {
+    if(event->type() == 23)
+    {
+        XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
+    }
     return false;
 }
 

@@ -132,10 +132,11 @@ if(width>=2560){
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 }
+
+    qunsetenv("QT_IM_MODULE");
  //   signal(SIGTERM,handler);
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
-
 
     //命令行参数解析
     QCommandLineParser parser;
@@ -155,30 +156,6 @@ if(width>=2560){
     if(!parser.isSet(sessionIdleOption) && !parser.isSet(lockOption) && !parser.isSet(screensaverOption))
     {
         return 0;
-    }
-    else
-    {
-        if(parser.isSet(lockOption))
-        {
-            if("fcitx" == qgetenv("QT_IM_MODULE"))
-            {
-                qunsetenv("QT_IM_MODULE");
-//                QProcess * process = new QProcess;//不阻塞
-//                process->start("/usr/bin/ukui-screensaver-dialog --lock");
-//                exit(EXIT_SUCCESS);
-            }
-        }
-
-        if(parser.isSet(sessionIdleOption))
-        {
-            if("fcitx" == qgetenv("QT_IM_MODULE"))
-            {
-                qunsetenv("QT_IM_MODULE");
-//                QProcess * process = new QProcess;//不阻塞
-//                process->start("/usr/bin/ukui-screensaver-dialog --session-idle");
-//                exit(EXIT_SUCCESS);
-            }
-        }
     }
 
     qInstallMessageHandler(messageOutput);
