@@ -183,10 +183,13 @@ void Screensaver::setUpdateCenterWidget()
         qDebug()<<"lang = "<<lang;
         if (lang.contains("zh_CN")){
         	qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver.ini",QSettings::IniFormat);
-	}
-	else{
-		qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver-en.ini",QSettings::IniFormat);
-	}
+        }
+        else{
+            qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver-en.ini",QSettings::IniFormat);
+	    }
+    }
+    else{
+        qsettings = new QSettings("/usr/share/ukui-screensaver/screensaver-en.ini",QSettings::IniFormat);
     }
 
     qsettings->setIniCodec(QTextCodec::codecForName("UTF-8"));
