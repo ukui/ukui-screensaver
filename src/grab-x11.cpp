@@ -40,15 +40,12 @@ static bool grabKeyboard()
 
 static bool grabMouse()
 {
-    int rv = XGrabPointer(QX11Info::display(),
-                 QX11Info::appRootWindow(),
-                 True,
-                 PointerMotionMask | ButtonPressMask | ButtonReleaseMask,
-                 GrabModeAsync,
-                 GrabModeAsync,
-                 None,
-                 None,
-                 CurrentTime);
+#define GRABEVENTS ButtonPressMask | ButtonReleaseMask | PointerMotionMask | \
+                   EnterWindowMask | LeaveWindowMask | KeyPressMask | KeyReleaseMask
+    int rv = XGrabPointer(QX11Info::display(), QX11Info::appRootWindow(),
+                          True, GRABEVENTS, GrabModeAsync, GrabModeAsync, None,
+                          None, CurrentTime);
+#undef GRABEVENTS
 
     return (rv == GrabSuccess);
 }
