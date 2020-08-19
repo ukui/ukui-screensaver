@@ -26,6 +26,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QCloseEvent>
+#include <QDBusPendingReply>
 
 #include <QX11Info>
 #include <X11/Xatom.h>
@@ -184,8 +185,11 @@ void FullBackgroundWidget::switchToLinux()
 
 void FullBackgroundWidget::laterActivate()
 {
-    raise();
     activateWindow();
+    raise();
+    setFocus();
+    if(lockWidget && lockWidget->isVisible())
+        lockWidget->setFocus();
 }
 
 void FullBackgroundWidget::setLockState()
@@ -208,8 +212,8 @@ bool FullBackgroundWidget::eventFilter(QObject *obj, QEvent *event)
 {
     if(event->type() == QEvent::WindowDeactivate){
          QTimer::singleShot(50,this,SLOT(laterActivate()));
-    }else if(event->type() == QEvent::Polish){
-        setLockState();
+    }else if(event->type() == QEvent::WindowActivate){
+    	QTimer::singleShot(500,this,SLOT(setLockState()));
     }
     return false;
 }
@@ -267,23 +271,16 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
         xcb_generic_event_t *event = reinterpret_cast<xcb_generic_event_t*>(message);
         const uint8_t responseType = event->response_type & ~0x80;
         if (responseType == XCB_CONFIGURE_NOTIFY) {
-                xcb_configure_notify_event_t *xc = reinterpret_cast<xcb_configure_notify_event_t*>(event);
-                if (xc->event == QX11Info::appRootWindow())
-                {
-                    this->onDesktopResized();
-                    raise();
-                }
+            xcb_configure_notify_event_t *xc = reinterpret_cast<xcb_configure_notify_event_t*>(event);
+            if(xc->window == winId())
                 return false;
-        }
-        else if(responseType == XCB_PROPERTY_NOTIFY)
-        {
-            raise();
-        }
-	else if(responseType == XCB_MAP_NOTIFY)
-        {
-            raise();
-        }
-
+            laterActivate();
+         }else if(responseType == XCB_MAP_NOTIFY){
+	    xcb_map_notify_event_t *xm = reinterpret_cast<xcb_map_notify_event_t*>(event);
+	    if(xm->window == winId())
+                return false;
+            laterActivate();
+	 }
         return false;
 }
 
@@ -308,6 +305,11 @@ void FullBackgroundWidget::init()
 {
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint
                    | Qt::X11BypassWindowManagerHint);
+
+    XWindowAttributes rootAttr;
+    XGetWindowAttributes(QX11Info::display(), QX11Info::appRootWindow(), &rootAttr);
+    XSelectInput( QX11Info::display(), QX11Info::appRootWindow(),
+                  SubstructureNotifyMask|rootAttr.your_event_mask );
 //    setAttribute(Qt::WA_DeleteOnClose);
 /*捕获键盘，如果捕获失败，则可能是由于弹出菜单项已经捕获，那么模拟一次esc按键来退出菜单，如果仍捕获失败，则放弃锁屏，避免密码无法输入*/
     if(establishGrab())
@@ -376,7 +378,8 @@ void FullBackgroundWidget::lock()
 {
     showLockWidget();
 
-    lockWidget->startAuth();;
+    lockWidget->startAuth();
+    inhibit();
 }
 
 
@@ -539,6 +542,21 @@ void FullBackgroundWidget::onDesktopResized()
 
 }
 
+void FullBackgroundWidget::laterInhibit(bool val)
+{
+	if(val){
+		inhibit();
+	}else{
+		uninhibit();
+	}
+}
+
+void FullBackgroundWidget::laterStartAuth()
+{
+	lockWidget->startAuth();
+	inhibit();
+}
+
 void FullBackgroundWidget::onPrepareForSleep(bool sleep)
 {
     ///系统休眠时，会关闭总线，导致设备不可用，发生错误
@@ -546,12 +564,46 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
     if(sleep)
     {
         lockWidget->stopAuth();
+        uninhibit();
     }
     else
     {
         if(screenStatus & SCREEN_SAVER)
         {
+            clearScreensavers();
+        }else{
             lockWidget->startAuth();
+            inhibit();
         }
     }
+}
+
+void FullBackgroundWidget::inhibit()
+{
+    if (m_inhibitFileDescriptor.isValid()) {
+        return;
+    }
+
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.login1",
+                                                          "/org/freedesktop/login1",
+                                                          "org.freedesktop.login1.Manager",
+                                                          QStringLiteral("Inhibit"));
+    message.setArguments(QVariantList({QStringLiteral("sleep"),
+                                       "Screen Locker",
+                                       "Ensuring that the screen gets locked before going to sleep",
+                                       QStringLiteral("delay")}));
+    QDBusPendingReply<QDBusUnixFileDescriptor> reply = QDBusConnection::systemBus().call(message);
+    if (!reply.isValid()) {
+        return;
+    }
+    reply.value().swap(m_inhibitFileDescriptor);
+}
+
+void FullBackgroundWidget::uninhibit()
+{
+    if (!m_inhibitFileDescriptor.isValid()) {
+        return;
+    }
+    
+     m_inhibitFileDescriptor = QDBusUnixFileDescriptor();
 }

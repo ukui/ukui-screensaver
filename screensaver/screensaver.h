@@ -48,6 +48,7 @@ private:
     void updateDate();
     void setUpdateBackground();
     void setUpdateCenterWidget();
+    QString getDefaultBackground(QString background);
 
 
     QLabel *dateOfWeek;

@@ -64,6 +64,7 @@ Screensaver::Screensaver(QWidget *parent):
     defaultBackground = settings->get("picture-filename").toString();
 
     QString backgroundFile = defaultBackground;
+    backgroundFile = getDefaultBackground(backgroundFile);
     background = QPixmap(backgroundFile);
 
     QList<QLabel*> labelList = this->findChildren<QLabel *>();
@@ -79,6 +80,20 @@ Screensaver::Screensaver(QWidget *parent):
 Screensaver::~Screensaver()
 {
 
+}
+
+QString Screensaver::getDefaultBackground(QString background)
+{
+    if(ispicture(background))
+        return background;
+    else if(getSystemDistrib().contains("Ubuntu",Qt::CaseInsensitive))
+        return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
+    else if(getSystemVersion().contains("V10.1",Qt::CaseInsensitive))
+        return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
+    else if(getSystemVersion().contains("V10",Qt::CaseInsensitive))
+        return "/usr/share/backgrounds/kylin/kylin-background.png";
+    else
+        return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
 }
 
 bool Screensaver::eventFilter(QObject *obj, QEvent *event)

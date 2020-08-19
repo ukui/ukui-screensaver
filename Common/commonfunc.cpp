@@ -1,14 +1,18 @@
 #include <QMimeType>
 #include <QSettings>
 #include <QMimeDatabase>
-
+#include <QFileInfo>
 #include "commonfunc.h"
 
 bool ispicture(QString filepath)
 {
-        QMimeDatabase db;
-        QMimeType mime = db.mimeTypeForFile(filepath);
-        return mime.name().startsWith("image/");
+	QFileInfo file(filepath);
+	if(file.exists() == false)
+		return false;
+
+    QMimeDatabase db;
+    QMimeType mime = db.mimeTypeForFile(filepath);
+    return mime.name().startsWith("image/");
 }
 
 QString getSystemVersion()

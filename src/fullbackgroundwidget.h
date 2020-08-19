@@ -25,6 +25,7 @@
 #include <QWidget>
 #include "types.h"
 #include <QAbstractNativeEventFilter>
+#include <QDBusUnixFileDescriptor>
 #include "logind.h"
 
 void x11_get_screen_size(int *width,int *height);
@@ -54,6 +55,8 @@ public Q_SLOTS:
     void showLockWidget();
     void showScreensaver();
     int onSessionStatusChanged(uint status);
+    void inhibit();
+    void uninhibit();
 
 private:
     void init();
@@ -70,6 +73,8 @@ private Q_SLOTS:
     void switchToLinux();
     void laterActivate();
     void setLockState();
+    void laterInhibit(bool val);
+    void laterStartAuth();
 
 private:
     QDBusInterface      *smInterface;
@@ -82,8 +87,8 @@ private:
     bool                isLocked;
     ScreenStatus        screenStatus;
     QPixmap             background;
-    LogindIntegration *m_logind;
     bool                lockState;
+    QDBusUnixFileDescriptor m_inhibitFileDescriptor;
 };
 
 #endif // FULLBACKGROUNDWIDGET_H

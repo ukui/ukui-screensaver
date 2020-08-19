@@ -123,15 +123,10 @@ int main(int argc, char *argv[])
     checkIsRunning();
     checkIslivecd();
 	
-    int width = 0, height = 0;
-    x11_get_screen_size(&width,&height);
-
-if(width>=2560){
 #if(QT_VERSION>=QT_VERSION_CHECK(5,6,0))
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
-}
 
     qunsetenv("QT_IM_MODULE");
  //   signal(SIGTERM,handler);
