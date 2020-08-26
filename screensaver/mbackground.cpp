@@ -81,7 +81,7 @@ void MBackground::getAllPixmap()
 
     if(getSystemDistrib().contains("Ubuntu",Qt::CaseInsensitive))
         file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
-    else if(getSystemVersion().contains("V10.1",Qt::CaseInsensitive))
+    else if(getSystemVersion().contains("V10",Qt::CaseInsensitive))
         file = new QFile("/usr/share/mate-background-properties/kylin-background.xml");
     else
         file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
