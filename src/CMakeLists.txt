@@ -53,6 +53,8 @@ qt5_wrap_cpp(dialog_SRC
 	iconedit.h
 	powermanager.h
         logind.h
+        weathermanager.h
+        tabletlockwidget.h
 	)
 
 set(dialog_SRC
@@ -74,6 +76,8 @@ set(dialog_SRC
 	displaymanager.cpp
 	iconedit.cpp
         logind.cpp
+        weathermanager.cpp
+        tabletlockwidget.cpp
 	)
 add_executable(ukui-screensaver-dialog ${dialog_SRC})
 
@@ -82,6 +86,7 @@ target_link_libraries(ukui-screensaver-dialog
 	Qt5::Widgets
 	Qt5::DBus
 	Qt5::X11Extras
+        Qt5::Network
 	${EXTRA_LIBS}
         BiometricAuth 
 	VirtualKeyboard 
