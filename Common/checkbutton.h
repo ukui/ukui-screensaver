@@ -24,6 +24,7 @@
 #include <QFrame>
 #include <QTimer>
 #include <QPainter>
+#include <QPainterPath>
 #include <QEvent>
 
 class checkButton : public QFrame

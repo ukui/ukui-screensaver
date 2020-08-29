@@ -21,6 +21,7 @@
 #include <QPixmap>
 #include <QHBoxLayout>
 #include <QPainter>
+#include <QPainterPath>
 #include <unistd.h>
 #include <pwd.h>
 #include <QBitmap>
