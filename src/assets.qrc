@@ -7,7 +7,7 @@
         <file>assets/hide-password.png</file>
         <file>assets/keyboard.png</file>
         <file>assets/switchGreeter.png</file>
-	<file>assets/switchUser.png</file>
+        <file>assets/switchUser.png</file>
         <file>assets/waiting.png</file>
         <file>assets/capslock.png</file>
         <file>assets/combobox_down.png</file>
@@ -18,16 +18,72 @@
         <file>assets/scrollbar_up_clicked.png</file>
         <file>assets/scrollbar_up_hover.png</file>
         <file>assets/unlock-button.png</file>
-	<file>assets/unlock-button-hover.png</file>
-	<file>assets/unlock-button-pressed.png</file>
-    	<file>assets/iconFace.png</file>
-	<file>assets/iconFace.svg</file>
-	<file>assets/powerManager.png</file>
-	<file>assets/lock.png</file>
-	<file>assets/logout.png</file>
-	<file>assets/shutdown.png</file>
-	<file>assets/reboot.png</file>
+        <file>assets/unlock-button-hover.png</file>
+        <file>assets/unlock-button-pressed.png</file>
+        <file>assets/iconFace.png</file>
+        <file>assets/iconFace.svg</file>
+        <file>assets/powerManager.png</file>
+        <file>assets/lock.png</file>
+        <file>assets/logout.png</file>
+        <file>assets/shutdown.png</file>
+        <file>assets/reboot.png</file>
         <file>assets/bio-login.png</file>
-	<file>assets/password-login.png</file>
+        <file>assets/password-login.png</file>
+        <file>assets/weather/68.png</file>
+        <file>assets/weather/67.png</file>
+        <file>assets/weather/66.png</file>
+        <file>assets/weather/63.png</file>
+        <file>assets/weather/62.png</file>
+        <file>assets/weather/60.png</file>
+        <file>assets/weather/59.png</file>
+        <file>assets/weather/58.png</file>
+        <file>assets/weather/56.png</file>
+        <file>assets/weather/55.png</file>
+        <file>assets/weather/53.png</file>
+        <file>assets/weather/52.png</file>
+        <file>assets/weather/51.png</file>
+        <file>assets/weather/49.png</file>
+        <file>assets/weather/48.png</file>
+        <file>assets/weather/47.png</file>
+        <file>assets/weather/45.png</file>
+        <file>assets/weather/43.png</file>
+        <file>assets/weather/41.png</file>
+        <file>assets/weather/40.png</file>
+        <file>assets/weather/39.png</file>
+        <file>assets/weather/38.png</file>
+        <file>assets/weather/36.png</file>
+        <file>assets/weather/35.png</file>
+        <file>assets/weather/33.png</file>
+        <file>assets/weather/31.png</file>
+        <file>assets/weather/30.png</file>
+        <file>assets/weather/29.png</file>
+        <file>assets/weather/28.png</file>
+        <file>assets/weather/27.png</file>
+        <file>assets/weather/24.png</file>
+        <file>assets/weather/22.png</file>
+        <file>assets/weather/21.png</file>
+        <file>assets/weather/20.png</file>
+        <file>assets/weather/19.png</file>
+        <file>assets/weather/18.png</file>
+        <file>assets/weather/17.png</file>
+        <file>assets/weather/16.png</file>
+        <file>assets/weather/15.png</file>
+        <file>assets/weather/14.png</file>
+        <file>assets/weather/13.png</file>
+        <file>assets/weather/11.png</file>
+        <file>assets/weather/10.png</file>
+        <file>assets/weather/9.png</file>
+        <file>assets/weather/8.png</file>
+        <file>assets/weather/7.png</file>
+        <file>assets/weather/6.png</file>
+        <file>assets/weather/5.png</file>
+        <file>assets/weather/4.png</file>
+        <file>assets/weather/3.png</file>
+        <file>assets/weather/2.png</file>
+        <file>assets/weather/1.png</file>
+        <file>assets/weather/0.png</file>
+        <file>assets/message.png</file>
+        <file>assets/more.png</file>
+        <file>assets/slide_unlock.png</file>
     </qresource>
 </RCC>

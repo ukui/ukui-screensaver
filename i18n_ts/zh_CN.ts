@@ -25,6 +25,14 @@
         <translation type="obsolete">解锁</translation>
     </message>
     <message>
+        <source>Slide to unlock</source>
+        <translation type="vanished">向上滑动解锁</translation>
+    </message>
+    <message>
+        <source>You have %1 unread message</source>
+        <translation type="vanished">您有%1条未读消息</translation>
+    </message>
+    <message>
         <source>LoggedIn</source>
         <translation type="obsolete">已登录</translation>
     </message>
@@ -190,7 +198,7 @@
         <translation>时间</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="247"/>
+        <location filename="../src/lockwidget.cpp" line="266"/>
         <source>Guest</source>
         <translation>游客</translation>
     </message>
@@ -222,27 +230,27 @@
         <translation type="vanished">关机</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="109"/>
+        <location filename="../src/powermanager.cpp" line="127"/>
         <source>Lock Screen</source>
         <translation>锁屏</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="124"/>
+        <location filename="../src/powermanager.cpp" line="142"/>
         <source>Switch User</source>
         <translation>切换用户</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="138"/>
+        <location filename="../src/powermanager.cpp" line="156"/>
         <source>Log Out</source>
         <translation>注销</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="152"/>
+        <location filename="../src/powermanager.cpp" line="170"/>
         <source>Restart</source>
         <translation>重启</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="166"/>
+        <location filename="../src/powermanager.cpp" line="184"/>
         <source>Power Off</source>
         <translation>关机</translation>
     </message>
@@ -250,12 +258,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/ukui-screensaver-command.cpp" line="66"/>
+        <location filename="../src/ukui-screensaver-command.cpp" line="68"/>
         <source>The screensaver is active.</source>
         <translation>屏幕保护程序已激活</translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-command.cpp" line="68"/>
+        <location filename="../src/ukui-screensaver-command.cpp" line="70"/>
         <source>The screensaver is inactive.</source>
         <translation>屏幕保护程序未激活</translation>
     </message>
@@ -271,12 +279,12 @@
         <translation type="vanished">退出</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="284"/>
+        <location filename="../screensaver/screensaver.cpp" line="306"/>
         <source>Set as desktop wallpaper</source>
         <translation>设置为桌面壁纸</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="294"/>
+        <location filename="../screensaver/screensaver.cpp" line="316"/>
         <source>Automatic switching</source>
         <translation>自动切换</translation>
     </message>
@@ -290,6 +298,19 @@
     </message>
 </context>
 <context>
+    <name>TabletLockWidget</name>
+    <message>
+        <location filename="../src/tabletlockwidget.cpp" line="167"/>
+        <source>You have %1 unread message</source>
+        <translation>您有%1条未读消息</translation>
+    </message>
+    <message>
+        <location filename="../src/tabletlockwidget.cpp" line="183"/>
+        <source>Slide to unlock</source>
+        <translation>向上滑动解锁</translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <location filename="../src/ukui-screensaver-command.cpp" line="40"/>
@@ -298,7 +319,7 @@
     </message>
     <message>
         <location filename="../src/ukui-screensaver-command.cpp" line="45"/>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="136"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="143"/>
         <source>lock the screen immediately</source>
         <translation>马上锁定屏幕</translation>
     </message>
@@ -308,32 +329,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="131"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="138"/>
         <source>Dialog for the ukui ScreenSaver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="138"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="145"/>
         <source>activated by session idle signal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../screensaver/main.cpp" line="55"/>
-        <source>Screensaver for ukui-screensaver</source>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="147"/>
+        <source>lock the screen and show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../screensaver/main.cpp" line="59"/>
+        <source>Screensaver for ukui-screensaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../screensaver/main.cpp" line="63"/>
         <source>show on root window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../screensaver/main.cpp" line="61"/>
+        <location filename="../screensaver/main.cpp" line="65"/>
         <source>show on window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../screensaver/main.cpp" line="62"/>
+        <location filename="../screensaver/main.cpp" line="66"/>
         <source>window id</source>
         <translation type="unfinished"></translation>
     </message>

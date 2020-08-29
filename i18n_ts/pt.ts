@@ -257,6 +257,17 @@
     </message>
 </context>
 <context>
+    <name>TabletLockWidget</name>
+    <message>
+        <source>You have %1 unread message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slide to unlock</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <source>Start command for the ukui ScreenSaver.</source>
@@ -292,6 +303,10 @@
     </message>
     <message>
         <source>query the status of the screen saver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lock the screen and show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
