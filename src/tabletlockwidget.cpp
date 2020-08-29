@@ -159,7 +159,7 @@ void TabletLockWidget::initUI()
     m_layout_notice = new QHBoxLayout(m_widget_notice);
 
     m_label_notice_icon->setFixedSize(24,24);
-    m_label_notice_icon->setPixmap(QPixmap(":/image/assets/lock.png").scaled(24,24)); //需要换图标
+    m_label_notice_icon->setPixmap(QPixmap(":/image/assets/message.png"));
     m_layout_notice->addWidget(m_label_notice_icon);
 
     QSpacerItem *spacerNoticeIcon2Msg = new QSpacerItem(8, 20, QSizePolicy::Fixed, QSizePolicy::Expanding);
@@ -193,7 +193,7 @@ void TabletLockWidget::initUI()
     unlockPbLayout->addSpacerItem(new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Maximum));
     m_pb_up_unlock = new QPushButton(unlockPbWidget);
     m_pb_up_unlock->setFixedSize(32,32);
-    m_pb_up_unlock->setIcon(QIcon(":/image/assets/scrollbar_up.png")); //需要图标
+    m_pb_up_unlock->setIcon(QIcon(":/image/assets/slide_unlock.png"));
     unlockPbLayout->addWidget(m_pb_up_unlock);
     unlockPbLayout->addSpacerItem(new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Maximum));
     connect(m_pb_up_unlock, &QPushButton::clicked,
@@ -206,8 +206,7 @@ void TabletLockWidget::initUI()
 
     settingPbLayout->addSpacerItem(new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Maximum));
     m_pb_login = new QPushButton(m_widget_buttom);
-    m_pb_login->setFixedSize(46,46);
-    m_pb_login->setIcon(QIcon(":/image/assets/switchUser.png"));
+    m_pb_login->setIcon(QIcon(":/image/assets/more.png"));
     settingPbLayout->addWidget(m_pb_login);
 
     m_layout_buttom->addWidget(m_widget_notice, 0, 0);

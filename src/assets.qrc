@@ -82,5 +82,8 @@
         <file>assets/weather/2.png</file>
         <file>assets/weather/1.png</file>
         <file>assets/weather/0.png</file>
+        <file>assets/message.png</file>
+        <file>assets/more.png</file>
+        <file>assets/slide_unlock.png</file>
     </qresource>
 </RCC>
