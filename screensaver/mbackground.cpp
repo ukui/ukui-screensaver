@@ -78,11 +78,12 @@ void MBackground::getAllPixmap()
 {
     QDomDocument doc;
     QFile *file;
-
     if(getSystemDistrib().contains("Ubuntu",Qt::CaseInsensitive))
         file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
+    else if(getSystemVersion().contains("V10.1",Qt::CaseInsensitive))
+        file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
     else if(getSystemVersion().contains("V10",Qt::CaseInsensitive))
-        file = new QFile("/usr/share/mate-background-properties/kylin-background.xml");
+	file = new QFile("/usr/share/ukui-background-properties/kylin-wallpaper.xml");
     else
         file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
 
@@ -100,13 +101,11 @@ void MBackground::getAllPixmap()
     file->close();
     file->deleteLater();
     QDomElement root = doc.documentElement();//读取根节点
-
     QDomNode node = root.firstChild();//读取第一个子节点   QDomNode 节点
     while (!node.isNull())
     {
         QDomElement node1 = node.firstChildElement("filename");
         QString fileName = node1.text();
-
         QMimeDatabase db;
         QMimeType mime = db.mimeTypeForFile(fileName);
         if(mime.name().startsWith("image/")){
