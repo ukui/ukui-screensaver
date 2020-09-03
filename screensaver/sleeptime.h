@@ -23,6 +23,7 @@
 #include <QLabel>
 #include <QTimer>
 #include <QList>
+#include <QDateTime>
 #include <QHBoxLayout>
 
 class SleepTime : public QWidget
@@ -31,13 +32,15 @@ class SleepTime : public QWidget
 public:
     explicit SleepTime(QWidget *parent = nullptr);
     ~SleepTime();
-    int setTime();
+    int setTime(QDateTime time);
+    int setInitTime(QDateTime time);
 
 private:
     QLabel *restTime;
     QList<QLabel *> list;
     QHBoxLayout *layout;
     int sleepTime;
+    QDateTime initTime;
 
     void init();
     void setSeconds(int seconds);
