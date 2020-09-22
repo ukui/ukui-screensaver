@@ -252,29 +252,30 @@ void LockWidget::initUserMenu()
 
     }
 
-    connect(users, &Users::userAdded, this, &LockWidget::onUserAdded);
-    connect(users, &Users::userDeleted, this, &LockWidget::onUserDeleted);
-
-    for(auto user : users->getUsers())
-    {
-        onUserAdded(user);
-    }
-
-    if(displayManager->hasGuestAccount())
-    {
+    if(displayManager->getDisplayType() == "gdm"){
         QAction *action = new QAction(QIcon(users->getDefaultIcon()),
-                                      tr("Guest"), this);
-        action->setData("Guest");
+                                      tr("SwitchUser"), this);
+        action->setData("SwitchUser");
         usersMenu->addAction(action);
     }
 
-//    {
-//        QAction *action = new QAction(QIcon(users->getDefaultIcon()),
-//                                      tr("SwitchUser"), this);
-//        action->setData("SwitchUser");
-//        usersMenu->addAction(action);
-//    }
-	
+    else if(displayManager->getDisplayType() == "lightdm"){
+        connect(users, &Users::userAdded, this, &LockWidget::onUserAdded);
+        connect(users, &Users::userDeleted, this, &LockWidget::onUserDeleted);
+
+        for(auto user : users->getUsers())
+        {
+            onUserAdded(user);
+        }
+
+        if(displayManager->hasGuestAccount())
+        {
+            QAction *action = new QAction(QIcon(users->getDefaultIcon()),
+                                      tr("Guest"), this);
+            action->setData("Guest");
+            usersMenu->addAction(action);
+        }
+    }
 }
 
 /* lockscreen follows cursor */
