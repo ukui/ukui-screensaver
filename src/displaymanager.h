@@ -19,6 +19,7 @@
 #define DISPLAYMANAGER_H
 
 #include <QObject>
+#include <QProcess>
 
 class QDBusInterface;
 class QDBusMessage;
@@ -34,16 +35,21 @@ public:
     bool canSwitch();
     bool hasGuestAccount();
 
+    QString getDisplayType();
+
 private:
     void getProperties();
     void handleDBusError(const QDBusMessage &msg);
+    bool process_is_running(QString name);
 
 private:
     bool _canSwitch;
     bool _hasGuestAccount;
+    QString _displayType;
 
     QDBusInterface *dmService;
     QDBusInterface *dmSeatService;
+    QProcess    *process;
 };
 
 #endif // DISPLAYMANAGER_H

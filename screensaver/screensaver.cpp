@@ -25,6 +25,7 @@
 #include <QDate>
 #include <QApplication>
 #include <QTextCodec>
+#include <QDateTime>
 #include <QKeyEvent>
 #include <QSplitterHandle>
 #include <QCursor>
@@ -406,6 +407,7 @@ void Screensaver::setSleeptime()
 {
     sleepTime = new SleepTime(this);
     sleepTime->adjustSize();
+    sleepTime->setInitTime(QDateTime::currentDateTime());
      updateDate();
 }
 
@@ -422,7 +424,7 @@ void Screensaver::updateTime()
     this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
     this->dateOfDay->setText(QDate::currentDate().toString("yy/MM/dd"));
     if(sleepTime){
-        if(!sleepTime->setTime()){
+        if(!sleepTime->setTime(QDateTime::currentDateTime())){
         	sleepTime->hide();
             sleepTime->deleteLater();
         }

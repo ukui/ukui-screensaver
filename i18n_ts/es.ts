@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>SwitchUser</source>
-        <translation type="vanished">Cambiar de usuario</translation>
+        <translation>Cambiar de usuario</translation>
     </message>
 </context>
 <context>
@@ -292,6 +292,10 @@
     </message>
     <message>
         <source>query the status of the screen saver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lock the screen and show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

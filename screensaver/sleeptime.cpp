@@ -76,9 +76,14 @@ void SleepTime::init()
 
 }
 
-int SleepTime::setTime()
+int SleepTime::setInitTime(QDateTime time)
 {
-    sleepTime+=1;
+    initTime = time;
+}
+
+int SleepTime::setTime(QDateTime time)
+{
+    sleepTime = initTime.secsTo(time);
 
     if(sleepTime>5999){
         hide();
