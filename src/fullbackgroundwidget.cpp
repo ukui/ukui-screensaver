@@ -516,7 +516,10 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
         ScreenSaver *saver = configuration->getScreensaver();
         if(saver->path == "/usr/lib/ukui-screensaver/ukui-screensaver-default")
                return ;
-        clearScreensavers();
+        if(screenStatus & SCREEN_SAVER)
+        {
+            clearScreensavers();
+        }
     }
 }
 
@@ -526,8 +529,11 @@ void FullBackgroundWidget::onScreenCountChanged(int)
     QSize newSize = monitorWatcher->getVirtualSize();
     setGeometry(0, 0, newSize.width(), newSize.height());
     //repaint();
+    if(screenStatus & SCREEN_SAVER)
+    {
+        clearScreensavers();
+    }
     update();
-    clearScreensavers();
 }
 
 void FullBackgroundWidget::onDesktopResized()
@@ -536,8 +542,11 @@ void FullBackgroundWidget::onDesktopResized()
     setGeometry(desktop->geometry());
     if(lockWidget)
     	onCursorMoved(cursor().pos());
-//    clearScreensavers();
-   //repaint();
+    if(screenStatus & SCREEN_SAVER)
+    {
+        clearScreensavers();
+    }
+    //repaint();
     update();
 
 }
