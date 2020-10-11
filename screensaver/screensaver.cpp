@@ -407,7 +407,6 @@ void Screensaver::setSleeptime()
 {
     sleepTime = new SleepTime(this);
     sleepTime->adjustSize();
-    sleepTime->setInitTime(QDateTime::currentDateTime());
      updateDate();
 }
 

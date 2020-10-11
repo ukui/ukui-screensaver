@@ -33,7 +33,6 @@ public:
     explicit SleepTime(QWidget *parent = nullptr);
     ~SleepTime();
     int setTime(QDateTime time);
-    int setInitTime(QDateTime time);
 
 private:
     QLabel *restTime;
