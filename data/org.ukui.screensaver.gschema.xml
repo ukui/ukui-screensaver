@@ -99,7 +99,7 @@
       <description>Allow the session status message to be displayed when the screen is locked.</description>
     </key>
     <key name="background" type="s">
-      <default>''</default>
+      <default>'/usr/share/backgrounds/warty-final-ubuntukylin.jpg'</default>
       <summary>the background iamge of lockscreen</summary>
       <description>Allow the user to set the background iamge of lockscreen.</description>
     </key>

@@ -57,10 +57,18 @@ UserItem Users::getUserByName(const QString &name)
     if(name == "root")
     {
         user.icon = "/root/.face";
+        if(!QFile(user.icon).exists())
+        {
+            user.icon = defaultIcon;
+        }
     }
     else
     {
         user.icon = qgetenv("HOME")+"/.face";
+        if(!QFile(user.icon).exists())
+        {
+            user.icon = defaultIcon;
+        }
     }
     user.name = name;
     user.path = "";
@@ -124,8 +132,8 @@ UserItem Users::getUser(const QString &path)
         dbusArgs >> key >> value;
         if(key == "UserName")
         {
-            user.name = value.toString();
-        }
+	    user.name = value.toString();
+	}
         else if(key == "RealName")
         {
             user.realName = value.toString();

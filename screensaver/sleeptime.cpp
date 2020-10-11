@@ -74,11 +74,7 @@ void SleepTime::init()
 
     layout->addWidget(restTime);
 
-}
-
-int SleepTime::setInitTime(QDateTime time)
-{
-    initTime = time;
+    initTime = QDateTime::currentDateTime();
 }
 
 int SleepTime::setTime(QDateTime time)
