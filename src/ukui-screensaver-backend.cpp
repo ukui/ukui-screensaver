@@ -60,25 +60,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    // 如果已经有实例在运行则kill, 主要是针对注销后重新登录时之前的实例没有被kill掉
-    char cmd[128] = {0};
-    char str[16];
     FILE *fp;
-    int pid;
-
-    int n = sprintf(cmd, "ps aux | grep ukui-screensaver-backend | grep %s | grep -v grep | awk '{print $2}'", getenv("USER"));
-    Q_UNUSED(n)
-
-    fp = popen(cmd, "r");
-    while(fgets(str, sizeof(str)-1, fp)) {
-        pid = atoi(str);
-
-        if(pid > 0 && pid != getpid()) {
-            qDebug() << "existing instance pid: " << pid;
-            kill(pid, SIGKILL);
-        }
-    }
-    pclose(fp);
 
     // for PowerManager
     fp = popen("xset s 0 0", "r");
@@ -118,7 +100,6 @@ int main(int argc, char *argv[])
 
     QObject::connect(checkInterface, SIGNAL(NameLost(QString)),
                      interface, SLOT(onNameLost(QString)));
-
 
     return a.exec();
 }
