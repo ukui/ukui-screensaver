@@ -278,6 +278,14 @@ void LockWidget::initUserMenu()
     }
 }
 
+void LockWidget::keyReleaseEvent(QKeyEvent *e)
+{
+    if(e->key() == Qt::Key_K){
+        if(e->modifiers() & Qt::ControlModifier)
+            showVirtualKeyboard();
+    }
+}
+
 /* lockscreen follows cursor */
 void LockWidget::resizeEvent(QResizeEvent *event)
 {
