@@ -27,7 +27,6 @@
 #include "types.h"
 #include "users.h"
 #include "biometricdeviceinfo.h"
-#include "pam-tally.h"
 
 
 namespace Ui {
@@ -41,6 +40,7 @@ class Auth;
 class BiometricProxy;
 class BiometricAuthWidget;
 class BiometricDevicesWidget;
+class PamTally;
 
 extern float scale;
 class AuthDialog : public QWidget
@@ -129,6 +129,7 @@ private:
     QWidget         *m_passwdWidget;        //放置密码输入框和信息列表
     IconEdit        *m_passwordEdit;       //密码输入框
     QLabel          *m_messageLabel;         //PAM消息显示
+    PamTally            *pamTally;
 };
 
 #endif // AUTHDIALOG_H
