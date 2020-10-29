@@ -62,37 +62,52 @@ void Interface::SetLockState()
     lockState = true;
 }
 
+void Interface::emitLockState()
+{
+    QDBusMessage message = QDBusMessage::createSignal(SS_DBUS_PATH,
+                                                      SS_DBUS_INTERFACE,
+                                                      "lock");
+    QDBusConnection::sessionBus().send(message);
+}
+
 void Interface::Lock()
 {
+    if(process.state() != QProcess::NotRunning)
+        return ;
     qDebug() << "Lock requested";
     lockState = false;
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --lock");
     qDebug() << cmd;
 
     process.start(cmd);
-
+    emitLockState();
 }
 
 void Interface::onSessionIdleReceived()
 {
+    if(process.state() != QProcess::NotRunning)
+        return ;
+
     qDebug() << "emit SessionIdle";
     lockState = false;
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --session-idle");
     qDebug() << cmd;
-
     process.start(cmd);
-
+    emitLockState();
 }
 
 void Interface::onShowScreensaver()
 {
+    if(process.state() != QProcess::NotRunning)
+        return ;
+
     qDebug() << "lock and show screensaver";
     lockState = false;
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --screensaver");
     qDebug() << cmd;
 
     process.start(cmd);
-
+    emitLockState();
 }
 
 bool Interface::checkExistChild()
