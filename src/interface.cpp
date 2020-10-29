@@ -19,11 +19,16 @@
 #include <QDebug>
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QDBusInterface>
+#include <QTimer>
 #include <unistd.h>
+#include <QDBusPendingReply>
 #include <signal.h>
 
 Interface::Interface(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+      m_timerCount(0),
+      m_timer(nullptr)
 {
     lockState = false;
     m_logind = new LogindIntegration(this);
@@ -38,6 +43,13 @@ Interface::Interface(QObject *parent)
 	}
     );
 
+    QDBusInterface *iface = new QDBusInterface("org.freedesktop.login1",
+                                               "/org/freedesktop/login1",
+                                               "org.freedesktop.login1.Manager",
+                                               QDBusConnection::systemBus(),
+                                               this);
+    connect(iface, SIGNAL(PrepareForSleep(bool)), this, SLOT(onPrepareForSleep(bool)));
+    inhibit();
 }
 
 bool Interface::GetLockState()
@@ -108,4 +120,66 @@ void Interface::onNameLost(const QString &serviceName)
 {
     if(serviceName == "cn.kylinos.ScreenSaver")
         exit(0);
+}
+
+void Interface::onPrepareForSleep(bool sleep)
+{
+
+    if(sleep)
+    {
+        if(GetLockState()){
+            uninhibit();
+            return;
+        }
+
+        this->Lock();
+
+        if(!m_timer){
+            m_timer = new QTimer(this);
+            connect(m_timer, &QTimer::timeout, this, [&]{
+                m_timerCount+=1;
+
+                if(GetLockState() || m_timerCount>20){
+                    m_timer->stop();
+                    m_timerCount = 0;
+                    uninhibit();
+                }
+            });
+        }
+        m_timer->start(100);
+    }
+    else
+    {
+        inhibit();
+    }
+}
+
+void Interface::inhibit()
+{
+    if (m_inhibitFileDescriptor.isValid()) {
+        return;
+    }
+
+    QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.login1",
+                                                          "/org/freedesktop/login1",
+                                                          "org.freedesktop.login1.Manager",
+                                                          QStringLiteral("Inhibit"));
+    message.setArguments(QVariantList({QStringLiteral("sleep"),
+                                       "Screen Locker Backend",
+                                       "Ensuring that the screen gets locked before going to sleep",
+                                       QStringLiteral("delay")}));
+    QDBusPendingReply<QDBusUnixFileDescriptor> reply = QDBusConnection::systemBus().call(message);
+    if (!reply.isValid()) {
+        return;
+    }
+    reply.value().swap(m_inhibitFileDescriptor);
+}
+
+void Interface::uninhibit()
+{
+    if (!m_inhibitFileDescriptor.isValid()) {
+        return;
+    }
+
+     m_inhibitFileDescriptor = QDBusUnixFileDescriptor();
 }
