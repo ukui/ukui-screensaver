@@ -69,6 +69,7 @@ private Q_SLOTS:
 protected:
      bool eventFilter(QObject *obj, QEvent *event);
      void resizeEvent(QResizeEvent *event);
+     void keyReleaseEvent(QKeyEvent *e);
 
 private:
     Ui::LockWidget      *ui;

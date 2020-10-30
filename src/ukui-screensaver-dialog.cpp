@@ -78,7 +78,8 @@ void checkIsRunning()
     struct flock lock;
 
     const QString PID_DIR = QString("/var/run/user/%1").arg(QString::number(getuid()));
-    const QString PID_FILE = PID_DIR + "/ukui-screensaver.pid";
+    QString env = qgetenv("DISPLAY");
+    const QString PID_FILE = PID_DIR + QString("/ukui-screensaver%1.pid").arg(env);
 
     qDebug() << PID_DIR;
     QDir dir(PID_DIR);

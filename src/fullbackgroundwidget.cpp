@@ -165,7 +165,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
 
     init();
      qApp->installNativeEventFilter(this);
-
+    installEventFilter(this);
     QTimer::singleShot(500,this,SLOT(switchToLinux()));
 }
 
@@ -213,7 +213,7 @@ bool FullBackgroundWidget::eventFilter(QObject *obj, QEvent *event)
     if(event->type() == QEvent::WindowDeactivate){
          QTimer::singleShot(50,this,SLOT(laterActivate()));
     }else if(event->type() == QEvent::WindowActivate){
-    	QTimer::singleShot(500,this,SLOT(setLockState()));
+        QTimer::singleShot(200,this,SLOT(setLockState()));
     }
     return false;
 }

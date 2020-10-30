@@ -21,6 +21,8 @@
 #include <QObject>
 #include <QDBusContext>
 #include <QProcess>
+#include <QTimer>
+#include <QDBusUnixFileDescriptor>
 #include "types.h"
 #include "logind.h"
 
@@ -46,10 +48,17 @@ public Q_SLOTS:
     void onSessionIdleReceived();
     void onShowScreensaver();
     void onNameLost(const QString&);
+    void onPrepareForSleep(bool sleep);
 
 private:
     bool checkExistChild();
+    void inhibit();
+    void uninhibit();
     bool lockState;
+    void emitLockState();
+    int m_timerCount;
+    QTimer *m_timer;
+    QDBusUnixFileDescriptor m_inhibitFileDescriptor;
 
 private:
     QProcess process;

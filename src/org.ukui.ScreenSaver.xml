@@ -3,6 +3,8 @@
   <interface name="org.ukui.ScreenSaver">
     <signal name="SessionIdle">
     </signal>
+    <signal name="lock">
+    </signal>
     <method name="Lock">
     </method>
     <method name="SetLockState">

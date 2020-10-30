@@ -37,7 +37,6 @@ qt5_add_resources(dialog_SRC
 
 # 头文件中包含了Xlib.h，需要单独拿出来处理，不知道原因
 qt5_wrap_cpp(dialog_SRC
-        pam-tally.h
 	fullbackgroundwidget.h
 	lockwidget.h
 	authdialog.h
@@ -48,16 +47,16 @@ qt5_wrap_cpp(dialog_SRC
 	xeventmonitor.h
 	monitorwatcher.h
 	configuration.h
-        users.h
-        displaymanager.h
+    users.h
+    displaymanager.h
 	iconedit.h
 	powermanager.h
-        logind.h
+    logind.h
+    pam-tally.h
 	)
 
 set(dialog_SRC
 	${dialog_SRC}
-        pam-tally.c
 	ukui-screensaver-dialog.cpp
 	fullbackgroundwidget.cpp
 	lockwidget.cpp
@@ -73,7 +72,8 @@ set(dialog_SRC
 	users.cpp
 	displaymanager.cpp
 	iconedit.cpp
-        logind.cpp
+    logind.cpp
+    pam-tally.cpp
 	)
 add_executable(ukui-screensaver-dialog ${dialog_SRC})
 
@@ -83,7 +83,7 @@ target_link_libraries(ukui-screensaver-dialog
 	Qt5::DBus
 	Qt5::X11Extras
 	${EXTRA_LIBS}
-        BiometricAuth 
+    BiometricAuth 
 	VirtualKeyboard 
 	Common
 	)

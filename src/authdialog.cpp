@@ -31,6 +31,7 @@
 #include "biometricproxy.h"
 #include "biometricauthwidget.h"
 #include "biometricdeviceswidget.h"
+#include "pam-tally.h"
 
 AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     QWidget(parent),
@@ -41,11 +42,10 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     m_biometricProxy(nullptr),
     m_biometricAuthWidget(nullptr),
     m_biometricDevicesWidget(nullptr),
+    pamTally(PamTally::instance(this)),
     m_buttonsWidget(nullptr)
 {
     initUI();
-
-    pam_tally_init();
 
     connect(auth, &Auth::showMessage, this, &AuthDialog::onShowMessage);
     connect(auth, &Auth::showPrompt, this, &AuthDialog::onShowPrompt);
@@ -251,7 +251,8 @@ void AuthDialog::onAuthComplete()
     }
     else
     {
-        onShowMessage(tr("Password Incorrect, Please try again"),
+        if(pamTally->getDeny() == 0)
+            onShowMessage(tr("Password Incorrect, Please try again"),
                       Auth::MessageTypeError);
         //认证失败，重新认证
 
