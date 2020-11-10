@@ -43,6 +43,11 @@ Interface::Interface(QObject *parent)
 	}
     );
 
+    connect(&process, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
+        [=](int exitCode, QProcess::ExitStatus exitStatus){
+            emitLockState(false);
+    });
+
     QDBusInterface *iface = new QDBusInterface("org.freedesktop.login1",
                                                "/org/freedesktop/login1",
                                                "org.freedesktop.login1.Manager",
@@ -50,6 +55,7 @@ Interface::Interface(QObject *parent)
                                                this);
     connect(iface, SIGNAL(PrepareForSleep(bool)), this, SLOT(onPrepareForSleep(bool)));
     inhibit();
+
 }
 
 bool Interface::GetLockState()
@@ -62,11 +68,18 @@ void Interface::SetLockState()
     lockState = true;
 }
 
-void Interface::emitLockState()
+void Interface::emitLockState(bool val)
 {
-    QDBusMessage message = QDBusMessage::createSignal(SS_DBUS_PATH,
-                                                      SS_DBUS_INTERFACE,
-                                                      "lock");
+    QDBusMessage message;
+    if(val){
+    	message = QDBusMessage::createSignal(SS_DBUS_PATH,
+                                             SS_DBUS_INTERFACE,
+                                             "lock");
+    }else{
+         message = QDBusMessage::createSignal(SS_DBUS_PATH,
+                                             SS_DBUS_INTERFACE,
+                                             "unlock");
+    }
     QDBusConnection::sessionBus().send(message);
 }
 
@@ -80,7 +93,7 @@ void Interface::Lock()
     qDebug() << cmd;
 
     process.start(cmd);
-    emitLockState();
+    emitLockState(true);
 }
 
 void Interface::onSessionIdleReceived()
@@ -93,7 +106,7 @@ void Interface::onSessionIdleReceived()
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --session-idle");
     qDebug() << cmd;
     process.start(cmd);
-    emitLockState();
+    emitLockState(true);
 }
 
 void Interface::onShowScreensaver()
@@ -107,7 +120,7 @@ void Interface::onShowScreensaver()
     qDebug() << cmd;
 
     process.start(cmd);
-    emitLockState();
+    emitLockState(true);
 }
 
 bool Interface::checkExistChild()

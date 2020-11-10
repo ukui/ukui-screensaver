@@ -5,6 +5,8 @@
     </signal>
     <signal name="lock">
     </signal>
+    <signal name="unlock">
+    </signal>
     <method name="Lock">
     </method>
     <method name="SetLockState">
