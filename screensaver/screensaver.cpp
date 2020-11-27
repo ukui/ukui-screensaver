@@ -122,8 +122,8 @@ void Screensaver::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.drawPixmap(0,0,this->width(),this->height(),background);
     painter.setBrush(QColor(0,0,0,178));
-    painter.drawRect(0,0,this->width(),this->height());
-
+    /*这里是为了不显示笔的线条*/
+    painter.drawRect(-1,-1,this->width()+1,this->height()+1);
 }
 
 void Screensaver::resizeEvent(QResizeEvent */*event*/)
