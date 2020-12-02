@@ -63,6 +63,7 @@ bool ScreenSaver::exists()
     case SAVER_IMAGE:
         return QDir(path).exists();
     }
+    return false;
 }
 
 void ScreenSaver::startSwitchImages()
