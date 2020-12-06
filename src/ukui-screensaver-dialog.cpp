@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
 #endif
 
     qunsetenv("QT_IM_MODULE");
- //   signal(SIGTERM,handler);
+    signal(SIGTERM,handler);
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
 
