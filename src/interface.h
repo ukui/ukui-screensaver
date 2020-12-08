@@ -55,7 +55,7 @@ private:
     void inhibit();
     void uninhibit();
     bool lockState;
-    void emitLockState();
+    void emitLockState(bool);
     int m_timerCount;
     QTimer *m_timer;
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;

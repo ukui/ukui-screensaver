@@ -265,7 +265,7 @@ void AuthDialog::onRespond(const QString &text)
 {
     clearMessage();
     startWaiting();
-
+    m_passwordEdit->setEnabled(false);
     auth->respond(text);
 }
 
