@@ -51,13 +51,14 @@ Screensaver::Screensaver(QWidget *parent):
   centerWidget(nullptr),
   dateOfLunar(nullptr),
   flag(0),
+  hasChanged(false),
   background(""),
   autoSwitch(nullptr),
   vboxFrame(nullptr),
   m_timer(nullptr)
 {
     installEventFilter(this);
-     setUpdateCenterWidget();
+    setUpdateCenterWidget();
     initUI();
     m_background = new MBackground();
 
@@ -157,7 +158,7 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
     }
 
     int x = (this->width()-timeLayout->geometry().width())/2;
-    int y = 129*scale;
+    int y = 59*scale;
 
     timeLayout->setGeometry(x,y,timeLayout->geometry().width(),timeLayout->geometry().height());
 
@@ -362,44 +363,45 @@ void Screensaver::setDatelayout()
     timeLayout = new QWidget(this);
     QVBoxLayout *vtimeLayout = new QVBoxLayout(timeLayout);
 
-    this->dateOfWeek = new QLabel(this);
-    this->dateOfWeek->setText(QDate::currentDate().toString("dddd"));
-    this->dateOfWeek->setObjectName("dateOfWeek");
-    this->dateOfWeek->setAlignment(Qt::AlignCenter);
-    vtimeLayout->addWidget(dateOfWeek);
+//    this->dateOfWeek = new QLabel(this);
+//    this->dateOfWeek->setText(QDate::currentDate().toString("ddd"));
+//    this->dateOfWeek->setObjectName("dateOfWeek");
+//    this->dateOfWeek->setAlignment(Qt::AlignCenter);
+//    vtimeLayout->addWidget(dateOfWeek);
 
     this->dateOfLocaltime = new QLabel(this);
     this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
     this->dateOfLocaltime->setObjectName("dateOfLocaltime");
     this->dateOfLocaltime->setAlignment(Qt::AlignCenter);
+    this->dateOfLocaltime->adjustSize();
     vtimeLayout->addWidget(dateOfLocaltime);
 
-    QWidget *dateWidget = new QWidget(this);
+//    QWidget *dateWidget = new QWidget(this);
     this->dateOfDay = new QLabel(this);
-    this->dateOfDay->setText(QDate::currentDate().toString("yy/MM/dd"));
+    this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
     this->dateOfDay->setObjectName("dateOfDay");
     this->dateOfDay->setAlignment(Qt::AlignCenter);
     this->dateOfDay->adjustSize();
+    
+//    QHBoxLayout *hdateLayout = new QHBoxLayout(dateWidget);
+//    hdateLayout->addWidget(dateOfDay);
+//    hdateLayout->addWidget(dateOfWeek);
 
-    QHBoxLayout *hdateLayout = new QHBoxLayout(dateWidget);
-    hdateLayout->addWidget(dateOfDay);
+//    QString lang = qgetenv("LANG");
+//    if (!lang.isEmpty()){
+//        qDebug()<<"lang = "<<lang;
+//        if (lang.contains("zh_CN")){
+//            this->dateOfLunar = new QLabel(this);
+//            this->dateOfLunar->setText(date->getDateLunar());
+//            this->dateOfLunar->setObjectName("dateOfLunar");
+//            this->dateOfLunar->setAlignment(Qt::AlignCenter);
+//            this->dateOfLunar->adjustSize();
+//            hdateLayout->addWidget(dateOfLunar);
+//        }
+//    }
+//   dateWidget->adjustSize();
 
-    QString lang = qgetenv("LANG");
-    if (!lang.isEmpty()){
-        qDebug()<<"lang = "<<lang;
-        if (lang.contains("zh_CN")){
-            this->dateOfLunar = new QLabel(this);
-            this->dateOfLunar->setText(date->getDateLunar());
-            this->dateOfLunar->setObjectName("dateOfLunar");
-            this->dateOfLunar->setAlignment(Qt::AlignCenter);
-            this->dateOfLunar->adjustSize();
-            hdateLayout->addWidget(dateOfLunar);
-        }
-    }
-    dateWidget->adjustSize();
-
-    vtimeLayout->addWidget(dateWidget);
-
+    vtimeLayout->addWidget(this->dateOfDay);
     timeLayout->adjustSize();
 }
 
@@ -419,12 +421,13 @@ void Screensaver::updateDate()
 
 void Screensaver::updateTime()
 {
-    this->dateOfWeek->setText(QDate::currentDate().toString("dddd"));
+    //this->dateOfWeek->setText(QDate::currentDate().toString("dddd"));
     this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
-    this->dateOfDay->setText(QDate::currentDate().toString("yy/MM/dd"));
+    this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
     if(sleepTime){
         if(!sleepTime->setTime(QDateTime::currentDateTime())){
-        	sleepTime->hide();
+	    timer->stop();
+            sleepTime->hide();
             sleepTime->deleteLater();
         }
     }
@@ -452,6 +455,7 @@ void Screensaver::updateBackground()
     if(!path.isEmpty()){
         background = QPixmap(path);
         repaint();
+	hasChanged=true;
     }
     updateCenterWidget(-1);
 }
@@ -515,11 +519,18 @@ void Screensaver::setCenterWidget()
 
 void Screensaver::setDesktopBackground()
 {
-     vboxFrame->hide();
-    if(m_background->getCurrent().isEmpty())
-        return;
+    vboxFrame->hide();
+    QString mBackground;
+	
+    if(!hasChanged){
+    	mBackground=defaultBackground; 
+    }else{ 
+        if(m_background->getCurrent().isEmpty())
+            return;
+	mBackground=m_background->getCurrent();
+    }
 
-    settings->set("picture-filename",QVariant(m_background->getCurrent()));
+    settings->set("picture-filename",QVariant(mBackground));
 
     QDBusInterface * interface = new QDBusInterface("org.freedesktop.Accounts",
                                      "/org/freedesktop/Accounts",
@@ -548,7 +559,7 @@ void Screensaver::setDesktopBackground()
         return;
     }
 
-    QDBusMessage msg = useriFace->call("SetBackgroundFile", m_background->getCurrent());
+    QDBusMessage msg = useriFace->call("SetBackgroundFile", mBackground);
     if (!msg.errorMessage().isEmpty())
         qDebug() << "update user background file error: " << msg.errorMessage();
 
