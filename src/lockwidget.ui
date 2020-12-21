@@ -37,36 +37,26 @@
     <rect>
      <x>10</x>
      <y>280</y>
-     <width>300</width>
-     <height>150</height>
+     <width>54</width>
+     <height>70</height>
     </rect>
    </property>
-   <widget class="QLabel" name="lblDate">
-    <property name="geometry">
-     <rect>
-      <x>13</x>
-      <y>90</y>
-      <width>280</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Date</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lblTime">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>11</y>
-      <width>280</width>
-      <height>60</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Time</string>
-    </property>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="lblTime">
+      <property name="text">
+       <string>Time</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lblDate">
+      <property name="text">
+       <string>Date</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QPushButton" name="btnSwitchUser">
    <property name="geometry">

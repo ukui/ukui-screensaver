@@ -110,7 +110,7 @@ void LockWidget::initUI()
     connect(timer, &QTimer::timeout, this, [&]{
         QString time = QDateTime::currentDateTime().toString("hh:mm");
         ui->lblTime->setText(time);
-	QString date = QDate::currentDate().toString("yyyy/MM/dd dddd");
+	QString date = QDate::currentDate().toString("yyyy/MM/dd ddd");
 	ui->lblDate->setText(date);
     });
 
@@ -121,7 +121,7 @@ void LockWidget::initUI()
     ui->lblTime->adjustSize();
     timer->start(1000);
 
-    QString date = QDate::currentDate().toString("yyyy/MM/dd dddd");
+    QString date = QDate::currentDate().toString("yyyy/MM/dd ddd");
     qDebug() << "current date: " << date;
     ui->lblDate->setText(date);
     ui->lblDate->setStyleSheet("QLabel{color:white; font-size: 16px;}");

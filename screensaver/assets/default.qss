@@ -1,17 +1,17 @@
 QLabel#dateOfWeek {
-    font-size:24px;
+    font-size:16px;
     color: #ffffff;
 }
 QLabel#dateOfLocaltime {
-    font-size:59px;
+    font-size:50px;
     color: #ffffff;
 }
 QLabel#dateOfDay {
-    font-size:18px;
+    font-size:16px;
     color: #ffffff;
 }
 QLabel#dateOfLunar {
-    font-size:18px;
+    font-size:16px;
     color: #ffffff;
 }
 QLabel#clockTime {
