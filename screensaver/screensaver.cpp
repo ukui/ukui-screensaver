@@ -51,13 +51,14 @@ Screensaver::Screensaver(QWidget *parent):
   centerWidget(nullptr),
   dateOfLunar(nullptr),
   flag(0),
+  hasChanged(false),
   background(""),
   autoSwitch(nullptr),
   vboxFrame(nullptr),
   m_timer(nullptr)
 {
     installEventFilter(this);
-     setUpdateCenterWidget();
+    setUpdateCenterWidget();
     initUI();
     m_background = new MBackground();
 
@@ -452,6 +453,7 @@ void Screensaver::updateBackground()
     if(!path.isEmpty()){
         background = QPixmap(path);
         repaint();
+	hasChanged=true;
     }
     updateCenterWidget(-1);
 }
@@ -515,11 +517,18 @@ void Screensaver::setCenterWidget()
 
 void Screensaver::setDesktopBackground()
 {
-     vboxFrame->hide();
-    if(m_background->getCurrent().isEmpty())
-        return;
+    vboxFrame->hide();
+    QString mBackground;
+	
+    if(!hasChanged){
+    	mBackground=defaultBackground; 
+    }else{ 
+        if(m_background->getCurrent().isEmpty())
+            return;
+	mBackground=m_background->getCurrent();
+    }
 
-    settings->set("picture-filename",QVariant(m_background->getCurrent()));
+    settings->set("picture-filename",QVariant(mBackground));
 
     QDBusInterface * interface = new QDBusInterface("org.freedesktop.Accounts",
                                      "/org/freedesktop/Accounts",
@@ -548,7 +557,7 @@ void Screensaver::setDesktopBackground()
         return;
     }
 
-    QDBusMessage msg = useriFace->call("SetBackgroundFile", m_background->getCurrent());
+    QDBusMessage msg = useriFace->call("SetBackgroundFile", mBackground);
     if (!msg.errorMessage().isEmpty())
         qDebug() << "update user background file error: " << msg.errorMessage();
 

@@ -92,6 +92,7 @@ private:
     QGSettings *defaultSettings;
 
     int flag;
+    bool hasChanged;
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);
