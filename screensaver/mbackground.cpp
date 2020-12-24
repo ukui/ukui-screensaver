@@ -78,15 +78,7 @@ void MBackground::getAllPixmap()
 {
     QDomDocument doc;
     QFile *file;
-    if(getSystemDistrib().contains("Ubuntu",Qt::CaseInsensitive))
-        file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
-    else if(getSystemVersion().contains("V10.1",Qt::CaseInsensitive))
-        file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
-    else if(getSystemVersion().contains("V10",Qt::CaseInsensitive))
-	file = new QFile("/usr/share/ukui-background-properties/kylin-wallpaper.xml");
-    else
-        file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
-
+    file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
     if (!file->open(QIODevice::ReadOnly))
     {
         qDebug()<<file->fileName()<<" open failed";
