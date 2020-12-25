@@ -161,7 +161,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
                                                "org.freedesktop.login1.Manager",
                                                QDBusConnection::systemBus(),
                                                this);
-    connect(iface, SIGNAL(PrepareForSleep(bool)), this, SLOT(onPrepareForSleep(bool)));
+    //connect(iface, SIGNAL(PrepareForSleep(bool)), this, SLOT(onPrepareForSleep(bool)));
 
     init();
      qApp->installNativeEventFilter(this);
@@ -379,7 +379,7 @@ void FullBackgroundWidget::lock()
     showLockWidget();
 
     lockWidget->startAuth();
-    inhibit();
+    //inhibit();
 }
 
 
@@ -487,6 +487,29 @@ int FullBackgroundWidget::onSessionStatusChanged(uint status)
     return 0;
 }
 
+void FullBackgroundWidget::onBlankScreensaver()
+{
+      showLockWidget();
+      screenStatus = (ScreenStatus)(screenStatus | SCREEN_SAVER);
+      qDebug() << "showScreensaver - screenStatus: " << screenStatus;
+
+      for(auto screen : QGuiApplication::screens())
+      {
+          ScreenSaver *saver = configuration->getScreensaver();
+          saver->mode = SaverMode(SAVER_BLANK_ONLY);
+          ScreenSaverWidget *saverWidget = new ScreenSaverWidget(saver, this);
+          widgetXScreensaverList.push_back(saverWidget);
+          saverWidget->setGeometry(screen->geometry());
+      }
+      setCursor(Qt::BlankCursor);
+
+      //显示屏保时，停止认证（主要针对生物识别）
+      if(lockWidget)
+      {
+          lockWidget->stopAuth();
+      }
+}
+
 void FullBackgroundWidget::onScreensaver()
 {
       showLockWidget();
@@ -536,6 +559,7 @@ void FullBackgroundWidget::onScreenCountChanged(int)
     update();
 }
 
+
 void FullBackgroundWidget::onDesktopResized()
 {
     QDesktopWidget *desktop = QApplication::desktop();
@@ -573,7 +597,7 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
     if(sleep)
     {
         lockWidget->stopAuth();
-        uninhibit();
+//        uninhibit();
     }
     else
     {
@@ -582,7 +606,7 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
             clearScreensavers();
         }else{
             lockWidget->startAuth();
-            inhibit();
+//            inhibit();
         }
     }
 }

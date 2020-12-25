@@ -146,10 +146,12 @@ int main(int argc, char *argv[])
                                        QCoreApplication::translate("main", "activated by session idle signal"));
     QCommandLineOption screensaverOption(QStringLiteral("screensaver"),
                                        QCoreApplication::translate("main", "lock the screen and show screensaver immediately"));
-    parser.addOptions({lockOption, sessionIdleOption , screensaverOption});
+    QCommandLineOption blankOption(QStringLiteral("blank"),
+                                       QCoreApplication::translate("main", "lock the screen and show screensaver immediately"));
+    parser.addOptions({lockOption, sessionIdleOption , screensaverOption,blankOption});
     parser.process(a);
 
-    if(!parser.isSet(sessionIdleOption) && !parser.isSet(lockOption) && !parser.isSet(screensaverOption))
+    if(!parser.isSet(sessionIdleOption) && !parser.isSet(lockOption) && !parser.isSet(screensaverOption) && !parser.isSet(blankOption))
     {
         return 0;
     }
@@ -188,6 +190,11 @@ int main(int argc, char *argv[])
     	window->onScreensaver();
     }
     
+    if(parser.isSet(blankOption))
+    {
+        window->onBlankScreensaver();
+    }
+
     window->show();
     window->activateWindow();
 	

@@ -61,7 +61,7 @@ Interface::Interface(QObject *parent)
 
 bool Interface::GetLockState()
 {
-    return ((process.state() != QProcess::NotRunning) && lockState);
+	return ((process.state() != QProcess::NotRunning) && lockState);
 }
 
 void Interface::SetLockState()
@@ -106,6 +106,20 @@ void Interface::onSessionIdleReceived()
     lockState = false;
     QString cmd = QString("/usr/bin/ukui-screensaver-dialog --session-idle");
     qDebug() << cmd;
+    process.start(cmd);
+    emitLockState(true);
+}
+
+void Interface::onShowBlankScreensaver()
+{
+    if(process.state() != QProcess::NotRunning)
+        return ;
+
+    qDebug() << "lock and show screensaver";
+    lockState = false;
+    QString cmd = QString("/usr/bin/ukui-screensaver-dialog --blank");
+    qDebug() << cmd;
+
     process.start(cmd);
     emitLockState(true);
 }
@@ -161,9 +175,9 @@ void Interface::onPrepareForSleep(bool sleep)
             return;
         }
 
-        this->Lock();
+    	this->onShowBlankScreensaver();
 
-        if(!m_timer){
+	if(!m_timer){
             m_timer = new QTimer(this);
             connect(m_timer, &QTimer::timeout, this, [&]{
                 m_timerCount+=1;
