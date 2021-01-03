@@ -445,11 +445,11 @@ void Screensaver::setUpdateBackground()
 
 void Screensaver::updateBackground()
 {
-    QString path = m_background->getNext();
-    if(!path.isEmpty()){
+    QString path = m_background->getRand();
+    if(!path.isEmpty() && ispicture(path)){
         background = QPixmap(path);
         repaint();
-	hasChanged=true;
+        hasChanged=true;
     }
     updateCenterWidget(-1);
 }
@@ -521,7 +521,7 @@ void Screensaver::setDesktopBackground()
     }else{ 
         if(m_background->getCurrent().isEmpty())
             return;
-	mBackground=m_background->getCurrent();
+        mBackground=m_background->getCurrent();
     }
 
     settings->set("picture-filename",QVariant(mBackground));

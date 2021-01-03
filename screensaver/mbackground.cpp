@@ -20,6 +20,7 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QMimeDatabase>
+#include <ctime>
 #include "mbackground.h"
 
 #include "commonfunc.h"
@@ -70,6 +71,16 @@ QString MBackground::getPrev()
         currentIndex = list.count() - 1;
     else
         currentIndex--;
+
+    return list.at(currentIndex);
+}
+
+QString MBackground::getRand()
+{
+    if(list.count() <= 0)
+        return "";
+    qsrand(time(NULL));
+    currentIndex = qrand() % list.count();
 
     return list.at(currentIndex);
 }
