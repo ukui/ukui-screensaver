@@ -543,8 +543,25 @@ void AuthDialog::onBiometricButtonClicked()
     //当前没有设备，让用户选择设备
     if(!m_deviceInfo)
     {
-        qDebug() << "hasn't device, to choice device.";
-        m_otherDeviceButton->click();
+   	if(m_deviceCount == 1)
+        {
+            DeviceList deviceList = m_biometricProxy->GetDevList();
+            m_deviceInfo = deviceList.at(0);
+            if(!m_deviceInfo)
+            {
+                m_otherDeviceButton->click();
+            }
+            else
+            {
+                authMode = BIOMETRIC;
+                startAuth();
+	    }
+        }
+        else
+        {
+            m_otherDeviceButton->click();
+        }
+
     }
     else
     {
