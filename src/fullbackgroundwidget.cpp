@@ -161,7 +161,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
                                                "org.freedesktop.login1.Manager",
                                                QDBusConnection::systemBus(),
                                                this);
-    //connect(iface, SIGNAL(PrepareForSleep(bool)), this, SLOT(onPrepareForSleep(bool)));
+    connect(iface, SIGNAL(PrepareForSleep(bool)), this, SLOT(onPrepareForSleep(bool)));
 
     init();
      qApp->installNativeEventFilter(this);
@@ -594,10 +594,10 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
 {
     ///系统休眠时，会关闭总线，导致设备不可用，发生错误
     ///在系统休眠之前停止认证，在系统唤醒后重新开始认证
-    if(sleep)
+/*    if(sleep)
     {
         lockWidget->stopAuth();
-//        uninhibit();
+        uninhibit();
     }
     else
     {
@@ -606,8 +606,15 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
             clearScreensavers();
         }else{
             lockWidget->startAuth();
-//            inhibit();
+            inhibit();
         }
+    }
+*/
+    if(sleep)
+	return;
+    if(screenStatus & SCREEN_SAVER)
+    {
+        clearScreensavers();
     }
 }
 
