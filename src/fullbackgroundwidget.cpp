@@ -368,7 +368,10 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
     {
        	if(screen->geometry().contains(pos))
        	{
+            /*避免切换时闪烁*/
+            lockWidget->hide();
     		lockWidget->setGeometry(screen->geometry());
+            lockWidget->show();
     		break;
        	}
     }
