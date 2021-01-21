@@ -33,7 +33,7 @@
     </message>
     <message>
         <source>Password Incorrect, Please try again</source>
-        <translation>Пароль неверен, повторите попытку</translation>
+        <translation type="vanished">Пароль неверен, повторите попытку</translation>
     </message>
     <message>
         <source>Password: </source>
@@ -49,6 +49,10 @@
     </message>
     <message>
         <source>Other Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentication failure, Please try again</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

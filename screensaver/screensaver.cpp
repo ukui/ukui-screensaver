@@ -45,6 +45,9 @@
 #include <X11/Xutil.h>
 
 #include "commonfunc.h"
+
+#define TIME_TYPE_SCHEMA "org.ukui.control-center.panel.plugins"
+
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
   date(new ChineseDate()),
@@ -354,6 +357,14 @@ void Screensaver::initUI()
 
 void Screensaver::setDatelayout()
 {
+    if(QGSettings::isSchemaInstalled(TIME_TYPE_SCHEMA)){
+        QGSettings *time_type = new QGSettings(TIME_TYPE_SCHEMA);
+        QStringList keys = time_type->keys();
+        if (keys.contains("hoursystem")) {
+                timeType = time_type->get("hoursystem").toInt();
+        }
+    }
+
     timeLayout = new QWidget(this);
     QVBoxLayout *vtimeLayout = new QVBoxLayout(timeLayout);
 
@@ -364,7 +375,11 @@ void Screensaver::setDatelayout()
 //    vtimeLayout->addWidget(dateOfWeek);
 
     this->dateOfLocaltime = new QLabel(this);
-    this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+    if(timeType == 12)
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+    else
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+
     this->dateOfLocaltime->setObjectName("dateOfLocaltime");
     this->dateOfLocaltime->setAlignment(Qt::AlignCenter);
     this->dateOfLocaltime->adjustSize();
@@ -416,7 +431,11 @@ void Screensaver::updateDate()
 void Screensaver::updateTime()
 {
     //this->dateOfWeek->setText(QDate::currentDate().toString("dddd"));
-    this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+    if(timeType == 12)
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+    else
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+
     this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
     if(sleepTime){
         if(!sleepTime->setTime(QDateTime::currentDateTime())){

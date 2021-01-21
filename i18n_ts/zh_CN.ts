@@ -16,7 +16,7 @@
         <translation type="obsolete">使用密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="455"/>
+        <location filename="../src/authdialog.cpp" line="458"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
@@ -29,7 +29,7 @@
         <translation type="obsolete">已登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="238"/>
+        <location filename="../src/authdialog.cpp" line="239"/>
         <source>Password: </source>
         <translation>密码：</translation>
     </message>
@@ -38,26 +38,30 @@
         <translation type="vanished">账户锁定%1分钟由于%2次错误尝试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="254"/>
         <source>Password Incorrect, Please try again</source>
-        <translation>密码错误，请重试</translation>
+        <translation type="vanished">密码错误，请重试</translation>
     </message>
     <message>
         <source>Authentication failure,there are still %1 remaining opportunities</source>
         <translation type="vanished">认证失败，还剩%1次尝试机会</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="420"/>
+        <location filename="../src/authdialog.cpp" line="256"/>
+        <source>Authentication failure, Please try again</source>
+        <translation>认证失败，请重试</translation>
+    </message>
+    <message>
+        <location filename="../src/authdialog.cpp" line="422"/>
         <source>Biometric Authentication</source>
         <translation>生物识别认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="433"/>
+        <location filename="../src/authdialog.cpp" line="435"/>
         <source>Password Authentication</source>
         <translation>密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="445"/>
+        <location filename="../src/authdialog.cpp" line="448"/>
         <source>Other Devices</source>
         <translation>其他设备</translation>
     </message>
@@ -180,22 +184,22 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.ui" line="54"/>
+        <location filename="../src/lockwidget.ui" line="55"/>
         <source>Date</source>
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.ui" line="67"/>
+        <location filename="../src/lockwidget.ui" line="48"/>
         <source>Time</source>
         <translation>时间</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="274"/>
+        <location filename="../src/lockwidget.cpp" line="289"/>
         <source>Guest</source>
         <translation>游客</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="257"/>
+        <location filename="../src/lockwidget.cpp" line="272"/>
         <source>SwitchUser</source>
         <translation>切换用户</translation>
     </message>
@@ -272,12 +276,12 @@
         <translation type="vanished">退出</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="306"/>
+        <location filename="../screensaver/screensaver.cpp" line="305"/>
         <source>Set as desktop wallpaper</source>
         <translation>设置为桌面壁纸</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="316"/>
+        <location filename="../screensaver/screensaver.cpp" line="315"/>
         <source>Automatic switching</source>
         <translation>自动切换</translation>
     </message>
@@ -299,7 +303,7 @@
     </message>
     <message>
         <location filename="../src/ukui-screensaver-command.cpp" line="45"/>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="143"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="144"/>
         <source>lock the screen immediately</source>
         <translation>马上锁定屏幕</translation>
     </message>
@@ -309,17 +313,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="138"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="139"/>
         <source>Dialog for the ukui ScreenSaver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="145"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="146"/>
         <source>activated by session idle signal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="147"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="148"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="150"/>
         <source>lock the screen and show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>
