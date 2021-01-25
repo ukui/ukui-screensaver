@@ -439,9 +439,9 @@ void Screensaver::updateTime()
     this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
     if(sleepTime){
         if(!sleepTime->setTime(QDateTime::currentDateTime())){
-	    timer->stop();
             sleepTime->hide();
-            sleepTime->deleteLater();
+            delete sleepTime; 
+	    sleepTime=NULL;
         }
     }
 }

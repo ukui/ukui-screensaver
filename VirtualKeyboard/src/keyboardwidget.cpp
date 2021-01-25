@@ -432,11 +432,10 @@ void KeyboardWidget::switchPage()
         ui->btn_shift_l->setIcon(QIcon(":/images/images/capslock.svg"));
         ui->btn_shift_r->setIcon(QIcon(":/images/images/capslock.svg"));
     } else {
-        QString text = QString("%1/%2").arg(page).arg(SYMBOL_PAGE_COUNT - 1);
-        ui->btn_shift_l->setText(text);
-        ui->btn_shift_r->setText(text);
-        ui->btn_shift_l->setIcon(QIcon());
-        ui->btn_shift_r->setIcon(QIcon());
+    	ui->btn_shift_l->setText("");
+        ui->btn_shift_r->setText("");
+        ui->btn_shift_l->setIcon(QIcon(":/images/images/capslock.svg"));
+        ui->btn_shift_r->setIcon(QIcon(":/images/images/capslock.svg"));
     }
 
     for(int i = 0; i < SYMBOL_KEY_COUNT; i++) {

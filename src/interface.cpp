@@ -23,11 +23,13 @@
 #include <QTimer>
 #include <unistd.h>
 #include <QDBusPendingReply>
+#include <QGSettings>
 #include <signal.h>
 
 Interface::Interface(QObject *parent)
     : QObject(parent),
       m_timerCount(0),
+      settings(nullptr),
       m_timer(nullptr)
 {
     lockState = false;
@@ -48,6 +50,8 @@ Interface::Interface(QObject *parent)
         [=](int exitCode, QProcess::ExitStatus exitStatus){
             emitLockState(false);
     });
+	
+    settings = new QGSettings("org.ukui.screensaver","",this);
 
     QDBusInterface *iface = new QDBusInterface("org.freedesktop.login1",
                                                "/org/freedesktop/login1",
@@ -167,7 +171,11 @@ void Interface::onNameLost(const QString &serviceName)
 
 void Interface::onPrepareForSleep(bool sleep)
 {
-
+    if(!settings->get("sleep-activation-enabled").toBool()){
+   	uninhibit();
+        return; 
+    }
+    
     if(sleep)
     {
         if(GetLockState()){

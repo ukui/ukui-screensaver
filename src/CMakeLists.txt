@@ -107,7 +107,7 @@ set(backend_SRC
     logind.cpp
     )
 add_executable(ukui-screensaver-backend ${backend_SRC})
-target_link_libraries(ukui-screensaver-backend Qt5::Core Qt5::DBus)
+target_link_libraries(ukui-screensaver-backend Qt5::Core Qt5::DBus ${QGS_LIBRARIES})
 
 set(command_SRC
     ukui-screensaver-command.cpp

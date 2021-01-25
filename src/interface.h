@@ -26,6 +26,7 @@
 #include "types.h"
 #include "logind.h"
 
+class QGSettings;
 class Interface : public QObject, protected QDBusContext
 {
     Q_OBJECT
@@ -60,6 +61,7 @@ private:
     int m_timerCount;
     QTimer *m_timer;
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
+    QGSettings	*settings;
 
 private:
     QProcess process;
