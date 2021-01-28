@@ -48,6 +48,7 @@ public:
     void mouseMoveEvent(QMouseEvent *e);
     void mousePressEvent(QMouseEvent *e);
     void onScreensaver();
+    void onBlankScreensaver();
 
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);

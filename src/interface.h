@@ -26,6 +26,7 @@
 #include "types.h"
 #include "logind.h"
 
+class QGSettings;
 class Interface : public QObject, protected QDBusContext
 {
     Q_OBJECT
@@ -47,6 +48,7 @@ public Q_SLOTS:
     void SetLockState();
     void onSessionIdleReceived();
     void onShowScreensaver();
+    void onShowBlankScreensaver();
     void onNameLost(const QString&);
     void onPrepareForSleep(bool sleep);
 
@@ -59,6 +61,7 @@ private:
     int m_timerCount;
     QTimer *m_timer;
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
+    QGSettings	*settings;
 
 private:
     QProcess process;

@@ -16,7 +16,7 @@
         <translation type="obsolete">Parola</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="455"/>
+        <location filename="../src/authdialog.cpp" line="458"/>
         <source>Retry</source>
         <translation type="unfinished">Yeniden Dene</translation>
     </message>
@@ -25,7 +25,7 @@
         <translation type="obsolete">Kilidi Aç</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="238"/>
+        <location filename="../src/authdialog.cpp" line="239"/>
         <source>Password: </source>
         <translation type="unfinished">Parola</translation>
     </message>
@@ -34,26 +34,30 @@
         <translation type="vanished">%2 başarısız denemeden dolayı hesap %1 dakika kilitlendi</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="254"/>
         <source>Password Incorrect, Please try again</source>
-        <translation type="unfinished">Parola yanlış, Lütfen tekrar deneyin</translation>
+        <translation type="obsolete">Parola yanlış, Lütfen tekrar deneyin</translation>
     </message>
     <message>
         <source>Authentication failure,there are still %1 remaining opportunities</source>
         <translation type="vanished">Kimlik doğrulama hatası, hala %1 kalan denemen var</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="420"/>
+        <location filename="../src/authdialog.cpp" line="256"/>
+        <source>Authentication failure, Please try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/authdialog.cpp" line="422"/>
         <source>Biometric Authentication</source>
         <translation type="unfinished">Biyometrik Kimlik Doğrulama</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="433"/>
+        <location filename="../src/authdialog.cpp" line="435"/>
         <source>Password Authentication</source>
         <translation type="unfinished">Parola Doğrulama</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="445"/>
+        <location filename="../src/authdialog.cpp" line="448"/>
         <source>Other Devices</source>
         <translation type="unfinished">Diğer Ayıtlar</translation>
     </message>
@@ -176,22 +180,22 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.ui" line="54"/>
+        <location filename="../src/lockwidget.ui" line="55"/>
         <source>Date</source>
         <translation type="unfinished">Tarih</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.ui" line="67"/>
+        <location filename="../src/lockwidget.ui" line="48"/>
         <source>Time</source>
         <translation type="unfinished">Zaman</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="274"/>
+        <location filename="../src/lockwidget.cpp" line="289"/>
         <source>Guest</source>
         <translation type="unfinished">Misafir</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="257"/>
+        <location filename="../src/lockwidget.cpp" line="272"/>
         <source>SwitchUser</source>
         <translation>Kullanıcı Değiştir</translation>
     </message>
@@ -268,12 +272,12 @@
         <translation type="obsolete">çıkış</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="306"/>
+        <location filename="../screensaver/screensaver.cpp" line="305"/>
         <source>Set as desktop wallpaper</source>
         <translation type="unfinished">Masaüstü arkaplanı olarak ayarla</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="316"/>
+        <location filename="../screensaver/screensaver.cpp" line="315"/>
         <source>Automatic switching</source>
         <translation type="unfinished">Otomatik değiştir</translation>
     </message>
@@ -295,7 +299,7 @@
     </message>
     <message>
         <location filename="../src/ukui-screensaver-command.cpp" line="45"/>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="143"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="144"/>
         <source>lock the screen immediately</source>
         <translation type="unfinished">Ekranı hemen kilitle</translation>
     </message>
@@ -305,17 +309,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="138"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="139"/>
         <source>Dialog for the ukui ScreenSaver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="145"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="146"/>
         <source>activated by session idle signal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="147"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="148"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="150"/>
         <source>lock the screen and show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>

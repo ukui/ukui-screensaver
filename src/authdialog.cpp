@@ -207,6 +207,7 @@ void AuthDialog::closeEvent(QCloseEvent *event)
 
 void AuthDialog::onShowMessage(const QString &message, Auth::MessageType type)
 {
+    qDebug()<<message;
     m_messageLabel->setText(message);
     stopWaiting();
 }
@@ -251,8 +252,8 @@ void AuthDialog::onAuthComplete()
     }
     else
     {
-        if(pamTally->getDeny() == 0)
-            onShowMessage(tr("Password Incorrect, Please try again"),
+        if(m_messageLabel->text()=="")
+            onShowMessage(tr("Authentication failure, Please try again"),
                       Auth::MessageTypeError);
         //认证失败，重新认证
 
@@ -424,7 +425,7 @@ void AuthDialog::initBiometricButtonWidget()
     m_biometricButton->setCursor(Qt::PointingHandCursor);
     QFontMetrics fm(m_biometricButton->font(), m_biometricButton);
     int width = fm.width(m_biometricButton->text());
-    m_biometricButton->setMaximumWidth(std::max(width + 20, 190));
+    m_biometricButton->setMaximumWidth(std::max(width + 50, 190));
     connect(m_biometricButton, &QPushButton::clicked,
             this, &AuthDialog::onBiometricButtonClicked);
 
@@ -434,7 +435,8 @@ void AuthDialog::initBiometricButtonWidget()
     m_passwordButton->setText(tr("Password Authentication"));
     fm = QFontMetrics(m_passwordButton->font(), m_passwordButton);
     width = fm.width(m_passwordButton->text());
-    m_passwordButton->setMaximumWidth(std::max(width + 20, 140));
+    m_passwordButton->setMaximumWidth(std::max(width + 50, 140));
+    m_passwordButton->adjustSize();
     m_passwordButton->setSizePolicy(sizePolicy);
     m_passwordButton->setVisible(false);
     m_passwordButton->setCursor(Qt::PointingHandCursor);
@@ -445,7 +447,7 @@ void AuthDialog::initBiometricButtonWidget()
     m_otherDeviceButton->setObjectName(QStringLiteral("otherDeviceButton"));
     m_otherDeviceButton->setText(tr("Other Devices"));
     m_otherDeviceButton->setSizePolicy(sizePolicy);
-    m_otherDeviceButton->setMaximumWidth(std::max(width + 20, 140));
+    m_otherDeviceButton->setMaximumWidth(std::max(width + 50, 140));
     m_otherDeviceButton->setVisible(false);
     m_otherDeviceButton->setCursor(Qt::PointingHandCursor);
     connect(m_otherDeviceButton, &QPushButton::clicked,
@@ -543,8 +545,25 @@ void AuthDialog::onBiometricButtonClicked()
     //当前没有设备，让用户选择设备
     if(!m_deviceInfo)
     {
-        qDebug() << "hasn't device, to choice device.";
-        m_otherDeviceButton->click();
+   	if(m_deviceCount == 1)
+        {
+            DeviceList deviceList = m_biometricProxy->GetDevList();
+            m_deviceInfo = deviceList.at(0);
+            if(!m_deviceInfo)
+            {
+                m_otherDeviceButton->click();
+            }
+            else
+            {
+                authMode = BIOMETRIC;
+                startAuth();
+	    }
+        }
+        else
+        {
+            m_otherDeviceButton->click();
+        }
+
     }
     else
     {

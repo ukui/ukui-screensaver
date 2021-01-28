@@ -368,7 +368,10 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
     {
        	if(screen->geometry().contains(pos))
        	{
+            /*避免切换时闪烁*/
+            lockWidget->hide();
     		lockWidget->setGeometry(screen->geometry());
+            lockWidget->show();
     		break;
        	}
     }
@@ -379,7 +382,7 @@ void FullBackgroundWidget::lock()
     showLockWidget();
 
     lockWidget->startAuth();
-    inhibit();
+    //inhibit();
 }
 
 
@@ -487,6 +490,29 @@ int FullBackgroundWidget::onSessionStatusChanged(uint status)
     return 0;
 }
 
+void FullBackgroundWidget::onBlankScreensaver()
+{
+      showLockWidget();
+      screenStatus = (ScreenStatus)(screenStatus | SCREEN_SAVER);
+      qDebug() << "showScreensaver - screenStatus: " << screenStatus;
+
+      for(auto screen : QGuiApplication::screens())
+      {
+          ScreenSaver *saver = configuration->getScreensaver();
+          saver->mode = SaverMode(SAVER_BLANK_ONLY);
+          ScreenSaverWidget *saverWidget = new ScreenSaverWidget(saver, this);
+          widgetXScreensaverList.push_back(saverWidget);
+          saverWidget->setGeometry(screen->geometry());
+      }
+      setCursor(Qt::BlankCursor);
+
+      //显示屏保时，停止认证（主要针对生物识别）
+      if(lockWidget)
+      {
+          lockWidget->stopAuth();
+      }
+}
+
 void FullBackgroundWidget::onScreensaver()
 {
       showLockWidget();
@@ -536,6 +562,7 @@ void FullBackgroundWidget::onScreenCountChanged(int)
     update();
 }
 
+
 void FullBackgroundWidget::onDesktopResized()
 {
     QDesktopWidget *desktop = QApplication::desktop();
@@ -570,7 +597,7 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
 {
     ///系统休眠时，会关闭总线，导致设备不可用，发生错误
     ///在系统休眠之前停止认证，在系统唤醒后重新开始认证
-    if(sleep)
+/*    if(sleep)
     {
         lockWidget->stopAuth();
         uninhibit();
@@ -584,6 +611,13 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
             lockWidget->startAuth();
             inhibit();
         }
+    }
+*/
+    if(sleep)
+	return;
+    if(screenStatus & SCREEN_SAVER)
+    {
+        clearScreensavers();
     }
 }
 

@@ -93,6 +93,7 @@ private:
 
     int flag;
     bool hasChanged;
+    int timeType;
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);

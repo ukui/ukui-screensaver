@@ -80,6 +80,7 @@ private:
     QMenu               *usersMenu;
     Users               *users;
     DisplayManager      *displayManager;
+    int			 timeType;
 };
 
 #endif // LOCKWIDGET_H

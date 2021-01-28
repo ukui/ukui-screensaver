@@ -242,7 +242,7 @@ readString(int fd)
     if(readData(fd, &length, sizeof(length)) <= 0)
         return NULL;
     if(length <= 0)
-        return NULL;
+        length = 0;
 
     char *value = (char *)malloc(sizeof(char) * (length + 1));
     readData(fd, value, length);
@@ -278,6 +278,14 @@ void AuthPAM::_authenticate(const char *userName)
         pam_end(pamh, 0);
         qDebug() << "failed to get username";
     }
+    if(authRet == PAM_SUCCESS)
+	ret = pam_acct_mgmt(pamh, 0);
+    
+    if(ret != PAM_SUCCESS)
+    {
+        qDebug() << "failed to acct mgmt " << pam_strerror(NULL, ret);
+    }
+
     free(newUser);
     fprintf(stderr, "authentication result: %d\n", authRet);
 

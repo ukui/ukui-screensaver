@@ -28,6 +28,11 @@
       <summary>Lock on activation</summary>
       <description>Set this to TRUE to lock the screen when the screensaver goes active.</description>
     </key>
+    <key name="sleep-activation-enabled" type="b">
+      <default>true</default>
+      <summary>Lock when sleep</summary>
+      <description>Set this to TRUE to lock the screen when the system goes sleep.</description>
+    </key>
     <key name="mode" enum="org.ukui.screensaver.Mode">
       <default>'default-ukui'</default>
       <summary>Screensaver theme selection mode</summary>

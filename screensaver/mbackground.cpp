@@ -20,6 +20,7 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QMimeDatabase>
+#include <ctime>
 #include "mbackground.h"
 
 #include "commonfunc.h"
@@ -74,19 +75,21 @@ QString MBackground::getPrev()
     return list.at(currentIndex);
 }
 
+QString MBackground::getRand()
+{
+    if(list.count() <= 0)
+        return "";
+    qsrand(time(NULL));
+    currentIndex = qrand() % list.count();
+
+    return list.at(currentIndex);
+}
+
 void MBackground::getAllPixmap()
 {
     QDomDocument doc;
     QFile *file;
-    if(getSystemDistrib().contains("Ubuntu",Qt::CaseInsensitive))
-        file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
-    else if(getSystemVersion().contains("V10.1",Qt::CaseInsensitive))
-        file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
-    else if(getSystemVersion().contains("V10",Qt::CaseInsensitive))
-	file = new QFile("/usr/share/ukui-background-properties/kylin-wallpaper.xml");
-    else
-        file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
-
+    file = new QFile("/usr/share/ukui-background-properties/focal-ubuntukylin-wallpapers.xml");
     if (!file->open(QIODevice::ReadOnly))
     {
         qDebug()<<file->fileName()<<" open failed";

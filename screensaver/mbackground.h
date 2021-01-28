@@ -30,6 +30,7 @@ public:
     QString getCurrent();
     QString getNext();
     QString getPrev();
+    QString getRand();
 
 private:
     void getAllPixmap();

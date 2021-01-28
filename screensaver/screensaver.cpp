@@ -45,6 +45,9 @@
 #include <X11/Xutil.h>
 
 #include "commonfunc.h"
+
+#define TIME_TYPE_SCHEMA "org.ukui.control-center.panel.plugins"
+
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
   date(new ChineseDate()),
@@ -88,14 +91,8 @@ QString Screensaver::getDefaultBackground(QString background)
 {
     if(ispicture(background))
         return background;
-    else if(getSystemDistrib().contains("Ubuntu",Qt::CaseInsensitive))
-        return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
-    else if(getSystemVersion().contains("V10.1",Qt::CaseInsensitive))
-        return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
-    else if(getSystemVersion().contains("V10",Qt::CaseInsensitive))
-        return "/usr/share/backgrounds/kylin/kylin-background.png";
-    else
-        return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
+    
+    return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
 }
 
 bool Screensaver::eventFilter(QObject *obj, QEvent *event)
@@ -360,6 +357,14 @@ void Screensaver::initUI()
 
 void Screensaver::setDatelayout()
 {
+    if(QGSettings::isSchemaInstalled(TIME_TYPE_SCHEMA)){
+        QGSettings *time_type = new QGSettings(TIME_TYPE_SCHEMA);
+        QStringList keys = time_type->keys();
+        if (keys.contains("hoursystem")) {
+                timeType = time_type->get("hoursystem").toInt();
+        }
+    }
+
     timeLayout = new QWidget(this);
     QVBoxLayout *vtimeLayout = new QVBoxLayout(timeLayout);
 
@@ -370,7 +375,11 @@ void Screensaver::setDatelayout()
 //    vtimeLayout->addWidget(dateOfWeek);
 
     this->dateOfLocaltime = new QLabel(this);
-    this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+    if(timeType == 12)
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+    else
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+
     this->dateOfLocaltime->setObjectName("dateOfLocaltime");
     this->dateOfLocaltime->setAlignment(Qt::AlignCenter);
     this->dateOfLocaltime->adjustSize();
@@ -422,13 +431,17 @@ void Screensaver::updateDate()
 void Screensaver::updateTime()
 {
     //this->dateOfWeek->setText(QDate::currentDate().toString("dddd"));
-    this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+    if(timeType == 12)
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+    else
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+
     this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
     if(sleepTime){
         if(!sleepTime->setTime(QDateTime::currentDateTime())){
-	    timer->stop();
             sleepTime->hide();
-            sleepTime->deleteLater();
+            delete sleepTime; 
+	    sleepTime=NULL;
         }
     }
 }
@@ -451,11 +464,11 @@ void Screensaver::setUpdateBackground()
 
 void Screensaver::updateBackground()
 {
-    QString path = m_background->getNext();
-    if(!path.isEmpty()){
+    QString path = m_background->getRand();
+    if(!path.isEmpty() && ispicture(path)){
         background = QPixmap(path);
         repaint();
-	hasChanged=true;
+        hasChanged=true;
     }
     updateCenterWidget(-1);
 }
@@ -527,7 +540,7 @@ void Screensaver::setDesktopBackground()
     }else{ 
         if(m_background->getCurrent().isEmpty())
             return;
-	mBackground=m_background->getCurrent();
+        mBackground=m_background->getCurrent();
     }
 
     settings->set("picture-filename",QVariant(mBackground));

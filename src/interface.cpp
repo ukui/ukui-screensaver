@@ -23,18 +23,20 @@
 #include <QTimer>
 #include <unistd.h>
 #include <QDBusPendingReply>
+#include <QGSettings>
 #include <signal.h>
 
 Interface::Interface(QObject *parent)
     : QObject(parent),
       m_timerCount(0),
+      settings(nullptr),
       m_timer(nullptr)
 {
     lockState = false;
     m_logind = new LogindIntegration(this);
     connect(m_logind, &LogindIntegration::requestLock, this,
         [this]() {
-            this->Lock();
+            this->onShowScreensaver();
         }
     );
     connect(m_logind, &LogindIntegration::requestUnlock, this,
@@ -48,6 +50,8 @@ Interface::Interface(QObject *parent)
         [=](int exitCode, QProcess::ExitStatus exitStatus){
             emitLockState(false);
     });
+	
+    settings = new QGSettings("org.ukui.screensaver","",this);
 
     QDBusInterface *iface = new QDBusInterface("org.freedesktop.login1",
                                                "/org/freedesktop/login1",
@@ -61,7 +65,7 @@ Interface::Interface(QObject *parent)
 
 bool Interface::GetLockState()
 {
-    return ((process.state() != QProcess::NotRunning) && lockState);
+	return ((process.state() != QProcess::NotRunning) && lockState);
 }
 
 void Interface::SetLockState()
@@ -110,6 +114,20 @@ void Interface::onSessionIdleReceived()
     emitLockState(true);
 }
 
+void Interface::onShowBlankScreensaver()
+{
+    if(process.state() != QProcess::NotRunning)
+        return ;
+
+    qDebug() << "lock and show screensaver";
+    lockState = false;
+    QString cmd = QString("/usr/bin/ukui-screensaver-dialog --blank");
+    qDebug() << cmd;
+
+    process.start(cmd);
+    emitLockState(true);
+}
+
 void Interface::onShowScreensaver()
 {
     if(process.state() != QProcess::NotRunning)
@@ -153,7 +171,11 @@ void Interface::onNameLost(const QString &serviceName)
 
 void Interface::onPrepareForSleep(bool sleep)
 {
-
+    if(!settings->get("sleep-activation-enabled").toBool()){
+   	uninhibit();
+        return; 
+    }
+    
     if(sleep)
     {
         if(GetLockState()){
@@ -161,9 +183,9 @@ void Interface::onPrepareForSleep(bool sleep)
             return;
         }
 
-        this->Lock();
+    	this->onShowBlankScreensaver();
 
-        if(!m_timer){
+	if(!m_timer){
             m_timer = new QTimer(this);
             connect(m_timer, &QTimer::timeout, this, [&]{
                 m_timerCount+=1;

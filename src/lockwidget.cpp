@@ -26,18 +26,20 @@
 #include <QtX11Extras/QX11Info>
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
-
+#include <QGSettings>
 #include "authdialog.h"
 #include "virtualkeyboard.h"
 #include "users.h"
 #include "displaymanager.h"
 
+#define TIME_TYPE_SCHEMA "org.ukui.control-center.panel.plugins"
 float scale;
 LockWidget::LockWidget(QWidget *parent)
     : QWidget(parent),
       ui(new Ui::LockWidget),
       usersMenu(nullptr),
       users(new Users(this)),
+      timeType(24),
       displayManager(new DisplayManager(this))
 {
     scale = 1.0;
@@ -105,17 +107,30 @@ void LockWidget::initUI()
 {
     setFocusProxy(authDialog);
 
+    if(QGSettings::isSchemaInstalled(TIME_TYPE_SCHEMA)){
+    	QGSettings *time_type = new QGSettings(TIME_TYPE_SCHEMA);
+        QStringList keys = time_type->keys();
+    	if (keys.contains("hoursystem")) {
+        	timeType = time_type->get("hoursystem").toInt();
+	}
+    }
+
     //显示系统时间
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [&]{
-        QString time = QDateTime::currentDateTime().toString("hh:mm");
-        ui->lblTime->setText(time);
+	if(timeType == 12)
+            ui->lblTime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+        else
+	    ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
 	QString date = QDate::currentDate().toString("yyyy/MM/dd ddd");
 	ui->lblDate->setText(date);
     });
 
-    QString time = QDateTime::currentDateTime().toString("hh:mm");
-    ui->lblTime->setText(time);
+    if(timeType == 12)
+    	ui->lblTime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+    else
+	ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+
     ui->lblTime->setStyleSheet("QLabel{color:white; font-size: 50px;}");
     ui->lblTime->setAlignment(Qt::AlignCenter);
     ui->lblTime->adjustSize();
