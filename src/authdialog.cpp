@@ -39,8 +39,11 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     auth(new AuthPAM(this)),
     m_deviceCount(-1),
     authMode(UNKNOWN),
+    usebind(false),
+    isBioPassed(false),
     m_biometricProxy(nullptr),
     m_biometricAuthWidget(nullptr),
+    usebindstarted(false),
     m_biometricDevicesWidget(nullptr),
     pamTally(PamTally::instance(this)),
     m_buttonsWidget(nullptr)
@@ -212,10 +215,23 @@ void AuthDialog::onShowMessage(const QString &message, Auth::MessageType type)
     stopWaiting();
 }
 
+void AuthDialog::pamBioSuccess()
+{
+    m_biometricAuthWidget->startAuth(m_deviceInfo, user.uid);
+    onShowMessage(tr("Please enter your password or enroll your fingerprint "),
+                          Auth::MessageTypeInfo);
+}
+
+void AuthDialog::startBioAuth()
+{
+    QTimer::singleShot(1000,this,SLOT(pamBioSuccess()));
+}
+
 void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
 {
     qDebug() << "prompt: " << prompt;
     QString text = prompt;
+
     if(text == BIOMETRIC_PAM)
     {
         if(authMode == PASSWORD)
@@ -226,6 +242,23 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
         {
             performBiometricAuth();
         }
+
+    }
+    else if(text == BIOMETRIC_PAM_DOUBLE)
+    {
+        usebind = true;
+        if(authMode == PASSWORD)
+        {
+            skipBiometricAuth();
+        }
+        else
+        {
+            if(isBioPassed){
+                onRespond(BIOMETRIC_SUCCESS);
+            }
+            else
+                performBiometricAuth();
+        }
     }
     else
     {
@@ -235,11 +268,17 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
 
         m_passwordEdit->setFocus();
 
-        if(text == "Password: ")
+        if(text == "Password: " || text == "密码："){
+            if(usebindstarted){
+                onShowMessage(tr("Please enter your password or enroll your fingerprint "),
+                          Auth::MessageTypeInfo);
+            }
             text = tr("Password: ");
+        }
 
         m_passwordEdit->clear();
         m_passwordEdit->setPrompt(text);
+        showPasswordAuthWidget();
     }
 }
 
@@ -248,7 +287,11 @@ void AuthDialog::onAuthComplete()
 
     if(auth->isAuthenticated())
     {
-            Q_EMIT authenticateCompete(true);
+        if(usebindstarted){
+            m_biometricAuthWidget->stopAuth();
+        }
+
+        Q_EMIT authenticateCompete(true);
     }
     else
     {
@@ -338,7 +381,8 @@ void AuthDialog::performBiometricAuth()
     }
 
     //初始化生物识别认证UI
-    initBiometricButtonWidget();
+    if(!usebind)
+        initBiometricButtonWidget();
     initBiometricWidget();
 
     //获取默认设备
@@ -367,6 +411,15 @@ void AuthDialog::performBiometricAuth()
     {
         skipBiometricAuth();
         return;
+    }
+
+    if(usebind){
+        if(!usebindstarted){
+            startBioAuth();
+            usebindstarted = true;
+         }
+        skipBiometricAuth();
+        return ;
     }
 
     authMode = BIOMETRIC;
@@ -532,11 +585,25 @@ void AuthDialog::onBiometricAuthComplete(bool result)
 {
     if(!result)
     {
-        m_retryButton->setVisible(!m_biometricAuthWidget->isHidden());
+        if(usebind){
+            authMode = UNKNOWN;
+            onShowMessage(tr("Authentication failure, Please try again"),Auth::MessageTypeError);
+            if(!isBioPassed)
+                startBioAuth();
+        }else{
+            m_retryButton->setVisible(!m_biometricAuthWidget->isHidden());
+        }
     }
     else
     {
-        auth->respond(BIOMETRIC_SUCCESS);
+        if(usebind){
+            isBioPassed = true;
+            authMode = UNKNOWN;
+            startAuth();
+            //onShowMessage("验证成功!",Auth::MessageTypeInfo);
+        }else{
+            auth->respond(BIOMETRIC_SUCCESS);
+        }
     }
 }
 
@@ -601,8 +668,8 @@ void AuthDialog::showPasswordAuthWidget()
     {
         m_biometricAuthWidget->setVisible(false);
         m_biometricDevicesWidget->setVisible(false);
-
-        m_biometricAuthWidget->stopAuth();
+        if(!usebindstarted)
+            m_biometricAuthWidget->stopAuth();
     }
 
     if(m_buttonsWidget)

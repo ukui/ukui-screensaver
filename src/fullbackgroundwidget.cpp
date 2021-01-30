@@ -321,9 +321,9 @@ void FullBackgroundWidget::init()
         XFlush(QX11Info::display());
         sleep(1);
         if(!establishGrab())
-	{
-		exit(1);
-	}
+        {
+            exit(1);
+        }
     }
     // 监听session信号
     smInterface = new QDBusInterface(SM_DBUS_SERVICE,

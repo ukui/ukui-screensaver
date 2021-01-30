@@ -16,7 +16,7 @@
         <translation type="obsolete">Parola</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="458"/>
+        <location filename="../src/authdialog.cpp" line="509"/>
         <source>Retry</source>
         <translation type="unfinished">Yeniden Dene</translation>
     </message>
@@ -25,7 +25,7 @@
         <translation type="obsolete">Kilidi Aç</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="239"/>
+        <location filename="../src/authdialog.cpp" line="274"/>
         <source>Password: </source>
         <translation type="unfinished">Parola</translation>
     </message>
@@ -42,22 +42,28 @@
         <translation type="vanished">Kimlik doğrulama hatası, hala %1 kalan denemen var</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="256"/>
+        <location filename="../src/authdialog.cpp" line="271"/>
+        <source>Please enter your password or enroll your fingerprint </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/authdialog.cpp" line="297"/>
+        <location filename="../src/authdialog.cpp" line="588"/>
         <source>Authentication failure, Please try again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="422"/>
+        <location filename="../src/authdialog.cpp" line="473"/>
         <source>Biometric Authentication</source>
         <translation type="unfinished">Biyometrik Kimlik Doğrulama</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="435"/>
+        <location filename="../src/authdialog.cpp" line="486"/>
         <source>Password Authentication</source>
         <translation type="unfinished">Parola Doğrulama</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="448"/>
+        <location filename="../src/authdialog.cpp" line="499"/>
         <source>Other Devices</source>
         <translation type="unfinished">Diğer Ayıtlar</translation>
     </message>
@@ -103,12 +109,12 @@
 <context>
     <name>BiometricAuthWidget</name>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="99"/>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="101"/>
         <source>Current device: </source>
         <translation type="unfinished">Şuanki aygıt:</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="160"/>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="167"/>
         <source>Identify failed, Please retry.</source>
         <translation type="unfinished">Tanımlama başarısız, Lütfen tekrar deneyin.</translation>
     </message>
