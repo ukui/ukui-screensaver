@@ -340,14 +340,16 @@ void FullBackgroundWidget::init()
     connect(xEventMonitor, SIGNAL(buttonDrag(int, int)),
             this, SLOT(onGlobalButtonDrag(int, int)));
 
-    int totalWidth = 0;
-    int totalHeight = 0;
-    for(auto screen : QGuiApplication::screens())
-    {
-        totalWidth += screen->geometry().width();
-        totalHeight += screen->geometry().height();
-    }
-    setGeometry(0, 0, totalWidth, totalHeight);
+//    int totalWidth = 0;
+//    int totalHeight = 0;
+//    for(auto screen : QGuiApplication::screens())
+//    {
+//        totalWidth += screen->geometry().width();
+//        totalHeight += screen->geometry().height();
+//    }
+//    setGeometry(0, 0, totalWidth, totalHeight);
+    QDesktopWidget *desktop = QApplication::desktop();
+    setGeometry(desktop->geometry());
 
     background.load(configuration->getBackground());
     
@@ -552,8 +554,8 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
 
 void FullBackgroundWidget::onScreenCountChanged(int)
 {
-    QSize newSize = monitorWatcher->getVirtualSize();
-    setGeometry(0, 0, newSize.width(), newSize.height());
+    QDesktopWidget *desktop = QApplication::desktop();
+    setGeometry(desktop->geometry());
     //repaint();
     if(screenStatus & SCREEN_SAVER)
     {
