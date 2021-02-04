@@ -33,6 +33,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
+#include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -274,10 +275,25 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
             xcb_configure_notify_event_t *xc = reinterpret_cast<xcb_configure_notify_event_t*>(event);
             if(xc->window == winId())
                 return false;
+            XWindowAttributes window_attributes;
+            XGetWindowAttributes (QX11Info::display(), xc->window,&window_attributes);
+            XClassHint ch;
+            ch.res_class = NULL;
+            XGetClassHint (QX11Info::display(), xc->window, &ch);
+            if(QString(ch.res_name) == "ukui-screensaver-dialog")
+                return false;
+
             laterActivate();
          }else if(responseType == XCB_MAP_NOTIFY){
-	    xcb_map_notify_event_t *xm = reinterpret_cast<xcb_map_notify_event_t*>(event);
-	    if(xm->window == winId())
+            xcb_map_notify_event_t *xm = reinterpret_cast<xcb_map_notify_event_t*>(event);
+            if(xm->window == winId())
+                    return false;
+            XWindowAttributes window_attributes;
+            XGetWindowAttributes (QX11Info::display(), xm->window,&window_attributes);
+            XClassHint ch;
+            ch.res_class = NULL;
+            XGetClassHint (QX11Info::display(), xm->window, &ch);
+            if(QString(ch.res_name) == "ukui-screensaver-dialog")
                 return false;
             laterActivate();
 	 }
