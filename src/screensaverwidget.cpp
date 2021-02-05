@@ -144,7 +144,6 @@ void ScreenSaverWidget::embedXScreensaver(const QString &path)
     char widStr[20] = {0};
     snprintf(widStr, sizeof(widStr), "%lu", wid);
     if((xscreensaverPid = fork()) == 0) {
-	prctl(PR_SET_PDEATHSIG, SIGHUP);
         execl(path.toStdString().c_str(), "xscreensaver", "-window-id", widStr, (char*)0);
         qWarning() << "exec " << path << "failed";
     }

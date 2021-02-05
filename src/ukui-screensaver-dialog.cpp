@@ -35,6 +35,7 @@
 
 #define CACHE_DIR "/.cache/ukui-screensaver/"
 
+FullBackgroundWidget *window = NULL;
 static void
 messageOutput(QtMsgType type, const QMessageLogContext &context,const QString &msg);
 
@@ -115,7 +116,7 @@ void checkIsRunning()
 
 void handler(int signum)
 {
-    qApp->quit();
+    window->closeScreensaver();
 }
 
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
@@ -130,7 +131,7 @@ int main(int argc, char *argv[])
 #endif
 
     qunsetenv("QT_IM_MODULE");
-//    signal(SIGTERM,handler);
+    signal(SIGTERM,handler);
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
 
@@ -166,7 +167,7 @@ int main(int argc, char *argv[])
     a.installTranslator(&translator);
     qDebug() << "load translation file " << qmFile;
 
-    FullBackgroundWidget *window = new FullBackgroundWidget();
+    window = new FullBackgroundWidget();
 
     QFile qssFile(":/qss/assets/authdialog.qss");
     if(qssFile.open(QIODevice::ReadOnly)) {

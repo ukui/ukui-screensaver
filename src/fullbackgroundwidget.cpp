@@ -569,6 +569,21 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
     }
 }
 
+void FullBackgroundWidget::closeScreensaver()
+{
+    if(screenStatus & SCREEN_SAVER){
+    	clearScreensavers();
+    }
+
+    if(screenStatus & SCREEN_LOCK){
+    	if(lockWidget){
+    	    	lockWidget->stopAuth();
+		lockWidget->close();
+    	}
+    }
+
+    close();
+}
 
 void FullBackgroundWidget::onScreenCountChanged(int)
 {
