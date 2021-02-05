@@ -278,6 +278,7 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
             XWindowAttributes window_attributes;
             XGetWindowAttributes (QX11Info::display(), xc->window,&window_attributes);
             XClassHint ch;
+            ch.res_name = NULL;
             ch.res_class = NULL;
             XGetClassHint (QX11Info::display(), xc->window, &ch);
             if(QString(ch.res_name) == "ukui-screensaver-dialog")
@@ -291,6 +292,7 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
             XWindowAttributes window_attributes;
             XGetWindowAttributes (QX11Info::display(), xm->window,&window_attributes);
             XClassHint ch;
+            ch.res_name = NULL;
             ch.res_class = NULL;
             XGetClassHint (QX11Info::display(), xm->window, &ch);
             if(QString(ch.res_name) == "ukui-screensaver-dialog")
