@@ -112,33 +112,44 @@ void LockWidget::initUI()
         QStringList keys = time_type->keys();
     	if (keys.contains("hoursystem")) {
         	timeType = time_type->get("hoursystem").toInt();
-	}
+        }
+        if (keys.contains("date")) {
+            dateType = time_type->get("date").toString();
+        }
     }
 
     //显示系统时间
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [&]{
-	if(timeType == 12)
+        if(timeType == 12)
             ui->lblTime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
         else
-	    ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
-	QString date = QDate::currentDate().toString("yyyy/MM/dd ddd");
-	ui->lblDate->setText(date);
+            ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+
+        if(dateType == "cn")
+            ui->lblDate->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
+        else
+            ui->lblDate->setText(QDate::currentDate().toString("yyyy-MM-dd ddd"));
     });
 
     if(timeType == 12)
     	ui->lblTime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
     else
-	ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
+        ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
 
     ui->lblTime->setStyleSheet("QLabel{color:white; font-size: 50px;}");
     ui->lblTime->setAlignment(Qt::AlignCenter);
     ui->lblTime->adjustSize();
     timer->start(1000);
 
-    QString date = QDate::currentDate().toString("yyyy/MM/dd ddd");
-    qDebug() << "current date: " << date;
-    ui->lblDate->setText(date);
+//    QString date = QDate::currentDate().toString("yyyy/MM/dd ddd");
+//    qDebug() << "current date: " << date;
+//    ui->lblDate->setText(date);
+    if(dateType == "cn")
+        ui->lblDate->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
+    else
+        ui->lblDate->setText(QDate::currentDate().toString("yyyy-MM-dd ddd"));
+
     ui->lblDate->setStyleSheet("QLabel{color:white; font-size: 16px;}");
     ui->lblDate->setAlignment(Qt::AlignCenter);
     ui->lblDate->adjustSize();
