@@ -193,9 +193,11 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 void Screensaver::setUpdateCenterWidget()
 {
     QString lang = qgetenv("LANG");
+    QString homePath=qgetenv("HOME");
     QString cwdPath="/usr/share/ukui-screensaver/";
     QString languageDirPath=cwdPath+"language/";
     QString defaultLanguageFilePath=languageDirPath+"screensaver-en_US.ini";
+    qDebug()<<"homePath="<<homePath;
     if (!lang.isEmpty()){
         qDebug()<<"lang = "<<lang;
         if(lang.contains('.')){
@@ -203,10 +205,16 @@ void Screensaver::setUpdateCenterWidget()
             qDebug()<<"langStr = "<<lang;
         }
         QString languageFilePath=languageDirPath+"screensaver-"+lang+".ini";
+        QString homeLanguageFilePath=homePath+"/.config/ukui/screensaver-"+lang+".ini";
         qDebug()<<"langnguageFile = "<<languageFilePath;
+        qDebug()<<"homeLanguageFilePath = "<<homeLanguageFilePath;
         QFileInfo fileInfo(languageFilePath);
-        if (fileInfo.isFile()){
-        	qsettings = new QSettings(languageFilePath,QSettings::IniFormat);
+        QFileInfo homeConfigFileInfo(homeLanguageFilePath);
+        if (homeConfigFileInfo.isFile()){
+            qsettings = new QSettings(homeLanguageFilePath,QSettings::IniFormat);
+        }
+        else if(fileInfo.isFile()){
+            qsettings = new QSettings(languageFilePath,QSettings::IniFormat);
         }
         else{
             qsettings = new QSettings(defaultLanguageFilePath,QSettings::IniFormat);
