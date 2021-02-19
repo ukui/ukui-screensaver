@@ -29,6 +29,7 @@ BiometricAuthWidget::BiometricAuthWidget(BiometricProxy *proxy, QWidget *parent)
     retrytimer(nullptr),
     failedCount(0),
     usebind(false),
+    useMinImage(false),
     timeoutCount(0),
     beStopped(false)
 {
@@ -59,6 +60,7 @@ void BiometricAuthWidget::initUI()
     //显示图片
     lblImage = new QLabel(this);
     lblImage->setFixedSize(100, 100);
+
 }
 
 
@@ -280,4 +282,16 @@ bool BiometricAuthWidget::getAuthDouble()
     QSettings settings("/etc/biometric-auth/ukui-biometric.conf", QSettings::IniFormat);
     bool distribId = settings.value("DoubleAuth").toBool();
     return distribId;
+}
+
+void BiometricAuthWidget::setMinImage(bool val)
+{
+    useMinImage = val;
+    if(useMinImage){
+        resize(400,150);
+        lblImage->setFixedSize(50, 50);
+    }else{
+        resize(400,200);
+        lblImage->setFixedSize(100, 100);
+    }
 }

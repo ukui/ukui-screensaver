@@ -327,7 +327,7 @@ void LockWidget::resizeEvent(QResizeEvent *event)
 
     //认证窗口
     //设置认证窗口左右居中
-    authDialog->setGeometry((width()-authDialog->geometry().width())/2,ui->widgetTime->geometry().bottom() + 176*scale,
+    authDialog->setGeometry((width()-authDialog->geometry().width())/2,height()/3, \
                             authDialog->width(), height());
 
     //右下角按钮,x,y的初始值代表距离右下角的距离。

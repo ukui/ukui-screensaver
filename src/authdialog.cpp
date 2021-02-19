@@ -164,7 +164,6 @@ void AuthDialog::setChildrenGeometry()
 {
     if(scale < 0.5)
         setFixedWidth(500);
-
     // 用户信息显示位置
     m_userWidget->setGeometry(0, 0,
                               width(), 292*scale);
@@ -534,6 +533,11 @@ void AuthDialog::setBiometricWidgetGeometry()
     //生物识别
     if(m_biometricAuthWidget)
     {
+        if(scale<=0.5)
+            m_biometricAuthWidget->setMinImage(true);
+        else
+            m_biometricAuthWidget->setMinImage(false);
+
         m_biometricAuthWidget->setGeometry(0, m_userWidget->geometry().bottom(),
                                            width(), m_biometricAuthWidget->height());
     }
@@ -550,7 +554,11 @@ void AuthDialog::setBiometricButtonWidgetGeometry()
 {
     if(m_buttonsWidget)
     {
-        m_buttonsWidget->setGeometry(0, height() - m_buttonsWidget->height() - y() - 100,
+        if(scale > 0.5)
+            m_buttonsWidget->setGeometry(0, height() - m_buttonsWidget->height() - y() - 100,
+                                     width(), m_buttonsWidget->height());
+        else
+            m_buttonsWidget->setGeometry(0, height() - m_buttonsWidget->height() - y() - 20,
                                      width(), m_buttonsWidget->height());
     }
 }

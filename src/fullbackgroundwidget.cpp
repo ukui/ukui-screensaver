@@ -549,7 +549,11 @@ void FullBackgroundWidget::onGlobalKeyRelease(const QString &key)
     {
         lockWidget->capsLockChanged();
     }
-    if(screenStatus & SCREEN_SAVER)
+    if(key == "Escape" && screenStatus == SCREEN_LOCK)
+    {
+        showScreensaver();
+    }
+    else if(screenStatus & SCREEN_SAVER)
     {
         clearScreensavers();	
     }
