@@ -115,12 +115,18 @@ set(command_SRC
 add_executable(ukui-screensaver-command ${command_SRC})
 target_link_libraries(ukui-screensaver-command Qt5::Core Qt5::DBus)
 
+set(checkpass_SRC
+    ukui-screensaver-checkpass.cpp
+    )
+add_executable(ukui-screensaver-checkpass ${checkpass_SRC})
+target_link_libraries(ukui-screensaver-checkpass ${PAM_LIBRARIES})
 
 install(TARGETS
-	ukui-screensaver-dialog
-	ukui-screensaver-backend
-	ukui-screensaver-command
-	DESTINATION bin)
+    ukui-screensaver-dialog
+    ukui-screensaver-backend
+    ukui-screensaver-command
+    ukui-screensaver-checkpass
+    DESTINATION bin)
 
 #set(test-act_SRC
 #	users.cpp

@@ -20,6 +20,7 @@
 #include <signal.h>
 #include <QDebug>
 #include <QTimer>
+#include <QProcess>
 #include <QPainter>
 #include <QKeyEvent>
 #include <QtX11Extras/QX11Info>
@@ -28,7 +29,6 @@
 ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
     : QWidget(parent),
       timer(nullptr),
-      xscreensaverPid(-1),
       screensaver(screensaver),
       closing(false)
 {
@@ -76,8 +76,8 @@ ScreenSaverWidget::~ScreenSaverWidget()
 void ScreenSaverWidget::closeEvent(QCloseEvent *event)
 {
     qDebug() << "ScreenSaverWidget::closeEvent---beginStop";
-    if(xscreensaverPid > 0)
-        kill(xscreensaverPid, SIGKILL);
+   if(process.state() != QProcess::NotRunning)
+       process.kill();
 
     if(!closing){
         closing = true;
@@ -140,14 +140,9 @@ bool ScreenSaverWidget::eventFilter(QObject *obj, QEvent *event)
 /* Embed xscreensavers */
 void ScreenSaverWidget::embedXScreensaver(const QString &path)
 {
-    unsigned long wid = winId();
-    char widStr[20] = {0};
-    snprintf(widStr, sizeof(widStr), "%lu", wid);
-    if((xscreensaverPid = fork()) == 0) {
-        execl(path.toStdString().c_str(), "xscreensaver", "-window-id", widStr, (char*)0);
-        qWarning() << "exec " << path << "failed";
-    }
-    qDebug() << "xscreensaver pid: " << xscreensaverPid;
+    QString cmd = path + " -window-id " + QString::number(winId());
+    if(process.state() == QProcess::NotRunning)
+        process.start(cmd);
 }
 
 
