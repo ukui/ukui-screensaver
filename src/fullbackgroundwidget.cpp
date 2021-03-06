@@ -99,7 +99,7 @@ int switch_to_linux(const char* container)
     printf("path = %s\n",path);
     connect_fd = connect_to_switch(path);
 
-    if(connect < 0)
+    if(connect_fd < 0)
         return -1;
 
     write(connect_fd, &switch_to, sizeof(switch_to));
