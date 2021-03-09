@@ -371,6 +371,9 @@ void Screensaver::setDatelayout()
         if (keys.contains("hoursystem")) {
                 timeType = time_type->get("hoursystem").toInt();
         }
+        if (keys.contains("date")) {
+                dateType = time_type->get("date").toString();
+        }
     }
 
     timeLayout = new QWidget(this);
@@ -395,7 +398,10 @@ void Screensaver::setDatelayout()
 
 //    QWidget *dateWidget = new QWidget(this);
     this->dateOfDay = new QLabel(this);
-    this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
+    if(dateType == "cn")
+        this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
+    else
+        this->dateOfDay->setText(QDate::currentDate().toString("yyyy-MM-dd ddd"));
     this->dateOfDay->setObjectName("dateOfDay");
     this->dateOfDay->setAlignment(Qt::AlignCenter);
     this->dateOfDay->adjustSize();
@@ -444,7 +450,11 @@ void Screensaver::updateTime()
     else
         this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
 
-    this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
+    if(dateType == "cn")
+        this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
+    else
+        this->dateOfDay->setText(QDate::currentDate().toString("yyyy-MM-dd ddd"));
+
     if(sleepTime){
         if(!sleepTime->setTime(QDateTime::currentDateTime())){
             sleepTime->hide();

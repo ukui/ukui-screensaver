@@ -42,7 +42,7 @@ AuthPAM::AuthPAM(QObject *parent)
       _isAuthenticated(false),
       _isAuthenticating(false)
 {
-    signal(SIGCHLD, sigchld_handler);
+//    signal(SIGCHLD, sigchld_handler);
 }
 
 void AuthPAM::authenticate(const QString &userName)
@@ -60,7 +60,16 @@ void AuthPAM::authenticate(const QString &userName)
 	prctl(PR_SET_PDEATHSIG, SIGHUP);
         close(toParent[0]);
         close(toChild[1]);
-       _authenticate(userName.toLocal8Bit().data());
+	int arg1_int = toParent[1];
+	int arg2_int = toChild[0]; 
+        char arg1[128];
+	char arg2[128];
+	sprintf(arg1,"%d",arg1_int);
+	sprintf(arg2,"%d",arg2_int);
+	execlp ("ukui-screensaver-checkpass",
+                "ukui-screensaver-checkpass",
+                arg1, arg2,userName.toLocal8Bit().data(), NULL);
+    	_exit (EXIT_FAILURE);
     }
     else
     {

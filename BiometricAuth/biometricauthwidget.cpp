@@ -28,9 +28,11 @@ BiometricAuthWidget::BiometricAuthWidget(BiometricProxy *proxy, QWidget *parent)
     movieTimer(nullptr),
     retrytimer(nullptr),
     failedCount(0),
+    usebind(false),
     timeoutCount(0),
     beStopped(false)
 {
+    usebind = getAuthDouble();
     initUI();
     resize(400, 200);
 
@@ -57,6 +59,7 @@ void BiometricAuthWidget::initUI()
     //显示图片
     lblImage = new QLabel(this);
     lblImage->setFixedSize(100, 100);
+
 }
 
 
@@ -117,6 +120,7 @@ void BiometricAuthWidget::stopAuth()
     {
         return;
     }
+
     proxy->StopOps(device->id);
     if(retrytimer&&retrytimer->isActive()){
         retrytimer->stop();
@@ -149,6 +153,10 @@ void BiometricAuthWidget::onIdentifyComplete(QDBusPendingCallWatcher *watcher)
     // 特征识别不匹配
     else if(result == DBUS_RESULT_NOTMATCH)
     {
+        if(usebind){
+            Q_EMIT authComplete(false);
+            return;
+        }
         qDebug() << "Identify failed";
         failedCount++;
         if(failedCount >= GetMaxFailedAutoRetry(userName))
@@ -172,6 +180,10 @@ void BiometricAuthWidget::onIdentifyComplete(QDBusPendingCallWatcher *watcher)
     //识别发生错误
     else if(result == DBUS_RESULT_ERROR)
     {
+        if(usebind){
+            Q_EMIT authComplete(false);
+            return;
+        }
         StatusReslut ret = proxy->UpdateStatus(device->id);
         //识别操作超时
         if(ret.result == 0 && ret.opsStatus == IDENTIFY_TIMEOUT)
@@ -190,7 +202,11 @@ void BiometricAuthWidget::onIdentifyComplete(QDBusPendingCallWatcher *watcher)
                     }
                 });
             }
-        }
+        }else{
+	    Q_EMIT authComplete(false);
+	}
+    }else{
+        Q_EMIT authComplete(false);
     }
     updateImage(0);
 }
@@ -262,4 +278,17 @@ void BiometricAuthWidget::setImage(const QString &path)
     image = image.scaled(lblImage->width(), lblImage->height(),
                          Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     lblImage->setPixmap(image);
+}
+
+bool BiometricAuthWidget::getAuthDouble()
+{
+    QSettings settings("/etc/biometric-auth/ukui-biometric.conf", QSettings::IniFormat);
+    bool distribId = settings.value("DoubleAuth").toBool();
+    return distribId;
+}
+
+void BiometricAuthWidget::setMinImage(float val)
+{
+    resize(400,100+100*val);
+    lblImage->setFixedSize(100*val, 100*val);
 }

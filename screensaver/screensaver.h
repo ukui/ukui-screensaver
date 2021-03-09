@@ -94,6 +94,7 @@ private:
     int flag;
     bool hasChanged;
     int timeType;
+    QString dateType;
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);

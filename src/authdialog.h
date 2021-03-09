@@ -69,6 +69,8 @@ private:
     void showBiometricAuthWidget();
     void showBiometricDeviceWidget();
     QPixmap PixmapToRound(const QPixmap &src, int radius);
+    void startBioAuth();
+
 
 private Q_SLOTS:
     void onShowMessage(const QString &message, Auth::MessageType type);
@@ -85,6 +87,7 @@ private Q_SLOTS:
     void onPasswordButtonClicked();
     void onOtherDevicesButtonClicked();
     void onRetryButtonClicked();
+    void pamBioSuccess();
 
 public Q_SLOTS:
 //    void switchToBiometric();
@@ -130,6 +133,9 @@ private:
     IconEdit        *m_passwordEdit;       //密码输入框
     QLabel          *m_messageLabel;         //PAM消息显示
     PamTally            *pamTally;
+    bool            usebind;
+    bool            usebindstarted;
+    bool            isBioPassed;
 };
 
 #endif // AUTHDIALOG_H

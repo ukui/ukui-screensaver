@@ -16,7 +16,7 @@
         <translation type="obsolete">使用密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="458"/>
+        <location filename="../src/authdialog.cpp" line="509"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
@@ -29,7 +29,7 @@
         <translation type="obsolete">已登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="239"/>
+        <location filename="../src/authdialog.cpp" line="274"/>
         <source>Password: </source>
         <translation>密码：</translation>
     </message>
@@ -46,22 +46,28 @@
         <translation type="vanished">认证失败，还剩%1次尝试机会</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="256"/>
+        <location filename="../src/authdialog.cpp" line="271"/>
+        <source>Please enter your password or enroll your fingerprint </source>
+        <translation>请输入密码或者录入指纹</translation>
+    </message>
+    <message>
+        <location filename="../src/authdialog.cpp" line="297"/>
+        <location filename="../src/authdialog.cpp" line="588"/>
         <source>Authentication failure, Please try again</source>
         <translation>认证失败，请重试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="422"/>
+        <location filename="../src/authdialog.cpp" line="473"/>
         <source>Biometric Authentication</source>
         <translation>生物识别认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="435"/>
+        <location filename="../src/authdialog.cpp" line="486"/>
         <source>Password Authentication</source>
         <translation>密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="448"/>
+        <location filename="../src/authdialog.cpp" line="499"/>
         <source>Other Devices</source>
         <translation>其他设备</translation>
     </message>
@@ -107,12 +113,12 @@
 <context>
     <name>BiometricAuthWidget</name>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="99"/>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="101"/>
         <source>Current device: </source>
         <translation>当前设备：</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="160"/>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="167"/>
         <source>Identify failed, Please retry.</source>
         <translation>识别失败，请重试</translation>
     </message>

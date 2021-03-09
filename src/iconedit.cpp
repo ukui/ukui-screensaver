@@ -35,13 +35,11 @@
  */
 bool checkCapsLockState()
 {
-    Display *display = XOpenDisplay(NULL);
     bool capsState = false;
-    if(display) {
-        unsigned int n;
-        XkbGetIndicatorState(display, XkbUseCoreKbd, &n);
-        capsState = (n & 0x01) == 1;
-    }
+    unsigned int n;
+    XkbGetIndicatorState(QX11Info::display(), XkbUseCoreKbd, &n);
+    capsState = (n & 0x01) == 1;
+
     return capsState;
 }
 

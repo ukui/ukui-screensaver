@@ -19,9 +19,8 @@
 #define SCREENSAVERWIDGET_H
 
 #include <QWidget>
-
+#include <QProcess>
 #include "screensaver.h"
-
 
 class ScreenSaverWidget : public QWidget
 {
@@ -43,10 +42,10 @@ private Q_SLOTS:
 
 private:
     QTimer          *timer;
-    int             xscreensaverPid;
     ScreenSaver     *screensaver;
     bool            closing;
     float           opacity;
+    QProcess        process;
 };
 
 #endif // SCREENSAVERWIDGET_H

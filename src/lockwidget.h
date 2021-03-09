@@ -81,6 +81,7 @@ private:
     Users               *users;
     DisplayManager      *displayManager;
     int			 timeType;
+    QString      dateType;
 };
 
 #endif // LOCKWIDGET_H

@@ -33,6 +33,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
+#include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -98,7 +99,7 @@ int switch_to_linux(const char* container)
     printf("path = %s\n",path);
     connect_fd = connect_to_switch(path);
 
-    if(connect < 0)
+    if(connect_fd < 0)
         return -1;
 
     write(connect_fd, &switch_to, sizeof(switch_to));
@@ -274,10 +275,27 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
             xcb_configure_notify_event_t *xc = reinterpret_cast<xcb_configure_notify_event_t*>(event);
             if(xc->window == winId())
                 return false;
+            XWindowAttributes window_attributes;
+            XGetWindowAttributes (QX11Info::display(), xc->window,&window_attributes);
+            XClassHint ch;
+            ch.res_name = NULL;
+            ch.res_class = NULL;
+            XGetClassHint (QX11Info::display(), xc->window, &ch);
+            if(QString(ch.res_name) == "ukui-screensaver-dialog")
+                return false;
+
             laterActivate();
          }else if(responseType == XCB_MAP_NOTIFY){
-	    xcb_map_notify_event_t *xm = reinterpret_cast<xcb_map_notify_event_t*>(event);
-	    if(xm->window == winId())
+            xcb_map_notify_event_t *xm = reinterpret_cast<xcb_map_notify_event_t*>(event);
+            if(xm->window == winId())
+                    return false;
+            XWindowAttributes window_attributes;
+            XGetWindowAttributes (QX11Info::display(), xm->window,&window_attributes);
+            XClassHint ch;
+            ch.res_name = NULL;
+            ch.res_class = NULL;
+            XGetClassHint (QX11Info::display(), xm->window, &ch);
+            if(QString(ch.res_name) == "ukui-screensaver-dialog")
                 return false;
             laterActivate();
 	 }
@@ -321,9 +339,9 @@ void FullBackgroundWidget::init()
         XFlush(QX11Info::display());
         sleep(1);
         if(!establishGrab())
-	{
-		exit(1);
-	}
+        {
+            exit(1);
+        }
     }
     // 监听session信号
     smInterface = new QDBusInterface(SM_DBUS_SERVICE,
@@ -340,14 +358,16 @@ void FullBackgroundWidget::init()
     connect(xEventMonitor, SIGNAL(buttonDrag(int, int)),
             this, SLOT(onGlobalButtonDrag(int, int)));
 
-    int totalWidth = 0;
-    int totalHeight = 0;
-    for(auto screen : QGuiApplication::screens())
-    {
-        totalWidth += screen->geometry().width();
-        totalHeight += screen->geometry().height();
-    }
-    setGeometry(0, 0, totalWidth, totalHeight);
+//    int totalWidth = 0;
+//    int totalHeight = 0;
+//    for(auto screen : QGuiApplication::screens())
+//    {
+//        totalWidth += screen->geometry().width();
+//        totalHeight += screen->geometry().height();
+//    }
+//    setGeometry(0, 0, totalWidth, totalHeight);
+    QDesktopWidget *desktop = QApplication::desktop();
+    setGeometry(desktop->geometry());
 
     background.load(configuration->getBackground());
     
@@ -529,7 +549,11 @@ void FullBackgroundWidget::onGlobalKeyRelease(const QString &key)
     {
         lockWidget->capsLockChanged();
     }
-    if(screenStatus & SCREEN_SAVER)
+    if(key == "Escape" && screenStatus == SCREEN_LOCK)
+    {
+        showScreensaver();
+    }
+    else if(screenStatus & SCREEN_SAVER)
     {
         clearScreensavers();	
     }
@@ -549,11 +573,26 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
     }
 }
 
+void FullBackgroundWidget::closeScreensaver()
+{
+    if(screenStatus & SCREEN_SAVER){
+    	clearScreensavers();
+    }
+
+    if(screenStatus & SCREEN_LOCK){
+    	if(lockWidget){
+    	    	lockWidget->stopAuth();
+		lockWidget->close();
+    	}
+    }
+
+    close();
+}
 
 void FullBackgroundWidget::onScreenCountChanged(int)
 {
-    QSize newSize = monitorWatcher->getVirtualSize();
-    setGeometry(0, 0, newSize.width(), newSize.height());
+    QDesktopWidget *desktop = QApplication::desktop();
+    setGeometry(desktop->geometry());
     //repaint();
     if(screenStatus & SCREEN_SAVER)
     {

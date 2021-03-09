@@ -41,8 +41,8 @@ Interface::Interface(QObject *parent)
     );
     connect(m_logind, &LogindIntegration::requestUnlock, this,
         [this]() {
-        //process.terminate();
-        process.kill();
+//        	process.terminate();
+        	process.kill();
 	}
     );
 

@@ -55,6 +55,10 @@
         <source>Authentication failure, Please try again</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Please enter your password or enroll your fingerprint </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BioAuthWidget</name>
