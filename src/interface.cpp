@@ -88,6 +88,12 @@ void Interface::emitLockState(bool val)
     QDBusConnection::sessionBus().send(message);
 }
 
+void Interface::UnLock()
+{
+    if(process.state() != QProcess::NotRunning)
+        process.kill();
+}
+
 void Interface::Lock()
 {
     if(process.state() != QProcess::NotRunning)

@@ -44,6 +44,7 @@ public Q_SLOTS:
      * Lock the screen
      */
     void Lock();
+    void UnLock();
     bool GetLockState();
     void SetLockState();
     void onSessionIdleReceived();
