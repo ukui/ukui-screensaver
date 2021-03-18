@@ -357,7 +357,7 @@ void AuthDialog::performBiometricAuth()
     //初始化enableBiometriAuth
     if(m_deviceCount < 0)
     {
-        m_deviceCount = m_biometricProxy->GetDevCount();
+        m_deviceCount = m_biometricProxy->GetUserDevCount(user.uid);
     }
 
     //没有可用设备，不启用生物识别认证
@@ -368,16 +368,6 @@ void AuthDialog::performBiometricAuth()
         return;
     }
 	
-    //初始化用户对应特征数量    
-    m_featureCount = m_biometricProxy->GetFeatureCount(user.uid);
-
-    qDebug()<<"m_featureCount = "<<m_featureCount;
-    //没有可用特征，不启用生物识别认证    
-    if(m_featureCount < 1)
-    {
-        skipBiometricAuth();
-        return;
-    }
 
     //初始化生物识别认证UI
     if(!usebind)
@@ -440,13 +430,14 @@ void AuthDialog::initBiometricWidget()
 {
     if(m_biometricAuthWidget)
     {
+        m_biometricDevicesWidget->setUser(user.uid);
         return;
     }
 
     m_biometricAuthWidget = new BiometricAuthWidget(m_biometricProxy, this);
     connect(m_biometricAuthWidget, &BiometricAuthWidget::authComplete,
             this, &AuthDialog::onBiometricAuthComplete);
-    m_biometricDevicesWidget = new BiometricDevicesWidget(m_biometricProxy, this);
+    m_biometricDevicesWidget = new BiometricDevicesWidget(m_biometricProxy,user.uid, this);
     connect(m_biometricDevicesWidget, &BiometricDevicesWidget::deviceChanged,
             this, &AuthDialog::onDeviceChanged);
 
