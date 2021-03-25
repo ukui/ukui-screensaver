@@ -52,6 +52,12 @@ QString getSystemDistrib()
     return distribId;
 }
 
+bool getUseFirstDevice()
+{
+    QSettings settings("/etc/biometric-auth/ukui-biometric.conf", QSettings::IniFormat);
+    return settings.value("UseFirstDevice").toBool();
+}
+
 commonFunc::commonFunc()
 {
 

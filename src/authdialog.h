@@ -136,6 +136,7 @@ private:
     bool            usebind;
     bool            usebindstarted;
     bool            isBioPassed;
+    bool            useFirstDevice;
 };
 
 #endif // AUTHDIALOG_H

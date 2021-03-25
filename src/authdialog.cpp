@@ -32,6 +32,7 @@
 #include "biometricauthwidget.h"
 #include "biometricdeviceswidget.h"
 #include "pam-tally.h"
+#include "commonfunc.h"
 
 AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     QWidget(parent),
@@ -46,13 +47,16 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     usebindstarted(false),
     m_biometricDevicesWidget(nullptr),
     pamTally(PamTally::instance(this)),
-    m_buttonsWidget(nullptr)
+    m_buttonsWidget(nullptr),
+    useFirstDevice(false)
 {
     initUI();
 
     connect(auth, &Auth::showMessage, this, &AuthDialog::onShowMessage);
     connect(auth, &Auth::showPrompt, this, &AuthDialog::onShowPrompt);
     connect(auth, &Auth::authenticateComplete, this, &AuthDialog::onAuthComplete);
+
+    useFirstDevice = getUseFirstDevice();
 
 }
 
@@ -385,9 +389,13 @@ void AuthDialog::performBiometricAuth()
     //如果默认设备为空的话，第一次不启动生物识别认证
     if(m_deviceName.isEmpty() && !m_deviceInfo)
     {
-        qDebug() << "No default device";
-        skipBiometricAuth();
-        return;
+        if(m_deviceCount == 1 && useFirstDevice == true){
+            DeviceList deviceList = m_biometricProxy->GetDevList();
+            m_deviceInfo = deviceList.at(0);
+        }else{
+            skipBiometricAuth();
+            return;
+        }
     }
 
     clearMessage();
@@ -609,7 +617,7 @@ void AuthDialog::onBiometricButtonClicked()
     //当前没有设备，让用户选择设备
     if(!m_deviceInfo)
     {
-   	if(m_deviceCount == 1)
+        if(m_deviceCount == 1)
         {
             DeviceList deviceList = m_biometricProxy->GetDevList();
             m_deviceInfo = deviceList.at(0);
