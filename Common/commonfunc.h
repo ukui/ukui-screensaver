@@ -27,6 +27,7 @@
 bool ispicture(QString filepath);
 QString getSystemVersion();
 QString getSystemDistrib();
+bool getUseFirstDevice();
 
 class commonFunc
 {

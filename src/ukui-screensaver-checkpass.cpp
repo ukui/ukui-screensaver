@@ -46,8 +46,7 @@ readString(int fd)
     if(readData(fd, &length, sizeof(length)) <= 0)
         return NULL;
     if(length <= 0)
-        return NULL;
-
+	length = 0;
     char *value = (char *)malloc(sizeof(char) * (length + 1));
     readData(fd, value, length);
     value[length] = '\0';

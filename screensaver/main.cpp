@@ -27,6 +27,8 @@
 #include <QVariant>
 #include <QCommandLineParser>
 #include <X11/Xlib.h>
+#include <sys/prctl.h>
+#include <signal.h>
 
 
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
@@ -38,7 +40,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
     QApplication a(argc, argv);
-	
+    prctl(PR_SET_PDEATHSIG, SIGHUP);	
     //加载翻译文件
     QString locale = QLocale::system().name();
     QTranslator translator;
