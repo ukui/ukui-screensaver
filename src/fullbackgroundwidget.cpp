@@ -313,8 +313,6 @@ void FullBackgroundWidget::mousePressEvent(QMouseEvent *e)
     if(screenStatus & SCREEN_SAVER)
     {
         ScreenSaver *saver = configuration->getScreensaver();
-        if(saver->path == "/usr/lib/ukui-screensaver/ukui-screensaver-default")
-               return ;
         clearScreensavers();
     }
 }
@@ -564,8 +562,6 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
     if(screenStatus & SCREEN_SAVER)
     {
         ScreenSaver *saver = configuration->getScreensaver();
-        if(saver->path == "/usr/lib/ukui-screensaver/ukui-screensaver-default")
-               return ;
         if(screenStatus & SCREEN_SAVER)
         {
             clearScreensavers();

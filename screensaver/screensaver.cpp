@@ -302,6 +302,7 @@ void Screensaver::initUI()
         vboxFrame->setVisible(!vboxFrame->isVisible());
 
     });
+    settingsButton->hide();
 
 
     //设为壁纸按钮
