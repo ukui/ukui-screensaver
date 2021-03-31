@@ -39,7 +39,7 @@ public:
     void setType(QLineEdit::EchoMode type = QLineEdit::Password);
     void startWaiting();
     void stopWaiting();
-    void setEnabled(bool enabled);
+    //void setEnabled(bool enabled);
 
 protected:
     void resizeEvent(QResizeEvent *) Q_DECL_OVERRIDE;

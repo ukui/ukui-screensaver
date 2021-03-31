@@ -224,9 +224,11 @@ void IconEdit::updatePixmap()
     m_iconButton->setIcon(QIcon(m_waitingPixmap));
 }
 
+/*
 void IconEdit::setEnabled(bool enabled)
 {
     m_edit->setAttribute(Qt::WA_InputMethodEnabled, false);
     m_edit->setEnabled(enabled);
     m_iconButton->setEnabled(enabled);
 }
+*/

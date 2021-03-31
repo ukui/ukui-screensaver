@@ -215,7 +215,7 @@ void AuthDialog::onShowMessage(const QString &message, Auth::MessageType type)
 {
     qDebug()<<message;
     m_messageLabel->setText(message);
-    stopWaiting();
+    //stopWaiting();
 }
 
 void AuthDialog::pamBioSuccess()
@@ -287,7 +287,7 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
 
 void AuthDialog::onAuthComplete()
 {
-
+    stopWaiting();
     if(auth->isAuthenticated())
     {
         if(usebindstarted){
