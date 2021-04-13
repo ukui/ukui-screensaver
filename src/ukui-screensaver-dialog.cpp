@@ -129,11 +129,15 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
-
+	
     qunsetenv("QT_IM_MODULE");
     //signal(SIGTERM,handler);
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
+    
+    QDesktopWidget *desktop = QApplication::desktop();
+    if(desktop->geometry().width()<=0 || desktop->geometry().height()<=0)
+        return 0;
 
     //命令行参数解析
     QCommandLineParser parser;

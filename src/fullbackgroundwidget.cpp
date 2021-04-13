@@ -155,7 +155,10 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
             this, &FullBackgroundWidget::onDesktopResized);
     connect(desktop, &QDesktopWidget::workAreaResized,
             this, &FullBackgroundWidget::onDesktopResized);
-
+    connect(desktop, &QDesktopWidget::primaryScreenChanged,
+            this, &FullBackgroundWidget::onDesktopResized);
+    connect(desktop, &QDesktopWidget::screenCountChanged,
+            this, &FullBackgroundWidget::onDesktopResized);
 
     QDBusInterface *iface = new QDBusInterface("org.freedesktop.login1",
                                                "/org/freedesktop/login1",
