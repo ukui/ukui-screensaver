@@ -347,7 +347,13 @@ void LockWidget::resizeEvent(QResizeEvent *event)
    	 usersMenu->move(width() - x , \
                     height() - y - usersMenu->height() - 5);
     }
+    
+    if(powermanager){
+        powermanager->setGeometry((width()-ITEM_WIDTH*5)/2,
+                                  (height()-ITEM_HEIGHT)/2,
+                                  ITEM_WIDTH*5,ITEM_HEIGHT);
 
+    }
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
 }
 
