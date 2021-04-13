@@ -174,6 +174,9 @@ int main(int argc, char *argv[])
         a.setStyleSheet(qssFile.readAll());
     }
     qssFile.close();
+    
+    window->show();
+    window->activateWindow();
 
     if(parser.isSet(lockOption))
     {
@@ -196,9 +199,6 @@ int main(int argc, char *argv[])
         window->onBlankScreensaver();
     }
 
-    window->show();
-    window->activateWindow();
-	
     QString username = getenv("USER");
     int uid = getuid();
     QDBusInterface *interface = new QDBusInterface("cn.kylinos.Kydroid2",
