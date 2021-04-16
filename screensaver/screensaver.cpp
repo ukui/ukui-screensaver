@@ -29,10 +29,15 @@
 #include <QKeyEvent>
 #include <QSplitterHandle>
 #include <QCursor>
+#include <QColor>
+#include <QPalette>
 #include <QDateTime>
 #include <QLayout>
+#include <QStringList>
 #include <QVBoxLayout>
 #include <QDir>
+#include <QByteArray>
+#include <QImageReader>
 #include <QHBoxLayout>
 #include <QX11Info>
 #include <QDBusInterface>
@@ -56,20 +61,42 @@ Screensaver::Screensaver(QWidget *parent):
   flag(0),
   hasChanged(false),
   background(""),
+  configuration(SCConfiguration::instance()),
   autoSwitch(nullptr),
   vboxFrame(nullptr),
+  sleepTime(nullptr),
+  lastPath(""),
+  currentPath(""),
+  switchTimer(nullptr),
+  cycleTime(300),
+  timer(nullptr),
+  isAutoSwitch(false),
+  isCustom(false),
+  backgroundPath(""),
+  isShowRestTime(true),
+  myTextLabel(nullptr),
+  myTextWidget(nullptr),
   m_timer(nullptr)
 {
     installEventFilter(this);
+
+    qsrand(time(NULL));
+
+    isCustom        =  configuration->getIsCustom();
+    if(isCustom){
+        cycleTime       =  configuration->getCycleTime();
+        isAutoSwitch    =  configuration->getAutoSwitch();
+        backgroundPath  =  configuration->getBackgroundPath();
+        isShowRestTime  =  configuration->getShowRestTime();
+        textIsCenter    =  configuration->getTextIsCenter();
+        myText          =  configuration->getMyText();
+    }
+
     setUpdateCenterWidget();
     initUI();
     m_background = new MBackground();
 
-    settings = new QGSettings("org.mate.background","",this);
-    defaultBackground = settings->get("picture-filename").toString();
-
-    QString backgroundFile = defaultBackground;
-    backgroundFile = getDefaultBackground(backgroundFile);
+    QString backgroundFile = configuration->getDefaultBackground(); 
     background = QPixmap(backgroundFile);
 
     QList<QLabel*> labelList = this->findChildren<QLabel *>();
@@ -79,7 +106,7 @@ Screensaver::Screensaver(QWidget *parent):
     }
 
     setUpdateBackground();
-
+    connectSingles();
 }
 
 Screensaver::~Screensaver()
@@ -87,24 +114,114 @@ Screensaver::~Screensaver()
 
 }
 
-QString Screensaver::getDefaultBackground(QString background)
+void Screensaver::connectSingles()
 {
-    if(ispicture(background))
-        return background;
-    
-    return "/usr/share/backgrounds/warty-final-ubuntukylin.jpg";
+    connect(configuration, &SCConfiguration::autoSwitchChanged,
+            this, &Screensaver::autoSwitchChanged);
+    connect(configuration, &SCConfiguration::backgroundPathChanged,
+            this, &Screensaver::backgroundPathChanged);
+    connect(configuration, &SCConfiguration::cycleTimeChanged,
+            this, &Screensaver::cycleTimeChanged);
+    connect(configuration, &SCConfiguration::myTextChanged,
+            this, &Screensaver::myTextChanged);
+    connect(configuration, &SCConfiguration::showRestTimeChanged,
+            this, &Screensaver::showRestTimeChanged);
+    connect(configuration, &SCConfiguration::textIsCenterChanged,
+            this, &Screensaver::textIsCenterChanged);
+}
+
+void Screensaver::autoSwitchChanged(bool isSwitch)
+{
+    isAutoSwitch = isSwitch;
+    if(!isCustom)
+        return ;
+    setUpdateBackground();
+}
+
+void Screensaver::backgroundPathChanged(QString path)
+{
+    backgroundPath  = path;
+    if(!isCustom)
+        return ;
+    stopSwitchImages();
+    startSwitchImages();
+}
+
+void Screensaver::cycleTimeChanged(int cTime)
+{
+    cycleTime = cTime;
+    if(!isCustom)
+        return ;
+    stopSwitchImages();
+    startSwitchImages();
+}
+
+void Screensaver::myTextChanged(QString text)
+{
+    if(text == "" || !isCustom)
+        return ;
+
+    myText = text;
+
+    if(!isCustom)
+        return ;
+    if(textIsCenter && centerWidget){
+        if(centerlabel1)
+            centerlabel1->setText(myText);
+        if(centerlabel2){
+            centerlabel2->setText("");
+            centerlabel2->hide();
+        }
+        if(authorlabel)
+            authorlabel = new QLabel("");
+        centerWidget->adjustSize();
+
+        centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
+                                  centerWidget->width(),centerWidget->height());
+
+        if((height()-centerWidget->height())/2 < timeLayout->y() + timeLayout->height())
+            centerWidget->setGeometry((width()-centerWidget->width())/2,timeLayout->y() + timeLayout->height(),
+                                      centerWidget->width(),centerWidget->height());
+    }else{
+        setRandomText();
+        setRandomPos();
+    }
+}
+
+void Screensaver::showRestTimeChanged(bool isShow)
+{
+    isShowRestTime = isShow;
+    if(!isCustom)
+        return;
+
+    setSleeptime(isShowRestTime);
+}
+
+void Screensaver::textIsCenterChanged(bool isCenter)
+{
+    textIsCenter = isCenter;
+    if(!isCustom)
+        return ;
+
+    if(isCenter){
+        if(myTextWidget)
+            myTextWidget->hide();
+        if(!centerWidget){
+            setCenterWidget();
+            resize(width(),height());
+        }
+        else
+            centerWidget->show();
+    }else{
+        if(centerWidget)
+            centerWidget->hide();
+        setRandomText();
+        setRandomPos();
+    }
 }
 
 bool Screensaver::eventFilter(QObject *obj, QEvent *event)
 {
-    /*	
-    if(event->type() == 6){
-        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-        if(keyEvent->key() ==Qt::Key_Q || keyEvent->key() == Qt::Key_Escape){
-            qApp->quit(); //需要 #include <QApplication> 头文件
-        }
-    }
-    */ 
     if(obj == this){
         if(event->type()==QEvent::MouseButtonPress){
             XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
@@ -118,10 +235,13 @@ bool Screensaver::eventFilter(QObject *obj, QEvent *event)
 void Screensaver::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
+
     painter.drawPixmap(0,0,this->width(),this->height(),background);
     painter.setBrush(QColor(0,0,0,178));
     /*这里是为了不显示笔的线条*/
     painter.drawRect(-1,-1,this->width()+1,this->height()+1);
+
+
 }
 
 void Screensaver::resizeEvent(QResizeEvent */*event*/)
@@ -160,7 +280,7 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
     timeLayout->setGeometry(x,y,timeLayout->geometry().width(),timeLayout->geometry().height());
 
     if(sleepTime){
-        x = this->width() - sleepTime->geometry().width() - 26*scale;
+        x =  26*scale;
         y = this->height() - sleepTime->geometry().height() - 26*scale;
         sleepTime->setGeometry(x,y,sleepTime->geometry().width(),sleepTime->geometry().height());
     }
@@ -174,11 +294,11 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
                                   centerWidget->width(),centerWidget->height());
     }
 
-    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
-         ubuntuKylinlogo->setGeometry(40*scale,40*scale,107*scale,41*scale);
-    }else{
-         ubuntuKylinlogo->setGeometry(40*scale,40*scale,127*scale,42*scale);
-    }
+//    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
+//         ubuntuKylinlogo->setGeometry(40*scale,40*scale,107*scale,41*scale);
+//    }else{
+//         ubuntuKylinlogo->setGeometry(40*scale,40*scale,127*scale,42*scale);
+//    }
 
 
     if(settingsButton);
@@ -188,6 +308,31 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
         vboxFrame->setGeometry(width() - vboxFrame->width() - 40*scale,
                                 settingsButton->geometry().bottom() + 12*scale,
                                 vboxFrame->width(),vboxFrame->height());
+    if(myTextWidget)
+        setRandomPos();
+}
+
+void Screensaver::setRandomPos()
+{
+    myTextWidget->adjustSize();
+    int x1 = 10;
+    int x2 = width() - 10 - myTextWidget->width();
+    int y1 = timeLayout->geometry().bottom() + 10;
+    int y2;
+    if(sleepTime)
+    	y2 = sleepTime->geometry().top() - myTextWidget->height() - 10;
+    else
+ 	y2 = geometry().bottom() - myTextWidget->height() - 10;
+
+    int x = 0;
+    int y = 0;
+    if(x2 > x1)
+        x = qrand()%(x2 - x1) + x1;
+    if(y2 > y1)
+        y = qrand()%(y2 - y1) + y1;
+
+    myTextWidget->move(x,y);
+
 }
 
 void Screensaver::setUpdateCenterWidget()
@@ -227,6 +372,57 @@ void Screensaver::setUpdateCenterWidget()
     qsettings->setIniCodec(QTextCodec::codecForName("UTF-8"));
 }
 
+void Screensaver::startSwitchImages()
+{
+    qDebug() << "ScreenSaver::startSwitchImages";
+    QFileInfo fileInfo(backgroundPath);
+    imagePaths.clear();
+    if(fileInfo.isFile())
+        return;
+    QList<QByteArray> formats = QImageReader::supportedImageFormats();
+    if(fileInfo.isDir()) {
+        QDir dir(backgroundPath);
+        QStringList files = dir.entryList(QDir::Files | QDir::Readable);
+        for(QString file : files) {
+            fileInfo.setFile(file);
+            QString suffix = fileInfo.suffix();
+            if(formats.contains(suffix.toUtf8()))
+                imagePaths.push_back(backgroundPath + "/" + file);
+        }
+        if(!imagePaths.empty()) {
+            switchTimer = new QTimer(this);
+            connect(switchTimer, &QTimer::timeout, this, [&]{
+                int index = qrand() % imagePaths.count();
+                background  = QPixmap(imagePaths.at(index));
+                repaint();
+            });
+            background  = QPixmap(imagePaths.at(0));
+            switchTimer->start(cycleTime * 1000);
+            repaint();
+        }
+    }
+}
+
+void Screensaver::stopSwitchImages()
+{
+    if(switchTimer && switchTimer->isActive())
+        switchTimer->stop();
+}
+
+void Screensaver::onBackgroundChanged()
+{
+    opacity = 1.0;
+    fadeTimer = new QTimer(this);
+    connect(fadeTimer, &QTimer::timeout, this, [&]{
+        opacity -= 0.1;
+        if(opacity <= 0)
+            fadeTimer->stop();
+        else
+            repaint();
+
+    });
+    fadeTimer->start(50);
+}
 void Screensaver::updateCenterWidget(int index)
 {
     if(!centerWidget )
@@ -256,11 +452,11 @@ void Screensaver::updateCenterWidget(int index)
     
     centerWidget->adjustSize();
     centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
-                          centerWidget->width(),centerWidget->height());
+                              centerWidget->width(),centerWidget->height());
 
     if((height()-centerWidget->height())/2 < timeLayout->y() + timeLayout->height())
         centerWidget->setGeometry((width()-centerWidget->width())/2,timeLayout->y() + timeLayout->height(),
-                              centerWidget->width(),centerWidget->height());
+                                  centerWidget->width(),centerWidget->height());
 
     qsettings->endGroup();
 
@@ -275,22 +471,29 @@ void Screensaver::initUI()
     qssFile.close();
 
     setDatelayout();
-    setSleeptime();
-  
-    setCenterWidget();
 
-    //logo
-    ubuntuKylinlogo = new QLabel(this);
-    ubuntuKylinlogo->setObjectName("ubuntuKylinlogo");
-    ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
-    ubuntuKylinlogo->adjustSize();
-    ubuntuKylinlogo->setScaledContents(true);
+    if(isCustom)
+        setSleeptime(isShowRestTime);
+    else
+        setSleeptime(true);
 
-    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
-        ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo-kylin.svg"));
+    if(textIsCenter || myText == ""){
+        setCenterWidget();
     }else{
-	ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
+        setRandomText();
     }
+    //logo
+//    ubuntuKylinlogo = new QLabel(this);
+//    ubuntuKylinlogo->setObjectName("ubuntuKylinlogo");
+//    ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
+//    ubuntuKylinlogo->adjustSize();
+//    ubuntuKylinlogo->setScaledContents(true);
+
+//    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
+//        ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo-kylin.svg"));
+//    }else{
+//        ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
+//    }
 
     //设置按钮
     settingsButton = new QPushButton(this);
@@ -312,7 +515,7 @@ void Screensaver::initUI()
     WallpaperButton->setMinimumWidth(160);
     WallpaperButton->setIcon(QIcon(":/assets/wallpaper.svg"));
     WallpaperButton->setText(tr("Set as desktop wallpaper"));
-    connect(WallpaperButton,SIGNAL(clicked()),this,SLOT(setDesktopBackground()));
+    //connect(WallpaperButton,SIGNAL(clicked()),this,SLOTsetDesktopBackground()));
 
     //自动切换
     QFrame *autoSwitch = new QFrame(this);
@@ -325,18 +528,14 @@ void Screensaver::initUI()
 
     checkSwitch = new checkButton(this);
 
-    //判断是否自动切换壁纸
-    defaultSettings = new QGSettings("org.ukui.screensaver-default","",this);
-    isAutoSwitch = defaultSettings->get("automatic-switching-enabled").toBool();
-
     checkSwitch->setAttribute(Qt::WA_DeleteOnClose);
     checkSwitch->setChecked(isAutoSwitch);
-    connect(checkSwitch, &checkButton::checkedChanged, [=](bool checked){
+/*    connect(checkSwitch, &checkButton::checkedChanged, [=](bool checked){
          defaultSettings->set("automatic-switching-enabled",QVariant(checked));
          isAutoSwitch = checked;
          setUpdateBackground();
     });
-
+*/
 
     QHBoxLayout *hlayout = new QHBoxLayout(autoSwitch);
     hlayout->addWidget(autoSwitchLabel);
@@ -366,16 +565,8 @@ void Screensaver::initUI()
 
 void Screensaver::setDatelayout()
 {
-    if(QGSettings::isSchemaInstalled(TIME_TYPE_SCHEMA)){
-        QGSettings *time_type = new QGSettings(TIME_TYPE_SCHEMA);
-        QStringList keys = time_type->keys();
-        if (keys.contains("hoursystem")) {
-                timeType = time_type->get("hoursystem").toInt();
-        }
-        if (keys.contains("date")) {
-                dateType = time_type->get("date").toString();
-        }
-    }
+    timeType = configuration->getTimeType();
+    dateType = configuration->getDateType();
 
     timeLayout = new QWidget(this);
     QVBoxLayout *vtimeLayout = new QVBoxLayout(timeLayout);
@@ -429,18 +620,30 @@ void Screensaver::setDatelayout()
     timeLayout->adjustSize();
 }
 
-void Screensaver::setSleeptime()
+void Screensaver::setSleeptime(bool Isshow)
 {
-    sleepTime = new SleepTime(this);
+    if(!sleepTime)
+        sleepTime = new SleepTime(this);
+
     sleepTime->adjustSize();
-     updateDate();
+    if(Isshow){
+        updateDate();
+        sleepTime->show();
+    }
+    else if(timer){
+        sleepTime->hide();
+        timer->stop();
+    }
 }
 
 void Screensaver::updateDate()
 {
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
+    if(!timer){
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
+    }
     timer->start(1000);
+    updateTime();
 }
 
 void Screensaver::updateTime()
@@ -460,7 +663,7 @@ void Screensaver::updateTime()
         if(!sleepTime->setTime(QDateTime::currentDateTime())){
             sleepTime->hide();
             delete sleepTime; 
-	    sleepTime=NULL;
+            sleepTime=NULL;
         }
     }
 }
@@ -468,16 +671,11 @@ void Screensaver::updateTime()
 void Screensaver::setUpdateBackground()
 {
     if(isAutoSwitch){
-        if(!m_timer){
-            m_timer = new QTimer(this);
-            connect(m_timer, SIGNAL(timeout()), this, SLOT(updateBackground()));
-        }
-
-        m_timer->start(300000);
+        startSwitchImages();
     }
     else{
-        if(m_timer && m_timer->isActive())
-            m_timer->stop();
+        stopSwitchImages();
+        repaint();
     }
 }
 
@@ -489,7 +687,25 @@ void Screensaver::updateBackground()
         repaint();
         hasChanged=true;
     }
-    updateCenterWidget(-1);
+   // updateCenterWidget(-1);
+}
+
+void Screensaver::setRandomText()
+{
+    if(!myTextWidget){
+        myTextWidget = new QWidget(this);
+        QHBoxLayout *layout = new QHBoxLayout(myTextWidget);
+        myTextLabel = new QLabel(myTextWidget);
+        myTextLabel->setObjectName("myText");
+
+        myTextLabel->setMaximumWidth(800);
+        myTextLabel->setContentsMargins(20,10,20,10);
+        layout->addWidget(myTextLabel);
+    }
+
+    myTextLabel->setText(myText);
+    myTextWidget->adjustSize();
+    myTextWidget->setVisible(true);
 }
 
 void Screensaver::setCenterWidget()
@@ -512,7 +728,13 @@ void Screensaver::setCenterWidget()
         index = 1;
 
     qsettings->beginGroup(QString::number(index));
-    if(qsettings->contains("OL")){
+    if(isCustom && !myText.isEmpty()){
+        centerlabel1 = new QLabel(myText);
+        centerlabel2 = new QLabel("");
+        centerlabel2->hide();
+        authorlabel = new QLabel("");
+    }
+    else if(qsettings->contains("OL")){
         centerlabel1 = new QLabel(qsettings->value("OL").toString());
         centerlabel2 = new QLabel("");
         centerlabel2->hide();
@@ -544,11 +766,13 @@ void Screensaver::setCenterWidget()
     layout->addWidget(line);
     layout->addWidget(authorlabel);
 
-    adjustSize();
+    centerWidget->adjustSize();
+    centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
+                              centerWidget->width(),centerWidget->height());
     centerWidget->setVisible(true);
-
 }
 
+/*
 void Screensaver::setDesktopBackground()
 {
     vboxFrame->hide();
@@ -595,4 +819,4 @@ void Screensaver::setDesktopBackground()
     if (!msg.errorMessage().isEmpty())
         qDebug() << "update user background file error: " << msg.errorMessage();
 
-}
+}*/

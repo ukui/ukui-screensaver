@@ -22,6 +22,9 @@
 #include <QList>
 #include <QString>
 #include <QGSettings>
+#include <QTimer>
+#include <QStringList>
+#include "scconfiguration.h"
 
 class MBackground
 {
@@ -37,7 +40,6 @@ private:
 
     QStringList list;
     int currentIndex;
-
 };
 
 #endif // MBACKGROUND_H

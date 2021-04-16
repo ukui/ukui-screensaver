@@ -106,11 +106,10 @@ int BiometricProxy::GetUserDevCount(int uid)
 
     return deviceList.count();
 }
-#include <unistd.h>
+
 int BiometricProxy::GetUserDevFeatureCount(int uid,int drvid)
 {
     StopOps(drvid);
-  //  sleep(1);
     QDBusMessage FeatureResult = call(QStringLiteral("GetFeatureList"),drvid,uid,0,-1);
     if(FeatureResult.type() == QDBusMessage::ErrorMessage)
     {

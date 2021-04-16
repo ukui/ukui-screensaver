@@ -79,13 +79,13 @@ void AuthDialog::startAuth()
 
 void AuthDialog::stopAuth()
 {
-    //这里只是为了在显示屏幕保护程序时停止生物识别认证
-
     if(m_biometricAuthWidget && m_biometricAuthWidget->isVisible())
     {
         biometricIsStopped = true;
         m_biometricAuthWidget->stopAuth();
-    }
+    }   
+
+    auth->stopAuth();
 }
 
 QPixmap AuthDialog::PixmapToRound(const QPixmap &src, int radius)

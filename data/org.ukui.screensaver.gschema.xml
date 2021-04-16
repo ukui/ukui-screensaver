@@ -5,6 +5,7 @@
     <value nick="single" value="2"/>
     <value nick="image" value="3"/>
     <value nick="default-ukui" value="4"/>
+    <value nick="default-ukui-custom" value="5"/>
   </enum>
   <enum id="org.ukui.screensaver.TransitionEffect">
     <value nick="none" value="0"/>
@@ -15,6 +16,31 @@
       <default>false</default>
       <summary>Automatic switching background</summary>
       <description>Set this to TRUE to activate the automatic switching background.</description>
+    </key>
+    <key name="show-rest-time" type="b">
+      <default>true</default>
+      <summary>show rest time on screensaver</summary>
+      <description>Set this to TRUE to show rest time on screensaver.</description>
+    </key>
+    <key name="mytext" type="s">
+      <default>""</default>
+      <summary>set user text on screensaver.</summary>
+      <description>set user text on screensaver.</description>
+    </key>
+    <key name="background-path" type="s">
+      <default>"/usr/share/backgrounds"</default>
+      <summary>set background path on screensaver.</summary>
+      <description>set background path on screensaver.</description>
+    </key>
+    <key name="text-is-center" type="b">
+      <default>true</default>
+      <summary>set  text postion</summary>
+      <description>Set this to TRUE to show text on screensaver center.</description>
+    </key>
+    <key name="cycle-time" type="i">
+      <default>300</default>
+      <summary>Time to update background on ukui-screensavaer-default</summary>
+      <description>The number of seconds to change screensaver background.</description>
     </key>
   </schema>
   <schema id="org.ukui.screensaver" path="/org/ukui/screensaver/">

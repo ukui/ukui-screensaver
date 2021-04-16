@@ -20,6 +20,10 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QMimeDatabase>
+#include <QByteArray>
+#include <QImageReader>
+#include <QStringList>
+
 #include <ctime>
 #include "mbackground.h"
 
@@ -29,7 +33,6 @@ MBackground::MBackground():
     currentIndex(0)
 {
     getAllPixmap();
-
 }
 
 QString MBackground::getCurrent()

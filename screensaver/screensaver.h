@@ -16,8 +16,8 @@
  *
 **/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef SCREENSAVER_H
+#define SCREENSAVER_H
 #include <QMainWindow>
 #include <QWidget>
 #include <QLabel>
@@ -32,6 +32,7 @@
 #include "chinesedate.h"
 #include "mbackground.h"
 #include "checkbutton.h"
+#include "scconfiguration.h"
 class Screensaver : public QWidget
 {
     Q_OBJECT
@@ -43,58 +44,81 @@ public:
 private:
     void initUI();
     void setDatelayout();
-    void setSleeptime();
+    void setSleeptime(bool Isshow);
     void setCenterWidget();
     void updateDate();
     void setUpdateBackground();
     void setUpdateCenterWidget();
-    QString getDefaultBackground(QString background);
+    void startSwitchImages();
+    void stopSwitchImages();
+    void onBackgroundChanged();
+    void setRandomText();
+    void setRandomPos();
+    void connectSingles();
+   
+    int                 imageIndex;
+    QTimer              *switchTimer;
+    QTimer              *fadeTimer;
+    QStringList         imagePaths;
+    QString             backgroundPath;
+    QString             lastPath;
+    QString             currentPath;
+    int                 cycleTime;
+    float               opacity;
+    QPixmap             lastPixmap;
+    QPixmap             currentPixmap;
+    bool                isCustom;
+    bool                isShowRestTime;
+    bool                textIsCenter;
+    QString             myText;
+    QLabel              *myTextLabel;
 
+    SCConfiguration     *configuration;
 
-    QLabel *dateOfWeek;
-    QLabel *dateOfLocaltime;
-    QLabel *dateOfDay;
-    QLabel *dateOfLunar;
+    QWidget             *myTextWidget;
+    QLabel              *dateOfWeek;
+    QLabel              *dateOfLocaltime;
+    QLabel              *dateOfDay;
+    QLabel              *dateOfLunar;
 
-    QWidget *centerWidget;
+    QWidget             *centerWidget;
 
-    QLabel *ubuntuKylinlogo;
+    QLabel              *ubuntuKylinlogo;
 
-    QWidget *timeLayout;
-    SleepTime *sleepTime;
-    QTimer *timer;
-    ChineseDate *date;
+    QWidget             *timeLayout;
+    SleepTime           *sleepTime;
+    QTimer              *timer;
+    ChineseDate         *date;
 
-    QGSettings *settings;
-    QPixmap background;
-    QString defaultBackground;
+    QPixmap             background;
+    QString             defaultBackground;
 
-    QPushButton *escButton;
-    QPushButton *settingsButton;
-    QPushButton *WallpaperButton;
-    QWidget *buttonWidget;
-    QSettings *qsettings;
+    QPushButton         *escButton;
+    QPushButton         *settingsButton;
+    QPushButton         *WallpaperButton;
+    QWidget             *buttonWidget;
+    QSettings           *qsettings;
 
-    MBackground *m_background;
-    QString m_backgroundPath;
+    MBackground         *m_background;
+    QString             m_backgroundPath;
 
-    QLabel *centerlabel1;
-    QLabel *centerlabel2;
-    QLabel *authorlabel;
+    QLabel              *centerlabel1;
+    QLabel              *centerlabel2;
+    QLabel              *authorlabel;
 
-    checkButton *checkSwitch;
-    QLabel *autoSwitchLabel;
-    QFrame *autoSwitch;
+    checkButton         *checkSwitch;
+    QLabel              *autoSwitchLabel;
+    QFrame              *autoSwitch;
 
-    QFrame *vboxFrame;
-    bool isAutoSwitch;
-    QTimer *m_timer;
-    QGSettings *defaultSettings;
+    QFrame              *vboxFrame;
+    bool                isAutoSwitch;
+    QTimer              *m_timer;
 
-    int flag;
-    bool hasChanged;
-    int timeType;
-    QString dateType;
+    int                 flag;
+    bool                hasChanged;
+    int                 timeType;
+    QString             dateType;
+
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);
@@ -102,9 +126,15 @@ protected:
 
 private Q_SLOTS:
     void updateTime();
-    void setDesktopBackground();
+    //void setDesktopBackground();
     void updateBackground();
     void updateCenterWidget(int index);
+    void autoSwitchChanged(bool iswitch);
+    void backgroundPathChanged(QString path);
+    void cycleTimeChanged(int cTime);
+    void myTextChanged(QString text);
+    void showRestTimeChanged(bool isShow);
+    void textIsCenterChanged(bool isCenter);
 };
 
 #endif // MAINWINDOW_H

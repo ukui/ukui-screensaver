@@ -28,7 +28,8 @@ enum SaverMode
     SAVER_RANDOM,
     SAVER_SINGLE,
     SAVER_IMAGE,
-    SAVER_DEFAULE
+    SAVER_DEFAULT,
+    SAVER_DEFAULT_CUSTOM
 };
 
 enum TransitionEffect

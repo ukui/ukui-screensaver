@@ -26,6 +26,7 @@ qt5_wrap_cpp(screensaver_SRC
     chinesedate.h
     screensaver.h
     mbackground.h
+    scconfiguration.h
     sleeptime.h
     )
 set(screensaver_SRC
@@ -34,6 +35,7 @@ set(screensaver_SRC
     chinesedate.cpp
     mbackground.cpp
     screensaver.cpp
+    scconfiguration.cpp
     sleeptime.cpp
     )
 add_executable(ukui-screensaver-default ${screensaver_SRC})

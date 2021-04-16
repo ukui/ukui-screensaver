@@ -115,7 +115,7 @@ void Configuration::onConfigurationChanged(QString key)
 /* Get the executable path of xscreensaver */
 ScreenSaver *Configuration::getScreensaver()
 {
-    QStringList modeStr{"blank-only", "random", "single", "image","default-ukui"};
+    QStringList modeStr{"blank-only", "random", "single", "image","default-ukui","default-ukui-custom"};
     ScreenSaver *saver = new ScreenSaver;
     int index = modeStr.indexOf(mode);
     saver->mode = SaverMode(index);
@@ -156,7 +156,10 @@ ScreenSaver *Configuration::getScreensaver()
         saver->path = QDir::homePath() + "/" + QStandardPaths::displayName(QStandardPaths::PicturesLocation);
         break;
     }
-    case SAVER_DEFAULE:
+    case SAVER_DEFAULT:
+        saver->path = "/usr/lib/ukui-screensaver/ukui-screensaver-default";
+        break;
+    case SAVER_DEFAULT_CUSTOM:
         saver->path = "/usr/lib/ukui-screensaver/ukui-screensaver-default";
         break;
     default:

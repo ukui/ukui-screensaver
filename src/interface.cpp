@@ -141,7 +141,7 @@ void Interface::onShowScreensaver()
 
     qDebug() << "lock and show screensaver";
     lockState = false;
-    QString cmd = QString("/usr/bin/ukui-screensaver-dialog --screensaver");
+    QString cmd = QString("/usr/bin/ukui-screensaver-dialog --lock-screensaver");
     qDebug() << cmd;
 
     process.start(cmd);

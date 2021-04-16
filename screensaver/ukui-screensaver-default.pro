@@ -29,13 +29,15 @@ SOURCES += \
     screensaver.cpp \
     sleeptime.cpp \
     chinesedate.cpp \
-    mbackground.cpp
+    mbackground.cpp \
+    scconfiguration.cpp
 
 HEADERS += \
     screensaver.h \
     sleeptime.h \
     chinesedate.h \
-    mbackground.h
+    mbackground.h \
+    scconfiguration.h
 
 TRANSLATIONS = ../i18n_ts/zh_CN.ts \
             ../i18n_ts/ru.ts \

@@ -37,6 +37,11 @@ QLabel#authorLabel {
     font-size:28px;
     color: #ffffff;
 }
+QLabel#myText{
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 90%);
+    color: #000000;
+}
 QPushButton{
     background:rgba(255,255,255,0.12);
 }
