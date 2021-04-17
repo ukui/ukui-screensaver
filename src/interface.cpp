@@ -211,6 +211,20 @@ void Interface::onPrepareForSleep(bool sleep)
     }
 }
 
+void Interface::ShowScreensaver()
+{
+    if(process.state() != QProcess::NotRunning)
+        return ;
+
+    qDebug() << "lock and show screensaver";
+    lockState = false;
+    QString cmd = QString("/usr/bin/ukui-screensaver-dialog --screensaver");
+    qDebug() << cmd;
+
+    process.start(cmd);
+    emitLockState(true);
+}
+
 void Interface::inhibit()
 {
     if (m_inhibitFileDescriptor.isValid()) {

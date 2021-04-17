@@ -9,6 +9,8 @@
     </signal>
     <method name="Lock">
     </method>
+    <method name="ShowScreensaver">
+    </method>
     <method name="UnLock">
     </method>
     <method name="SetLockState">

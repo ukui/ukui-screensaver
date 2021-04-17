@@ -45,6 +45,7 @@ public Q_SLOTS:
      */
     void Lock();
     void UnLock();
+    void ShowScreensaver();
     bool GetLockState();
     void SetLockState();
     void onSessionIdleReceived();
@@ -52,7 +53,7 @@ public Q_SLOTS:
     void onShowBlankScreensaver();
     void onNameLost(const QString&);
     void onPrepareForSleep(bool sleep);
-
+   
 private:
     bool checkExistChild();
     void inhibit();

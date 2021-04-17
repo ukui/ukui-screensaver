@@ -49,13 +49,16 @@ int main(int argc, char **argv)
     
     QCommandLineOption unlockOption({"u", QStringLiteral("unlock")},
                                  QCoreApplication::translate("main", "unlock the screen saver"));
+    QCommandLineOption screensaverOption({"s", QStringLiteral("screensaver")},
+                                 QCoreApplication::translate("main", "show the screensaver"));
     
     parser.addOption(lockOption);
     parser.addOption(queryOption);
     parser.addOption(unlockOption);
+    parser.addOption(screensaverOption);
     parser.process(a);
 
-    if(!parser.isSet(lockOption) && !parser.isSet(queryOption) && !parser.isSet(unlockOption))
+    if(!parser.isSet(lockOption) && !parser.isSet(queryOption) && !parser.isSet(unlockOption) && !parser.isSet(screensaverOption))
         return -1;
 
     QDBusInterface *interface = new QDBusInterface(SS_DBUS_SERVICE,
@@ -81,6 +84,10 @@ int main(int argc, char **argv)
    	QDBusMessage msg = interface->call("UnLock");
         if(msg.type() == QDBusMessage::ErrorMessage)
             qDebug() << msg.errorMessage(); 
+    }else if(parser.isSet(screensaverOption)){
+    	QDBusMessage msg = interface->call("ShowScreensaver");
+	if(msg.type() == QDBusMessage::ErrorMessage)
+	    qDebug() << msg.errorMessage();	
     }
     return 0;
 }
