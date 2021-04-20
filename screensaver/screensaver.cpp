@@ -107,6 +107,7 @@ Screensaver::Screensaver(QWidget *parent):
 
     setUpdateBackground();
     connectSingles();
+    setCursor(Qt::BlankCursor);
 }
 
 Screensaver::~Screensaver()

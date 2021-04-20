@@ -142,6 +142,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       monitorWatcher(new MonitorWatcher(this)),
       configuration(new Configuration(this)),
       isLocked(false),
+      isPassed(false),
       lockState(false),
       screenStatus(UNDEFINED)
 {
@@ -457,7 +458,6 @@ void FullBackgroundWidget::clearScreensavers()
 
     qDebug() << "clearScreensavers - screenStatus: " << screenStatus;
 
-
     unsetCursor();
     if(screenStatus == UNDEFINED)
     {
@@ -565,10 +565,10 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
     if(screenStatus & SCREEN_SAVER)
     {
         ScreenSaver *saver = configuration->getScreensaver();
-        if(screenStatus & SCREEN_SAVER)
-        {
+	if(isPassed || saver->path != "/usr/lib/ukui-screensaver/ukui-screensaver-default"){
             clearScreensavers();
-        }
+	}
+	isPassed = true;
     }
 }
 

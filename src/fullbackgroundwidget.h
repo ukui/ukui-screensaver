@@ -91,6 +91,7 @@ private:
     QPixmap             background;
     bool                lockState;
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
+    bool 		isPassed;
 };
 
 #endif // FULLBACKGROUNDWIDGET_H
