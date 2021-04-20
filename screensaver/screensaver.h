@@ -33,6 +33,8 @@
 #include "mbackground.h"
 #include "checkbutton.h"
 #include "scconfiguration.h"
+#include "cyclelabel.h"
+
 class Screensaver : public QWidget
 {
     Q_OBJECT
@@ -126,7 +128,6 @@ protected:
 
 private Q_SLOTS:
     void updateTime();
-    //void setDesktopBackground();
     void updateBackground();
     void updateCenterWidget(int index);
     void autoSwitchChanged(bool iswitch);

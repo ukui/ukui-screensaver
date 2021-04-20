@@ -110,3 +110,10 @@ void SleepTime::setMinute(int minutes)
     list.at(3)->setText(QString::number(min1));
     list.at(4)->setText(QString::number(min2));
 }
+
+void SleepTime::setSmallMode()
+{
+    for(int i = 0;i<5;i++)
+        list.at(i)->setFixedSize(8,8);
+    adjustSize();
+}

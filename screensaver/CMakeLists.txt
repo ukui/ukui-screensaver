@@ -26,6 +26,7 @@ qt5_wrap_cpp(screensaver_SRC
     chinesedate.h
     screensaver.h
     mbackground.h
+    cyclelabel.h
     scconfiguration.h
     sleeptime.h
     )
@@ -35,6 +36,7 @@ set(screensaver_SRC
     chinesedate.cpp
     mbackground.cpp
     screensaver.cpp
+    cyclelabel.cpp
     scconfiguration.cpp
     sleeptime.cpp
     )

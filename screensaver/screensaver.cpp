@@ -158,13 +158,11 @@ void Screensaver::cycleTimeChanged(int cTime)
 
 void Screensaver::myTextChanged(QString text)
 {
-    if(text == "" || !isCustom)
+    if(!isCustom)
         return ;
 
     myText = text;
 
-    if(!isCustom)
-        return ;
     if(textIsCenter && centerWidget){
         if(centerlabel1)
             centerlabel1->setText(myText);
@@ -172,8 +170,10 @@ void Screensaver::myTextChanged(QString text)
             centerlabel2->setText("");
             centerlabel2->hide();
         }
-        if(authorlabel)
-            authorlabel = new QLabel("");
+        if(authorlabel){
+            authorlabel->setText("");
+            authorlabel->hide();
+        }
         centerWidget->adjustSize();
 
         centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
@@ -185,6 +185,8 @@ void Screensaver::myTextChanged(QString text)
     }else{
         setRandomText();
         setRandomPos();
+        if(centerWidget)
+            centerWidget->hide();
     }
 }
 
@@ -267,8 +269,11 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
                 centerWidget->adjustSize();
         }
         flag = 1;
+        if(myTextWidget){
+            myTextLabel->setStyleSheet("font-size:5px;border-radius: 2px;background: rgba(255, 255, 255, 82%);color: #000000;padding: 4px 8px 4px 8px;");
+        }
         if(sleepTime)
-            sleepTime->hide();
+            sleepTime->setSmallMode();
         if(settingsButton)
             settingsButton->hide();
         scale = 0.1;
@@ -322,7 +327,7 @@ void Screensaver::setRandomPos()
     if(sleepTime)
     	y2 = sleepTime->geometry().top() - myTextWidget->height() - 10;
     else
- 	y2 = geometry().bottom() - myTextWidget->height() - 10;
+        y2 = geometry().bottom() - myTextWidget->height() - 10;
 
     int x = 0;
     int y = 0;
@@ -330,7 +335,7 @@ void Screensaver::setRandomPos()
         x = qrand()%(x2 - x1) + x1;
     if(y2 > y1)
         y = qrand()%(y2 - y1) + y1;
-
+	
     myTextWidget->move(x,y);
 
 }
@@ -477,11 +482,16 @@ void Screensaver::initUI()
     else
         setSleeptime(true);
 
+    setCenterWidget();
+    setRandomText();
     if(textIsCenter || myText == ""){
-        setCenterWidget();
+        myTextWidget->hide();
+        centerWidget->show();
     }else{
-        setRandomText();
+        centerWidget->hide();
+        myTextWidget->show();
     }
+
     //logo
 //    ubuntuKylinlogo = new QLabel(this);
 //    ubuntuKylinlogo->setObjectName("ubuntuKylinlogo");
@@ -630,9 +640,11 @@ void Screensaver::setSleeptime(bool Isshow)
         updateDate();
         sleepTime->show();
     }
-    else if(timer){
+    else{
         sleepTime->hide();
-        timer->stop();
+        if(timer){
+            timer->stop();
+        }
     }
 }
 
@@ -695,14 +707,17 @@ void Screensaver::setRandomText()
     if(!myTextWidget){
         myTextWidget = new QWidget(this);
         QHBoxLayout *layout = new QHBoxLayout(myTextWidget);
+        CycleLabel *label = new CycleLabel(this);
+        layout->addWidget(label);
+        layout->setSpacing(16);
         myTextLabel = new QLabel(myTextWidget);
         myTextLabel->setObjectName("myText");
-
+        myTextLabel->setBackgroundRole(QPalette::Base);
+        myTextLabel->setAutoFillBackground(true);
         myTextLabel->setMaximumWidth(800);
-        myTextLabel->setContentsMargins(20,10,20,10);
         layout->addWidget(myTextLabel);
     }
-
+	
     myTextLabel->setText(myText);
     myTextWidget->adjustSize();
     myTextWidget->setVisible(true);
@@ -728,7 +743,7 @@ void Screensaver::setCenterWidget()
         index = 1;
 
     qsettings->beginGroup(QString::number(index));
-    if(isCustom && !myText.isEmpty()){
+    if(isCustom){
         centerlabel1 = new QLabel(myText);
         centerlabel2 = new QLabel("");
         centerlabel2->hide();
@@ -755,15 +770,17 @@ void Screensaver::setCenterWidget()
 
     centerWidget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(centerWidget);
-
-    QPushButton *line =new QPushButton(this);
-    line->setWindowOpacity(0.08);
-    line->setFocusPolicy(Qt::NoFocus);
-    line->setMaximumHeight(1);
-
     layout->addWidget(centerlabel1);
     layout->addWidget(centerlabel2);
-    layout->addWidget(line);
+
+    if(!isCustom){
+        QPushButton *line =new QPushButton(this);
+        line->setWindowOpacity(0.08);
+        line->setFocusPolicy(Qt::NoFocus);
+        line->setMaximumHeight(1);
+        layout->addWidget(line);
+    }
+
     layout->addWidget(authorlabel);
 
     centerWidget->adjustSize();
