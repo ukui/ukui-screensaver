@@ -59,13 +59,9 @@ void checkIslivecd()
     }
     pclose(fp);
 
-    QString filepath = QDir::homePath() + "/Desktop" + "/ubiquity.desktop";
-    QString folderpath = "/cdrom";
+    QString filepath = QDir::homePath() + "/Desktop" + "/kylin-os-installer.desktop";
     QFileInfo file(filepath);
-    QFileInfo folder(folderpath);
     if(!file.exists())
-            return;
-    if(!folder.exists())
             return;
     if(getuid() != 999)
             return;
