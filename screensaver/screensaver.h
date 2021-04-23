@@ -19,6 +19,7 @@
 #ifndef SCREENSAVER_H
 #define SCREENSAVER_H
 #include <QMainWindow>
+#include <QProcess>
 #include <QWidget>
 #include <QLabel>
 #include <QTimer>
@@ -74,6 +75,7 @@ private:
     bool                textIsCenter;
     QString             myText;
     QLabel              *myTextLabel;
+    CycleLabel          *cycleLabel;
 
     SCConfiguration     *configuration;
 
@@ -120,7 +122,7 @@ private:
     bool                hasChanged;
     int                 timeType;
     QString             dateType;
-
+    QProcess		*process;
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);

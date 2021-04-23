@@ -21,9 +21,11 @@
 #include "cyclelabel.h".h"
 
 CycleLabel::CycleLabel(QWidget *parent)
-    :QFrame(parent)
+    :QFrame(parent),
+      m_width(20),
+      m_height(20)
 {
-    this->setFixedSize(QSize(20, 20));
+    this->setFixedSize(QSize(m_width, m_height));
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground, true);
 }
@@ -37,8 +39,16 @@ void CycleLabel::paintEvent(QPaintEvent *){
     drawSlider(&painter);
 }
 
+void CycleLabel::setSize(QSize size)
+{
+    m_width = size.width();
+    m_height = size.height();
+    setFixedSize(size);
+    repaint();
+}
 
-void CycleLabel::drawBg(QPainter *painter){
+void CycleLabel::drawBg(QPainter *painter)
+{
     painter->save();
 
     if (!checked){
@@ -77,9 +87,9 @@ void CycleLabel::drawSlider(QPainter *painter){
     painter->setBrush(QColor("#ffffff"));
 
     //circle in
-    QRect rect(0, 0, width(), height());
-    int sliderWidth = 10;
-    QRect sliderRect(5, 5, sliderWidth, sliderWidth);
+    QRect rect(0, 0, m_width, m_height);
+    int sliderWidth = m_width/2;
+    QRect sliderRect(sliderWidth/2, sliderWidth/2, sliderWidth, sliderWidth);
     painter->drawEllipse(sliderRect);
 
     painter->restore();

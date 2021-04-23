@@ -25,6 +25,7 @@
 #include <QDate>
 #include <QApplication>
 #include <QTextCodec>
+#include <QProcess>
 #include <QDateTime>
 #include <QKeyEvent>
 #include <QSplitterHandle>
@@ -68,6 +69,7 @@ Screensaver::Screensaver(QWidget *parent):
   lastPath(""),
   currentPath(""),
   switchTimer(nullptr),
+  process(nullptr),
   cycleTime(300),
   timer(nullptr),
   isAutoSwitch(false),
@@ -107,7 +109,6 @@ Screensaver::Screensaver(QWidget *parent):
 
     setUpdateBackground();
     connectSingles();
-    setCursor(Qt::BlankCursor);
 }
 
 Screensaver::~Screensaver()
@@ -230,6 +231,13 @@ bool Screensaver::eventFilter(QObject *obj, QEvent *event)
             XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
             XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
             XFlush(QX11Info::display());
+	    /*
+	    if(width() >200 && width() <500)
+	    if(!process){
+	    	process = new QProcess(this);
+	    }
+	    process->start("ukui-screensaver-command -s");
+	    */
         }
     }
     return false;
@@ -272,6 +280,7 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
         flag = 1;
         if(myTextWidget){
             myTextLabel->setStyleSheet("font-size:5px;border-radius: 2px;background: rgba(255, 255, 255, 82%);color: #000000;padding: 4px 8px 4px 8px;");
+            cycleLabel->setSize(QSize(5,5));
         }
         if(sleepTime)
             sleepTime->setSmallMode();
@@ -708,8 +717,8 @@ void Screensaver::setRandomText()
     if(!myTextWidget){
         myTextWidget = new QWidget(this);
         QHBoxLayout *layout = new QHBoxLayout(myTextWidget);
-        CycleLabel *label = new CycleLabel(this);
-        layout->addWidget(label);
+        cycleLabel = new CycleLabel(this);
+        layout->addWidget(cycleLabel);
         layout->setSpacing(16);
         myTextLabel = new QLabel(myTextWidget);
         myTextLabel->setObjectName("myText");
@@ -721,7 +730,10 @@ void Screensaver::setRandomText()
 	
     myTextLabel->setText(myText);
     myTextWidget->adjustSize();
-    myTextWidget->setVisible(true);
+    if(myText != "")
+    	myTextWidget->setVisible(true);
+    else
+	myTextWidget->setVisible(false);
 }
 
 void Screensaver::setCenterWidget()

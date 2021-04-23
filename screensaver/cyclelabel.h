@@ -23,6 +23,7 @@
 #include <QWidget>
 #include <QFrame>
 #include <QPainter>
+#include <QSize>
 #include <QPainterPath>
 #include <QEvent>
 
@@ -31,6 +32,7 @@ class CycleLabel : public QFrame
     Q_OBJECT
 public:
     CycleLabel(QWidget *parent = 0);
+    void setSize(QSize size);
 
 protected:
 
@@ -53,7 +55,8 @@ private:
 
     void drawBg(QPainter *painter);
     void drawSlider(QPainter *painter);
-
+    int m_width;
+    int m_height;
 
 
 };
