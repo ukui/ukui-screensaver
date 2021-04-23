@@ -236,7 +236,8 @@ void FullBackgroundWidget::paintEvent(QPaintEvent *event)
             painter.drawRect(screen->geometry());
         }
 	else{
-            painter.drawPixmap(screen->geometry(), background.scaled(screen->size()));
+            painter.drawPixmap(screen->geometry().x(),screen->geometry().y(),screen->geometry().width(), \
+                               screen->geometry().height()+1, background.scaled(screen->size()));
     	}
     }
 
