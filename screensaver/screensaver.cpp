@@ -352,7 +352,8 @@ void Screensaver::setRandomPos()
 
 void Screensaver::setUpdateCenterWidget()
 {
-    QString lang = qgetenv("LANG");
+    //QString lang = qgetenv("LANG");
+    QString lang = QLocale::system().name();
     QString homePath=qgetenv("HOME");
     QString cwdPath="/usr/share/ukui-screensaver/";
     QString languageDirPath=cwdPath+"language/";
