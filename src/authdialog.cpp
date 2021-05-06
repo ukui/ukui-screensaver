@@ -44,10 +44,13 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     isBioPassed(false),
     m_biometricProxy(nullptr),
     m_biometricAuthWidget(nullptr),
+    m_retryButton(nullptr),
     usebindstarted(false),
     m_biometricDevicesWidget(nullptr),
     pamTally(PamTally::instance(this)),
     m_buttonsWidget(nullptr),
+    failedTimes(0),
+    m_bioTimer(nullptr),
     useFirstDevice(false)
 {
     initUI();
@@ -57,35 +60,36 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     connect(auth, &Auth::authenticateComplete, this, &AuthDialog::onAuthComplete);
 
     useFirstDevice = getUseFirstDevice();
-
 }
-
-bool biometricIsStopped = false;
 
 void AuthDialog::startAuth()
 {
-    if(biometricIsStopped)
-    {
-        biometricIsStopped = false;
-        m_biometricAuthWidget->startAuth(m_deviceInfo, user.uid);
-        return;
-    }
     auth->authenticate(user.name);
 
-    showPasswordAuthWidget();
+    //showPasswordAuthWidget();
     m_passwordEdit->clear();
     m_passwordEdit->setEnabled(false);
 }
 
 void AuthDialog::stopAuth()
 {
-    if(m_biometricAuthWidget && m_biometricAuthWidget->isVisible())
-    {
-        biometricIsStopped = true;
+    if(m_biometricAuthWidget)
+    { 
+        usebind = false;
+        usebindstarted = false;
+
+        if(m_bioTimer && m_bioTimer->isActive())
+            m_bioTimer->stop();
         m_biometricAuthWidget->stopAuth();
+
+        m_biometricAuthWidget->hide();
     }   
 
-    auth->stopAuth();
+    clearMessage();
+   // auth->stopAuth();
+
+//    if(m_passwdWidget)
+//        m_passwdWidget->hide();
 }
 
 QPixmap AuthDialog::PixmapToRound(const QPixmap &src, int radius)
@@ -146,12 +150,13 @@ void AuthDialog::initUI()
     m_passwordEdit->setIcon(QIcon(":/image/assets/unlock-button.png"));
     m_passwordEdit->setFocusPolicy(Qt::StrongFocus);
     m_passwordEdit->installEventFilter(this);
-//    m_passwordEdit->hide(); //收到请求密码的prompt才显示出来
     m_passwordEdit->setEnabled(false);
     m_passwordEdit->setType(QLineEdit::Password);
     setFocusProxy(m_passwordEdit);
     connect(m_passwordEdit, SIGNAL(clicked(const QString&)),
             this, SLOT(onRespond(const QString&)));
+
+    m_passwdWidget->hide();
 
     /* 密码认证信息显示列表 */
     m_messageLabel = new QLabel(m_passwdWidget);
@@ -223,11 +228,17 @@ void AuthDialog::pamBioSuccess()
     m_biometricAuthWidget->startAuth(m_deviceInfo, user.uid);
     onShowMessage(tr("Please enter your password or enroll your fingerprint "),
                           Auth::MessageTypeInfo);
+    m_bioTimer->stop();
 }
 
 void AuthDialog::startBioAuth()
 {
-    QTimer::singleShot(1000,this,SLOT(pamBioSuccess()));
+    if(!m_bioTimer){
+        m_bioTimer = new QTimer(this);
+        connect(m_bioTimer, SIGNAL(timeout()), this, SLOT(pamBioSuccess()));
+    }
+    m_bioTimer->start(1000);
+
 }
 
 void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
@@ -249,6 +260,11 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
     }
     else if(text == BIOMETRIC_PAM_DOUBLE)
     {
+        if(failedTimes >= maxFailedTimes){
+            skipBiometricAuth();
+            return ;
+        }
+
         usebind = true;
         if(authMode == PASSWORD)
         {
@@ -442,6 +458,8 @@ void AuthDialog::initBiometricWidget()
         return;
     }
 
+    maxFailedTimes = GetFailedTimes();
+
     m_biometricAuthWidget = new BiometricAuthWidget(m_biometricProxy, this);
     connect(m_biometricAuthWidget, &BiometricAuthWidget::authComplete,
             this, &AuthDialog::onBiometricAuthComplete);
@@ -583,7 +601,8 @@ void AuthDialog::onDeviceChanged(const DeviceInfoPtr &deviceInfo)
     m_biometricButton->hide();
     m_passwordButton->show();
     m_otherDeviceButton->show();
-    m_retryButton->hide();
+    if(m_retryButton)
+        m_retryButton->hide();
 }
 
 void AuthDialog::onBiometricAuthComplete(bool result)
@@ -592,11 +611,18 @@ void AuthDialog::onBiometricAuthComplete(bool result)
     {
         if(usebind){
             authMode = UNKNOWN;
+            failedTimes++;
+            if(failedTimes >= maxFailedTimes){
+                onShowMessage(tr("Too many unsuccessful attempts,please enter password."),Auth::MessageTypeError);
+                usebindstarted = false;
+                return ;
+            }
             onShowMessage(tr("Authentication failure, Please try again"),Auth::MessageTypeError);
             if(!isBioPassed)
                 startBioAuth();
         }else{
-            m_retryButton->setVisible(!m_biometricAuthWidget->isHidden());
+            if(m_retryButton)
+                m_retryButton->setVisible(!m_biometricAuthWidget->isHidden());
         }
     }
     else
@@ -685,7 +711,8 @@ void AuthDialog::showPasswordAuthWidget()
             m_biometricButton->setVisible(true);
             m_passwordButton->setVisible(false);
             m_otherDeviceButton->setVisible(false);
-            m_retryButton->setVisible(false);
+            if(m_retryButton)
+                m_retryButton->setVisible(false);
         }
         else
         {
@@ -713,7 +740,8 @@ void AuthDialog::showBiometricAuthWidget()
         m_biometricButton->setVisible(false);
         m_passwordButton->setVisible(true);
         m_otherDeviceButton->setVisible(m_deviceCount > 1);
-        m_retryButton->setVisible(!m_biometricAuthWidget->isAuthenticating());
+        if(m_retryButton)
+            m_retryButton->setVisible(!m_biometricAuthWidget->isAuthenticating());
     }
     else
     {
@@ -739,6 +767,7 @@ void AuthDialog::showBiometricDeviceWidget()
         m_biometricButton->setVisible(false);
         m_passwordButton->setVisible(false);
         m_otherDeviceButton->setVisible(false);
-        m_retryButton->setVisible(false);
+        if(m_retryButton)
+            m_retryButton->setVisible(false);
     }
 }

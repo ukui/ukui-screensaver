@@ -224,6 +224,10 @@ void LockWidget::showPowerManager()
 
 void LockWidget::switchToGreeter()
 {
+    if(authDialog)
+    {
+        authDialog->stopAuth();
+    }
     displayManager->switchToGreeter();;
 }
 
@@ -379,6 +383,11 @@ void LockWidget::onUserMenuTrigged(QAction *action)
 {
     qDebug() << action->data().toString() << "selected";
 
+    if(authDialog)
+    {
+        authDialog->stopAuth();
+    }
+
     QString userName = action->data().toString();
     if(userName == "Guest")
     {
@@ -391,9 +400,5 @@ void LockWidget::onUserMenuTrigged(QAction *action)
     else
     {
         displayManager->switchToUser(userName);
-    }
-    if(authDialog)
-    {
-        authDialog->stopAuth();
     }
 }

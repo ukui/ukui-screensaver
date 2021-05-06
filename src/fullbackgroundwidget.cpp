@@ -403,9 +403,9 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
 void FullBackgroundWidget::lock()
 {
     showLockWidget();
-
+    qApp->processEvents();
     lockWidget->startAuth();
-    //inhibit();
+    inhibit();
 }
 
 
@@ -483,7 +483,7 @@ int FullBackgroundWidget::onSessionStatusChanged(uint status)
 
     if(!configuration->xscreensaverActivatedWhenIdle())
     {
-	return -1;
+        return -1;
     }
 
     if(screenStatus & SCREEN_SAVER)
@@ -636,7 +636,7 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
 {
     ///系统休眠时，会关闭总线，导致设备不可用，发生错误
     ///在系统休眠之前停止认证，在系统唤醒后重新开始认证
-/*    if(sleep)
+    if(sleep)
     {
         lockWidget->stopAuth();
         uninhibit();
@@ -650,13 +650,6 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
             lockWidget->startAuth();
             inhibit();
         }
-    }
-*/
-    if(sleep)
-	return;
-    if(screenStatus & SCREEN_SAVER)
-    {
-        clearScreensavers();
     }
 }
 

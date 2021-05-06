@@ -155,4 +155,5 @@ int GetMaxFailedAutoRetry(const QString &userName);
  */
 int GetMaxTimeoutAutoRetry(const QString &userName);
 
+int GetFailedTimes();
 #endif // BIOMETRICDEVICEINFO_H

@@ -18,7 +18,7 @@
  *
  */
 
-#include "cyclelabel.h".h"
+#include "cyclelabel.h"
 
 CycleLabel::CycleLabel(QWidget *parent)
     :QFrame(parent),

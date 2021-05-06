@@ -59,6 +59,10 @@
         <source>Please enter your password or enroll your fingerprint </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Too many unsuccessful attempts,please enter password.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BioAuthWidget</name>
@@ -304,6 +308,18 @@
     </message>
     <message>
         <source>lock the screen and show screensaver immediately</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unlock the screen saver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show the screensaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

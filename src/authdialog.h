@@ -23,6 +23,7 @@
 #endif
 
 #include <QWidget>
+#include <QTimer>
 #include "auth-pam.h"
 #include "types.h"
 #include "users.h"
@@ -132,11 +133,14 @@ private:
     QWidget         *m_passwdWidget;        //放置密码输入框和信息列表
     IconEdit        *m_passwordEdit;       //密码输入框
     QLabel          *m_messageLabel;         //PAM消息显示
-    PamTally            *pamTally;
+    PamTally        *pamTally;
+    QTimer          *m_bioTimer;
     bool            usebind;
     bool            usebindstarted;
     bool            isBioPassed;
     bool            useFirstDevice;
+    int             failedTimes;
+    int             maxFailedTimes;
 };
 
 #endif // AUTHDIALOG_H
