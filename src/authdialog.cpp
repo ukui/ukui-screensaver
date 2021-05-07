@@ -364,6 +364,7 @@ void AuthDialog::performBiometricAuth()
     if(!m_biometricProxy)
     {
         m_biometricProxy = new BiometricProxy(this);
+	isHiddenSwitchButton = GetHiddenSwitchButton();
     }
 
     //服务没启动，或者打开DBus连接出错
@@ -708,7 +709,9 @@ void AuthDialog::showPasswordAuthWidget()
         if(m_deviceCount > 0)
         {
             m_buttonsWidget->setVisible(true);
-            m_biometricButton->setVisible(true);
+	    if(!isHiddenSwitchButton){
+            	m_biometricButton->setVisible(true);
+	    }
             m_passwordButton->setVisible(false);
             m_otherDeviceButton->setVisible(false);
             if(m_retryButton)
@@ -738,7 +741,9 @@ void AuthDialog::showBiometricAuthWidget()
     {
         m_buttonsWidget->setVisible(true);
         m_biometricButton->setVisible(false);
-        m_passwordButton->setVisible(true);
+	if(!isHiddenSwitchButton){
+            m_passwordButton->setVisible(true);
+	}
         m_otherDeviceButton->setVisible(m_deviceCount > 1);
         if(m_retryButton)
             m_retryButton->setVisible(!m_biometricAuthWidget->isAuthenticating());

@@ -141,6 +141,7 @@ private:
     bool            useFirstDevice;
     int             failedTimes;
     int             maxFailedTimes;
+    bool            isHiddenSwitchButton;
 };
 
 #endif // AUTHDIALOG_H

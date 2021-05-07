@@ -154,6 +154,6 @@ int GetMaxFailedAutoRetry(const QString &userName);
  * @return
  */
 int GetMaxTimeoutAutoRetry(const QString &userName);
-
+bool GetHiddenSwitchButton();
 int GetFailedTimes();
 #endif // BIOMETRICDEVICEINFO_H
