@@ -16,7 +16,7 @@
         <translation type="obsolete">使用密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="510"/>
+        <location filename="../src/authdialog.cpp" line="528"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
@@ -29,7 +29,7 @@
         <translation type="obsolete">已登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="280"/>
+        <location filename="../src/authdialog.cpp" line="295"/>
         <source>Password: </source>
         <translation>密码：</translation>
     </message>
@@ -46,34 +46,34 @@
         <translation type="vanished">认证失败，还剩%1次尝试机会</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="225"/>
-        <location filename="../src/authdialog.cpp" line="277"/>
+        <location filename="../src/authdialog.cpp" line="229"/>
+        <location filename="../src/authdialog.cpp" line="292"/>
         <source>Please enter your password or enroll your fingerprint </source>
         <translation>请输入密码或者录入指纹</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="303"/>
-        <location filename="../src/authdialog.cpp" line="602"/>
+        <location filename="../src/authdialog.cpp" line="318"/>
+        <location filename="../src/authdialog.cpp" line="621"/>
         <source>Authentication failure, Please try again</source>
         <translation>认证失败，请重试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="474"/>
+        <location filename="../src/authdialog.cpp" line="492"/>
         <source>Biometric Authentication</source>
         <translation>生物识别认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="487"/>
+        <location filename="../src/authdialog.cpp" line="505"/>
         <source>Password Authentication</source>
         <translation>密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="500"/>
+        <location filename="../src/authdialog.cpp" line="518"/>
         <source>Other Devices</source>
         <translation>其他设备</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="599"/>
+        <location filename="../src/authdialog.cpp" line="617"/>
         <source>Too many unsuccessful attempts,please enter password.</source>
         <translation>指纹验证失败达最大次数，请使用密码解锁</translation>
     </message>
@@ -206,12 +206,12 @@
         <translation>时间</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="300"/>
+        <location filename="../src/lockwidget.cpp" line="304"/>
         <source>Guest</source>
         <translation>游客</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="283"/>
+        <location filename="../src/lockwidget.cpp" line="287"/>
         <source>SwitchUser</source>
         <translation>切换用户</translation>
     </message>
@@ -239,29 +239,39 @@
         <translation type="vanished">关机</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="127"/>
+        <location filename="../src/powermanager.cpp" line="131"/>
         <source>Lock Screen</source>
         <translation>锁屏</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="142"/>
+        <location filename="../src/powermanager.cpp" line="146"/>
         <source>Switch User</source>
         <translation>切换用户</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="156"/>
+        <location filename="../src/powermanager.cpp" line="160"/>
         <source>Log Out</source>
         <translation>注销</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="170"/>
+        <location filename="../src/powermanager.cpp" line="174"/>
         <source>Restart</source>
         <translation>重启</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="184"/>
+        <location filename="../src/powermanager.cpp" line="188"/>
         <source>Power Off</source>
         <translation>关机</translation>
+    </message>
+    <message>
+        <location filename="../src/powermanager.cpp" line="202"/>
+        <source>Suspend</source>
+        <translation>睡眠</translation>
+    </message>
+    <message>
+        <location filename="../src/powermanager.cpp" line="216"/>
+        <source>Sleep</source>
+        <translation>休眠</translation>
     </message>
 </context>
 <context>

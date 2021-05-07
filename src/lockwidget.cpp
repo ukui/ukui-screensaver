@@ -216,9 +216,14 @@ void LockWidget::showPowerManager()
     else{     
         authDialog->hide();
         powermanager->show();
-        powermanager->setGeometry((width()-ITEM_WIDTH*5)/2,
-                                  (height()-ITEM_HEIGHT)/2,
-                                  ITEM_WIDTH*5,ITEM_HEIGHT);
+        if(width() < 1280)
+            powermanager->showSmallSize();
+        else
+            powermanager->showNormalSize();
+
+        powermanager->setGeometry((width()-powermanager->width())/2,
+                                  (height()-powermanager->height())/2,
+                                  powermanager->width(),powermanager->height());
     }
 }
 
@@ -348,14 +353,19 @@ void LockWidget::resizeEvent(QResizeEvent *event)
 
     //设置弹出菜单，设置弹出菜单的坐标为切换用户按钮的上方，中间保持一定间隔。
     if(usersMenu){
-   	 usersMenu->move(width() - x , \
+        usersMenu->move(width() - x , \
                     height() - y - usersMenu->height() - 5);
     }
     
     if(powermanager){
-        powermanager->setGeometry((width()-ITEM_WIDTH*5)/2,
-                                  (height()-ITEM_HEIGHT)/2,
-                                  ITEM_WIDTH*5,ITEM_HEIGHT);
+        if(width() < 1280)
+            powermanager->showSmallSize();
+        else
+            powermanager->showNormalSize();
+
+        powermanager->setGeometry((width()- powermanager->width())/2,
+                                  (height()-powermanager->height())/2,
+                                  powermanager->width(),powermanager->height());
 
     }
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);

@@ -566,10 +566,10 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
     if(screenStatus & SCREEN_SAVER)
     {
         ScreenSaver *saver = configuration->getScreensaver();
-	if(isPassed || saver->path != "/usr/lib/ukui-screensaver/ukui-screensaver-default"){
+        if(isPassed || saver->path != "/usr/lib/ukui-screensaver/ukui-screensaver-default"){
             clearScreensavers();
-	}
-	isPassed = true;
+        }
+        isPassed = true;
     }
 }
 

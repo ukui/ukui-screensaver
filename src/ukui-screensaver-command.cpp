@@ -67,8 +67,8 @@ int main(int argc, char **argv)
 
     QDBusReply<bool> stateReply = interface->call("GetLockState");
     if(!stateReply.isValid()){
-    	qWarning()<< "Get state error:" << stateReply.error();
-	return 0;
+        qWarning()<< "Get state error:" << stateReply.error();
+        return 0;
     }
 
     if(parser.isSet(queryOption)){

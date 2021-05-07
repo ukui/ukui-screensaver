@@ -28,12 +28,15 @@
 
 class QListWidget;
 class QListWidgetItem;
+class QDBusInterface;
 class PowerManager:public QListWidget
 {
     Q_OBJECT
 
 public:
     PowerManager(QWidget *parent = 0);
+    void showNormalSize();
+    void showSmallSize();
 private:
     void initUI();
     QListWidget *list;
@@ -42,14 +45,22 @@ private:
     QWidget *logoutWidget;
     QWidget *rebootWidget;
     QWidget *shutdownWidget;
+    QWidget *suspendWidget;
+    QWidget *hibernateWidget;
     QTime lasttime;
-
+    QDBusInterface *sessionInterface;
+    QDBusInterface *loginInterface;
+    bool    canSuspend;
+    bool    canHibernate;
+    int     m_count;
 private:
     void lockWidgetClicked();
     void switchWidgetClicked();
     void logoutWidgetCliced();
     void rebootWidgetClicked();
     void shutdownWidgetClicked();
+    void suspendWidgetClicked();
+    void hibernateWidgetClicked();
 
 private Q_SLOTS:
     void powerClicked(QListWidgetItem *item);

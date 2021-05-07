@@ -16,7 +16,7 @@
         <translation type="obsolete">Parola</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="510"/>
+        <location filename="../src/authdialog.cpp" line="528"/>
         <source>Retry</source>
         <translation type="unfinished">Yeniden Dene</translation>
     </message>
@@ -25,7 +25,7 @@
         <translation type="obsolete">Kilidi Aç</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="280"/>
+        <location filename="../src/authdialog.cpp" line="295"/>
         <source>Password: </source>
         <translation type="unfinished">Parola</translation>
     </message>
@@ -42,34 +42,34 @@
         <translation type="vanished">Kimlik doğrulama hatası, hala %1 kalan denemen var</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="225"/>
-        <location filename="../src/authdialog.cpp" line="277"/>
+        <location filename="../src/authdialog.cpp" line="229"/>
+        <location filename="../src/authdialog.cpp" line="292"/>
         <source>Please enter your password or enroll your fingerprint </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="303"/>
-        <location filename="../src/authdialog.cpp" line="602"/>
+        <location filename="../src/authdialog.cpp" line="318"/>
+        <location filename="../src/authdialog.cpp" line="621"/>
         <source>Authentication failure, Please try again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="474"/>
+        <location filename="../src/authdialog.cpp" line="492"/>
         <source>Biometric Authentication</source>
         <translation type="unfinished">Biyometrik Kimlik Doğrulama</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="487"/>
+        <location filename="../src/authdialog.cpp" line="505"/>
         <source>Password Authentication</source>
         <translation type="unfinished">Parola Doğrulama</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="500"/>
+        <location filename="../src/authdialog.cpp" line="518"/>
         <source>Other Devices</source>
         <translation type="unfinished">Diğer Ayıtlar</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="599"/>
+        <location filename="../src/authdialog.cpp" line="617"/>
         <source>Too many unsuccessful attempts,please enter password.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -202,12 +202,12 @@
         <translation type="unfinished">Zaman</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="300"/>
+        <location filename="../src/lockwidget.cpp" line="304"/>
         <source>Guest</source>
         <translation type="unfinished">Misafir</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="283"/>
+        <location filename="../src/lockwidget.cpp" line="287"/>
         <source>SwitchUser</source>
         <translation>Kullanıcı Değiştir</translation>
     </message>
@@ -235,29 +235,39 @@
         <translation type="vanished">kapat</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="127"/>
+        <location filename="../src/powermanager.cpp" line="131"/>
         <source>Lock Screen</source>
         <translation type="unfinished">Ekranı Kilitle</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="142"/>
+        <location filename="../src/powermanager.cpp" line="146"/>
         <source>Switch User</source>
         <translation type="unfinished">Kullanıcı Değiştir</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="156"/>
+        <location filename="../src/powermanager.cpp" line="160"/>
         <source>Log Out</source>
         <translation type="unfinished">Çıkış</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="170"/>
+        <location filename="../src/powermanager.cpp" line="174"/>
         <source>Restart</source>
         <translation type="unfinished">Yeniden Başlat</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="184"/>
+        <location filename="../src/powermanager.cpp" line="188"/>
         <source>Power Off</source>
         <translation type="unfinished">Bilgisayarı Kapat</translation>
+    </message>
+    <message>
+        <location filename="../src/powermanager.cpp" line="202"/>
+        <source>Suspend</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/powermanager.cpp" line="216"/>
+        <source>Sleep</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
