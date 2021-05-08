@@ -96,7 +96,6 @@ void IconEdit::setType(QLineEdit::EchoMode type)
        m_modeButton->setChecked(false);
 }
 
-
 void IconEdit::resizeEvent(QResizeEvent *)
 {
     // 设置输入框中文件输入区，不让输入的文字在被隐藏在按钮下
@@ -107,9 +106,9 @@ void IconEdit::resizeEvent(QResizeEvent *)
 bool IconEdit::eventFilter(QObject *obj, QEvent *event)
 {
     if(obj == m_edit){
-        if(event->type() == 6){
+        if(event->type() == 6){ //禁止复制粘贴功能。
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-            if(keyEvent->key()==80 &&keyEvent->modifiers() ==(Qt::MetaModifier)){
+            if(keyEvent->matches(QKeySequence::Copy) || keyEvent->matches(QKeySequence::Cut) || keyEvent->matches(QKeySequence::Paste)){
                 event->ignore();
                 return true;
             }
