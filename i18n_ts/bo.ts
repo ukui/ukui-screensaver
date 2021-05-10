@@ -16,7 +16,6 @@
     </message>
     <message>
         <location filename="../src/authdialog.cpp" line="318"/>
-        <location filename="../src/authdialog.cpp" line="621"/>
         <source>Authentication failure, Please try again</source>
         <translation type="unfinished"></translation>
     </message>
@@ -43,6 +42,11 @@
     <message>
         <location filename="../src/authdialog.cpp" line="617"/>
         <source>Too many unsuccessful attempts,please enter password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/authdialog.cpp" line="621"/>
+        <source>Fingerprint authentication failed, you still have %1 verification opportunities</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -136,12 +140,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="287"/>
+        <location filename="../src/lockwidget.cpp" line="292"/>
         <source>SwitchUser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="304"/>
+        <location filename="../src/lockwidget.cpp" line="309"/>
         <source>Guest</source>
         <translation type="unfinished"></translation>
     </message>
@@ -149,37 +153,37 @@
 <context>
     <name>PowerManager</name>
     <message>
-        <location filename="../src/powermanager.cpp" line="131"/>
+        <location filename="../src/powermanager.cpp" line="169"/>
         <source>Lock Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="146"/>
+        <location filename="../src/powermanager.cpp" line="184"/>
         <source>Switch User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="160"/>
+        <location filename="../src/powermanager.cpp" line="198"/>
         <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="174"/>
+        <location filename="../src/powermanager.cpp" line="212"/>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="188"/>
+        <location filename="../src/powermanager.cpp" line="226"/>
         <source>Power Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="202"/>
+        <location filename="../src/powermanager.cpp" line="267"/>
         <source>Suspend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="216"/>
+        <location filename="../src/powermanager.cpp" line="289"/>
         <source>Sleep</source>
         <translation type="unfinished"></translation>
     </message>

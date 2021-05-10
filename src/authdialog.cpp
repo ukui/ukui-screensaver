@@ -618,7 +618,8 @@ void AuthDialog::onBiometricAuthComplete(bool result)
                 usebindstarted = false;
                 return ;
             }
-            onShowMessage(tr("Authentication failure, Please try again"),Auth::MessageTypeError);
+            onShowMessage(tr("Fingerprint authentication failed, you still have %1 verification opportunities")\
+                          .arg(maxFailedTimes - failedTimes),Auth::MessageTypeError);
             if(!isBioPassed)
                 startBioAuth();
         }else{
