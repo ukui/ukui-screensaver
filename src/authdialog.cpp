@@ -289,8 +289,16 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
 
         if(text == "Password: " || text == "密码："){
             if(usebindstarted){
-                onShowMessage(tr("Please enter your password or enroll your fingerprint "),
-                          Auth::MessageTypeInfo);
+                if(m_messageLabel->text().isEmpty()){
+                    onShowMessage(tr("Please enter your password or enroll your fingerprint "),
+                                  Auth::MessageTypeInfo);
+                }
+                else{
+                    QTimer::singleShot(1000, [&]{
+                        onShowMessage(tr("Please enter your password or enroll your fingerprint "),
+                                      Auth::MessageTypeInfo);
+                    });
+                }
             }
             text = tr("Password: ");
         }
@@ -415,7 +423,7 @@ void AuthDialog::performBiometricAuth()
         }
     }
 
-    clearMessage();
+    //clearMessage();
 
     if(!m_deviceInfo)
     {

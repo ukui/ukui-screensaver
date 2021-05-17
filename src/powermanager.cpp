@@ -203,7 +203,7 @@ void PowerManager::initUI()
     logoutWidget->installEventFilter(this);
 
     rebootWidget = new QWidget(this);
-    rebootWidget->setObjectName("logoutWidget");
+    rebootWidget->setObjectName("rebootWidget");
     QLabel *rebootFace = new QLabel(this);
     QLabel *rebootLabel = new QLabel(this);
     rebootFace->setAlignment(Qt::AlignCenter);
