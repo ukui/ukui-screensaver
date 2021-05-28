@@ -116,8 +116,11 @@ bool IconEdit::eventFilter(QObject *obj, QEvent *event)
         if(event->type() == 23)
         {
             XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
-        }
-
+	    update();
+	}else if(event->type() == QEvent::MouseButtonPress){
+            XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
+	    update();
+	}
     }
     if(obj == m_iconButton){
         if(m_timer && m_timer->isActive())
@@ -132,6 +135,12 @@ bool IconEdit::eventFilter(QObject *obj, QEvent *event)
         }
     }
     return false;
+}
+
+void IconEdit::setX11Focus()
+{
+    XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
+    update(); 
 }
 
 void IconEdit::clicked_cb()

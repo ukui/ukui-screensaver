@@ -53,7 +53,7 @@ public:
     void resizeEvent(QResizeEvent *event);
     void closeEvent(QCloseEvent *event);
     void setUserOfAuth();
-
+    void setX11Focus();
 private:
     void initUI();
     void startWaiting();

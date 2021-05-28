@@ -194,7 +194,7 @@ void PowerManager::initUI()
     QLabel *logoutLabel = new QLabel(this);
     logoutFace->setAlignment(Qt::AlignCenter);
     logoutLabel->setAlignment(Qt::AlignCenter);
-    logoutFace->setPixmap(QPixmap(":/image/assets/logout.png").scaled(58,58));
+    logoutFace->setPixmap(QPixmap(":/image/assets/logout.png").scaled(48,48));
     logoutLabel->setText(tr("Log Out"));
     logoutWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     QVBoxLayout *logoutlayout = new QVBoxLayout(logoutWidget);

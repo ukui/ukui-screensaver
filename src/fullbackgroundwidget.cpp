@@ -20,6 +20,7 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDBusInterface>
+#include <QTime>
 #include <QDebug>
 #include <QPainter>
 #include <QTimer>
@@ -143,6 +144,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       configuration(new Configuration(this)),
       isLocked(false),
       isPassed(false),
+      helpWidget(nullptr),
       lockState(false),
       screenStatus(UNDEFINED)
 {
@@ -156,7 +158,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
             this, &FullBackgroundWidget::onDesktopResized);
     connect(desktop, &QDesktopWidget::workAreaResized,
             this, &FullBackgroundWidget::onDesktopResized);
-    connect(desktop, &QDesktopWidget::primaryScreenChanged,
+     connect(desktop, &QDesktopWidget::primaryScreenChanged,
             this, &FullBackgroundWidget::onDesktopResized);
     connect(desktop, &QDesktopWidget::screenCountChanged,
             this, &FullBackgroundWidget::onDesktopResized);
@@ -172,7 +174,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
      qApp->installNativeEventFilter(this);
     installEventFilter(this);
     QTimer::singleShot(500,this,SLOT(switchToLinux()));
-}
+} 
 
 void FullBackgroundWidget::switchToLinux()
 {
@@ -186,6 +188,15 @@ void FullBackgroundWidget::switchToLinux()
 
     switch_to_linux(container);
 
+}
+
+void FullBackgroundWidget::activeHelpWindow()
+{
+    if(helpWidget){
+        helpWidget->show();
+        helpWidget->activateWindow();
+    }
+    QTimer::singleShot(100,this,SLOT(laterActivate()));
 }
 
 void FullBackgroundWidget::laterActivate()
@@ -216,7 +227,7 @@ void FullBackgroundWidget::setLockState()
 bool FullBackgroundWidget::eventFilter(QObject *obj, QEvent *event)
 {
     if(event->type() == QEvent::WindowDeactivate){
-         QTimer::singleShot(50,this,SLOT(laterActivate()));
+         QTimer::singleShot(50,this,SLOT(activeHelpWindow()));
     }else if(event->type() == QEvent::WindowActivate){
         QTimer::singleShot(200,this,SLOT(setLockState()));
     }
@@ -242,6 +253,15 @@ void FullBackgroundWidget::paintEvent(QPaintEvent *event)
     }
 
     return QWidget::paintEvent(event);
+}
+
+void FullBackgroundWidget::showHelpWindow(){
+    helpWidget = new QWidget();
+    helpWidget->resize(1,1);
+    helpWidget->setWindowOpacity(0);
+    helpWidget->setAttribute(Qt::WA_X11NetWmWindowTypeDock);
+    helpWidget->show();
+    helpWidget->activateWindow();
 }
 
 void FullBackgroundWidget::closeEvent(QCloseEvent *event)
@@ -290,6 +310,7 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
                 return false;
 
             laterActivate();
+	    activeHelpWindow();
          }else if(responseType == XCB_MAP_NOTIFY){
             xcb_map_notify_event_t *xm = reinterpret_cast<xcb_map_notify_event_t*>(event);
             if(xm->window == winId())
@@ -303,6 +324,7 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
             if(QString(ch.res_name) == "ukui-screensaver-dialog")
                 return false;
             laterActivate();
+	    activeHelpWindow();
 	 }
         return false;
 }
@@ -419,11 +441,19 @@ void FullBackgroundWidget::showLockWidget()
 
         lockWidget = new LockWidget(this);
         connect(lockWidget, &LockWidget::closed,
-                this, &FullBackgroundWidget::close);
+                this, &FullBackgroundWidget::closeWidget);
     }
     onCursorMoved(cursor().pos());
     lockWidget->setFocus();
-     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
+    //XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
+    lockWidget->setX11Focus();
+    repaint();
+}
+
+void FullBackgroundWidget::closeWidget(){
+    if(helpWidget)
+        helpWidget->close();
+    close();
 }
 
 void FullBackgroundWidget::showScreensaver()
@@ -463,6 +493,8 @@ void FullBackgroundWidget::clearScreensavers()
     if(screenStatus == UNDEFINED)
     {
         close();
+        if(helpWidget)
+            helpWidget->close();
     }
     else
     {
@@ -647,6 +679,7 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
         {
             clearScreensavers();
         }else{
+	    lockWidget->setX11Focus();
             lockWidget->startAuth();
             inhibit();
         }

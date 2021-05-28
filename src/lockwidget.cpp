@@ -103,6 +103,13 @@ void LockWidget::stopAuth()
     }
 }
 
+void LockWidget::setX11Focus()
+{
+    if(authDialog){
+    	authDialog->setX11Focus();
+    }
+}
+
 void LockWidget::initUI()
 {
     setFocusProxy(authDialog);

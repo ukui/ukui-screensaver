@@ -48,7 +48,7 @@ public:
     void closeEvent(QCloseEvent *event);
     void startAuth();
     void stopAuth();
-
+    void setX11Focus();
 Q_SIGNALS:
     void closed();
     void capsLockChanged();

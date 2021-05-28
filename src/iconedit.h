@@ -39,6 +39,7 @@ public:
     void setType(QLineEdit::EchoMode type = QLineEdit::Password);
     void startWaiting();
     void stopWaiting();
+    void setX11Focus();
     //void setEnabled(bool enabled);
 
 protected:

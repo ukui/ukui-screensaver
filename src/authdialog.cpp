@@ -241,6 +241,13 @@ void AuthDialog::startBioAuth()
 
 }
 
+void AuthDialog::setX11Focus()
+{
+    if(m_passwordEdit && m_passwordEdit->isVisible()){
+    	m_passwordEdit->setX11Focus();
+    }
+}
+
 void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
 {
     qDebug() << "prompt: " << prompt;

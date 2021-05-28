@@ -50,7 +50,7 @@ public:
     void onScreensaver();
     void onBlankScreensaver();
     void closeScreensaver();
-
+    void showHelpWindow();
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);
     void lock();
@@ -59,7 +59,7 @@ public Q_SLOTS:
     int onSessionStatusChanged(uint status);
     void inhibit();
     void uninhibit();
-
+    void closeWidget();
 private:
     void init();
     void clearScreensavers();
@@ -77,7 +77,7 @@ private Q_SLOTS:
     void setLockState();
     void laterInhibit(bool val);
     void laterStartAuth();
-
+    void activeHelpWindow();
 private:
     QDBusInterface      *smInterface;
     LockWidget          *lockWidget;
@@ -92,6 +92,7 @@ private:
     bool                lockState;
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
     bool 		isPassed;
+    QWidget             *helpWidget;
 };
 
 #endif // FULLBACKGROUNDWIDGET_H
