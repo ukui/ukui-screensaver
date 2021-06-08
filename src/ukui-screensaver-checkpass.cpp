@@ -115,7 +115,7 @@ _authenticate(const char *userName)
 
     if(ret != PAM_SUCCESS)
     {
-        qDebug() << "failed to acct mgmt " << pam_strerror(NULL, ret);
+
     }
 `
     free(newUser);

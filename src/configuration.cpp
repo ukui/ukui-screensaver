@@ -141,6 +141,10 @@ ScreenSaver *Configuration::getScreensaver()
         break;
     }
     case SAVER_SINGLE:
+        if(themes.count()==0){
+            saver->path = "/usr/lib/ukui-screensaver/ukui-screensaver-default";
+            break;
+        }
         saver->path = getXScreensaverPath(themes[0]);
         break;
     case SAVER_IMAGE:
