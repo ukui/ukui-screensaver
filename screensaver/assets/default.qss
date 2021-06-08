@@ -80,6 +80,10 @@ QPushButton{
     font-size:14px;
     color: #ffffff;
 }
+#screenLabel{
+    font-size:14px;
+    color: #ffffff;
+}
 #autoSwitch{
     background: rgba(255, 255, 255, 0%);
     border-radius:4px;

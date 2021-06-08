@@ -117,7 +117,7 @@ _authenticate(const char *userName)
     {
 
     }
-`
+
     free(newUser);
     fprintf(stderr, "authentication result: %d\n", authRet);
 

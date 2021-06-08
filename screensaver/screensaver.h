@@ -123,6 +123,7 @@ private:
     int                 timeType;
     QString             dateType;
     QProcess		*process;
+    QLabel              *screenLabel;
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);
@@ -138,6 +139,7 @@ private Q_SLOTS:
     void myTextChanged(QString text);
     void showRestTimeChanged(bool isShow);
     void textIsCenterChanged(bool isCenter);
+    void themeChanged();
 };
 
 #endif // MAINWINDOW_H

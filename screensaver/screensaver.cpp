@@ -53,6 +53,7 @@
 #include "commonfunc.h"
 
 #define TIME_TYPE_SCHEMA "org.ukui.control-center.panel.plugins"
+#define THEME_TYPE_SCHENA "org.ukui.style"
 
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
@@ -72,6 +73,7 @@ Screensaver::Screensaver(QWidget *parent):
   process(nullptr),
   cycleTime(300),
   timer(nullptr),
+  screenLabel(nullptr),
   isAutoSwitch(false),
   isCustom(false),
   backgroundPath(""),
@@ -109,11 +111,52 @@ Screensaver::Screensaver(QWidget *parent):
 
     setUpdateBackground();
     connectSingles();
+
+    QGSettings *themeSettings;
+    if(QGSettings::isSchemaInstalled(TIME_TYPE_SCHEMA))
+        themeSettings = new QGSettings(TIME_TYPE_SCHEMA,"",this);
+
+    connect(themeSettings, &QGSettings::changed,
+            this, &Screensaver::themeChanged);
+
+    screenLabel = new QLabel(this);
+    screenLabel->setObjectName("screenLabel");
+    screenLabel->setText(tr("Picture does not exist"));
+    screenLabel->adjustSize();
+    screenLabel->hide();
 }
 
 Screensaver::~Screensaver()
 {
 
+}
+
+void Screensaver::themeChanged()
+{
+    if(myTextLabel){
+        QColor highLightColor = palette().color(QPalette::Base);
+        QString stringColor = QString("rgba(%1,%2,%3,82%)")
+                .arg(highLightColor.red())
+                .arg(highLightColor.green())
+                .arg(highLightColor.blue());
+        QColor textColor = palette().color(QPalette::Text);
+        QString textString = QString("rgb(%1,%2,%3)")
+                .arg(textColor.red())
+                .arg(textColor.green())
+                .arg(textColor.blue());
+        QColor borderColor = palette().color(QPalette::BrightText);
+        QString borderString = QString("rgba(%1,%2,%3,85%)")
+                .arg(borderColor.red())
+                .arg(borderColor.green())
+                .arg(borderColor.blue());
+
+        if(width() < 600 || height()<400)
+            myTextLabel->setStyleSheet(QString("font-size:5px;border-radius: 2px;background: %1;color: %2;padding: 4px 8px 4px 8px;border-width: 1px;border-style: solid;border-color:%3;") \
+                                   .arg(stringColor).arg(textString).arg(borderString));
+        else
+            myTextLabel->setStyleSheet(QString("font-size:18px;border-radius: 6px;background: %1;color: %2;padding: 24px 48px 24px 48px;border-width: 1px;border-style: solid;border-color:%3;") \
+                                       .arg(stringColor).arg(textString).arg(borderString));
+    }
 }
 
 void Screensaver::connectSingles()
@@ -231,13 +274,12 @@ bool Screensaver::eventFilter(QObject *obj, QEvent *event)
             XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
             XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
             XFlush(QX11Info::display());
-	    /*
-	    if(width() >200 && width() <500)
-	    if(!process){
-	    	process = new QProcess(this);
-	    }
-	    process->start("ukui-screensaver-command -s");
-	    */
+
+            if(width() >200 && width() <500)
+                if(!process){
+                    process = new QProcess(this);
+                }
+            process->start("ukui-screensaver-command -s");
         }
     }
     return false;
@@ -247,12 +289,19 @@ void Screensaver::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 
-    painter.drawPixmap(0,0,this->width(),this->height(),background);
-    painter.setBrush(QColor(0,0,0,178));
+    if(isCustom && imagePaths.count()==0){
+        painter.setBrush(QColor("#000000"));
+        if(screenLabel->isHidden()){
+            screenLabel->show();
+        }
+    }else{
+        painter.drawPixmap(0,0,this->width(),this->height(),background);
+        painter.setBrush(QColor(0,0,0,178));
+        if(screenLabel->isVisible())
+            screenLabel->hide();
+    }
     /*这里是为了不显示笔的线条*/
     painter.drawRect(-1,-1,this->width()+1,this->height()+1);
-
-
 }
 
 void Screensaver::resizeEvent(QResizeEvent */*event*/)
@@ -279,9 +328,30 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
         }
         flag = 1;
         if(myTextWidget){
-            myTextLabel->setStyleSheet("font-size:5px;border-radius: 2px;background: rgba(255, 255, 255, 82%);color: #000000;padding: 4px 8px 4px 8px;");
+
+            QColor highLightColor = palette().color(QPalette::Base);
+            QString stringColor = QString("rgba(%1,%2,%3,82%)")
+                    .arg(highLightColor.red())
+                    .arg(highLightColor.green())
+                    .arg(highLightColor.blue());
+            QColor textColor = palette().color(QPalette::Text);
+            QString textString = QString("rgb(%1,%2,%3)")
+                    .arg(textColor.red())
+                    .arg(textColor.green())
+                    .arg(textColor.blue());
+            QColor borderColor = palette().color(QPalette::BrightText);
+            QString borderString = QString("rgba(%1,%2,%3,85%)")
+                    .arg(borderColor.red())
+                    .arg(borderColor.green())
+                    .arg(borderColor.blue());
+
+            myTextLabel->setStyleSheet(QString("font-size:5px;border-radius: 2px;background: %1;color: %2;padding: 4px 8px 4px 8px;border-width: 1px;border-style: solid;border-color:%3;") \
+                                   .arg(stringColor).arg(textString).arg(borderString));
+
             cycleLabel->setSize(QSize(5,5));
         }
+        if(screenLabel)
+            screenLabel->adjustSize();
         if(sleepTime)
             sleepTime->setSmallMode();
         if(settingsButton)
@@ -299,6 +369,11 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
         y = this->height() - sleepTime->geometry().height() - 26*scale;
         sleepTime->setGeometry(x,y,sleepTime->geometry().width(),sleepTime->geometry().height());
     }
+
+    if(screenLabel){
+        screenLabel->setGeometry((width() - screenLabel->width())/2,y,screenLabel->width(),screenLabel->height());
+    }
+
     if(centerWidget){
         centerWidget->adjustSize();
         centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
@@ -325,6 +400,8 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
                                 vboxFrame->width(),vboxFrame->height());
     if(myTextWidget)
         setRandomPos();
+
+
 }
 
 void Screensaver::setRandomPos()
@@ -726,6 +803,23 @@ void Screensaver::setRandomText()
         myTextLabel->setBackgroundRole(QPalette::Base);
         myTextLabel->setAutoFillBackground(true);
         myTextLabel->setMaximumWidth(800);
+        QColor highLightColor = palette().color(QPalette::Base);
+        QString stringColor = QString("rgba(%1,%2,%3,82%)")
+                .arg(highLightColor.red())
+                .arg(highLightColor.green())
+                .arg(highLightColor.blue());
+        QColor textColor = palette().color(QPalette::Text);
+        QString textString = QString("rgb(%1,%2,%3)")
+                .arg(textColor.red())
+                .arg(textColor.green())
+                .arg(textColor.blue());
+        QColor borderColor = palette().color(QPalette::BrightText);
+        QString borderString = QString("rgba(%1,%2,%3,85%)")
+                .arg(borderColor.red())
+                .arg(borderColor.green())
+                .arg(borderColor.blue());
+        myTextLabel->setStyleSheet(QString("font-size:18px;border-radius: 6px;background: %1;color: %2;padding: 24px 48px 24px 48px;border-width: 1px;border-style: solid;border-color:%3;") \
+                                   .arg(stringColor).arg(textString).arg(borderString));
         layout->addWidget(myTextLabel);
     }
 	
@@ -734,7 +828,7 @@ void Screensaver::setRandomText()
     if(myText != "")
     	myTextWidget->setVisible(true);
     else
-	myTextWidget->setVisible(false);
+        myTextWidget->setVisible(false);
 }
 
 void Screensaver::setCenterWidget()
