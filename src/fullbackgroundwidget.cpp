@@ -337,11 +337,6 @@ void FullBackgroundWidget::mouseMoveEvent(QMouseEvent *e)
 
 void FullBackgroundWidget::mousePressEvent(QMouseEvent *e)
 {
-    if(screenStatus & SCREEN_SAVER)
-    {
-        ScreenSaver *saver = configuration->getScreensaver();
-        clearScreensavers();
-    }
 }
 
 void FullBackgroundWidget::init()
@@ -382,6 +377,9 @@ void FullBackgroundWidget::init()
             this, SLOT(onGlobalKeyRelease(const QString &)));
     connect(xEventMonitor, SIGNAL(buttonDrag(int, int)),
             this, SLOT(onGlobalButtonDrag(int, int)));
+    connect(xEventMonitor, SIGNAL(buttonPress(int, int)),
+            this, SLOT(onGlobalButtonPressed(int, int)));
+
 
 //    int totalWidth = 0;
 //    int totalHeight = 0;
@@ -602,6 +600,14 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
             clearScreensavers();
         }
         isPassed = true;
+    }
+}
+
+void FullBackgroundWidget::onGlobalButtonPressed(int xPos, int yPos)
+{
+    if(screenStatus & SCREEN_SAVER)
+    {
+        clearScreensavers();
     }
 }
 

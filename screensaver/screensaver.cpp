@@ -76,6 +76,7 @@ Screensaver::Screensaver(QWidget *parent):
   screenLabel(nullptr),
   isAutoSwitch(false),
   isCustom(false),
+  respondClick(false),
   backgroundPath(""),
   isShowRestTime(true),
   myTextLabel(nullptr),
@@ -109,7 +110,9 @@ Screensaver::Screensaver(QWidget *parent):
         labelList.at(i)->setAlignment(Qt::AlignCenter);
     }
 
-    setUpdateBackground();
+    updateBackgroundPath();
+    startSwitchImages();
+
     connectSingles();
 
     QGSettings *themeSettings;
@@ -177,17 +180,24 @@ void Screensaver::connectSingles()
 
 void Screensaver::autoSwitchChanged(bool isSwitch)
 {
-    isAutoSwitch = isSwitch;
     if(!isCustom)
         return ;
-    setUpdateBackground();
+    isAutoSwitch = isSwitch;
+    if(!isSwitch){
+        stopSwitchImages();
+    }
+    startSwitchImages();
 }
 
+/*
+* 图片路径改变
+*/
 void Screensaver::backgroundPathChanged(QString path)
 {
     backgroundPath  = path;
     if(!isCustom)
         return ;
+    updateBackgroundPath();//更新图片路径
     stopSwitchImages();
     startSwitchImages();
 }
@@ -195,7 +205,7 @@ void Screensaver::backgroundPathChanged(QString path)
 void Screensaver::cycleTimeChanged(int cTime)
 {
     cycleTime = cTime;
-    if(!isCustom)
+    if(!isCustom || !autoSwitch)
         return ;
     stopSwitchImages();
     startSwitchImages();
@@ -257,8 +267,10 @@ void Screensaver::textIsCenterChanged(bool isCenter)
             setCenterWidget();
             resize(width(),height());
         }
-        else
+        else{
             centerWidget->show();
+            myTextChanged(myText);
+        }
     }else{
         if(centerWidget)
             centerWidget->hide();
@@ -271,15 +283,12 @@ bool Screensaver::eventFilter(QObject *obj, QEvent *event)
 {
     if(obj == this){
         if(event->type()==QEvent::MouseButtonPress){
-            XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), True, 1);
-            XTestFakeKeyEvent(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),XK_Escape), False, 1);
-            XFlush(QX11Info::display());
-
-            if(width() >200 && width() <500)
+            if(respondClick){
                 if(!process){
                     process = new QProcess(this);
                 }
-            process->start("ukui-screensaver-command -s");
+                process->start("ukui-screensaver-command -s");
+            }
         }
     }
     return false;
@@ -302,6 +311,10 @@ void Screensaver::paintEvent(QPaintEvent *event)
     }
     /*这里是为了不显示笔的线条*/
     painter.drawRect(-1,-1,this->width()+1,this->height()+1);
+}
+
+void Screensaver::addClickedEvent(){
+    respondClick = true;
 }
 
 void Screensaver::resizeEvent(QResizeEvent */*event*/)
@@ -465,7 +478,7 @@ void Screensaver::setUpdateCenterWidget()
     qsettings->setIniCodec(QTextCodec::codecForName("UTF-8"));
 }
 
-void Screensaver::startSwitchImages()
+void Screensaver::updateBackgroundPath()
 {
     qDebug() << "ScreenSaver::startSwitchImages";
     QFileInfo fileInfo(backgroundPath);
@@ -482,17 +495,26 @@ void Screensaver::startSwitchImages()
             if(formats.contains(suffix.toUtf8()))
                 imagePaths.push_back(backgroundPath + "/" + file);
         }
-        if(!imagePaths.empty()) {
+    }
+}
+
+void Screensaver::startSwitchImages()
+{
+    if(!imagePaths.empty()) {
+        background  = QPixmap(imagePaths.at(0));
+
+        if(!switchTimer){
             switchTimer = new QTimer(this);
             connect(switchTimer, &QTimer::timeout, this, [&]{
                 int index = qrand() % imagePaths.count();
                 background  = QPixmap(imagePaths.at(index));
                 repaint();
             });
-            background  = QPixmap(imagePaths.at(0));
-            switchTimer->start(cycleTime * 1000);
-            repaint();
         }
+        if(isAutoSwitch){
+            switchTimer->start(cycleTime * 1000);
+        }
+        repaint();
     }
 }
 
@@ -770,13 +792,7 @@ void Screensaver::updateTime()
 
 void Screensaver::setUpdateBackground()
 {
-    if(isAutoSwitch){
-        startSwitchImages();
-    }
-    else{
-        stopSwitchImages();
-        repaint();
-    }
+
 }
 
 void Screensaver::updateBackground()

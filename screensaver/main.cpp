@@ -27,8 +27,10 @@
 #include <QVariant>
 #include <QCommandLineParser>
 #include <X11/Xlib.h>
+#include <X11/Xutil.h>
 #include <sys/prctl.h>
 #include <signal.h>
+#include <syslog.h>
 
 
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
@@ -84,6 +86,13 @@ int main(int argc, char *argv[])
         s.winId();
         s.windowHandle()->setParent(window);
         XGetWindowAttributes (QX11Info::display(), wid, &xwa);
+
+        XClassHint ch;
+        ch.res_name = NULL;
+        ch.res_class = NULL;
+        XGetClassHint (QX11Info::display(), wid, &ch);
+        if(ch.res_name && strcmp(ch.res_name,"ukui-control-center")==0)
+            s.addClickedEvent();
 
         //获取屏保所在屏幕对应的缩放比例。
         for(auto screen : QGuiApplication::screens())

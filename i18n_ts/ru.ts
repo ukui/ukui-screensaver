@@ -272,6 +272,10 @@
         <source>Automatic switching</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Picture does not exist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SleepTime</name>

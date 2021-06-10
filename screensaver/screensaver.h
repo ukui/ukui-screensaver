@@ -43,6 +43,7 @@ class Screensaver : public QWidget
 public:
     explicit Screensaver(QWidget *parent = 0);
     ~Screensaver();
+    void addClickedEvent();
 
 private:
     void initUI();
@@ -58,6 +59,7 @@ private:
     void setRandomText();
     void setRandomPos();
     void connectSingles();
+    void updateBackgroundPath();
    
     int                 imageIndex;
     QTimer              *switchTimer;
@@ -124,6 +126,7 @@ private:
     QString             dateType;
     QProcess		*process;
     QLabel              *screenLabel;
+    bool                respondClick;
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);

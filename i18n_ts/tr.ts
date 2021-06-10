@@ -16,7 +16,7 @@
         <translation type="obsolete">Parola</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="528"/>
+        <location filename="../src/authdialog.cpp" line="543"/>
         <source>Retry</source>
         <translation type="unfinished">Yeniden Dene</translation>
     </message>
@@ -25,7 +25,7 @@
         <translation type="obsolete">Kilidi Aç</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="295"/>
+        <location filename="../src/authdialog.cpp" line="310"/>
         <source>Password: </source>
         <translation type="unfinished">Parola</translation>
     </message>
@@ -43,37 +43,38 @@
     </message>
     <message>
         <location filename="../src/authdialog.cpp" line="229"/>
-        <location filename="../src/authdialog.cpp" line="292"/>
+        <location filename="../src/authdialog.cpp" line="300"/>
+        <location filename="../src/authdialog.cpp" line="305"/>
         <source>Please enter your password or enroll your fingerprint </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="318"/>
+        <location filename="../src/authdialog.cpp" line="333"/>
         <source>Authentication failure, Please try again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="492"/>
+        <location filename="../src/authdialog.cpp" line="507"/>
         <source>Biometric Authentication</source>
         <translation type="unfinished">Biyometrik Kimlik Doğrulama</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="505"/>
+        <location filename="../src/authdialog.cpp" line="520"/>
         <source>Password Authentication</source>
         <translation type="unfinished">Parola Doğrulama</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="518"/>
+        <location filename="../src/authdialog.cpp" line="533"/>
         <source>Other Devices</source>
         <translation type="unfinished">Diğer Ayıtlar</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="617"/>
+        <location filename="../src/authdialog.cpp" line="632"/>
         <source>Too many unsuccessful attempts,please enter password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="621"/>
+        <location filename="../src/authdialog.cpp" line="636"/>
         <source>Fingerprint authentication failed, you still have %1 verification opportunities</source>
         <translation type="unfinished"></translation>
     </message>
@@ -206,12 +207,12 @@
         <translation type="unfinished">Zaman</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="309"/>
+        <location filename="../src/lockwidget.cpp" line="316"/>
         <source>Guest</source>
         <translation type="unfinished">Misafir</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="292"/>
+        <location filename="../src/lockwidget.cpp" line="299"/>
         <source>SwitchUser</source>
         <translation>Kullanıcı Değiştir</translation>
     </message>
@@ -298,12 +299,17 @@
         <translation type="obsolete">çıkış</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="538"/>
+        <location filename="../screensaver/screensaver.cpp" line="124"/>
+        <source>Picture does not exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../screensaver/screensaver.cpp" line="615"/>
         <source>Set as desktop wallpaper</source>
         <translation type="unfinished">Masaüstü arkaplanı olarak ayarla</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="548"/>
+        <location filename="../screensaver/screensaver.cpp" line="625"/>
         <source>Automatic switching</source>
         <translation type="unfinished">Otomatik değiştir</translation>
     </message>
@@ -325,7 +331,7 @@
     </message>
     <message>
         <location filename="../src/ukui-screensaver-command.cpp" line="45"/>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="145"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="149"/>
         <source>lock the screen immediately</source>
         <translation type="unfinished">Ekranı hemen kilitle</translation>
     </message>
@@ -345,23 +351,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="140"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="144"/>
         <source>Dialog for the ukui ScreenSaver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="147"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="151"/>
         <source>activated by session idle signal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="149"/>
         <location filename="../src/ukui-screensaver-dialog.cpp" line="153"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="157"/>
         <source>lock the screen and show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="151"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="155"/>
         <source>show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>

@@ -71,6 +71,7 @@ private Q_SLOTS:
     void onGlobalKeyPress(const QString &key);
     void onGlobalKeyRelease(const QString &key);
     void onGlobalButtonDrag(int xPos, int yPos);
+    void onGlobalButtonPressed(int xPos, int yPos);
     void onPrepareForSleep(bool sleep);
     void switchToLinux();
     void laterActivate();
