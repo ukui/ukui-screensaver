@@ -85,7 +85,8 @@ Screensaver::Screensaver(QWidget *parent):
 {
     installEventFilter(this);
 
-    qsrand(time(NULL));
+    //qsrand(time(NULL));
+    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
     isCustom        =  configuration->getIsCustom();
     if(isCustom){
@@ -328,7 +329,7 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
             for(int i = 0;i<labelList.count();i++)
             {
                 int fontsize = labelList.at(i)->font().pixelSize();
-                const QString SheetStyle = QString("font-size:%1px;").arg(fontsize/3);
+                const QString SheetStyle = QString("font-size:%1px;").arg(fontsize/4);
                 labelList.at(i)->setStyleSheet(SheetStyle);
             }
             QList<QWidget*> childList = timeLayout->findChildren<QWidget *>();
@@ -457,11 +458,23 @@ void Screensaver::setUpdateCenterWidget()
         }
         QString languageFilePath=languageDirPath+"screensaver-"+lang+".ini";
         QString homeLanguageFilePath=homePath+"/.config/ukui/screensaver-"+lang+".ini";
+        QString jdLanguageFilePath=languageDirPath+"screensaver-jd" + ".ini";
         qDebug()<<"langnguageFile = "<<languageFilePath;
         qDebug()<<"homeLanguageFilePath = "<<homeLanguageFilePath;
         QFileInfo fileInfo(languageFilePath);
         QFileInfo homeConfigFileInfo(homeLanguageFilePath);
-        if (homeConfigFileInfo.isFile()){
+        QFileInfo jdConfigFileInfo(jdLanguageFilePath);
+        bool useJd = false;
+
+        QDate date1(2021,6,20);
+        QDate date2(2021,7,31);
+        if(QDate::currentDate() >= date1 && QDate::currentDate()<=date2){
+            useJd = true;
+        }
+
+        if(useJd && jdConfigFileInfo.isFile()){
+            qsettings = new QSettings(jdLanguageFilePath,QSettings::IniFormat);
+        }else if (homeConfigFileInfo.isFile()){
             qsettings = new QSettings(homeLanguageFilePath,QSettings::IniFormat);
         }
         else if(fileInfo.isFile()){
@@ -548,7 +561,6 @@ void Screensaver::updateCenterWidget(int index)
         return;
 
     if(index<=1){
-        qsrand((unsigned)time(0));
         index = qrand() % qlist.count() + 1;
     }
     qsettings->beginGroup(QString::number(index));
