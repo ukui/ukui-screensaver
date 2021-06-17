@@ -39,8 +39,8 @@ LockWidget::LockWidget(QWidget *parent)
       ui(new Ui::LockWidget),
       usersMenu(nullptr),
       users(new Users(this)),
-      timeType(24),
-      displayManager(new DisplayManager(this))
+      displayManager(new DisplayManager(this)),
+      timeType(24)
 {
     scale = 1.0;
     ui->setupUi(this);

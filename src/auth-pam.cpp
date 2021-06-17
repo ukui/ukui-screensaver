@@ -33,7 +33,6 @@ static int readData(int fd, void *buf, size_t count);
 static char * readString(int fd);
 static int pam_conversation(int msgLength, const struct pam_message **msg,
                 PAM_RESPONSE **resp, void *appData);
-static void sigchld_handler(int signo);
 
 AuthPAM::AuthPAM(QObject *parent)
     : Auth(parent),

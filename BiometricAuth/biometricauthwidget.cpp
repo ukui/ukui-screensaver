@@ -25,12 +25,12 @@ BiometricAuthWidget::BiometricAuthWidget(BiometricProxy *proxy, QWidget *parent)
     QWidget(parent),
     proxy(proxy),
     isInAuth(false),
-    movieTimer(nullptr),
-    retrytimer(nullptr),
+    movieTimer(nullptr), 
     failedCount(0),
-    usebind(false),
     timeoutCount(0),
-    beStopped(false)
+    beStopped(false),
+    retrytimer(nullptr),
+    usebind(false)
 {
     usebind = getAuthDouble();
     initUI();

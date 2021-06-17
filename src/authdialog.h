@@ -133,15 +133,14 @@ private:
     QWidget         *m_passwdWidget;        //放置密码输入框和信息列表
     IconEdit        *m_passwordEdit;       //密码输入框
     QLabel          *m_messageLabel;         //PAM消息显示
-    PamTally        *pamTally;
-    QTimer          *m_bioTimer;
     bool            usebind;
     bool            usebindstarted;
     bool            isBioPassed;
-    bool            useFirstDevice;
-    int             failedTimes;
     int             maxFailedTimes;
     bool            isHiddenSwitchButton;
+    int             failedTimes;
+    QTimer          *m_bioTimer;
+    bool            useFirstDevice;
 };
 
 #endif // AUTHDIALOG_H

@@ -82,7 +82,6 @@ void PowerManager::powerClicked(QListWidgetItem *item)
         return ;
     lasttime = QTime::currentTime();
 
-    int x = row(item);
     QString name = itemWidget(item)->objectName();
     if(name == lockWidget->objectName())
         lockWidgetClicked();

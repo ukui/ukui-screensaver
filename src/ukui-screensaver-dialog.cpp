@@ -45,7 +45,6 @@ void checkIslivecd()
     char cmd[128] = {0};
     char str[1024];
     FILE *fp;
-    int pid;
 
     int n = sprintf(cmd, "cat /proc/cmdline");
     Q_UNUSED(n)

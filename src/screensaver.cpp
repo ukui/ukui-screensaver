@@ -62,6 +62,12 @@ bool ScreenSaver::exists()
         return QFile(path).exists();
     case SAVER_IMAGE:
         return QDir(path).exists();
+    case SAVER_DEFAULT:
+        return QDir(path).exists();
+    case SAVER_DEFAULT_CUSTOM:
+        return QDir(path).exists();
+    default:
+        return false;
     }
     return false;
 }
@@ -112,7 +118,7 @@ bool ScreenSaver::timerStatus()
 
 QDebug &operator<<(QDebug debug, const ScreenSaver &screensaver)
 {
-    QString modes[] = {"blank-only", "random", "single", "image"};
+    QString modes[] = {"blank-only", "random", "single", "image","default-ukui","default-ukui-custom"};
     QString effects[] = {"none", "fade-in-out"};
     debug.nospace()<< "screensaver: "<< modes[screensaver.mode];
     switch(screensaver.mode) {
@@ -124,6 +130,12 @@ QDebug &operator<<(QDebug debug, const ScreenSaver &screensaver)
         break;
     case SAVER_IMAGE:
         debug.nospace() << screensaver.path << effects[screensaver.effect] << screensaver.interval;
+    case SAVER_DEFAULT:
+        debug.nospace() << screensaver.path << effects[screensaver.effect] << screensaver.interval;
+    case SAVER_DEFAULT_CUSTOM:
+        debug.nospace() << screensaver.path << effects[screensaver.effect] << screensaver.interval;
+    default:
+        debug.nospace() <<"screensaver path not exists";
     }
 
     return debug.maybeSpace();

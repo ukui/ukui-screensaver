@@ -88,9 +88,9 @@ private:
     QList<QWidget*>     widgetXScreensaverList;
     QList<pid_t>        xscreensaverPidList;
     bool                isLocked;
+    bool                lockState;
     ScreenStatus        screenStatus;
     QPixmap             background;
-    bool                lockState;
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
     bool 		isPassed;
     QWidget             *helpWidget;

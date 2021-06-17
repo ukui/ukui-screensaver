@@ -143,10 +143,10 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       monitorWatcher(new MonitorWatcher(this)),
       configuration(new Configuration(this)),
       isLocked(false),
-      isPassed(false),
-      helpWidget(nullptr),
       lockState(false),
-      screenStatus(UNDEFINED)
+      screenStatus(UNDEFINED),
+      isPassed(false),
+      helpWidget(nullptr)
 {
     qDebug() << "init - screenStatus: " << screenStatus;
     setMouseTracking(true);
@@ -236,8 +236,6 @@ bool FullBackgroundWidget::eventFilter(QObject *obj, QEvent *event)
 
 void FullBackgroundWidget::paintEvent(QPaintEvent *event)
 {
-    QDesktopWidget *desktop = QApplication::desktop();
-
     for(auto screen : QGuiApplication::screens())
     {
         QPainter painter(this);

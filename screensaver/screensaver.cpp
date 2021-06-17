@@ -57,31 +57,26 @@
 
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
-  date(new ChineseDate()),
-  centerWidget(nullptr),
-  dateOfLunar(nullptr),
-  flag(0),
-  hasChanged(false),
-  background(""),
-  configuration(SCConfiguration::instance()),
-  autoSwitch(nullptr),
-  vboxFrame(nullptr),
-  sleepTime(nullptr),
-  lastPath(""),
-  currentPath(""),
   switchTimer(nullptr),
-  process(nullptr),
-  cycleTime(300),
-  timer(nullptr),
-  screenLabel(nullptr),
-  isAutoSwitch(false),
-  isCustom(false),
-  respondClick(false),
   backgroundPath(""),
+  cycleTime(300),
+  isCustom(false),
   isShowRestTime(true),
   myTextLabel(nullptr),
+  configuration(SCConfiguration::instance()),
   myTextWidget(nullptr),
-  m_timer(nullptr)
+  centerWidget(nullptr),
+  sleepTime(nullptr),
+  timer(nullptr),
+  background(""),
+  autoSwitch(nullptr),
+  vboxFrame(nullptr),
+  isAutoSwitch(false),
+  flag(0),
+  hasChanged(false),
+  process(nullptr),
+  screenLabel(nullptr),
+  respondClick(false)
 {
     installEventFilter(this);
 
@@ -405,7 +400,7 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
 //    }
 
 
-    if(settingsButton);
+    if(settingsButton)
          settingsButton->setGeometry(width() - 40*scale - settingsButton->width(),40*scale,settingsButton->width(),settingsButton->height());
 
     if(vboxFrame)

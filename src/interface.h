@@ -61,9 +61,9 @@ private:
     bool lockState;
     void emitLockState(bool);
     int m_timerCount;
+    QGSettings	*settings;
     QTimer *m_timer;
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
-    QGSettings	*settings;
 
 private:
     QProcess process;

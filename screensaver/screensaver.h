@@ -61,17 +61,12 @@ private:
     void connectSingles();
     void updateBackgroundPath();
    
-    int                 imageIndex;
     QTimer              *switchTimer;
     QTimer              *fadeTimer;
     QStringList         imagePaths;
     QString             backgroundPath;
-    QString             lastPath;
-    QString             currentPath;
     int                 cycleTime;
     float               opacity;
-    QPixmap             lastPixmap;
-    QPixmap             currentPixmap;
     bool                isCustom;
     bool                isShowRestTime;
     bool                textIsCenter;
@@ -82,31 +77,23 @@ private:
     SCConfiguration     *configuration;
 
     QWidget             *myTextWidget;
-    QLabel              *dateOfWeek;
     QLabel              *dateOfLocaltime;
     QLabel              *dateOfDay;
-    QLabel              *dateOfLunar;
 
     QWidget             *centerWidget;
-
-    QLabel              *ubuntuKylinlogo;
 
     QWidget             *timeLayout;
     SleepTime           *sleepTime;
     QTimer              *timer;
-    ChineseDate         *date;
 
     QPixmap             background;
-    QString             defaultBackground;
 
-    QPushButton         *escButton;
     QPushButton         *settingsButton;
     QPushButton         *WallpaperButton;
     QWidget             *buttonWidget;
     QSettings           *qsettings;
 
     MBackground         *m_background;
-    QString             m_backgroundPath;
 
     QLabel              *centerlabel1;
     QLabel              *centerlabel2;
@@ -118,7 +105,6 @@ private:
 
     QFrame              *vboxFrame;
     bool                isAutoSwitch;
-    QTimer              *m_timer;
 
     int                 flag;
     bool                hasChanged;

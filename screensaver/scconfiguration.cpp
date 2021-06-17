@@ -30,11 +30,11 @@
 SCConfiguration* SCConfiguration::instance_ = nullptr;
 
 SCConfiguration::SCConfiguration(QObject *parent) :
-        mgsettings(nullptr),
-	ukgsettings(nullptr),
-	udgsettings(nullptr),
-	timegsettings(nullptr),	
-	QObject(parent)
+    QObject(parent),
+    mgsettings(nullptr),
+    ukgsettings(nullptr),
+    udgsettings(nullptr),
+    timegsettings(nullptr)
 {
     initGsettings();
 }
