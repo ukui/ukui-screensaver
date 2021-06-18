@@ -79,6 +79,7 @@ Screensaver::Screensaver(QWidget *parent):
   respondClick(false)
 {
     installEventFilter(this);
+    setWindowFlags(Qt::X11BypassWindowManagerHint);
 
     //qsrand(time(NULL));
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
@@ -123,6 +124,7 @@ Screensaver::Screensaver(QWidget *parent):
     screenLabel->setText(tr("Picture does not exist"));
     screenLabel->adjustSize();
     screenLabel->hide();
+
 }
 
 Screensaver::~Screensaver()

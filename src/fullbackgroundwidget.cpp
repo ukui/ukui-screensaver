@@ -174,6 +174,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
      qApp->installNativeEventFilter(this);
     installEventFilter(this);
     QTimer::singleShot(500,this,SLOT(switchToLinux()));
+
 } 
 
 void FullBackgroundWidget::switchToLinux()

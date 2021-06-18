@@ -37,10 +37,11 @@ ScreenSaverWidget::ScreenSaverWidget(ScreenSaver *screensaver, QWidget *parent)
     setFocus();
     this->installEventFilter(this);
 
-    QPalette plt;
-    plt.setBrush(QPalette::Window, Qt::black);
-    setPalette(plt);
+    QPalette pal(palette());
+    pal.setColor(QPalette::Background, Qt::black); //设置背景黑色
     setAutoFillBackground(true);
+    setPalette(pal);
+
     switch(screensaver->mode) {
     case SAVER_RANDOM:
     case SAVER_SINGLE:
