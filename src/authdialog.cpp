@@ -661,17 +661,8 @@ void AuthDialog::onBiometricButtonClicked()
     {
         if(m_deviceCount == 1)
         {
-            DeviceList deviceList = m_biometricProxy->GetDevList();
-            m_deviceInfo = deviceList.at(0);
-            if(!m_deviceInfo)
-            {
-                m_otherDeviceButton->click();
-            }
-            else
-            {
-                authMode = BIOMETRIC;
-                startAuth();
-	    }
+            if(m_biometricDevicesWidget)
+                m_biometricDevicesWidget->onOKButtonClicked();
         }
         else
         {
