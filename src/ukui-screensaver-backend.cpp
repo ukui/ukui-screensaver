@@ -18,6 +18,7 @@
 #include <QCoreApplication>
 #include <QDBusConnection>
 #include <QDebug>
+#include <QGSettings>
 
 #include "interface.h"
 #include "sessionwatcher.h"
@@ -29,6 +30,7 @@
 #include <sys/wait.h>
 #include <stdio.h>
 
+#define POWER_TYPE_SCHENA "org.ukui.power-manager"
 
 void sig_chld(int /*signo*/)
 {
@@ -67,6 +69,23 @@ int main(int argc, char *argv[])
     fclose(fp);
 //    Q_UNUSED(fp)
 
+    QGSettings *powerSettings;
+    if(QGSettings::isSchemaInstalled(POWER_TYPE_SCHENA)){
+        powerSettings = new QGSettings(POWER_TYPE_SCHENA,"",NULL);
+        QStringList keys = powerSettings->keys();
+        if (keys.contains("lockSuspend")) {
+            bool ret = powerSettings->get("lockSuspend").toBool();
+            if(ret){
+                powerSettings->set("lock-suspend",false);
+            }
+        }
+        if (keys.contains("lockHibernate")) {
+            bool ret = powerSettings->get("lockHibernate").toBool();
+            if(ret){
+                powerSettings->set("lock-hibernate",false);
+            }
+        }
+    }
 
     // 注册DBus
     Interface *interface = new Interface();

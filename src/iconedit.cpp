@@ -111,16 +111,19 @@ bool IconEdit::eventFilter(QObject *obj, QEvent *event)
             if(keyEvent->matches(QKeySequence::Copy) || keyEvent->matches(QKeySequence::Cut) || keyEvent->matches(QKeySequence::Paste)){
                 event->ignore();
                 return true;
+            }else if(keyEvent->modifiers() ==(Qt::MetaModifier)){//当meta键被按下时，忽略按键事件
+                event->ignore();
+                return true;
             }
         }
         if(event->type() == 23)
         {
             XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
-	    update();
-	}else if(event->type() == QEvent::MouseButtonPress){
+            update();
+        }else if(event->type() == QEvent::MouseButtonPress){
             XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
-	    update();
-	}
+            update();
+        }
     }
     if(obj == m_iconButton){
         if(m_timer && m_timer->isActive())

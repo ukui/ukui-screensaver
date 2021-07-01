@@ -668,7 +668,6 @@ void AuthDialog::onBiometricButtonClicked()
         {
             m_otherDeviceButton->click();
         }
-
     }
     else
     {
