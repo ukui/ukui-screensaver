@@ -20,6 +20,9 @@
 
 #include <QObject>
 #include <QDBusObjectPath>
+#include <QGSettings>
+#include <QString>
+#include <QTimer>
 
 class SessionWatcher : public QObject
 {
@@ -33,9 +36,13 @@ Q_SIGNALS:
 private Q_SLOTS:
     void onStatusChanged(unsigned int status);
     void onSessionRemoved(const QDBusObjectPath &objectPath);
+    void onConfigurationChanged(QString key);
 
 private:
     QString sessionPath;
+    QGSettings *settings;
+    int idleDelay;
+    QTimer *m_timer = nullptr;
 };
 
 #endif // SESSIONWATCHER_H
