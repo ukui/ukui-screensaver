@@ -81,9 +81,10 @@ target_link_libraries(ukui-screensaver-dialog
 	Qt5::Core
 	Qt5::Widgets
 	Qt5::DBus
+	Qt5::Svg
 	Qt5::X11Extras
 	${EXTRA_LIBS}
-    BiometricAuth 
+        BiometricAuth 
 	VirtualKeyboard 
 	Common
 	)

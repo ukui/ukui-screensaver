@@ -39,36 +39,34 @@ QLineEdit::focus{
 
 /* 大写提示 */
 #capsIconLabel{
-    background: url(:/image/assets/capslock.png);
     background-repeat: no-repeat;
     background-position: center;
-    max-width: 22px;
-    max-height: 22px;
-    min-width: 22px;
-    min-height: 22px;
+    max-width: 16px;
+    max-height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    icon-size: 16px;
 }
 
 /* echo mode */
 #echoModeButton {
     background: transparent;
-    image: url(:/image/assets/hide-password.png);
     max-width: 22px;
     max-height: 22px;
+    min-width: 22px;
+    min-height: 22px;
     margin-right: 5px;
-}
-#echoModeButton::checked {
-    image: url(:/image/assets/show-password.png);
+    icon-size: 22px;
 }
 /* 登录按钮 */
 #loginButton{
-    /*image: url(:/image/assets/unlock-button.png);*/
-    min-width: 26px;
-    max-width: 26px;
-    min-height: 26px;
-    max-height: 26px;
-    icon-size: 26px;
+    min-width: 24px;
+    max-width: 24px;
+    min-height: 24px;
+    max-height: 24px;
+    icon-size: 24px;
     background:#3D6BE5;
-    border-radius:13px;
+    border-radius:12px;
 }
 
 /* PAM message提示*/

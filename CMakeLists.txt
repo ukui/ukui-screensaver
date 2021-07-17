@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 project(ukui-screensaver)
 
-find_package(Qt5 COMPONENTS Core Widgets DBus X11Extras Xml)
+find_package(Qt5 COMPONENTS Core Widgets DBus X11Extras Xml Svg)
 find_package(PkgConfig REQUIRED)
 
 set(TS_FILES
