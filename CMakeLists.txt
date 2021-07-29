@@ -3,6 +3,10 @@ project(ukui-screensaver)
 
 find_package(Qt5 COMPONENTS Core Widgets DBus X11Extras Xml Svg)
 find_package(PkgConfig REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(PkgConfig)
+pkg_check_modules(GIOUNIX2 REQUIRED gio-unix-2.0)
+pkg_check_modules(GLIB2 REQUIRED glib-2.0 gio-2.0)
 
 set(TS_FILES
 	${CMAKE_CURRENT_SOURCE_DIR}/i18n_ts/zh_CN.ts

@@ -19,7 +19,16 @@
 #include "biometricauthwidget.h"
 #include <QLabel>
 #include <QDebug>
+#include <QDBusUnixFileDescriptor>
+#include <unistd.h>
 #include <pwd.h>
+
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/opencv.hpp>
+
+#include "giodbus.h"
 
 BiometricAuthWidget::BiometricAuthWidget(BiometricProxy *proxy, QWidget *parent) :
     QWidget(parent),
@@ -34,12 +43,15 @@ BiometricAuthWidget::BiometricAuthWidget(BiometricProxy *proxy, QWidget *parent)
 {
     usebind = getAuthDouble();
     initUI();
-    resize(400, 200);
+    resize(400, 260);
 
     if(this->proxy)
     {
         connect(this->proxy, &BiometricProxy::StatusChanged,
                 this, &BiometricAuthWidget::onStatusChanged);
+
+        connect(this->proxy, &BiometricProxy::FrameWritten,
+                this, &BiometricAuthWidget::onFrameWritten);
     }
 
 }
@@ -70,6 +82,7 @@ void BiometricAuthWidget::resizeEvent(QResizeEvent */*event*/)
     lblImage->setGeometry((width() - lblImage->width()) / 2,
                            lblDevice->geometry().bottom() + 10,
                            lblImage->width(), lblImage->height());
+    //qDebug()
 }
 
 void BiometricAuthWidget::startAuth(DeviceInfoPtr device, int uid)
@@ -92,25 +105,30 @@ void BiometricAuthWidget::startAuth(DeviceInfoPtr device, int uid)
     this->failedCount = 0;
     this->timeoutCount = 0;
     this->beStopped = false;
-	
     proxy->StopOps(device->id);
     startAuth_();
+
+
+    if(!device->deviceType == DeviceType::Type::Face){
+        updateImage(1);
+    }
+
 }
 
 void BiometricAuthWidget::startAuth_()
 {
     lblDevice->setText(tr("Current device: ") + device->shortName);
 
-    qDebug().noquote() << QString("Identify:[drvid: %1, uid: %2]").arg(1).arg(2);
+    //qDebug().noquote() << QString("Identify:[drvid: %1, uid: %2]").arg(1).arg(2);
 
     isInAuth = true;
+    dup_fd = -1;
 
     QDBusPendingCall call = proxy->Identify(device->id, uid);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
     connect(watcher, &QDBusPendingCallWatcher::finished,
             this, &BiometricAuthWidget::onIdentifyComplete);
 
-    updateImage(1);
 }
 
 void BiometricAuthWidget::stopAuth()
@@ -211,6 +229,34 @@ void BiometricAuthWidget::onIdentifyComplete(QDBusPendingCallWatcher *watcher)
     updateImage(0);
 }
 
+void BiometricAuthWidget::onFrameWritten(int drvid)
+{
+
+    if(dup_fd == -1){
+        dup_fd = get_server_gvariant_stdout(drvid);
+    }
+
+    if(dup_fd <= 0)
+        return ;
+
+    cv::Mat img;
+    lseek(dup_fd, 0, SEEK_SET);
+    char base64_bufferData[1024*1024];
+    int rc = read(dup_fd, base64_bufferData, 1024*1024);
+    printf("rc = %d\n", rc);
+
+    cv::Mat mat2(1, sizeof(base64_bufferData), CV_8U, base64_bufferData);
+    img = cv::imdecode(mat2, cv::IMREAD_COLOR);
+
+    QImage srcQImage = QImage((uchar*)(img.data), img.cols, img.rows, QImage::Format_RGB888);
+    lblImage->setFixedSize(160,160);
+    lblImage->setGeometry((width() - lblImage->width()) / 2,
+                           lblDevice->geometry().bottom() + 10,
+                           lblImage->width(), lblImage->height());
+    lblImage->setPixmap(QPixmap::fromImage(srcQImage).scaled(lblImage->size()));
+
+}
+
 void BiometricAuthWidget::onStatusChanged(int drvid, int status)
 {
     if(!isInAuth)
@@ -233,6 +279,9 @@ void BiometricAuthWidget::onStatusChanged(int drvid, int status)
 static int count = 0;
 void BiometricAuthWidget::updateImage(int type)
 {
+    if(device->deviceType == DeviceType::Type::Face)
+        return ;
+
     if(type == 0)
     {
         if(movieTimer && movieTimer->isActive())
@@ -277,6 +326,7 @@ void BiometricAuthWidget::setImage(const QString &path)
     QPixmap image(path);
     image = image.scaled(lblImage->width(), lblImage->height(),
                          Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
     lblImage->setPixmap(image);
 }
 
