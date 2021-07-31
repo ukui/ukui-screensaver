@@ -8,6 +8,19 @@ find_package(PkgConfig)
 pkg_check_modules(GIOUNIX2 REQUIRED gio-unix-2.0)
 pkg_check_modules(GLIB2 REQUIRED glib-2.0 gio-2.0)
 
+# 是否是intel项目
+option (USE_INTEL "intel项目" ON)
+# 用于测试替换用的变量
+set(TEST_ON 1)
+set(TEST_OF 0)
+set(VAR "VAR_NEW")
+
+# 加入一个配置头文件，用于处理 CMake 对源码的设置
+configure_file (
+  "${CMAKE_CURRENT_SOURCE_DIR}/config.h.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/config.h"
+)
+
 set(TS_FILES
 	${CMAKE_CURRENT_SOURCE_DIR}/i18n_ts/zh_CN.ts
 	${CMAKE_CURRENT_SOURCE_DIR}/i18n_ts/es.ts
