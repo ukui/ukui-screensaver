@@ -20,6 +20,9 @@
 #include <QDebug>
 #include "types.h"
 
+#define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
+#define KEY_IDLE_DELAY "idleDelay"
+
 SessionWatcher::SessionWatcher(QObject *parent) : QObject(parent)
 {
     sessionPath = qgetenv("XDG_SESSION_PATH");
@@ -40,15 +43,40 @@ SessionWatcher::SessionWatcher(QObject *parent) : QObject(parent)
                 QDBusConnection::systemBus());
     connect(displayManagerInterface, SIGNAL(SessionRemoved(QDBusObjectPath)),
             this, SLOT(onSessionRemoved(QDBusObjectPath)));
-}
 
+    settings = new QGSettings(GSETTINGS_SCHEMA_SCREENSAVER, "", this);
+    connect(settings, &QGSettings::changed,
+            this, &SessionWatcher::onConfigurationChanged);
+    idleDelay = settings->get("idle-delay").toInt();
+}
+ 
+void SessionWatcher::onConfigurationChanged(QString key)
+{
+    if(key == KEY_IDLE_DELAY){
+        idleDelay = settings->get("idle-delay").toInt();
+    }
+}
 
 void SessionWatcher::onStatusChanged(unsigned int status)
 {
     qDebug() << "Session Status: " << status;
 
     if(status == SESSION_IDLE) {
-        Q_EMIT sessionIdle();
+        if(!m_timer){
+            m_timer = new QTimer(this);
+            connect(m_timer, &QTimer::timeout, this, [&]{
+                Q_EMIT sessionIdle();
+                m_timer->stop();
+            });
+        }
+        int time = (idleDelay - 1)*60000;
+        if(time<0)
+            time = 0;
+        m_timer->start(time);
+    }else if(status == SESSION_AVAILABLE){
+        if(m_timer && m_timer->isActive()){
+            m_timer->stop();
+        }
     }
 }
 

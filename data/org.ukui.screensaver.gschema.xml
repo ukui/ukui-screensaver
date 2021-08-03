@@ -54,6 +54,11 @@
       <summary>Lock on activation</summary>
       <description>Set this to TRUE to lock the screen when the screensaver goes active.</description>
     </key>
+    <key name="idle-delay" type="i">
+      <default>5</default>
+      <summary>idle delay to lock</summary>
+      <description>Wait idle delay to lock</description>
+    </key>
     <key name="sleep-activation-enabled" type="b">
       <default>true</default>
       <summary>Lock when sleep</summary>
