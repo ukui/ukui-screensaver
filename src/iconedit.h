@@ -21,6 +21,7 @@
 #define ICONEDIT_H
 
 #include <QLabel>
+#include <QSvgWidget>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QPixmap>
@@ -59,7 +60,7 @@ public Q_SLOTS:
 
 private:
     QLineEdit       *m_edit;
-    QLabel          *m_capsIcon;
+    QSvgWidget      *m_capsIcon;
     QPushButton     *m_iconButton;
     QPushButton     *m_modeButton;
     QTimer          *m_timer;

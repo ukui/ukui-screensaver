@@ -21,6 +21,7 @@
 
 #include <QtDBus>
 #include <QDBusAbstractInterface>
+#include <QDBusUnixFileDescriptor>
 #include "biometricdeviceinfo.h"
 
 /**
@@ -132,6 +133,7 @@ Q_SIGNALS:
      * @param deviceNum 插拔动作后该驱动拥有的设备数量
      */
     void USBDeviceHotPlug(int drvid, int action, int deviceNum);
+    void FrameWritten(int drvid);
 };
 
 #endif // BIOMETRICPROXY_H

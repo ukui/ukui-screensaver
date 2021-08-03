@@ -54,6 +54,10 @@ LockWidget::LockWidget(QWidget *parent)
             authDialog, &AuthDialog::onCapsLockChanged);
     this->installEventFilter(this);
     initUI();
+
+    if(users->getUsers().count() < 2){
+        ui->btnSwitchUser->hide();
+    }
 }
 
 LockWidget::~LockWidget()
