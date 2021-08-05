@@ -184,16 +184,6 @@ int main(int argc, char *argv[])
     }
     qssFile.close();
 
-/*下面这段愚蠢的代码仅作用于990，用于解决一个无法输入密码的问题，后续修改支持wayland后，
- * 再取消该代码的应用。不要将其应用到通用版本里去，这里只要不放开下面的注释就可以*/
-/*     
-    window->showHelpWindow();
-
-    QTime t;
-    t.start();
-    while(t.elapsed()<100)//此处100表示100毫秒
-           QCoreApplication::processEvents();//不停地处理事件，以使得程序保持响应。
-*/
     window->show();
     window->activateWindow();
 
