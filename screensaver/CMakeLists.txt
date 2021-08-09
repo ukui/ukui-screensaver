@@ -29,6 +29,8 @@ qt5_wrap_cpp(screensaver_SRC
     cyclelabel.h
     scconfiguration.h
     sleeptime.h
+    weathermanager.h
+    ../src/networkwatcher.h
     )
 set(screensaver_SRC
     ${screensaver_SRC}
@@ -39,9 +41,11 @@ set(screensaver_SRC
     cyclelabel.cpp
     scconfiguration.cpp
     sleeptime.cpp
+    weathermanager.cpp
+    ../src/networkwatcher.cpp
     )
 add_executable(ukui-screensaver-default ${screensaver_SRC})
-target_link_libraries(ukui-screensaver-default Qt5::Core Qt5::Widgets Qt5::X11Extras Qt5::Xml ${EXTRA_LIBS})
+target_link_libraries(ukui-screensaver-default Qt5::Core Qt5::Widgets Qt5::X11Extras Qt5::Xml Qt5::Network ${EXTRA_LIBS})
 
 install(TARGETS
 	ukui-screensaver-default

@@ -96,8 +96,8 @@ void SCConfiguration::onConfigurationChanged(QString key)
 QString SCConfiguration::getDefaultBackground()
 {
     QString backgroundFile = "";
-    if(mgsettings){
-        backgroundFile = mgsettings->get("picture-filename").toString();    
+    if(ukgsettings){
+        backgroundFile = ukgsettings->get("background").toString();
     }
 
     if(ispicture(backgroundFile))

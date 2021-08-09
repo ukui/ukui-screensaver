@@ -1,0 +1,86 @@
+QLabel#m_weatherArea {
+    font-size:26px;
+    color: #ffffff;
+}
+QLabel#dateOfWeek {
+    font-size:40px;
+    color: #ffffff;
+    text-align:left;
+}
+QLabel#dateOfLocaltime {
+    font-size:96px;
+    color: #ffffff;
+    text-align:left;
+}
+QLabel#dateOfDay {
+    font-size:32px;
+    color: #ffffff;
+    text-align:left;
+}
+QLabel#dateOfLunar {
+    font-size:18px;
+    color: #ffffff;
+}
+QLabel#clockTime {
+    background:rgba(255,255,255,0.15);
+    border-radius: 6px;
+    font-size:20px;
+    color: #ffffff;
+}
+QLabel#colon {
+    font-size:20px;
+    color: #ffffff;
+}
+QLabel#restTime {
+    font-size:20px;
+    color: #ffffff;
+    opacity:0.6;
+}
+QLabel#centerLabel {
+    font-size:18px;
+    color: #ffffff;
+}
+QLabel#authorLabel {
+    font-size:18px;
+    color: #ffffff;
+}
+QPushButton{
+    background:rgba(255,255,255,0.12);
+}
+#escButton,#prevButton,#nextButton,#settingsButton{
+    background: rgba(255, 255, 255, 12%);
+    border-radius:24px;
+    border-size:0px;
+    color:white;
+    icon-size:24px;
+}
+#escButton::hover,#prevButton::hover,#nextButton::hover,#settingsButton::hover
+{
+    background: rgba(255, 255, 255, 30%);
+}
+#escButton::pressed,#prevButton::pressed,#nextButton::pressed,#settingsButton::pressed
+{
+    background: rgba(255, 255, 255, 8%);
+}
+#vboxFrame{
+    background: rgba(255, 255, 255, 12%);
+    border: 0px;
+    border-radius:4px;
+}
+#WallpaperButton{
+    background: rgba(255, 255, 255, 0%);
+    border-radius:4px;
+    color:white;
+    icon-size:24px;
+}
+#WallpaperButton::hover{
+    background: rgba(61, 107, 229, 255);
+}
+#autoSwitchLabel{
+    font-size:14px;
+    color: #ffffff;
+}
+#autoSwitch{
+    background: rgba(255, 255, 255, 0%);
+    border-radius:4px;
+}

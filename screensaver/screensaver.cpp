@@ -51,9 +51,18 @@
 #include <X11/Xutil.h>
 
 #include "commonfunc.h"
+#include "config.h"
 
 #define TIME_TYPE_SCHEMA "org.ukui.control-center.panel.plugins"
 #define THEME_TYPE_SCHENA "org.ukui.style"
+
+#define GSETTINGS_SCHEMA_SCREENSAVER      "org.ukui.screensaver";
+#define KEY_MESSAGE_NUMBER                "message-number";
+#define KEY_MESSAGE_SHOW_ENABLED          "show-message-enabled";
+#define KEY_HOURSYSTEM                    "hoursystem";
+#define KEY_DATE_FORMAT                   "date";
+
+QTime Screensaver::m_currentTime = QTime::currentTime();
 
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
@@ -76,12 +85,16 @@ Screensaver::Screensaver(QWidget *parent):
   hasChanged(false),
   process(nullptr),
   screenLabel(nullptr),
-  respondClick(false)
+  respondClick(false),
+  m_weatherManager(new WeatherManager(this))
 {
     installEventFilter(this);
     setWindowFlags(Qt::X11BypassWindowManagerHint);
+    setUpdateCenterWidget();
+    connect(m_weatherManager, &WeatherManager::onWeatherUpdate,
+            this, &Screensaver::getWeatherFinish);
 
-    //qsrand(time(NULL));
+
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
     isCustom        =  configuration->getIsCustom();
@@ -94,7 +107,6 @@ Screensaver::Screensaver(QWidget *parent):
         myText          =  configuration->getMyText();
     }
 
-    setUpdateCenterWidget();
     initUI();
     m_background = new MBackground();
 
@@ -106,12 +118,12 @@ Screensaver::Screensaver(QWidget *parent):
     {
         labelList.at(i)->setAlignment(Qt::AlignCenter);
     }
-
+#ifndef USE_INTEL
     updateBackgroundPath();
     startSwitchImages();
 
     connectSingles();
-
+#endif
     QGSettings *themeSettings;
     if(QGSettings::isSchemaInstalled(TIME_TYPE_SCHEMA))
         themeSettings = new QGSettings(TIME_TYPE_SCHEMA,"",this);
@@ -209,6 +221,35 @@ void Screensaver::cycleTimeChanged(int cTime)
     startSwitchImages();
 }
 
+void Screensaver::getWeatherFinish(QString city, QString cond, QString tmp)
+{
+    qDebug() << "getWeatherFinish";
+    qDebug() << city << "," << cond << "," << tmp;
+
+    this->m_weatherIcon->setPixmap(m_weatherManager->getWeatherIcon(cond));
+    this->m_weatherArea->setText(city);
+
+    if(!cond.isEmpty())
+    {
+        this->m_weatherCond->show();
+        this->m_weatherCond->setText("·" + cond);
+    }
+    else
+        this->m_weatherCond->hide();
+
+    if(!tmp.isEmpty())
+    {
+        this->m_weatherTemperature->show();
+        this->m_weatherTemperature->setText(tmp);
+    }
+    else
+        this->m_weatherTemperature->hide();
+
+    m_weatherLaout->adjustSize();
+    m_weatherLaout->setGeometry((this->width()-m_weatherLaout->width())/2,96 * (float)width()/1920,
+                                m_weatherLaout->geometry().width(), m_weatherLaout->geometry().height());
+}
+
 void Screensaver::myTextChanged(QString text)
 {
     if(!isCustom)
@@ -279,6 +320,7 @@ void Screensaver::textIsCenterChanged(bool isCenter)
 
 bool Screensaver::eventFilter(QObject *obj, QEvent *event)
 {
+#ifndef USE_INTEL
     if(obj == this){
         if(event->type()==QEvent::MouseButtonPress){
             if(respondClick){
@@ -289,6 +331,7 @@ bool Screensaver::eventFilter(QObject *obj, QEvent *event)
             }
         }
     }
+#endif
     return false;
 }
 
@@ -296,19 +339,52 @@ void Screensaver::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 
+    /*时间未同步的时候重新刷新一次,主要是避免睡眠唤醒时的时间跳变*/
+    if (m_currentTime.hour() != QTime::currentTime().hour() ||
+            m_currentTime.minute() != QTime::currentTime().minute()) {
+        updateTime();
+    }
+
     if(isCustom && imagePaths.count()==0){
         painter.setBrush(QColor("#000000"));
         if(screenLabel->isHidden()){
             screenLabel->show();
         }
     }else{
-        painter.drawPixmap(0,0,this->width(),this->height(),background);
+        painter.drawPixmap(0,0,this->width(),this->height(), getPaddingPixmap());
         painter.setBrush(QColor(0,0,0,178));
         if(screenLabel->isVisible())
             screenLabel->hide();
     }
     /*这里是为了不显示笔的线条*/
-    painter.drawRect(-1,-1,this->width()+1,this->height()+1);
+    painter.drawRect(0,0,this->width(),this->height());
+}
+
+QPixmap Screensaver::getPaddingPixmap()
+{
+    if (background.width() == 0 || background.height() == 0)
+    {
+        return QPixmap();
+    }
+
+    bool useHeight;
+    float scaled = 0.0;
+    QPixmap scaledPixmap;
+    QPixmap paddingPixmap;
+    qint64 rw = qint64(this->height()) * qint64(background.width()) / qint64(background.height());
+
+    useHeight = (rw >= this->width());
+    if (useHeight) {
+        scaled = float(this->height()) / float(background.height());
+        scaledPixmap = background.scaled(background.width() * scaled, this->height());
+        paddingPixmap = scaledPixmap.copy((background.width() * scaled - this->width()) / 2 , 0, this->width(), this->height());
+    } else {
+        scaled = float(this->width()) / float(background.width());
+        scaledPixmap = background.scaled(this->width(), background.height() * scaled);
+        paddingPixmap = scaledPixmap.copy(0 , (background.height() * scaled - this->height()) / 2,this->width(), this->height());
+    }
+
+    return paddingPixmap;
 }
 
 void Screensaver::addClickedEvent(){
@@ -588,7 +664,14 @@ void Screensaver::updateCenterWidget(int index)
 
 void Screensaver::initUI()
 {
-    QFile qssFile(":/qss/assets/default.qss");
+    QFile qssFile;
+
+#ifdef USE_INTEL
+    qssFile.setFileName(":/qss/assets/default-intel.qss");
+#elif
+    qssFile.setFileName(":/qss/assets/default.qss");
+#endif
+
     if(qssFile.open(QIODevice::ReadOnly)) {
         setStyleSheet(qssFile.readAll());
     }

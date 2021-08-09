@@ -139,5 +139,15 @@
       <summary>the background iamge of lockscreen</summary>
       <description>Allow the user to set the background iamge of lockscreen.</description>
     </key>
+    <key name="message-number" type="i">
+      <default>0</default>
+      <summary>Number of side-bar notify messages</summary>
+      <description>The number of sider notify messages</description>
+    </key>
+    <key name="show-message-enabled" type="b">
+      <default>true</default>
+      <summary>Allow to show messages</summary>
+      <description>Set this to TRUE to if u want to see how many masseges not read</description>
+    </key>
   </schema>
 </schemalist>

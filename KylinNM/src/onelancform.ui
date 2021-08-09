@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OneLancForm</class>
+ <widget class="QWidget" name="OneLancForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>424</width>
+    <height>250</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="lbName">
+   <property name="geometry">
+    <rect>
+     <x>63</x>
+     <y>8</y>
+     <width>190</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnConn">
+   <property name="geometry">
+    <rect>
+     <x>316</x>
+     <y>14</y>
+     <width>100</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnConnSub">
+   <property name="geometry">
+    <rect>
+     <x>316</x>
+     <y>14</y>
+     <width>100</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnDisConn">
+   <property name="geometry">
+    <rect>
+     <x>316</x>
+     <y>18</y>
+     <width>80</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbConned">
+   <property name="geometry">
+    <rect>
+     <x>63</x>
+     <y>31</y>
+     <width>52</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QWidget" name="wbg" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>424</width>
+     <height>162</height>
+    </rect>
+   </property>
+   <widget class="QPushButton" name="btnInfo">
+    <property name="geometry">
+     <rect>
+      <x>63</x>
+      <y>64</y>
+      <width>238</width>
+      <height>85</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leInfo_1">
+    <property name="geometry">
+     <rect>
+      <x>63</x>
+      <y>62</y>
+      <width>238</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leInfo_2">
+    <property name="geometry">
+     <rect>
+      <x>63</x>
+      <y>86</y>
+      <width>250</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leInfo_3">
+    <property name="geometry">
+     <rect>
+      <x>63</x>
+      <y>110</y>
+      <width>238</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leInfo_4">
+    <property name="geometry">
+     <rect>
+      <x>63</x>
+      <y>134</y>
+      <width>238</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>leInfo_1</zorder>
+   <zorder>leInfo_2</zorder>
+   <zorder>leInfo_3</zorder>
+   <zorder>leInfo_4</zorder>
+   <zorder>btnInfo</zorder>
+  </widget>
+  <widget class="QLabel" name="lbIcon">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>14</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>2</x>
+     <y>59</y>
+     <width>421</width>
+     <height>2</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(255, 255, 255,0.05);</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QWidget" name="wbg_2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>340</width>
+     <height>56</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbWaiting">
+   <property name="geometry">
+    <rect>
+     <x>316</x>
+     <y>14</y>
+     <width>100</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbWaitingIcon">
+   <property name="geometry">
+    <rect>
+     <x>356</x>
+     <y>20</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnConnCfg">
+   <property name="geometry">
+    <rect>
+     <x>364</x>
+     <y>18</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>lbName</zorder>
+  <zorder>lbConned</zorder>
+  <zorder>lbIcon</zorder>
+  <zorder>line</zorder>
+  <zorder>wbg</zorder>
+  <zorder>wbg_2</zorder>
+  <zorder>btnConnSub</zorder>
+  <zorder>btnDisConn</zorder>
+  <zorder>btnConn</zorder>
+  <zorder>lbWaiting</zorder>
+  <zorder>lbWaitingIcon</zorder>
+  <zorder>btnConnCfg</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

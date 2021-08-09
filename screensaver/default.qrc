@@ -1,29 +1,87 @@
 <RCC>
     <qresource prefix="/qss">
         <file>assets/default.qss</file>
+        <file>assets/default-intel.qss</file>
     </qresource>
     <qresource prefix="/">
         <file>assets/logo.svg</file>
-    </qresource>
-    <qresource prefix="/">
         <file>assets/download.svg</file>
-    </qresource>
-    <qresource prefix="/">
         <file>assets/prev.svg</file>
-    </qresource>
-    <qresource prefix="/">
         <file>assets/next.svg</file>
-    </qresource>
-    <qresource prefix="/">
         <file>assets/setBackground.svg</file>
-    </qresource>
-    <qresource prefix="/">
         <file>assets/settings.svg</file>
-    </qresource>
-    <qresource prefix="/">
         <file>assets/wallpaper.svg</file>
-    </qresource>
-    <qresource prefix="/">
         <file>assets/logo-kylin.svg</file>
+        <file>assets/message.png</file>
+    </qresource>
+    <qresource prefix="/weather">
+        <file>assets/weather-icon/100.svg</file>
+        <file>assets/weather-icon/101.svg</file>
+        <file>assets/weather-icon/102.svg</file>
+        <file>assets/weather-icon/103.svg</file>
+        <file>assets/weather-icon/104.svg</file>
+        <file>assets/weather-icon/200.svg</file>
+        <file>assets/weather-icon/201.svg</file>
+        <file>assets/weather-icon/202.svg</file>
+        <file>assets/weather-icon/203.svg</file>
+        <file>assets/weather-icon/204.svg</file>
+        <file>assets/weather-icon/205.svg</file>
+        <file>assets/weather-icon/206.svg</file>
+        <file>assets/weather-icon/207.svg</file>
+        <file>assets/weather-icon/208.svg</file>
+        <file>assets/weather-icon/209.svg</file>
+        <file>assets/weather-icon/210.svg</file>
+        <file>assets/weather-icon/211.svg</file>
+        <file>assets/weather-icon/212.svg</file>
+        <file>assets/weather-icon/213.svg</file>
+        <file>assets/weather-icon/300.svg</file>
+        <file>assets/weather-icon/301.svg</file>
+        <file>assets/weather-icon/302.svg</file>
+        <file>assets/weather-icon/303.svg</file>
+        <file>assets/weather-icon/304.svg</file>
+        <file>assets/weather-icon/305.svg</file>
+        <file>assets/weather-icon/306.svg</file>
+        <file>assets/weather-icon/307.svg</file>
+        <file>assets/weather-icon/308.svg</file>
+        <file>assets/weather-icon/309.svg</file>
+        <file>assets/weather-icon/310.svg</file>
+        <file>assets/weather-icon/311.svg</file>
+        <file>assets/weather-icon/312.svg</file>
+        <file>assets/weather-icon/313.svg</file>
+        <file>assets/weather-icon/314.svg</file>
+        <file>assets/weather-icon/315.svg</file>
+        <file>assets/weather-icon/316.svg</file>
+        <file>assets/weather-icon/317.svg</file>
+        <file>assets/weather-icon/318.svg</file>
+        <file>assets/weather-icon/399.svg</file>
+        <file>assets/weather-icon/400.svg</file>
+        <file>assets/weather-icon/401.svg</file>
+        <file>assets/weather-icon/402.svg</file>
+        <file>assets/weather-icon/403.svg</file>
+        <file>assets/weather-icon/404.svg</file>
+        <file>assets/weather-icon/405.svg</file>
+        <file>assets/weather-icon/406.svg</file>
+        <file>assets/weather-icon/407.svg</file>
+        <file>assets/weather-icon/408.svg</file>
+        <file>assets/weather-icon/409.svg</file>
+        <file>assets/weather-icon/410.svg</file>
+        <file>assets/weather-icon/499.svg</file>
+        <file>assets/weather-icon/500.svg</file>
+        <file>assets/weather-icon/501.svg</file>
+        <file>assets/weather-icon/502.svg</file>
+        <file>assets/weather-icon/503.svg</file>
+        <file>assets/weather-icon/504.svg</file>
+        <file>assets/weather-icon/507.svg</file>
+        <file>assets/weather-icon/508.svg</file>
+        <file>assets/weather-icon/509.svg</file>
+        <file>assets/weather-icon/510.svg</file>
+        <file>assets/weather-icon/511.svg</file>
+        <file>assets/weather-icon/512.svg</file>
+        <file>assets/weather-icon/513.svg</file>
+        <file>assets/weather-icon/514.svg</file>
+        <file>assets/weather-icon/515.svg</file>
+        <file>assets/weather-icon/900.svg</file>
+        <file>assets/weather-icon/901.svg</file>
+        <file>assets/weather-icon/999.svg</file>
     </qresource>
 </RCC>

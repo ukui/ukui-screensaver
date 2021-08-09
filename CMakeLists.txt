@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 project(ukui-screensaver)
 
-find_package(Qt5 COMPONENTS Core Widgets DBus X11Extras Xml Svg)
+find_package(Qt5 COMPONENTS Core Widgets DBus X11Extras Xml Network Svg)
 find_package(PkgConfig REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(PkgConfig)
@@ -58,6 +58,7 @@ add_subdirectory(i18n_ts)
 add_subdirectory(data)
 add_subdirectory(screensaver)
 add_subdirectory(Common)
+add_subdirectory(KylinNM)
 
 add_dependencies(ukui-screensaver-dialog BiometricAuth VirtualKeyboard Common)
 add_dependencies(ukui-screensaver-default Common)
