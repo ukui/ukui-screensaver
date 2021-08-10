@@ -56,11 +56,11 @@
 #define TIME_TYPE_SCHEMA "org.ukui.control-center.panel.plugins"
 #define THEME_TYPE_SCHENA "org.ukui.style"
 
-#define GSETTINGS_SCHEMA_SCREENSAVER      "org.ukui.screensaver";
-#define KEY_MESSAGE_NUMBER                "message-number";
-#define KEY_MESSAGE_SHOW_ENABLED          "show-message-enabled";
-#define KEY_HOURSYSTEM                    "hoursystem";
-#define KEY_DATE_FORMAT                   "date";
+#define GSETTINGS_SCHEMA_SCREENSAVER      "org.ukui.screensaver"
+#define KEY_MESSAGE_NUMBER                "message-number"
+#define KEY_MESSAGE_SHOW_ENABLED          "show-message-enabled"
+#define KEY_HOURSYSTEM                    "hoursystem"
+#define KEY_DATE_FORMAT                   "date"
 
 QTime Screensaver::m_currentTime = QTime::currentTime();
 
@@ -89,7 +89,7 @@ Screensaver::Screensaver(QWidget *parent):
   m_weatherManager(new WeatherManager(this))
 {
     installEventFilter(this);
-    setWindowFlags(Qt::X11BypassWindowManagerHint);
+  //  setWindowFlags(Qt::X11BypassWindowManagerHint);
     setUpdateCenterWidget();
     connect(m_weatherManager, &WeatherManager::onWeatherUpdate,
             this, &Screensaver::getWeatherFinish);
@@ -186,6 +186,22 @@ void Screensaver::connectSingles()
             this, &Screensaver::showRestTimeChanged);
     connect(configuration, &SCConfiguration::textIsCenterChanged,
             this, &Screensaver::textIsCenterChanged);
+    connect(configuration, &SCConfiguration::messageNumberChanged,
+            this, &Screensaver::onMessageNumberChanged);
+    connect(configuration, &SCConfiguration::messageShowEnableChanged,
+            this, &Screensaver::onMessageShowEnabledChanged);
+}
+
+void Screensaver::onMessageNumberChanged(int num)
+{
+    int num = configuration->getMessageNumber();
+    int num = m_screensaver_gsettings->get(KEY_MESSAGE_NUMBER).toInt();
+    (m_screensaver_gsettings->get(KEY_MESSAGE_SHOW_ENABLED).toBool() && num > 0) ? showNotice() : hideNotice();
+}
+
+void Screensaver::onMessageShowEnabledChanged(bool enabled)
+{
+
 }
 
 void Screensaver::autoSwitchChanged(bool isSwitch)
@@ -219,35 +235,6 @@ void Screensaver::cycleTimeChanged(int cTime)
         return ;
     stopSwitchImages();
     startSwitchImages();
-}
-
-void Screensaver::getWeatherFinish(QString city, QString cond, QString tmp)
-{
-    qDebug() << "getWeatherFinish";
-    qDebug() << city << "," << cond << "," << tmp;
-
-    this->m_weatherIcon->setPixmap(m_weatherManager->getWeatherIcon(cond));
-    this->m_weatherArea->setText(city);
-
-    if(!cond.isEmpty())
-    {
-        this->m_weatherCond->show();
-        this->m_weatherCond->setText("·" + cond);
-    }
-    else
-        this->m_weatherCond->hide();
-
-    if(!tmp.isEmpty())
-    {
-        this->m_weatherTemperature->show();
-        this->m_weatherTemperature->setText(tmp);
-    }
-    else
-        this->m_weatherTemperature->hide();
-
-    m_weatherLaout->adjustSize();
-    m_weatherLaout->setGeometry((this->width()-m_weatherLaout->width())/2,96 * (float)width()/1920,
-                                m_weatherLaout->geometry().width(), m_weatherLaout->geometry().height());
 }
 
 void Screensaver::myTextChanged(QString text)
@@ -402,7 +389,11 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
             for(int i = 0;i<labelList.count();i++)
             {
                 int fontsize = labelList.at(i)->font().pixelSize();
+#ifdef USE_INTEL
+                const QString SheetStyle = QString("font-size:%1px;").arg(fontsize/3);
+#else
                 const QString SheetStyle = QString("font-size:%1px;").arg(fontsize/4);
+#endif
                 labelList.at(i)->setStyleSheet(SheetStyle);
             }
             QList<QWidget*> childList = timeLayout->findChildren<QWidget *>();
@@ -414,6 +405,7 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
                 centerWidget->adjustSize();
         }
         flag = 1;
+#ifndef USE_INTEL
         if(myTextWidget){
 
             QColor highLightColor = palette().color(QPalette::Base);
@@ -441,11 +433,35 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
             screenLabel->adjustSize();
         if(sleepTime)
             sleepTime->setSmallMode();
-        if(settingsButton)
-            settingsButton->hide();
+#endif
         scale = 0.1;
     }
 
+#ifdef USE_INTEL
+    int x = 840*scale;
+    int y = 96*scale;
+
+    m_weatherLaout->setGeometry((this->width()-m_weatherLaout->width())/2, y, m_weatherLaout->geometry().width(), m_weatherLaout->geometry().height());
+
+    timeLayout->setGeometry((this->width()-timeLayout->width())/2,m_weatherLaout->geometry().bottom()+33,
+                            timeLayout->geometry().width(),timeLayout->geometry().height());
+
+    if(centerWidget){
+        centerWidget->adjustSize();
+        centerWidget->setGeometry((width()-centerWidget->width())/2,(height() * 85) / 100 - (centerWidget->height())/2,
+                              centerWidget->width(),centerWidget->height());
+
+        if((height()-centerWidget->height())/2 < timeLayout->y() + timeLayout->height())
+            centerWidget->setGeometry((width()-centerWidget->width())/2,timeLayout->y() + timeLayout->height(),
+                                  centerWidget->width(),centerWidget->height());
+    }
+
+    if (m_widgetNotice)
+    {
+        m_widgetNotice->setGeometry((this->width()-m_widgetNotice->width())/2, (centerWidget->y() + centerWidget->height() + 20),
+                                    m_widgetNotice->geometry().width(), m_widgetNotice->geometry().height());
+    }
+#else
     int x = (this->width()-timeLayout->geometry().width())/2;
     int y = 59*scale;
 
@@ -471,24 +487,9 @@ void Screensaver::resizeEvent(QResizeEvent */*event*/)
                                   centerWidget->width(),centerWidget->height());
     }
 
-//    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
-//         ubuntuKylinlogo->setGeometry(40*scale,40*scale,107*scale,41*scale);
-//    }else{
-//         ubuntuKylinlogo->setGeometry(40*scale,40*scale,127*scale,42*scale);
-//    }
-
-
-    if(settingsButton)
-         settingsButton->setGeometry(width() - 40*scale - settingsButton->width(),40*scale,settingsButton->width(),settingsButton->height());
-
-    if(vboxFrame)
-        vboxFrame->setGeometry(width() - vboxFrame->width() - 40*scale,
-                                settingsButton->geometry().bottom() + 12*scale,
-                                vboxFrame->width(),vboxFrame->height());
     if(myTextWidget)
         setRandomPos();
-
-
+#endif
 }
 
 void Screensaver::setRandomPos()
@@ -640,24 +641,51 @@ void Screensaver::updateCenterWidget(int index)
     if(qsettings->contains("OL")){
         centerlabel1->setText(qsettings->value("OL").toString());
         centerlabel2->hide();
+#ifndef USE_INTEL
         authorlabel->setText(qsettings->value("author").toString());
+#endif
     }
     else if(qsettings->contains("FL"))
     {
         centerlabel1->setText(qsettings->value("FL").toString());
         centerlabel2->setText(qsettings->value("SL").toString());
         centerlabel2->show();
+#ifndef USE_INTEL
         authorlabel->setText(qsettings->value("author").toString());
+#endif
     }
-    
+
+#ifdef USE_INTEL
+    if(qsettings->contains("author") && !qsettings->value("author").toString().isEmpty())
+    {
+        authorlabel->setText(qsettings->value("author").toString());
+        authorlabel->show();
+    }
+    else
+    {
+        authorlabel->setText("");
+        authorlabel->hide();
+    }
+#endif
+
     centerWidget->adjustSize();
+
+#ifdef USE_INTEL
+    centerWidget->setGeometry((width()-centerWidget->width())/2,(height() * 85) / 100 - (centerWidget->height())/2,
+                          centerWidget->width(),centerWidget->height());
+
+    if((height()-centerWidget->height())/2 < timeLayout->y() + timeLayout->height())
+        centerWidget->setGeometry((width()-centerWidget->width())/2,timeLayout->y() + timeLayout->height(),
+                              centerWidget->width(),centerWidget->height());
+
+#else
     centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
                               centerWidget->width(),centerWidget->height());
 
     if((height()-centerWidget->height())/2 < timeLayout->y() + timeLayout->height())
         centerWidget->setGeometry((width()-centerWidget->width())/2,timeLayout->y() + timeLayout->height(),
                                   centerWidget->width(),centerWidget->height());
-
+#endif
     qsettings->endGroup();
 
 }
@@ -677,13 +705,18 @@ void Screensaver::initUI()
     }
     qssFile.close();
 
+#ifdef USE_INTEL
+    setWeatherLayout();
     setDatelayout();
-
+    setCenterWidget();
+    setNoticeLaout();
+    m_weatherManager->getWeather();
+#else
     if(isCustom)
         setSleeptime(isShowRestTime);
     else
         setSleeptime(true);
-
+    setDatelayout();
     setCenterWidget();
     setRandomText();
     if(textIsCenter || myText == ""){
@@ -693,101 +726,83 @@ void Screensaver::initUI()
         centerWidget->hide();
         myTextWidget->show();
     }
-
-    //logo
-//    ubuntuKylinlogo = new QLabel(this);
-//    ubuntuKylinlogo->setObjectName("ubuntuKylinlogo");
-//    ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
-//    ubuntuKylinlogo->adjustSize();
-//    ubuntuKylinlogo->setScaledContents(true);
-
-//    if(!getSystemDistrib().contains("ubuntu",Qt::CaseInsensitive)){
-//        ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo-kylin.svg"));
-//    }else{
-//        ubuntuKylinlogo->setPixmap(QPixmap(":/assets/logo.svg"));
-//    }
-
-    //设置按钮
-    settingsButton = new QPushButton(this);
-    settingsButton->setObjectName("settingsButton");
-    settingsButton->setFixedSize(48,48);
-    settingsButton->setIcon(QIcon(":/assets/settings.svg"));
-    settingsButton->installEventFilter(this);
-    connect(settingsButton,&QPushButton::clicked,this,[&]{
-        vboxFrame->setVisible(!vboxFrame->isVisible());
-
-    });
-    settingsButton->hide();
-
-
-    //设为壁纸按钮
-    WallpaperButton = new QPushButton(this);
-    WallpaperButton->setObjectName("WallpaperButton");
-    WallpaperButton->setFixedHeight(36);
-    WallpaperButton->setMinimumWidth(160);
-    WallpaperButton->setIcon(QIcon(":/assets/wallpaper.svg"));
-    WallpaperButton->setText(tr("Set as desktop wallpaper"));
-    //connect(WallpaperButton,SIGNAL(clicked()),this,SLOTsetDesktopBackground()));
-
-    //自动切换
-    QFrame *autoSwitch = new QFrame(this);
-    autoSwitch->setObjectName("autoSwitch");
-    autoSwitch->setFixedHeight(36);
-    autoSwitch->setMinimumWidth(160);
-    autoSwitchLabel = new QLabel(this);
-    autoSwitchLabel->setObjectName("autoSwitchLabel");
-    autoSwitchLabel->setText(tr("Automatic switching"));
-
-    checkSwitch = new checkButton(this);
-
-    checkSwitch->setAttribute(Qt::WA_DeleteOnClose);
-    checkSwitch->setChecked(isAutoSwitch);
-/*    connect(checkSwitch, &checkButton::checkedChanged, [=](bool checked){
-         defaultSettings->set("automatic-switching-enabled",QVariant(checked));
-         isAutoSwitch = checked;
-         setUpdateBackground();
-    });
-*/
-
-    QHBoxLayout *hlayout = new QHBoxLayout(autoSwitch);
-    hlayout->addWidget(autoSwitchLabel);
-    hlayout->addWidget(checkSwitch);
-
-    vboxFrame = new QFrame(this);
-    vboxFrame->setObjectName("vboxFrame");
-    vboxFrame->installEventFilter(this);
-    QVBoxLayout *vlayout = new QVBoxLayout(vboxFrame);
-
-    //分隔线
-    QPushButton *line =new QPushButton(this);
-    line->setWindowOpacity(0.08);
-    line->setFocusPolicy(Qt::NoFocus);
-    line->setMaximumHeight(1);
-
-    //设置窗口
-    vlayout->setContentsMargins(4,4,4,4);
-    vlayout->setSpacing(4);
-    vlayout->addWidget(WallpaperButton);
-    vlayout->addWidget(line);
-    vlayout->addWidget(autoSwitch);
-    vlayout->setAlignment(autoSwitch,Qt::AlignCenter);
-    vboxFrame->adjustSize();
-    vboxFrame->hide();
+#endif
 }
 
 void Screensaver::setDatelayout()
 {
     timeType = configuration->getTimeType();
     dateType = configuration->getDateType();
+#ifdef USE_INTEL
+    timeLayout = new QWidget(this);
+    timeLayout->setFixedSize(((timeType == 12) ? 397:326), 117);
 
+    QHBoxLayout *htimeLayout = new QHBoxLayout(timeLayout);
+    htimeLayout->setContentsMargins(0,0,0,0);
+
+    QWidget *timeWidget = new QWidget(this);
+    timeWidget->setFixedSize(235, 117);
+    QGridLayout *gtimeLayout = new QGridLayout(timeWidget);
+    gtimeLayout->setContentsMargins(0,0,0,12);
+
+    this->dateOfLocaltimeHour = new QLabel(this);
+    this->dateOfLocaltimeHour->setObjectName("dateOfLocaltime");
+    this->dateOfLocaltimeHour->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    this->dateOfLocaltimeHour->setFixedSize(107, 96);
+
+    this->dateofLocaltimeColon = new QLabel(this);
+    this->dateofLocaltimeColon->setObjectName("dateOfLocaltime");
+    this->dateofLocaltimeColon->setAlignment(Qt::AlignCenter);
+    this->dateofLocaltimeColon->setFixedSize(21, 96);
+    this->dateofLocaltimeColon->setText(":");
+
+    this->dateOfLocaltimeMinute = new QLabel(this);
+    this->dateOfLocaltimeMinute->setObjectName("dateOfLocaltime");
+    this->dateOfLocaltimeMinute->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    this->dateOfLocaltimeMinute->setFixedSize(107, 96);
+
+    gtimeLayout->setSpacing(0);
+    gtimeLayout->setRowMinimumHeight(0, 9);
+    gtimeLayout->setRowMinimumHeight(1, 87);
+    gtimeLayout->setRowMinimumHeight(2, 9);
+
+    gtimeLayout->setColumnMinimumWidth(0, 107);
+    gtimeLayout->setColumnMinimumWidth(1, 21);
+    gtimeLayout->setColumnMinimumWidth(2, 107);
+
+    gtimeLayout->addWidget(dateOfLocaltimeHour, 1, 0, 2, 1);
+    gtimeLayout->addWidget(dateofLocaltimeColon, 0, 1, 2, 1);
+    gtimeLayout->addWidget(dateOfLocaltimeMinute, 1, 2, 2, 1);
+
+    QWidget *dateWidget = new QWidget(this);
+    dateWidget->setFixedSize(((timeType == 12) ? 154:83), 117);
+    QVBoxLayout *vDateLaout = new QVBoxLayout(dateWidget);
+    vDateLaout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    vDateLaout->setContentsMargins(0,18,0,12);
+
+    this->dateOfWeek = new QLabel(this);
+    this->dateOfWeek->setObjectName("dateOfWeek");
+    this->dateOfWeek->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    this->dateOfWeek->setFixedWidth(83);
+
+    this->dateOfDay = new QLabel(this);
+    this->dateOfDay->setObjectName("dateOfDay");
+    this->dateOfDay->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    this->dateOfDay->setFixedSize(((timeType == 12) ? 154:83),32);
+    updateTime();
+    updateDate();
+
+    this->dateOfWeek->adjustSize();
+    vDateLaout->addWidget(dateOfWeek);
+    vDateLaout->setSpacing(4);
+    vDateLaout->addWidget(dateOfDay);
+
+    htimeLayout->addWidget(timeWidget);
+    htimeLayout->addSpacing(8);
+    htimeLayout->addWidget(dateWidget);
+ #else
     timeLayout = new QWidget(this);
     QVBoxLayout *vtimeLayout = new QVBoxLayout(timeLayout);
-
-//    this->dateOfWeek = new QLabel(this);
-//    this->dateOfWeek->setText(QDate::currentDate().toString("ddd"));
-//    this->dateOfWeek->setObjectName("dateOfWeek");
-//    this->dateOfWeek->setAlignment(Qt::AlignCenter);
-//    vtimeLayout->addWidget(dateOfWeek);
 
     this->dateOfLocaltime = new QLabel(this);
     if(timeType == 12)
@@ -800,7 +815,6 @@ void Screensaver::setDatelayout()
     this->dateOfLocaltime->adjustSize();
     vtimeLayout->addWidget(dateOfLocaltime);
 
-//    QWidget *dateWidget = new QWidget(this);
     this->dateOfDay = new QLabel(this);
     if(dateType == "cn")
         this->dateOfDay->setText(QDate::currentDate().toString("yyyy/MM/dd ddd"));
@@ -809,27 +823,42 @@ void Screensaver::setDatelayout()
     this->dateOfDay->setObjectName("dateOfDay");
     this->dateOfDay->setAlignment(Qt::AlignCenter);
     this->dateOfDay->adjustSize();
-    
-//    QHBoxLayout *hdateLayout = new QHBoxLayout(dateWidget);
-//    hdateLayout->addWidget(dateOfDay);
-//    hdateLayout->addWidget(dateOfWeek);
-
-//    QString lang = qgetenv("LANG");
-//    if (!lang.isEmpty()){
-//        qDebug()<<"lang = "<<lang;
-//        if (lang.contains("zh_CN")){
-//            this->dateOfLunar = new QLabel(this);
-//            this->dateOfLunar->setText(date->getDateLunar());
-//            this->dateOfLunar->setObjectName("dateOfLunar");
-//            this->dateOfLunar->setAlignment(Qt::AlignCenter);
-//            this->dateOfLunar->adjustSize();
-//            hdateLayout->addWidget(dateOfLunar);
-//        }
-//    }
-//   dateWidget->adjustSize();
 
     vtimeLayout->addWidget(this->dateOfDay);
     timeLayout->adjustSize();
+    updateDate();
+#endif
+
+}
+
+void Screensaver::setWeatherLayout()
+{
+    m_weatherLaout = new QWidget(this);
+    QHBoxLayout *hWeatherLayout = new QHBoxLayout(m_weatherLaout);
+    hWeatherLayout->setContentsMargins(0, 0, 0, 0);
+
+    this->m_weatherIcon = new QLabel(this);
+    this->m_weatherArea = new QLabel(this);
+    this->m_weatherCond = new QLabel(this);
+    this->m_weatherTemperature = new QLabel(this);
+
+    m_weatherIcon->setPixmap(m_weatherManager->getWeatherIcon());
+    m_weatherArea->setText(m_weatherManager->getCityName());
+    if (!m_weatherManager->getCond().isEmpty())
+        m_weatherCond->setText("·" + m_weatherManager->getCond());
+    m_weatherTemperature->setText(m_weatherManager->getTemperature());
+
+    m_weatherArea->setStyleSheet("font-size:26px;color:#ffffff");
+    m_weatherCond->setStyleSheet("font-size:26px;color:#ffffff");
+    m_weatherTemperature->setStyleSheet("font-size:26px;color:#ffffff");
+
+    hWeatherLayout->addWidget(m_weatherIcon);
+    hWeatherLayout->addSpacing(8);
+    hWeatherLayout->addWidget(m_weatherArea);
+    hWeatherLayout->addWidget(m_weatherCond);
+    hWeatherLayout->addSpacing(8);
+    hWeatherLayout->addWidget(m_weatherTemperature);
+    m_weatherLaout->adjustSize();
 }
 
 void Screensaver::setSleeptime(bool Isshow)
@@ -839,7 +868,6 @@ void Screensaver::setSleeptime(bool Isshow)
 
     sleepTime->adjustSize();
     if(Isshow){
-        updateDate();
         sleepTime->show();
     }
     else{
@@ -862,7 +890,40 @@ void Screensaver::updateDate()
 
 void Screensaver::updateTime()
 {
-    //this->dateOfWeek->setText(QDate::currentDate().toString("dddd"));
+#ifdef USE_INTEL
+    QLocale locale(QLocale::system().name());
+
+    QTimeZone timeZone(QString::fromLatin1(QTimeZone::systemTimeZoneId()).toLatin1());
+    QDateTime tzNow = QDateTime::currentDateTime().toTimeZone(timeZone);
+
+    QString time;
+
+    if (timeType == 12)
+    {
+        time = tzNow.toString("hh:mm AP").split(" ").at(0);
+        this->dateOfWeek->setText(tzNow.toString("AP"));
+        if(dateType == "en")
+        {
+            this->dateOfDay->setText(tzNow.toString("ddd MM-dd"));
+        } else {
+            this->dateOfDay->setText(tzNow.toString("ddd MM/dd"));
+        }
+    } else {
+        time = tzNow.toString("hh:mm");
+        this->dateOfWeek->setText(tzNow.toString("ddd"));
+        if(dateType == "en")
+        {
+            this->dateOfDay->setText(tzNow.toString("MM-dd"));
+        } else {
+            this->dateOfDay->setText(tzNow.toString("MM/dd"));
+        }
+    }
+
+    this->dateOfLocaltimeHour->setText(time.split(":").at(0));
+    this->dateOfLocaltimeMinute->setText(time.split(":").at(1));
+
+    m_currentTime = QTime::currentTime();
+#else
     if(timeType == 12)
         this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
     else
@@ -880,6 +941,7 @@ void Screensaver::updateTime()
             sleepTime=NULL;
         }
     }
+#endif
 }
 
 void Screensaver::setUpdateBackground()
@@ -969,21 +1031,63 @@ void Screensaver::setCenterWidget()
         centerlabel1 = new QLabel(qsettings->value("OL").toString());
         centerlabel2 = new QLabel("");
         centerlabel2->hide();
+#ifndef USE_INTEL
         authorlabel = new QLabel(qsettings->value("author").toString());
+#endif
     }
     else if(qsettings->contains("FL"))
     {
         centerlabel1 = new QLabel(qsettings->value("FL").toString());
         centerlabel2 = new QLabel(qsettings->value("SL").toString());
         centerlabel2->show();
+#ifndef USE_INTEL
         authorlabel = new QLabel(qsettings->value("author").toString());
+#endif
     }
+
+#ifdef USE_INTEL
+    if(qsettings->contains("author")  && !qsettings->value("author").toString().isEmpty())
+    {
+        authorlabel = new QLabel(qsettings->value("author").toString());
+        authorlabel->show();
+    }
+    else
+    {
+        authorlabel = new QLabel("");
+        authorlabel->hide();
+    }
+#endif
+
     centerlabel1->setObjectName("centerLabel");
     centerlabel2->setObjectName("centerLabel");
     authorlabel->setObjectName("authorLabel");
 
     qsettings->endGroup();
 
+#ifdef USE_INTEL
+    //设置背景透明，qss中更改为透明不生效
+    centerlabel1->setStyleSheet("QLabel{background-color: transparent;}");
+    centerlabel2->setStyleSheet("QLabel{background-color: transparent;}");
+    authorlabel->setStyleSheet("QLabel{background-color: transparent;}");
+
+    centerWidget = new QWidget(this);
+    centerWidget->setStyleSheet("QWidget{background:rgb(0,0,0,64);border-radius:16px}");
+    QVBoxLayout *layout = new QVBoxLayout(centerWidget);
+
+//    QPushButton *line =new QPushButton(this);
+//    line->setWindowOpacity(0.08);
+//    line->setFocusPolicy(Qt::NoFocus);
+//    line->setMaximumHeight(1);
+
+    layout->addWidget(centerlabel1);
+    layout->addWidget(centerlabel2);
+//    layout->addWidget(line);
+    layout->addWidget(authorlabel);
+
+
+    adjustSize();
+    centerWidget->setVisible(true);
+#else
     centerWidget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(centerWidget);
     layout->addWidget(centerlabel1);
@@ -1003,8 +1107,69 @@ void Screensaver::setCenterWidget()
     centerWidget->setGeometry((width()-centerWidget->width())/2,(height()-centerWidget->height())/2,
                               centerWidget->width(),centerWidget->height());
     centerWidget->setVisible(true);
+#endif
 }
 
+void Screensaver::getWeatherFinish(QString city, QString cond, QString tmp)
+{
+    qDebug() << "getWeatherFinish";
+    qDebug() << city << "," << cond << "," << tmp;
+
+    this->m_weatherIcon->setPixmap(m_weatherManager->getWeatherIcon(cond));
+    this->m_weatherArea->setText(city);
+
+    if(!cond.isEmpty())
+    {
+        this->m_weatherCond->show();
+        this->m_weatherCond->setText("·" + cond);
+    }
+    else
+        this->m_weatherCond->hide();
+
+    if(!tmp.isEmpty())
+    {
+        this->m_weatherTemperature->show();
+        this->m_weatherTemperature->setText(tmp);
+    }
+    else
+        this->m_weatherTemperature->hide();
+
+    m_weatherLaout->adjustSize();
+    m_weatherLaout->setGeometry((this->width()-m_weatherLaout->width())/2,96 * (float)width()/1920,
+                                m_weatherLaout->geometry().width(), m_weatherLaout->geometry().height());
+}
+
+void Screensaver::setNoticeLaout()
+{
+    m_widgetNotice = new QWidget(this);
+    QHBoxLayout *hNoticeLayout = new QHBoxLayout(m_widgetNotice);
+    hNoticeLayout->setContentsMargins(0, 0, 0, 0);
+    m_labelNoticeIcon = new QLabel(this);
+    m_labelNoticeMessage = new QLabel(this);
+    m_labelNoticeMessage->setStyleSheet("font-size:16px;color:#ffffff");
+
+    m_labelNoticeIcon->setPixmap(QPixmap(":/assets/message.png"));
+
+    m_labelNoticeMessage->setText(tr("You have new notification"));
+
+    int num = configuration->getMessageNumber();
+    (configuration->getMessageShowEnable()) ? showNotice() : hideNotice();
+
+    hNoticeLayout->addWidget(m_labelNoticeIcon);
+    hNoticeLayout->addWidget(m_labelNoticeMessage);
+    m_widgetNotice->adjustSize();
+}
+
+//显示新消息通知
+void Screensaver::showNotice()
+{
+    m_widgetNotice->show();
+}
+
+void Screensaver::hideNotice()
+{
+    m_widgetNotice->hide();
+}
 /*
 void Screensaver::setDesktopBackground()
 {

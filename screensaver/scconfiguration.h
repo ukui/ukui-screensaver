@@ -45,6 +45,8 @@ public:
     QString 	getBackgroundPath(); //背景图片来源
     bool        getTextIsCenter();  //文字是否居中
     QString     getMyText();        //获取文字
+    bool        getMessageShowEnable(); //获取是否显示消息
+    int         getMessageNumber(); //获取消息数量
 public:
 
 public Q_SLOTS:
@@ -57,6 +59,8 @@ Q_SIGNALS:
     QString     myTextChanged(QString text);
     bool        showRestTimeChanged(bool isShow);
     bool        textIsCenterChanged(bool isCenter);
+    int         messageNumberChanged(int number);
+    bool        messageShowEnableChanged(bool enabled);
 
 private:
     void initGsettings();

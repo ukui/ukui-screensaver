@@ -85,8 +85,13 @@ private:
 
     QWidget             *myTextWidget;
     QLabel              *dateOfLocaltime;
-    QLabel              *dateOfDay;
 
+    QLabel *dateOfWeek;
+    QLabel *dateOfLocaltimeHour;
+    QLabel *dateofLocaltimeColon;
+    QLabel *dateOfLocaltimeMinute;
+    QLabel *dateOfDay;
+    QLabel *dateOfLunar;
     QWidget             *centerWidget;
 
     QWidget             *timeLayout;
@@ -149,6 +154,8 @@ private Q_SLOTS:
     void textIsCenterChanged(bool isCenter);
     void themeChanged();
     void getWeatherFinish(QString city, QString cond, QString tmp);
+    void onMessageNumberChanged(int num);
+    void onMessageShowEnabledChanged(bool enabled);
     QPixmap getPaddingPixmap();
 };
 
