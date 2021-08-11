@@ -154,6 +154,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       lockState(false),
       screenStatus(UNDEFINED),
       isPassed(false),
+      isBlank(false),
       m_delay(false)
 {
     qDebug() << "init - screenStatus: " << screenStatus;
@@ -353,7 +354,7 @@ bool FullBackgroundWidget::nativeEventFilter(const QByteArray &eventType, void *
 
 void FullBackgroundWidget::mouseMoveEvent(QMouseEvent *e)
 {
-	onCursorMoved(cursor().pos()); 
+	onCursorMoved(QCursor::pos()); 
 	return QWidget::mouseMoveEvent(e);
 }
 
@@ -452,11 +453,13 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
 #else
        	if(screen->geometry().contains(pos))
        	{
+            if(lockWidget->geometry() == screen->geometry())
+                return ;
             /*避免切换时闪烁*/
             lockWidget->hide();
-    		lockWidget->setGeometry(screen->geometry());
+  	    lockWidget->setGeometry(screen->geometry());
             lockWidget->show();
-    		break;
+    	    break;
        	}
 #endif
     }
@@ -465,8 +468,10 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
 void FullBackgroundWidget::lock()
 {
     showLockWidget();
-    qApp->processEvents();
-    lockWidget->startAuth();
+    if(lockWidget){
+        lockWidget->show();
+        lockWidget->startAuth();
+    }
 #ifndef USE_INTEL
     inhibit();
 #endif
@@ -502,9 +507,10 @@ void FullBackgroundWidget::showLockWidget()
                 this, &FullBackgroundWidget::closeWidget);
 #endif
     }
-    onCursorMoved(cursor().pos());
+    onCursorMoved(QCursor::pos());
     lockWidget->setFocus();
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
+    activateWindow();
     repaint();
 }
 
@@ -542,6 +548,7 @@ void FullBackgroundWidget::showScreensaver()
     if(lockWidget)
     {
         lockWidget->stopAuth();
+	lockWidget->hide();
     }
 }
 
@@ -628,8 +635,7 @@ int FullBackgroundWidget::onSessionStatusChanged(uint status)
 
 void FullBackgroundWidget::onBlankScreensaver()
 {
-      showLockWidget();
-      screenStatus = (ScreenStatus)(screenStatus | SCREEN_SAVER);
+      screenStatus = (ScreenStatus)(screenStatus | SCREEN_SAVER | SCREEN_LOCK);
       qDebug() << "showScreensaver - screenStatus: " << screenStatus;
 
       for(auto screen : QGuiApplication::screens())
@@ -641,12 +647,8 @@ void FullBackgroundWidget::onBlankScreensaver()
           saverWidget->setGeometry(screen->geometry());
       }
       setCursor(Qt::BlankCursor);
-
-      //显示屏保时，停止认证（主要针对生物识别）
-      if(lockWidget)
-      {
-          lockWidget->stopAuth();
-      }
+      
+      isBlank = true;
 }
 
 void FullBackgroundWidget::onScreensaver()
@@ -734,7 +736,7 @@ void FullBackgroundWidget::onGlobalKeyRelease(const QString &key)
     {
         showScreensaver();
     }
-    else if(screenStatus & SCREEN_SAVER)
+    else if(screenStatus & SCREEN_SAVER && !isBlank)
     {
         clearScreensavers();	
     }
@@ -752,7 +754,7 @@ void FullBackgroundWidget::onGlobalButtonDrag(int xPos, int yPos)
         clearScreensavers();
     }
 #else
-    if(screenStatus & SCREEN_SAVER)
+    if(screenStatus & SCREEN_SAVER && !isBlank)
     {
         ScreenSaver *saver = configuration->getScreensaver();
         if(isPassed || saver->path != "/usr/lib/ukui-screensaver/ukui-screensaver-default"){
@@ -835,7 +837,7 @@ void FullBackgroundWidget::onDesktopResized()
     QDesktopWidget *desktop = QApplication::desktop();
     setGeometry(desktop->geometry());
     if(lockWidget)
-    	onCursorMoved(cursor().pos());
+    	onCursorMoved(QCursor::pos());
     if(screenStatus & SCREEN_SAVER)
     {
         clearScreensavers();
@@ -873,9 +875,9 @@ void FullBackgroundWidget::onPrepareForSleep(bool sleep)
     {
         if(screenStatus & SCREEN_SAVER)
         {
+	    isBlank = false;
             clearScreensavers();
         }else{
-            XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
             lockWidget->startAuth();
             inhibit();
         }

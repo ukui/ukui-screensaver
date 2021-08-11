@@ -110,6 +110,7 @@ private:
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
     bool                isPassed;
     bool                m_delay;
+    int			isBlank;
 };
 
 #endif // FULLBACKGROUNDWIDGET_H

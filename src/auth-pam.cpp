@@ -26,7 +26,7 @@
 
 //通信管道的文件描述符
 int toParent[2], toChild[2];
-
+void sigchld_handler(int signo);
 static void writeData(int fd, const void *buf, ssize_t count);
 static void writeString(int fd, const char *data);
 static int readData(int fd, void *buf, size_t count);
@@ -41,7 +41,7 @@ AuthPAM::AuthPAM(QObject *parent)
       _isAuthenticated(false),
       _isAuthenticating(false)
 {
-//    signal(SIGCHLD, sigchld_handler);
+    signal(SIGCHLD, sigchld_handler);
 }
 
 void AuthPAM::authenticate(const QString &userName)
@@ -153,12 +153,12 @@ void AuthPAM::onSockRead()
 {
 //    qDebug() << "has message";
     int msgLength;
-    int authComplete;
+    int authComplete = 0;
     readData(toParent[0], &authComplete, sizeof(authComplete));
 
     if(authComplete)
     {
-        int authRet;
+        int authRet = 1;
         if(readData(toParent[0], (void*)&authRet, sizeof(authRet)) <= 0)
             qDebug() << "get authentication result failed: " << strerror(errno);
         qDebug() << "result: " << authRet;
