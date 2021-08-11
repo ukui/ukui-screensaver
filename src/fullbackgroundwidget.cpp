@@ -151,6 +151,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       monitorWatcher(new MonitorWatcher(this)),
       configuration(new Configuration(this)),
       isLocked(false),
+      isPassed(false),
       lockState(false),
       screenStatus(UNDEFINED),
       isPassed(false),
@@ -268,7 +269,6 @@ void FullBackgroundWidget::paintEvent(QPaintEvent *event)
             painter.drawPixmap(screen->geometry(), getPaddingPixmap(background, screen->size().width(),screen->size().height()));
         }
     }
-
     return QWidget::paintEvent(event);
 }
 
@@ -456,6 +456,7 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
             if(lockWidget->geometry() == screen->geometry())
                 return ;
             /*避免切换时闪烁*/
+	    qDebug()<<screen->geometry()<<lockWidget->geometry();
             lockWidget->hide();
   	    lockWidget->setGeometry(screen->geometry());
             lockWidget->show();
@@ -504,7 +505,7 @@ void FullBackgroundWidget::showLockWidget()
 #else
         lockWidget = new LockWidget(this);
         connect(lockWidget, &LockWidget::closed,
-                this, &FullBackgroundWidget::closeWidget);
+                this, &FullBackgroundWidget::close);
 #endif
     }
     onCursorMoved(QCursor::pos());
@@ -576,7 +577,6 @@ void FullBackgroundWidget::clearScreensavers()
     {
         lock();
     }
-
 }
 
 int FullBackgroundWidget::onSessionStatusChanged(uint status)
@@ -647,7 +647,6 @@ void FullBackgroundWidget::onBlankScreensaver()
           saverWidget->setGeometry(screen->geometry());
       }
       setCursor(Qt::BlankCursor);
-      
       isBlank = true;
 }
 
@@ -734,7 +733,7 @@ void FullBackgroundWidget::onGlobalKeyRelease(const QString &key)
 #else
     if(key == "Escape" && screenStatus == SCREEN_LOCK)
     {
-        showScreensaver();
+	showScreensaver();
     }
     else if(screenStatus & SCREEN_SAVER && !isBlank)
     {

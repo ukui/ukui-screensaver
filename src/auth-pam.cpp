@@ -33,7 +33,7 @@ static int readData(int fd, void *buf, size_t count);
 static char * readString(int fd);
 static int pam_conversation(int msgLength, const struct pam_message **msg,
                 PAM_RESPONSE **resp, void *appData);
-
+void sigchld_handler(int signo);
 AuthPAM::AuthPAM(QObject *parent)
     : Auth(parent),
       pid(0),
@@ -89,7 +89,6 @@ void AuthPAM::stopAuth()
         _isAuthenticating = false;
         _isAuthenticated = false;
         nPrompts = 0;
-
         ::kill(pid, SIGKILL);
 
         close(toParent[0]);
@@ -158,7 +157,7 @@ void AuthPAM::onSockRead()
 
     if(authComplete)
     {
-        int authRet = 1;
+        int authRet = -1;
         if(readData(toParent[0], (void*)&authRet, sizeof(authRet)) <= 0)
             qDebug() << "get authentication result failed: " << strerror(errno);
         qDebug() << "result: " << authRet;

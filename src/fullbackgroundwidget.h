@@ -62,7 +62,6 @@ public Q_SLOTS:
     int onSessionStatusChanged(uint status);
     void inhibit();
     void uninhibit();
-    void closeWidget();
 #ifdef USE_INTEL
     void propertiesChangedSlot(QString, QMap<QString, QVariant>, QStringList);
     void onShowBlackBackGround();
