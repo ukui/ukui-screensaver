@@ -9,7 +9,7 @@ pkg_check_modules(GIOUNIX2 REQUIRED gio-unix-2.0)
 pkg_check_modules(GLIB2 REQUIRED glib-2.0 gio-2.0)
 
 # 是否是intel项目
-option (USE_INTEL "intel项目" ON)
+option (USE_INTEL "intel项目" OFF)
 # 用于测试替换用的变量
 set(TEST_ON 1)
 set(TEST_OF 0)
