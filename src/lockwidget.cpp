@@ -31,6 +31,7 @@
 #include "virtualkeyboard.h"
 #include "users.h"
 #include "displaymanager.h"
+#include "config.h"
 
 #define TIME_TYPE_SCHEMA "org.ukui.control-center.panel.plugins"
 float scale;
@@ -227,11 +228,12 @@ void LockWidget::showPowerManager()
     else{     
         authDialog->hide();
         powermanager->show();
+#ifndef USE_INTEL
         if(width() < 1280)
             powermanager->showSmallSize();
         else
             powermanager->showNormalSize();
-
+#endif
         powermanager->setGeometry((width()-powermanager->width())/2,
                                   (height()-powermanager->height())/2,
                                   powermanager->width(),powermanager->height());
@@ -369,11 +371,12 @@ void LockWidget::resizeEvent(QResizeEvent *event)
     }
     
     if(powermanager){
+#ifndef USE_INTEL
         if(width() < 1280)
             powermanager->showSmallSize();
         else
             powermanager->showNormalSize();
-
+#endif
         powermanager->setGeometry((width()- powermanager->width())/2,
                                   (height()-powermanager->height())/2,
                                   powermanager->width(),powermanager->height());

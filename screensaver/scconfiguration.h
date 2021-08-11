@@ -61,6 +61,8 @@ Q_SIGNALS:
     bool        textIsCenterChanged(bool isCenter);
     int         messageNumberChanged(int number);
     bool        messageShowEnableChanged(bool enabled);
+    int         timeTypeChanged(int time);
+    QString     dateTypeChanged(QString type);
 
 private:
     void initGsettings();

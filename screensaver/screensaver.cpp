@@ -91,9 +91,6 @@ Screensaver::Screensaver(QWidget *parent):
     installEventFilter(this);
   //  setWindowFlags(Qt::X11BypassWindowManagerHint);
     setUpdateCenterWidget();
-    connect(m_weatherManager, &WeatherManager::onWeatherUpdate,
-            this, &Screensaver::getWeatherFinish);
-
 
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
@@ -190,18 +187,30 @@ void Screensaver::connectSingles()
             this, &Screensaver::onMessageNumberChanged);
     connect(configuration, &SCConfiguration::messageShowEnableChanged,
             this, &Screensaver::onMessageShowEnabledChanged);
+    connect(configuration, &SCConfiguration::timeTypeChanged,
+            this, &Screensaver::onTimeFormatChanged);
+    connect(configuration, &SCConfiguration::dateTypeChanged,
+            this, &Screensaver::onDateFormatChanged);
+}
+
+void Screensaver::onTimeFormatChanged(int type){
+    timeType = type;
+}
+
+void Screensaver::onDateFormatChanged(QString type){
+    dateType = type;
 }
 
 void Screensaver::onMessageNumberChanged(int num)
 {
-    int num = configuration->getMessageNumber();
-    int num = m_screensaver_gsettings->get(KEY_MESSAGE_NUMBER).toInt();
-    (m_screensaver_gsettings->get(KEY_MESSAGE_SHOW_ENABLED).toBool() && num > 0) ? showNotice() : hideNotice();
+    int number = configuration->getMessageNumber();
+    (configuration->getMessageShowEnable() && number > 0) ? showNotice() : hideNotice();
 }
 
 void Screensaver::onMessageShowEnabledChanged(bool enabled)
 {
-
+    int number = configuration->getMessageNumber();
+    (configuration->getMessageShowEnable() && number > 0) ? showNotice() : hideNotice();
 }
 
 void Screensaver::autoSwitchChanged(bool isSwitch)
@@ -696,7 +705,7 @@ void Screensaver::initUI()
 
 #ifdef USE_INTEL
     qssFile.setFileName(":/qss/assets/default-intel.qss");
-#elif
+#else
     qssFile.setFileName(":/qss/assets/default.qss");
 #endif
 
@@ -711,6 +720,8 @@ void Screensaver::initUI()
     setCenterWidget();
     setNoticeLaout();
     m_weatherManager->getWeather();
+    connect(m_weatherManager, &WeatherManager::onWeatherUpdate,
+            this, &Screensaver::getWeatherFinish);
 #else
     if(isCustom)
         setSleeptime(isShowRestTime);
@@ -1153,7 +1164,7 @@ void Screensaver::setNoticeLaout()
     m_labelNoticeMessage->setText(tr("You have new notification"));
 
     int num = configuration->getMessageNumber();
-    (configuration->getMessageShowEnable()) ? showNotice() : hideNotice();
+    (configuration->getMessageShowEnable() && num > 0)? showNotice() : hideNotice();
 
     hNoticeLayout->addWidget(m_labelNoticeIcon);
     hNoticeLayout->addWidget(m_labelNoticeMessage);

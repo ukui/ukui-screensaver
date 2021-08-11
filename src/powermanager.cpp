@@ -20,6 +20,7 @@
 #include <QVBoxLayout>
 #include <QDBusReply>
 #include <QPixmap>
+#include <QPushButton>
 #include <QListWidgetItem>
 #include <QListWidget>
 #include <QDebug>
@@ -30,6 +31,16 @@ const static QString login1Service = QStringLiteral("org.freedesktop.login1");
 const static QString login1Path = QStringLiteral("/org/freedesktop/login1");
 const static QString login1ManagerInterface = QStringLiteral("org.freedesktop.login1.Manager");
 
+#ifdef USE_INTEL
+PowerManager::PowerManager(QWidget *parent)
+ : QWidget(parent),
+   lasttime(QTime::currentTime())
+{
+    resize((ITEM_WIDTH*4 + ITEM_SPACING*3), ITEM_HEIGHT);
+    initUI();
+    setQSS();
+}
+#else
 PowerManager::PowerManager(QWidget *parent)
     : QListWidget(parent),
       lasttime(QTime::currentTime())
@@ -98,6 +109,7 @@ void PowerManager::powerClicked(QListWidgetItem *item)
     else if(hibernateWidget && name == hibernateWidget->objectName())
         hibernateWidgetClicked();
 }
+#endif
 
 void PowerManager::lockWidgetClicked()
 {
@@ -109,6 +121,239 @@ void PowerManager::switchWidgetClicked()
     emit switchToUser();
 }
 
+#ifdef USE_INTEL
+void PowerManager::shutdownWidgetClicked()
+{
+    QDBusInterface *interface = new QDBusInterface("org.gnome.SessionManager",
+                                                   "/org/gnome/SessionManager",
+                                                   "org.gnome.SessionManager",
+                                                   QDBusConnection::sessionBus(),
+                                                   this);
+
+    QDBusMessage msg = interface->call("powerOff");
+    qDebug() << "[PowerManager] [shutdownWidgetClicked]" << msg.errorMessage();
+}
+
+void PowerManager::rebootWidgetClicked()
+{
+    QDBusInterface *interface = new QDBusInterface("org.gnome.SessionManager",
+                                                   "/org/gnome/SessionManager",
+                                                   "org.gnome.SessionManager",
+                                                   QDBusConnection::sessionBus(),
+                                                   this);
+
+    QDBusMessage msg = interface->call("reboot");
+    qDebug() << "[PowerManager] [rebootWidgetClicked]" << msg.errorMessage();
+}
+
+void PowerManager::logoutWidgetCliced()
+{
+    QDBusInterface *interface = new QDBusInterface("org.gnome.SessionManager",
+                                                   "/org/gnome/SessionManager",
+                                                   "org.gnome.SessionManager",
+                                                   QDBusConnection::sessionBus(),
+                                                   this);
+
+    QDBusMessage msg = interface->call("logout");
+    qDebug() << "[PowerManager] [logoutWidgetCliced]" << msg.errorMessage();
+}
+
+void PowerManager::initUI()
+{
+    this->setContentsMargins(0,0,0,0);
+    QHBoxLayout *main_layout = new QHBoxLayout(this);
+    main_layout->setContentsMargins(0,0,0,0);
+    main_layout->setSpacing(0);
+
+    lockWidget = new QWidget(this);
+    lockWidget->setContentsMargins(0,0,0,0);
+    lockWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
+    QPushButton *lockPB = new QPushButton(lockWidget);
+    QLabel *lockLabel = new QLabel(lockWidget);
+    lockPB->setProperty("class", "PowerManagerPB");
+    lockPB->setIcon(QIcon(QPixmap(":/image/assets/intel/lock.png").scaled(40,40)));
+    lockLabel->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
+    lockLabel->setText(tr("lock"));
+    QVBoxLayout *locklayout = new QVBoxLayout(lockWidget);
+    locklayout->setContentsMargins(0,0,0,0);
+    locklayout->addWidget(lockPB);
+    locklayout->addWidget(lockLabel);
+    connect(lockPB, &QPushButton::clicked, this, [=]{
+        qDebug() << "PowerManager lock clicked";
+        Q_EMIT lock();
+    });
+
+    logoutWidget = new QWidget(this);
+    logoutWidget->setContentsMargins(0,0,0,0);
+    logoutWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
+    QPushButton *logoutPB = new QPushButton(logoutWidget);
+    QLabel *logoutLabel = new QLabel(this);
+    logoutPB->setProperty("class", "PowerManagerPB");
+    logoutPB->setIcon(QIcon(QPixmap(":/image/assets/intel/logout.png").scaled(40,40)));
+    logoutLabel->setText(tr("Log Out"));
+    logoutLabel->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
+    QVBoxLayout *logoutlayout = new QVBoxLayout(logoutWidget);
+    logoutlayout->setContentsMargins(0,0,0,0);
+    logoutlayout->addWidget(logoutPB);
+    logoutlayout->addWidget(logoutLabel);
+    connect(logoutPB, &QPushButton::clicked, this, [=]{
+        qDebug() << "PowerManager logout clicked";
+        logoutWidgetCliced();;
+    });
+
+    rebootWidget = new QWidget(this);
+    rebootWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
+    rebootWidget->setContentsMargins(0,0,0,0);
+    QPushButton *rebootPB = new QPushButton(rebootWidget);
+    QLabel *rebootLabel = new QLabel(this);
+    rebootPB->setProperty("class", "PowerManagerPB");
+    rebootPB->setIcon(QIcon(QPixmap(":/image/assets/intel/reboot.png").scaled(40,40)));
+    rebootLabel->setText(tr("Restart"));
+    rebootLabel->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
+
+    QVBoxLayout *rebootlayout = new QVBoxLayout(rebootWidget);
+    rebootlayout->setContentsMargins(0,0,0,0);
+    rebootlayout->addWidget(rebootPB);
+    rebootlayout->addWidget(rebootLabel);
+    connect(rebootPB, &QPushButton::clicked, this, [=]{
+        qDebug() << "PowerManager reboot clicked";
+        //rebootWidgetClicked();
+        reboot();
+    });
+
+    shutdownWidget = new QWidget(this);
+    shutdownWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
+    shutdownWidget->setObjectName("shutdownWidget");
+    QPushButton *shutdownPB = new QPushButton(shutdownWidget);
+    QLabel *shutdownLabel = new QLabel(shutdownWidget);
+    shutdownPB->setProperty("class", "PowerManagerPB");
+    shutdownPB->setIcon(QIcon(QPixmap(":/image/assets/intel/shutdown.png").scaled(40,40)));
+    shutdownLabel->setText(tr("Power Off"));
+    shutdownLabel->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
+    QVBoxLayout *shutdownlayout = new QVBoxLayout(shutdownWidget);
+    shutdownlayout->setContentsMargins(0,0,0,0);
+    shutdownlayout->addWidget(shutdownPB);
+    shutdownlayout->addWidget(shutdownLabel);
+    connect(shutdownPB, &QPushButton::clicked, this, [=]{
+        qDebug() << "PowerManager shutdown clicked";
+        //shutdownWidgetClicked();
+        powerOff();
+    });
+
+    main_layout->addWidget(lockWidget);
+    main_layout->addSpacing(ITEM_SPACING);
+    main_layout->addWidget(logoutWidget);
+    main_layout->addSpacing(ITEM_SPACING);
+    main_layout->addWidget(rebootWidget);
+    main_layout->addSpacing(ITEM_SPACING);
+    main_layout->addWidget(shutdownWidget);
+    adjustSize();
+}
+
+//息屏，休眠状态Hibernate/挂起Suspend
+bool PowerManager::hibernate()
+{
+    const QString service = "org.freedesktop.login1";
+    const QString path = "/org/freedesktop/login1";
+    const QString interface = "org.freedesktop.login1.Manager";
+    QString command = QLatin1String("Suspend");
+
+    QDBusInterface dbus(service, path, interface, QDBusConnection::systemBus());
+    if (!dbus.isValid()) {
+        qWarning() << "dbusCall: QDBusInterface is invalid" << service<< path
+                   << interface << "Suspend";
+        return false;
+    }
+    QDBusMessage msg = dbus.call(command, QVariant(true));
+
+    if (!msg.errorName().isEmpty()) {
+        qWarning() << "Debus error: " << msg;
+    }
+
+    if (msg.arguments().isEmpty() || msg.arguments().constFirst().isNull())
+        return true;
+
+    QString response = msg.arguments().constFirst().toString();
+    qDebug() << "systemd:" << QLatin1String("Suspend") << "=" << response;
+    return response == QLatin1String("yes") || response == QLatin1String("challenge");
+}
+
+bool PowerManager::reboot()
+{
+    const QString service = "org.freedesktop.login1";
+    const QString path = "/org/freedesktop/login1";
+    const QString interface = "org.freedesktop.login1.Manager";
+    QString command = QLatin1String("Reboot");
+
+    QDBusInterface dbus(service, path, interface, QDBusConnection::systemBus());
+    if (!dbus.isValid()) {
+        qWarning() << "dbusCall: QDBusInterface is invalid" << service<< path
+                   << interface << "Reboot";
+        return false;
+    }
+    QDBusMessage msg = dbus.call(command, QVariant(true));
+
+    if (!msg.errorName().isEmpty()) {
+        qWarning() << "Debus error: " << msg;
+    }
+
+    if (msg.arguments().isEmpty() || msg.arguments().constFirst().isNull())
+        return true;
+
+    QString response = msg.arguments().constFirst().toString();
+    qDebug() << "systemd:" << QLatin1String("Reboot") << "=" << response;
+    return response == QLatin1String("yes") || response == QLatin1String("challenge");
+}
+
+bool PowerManager::powerOff()
+{
+    const QString service = "org.freedesktop.login1";
+    const QString path = "/org/freedesktop/login1";
+    const QString interface = "org.freedesktop.login1.Manager";
+    QString command = QLatin1String("PowerOff");
+
+    QDBusInterface dbus(service, path, interface, QDBusConnection::systemBus());
+    if (!dbus.isValid()) {
+        qWarning() << "dbusCall: QDBusInterface is invalid" << service<< path
+                   << interface << "PowerOff";
+        return false;
+    }
+    QDBusMessage msg = dbus.call(command, QVariant(true));
+
+    if (!msg.errorName().isEmpty()) {
+        qWarning() << "Debus error: " << msg;
+    }
+
+    if (msg.arguments().isEmpty() || msg.arguments().constFirst().isNull())
+        return true;
+
+    QString response = msg.arguments().constFirst().toString();
+    qDebug() << "systemd:" << QLatin1String("PowerOff") << "=" << response;
+    return response == QLatin1String("yes") || response == QLatin1String("challenge");
+}
+
+void PowerManager::setQSS()
+{
+    //设置电源管理按键样式
+    QString style_sheet = ".PowerManagerPB{"
+                          "background:rgba(255,255,255,38);"
+                          "min-width: 128px;"
+                          "max-width: 128px;"
+                          "min-height: 128px;"
+                          "max-height: 128px;"
+                          "border-radius: 64px;"
+                          "icon-size: 40px;"
+                          "font-family: NotoSansCJKsc-Regular, NotoSansCJKsc;"
+                          "}"
+                          ".PowerManagerPB:hover{"
+                          "background:rgba(255,255,255,89);"
+                          "}"
+                          ".PowerManagerPB:pressed{"
+                          "background:rgba(255,255,255,12);"
+                          "}";
+    setStyleSheet(style_sheet);
+}
+#else
 void PowerManager::suspendWidgetClicked()
 {
     loginInterface->call("Suspend",true);
@@ -298,3 +543,4 @@ void PowerManager::initUI()
         setItemWidget(item6, hibernateWidget);
     }
 }
+#endif

@@ -31,7 +31,9 @@ enum ScreenStatus
 {
     UNDEFINED = 0x00,
     SCREEN_SAVER = 0x01,
-    SCREEN_LOCK = 0x02
+    SCREEN_LOCK = 0x02,
+    SCREEN_LOCK_AND_SAVER = 0x03,
+    SCREEN_BLACK = 0x04,
 };
 
 #define SM_DBUS_SERVICE     "org.gnome.SessionManager"

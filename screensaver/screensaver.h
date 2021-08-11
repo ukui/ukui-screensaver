@@ -156,6 +156,8 @@ private Q_SLOTS:
     void getWeatherFinish(QString city, QString cond, QString tmp);
     void onMessageNumberChanged(int num);
     void onMessageShowEnabledChanged(bool enabled);
+    void onTimeFormatChanged(int type);
+    void onDateFormatChanged(QString type);
     QPixmap getPaddingPixmap();
 };
 

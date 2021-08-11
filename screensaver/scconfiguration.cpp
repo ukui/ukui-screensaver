@@ -64,6 +64,8 @@ void SCConfiguration::initGsettings()
             this, &SCConfiguration::onConfigurationChanged);
     connect(ukgsettings, &QGSettings::changed,
             this, &SCConfiguration::onConfigurationChanged);
+    connect(timegsettings, &QGSettings::changed,
+            this, &SCConfiguration::onConfigurationChanged);
 }
 
 void SCConfiguration::initDefaultSettings()
@@ -74,6 +76,7 @@ void SCConfiguration::initDefaultSettings()
 
 void SCConfiguration::onConfigurationChanged(QString key)
 {
+    qDebug()<<"111111111111111111111111111111111111111 key = "<<key;
     if(key == "cycleTime"){
         int cycleTime = getCycleTime();
         Q_EMIT cycleTimeChanged(cycleTime);
@@ -98,6 +101,12 @@ void SCConfiguration::onConfigurationChanged(QString key)
     }else if(key == "messageNumber"){
         int num = getMessageNumber();
         Q_EMIT messageNumberChanged(num);
+    }else if(key == "hoursystem"){
+        int timeType = timegsettings->get("hoursystem").toInt();
+        Q_EMIT timeTypeChanged(timeType);
+    }else if(key == "type"){
+        QString dateType = timegsettings->get("date").toString();
+        Q_EMIT dateTypeChanged(dateType);
     }
 }
 

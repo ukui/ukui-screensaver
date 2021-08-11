@@ -35,6 +35,13 @@
 #include "fullbackgroundwidget.h"
 
 #define CACHE_DIR "/.cache/ukui-screensaver/"
+#define DOUBLE 2
+#define MAX_FILE_SIZE 1024 * 1024
+#define LOG_FILE0 "screensaver_0.log"
+#define LOG_FILE1 "screensaver_1.log"
+
+#define GSETTINGS_SCHEMA_SCREENSAVER "org.ukui.screensaver"
+#define KEY_LOCK_ENABLED "lock-enabled"
 
 FullBackgroundWidget *window = NULL;
 static void
@@ -183,20 +190,10 @@ int main(int argc, char *argv[])
         a.setStyleSheet(qssFile.readAll());
     }
     qssFile.close();
-
-/*下面这段愚蠢的代码仅作用于990，用于解决一个无法输入密码的问题，后续修改支持wayland后，
- * 再取消该代码的应用。不要将其应用到通用版本里去，这里只要不放开下面的注释就可以*/
-/*     
-    window->showHelpWindow();
-
-    QTime t;
-    t.start();
-    while(t.elapsed()<100)//此处100表示100毫秒
-           QCoreApplication::processEvents();//不停地处理事件，以使得程序保持响应。
-*/
+#ifndef USE_INTEL
     window->show();
     window->activateWindow();
-
+#endif
     if(parser.isSet(lockOption))
     {
         window->lock();
@@ -223,6 +220,11 @@ int main(int argc, char *argv[])
     	window->showScreensaver();
     }
 
+#ifdef USE_INTEL
+    window->show();
+    window->activateWindow();
+#endif
+
     QString username = getenv("USER");
     int uid = getuid();
     QDBusInterface *interface = new QDBusInterface("cn.kylinos.Kydroid2",
@@ -242,6 +244,18 @@ static void messageOutput(QtMsgType type, const QMessageLogContext &context, con
     QByteArray time = QString("[%1] ").arg(dateTime.toString("MM-dd hh:mm:ss.zzz")).toLocal8Bit();
     QByteArray localMsg = msg.toLocal8Bit();
 
+    QString name[DOUBLE] = {LOG_FILE0, LOG_FILE1};
+    FILE *log_file = nullptr;
+    QString logFilePath;
+    int fileSize;
+    static int i = 0;
+    QDir dir;
+
+    if (dir.mkpath(QDir::homePath() + CACHE_DIR)) {
+        logFilePath = QDir::homePath() + CACHE_DIR + "/" + name[i];
+        log_file = fopen(logFilePath.toLocal8Bit().constData(), "a+");
+    }
+
     QString filePath(context.file);
     int separator = filePath.lastIndexOf('/');
     QString fileName = filePath.right(filePath.length() - separator - 1);
@@ -249,20 +263,33 @@ static void messageOutput(QtMsgType type, const QMessageLogContext &context, con
 
     switch(type) {
     case QtDebugMsg:
-        fprintf(stderr, "%s Debug: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
+        fprintf(log_file? log_file:stderr, "%s Debug: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         break;
     case QtInfoMsg:
-        fprintf(stderr, "%s Info: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
+        fprintf(log_file? log_file:stderr, "%s Info: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         break;
     case QtWarningMsg:
-        fprintf(stderr, "%s Warnning: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
+        fprintf(log_file? log_file:stderr, "%s Warnning: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         break;
     case QtCriticalMsg:
-        fprintf(stderr, "%s Critical: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
+        fprintf(log_file? log_file:stderr, "%s Critical: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         break;
     case QtFatalMsg:
-        fprintf(stderr, "%s Fatal: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
+        fprintf(log_file? log_file:stderr, "%s Fatal: %s:%u: %s\n", time.constData(), file, context.line, localMsg.constData());
         abort();
     }
     fflush(stderr);
+
+    if (log_file) {
+        fileSize = ftell(log_file);
+        if (fileSize >= MAX_FILE_SIZE) {
+            i = (i + 1) % DOUBLE;
+            logFilePath = QDir::homePath() + logFilePath + "/" + name[i];
+            if (QFile::exists(logFilePath)) {
+                QFile temp(logFilePath);
+                temp.remove();
+            }
+        }
+        fclose(log_file);
+    }
 }
