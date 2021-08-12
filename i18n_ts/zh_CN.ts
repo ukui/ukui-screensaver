@@ -46,6 +46,25 @@
         <translation type="vanished">账户锁定%1分钟由于%2次错误尝试</translation>
     </message>
     <message>
+        <location filename="../src/authdialog.cpp" line="185"/>
+        <source>Please try again in %1 minutes.</source>
+        <translation>请%1分钟后再试</translation>
+    </message>
+    <message>
+        <location filename="../src/authdialog.cpp" line="195"/>
+        <source>Please try again in %1 seconds.</source>
+        <translation>请%1秒后再试</translation>
+    </message>
+    <message>
+        <location filename="../src/authdialog.cpp" line="195"/>
+        <source>Account locked permanently.</source>
+        <translation>账号已被永久锁定</translation>
+    </message>
+    <message>
+        <source>Password cannot be empty</source>
+        <translation>密码不能为空</translation>
+    </message>
+    <message>
         <source>Password Incorrect, Please try again</source>
         <translation type="vanished">密码错误，请重试</translation>
     </message>

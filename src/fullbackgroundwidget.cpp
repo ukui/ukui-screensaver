@@ -154,7 +154,6 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       isPassed(false),
       lockState(false),
       screenStatus(UNDEFINED),
-      isPassed(false),
       isBlank(false),
       m_delay(false)
 {
@@ -513,10 +512,6 @@ void FullBackgroundWidget::showLockWidget()
     XSetInputFocus(QX11Info::display(),this->winId(),RevertToParent,CurrentTime);
     activateWindow();
     repaint();
-}
-
-void FullBackgroundWidget::closeWidget(){
-    close();
 }
 
 void FullBackgroundWidget::showScreensaver()

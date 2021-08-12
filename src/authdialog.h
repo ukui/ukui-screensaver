@@ -28,6 +28,7 @@
 #include "types.h"
 #include "users.h"
 #include "biometricdeviceinfo.h"
+#include "pam-tally.h"
 
 
 namespace Ui {
@@ -141,6 +142,12 @@ private:
     int             failedTimes;
     QTimer          *m_bioTimer;
     bool            useFirstDevice;
+    bool            isLockingFlg;   //判断当前是否正在锁定倒计时
+
+
+    void root_unlock_countdown();
+    void unlock_countdown();
+    QTimer *m_timer;
 };
 
 #endif // AUTHDIALOG_H

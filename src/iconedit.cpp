@@ -189,6 +189,11 @@ void IconEdit::clear()
     setPrompt("");
 }
 
+void IconEdit::clearText()
+{
+    m_edit->setText("");
+}
+
 void IconEdit::setPrompt(const QString &prompt)
 {
     m_edit->setPlaceholderText(prompt);

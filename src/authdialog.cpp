@@ -50,9 +50,12 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
     isBioPassed(false),
     failedTimes(0),
     m_bioTimer(nullptr),
+	m_timer(nullptr),
+    isLockingFlg(false),
     useFirstDevice(false)
 {
     initUI();
+    pam_tally_init();  //这里写函数声明
 
     connect(auth, &Auth::showMessage, this, &AuthDialog::onShowMessage);
     connect(auth, &Auth::showPrompt, this, &AuthDialog::onShowPrompt);
@@ -163,6 +166,114 @@ void AuthDialog::initUI()
     m_messageLabel->setAlignment(Qt::AlignCenter);
 }
 
+void AuthDialog::unlock_countdown()
+{
+    int failed_count = 0;
+    int time_left = 0;
+    int deny = 0;
+    int fail_time =0;
+    int unlock_time = 0;
+    pam_tally_unlock_time_left(&failed_count, &time_left, &deny,&fail_time,&unlock_time);
+
+    // qDebug() << "failed_count:" << failed_count << "time_left:" <<time_left <<"deny:"<<deny<<"fail_time:"<< fail_time<<"unlock_time:" << unlock_time;
+    if(time_left/60 > 0)//请多少分钟后重试
+    {
+        char ch[100]={0};
+        int nMinute = time_left/60 + 1;
+        m_messageLabel->setText(tr("Please try again in %1 minutes.").arg(nMinute));
+        m_messageLabel->setToolTip(tr("Please try again in %1 minutes.").arg(nMinute));
+        m_passwordEdit->clearText();
+        m_passwordEdit->setDisabled(true);
+        isLockingFlg = true;
+        return ;
+    }
+    else if(time_left > 0)//请多少秒后重试
+    {
+        char ch[100]={0};
+        m_messageLabel->setText(tr("Please try again in %1 seconds.").arg(time_left%60));
+        m_messageLabel->setToolTip(tr("Please try again in %1 seconds.").arg(time_left%60));
+        m_passwordEdit->clearText();
+        m_passwordEdit->setDisabled(true);
+        isLockingFlg = true;
+        return ;
+    }
+    else if (failed_count == 0xFFFF)//账号被永久锁定
+    {
+        m_messageLabel->setText(tr("Account locked permanently."));
+        m_messageLabel->setToolTip(tr("Account locked permanently."));
+        m_passwordEdit->clearText();
+        m_passwordEdit->setDisabled(true);
+        isLockingFlg = true;
+        return ;
+    }
+    else
+    {
+        if(m_passwordEdit){
+            m_passwordEdit->setDisabled(false);
+            m_passwordEdit->setFocus();
+        }
+        if (isLockingFlg)
+        {
+            m_messageLabel->setText("");
+        }
+            
+        m_timer->stop();
+    }
+    return ;
+}
+
+void AuthDialog::root_unlock_countdown()
+{
+        int failed_count = 0;
+        int time_left = 0;
+        int deny = 0;
+        pam_tally_root_unlock_time_left(&failed_count, &time_left, &deny);
+        if(time_left/60 > 0)//请多少分钟后重试
+        {
+            char ch[100]={0};
+            int nMinute = time_left/60 + 1;
+            m_messageLabel->setText(tr("Please try again in %1 minutes.").arg(nMinute));
+            m_messageLabel->setToolTip(tr("Please try again in %1 minutes.").arg(nMinute));
+            m_passwordEdit->clearText();
+            m_passwordEdit->setDisabled(true);
+            isLockingFlg = true;
+            return ;
+        }
+        else if(time_left > 0)//请多少秒后重试
+        {
+            char ch[100]={0};
+            m_messageLabel->setText(tr("Please try again in %1 seconds.").arg(time_left%60));
+            m_messageLabel->setToolTip(tr("Please try again in %1 seconds.").arg(time_left%60));
+            m_passwordEdit->clearText();
+            m_passwordEdit->setDisabled(true);
+            isLockingFlg = true;
+            return ;
+        }
+        else if (failed_count == 0xFFFF)//账号被永久锁定
+        {
+            m_messageLabel->setText(tr("Account locked permanently."));
+            m_messageLabel->setToolTip(tr("Account locked permanently."));
+            m_passwordEdit->clearText();
+            m_passwordEdit->setDisabled(true);
+            isLockingFlg = true;
+            return ;
+        }
+        else
+        {
+            if(m_passwordEdit){
+                m_passwordEdit->setDisabled(false);
+                m_passwordEdit->setFocus();
+            }
+            if (isLockingFlg)
+            {
+                m_messageLabel->setText("");
+            }
+                
+            m_timer->stop();
+        }
+        return ;
+}
+
 void AuthDialog::resizeEvent(QResizeEvent *)
 {
     setChildrenGeometry();
@@ -218,7 +329,28 @@ void AuthDialog::closeEvent(QCloseEvent *event)
 void AuthDialog::onShowMessage(const QString &message, Auth::MessageType type)
 {
     qDebug()<<message;
-    m_messageLabel->setText(message);
+    //qDebug() << "onShowMessage" << message;
+
+    if (message.indexOf("account locked") != -1 || message.indexOf("账户已锁定") != -1 
+        || message.indexOf("Account locked") != -1 || message.indexOf("永久锁定") != -1)
+    {
+        m_passwordEdit->clearText();
+        m_passwordEdit->setDisabled(true);
+        if(!m_timer){
+            m_timer = new QTimer(this);
+            m_timer->setInterval(400);
+            connect(m_timer, &QTimer::timeout, this, &AuthDialog::unlock_countdown);
+        }
+        m_timer->start();
+    }else if (message.indexOf("No password received, please input password") != -1){
+        m_messageLabel->setText(tr("Password cannot be empty"));
+        m_messageLabel->setToolTip(tr("Password cannot be empty"));
+    }
+    else{
+        m_messageLabel->setText(message);
+        m_messageLabel->setToolTip(message);
+    }
+    
     //stopWaiting();
 }
 
@@ -312,6 +444,13 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
         m_passwordEdit->clear();
         m_passwordEdit->setPrompt(text);
         showPasswordAuthWidget();
+        if(!m_timer){
+            m_timer = new QTimer(this);
+            m_timer->setInterval(200);
+            connect(m_timer, &QTimer::timeout, this, &AuthDialog::unlock_countdown);
+        }
+        m_timer->start();
+        
     }
 }
 
@@ -323,14 +462,19 @@ void AuthDialog::onAuthComplete()
         if(usebindstarted){
             m_biometricAuthWidget->stopAuth();
         }
-
+        //账号密码认证完后，pam返回有警告或者提示信息，则停顿一秒
+        if (authMode == PASSWORD && false == m_messageLabel->text().isEmpty())
+        {
+            sleep(1);
+        }
+        
         Q_EMIT authenticateCompete(true);
     }
     else
     {
-        if(m_messageLabel->text()=="")
-            onShowMessage(tr("Authentication failure, Please try again"),
-                      Auth::MessageTypeError);
+        // if(m_messageLabel->text()=="")
+        //     onShowMessage(tr("Authentication failure, Please try again"),
+        //               Auth::MessageTypeError);
         //认证失败，重新认证
 
         authMode = PASSWORD;

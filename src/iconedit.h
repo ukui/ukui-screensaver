@@ -35,6 +35,7 @@ public:
     void setIcon(const QString &text);
     void setIcon(const QIcon &icon);
     void clear();
+    void clearText();
     void setPrompt(const QString &);
     const QString text();
     void setType(QLineEdit::EchoMode type = QLineEdit::Password);

@@ -86,6 +86,7 @@ qt5_wrap_cpp(dialog_SRC
 
 set(dialog_SRC
     ${dialog_SRC}
+        pam-tally.c
     ukui-screensaver-dialog.cpp
     fullbackgroundwidget.cpp
     lockwidget.cpp
