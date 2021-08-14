@@ -76,7 +76,6 @@ void SCConfiguration::initDefaultSettings()
 
 void SCConfiguration::onConfigurationChanged(QString key)
 {
-    qDebug()<<"111111111111111111111111111111111111111 key = "<<key;
     if(key == "cycleTime"){
         int cycleTime = getCycleTime();
         Q_EMIT cycleTimeChanged(cycleTime);

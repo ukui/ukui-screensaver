@@ -334,8 +334,6 @@ void AuthDialog::onShowMessage(const QString &message, Auth::MessageType type)
     if (message.indexOf("account locked") != -1 || message.indexOf("账户已锁定") != -1 
         || message.indexOf("Account locked") != -1 || message.indexOf("永久锁定") != -1)
     {
-        m_passwordEdit->clearText();
-        m_passwordEdit->setDisabled(true);
         if(!m_timer){
             m_timer = new QTimer(this);
             m_timer->setInterval(400);

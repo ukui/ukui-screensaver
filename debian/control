@@ -15,6 +15,7 @@ Build-Depends: debhelper-compat (= 12),
                libopencv-dev,
                libx11-dev,
                libxtst-dev,
+			   libqt5svg5-dev,
                libgsettings-qt-dev,
                libkf5windowsystem-dev,
                libmatemixer-dev
