@@ -214,7 +214,9 @@ void AuthDialog::unlock_countdown()
         }
         if (isLockingFlg)
         {
-            m_messageLabel->setText("");
+            onShowMessage(tr("Authentication failure, Please try again"),
+                      Auth::MessageTypeError);
+            isLockingFlg = false;
         }
             
         m_timer->stop();
@@ -266,7 +268,10 @@ void AuthDialog::root_unlock_countdown()
             }
             if (isLockingFlg)
             {
-                m_messageLabel->setText("");
+                // m_messageLabel->setText("");
+                onShowMessage(tr("Authentication failure, Please try again"),
+                      Auth::MessageTypeError);
+                isLockingFlg = false;
             }
                 
             m_timer->stop();
@@ -336,7 +341,7 @@ void AuthDialog::onShowMessage(const QString &message, Auth::MessageType type)
     {
         if(!m_timer){
             m_timer = new QTimer(this);
-            m_timer->setInterval(400);
+            m_timer->setInterval(800);
             connect(m_timer, &QTimer::timeout, this, &AuthDialog::unlock_countdown);
         }
         m_timer->start();
@@ -470,9 +475,9 @@ void AuthDialog::onAuthComplete()
     }
     else
     {
-        // if(m_messageLabel->text()=="")
-        //     onShowMessage(tr("Authentication failure, Please try again"),
-        //               Auth::MessageTypeError);
+        if(m_messageLabel->text()=="")
+            onShowMessage(tr("Authentication failure, Please try again"),
+                      Auth::MessageTypeError);
         //认证失败，重新认证
 
         authMode = PASSWORD;
