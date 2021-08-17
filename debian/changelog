@@ -2,7 +2,7 @@ ukui-screensaver (2.1.1-1kylin76) v101; urgency=medium
 
   * bug号：无
   * 需求号：无
-  * 其他：增加人脸识别依赖项 
+  * 其他：增加人脸识别依赖项
 
  -- lilin <lilin@kylinos.cn>  Fri, 13 Aug 2021 11:25:11 +0800
 
@@ -18,7 +18,7 @@ ukui-screensaver (2.1.1-1kylin74) v101; urgency=medium
 
   * bug号：无
   * 需求号：无
-  * 其他：帮远鹏合入intel相关代码 
+  * 其他：帮远鹏合入intel相关代码
 
  -- lilin <lilin@kylinos.cn>  Thu, 12 Aug 2021 21:46:36 +0800
 
@@ -32,7 +32,7 @@ ukui-screensaver (2.1.1-1kylin73) v101; urgency=medium
 
 ukui-screensaver (2.1.1-1kylin72) v101; urgency=medium
 
-  * bug#58566 
+  * bug#58566
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Wed, 04 Aug 2021 20:19:53 +0800
 
@@ -44,19 +44,19 @@ ukui-screensaver (2.1.1-1kylin69) v101; urgency=medium
 
 ukui-screensaver (2.1.1-1kylin68) v101; urgency=medium
 
-  * 提供基于session空闲时间封装一层空闲时间接口 
+  * 提供基于session空闲时间封装一层空闲时间接口
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Sat, 03 Jul 2021 15:00:58 +0800
 
 ukui-screensaver (2.1.1-1kylin67) v101; urgency=medium
 
-  * task:41518 
+  * task:41518
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Thu, 01 Jul 2021 21:35:05 +0800
 
 ukui-screensaver (2.1.1-1kylin66) v101; urgency=medium
 
-  * bug#42674 bug#62362 
+  * bug#42674 bug#62362
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Fri, 18 Jun 2021 21:55:38 +0800
 
@@ -68,7 +68,7 @@ ukui-screensaver (2.1.1-1kylin64) v101; urgency=medium
 
 ukui-screensaver (2.1.1-1kylin61) v101; urgency=medium
 
-  * 改动说明:更新屏保句子为习近平语录,修复图片随机切换不随机的问题 
+  * 改动说明:更新屏保句子为习近平语录,修复图片随机切换不随机的问题
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Fri, 11 Jun 2021 21:26:55 +0800
 
@@ -86,27 +86,27 @@ ukui-screensaver (2.1.1-1kylin59) v101; urgency=medium
 
 ukui-screensaver (2.1.1-1kylin58) v101; urgency=medium
 
-  * 需求号:6016 
+  * 需求号:6016
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Tue, 08 Jun 2021 19:07:12 +0800
 
 ukui-screensaver (2.1.1-1kylin57) v101; urgency=medium
 
   * bug:号 57254
-  * 改动说明：界面的注销图标与其他界面图标不一致 
+  * 改动说明：界面的注销图标与其他界面图标不一致
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Sat, 29 May 2021 17:07:57 +0800
 
 ukui-screensaver (2.1.1-1kylin56) v101; urgency=medium
 
   * bug#50716 底部边缘处有微微亮的线条，给人一种未贴合的感觉
-  * 添加自定义屏保功能 
+  * 添加自定义屏保功能
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Fri, 23 Apr 2021 20:28:22 +0800
 
 ukui-screensaver (2.1.1-1kylin55) v101; urgency=medium
 
-  * bug#49314 设置一分钟后进入屏保，会直接进入锁屏界面  
+  * bug#49314 设置一分钟后进入屏保，会直接进入锁屏界面
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Tue, 20 Apr 2021 20:13:21 +0800
 
@@ -118,7 +118,7 @@ ukui-screensaver (2.1.1-1kylin54) v101; urgency=medium
 
 ukui-screensaver (2.1.1-1kylin53) v101; urgency=medium
 
-  * bug#45648 英文系统下，登录界面输入错误的密码时，提示信息截断 
+  * bug#45648 英文系统下，登录界面输入错误的密码时，提示信息截断
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Fri, 02 Apr 2021 14:15:26 +0800
 
@@ -167,7 +167,7 @@ ukui-screensaver (2.1.1-1kylin46) v101; urgency=medium
 
 ukui-screensaver (2.1.1-1kylin45) v101; urgency=medium
 
-  * bug#39908 进行用户切换操作，出现切换后的用户输入密码登录卡在锁界面或者登录后键盘无法操作 
+  * bug#39908 进行用户切换操作，出现切换后的用户输入密码登录卡在锁界面或者登录后键盘无法操作
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Thu, 25 Feb 2021 09:12:01 +0800
 
@@ -320,7 +320,7 @@ ukui-screensaver (2.1.1-1kylin22) v101; urgency=medium
 ukui-screensaver (2.1.1-1kylin21) v101; urgency=medium
 
   * bug#25272 密码输错后，等到下一次认证开始后才可以重新输入
-  * 添加解锁信号 
+  * 添加解锁信号
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Fri, 27 Nov 2020 01:51:14 +0800
 
@@ -333,7 +333,7 @@ ukui-screensaver (2.1.1-1kylin20) v101; urgency=medium
 ukui-screensaver (2.1.1-1kylin19) v101; urgency=medium
 
   * bug#22713 系统挂起/睡眠后唤醒后不显示锁屏
-  * 添加锁屏信号 
+  * 添加锁屏信号
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Thu, 29 Oct 2020 11:52:43 +0800
 
@@ -383,7 +383,7 @@ ukui-screensaver (2.1.1-1kylin12) v101; urgency=medium
 
 ukui-screensaver (2.1.1-1kylin11) v101; urgency=medium
 
-  * 同步github最新 
+  * 同步github最新
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Wed, 19 Aug 2020 15:07:20 +0800
 
@@ -395,7 +395,7 @@ ukui-screensaver (2.1.1-1kylin10) v101; urgency=medium
 
 ukui-screensaver (2.1.1-1kylin9) v101; urgency=medium
 
-  * 同步v10 3.0  ukui-screensaver 2.1.1-1kylin4~10版本 
+  * 同步v10 3.0  ukui-screensaver 2.1.1-1kylin4~10版本
 
  -- liuyuanpeng <liuyuanpeng@kylinos.cn>  Mon, 20 Jul 2020 11:41:07 +0800
 
