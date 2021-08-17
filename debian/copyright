@@ -2,14 +2,7 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Contact: yanghao@kylinos.cn
 Source: https://github.com/ukui/ukui-screensaver
 
-Files: CMakeLists.txt
-       src/*
-       i18n_ts/*
-       data/*
-       man/*
-       debian/*
-       screensaver/*
-       Common/*
+Files: *
 Copyright: 2018, Tianjin KYLIN Information Technology Co., Ltd.
 License: GPL-3+
 
