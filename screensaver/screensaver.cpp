@@ -817,7 +817,7 @@ void Screensaver::setDatelayout()
 
     this->dateOfLocaltime = new QLabel(this);
     if(timeType == 12)
-        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("A hh:mm"));
     else
         this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
 
@@ -936,7 +936,7 @@ void Screensaver::updateTime()
     m_currentTime = QTime::currentTime();
 #else
     if(timeType == 12)
-        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+        this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("A hh:mm"));
     else
         this->dateOfLocaltime->setText(QDateTime::currentDateTime().toString("hh:mm"));
 

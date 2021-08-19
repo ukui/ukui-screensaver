@@ -134,7 +134,7 @@ void LockWidget::initUI()
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [&]{
         if(timeType == 12)
-            ui->lblTime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+            ui->lblTime->setText(QDateTime::currentDateTime().toString("A hh:mm"));
         else
             ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
 
@@ -145,7 +145,7 @@ void LockWidget::initUI()
     });
 
     if(timeType == 12)
-    	ui->lblTime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+    	ui->lblTime->setText(QDateTime::currentDateTime().toString("A hh:mm"));
     else
         ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
 
