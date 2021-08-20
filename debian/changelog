@@ -1,3 +1,12 @@
+ukui-screensaver (2.1.1-1kylin77) v101; urgency=medium
+
+  * bug号： 59963【锁屏】锁屏界面按快捷键F9，输入框会输入字符“l”
+  * 62362【双屏】锁屏时，按win+p会在输入框输入字符
+  * 需求号：无
+  * 其他：倒计时优化
+
+ -- lilin <lilin@kylinos.cn>  Sun, 15 Aug 2021 18:39:23 +0800
+
 ukui-screensaver (2.1.1-1kylin76) v101; urgency=medium
 
   * bug号：无

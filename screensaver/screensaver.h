@@ -62,9 +62,12 @@ private:
     void stopSwitchImages();
     void onBackgroundChanged();
     void setRandomText();
+    void setPreviewText(bool bVisible);//设置预览样式
     void setRandomPos();
     void connectSingles();
     void updateBackgroundPath();
+    void enterEvent(QEvent*);
+    void leaveEvent(QEvent*);
    
     QTimer              *switchTimer;
     QTimer              *fadeTimer;
@@ -77,6 +80,7 @@ private:
     bool                textIsCenter;
     QString             myText;
     QLabel              *myTextLabel;
+    QLabel              *myPreviewLabel;
     CycleLabel          *cycleLabel;
 
     SCConfiguration     *configuration;

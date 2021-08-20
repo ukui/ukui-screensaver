@@ -2131,6 +2131,11 @@
         <source>You have new notification</source>
         <translation>您有新的消息</translation>
     </message>
+    <message>
+        <location filename="../screensaver/screensaver.cpp" line="124"/>
+        <source>View</source>
+        <translation>预览</translation>
+    </message>
 </context>
 <context>
     <name>SleepTime</name>

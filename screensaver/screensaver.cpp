@@ -63,6 +63,7 @@
 #define KEY_DATE_FORMAT                   "date"
 
 QTime Screensaver::m_currentTime = QTime::currentTime();
+extern bool bControlFlg;
 
 Screensaver::Screensaver(QWidget *parent):
   QWidget(parent),
@@ -72,6 +73,7 @@ Screensaver::Screensaver(QWidget *parent):
   isCustom(false),
   isShowRestTime(true),
   myTextLabel(nullptr),
+  myPreviewLabel(nullptr),//预览label标签
   configuration(SCConfiguration::instance()),
   myTextWidget(nullptr),
   centerWidget(nullptr),
@@ -91,7 +93,7 @@ Screensaver::Screensaver(QWidget *parent):
     installEventFilter(this);
   //  setWindowFlags(Qt::X11BypassWindowManagerHint);
     setUpdateCenterWidget();
-
+    setMouseTracking(true);
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
     isCustom        =  configuration->getIsCustom();
@@ -588,10 +590,25 @@ void Screensaver::updateBackgroundPath()
         for(QString file : files) {
             fileInfo.setFile(file);
             QString suffix = fileInfo.suffix();
-            if(formats.contains(suffix.toUtf8()))
+            if(formats.contains(suffix.toUtf8()) && file.right(4) != ".ico" && file.right(4) != ".tga"){
+                // qDebug() << "file:" <<file;
                 imagePaths.push_back(backgroundPath + "/" + file);
+            }
         }
     }
+}
+void Screensaver::enterEvent(QEvent*){
+    // qDebug() << "enter ScreenSaver::enterEvent";
+    //当前是否是控制面板窗口
+    if(bControlFlg){
+        setPreviewText(true);
+    }   
+}
+
+void Screensaver::leaveEvent(QEvent*){
+    // qDebug() << "enter ScreenSaver::leaveEvent";
+    setPreviewText(false);
+    // setToolTip("离开");
 }
 
 void Screensaver::startSwitchImages()
@@ -1010,6 +1027,27 @@ void Screensaver::setRandomText()
     	myTextWidget->setVisible(true);
     else
         myTextWidget->setVisible(false);
+}
+
+void Screensaver::setPreviewText(bool bVisible)
+{
+    if(!myPreviewLabel){
+        myPreviewLabel = new QLabel(this);
+        myPreviewLabel->setFixedSize(58,30);
+
+        //设置样式
+        myPreviewLabel->setStyleSheet("background-color: rgb(38,38,38); border-radius: 0px; color:white;");
+
+        //先采取固定大小方式
+        myPreviewLabel->move(120,142);
+        myPreviewLabel->setAlignment(Qt::AlignCenter);
+    }
+	
+    myPreviewLabel->setText(tr("View"));
+    myPreviewLabel->adjustSize();
+    
+    myPreviewLabel->setVisible(bVisible);  
+
 }
 
 void Screensaver::setCenterWidget()
