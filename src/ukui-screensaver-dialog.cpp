@@ -17,6 +17,8 @@
 **/
 #include <QApplication>
 #include <QTranslator>
+#include <syslog.h>
+#include <QDBusReply>
 #include <QLocale>
 #include <QDir>
 #include <QCommandLineParser>
@@ -33,7 +35,7 @@
 #include <QProcess>
 #include <X11/Xlib.h>
 #include "fullbackgroundwidget.h"
-
+#include "configuration.h"
 #define CACHE_DIR "/.cache/ukui-screensaver/"
 #define DOUBLE 2
 #define MAX_FILE_SIZE 1024 * 1024
@@ -125,9 +127,30 @@ void handler(int signum)
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
 int main(int argc, char *argv[])
 {
+    if(argc < 2)
+	return 0;
+
     checkIsRunning();
     checkIslivecd();
-	
+   
+    if(QString(argv[1]) == "--lock-startup"){
+        Configuration::instance();
+	QDBusInterface *checkInterface =
+            new QDBusInterface("org.freedesktop.DBus",
+                               "/org/freedesktop/DBus",
+                               "org.freedesktop.DBus",
+                               QDBusConnection::sessionBus());
+        for(int i = 0;i<20;i++){
+	    QDBusReply<bool> ret = checkInterface->call("NameHasOwner",
+                                               "org.gnome.SessionManager");
+            if(ret.value()) {
+                break;
+    	    }
+
+	    usleep(100000);
+        }
+    }
+
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
@@ -153,6 +176,8 @@ int main(int argc, char *argv[])
 
     QCommandLineOption lockOption(QStringLiteral("lock"),
                                   QCoreApplication::translate("main", "lock the screen immediately"));
+    QCommandLineOption lstOption(QStringLiteral("lock-startup"),
+                                  QCoreApplication::translate("main", "lock the screen immediately"));
     QCommandLineOption sessionIdleOption(QStringLiteral("session-idle"),
                                        QCoreApplication::translate("main", "activated by session idle signal"));
     QCommandLineOption lscreensaverOption(QStringLiteral("lock-screensaver"),
@@ -161,11 +186,12 @@ int main(int argc, char *argv[])
                                        QCoreApplication::translate("main", "show screensaver immediately"));
     QCommandLineOption blankOption(QStringLiteral("blank"),
                                        QCoreApplication::translate("main", "lock the screen and show screensaver immediately"));
-    parser.addOptions({lockOption, sessionIdleOption , screensaverOption,blankOption,lscreensaverOption});
+    parser.addOptions({lockOption, lstOption,sessionIdleOption , screensaverOption,blankOption,lscreensaverOption});
     parser.process(a);
 
     if(!parser.isSet(sessionIdleOption) 
 		   && !parser.isSet(lockOption) 
+		   && !parser.isSet(lstOption) 
 		   && !parser.isSet(screensaverOption) 
 		   && !parser.isSet(lscreensaverOption)
 		   && !parser.isSet(blankOption))
@@ -195,6 +221,11 @@ int main(int argc, char *argv[])
     window->activateWindow();
 #endif
     if(parser.isSet(lockOption))
+    {
+        window->lock();
+    }
+    
+    if(parser.isSet(lstOption))
     {
         window->lock();
     }

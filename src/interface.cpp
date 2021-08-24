@@ -39,6 +39,7 @@ Interface::Interface(QObject *parent)
             this->onShowScreensaver();
         }
     );
+
     connect(m_logind, &LogindIntegration::requestUnlock, this,
         [this]() {
 //        	process.terminate();

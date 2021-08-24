@@ -45,7 +45,7 @@ PowerManager::PowerManager(QWidget *parent)
     : QListWidget(parent),
       lasttime(QTime::currentTime())
 {
-    resize(ITEM_WIDTH*7, ITEM_HEIGHT);
+  //  resize(ITEM_WIDTH*7, ITEM_HEIGHT);
     setFlow(QListWidget::LeftToRight);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -65,11 +65,9 @@ PowerManager::PowerManager(QWidget *parent)
                                         QDBusConnection::systemBus(),
                                         this);
 
-    m_count = 5;
     QDBusReply<QString> stateReply = loginInterface->call("CanSuspend");
     if(stateReply.isValid() && stateReply.value() == "yes"){
         canSuspend = true;
-        m_count ++;
     }else{
         canSuspend = false;
     }
@@ -77,13 +75,12 @@ PowerManager::PowerManager(QWidget *parent)
     QDBusReply<QString> stateReply1 = loginInterface->call("CanHibernate");
     if(stateReply1.isValid() && stateReply1.value() == "yes"){
         canHibernate = true;
-        m_count ++;
     }else{
         canHibernate = false;
     }
 
     initUI();
-    resize(ITEM_WIDTH*m_count, ITEM_HEIGHT);
+    resize(ITEM_WIDTH*this->count(), ITEM_HEIGHT);
 }
 
 void PowerManager::powerClicked(QListWidgetItem *item)
@@ -92,11 +89,11 @@ void PowerManager::powerClicked(QListWidgetItem *item)
     if(interval < 200 && interval > -200)
         return ;
     lasttime = QTime::currentTime();
-
+    
     QString name = itemWidget(item)->objectName();
-    if(name == lockWidget->objectName())
-        lockWidgetClicked();
-    else if(name == switchWidget->objectName())
+//    if(name == lockWidget->objectName())
+//        lockWidgetClicked();
+    if(name == switchWidget->objectName())
         switchWidgetClicked();
     else if(name == logoutWidget->objectName())
         logoutWidgetCliced();
@@ -387,7 +384,7 @@ void PowerManager::showSmallSize()
         item->setSizeHint(QSize(ITEM_WIDTH*0.8,ITEM_HEIGHT));
         itemWidget(item)->setFixedSize(ITEM_WIDTH*0.8,ITEM_HEIGHT);
     }
-    resize(ITEM_WIDTH*m_count*0.8,ITEM_HEIGHT);
+    resize(ITEM_WIDTH*this->count()*0.8,ITEM_HEIGHT);
 }
 
 void PowerManager::showNormalSize()
@@ -397,12 +394,12 @@ void PowerManager::showNormalSize()
         item->setSizeHint(QSize(ITEM_WIDTH,ITEM_HEIGHT));
         itemWidget(item)->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
     }
-    resize(ITEM_WIDTH*m_count,ITEM_HEIGHT);
+    resize(ITEM_WIDTH*this->count(),ITEM_HEIGHT);
 }
 
 void PowerManager::initUI()
 {
-
+/*
     lockWidget = new QWidget(this);
     lockWidget->setObjectName("lockWidget");
     QLabel *lockFace = new QLabel(this);
@@ -417,7 +414,7 @@ void PowerManager::initUI()
     locklayout->addWidget(lockFace);
     locklayout->addWidget(lockLabel);
     lockWidget->installEventFilter(this);
-
+*/
     switchWidget = new QWidget(this);
     switchWidget->setObjectName("switchWidget");
     QLabel *switchFace = new QLabel(this);
@@ -473,32 +470,39 @@ void PowerManager::initUI()
     shutdownlayout->addWidget(shutdownFace);
     shutdownlayout->addWidget(shutdownLabel);
     shutdownWidget->installEventFilter(this);
-
+/*
     QListWidgetItem *item0 = new QListWidgetItem();
     item0->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
     insertItem(this->count(), item0);
     setItemWidget(item0, lockWidget);
-
+*/
     QListWidgetItem *item1 = new QListWidgetItem();
     item1->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
     insertItem(this->count(), item1);
     setItemWidget(item1, switchWidget);
 
-    QListWidgetItem *item2 = new QListWidgetItem();
-    item2->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
-    insertItem(this->count(), item2);
-    setItemWidget(item2, logoutWidget);
+    hibernateWidget = nullptr;
+    if(canHibernate){
+        hibernateWidget = new QWidget(this);
+        hibernateWidget->setObjectName("hibernateWidget");
+        QLabel *hibernateFace  = new QLabel(this);
+        QLabel *hibernateLabel = new QLabel(this);
+        hibernateLabel->setAlignment(Qt::AlignCenter);
+        hibernateFace->setAlignment(Qt::AlignCenter);
+        hibernateFace->setPixmap(QPixmap(":/image/assets/hibernate.png").scaled(48,48));
+        hibernateLabel->setText(tr("Sleep"));
+        hibernateWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
+        QVBoxLayout *hibernatelayout = new QVBoxLayout(hibernateWidget);
+        hibernatelayout->addWidget(hibernateFace);
+        hibernatelayout->addWidget(hibernateLabel);
+        hibernateWidget->installEventFilter(this);
 
-    QListWidgetItem *item3 = new QListWidgetItem();
-    item3->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
-    insertItem(this->count(), item3);
-    setItemWidget(item3, rebootWidget);
-
-    QListWidgetItem *item4 = new QListWidgetItem();
-    item4->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
-    insertItem(this->count(), item4);
-    setItemWidget(item4, shutdownWidget);
-
+        QListWidgetItem *item6 = new QListWidgetItem();
+        item6->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
+        insertItem(this->count(), item6);
+        setItemWidget(item6, hibernateWidget);
+    }
+    
     suspendWidget = nullptr;
     if(canSuspend){
         suspendWidget = new QWidget(this);
@@ -521,26 +525,20 @@ void PowerManager::initUI()
         setItemWidget(item5, suspendWidget);
     }
 
-    hibernateWidget = nullptr;
-    if(canHibernate){
-        hibernateWidget = new QWidget(this);
-        hibernateWidget->setObjectName("hibernateWidget");
-        QLabel *hibernateFace  = new QLabel(this);
-        QLabel *hibernateLabel = new QLabel(this);
-        hibernateLabel->setAlignment(Qt::AlignCenter);
-        hibernateFace->setAlignment(Qt::AlignCenter);
-        hibernateFace->setPixmap(QPixmap(":/image/assets/hibernate.png").scaled(48,48));
-        hibernateLabel->setText(tr("Sleep"));
-        hibernateWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
-        QVBoxLayout *hibernatelayout = new QVBoxLayout(hibernateWidget);
-        hibernatelayout->addWidget(hibernateFace);
-        hibernatelayout->addWidget(hibernateLabel);
-        hibernateWidget->installEventFilter(this);
+    QListWidgetItem *item2 = new QListWidgetItem();
+    item2->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
+    insertItem(this->count(), item2);
+    setItemWidget(item2, logoutWidget);
 
-        QListWidgetItem *item6 = new QListWidgetItem();
-        item6->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
-        insertItem(6, item6);
-        setItemWidget(item6, hibernateWidget);
-    }
+    QListWidgetItem *item3 = new QListWidgetItem();
+    item3->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
+    insertItem(this->count(), item3);
+    setItemWidget(item3, rebootWidget);
+
+    QListWidgetItem *item4 = new QListWidgetItem();
+    item4->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
+    insertItem(this->count(), item4);
+    setItemWidget(item4, shutdownWidget);
+
 }
 #endif

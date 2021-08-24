@@ -37,6 +37,8 @@
 #define KEY_BACKGROUND "background"
 #define XSCREENSAVER_DIRNAME "/usr/lib/xscreensaver"
 
+Configuration* Configuration::instance_ = nullptr;
+
 Configuration::Configuration(QObject *parent) : QObject(parent)
 {
 	/* QGSettings for screensaver */
@@ -88,6 +90,13 @@ Configuration::Configuration(QObject *parent) : QObject(parent)
 
     if(themes.count() == 1 && themes[0] == "kyccss-personal-slideshow")
         mode ="image";
+}
+
+Configuration* Configuration::instance(QObject *parent)
+{
+    if(instance_ == nullptr)
+        instance_ = new Configuration(parent);
+    return instance_;
 }
 
 /* Update member value when GSettings changed */

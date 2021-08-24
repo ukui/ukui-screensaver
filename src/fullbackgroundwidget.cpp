@@ -149,7 +149,7 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
       lockWidget(nullptr),
       xEventMonitor(new XEventMonitor(this)),
       monitorWatcher(new MonitorWatcher(this)),
-      configuration(new Configuration(this)),
+      configuration(Configuration::instance()),
       isLocked(false),
       isPassed(false),
       lockState(false),
@@ -188,6 +188,14 @@ FullBackgroundWidget::FullBackgroundWidget(QWidget *parent)
     qApp->installNativeEventFilter(this);
     installEventFilter(this);
     QTimer::singleShot(500,this,SLOT(switchToLinux()));
+
+    LogindIntegration *m_logind = new LogindIntegration(this);
+    
+    connect(m_logind, &LogindIntegration::requestUnlock, this,
+        [this]() {
+        closeScreensaver();
+    });
+
 }
 
 #ifdef USE_INTEL

@@ -37,6 +37,7 @@ public:
 
 public:
     ScreenSaver *getScreensaver();
+    static Configuration *instance(QObject *parent = nullptr);
 	QString getBackground();
 	bool xscreensaverActivatedWhenIdle();
 	bool lockWhenXScreensaverActivated();
@@ -51,12 +52,13 @@ private:
     QGSettings *gsettings;
     QGSettings *bgGsettings;
     QString mode;
-	QList<QString> themes;
-	QString background;
-	bool idleActivationEnabled;
-	bool lockEnabled;
+    QList<QString> themes;
+    QString background;
+    bool idleActivationEnabled;
+    bool lockEnabled;
     int imageTSEffect;
     int imageSwitchInterval;  
+    static Configuration    *instance_;
 };
 
 #endif // CONFIGURATION_H
