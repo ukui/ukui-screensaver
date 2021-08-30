@@ -10,6 +10,9 @@ Files: CMakeLists.txt
        debian/*
        screensaver/*
        Common/*
+       .gitattributes
+       KylinNM/*
+       .config.h.in
 Copyright: 2018, Tianjin KYLIN Information Technology Co., Ltd.
 License: GPL-3+
 
