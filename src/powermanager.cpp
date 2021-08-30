@@ -406,16 +406,7 @@ void PowerManager::initUI()
     QLabel *lockLabel = new QLabel(this);
     lockFace->setAlignment(Qt::AlignCenter);
     lockLabel->setAlignment(Qt::AlignCenter);
-    lockFace->setPixmap(QPixmap(":/image/assets/lock.png").scaled(58,58));
-    lockLabel->setText(tr("Lock Screen"));
-
-    lockWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
-    QVBoxLayout *locklayout = new QVBoxLayout(lockWidget);
-    locklayout->addWidget(lockFace);
-    locklayout->addWidget(lockLabel);
-    lockWidget->installEventFilter(this);
-*/
-    switchWidget = new QWidget(this);
+    lockFace->setPixmap(QPixmap    switchWidget = new QWidget(this);
     switchWidget->setObjectName("switchWidget");
     QLabel *switchFace = new QLabel(this);
     QLabel *switchLabel =  new QLabel(this);
@@ -427,8 +418,54 @@ void PowerManager::initUI()
     QVBoxLayout *switchlayout = new QVBoxLayout(switchWidget);
     switchlayout->addWidget(switchFace);
     switchlayout->addWidget(switchLabel);
-    switchWidget->installEventFilter(this);
+    switchWidget->installEventFilter(this);(":/image/assets/lock.png").scaled(58,58));
+    lockLabel->setText(tr("Lock Screen"));
 
+    lockWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
+    QVBoxLayout *locklayout = new QVBoxLayout(lockWidget);
+    locklayout->addWidget(lockFace);
+    locklayout->addWidget(lockLabel);
+    lockWidget->installEventFilter(this);
+*/
+    actService = new QDBusInterface("org.freedesktop.Accounts",
+                                    "/org/freedesktop/Accounts",
+                                    "org.freedesktop.Accounts",
+                                    QDBusConnection::systemBus());
+
+    connect(actService, SIGNAL(UserAdded(const QDBusObjectPath&)),
+            this, SLOT(onUserAdded(const QDBusObjectPath&)));
+    connect(actService, SIGNAL(UserDeleted(const QDBusObjectPath&)),
+            this, SLOT(onUserDeleted(const QDBusObjectPath&)));
+    QDBusMessage ret = actService->call("ListCachedUsers");
+    QList<QVariant> outArgs = ret.arguments();
+    QVariant first = outArgs.at(0);
+    const QDBusArgument &dbusArgs = first.value<QDBusArgument>();
+    dbusArgs.beginArray();
+    QDBusObjectPath path;
+    int userCount =0;
+    while (!dbusArgs.atEnd())
+    {
+        userCount++;
+        dbusArgs >> path;
+    }
+    dbusArgs.endArray();
+    switchWidget=nullptr;
+    qDebug()<<"______________________i="<<userCount;
+    if(userCount>1){
+        switchWidget = new QWidget(this);
+        switchWidget->setObjectName("switchWidget");
+        QLabel *switchFace = new QLabel(this);
+        QLabel *switchLabel =  new QLabel(this);
+        switchFace->setAlignment(Qt::AlignCenter);
+        switchLabel->setAlignment(Qt::AlignCenter);
+        switchFace->setPixmap(QPixmap(":/image/assets/switchGreeter.png").scaled(58,58));
+        switchLabel->setText(tr("Switch User"));
+        switchWidget->setFixedSize(ITEM_WIDTH,ITEM_HEIGHT);
+        QVBoxLayout *switchlayout = new QVBoxLayout(switchWidget);
+        switchlayout->addWidget(switchFace);
+        switchlayout->addWidget(switchLabel);
+        switchWidget->installEventFilter(this);
+    }
     logoutWidget = new QWidget(this);
     logoutWidget->setObjectName("logoutWidget");
     QLabel *logoutFace = new QLabel(this);
@@ -470,16 +507,18 @@ void PowerManager::initUI()
     shutdownlayout->addWidget(shutdownFace);
     shutdownlayout->addWidget(shutdownLabel);
     shutdownWidget->installEventFilter(this);
-/*
-    QListWidgetItem *item0 = new QListWidgetItem();
-    item0->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
-    insertItem(this->count(), item0);
-    setItemWidget(item0, lockWidget);
-*/
-    QListWidgetItem *item1 = new QListWidgetItem();
-    item1->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
-    insertItem(this->count(), item1);
-    setItemWidget(item1, switchWidget);
+
+//        QListWidgetItem *item0 = new QListWidgetItem();
+//        item0->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
+//        insertItem(this->count(), item0);
+//        setItemWidget(item0, lockWidget);
+
+    if(userCount>1){
+        QListWidgetItem *item1 = new QListWidgetItem();
+        item1->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
+        insertItem(this->count(), item1);
+        setItemWidget(item1, switchWidget);
+    }
 
     hibernateWidget = nullptr;
     if(canHibernate){

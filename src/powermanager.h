@@ -62,6 +62,8 @@ private:
     QWidget *hibernateWidget;
     QDBusInterface *sessionInterface;
     QDBusInterface *loginInterface;
+    QDBusInterface      *actService;
+
     bool    canSuspend;
     bool    canHibernate;
     int     m_count;
