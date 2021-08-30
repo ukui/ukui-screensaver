@@ -93,7 +93,7 @@ void PowerManager::powerClicked(QListWidgetItem *item)
     QString name = itemWidget(item)->objectName();
 //    if(name == lockWidget->objectName())
 //        lockWidgetClicked();
-    if(name == switchWidget->objectName())
+    if(switchWidget && name == switchWidget->objectName())
         switchWidgetClicked();
     else if(name == logoutWidget->objectName())
         logoutWidgetCliced();
@@ -432,10 +432,6 @@ void PowerManager::initUI()
                                     "org.freedesktop.Accounts",
                                     QDBusConnection::systemBus());
 
-    connect(actService, SIGNAL(UserAdded(const QDBusObjectPath&)),
-            this, SLOT(onUserAdded(const QDBusObjectPath&)));
-    connect(actService, SIGNAL(UserDeleted(const QDBusObjectPath&)),
-            this, SLOT(onUserDeleted(const QDBusObjectPath&)));
     QDBusMessage ret = actService->call("ListCachedUsers");
     QList<QVariant> outArgs = ret.arguments();
     QVariant first = outArgs.at(0);
@@ -450,7 +446,6 @@ void PowerManager::initUI()
     }
     dbusArgs.endArray();
     switchWidget=nullptr;
-    qDebug()<<"______________________i="<<userCount;
     if(userCount>1){
         switchWidget = new QWidget(this);
         switchWidget->setObjectName("switchWidget");
@@ -507,11 +502,6 @@ void PowerManager::initUI()
     shutdownlayout->addWidget(shutdownFace);
     shutdownlayout->addWidget(shutdownLabel);
     shutdownWidget->installEventFilter(this);
-
-//        QListWidgetItem *item0 = new QListWidgetItem();
-//        item0->setSizeHint(QSize(ITEM_WIDTH, ITEM_HEIGHT));
-//        insertItem(this->count(), item0);
-//        setItemWidget(item0, lockWidget);
 
     if(userCount>1){
         QListWidgetItem *item1 = new QListWidgetItem();
