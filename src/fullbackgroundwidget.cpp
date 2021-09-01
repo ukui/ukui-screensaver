@@ -18,6 +18,7 @@
 #include "fullbackgroundwidget.h"
 
 #include <QGuiApplication>
+#include <QSvgRenderer>
 #include <QScreen>
 #include <QDBusInterface>
 #include <QTime>
@@ -72,6 +73,40 @@ extern void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool qual
 QT_END_NAMESPACE
 
 #define BLUR_RADIUS 300
+
+QPixmap scaledPixmap(int width, int height, QString url)
+{
+    QFile imgFile(url);
+    if(!imgFile.exists()){
+        qDebug()<< "not find the pixmap file";
+        return QPixmap();
+    }
+    QImage image(url);
+    QPixmap pixmap = QPixmap::fromImage(image);
+    if(pixmap.isNull()) {
+        qDebug() << "pixmap is null";
+        QProcess exec;
+        QString program("file " + url);
+        exec.start(program);
+        exec.waitForFinished(1000);
+        QString output = exec.readAllStandardOutput();
+        qDebug() << output;
+        if(output.contains("SVG")){
+            qDebug() << "image format is SVG";
+            QSvgRenderer render(url);
+            QImage image(width, height, QImage::Format_ARGB32);
+            image.fill(Qt::transparent);
+            QPainter painter(&image);
+            render.render(&painter, image.rect());
+            pixmap.convertFromImage(image);
+        } else if(output.contains("TIFF")) {
+            qDebug() << "image format is TIFF";
+
+        }
+    }
+
+    return pixmap.scaled(width, height, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+}
 
 int connect_to_switch(const char* path)
 {
@@ -431,7 +466,8 @@ void FullBackgroundWidget::init()
     QDesktopWidget *desktop = QApplication::desktop();
     setGeometry(desktop->geometry());
 
-    background.load(configuration->getBackground());
+//    background.load(configuration->getBackground());
+    background = scaledPixmap(QApplication::primaryScreen()->geometry().width(), QApplication::primaryScreen()->geometry().height(), configuration->getBackground());
     
     if(!background.isNull()){
         background = blurPixmap(background);
