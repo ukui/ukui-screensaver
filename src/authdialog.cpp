@@ -66,6 +66,8 @@ AuthDialog::AuthDialog(const UserItem &user, QWidget *parent) :
 
 void AuthDialog::startAuth()
 {
+    prompted = false;
+    unacknowledged_messages = false;
     auth->authenticate(user.name);
 
     //showPasswordAuthWidget();
@@ -164,6 +166,10 @@ void AuthDialog::initUI()
     m_messageLabel = new QLabel(m_passwdWidget);
     m_messageLabel->setObjectName(QStringLiteral("messageLabel"));
     m_messageLabel->setAlignment(Qt::AlignCenter);
+
+    m_messageButton = new QPushButton(m_passwdWidget);
+    m_messageButton->setObjectName(QStringLiteral("messageButton"));
+    m_messageButton->hide();
 }
 
 void AuthDialog::unlock_countdown()
@@ -312,7 +318,8 @@ void AuthDialog::setChildrenGeometry()
                                 m_passwordEdit->geometry().bottom() + 25,
                                 600, 25);
 
-
+    m_messageButton->setGeometry((m_passwdWidget->width() - 200)/2 ,0, 200, 40);
+    
     setBiometricWidgetGeometry();
     setBiometricButtonWidgetGeometry();
 }
@@ -353,7 +360,7 @@ void AuthDialog::onShowMessage(const QString &message, Auth::MessageType type)
         m_messageLabel->setText(message);
         m_messageLabel->setToolTip(message);
     }
-    
+     unacknowledged_messages = true; 
     //stopWaiting();
 }
 
@@ -427,6 +434,9 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
             m_passwordEdit->setEnabled(true);
 
         m_passwordEdit->setFocus();
+        
+	prompted = true;
+        unacknowledged_messages = false;
 
         if(text == "Password: " || text == "密码："){
             if(usebindstarted){
@@ -465,28 +475,79 @@ void AuthDialog::onAuthComplete()
         if(usebindstarted){
             m_biometricAuthWidget->stopAuth();
         }
-        //账号密码认证完后，pam返回有警告或者提示信息，则停顿一秒
-        if (authMode == PASSWORD && false == m_messageLabel->text().isEmpty())
+       
+        if((prompted && !unacknowledged_messages )||direct_login){
+            direct_login = false;
+            Q_EMIT authenticateCompete(true);
+	}
+        else
         {
-            sleep(1);
+            qDebug()<<"prompted  = "<<prompted<<"  unacknowledged_messages = "<<unacknowledged_messages;
+            prompted = true;
+            show_authenticated ();
         }
-        
+    }
+    else
+    { 
+        if (prompted)
+        {
+            if(m_messageLabel->text()=="")
+                onShowMessage(tr("Authentication failure, Please try again"),
+                      Auth::MessageTypeError);
+
+            authMode = PASSWORD;
+            startAuth();
+	}
+	else
+	{
+            show_authenticated (false);	
+	}
+    }
+}
+
+void AuthDialog::show_authenticated(bool successful)
+{
+    m_passwdWidget->show();
+    m_passwordEdit->hide();
+    m_messageButton->show();
+    m_messageButton->setFocus();
+    m_messageButton->setDefault(true);
+    
+    connect(m_messageButton, &QPushButton::clicked,
+            this, &AuthDialog::onMessageButtonClicked);
+    if(successful)
+    {
+        isretry = false;
+        m_messageButton->setText(tr("Login"));
+    }
+    else
+    {
+        isretry = true;
+        m_messageButton->setText(tr("Retry"));
+    }
+
+}
+
+void AuthDialog::onMessageButtonClicked()
+{
+    m_messageButton->setDefault(false);
+    if(!isretry)
+    { 
         Q_EMIT authenticateCompete(true);
     }
     else
     {
-        if(m_messageLabel->text()=="")
-            onShowMessage(tr("Authentication failure, Please try again"),
-                      Auth::MessageTypeError);
-        //认证失败，重新认证
-
+        m_messageButton->hide();
         authMode = PASSWORD;
+
+        m_messageLabel->setText("");
         startAuth();
     }
 }
 
 void AuthDialog::onRespond(const QString &text)
 {
+    unacknowledged_messages=false;
     clearMessage();
     startWaiting();
     m_passwordEdit->setEnabled(false);
@@ -798,6 +859,7 @@ void AuthDialog::onBiometricAuthComplete(bool result)
         }else{
             auth->respond(BIOMETRIC_SUCCESS);
         }
+	direct_login = true;
     }
 }
 

@@ -1,8 +1,17 @@
-QPushButton {
+QPushButton{
+    text-align:center;
+    color: rgb(255, 255, 255, 255);
     border: none;
+    border-radius: 4px;
     outline: none;
-    color: white;
 }
+QPushButton::hover{
+    background-color: rgb(255, 255, 255, 20%);
+}
+QPushButton::pressed {
+    background-color: rgba(0, 0, 0, 30%);
+}
+
 
 QLabel {
     color: white;
@@ -71,6 +80,12 @@ QLineEdit::focus{
 
 /* PAM message提示*/
 #messageLabel {
+    font-size: 16px;
+    color: white;
+}
+
+#messageButton{
+    text-align:center;
     font-size: 16px;
     color: white;
 }

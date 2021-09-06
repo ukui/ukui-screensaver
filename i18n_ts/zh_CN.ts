@@ -16,7 +16,8 @@
         <translation type="obsolete">使用密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="543"/>
+        <location filename="../src/authdialog.cpp" line="526"/>
+        <location filename="../src/authdialog.cpp" line="750"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
@@ -37,7 +38,7 @@
         <translation type="obsolete">已登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="310"/>
+        <location filename="../src/authdialog.cpp" line="454"/>
         <source>Password: </source>
         <translation>密码：</translation>
     </message>
@@ -46,21 +47,32 @@
         <translation type="vanished">账户锁定%1分钟由于%2次错误尝试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="185"/>
+        <location filename="../src/authdialog.cpp" line="189"/>
+        <location filename="../src/authdialog.cpp" line="190"/>
+        <location filename="../src/authdialog.cpp" line="243"/>
+        <location filename="../src/authdialog.cpp" line="244"/>
         <source>Please try again in %1 minutes.</source>
         <translation>请%1分钟后再试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="195"/>
+        <location filename="../src/authdialog.cpp" line="199"/>
+        <location filename="../src/authdialog.cpp" line="200"/>
+        <location filename="../src/authdialog.cpp" line="253"/>
+        <location filename="../src/authdialog.cpp" line="254"/>
         <source>Please try again in %1 seconds.</source>
         <translation>请%1秒后再试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="195"/>
+        <location filename="../src/authdialog.cpp" line="208"/>
+        <location filename="../src/authdialog.cpp" line="209"/>
+        <location filename="../src/authdialog.cpp" line="262"/>
+        <location filename="../src/authdialog.cpp" line="263"/>
         <source>Account locked permanently.</source>
         <translation>账号已被永久锁定</translation>
     </message>
     <message>
+        <location filename="../src/authdialog.cpp" line="356"/>
+        <location filename="../src/authdialog.cpp" line="357"/>
         <source>Password cannot be empty</source>
         <translation>密码不能为空</translation>
     </message>
@@ -73,39 +85,46 @@
         <translation type="vanished">认证失败，还剩%1次尝试机会</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="229"/>
-        <location filename="../src/authdialog.cpp" line="300"/>
-        <location filename="../src/authdialog.cpp" line="305"/>
+        <location filename="../src/authdialog.cpp" line="370"/>
+        <location filename="../src/authdialog.cpp" line="444"/>
+        <location filename="../src/authdialog.cpp" line="449"/>
         <source>Please enter your password or enroll your fingerprint </source>
         <translation>请输入密码或者录入指纹</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="333"/>
+        <location filename="../src/authdialog.cpp" line="223"/>
+        <location filename="../src/authdialog.cpp" line="278"/>
+        <location filename="../src/authdialog.cpp" line="495"/>
         <source>Authentication failure, Please try again</source>
         <translation>认证失败，请重试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="507"/>
+        <location filename="../src/authdialog.cpp" line="521"/>
+        <source>Login</source>
+        <translation>登录</translation>
+    </message>
+    <message>
+        <location filename="../src/authdialog.cpp" line="714"/>
         <source>Biometric Authentication</source>
         <translation>生物识别认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="520"/>
+        <location filename="../src/authdialog.cpp" line="727"/>
         <source>Password Authentication</source>
         <translation>密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="533"/>
+        <location filename="../src/authdialog.cpp" line="740"/>
         <source>Other Devices</source>
         <translation>其他设备</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="632"/>
+        <location filename="../src/authdialog.cpp" line="839"/>
         <source>Too many unsuccessful attempts,please enter password.</source>
         <translation>指纹验证失败达最大次数，请使用密码登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="636"/>
+        <location filename="../src/authdialog.cpp" line="843"/>
         <source>Fingerprint authentication failed, you still have %1 verification opportunities</source>
         <translation>指纹验证失败，您还有%1次尝试机会</translation>
     </message>
@@ -151,12 +170,12 @@
 <context>
     <name>BiometricAuthWidget</name>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="102"/>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="120"/>
         <source>Current device: </source>
         <translation>当前设备：</translation>
     </message>
     <message>
-        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="168"/>
+        <location filename="../BiometricAuth/biometricauthwidget.cpp" line="186"/>
         <source>Identify failed, Please retry.</source>
         <translation>识别失败，请重试</translation>
     </message>
@@ -264,22 +283,22 @@
         <translation type="unfinished">缺少有线网卡 无法新建网络</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/confform.cpp" line="317"/>
+        <location filename="../KylinNM/src/confform.cpp" line="318"/>
         <source>New network already created</source>
         <translation type="unfinished">已创建新的有线网络</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/confform.cpp" line="357"/>
+        <location filename="../KylinNM/src/confform.cpp" line="362"/>
         <source>New network settings already finished</source>
         <translation type="unfinished">新的网络配置已经完成</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/confform.cpp" line="390"/>
+        <location filename="../KylinNM/src/confform.cpp" line="395"/>
         <source>Edit Network</source>
         <translation type="unfinished">网络属性</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/confform.cpp" line="426"/>
+        <location filename="../KylinNM/src/confform.cpp" line="431"/>
         <source>Add Wired Network</source>
         <translation type="unfinished">新建有线网络</translation>
     </message>
@@ -292,7 +311,7 @@
         <translation type="obsolete">新的设置已经生效</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/confform.cpp" line="366"/>
+        <location filename="../KylinNM/src/confform.cpp" line="371"/>
         <source>New settings already effective</source>
         <translation>新的设置已经生效</translation>
     </message>
@@ -332,8 +351,8 @@
 <context>
     <name>DigitalAuthDialog</name>
     <message>
-        <location filename="../src/digitalauthdialog.cpp" line="56"/>
-        <location filename="../src/digitalauthdialog.cpp" line="655"/>
+        <location filename="../src/digitalauthdialog.cpp" line="57"/>
+        <location filename="../src/digitalauthdialog.cpp" line="759"/>
         <source>LoginByUEdu</source>
         <translation>请输入锁屏密码</translation>
     </message>
@@ -346,33 +365,33 @@
         <translation type="obsolete">密码错误，请重试</translation>
     </message>
     <message>
-        <location filename="../src/digitalauthdialog.cpp" line="60"/>
+        <location filename="../src/digitalauthdialog.cpp" line="61"/>
         <source>ResetPWD?</source>
         <translation>忘记密码？</translation>
     </message>
     <message>
-        <location filename="../src/digitalauthdialog.cpp" line="85"/>
-        <location filename="../src/digitalauthdialog.cpp" line="672"/>
+        <location filename="../src/digitalauthdialog.cpp" line="87"/>
+        <location filename="../src/digitalauthdialog.cpp" line="776"/>
         <source>SetNewUEduPWD</source>
         <translation>设置新锁屏密码</translation>
     </message>
     <message>
-        <location filename="../src/digitalauthdialog.cpp" line="520"/>
+        <location filename="../src/digitalauthdialog.cpp" line="599"/>
         <source>ConfirmNewUEduPWD</source>
         <translation>确认新锁屏密码</translation>
     </message>
     <message>
-        <location filename="../src/digitalauthdialog.cpp" line="532"/>
+        <location filename="../src/digitalauthdialog.cpp" line="611"/>
         <source>The two password entries are inconsistent, please reset</source>
         <translation>两次密码输入不一致，请重设</translation>
     </message>
     <message>
-        <location filename="../src/digitalauthdialog.cpp" line="600"/>
+        <location filename="../src/digitalauthdialog.cpp" line="700"/>
         <source>Password entered incorrectly, please try again</source>
         <translation>密码输入错误，请重试</translation>
     </message>
     <message>
-        <location filename="../src/digitalauthdialog.cpp" line="176"/>
+        <location filename="../src/digitalauthdialog.cpp" line="224"/>
         <source>clear</source>
         <translation>清空</translation>
     </message>
@@ -442,8 +461,6 @@
     </message>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifi.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifi.h" line="122"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifi.h" line="122"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -452,8 +469,6 @@
     <name>DlgConnHidWifiLeap</name>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifileap.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifileap.h" line="149"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifileap.h" line="149"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -537,8 +552,6 @@
     <name>DlgConnHidWifiSecFast</name>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifisecfast.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifisecfast.h" line="216"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifisecfast.h" line="216"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -673,8 +686,6 @@
     <name>DlgConnHidWifiSecLeap</name>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifisecleap.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifisecleap.h" line="161"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifisecleap.h" line="161"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -773,8 +784,6 @@
     <name>DlgConnHidWifiSecPeap</name>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifisecpeap.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifisecpeap.h" line="249"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifisecpeap.h" line="249"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -924,8 +933,6 @@
     <name>DlgConnHidWifiSecPwd</name>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifisecpwd.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifisecpwd.h" line="161"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifisecpwd.h" line="161"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -1024,8 +1031,6 @@
     <name>DlgConnHidWifiSecTls</name>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifisectls.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifisectls.h" line="250"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifisectls.h" line="250"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -1169,8 +1174,6 @@
     <name>DlgConnHidWifiSecTunnelTLS</name>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifisectunneltls.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifisectunneltls.h" line="237"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifisectunneltls.h" line="237"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -1305,8 +1308,6 @@
     <name>DlgConnHidWifiWep</name>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifiwep.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifiwep.h" line="163"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifiwep.h" line="163"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -1410,8 +1411,6 @@
     <name>DlgConnHidWifiWpa</name>
     <message>
         <location filename="../KylinNM/wireless-security/dlgconnhidwifiwpa.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlgconnhidwifiwpa.h" line="137"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlgconnhidwifiwpa.h" line="137"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
@@ -1486,8 +1485,6 @@
     <name>DlgHotspotCreate</name>
     <message>
         <location filename="../KylinNM/hot-spot/dlghotspotcreate.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_dlghotspotcreate.h" line="89"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_dlghotspotcreate.h" line="89"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1585,9 +1582,7 @@
     <name>KylinNM</name>
     <message>
         <location filename="../KylinNM/src/kylinnm.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_kylinnm.h" line="136"/>
         <location filename="../KylinNM/src/kylinnm.cpp" line="610"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_kylinnm.h" line="136"/>
         <source>kylin-nm</source>
         <translation>网络工具</translation>
     </message>
@@ -1624,7 +1619,7 @@
     <message>
         <location filename="../KylinNM/src/kylinnm.cpp" line="411"/>
         <location filename="../KylinNM/src/kylinnm.cpp" line="416"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1324"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1330"/>
         <source>Ethernet</source>
         <translation>有线网络</translation>
     </message>
@@ -1635,7 +1630,7 @@
     <message>
         <location filename="../KylinNM/src/kylinnm.cpp" line="422"/>
         <location filename="../KylinNM/src/kylinnm.cpp" line="427"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1391"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1397"/>
         <source>Wifi</source>
         <translation>无线网络</translation>
     </message>
@@ -1667,34 +1662,34 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1287"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1293"/>
         <source>No wireless card detected</source>
         <translation type="unfinished">未检测到无线网卡</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1435"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1533"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1682"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="2349"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="2440"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1441"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1539"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1701"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="2426"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="2517"/>
         <source>Not connected</source>
         <translation>未连接任何网络</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1438"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1535"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1601"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1602"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1685"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1765"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1918"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="2351"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="2442"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1444"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1541"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1607"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1608"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1704"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1828"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1995"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="2428"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="2519"/>
         <source>Disconnected</source>
         <translation>未连接</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1627"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1633"/>
         <source>No Other Wired Network Scheme</source>
         <translation type="unfinished">列表中无其他有线网络</translation>
     </message>
@@ -1711,12 +1706,12 @@
         <translation type="obsolete">未连接任何网络</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1787"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1849"/>
         <source>No Other Wireless Network Scheme</source>
         <translation type="unfinished">未检测到其他无线网络</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="2258"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="2335"/>
         <source>Wired net is disconnected</source>
         <translation type="unfinished">断开有线网络</translation>
     </message>
@@ -1725,7 +1720,7 @@
         <translation type="obsolete">断开无线网络</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="2674"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="2751"/>
         <source>Confirm your Wi-Fi password or usable of wireless card</source>
         <translation type="unfinished">请确认Wi-Fi密码或无线设备</translation>
     </message>
@@ -1748,8 +1743,8 @@
         <translation type="unfinished">列表暂无可连接网络</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1582"/>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="1742"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1588"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="1798"/>
         <source>NetOn,</source>
         <translation>已连接，</translation>
     </message>
@@ -1783,17 +1778,17 @@
         <translation type="vanished">正在更新 Wi-Fi列表</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="2628"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="2705"/>
         <source>Conn Ethernet Success</source>
         <translation>连接有线网络成功</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="2640"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="2717"/>
         <source>Conn Ethernet Fail</source>
         <translation>连接有线网络失败</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/kylinnm.cpp" line="2665"/>
+        <location filename="../KylinNM/src/kylinnm.cpp" line="2742"/>
         <source>Conn Wifi Success</source>
         <translation>连接无线网络成功</translation>
     </message>
@@ -1816,22 +1811,22 @@
         <translation>时间</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="316"/>
+        <location filename="../src/lockwidget.cpp" line="322"/>
         <source>Guest</source>
         <translation>游客</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="299"/>
+        <location filename="../src/lockwidget.cpp" line="305"/>
         <source>SwitchUser</source>
-        <translation type="vanished">切换用户</translation>
+        <translation>切换用户</translation>
     </message>
 </context>
 <context>
     <name>MyLineEdit</name>
     <message>
-        <location filename="../src/verificationwidget.cpp" line="598"/>
-        <location filename="../src/verificationwidget.cpp" line="604"/>
-        <location filename="../src/verificationwidget.cpp" line="621"/>
+        <location filename="../src/verificationwidget.cpp" line="599"/>
+        <location filename="../src/verificationwidget.cpp" line="605"/>
+        <location filename="../src/verificationwidget.cpp" line="622"/>
         <source>Verification code</source>
         <translation>短信验证码</translation>
     </message>
@@ -1840,13 +1835,11 @@
     <name>OneConnForm</name>
     <message>
         <location filename="../KylinNM/src/oneconnform.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_oneconnform.h" line="150"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_oneconnform.h" line="150"/>
         <source>Form</source>
         <translation>--</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/oneconnform.cpp" line="157"/>
+        <location filename="../KylinNM/src/oneconnform.cpp" line="158"/>
         <source>Automatically join the network</source>
         <translation>自动加入该网络</translation>
     </message>
@@ -1877,12 +1870,12 @@
         <translation type="unfinished">输入密码...</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/oneconnform.cpp" line="418"/>
+        <location filename="../KylinNM/src/oneconnform.cpp" line="419"/>
         <source>Connect to Hidden Wi-Fi Network</source>
         <translation>连接到隐藏 Wi-Fi 网络</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/oneconnform.cpp" line="554"/>
+        <location filename="../KylinNM/src/oneconnform.cpp" line="555"/>
         <source>Signal：</source>
         <translation type="unfinished">信号强度：</translation>
     </message>
@@ -1899,22 +1892,22 @@
         <translation type="vanished">速率</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/oneconnform.cpp" line="551"/>
+        <location filename="../KylinNM/src/oneconnform.cpp" line="552"/>
         <source>None</source>
         <translation type="unfinished">无</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/oneconnform.cpp" line="553"/>
+        <location filename="../KylinNM/src/oneconnform.cpp" line="554"/>
         <source>WiFi Security：</source>
         <translation type="unfinished">WiFi安全性：</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/oneconnform.cpp" line="555"/>
+        <location filename="../KylinNM/src/oneconnform.cpp" line="556"/>
         <source>MAC：</source>
         <translation type="unfinished">物理地址：</translation>
     </message>
     <message>
-        <location filename="../KylinNM/src/oneconnform.cpp" line="824"/>
+        <location filename="../KylinNM/src/oneconnform.cpp" line="826"/>
         <source>Conn Wifi Failed</source>
         <translation>连接无线网络失败</translation>
     </message>
@@ -1923,8 +1916,6 @@
     <name>OneLancForm</name>
     <message>
         <location filename="../KylinNM/src/onelancform.ui" line="14"/>
-        <location filename="../build/KylinNM/ui_onelancform.h" line="127"/>
-        <location filename="../obj-x86_64-linux-gnu/KylinNM/ui_onelancform.h" line="127"/>
         <source>Form</source>
         <translation>--</translation>
     </message>
@@ -1984,44 +1975,48 @@
     </message>
     <message>
         <location filename="../src/permissioncheck.cpp" line="241"/>
-        <location filename="../src/verificationwidget.cpp" line="380"/>
+        <source>「 Use bound Phone number to verification 」</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/verificationwidget.cpp" line="381"/>
         <source>「 Use SMS to verification 」</source>
         <translation>「 请使用绑定该账户手机号验证 」</translation>
     </message>
     <message>
         <location filename="../src/permissioncheck.cpp" line="259"/>
-        <location filename="../src/verificationwidget.cpp" line="398"/>
+        <location filename="../src/verificationwidget.cpp" line="399"/>
         <source>commit</source>
         <translation>提交</translation>
     </message>
     <message>
-        <location filename="../src/verificationwidget.cpp" line="483"/>
-        <location filename="../src/verificationwidget.cpp" line="523"/>
+        <location filename="../src/verificationwidget.cpp" line="484"/>
+        <location filename="../src/verificationwidget.cpp" line="524"/>
         <source>Network not connected~</source>
         <translation>系统未联网，请检查网络连接~</translation>
     </message>
     <message>
-        <location filename="../src/verificationwidget.cpp" line="529"/>
+        <location filename="../src/verificationwidget.cpp" line="530"/>
         <source>Network unavailable~</source>
         <translation>网络状态差，请检查网络连接~</translation>
     </message>
     <message>
-        <location filename="../src/verificationwidget.cpp" line="486"/>
+        <location filename="../src/verificationwidget.cpp" line="487"/>
         <source>Verification Code invalid!</source>
         <translation>验证码失效</translation>
     </message>
     <message>
-        <location filename="../src/verificationwidget.cpp" line="489"/>
+        <location filename="../src/verificationwidget.cpp" line="490"/>
         <source>Verification Code incorrect.Please retry!</source>
         <translation>验证码错误！请填写正确的验证码!</translation>
     </message>
     <message>
-        <location filename="../src/verificationwidget.cpp" line="492"/>
+        <location filename="../src/verificationwidget.cpp" line="493"/>
         <source>Failed time over limit!Retry after 1 hour!</source>
         <translation>验证码错误次数超过10次,1小时后再试</translation>
     </message>
     <message>
-        <location filename="../src/verificationwidget.cpp" line="496"/>
+        <location filename="../src/verificationwidget.cpp" line="497"/>
         <source>verifaction failed!</source>
         <translation>手机验证失败</translation>
     </message>
@@ -2029,6 +2024,7 @@
 <context>
     <name>PowerManager</name>
     <message>
+        <location filename="../src/powermanager.cpp" line="173"/>
         <source>lock</source>
         <translation>锁定</translation>
     </message>
@@ -2049,37 +2045,39 @@
         <translation type="vanished">关机</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="169"/>
         <source>Lock Screen</source>
-        <translation>锁屏</translation>
+        <translation type="vanished">锁屏</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="184"/>
+        <location filename="../src/powermanager.cpp" line="457"/>
         <source>Switch User</source>
         <translation>切换用户</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="198"/>
+        <location filename="../src/powermanager.cpp" line="190"/>
+        <location filename="../src/powermanager.cpp" line="471"/>
         <source>Log Out</source>
         <translation>注销</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="212"/>
+        <location filename="../src/powermanager.cpp" line="208"/>
+        <location filename="../src/powermanager.cpp" line="485"/>
         <source>Restart</source>
         <translation>重启</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="226"/>
+        <location filename="../src/powermanager.cpp" line="228"/>
+        <location filename="../src/powermanager.cpp" line="499"/>
         <source>Power Off</source>
         <translation>关机</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="267"/>
+        <location filename="../src/powermanager.cpp" line="544"/>
         <source>Suspend</source>
         <translation>睡眠</translation>
     </message>
     <message>
-        <location filename="../src/powermanager.cpp" line="289"/>
+        <location filename="../src/powermanager.cpp" line="522"/>
         <source>Sleep</source>
         <translation>休眠</translation>
     </message>
@@ -2108,31 +2106,29 @@
         <translation type="vanished">退出</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="124"/>
+        <location filename="../screensaver/screensaver.cpp" line="135"/>
         <source>Picture does not exist</source>
         <translation>图片不存在</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="615"/>
         <source>Set as desktop wallpaper</source>
-        <translation>设置为桌面壁纸</translation>
+        <translation type="vanished">设置为桌面壁纸</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="625"/>
         <source>Automatic switching</source>
-        <translation>自动切换</translation>
+        <translation type="vanished">自动切换</translation>
     </message>
     <message>
         <source>You have %1 unread message</source>
         <translation type="obsolete">您有%1条未读消息</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="751"/>
+        <location filename="../screensaver/screensaver.cpp" line="1202"/>
         <source>You have new notification</source>
         <translation>您有新的消息</translation>
     </message>
     <message>
-        <location filename="../screensaver/screensaver.cpp" line="124"/>
+        <location filename="../screensaver/screensaver.cpp" line="1046"/>
         <source>View</source>
         <translation>预览</translation>
     </message>
@@ -2180,38 +2176,38 @@
         <translation type="vanished">向上滑动解锁</translation>
     </message>
     <message>
-        <location filename="../src/tabletlockwidget.cpp" line="267"/>
+        <location filename="../src/tabletlockwidget.cpp" line="266"/>
         <source>New password is the same as old</source>
         <translation>新密码与原密码相同</translation>
     </message>
     <message>
-        <location filename="../src/tabletlockwidget.cpp" line="278"/>
+        <location filename="../src/tabletlockwidget.cpp" line="277"/>
         <source>Reset password error:%1</source>
         <translation>重置密码失败:%1</translation>
     </message>
     <message>
-        <location filename="../src/tabletlockwidget.cpp" line="290"/>
+        <location filename="../src/tabletlockwidget.cpp" line="289"/>
         <source>Please scan by correct WeChat</source>
         <translation>请使用正确的微信扫码</translation>
     </message>
     <message>
-        <location filename="../src/tabletlockwidget.cpp" line="183"/>
-        <location filename="../src/tabletlockwidget.cpp" line="203"/>
-        <location filename="../src/tabletlockwidget.cpp" line="222"/>
-        <location filename="../src/tabletlockwidget.cpp" line="235"/>
-        <location filename="../src/tabletlockwidget.cpp" line="374"/>
+        <location filename="../src/tabletlockwidget.cpp" line="180"/>
+        <location filename="../src/tabletlockwidget.cpp" line="200"/>
+        <location filename="../src/tabletlockwidget.cpp" line="219"/>
+        <location filename="../src/tabletlockwidget.cpp" line="234"/>
+        <location filename="../src/tabletlockwidget.cpp" line="373"/>
         <location filename="../src/tabletlockwidget.cpp" line="388"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../src/tabletlockwidget.cpp" line="189"/>
+        <location filename="../src/tabletlockwidget.cpp" line="186"/>
         <location filename="../src/tabletlockwidget.cpp" line="398"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>
     <message>
-        <location filename="../src/tabletlockwidget.cpp" line="240"/>
+        <location filename="../src/tabletlockwidget.cpp" line="239"/>
         <source>Skip</source>
         <translation>跳过</translation>
     </message>
@@ -2243,42 +2239,42 @@
 <context>
     <name>WeChatAuthDialog</name>
     <message>
-        <location filename="../src/wechatauthdialog.cpp" line="72"/>
-        <location filename="../src/wechatauthdialog.cpp" line="134"/>
+        <location filename="../src/wechatauthdialog.cpp" line="74"/>
+        <location filename="../src/wechatauthdialog.cpp" line="136"/>
         <source>Login by wechat</source>
         <translation>微信登录</translation>
     </message>
     <message>
-        <location filename="../src/wechatauthdialog.cpp" line="76"/>
-        <location filename="../src/wechatauthdialog.cpp" line="138"/>
+        <location filename="../src/wechatauthdialog.cpp" line="78"/>
+        <location filename="../src/wechatauthdialog.cpp" line="140"/>
         <source>Verification by wechat</source>
         <translation>微信验证</translation>
     </message>
     <message>
-        <location filename="../src/wechatauthdialog.cpp" line="73"/>
-        <location filename="../src/wechatauthdialog.cpp" line="135"/>
+        <location filename="../src/wechatauthdialog.cpp" line="75"/>
+        <location filename="../src/wechatauthdialog.cpp" line="137"/>
         <source>「 Use registered WeChat account to login 」</source>
         <translation>「 使用已注册的微信号登录 」</translation>
     </message>
     <message>
-        <location filename="../src/wechatauthdialog.cpp" line="77"/>
-        <location filename="../src/wechatauthdialog.cpp" line="139"/>
+        <location filename="../src/wechatauthdialog.cpp" line="79"/>
+        <location filename="../src/wechatauthdialog.cpp" line="141"/>
         <source>「 Use bound WeChat account to verification 」</source>
         <translation>「 请使用绑定该账号的微信验证 」</translation>
     </message>
     <message>
-        <location filename="../src/wechatauthdialog.cpp" line="126"/>
-        <location filename="../src/wechatauthdialog.cpp" line="181"/>
+        <location filename="../src/wechatauthdialog.cpp" line="128"/>
+        <location filename="../src/wechatauthdialog.cpp" line="183"/>
         <source>Network not connected~</source>
         <translation>系统未联网，请检查网络连接~</translation>
     </message>
     <message>
-        <location filename="../src/wechatauthdialog.cpp" line="211"/>
+        <location filename="../src/wechatauthdialog.cpp" line="227"/>
         <source>Scan code successfully</source>
         <translation>扫码成功</translation>
     </message>
     <message>
-        <location filename="../src/wechatauthdialog.cpp" line="236"/>
+        <location filename="../src/wechatauthdialog.cpp" line="252"/>
         <source>Timeout!Try again!</source>
         <translation>超时!请重新扫码!</translation>
     </message>
@@ -2296,7 +2292,8 @@
     </message>
     <message>
         <location filename="../src/ukui-screensaver-command.cpp" line="45"/>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="149"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="178"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="180"/>
         <source>lock the screen immediately</source>
         <translation>马上锁定屏幕</translation>
     </message>
@@ -2316,43 +2313,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="144"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="173"/>
         <source>Dialog for the ukui ScreenSaver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="151"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="182"/>
         <source>activated by session idle signal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="153"/>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="157"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="184"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="188"/>
         <source>lock the screen and show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ukui-screensaver-dialog.cpp" line="155"/>
+        <location filename="../src/ukui-screensaver-dialog.cpp" line="186"/>
         <source>show screensaver immediately</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../screensaver/main.cpp" line="61"/>
+        <location filename="../screensaver/main.cpp" line="65"/>
         <source>Screensaver for ukui-screensaver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../screensaver/main.cpp" line="65"/>
+        <location filename="../screensaver/main.cpp" line="69"/>
         <source>show on root window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../screensaver/main.cpp" line="67"/>
+        <location filename="../screensaver/main.cpp" line="71"/>
         <source>show on window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../screensaver/main.cpp" line="68"/>
+        <location filename="../screensaver/main.cpp" line="72"/>
         <source>window id</source>
         <translation type="unfinished"></translation>
     </message>

@@ -72,7 +72,7 @@ private:
     void showBiometricDeviceWidget();
     QPixmap PixmapToRound(const QPixmap &src, int radius);
     void startBioAuth();
-
+    void show_authenticated (bool successful = true);
 
 private Q_SLOTS:
     void onShowMessage(const QString &message, Auth::MessageType type);
@@ -90,6 +90,7 @@ private Q_SLOTS:
     void onOtherDevicesButtonClicked();
     void onRetryButtonClicked();
     void pamBioSuccess();
+    void onMessageButtonClicked();
 
 public Q_SLOTS:
 //    void switchToBiometric();
@@ -134,6 +135,8 @@ private:
     QWidget         *m_passwdWidget;        //放置密码输入框和信息列表
     IconEdit        *m_passwordEdit;       //密码输入框
     QLabel          *m_messageLabel;         //PAM消息显示
+    QPushButton     *m_messageButton;
+
     bool            usebind;
     bool            usebindstarted;
     bool            isBioPassed;
@@ -143,7 +146,10 @@ private:
     QTimer          *m_bioTimer;
     bool            useFirstDevice;
     bool            isLockingFlg;   //判断当前是否正在锁定倒计时
-
+    bool prompted = false;
+    bool unacknowledged_messages = false;
+    bool direct_login = false;
+    bool isretry = true;
 
     void root_unlock_countdown();
     void unlock_countdown();
