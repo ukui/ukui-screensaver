@@ -21,6 +21,7 @@
 #define ICONEDIT_H
 
 #include <QLabel>
+#include <QSvgWidget>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QPixmap>

@@ -41,7 +41,7 @@ AuthPAM::AuthPAM(QObject *parent)
       _isAuthenticated(false),
       _isAuthenticating(false)
 {
-    signal(SIGCHLD, sigchld_handler);
+//    signal(SIGCHLD, sigchld_handler);
 }
 
 void AuthPAM::authenticate(const QString &userName)
