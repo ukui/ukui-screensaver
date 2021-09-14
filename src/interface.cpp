@@ -204,7 +204,7 @@ void Interface::onPrepareForSleep(bool sleep)
                 }
             });
         }
-        m_timer->start(100);
+        m_timer->start(200);
     }
     else
     {

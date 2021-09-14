@@ -674,6 +674,7 @@ int FullBackgroundWidget::onSessionStatusChanged(uint status)
 
 void FullBackgroundWidget::onBlankScreensaver()
 {
+      showLockWidget();
       screenStatus = (ScreenStatus)(screenStatus | SCREEN_SAVER | SCREEN_LOCK);
       qDebug() << "showScreensaver - screenStatus: " << screenStatus;
 

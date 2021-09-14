@@ -216,6 +216,12 @@ int main(int argc, char *argv[])
         a.setStyleSheet(qssFile.readAll());
     }
     qssFile.close();
+
+    if(parser.isSet(blankOption))
+    {
+        window->onBlankScreensaver();
+    }
+
 #ifndef USE_INTEL
     window->show();
     window->activateWindow();
@@ -240,12 +246,12 @@ int main(int argc, char *argv[])
     {
     	window->onScreensaver();
     }
-    
+/*    
     if(parser.isSet(blankOption))
     {
         window->onBlankScreensaver();
     }
-
+*/
     if(parser.isSet(screensaverOption))
     {
     	window->showScreensaver();
