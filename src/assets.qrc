@@ -9,7 +9,7 @@
         <file>assets/switchGreeter.png</file>
 	<file>assets/switchUser.png</file>
         <file>assets/waiting.png</file>
-        <file>assets/capslock.svg</file>
+        <file>assets/capslock.png</file>
         <file>assets/combobox_down.png</file>
         <file>assets/scrollbar_down.png</file>
         <file>assets/scrollbar_down_clicked.png</file>
@@ -18,11 +18,8 @@
         <file>assets/scrollbar_up_clicked.png</file>
         <file>assets/scrollbar_up_hover.png</file>
         <file>assets/unlock-button.png</file>
-        <file>assets/unlock-button-hover.png</file>
-        <file>assets/unlock-button-pressed.png</file>
-        <file>assets/login-button.svg</file>
-	<file>assets/login-button-hover.svg</file>
-	<file>assets/login-button-pressed.svg</file>
+	<file>assets/unlock-button-hover.png</file>
+	<file>assets/unlock-button-pressed.png</file>
     	<file>assets/iconFace.png</file>
 	<file>assets/iconFace.svg</file>
 	<file>assets/powerManager.png</file>

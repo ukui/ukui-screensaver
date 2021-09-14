@@ -130,7 +130,7 @@ target_link_libraries(ukui-screensaver-dialog
 	Qt5::X11Extras
         Qt5::Network
 	${EXTRA_LIBS}
-        BiometricAuth 
+    BiometricAuth 
 	VirtualKeyboard 
 	Common
         Kylin-nm
