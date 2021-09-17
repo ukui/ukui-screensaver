@@ -140,7 +140,12 @@ void AuthDialog::initUI()
     m_nameLabel->setObjectName(QStringLiteral("login_nameLabel"));
     m_nameLabel->setFocusPolicy(Qt::NoFocus);
     m_nameLabel->setAlignment(Qt::AlignCenter);
-    m_nameLabel->setText(user.realName.isEmpty() ? user.name : user.realName);
+    //m_nameLabel->setText(user.realName.isEmpty() ? user.name : user.realName);
+    QString text = user.realName.isEmpty() ? user.name : user.realName;
+    QString str = ElideText(m_nameLabel->font(),300,text);
+    if(text != str)
+         m_nameLabel->setToolTip(text);
+    m_nameLabel->setText(str);
 
 
     /* 密码框所在窗口 */
