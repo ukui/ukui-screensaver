@@ -189,10 +189,15 @@ void AuthDialog::unlock_countdown()
     pam_tally_unlock_time_left(&failed_count, &time_left, &deny,&fail_time,&unlock_time);
 
     // qDebug() << "failed_count:" << failed_count << "time_left:" <<time_left <<"deny:"<<deny<<"fail_time:"<< fail_time<<"unlock_time:" << unlock_time;
-    if(time_left/60 > 0)//请多少分钟后重试
+    int nMinuteleft = time_left/60;
+    if(nMinuteleft > 1)//请多少分钟后重试
     {
         char ch[100]={0};
-        int nMinute = time_left/60 + 1;
+        int nMinute = nMinuteleft;
+        if (nMinuteleft > 1 )
+        {
+            nMinute = nMinuteleft + 1;
+        }
         m_messageLabel->setText(tr("Please try again in %1 minutes.").arg(nMinute));
         m_messageLabel->setToolTip(tr("Please try again in %1 minutes.").arg(nMinute));
         m_passwordEdit->clearText();
@@ -243,10 +248,15 @@ void AuthDialog::root_unlock_countdown()
         int time_left = 0;
         int deny = 0;
         pam_tally_root_unlock_time_left(&failed_count, &time_left, &deny);
-        if(time_left/60 > 0)//请多少分钟后重试
+        int nMinuteleft = time_left/60;
+        if(nMinuteleft > 1)//请多少分钟后重试
         {
             char ch[100]={0};
-            int nMinute = time_left/60 + 1;
+            int nMinute = nMinuteleft;
+            if (nMinuteleft > 1 )
+            {
+                nMinute = nMinuteleft + 1;
+            }
             m_messageLabel->setText(tr("Please try again in %1 minutes.").arg(nMinute));
             m_messageLabel->setToolTip(tr("Please try again in %1 minutes.").arg(nMinute));
             m_passwordEdit->clearText();
