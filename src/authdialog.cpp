@@ -143,8 +143,8 @@ void AuthDialog::initUI()
     //m_nameLabel->setText(user.realName.isEmpty() ? user.name : user.realName);
     QString text = user.realName.isEmpty() ? user.name : user.realName;
     QFont font;
-    font.setPixelSize(16);
-    QString str = ElideText(font,300,text);
+    font.setPixelSize(24);
+    QString str = ElideText(font,500,text);
     if(text != str)
          m_nameLabel->setToolTip(text);
     m_nameLabel->setText(str);
