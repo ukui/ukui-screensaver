@@ -1,12 +1,12 @@
 QPushButton{
     text-align:center;
-    color: rgb(255, 255, 255, 255);
+    color: rgba(255, 255, 255, 255);
     border: none;
     border-radius: 4px;
     outline: none;
 }
 QPushButton::hover{
-    background-color: rgb(255, 255, 255, 20%);
+    background-color: rgba(255, 255, 255, 20%);
 }
 QPushButton::pressed {
     background-color: rgba(0, 0, 0, 30%);
@@ -95,7 +95,7 @@ QLineEdit::focus{
 /* 切换用户 */
 
 QMenu{
-    background-color: rgb(255,255,255,20%);
+    background-color: rgba(255,255,255,20%);
     color: white;
     border-radius: 4px;
     width:165px;
@@ -108,7 +108,7 @@ QMenu::icon{
 }
 QMenu::item
 {
-    width:135px;
+    width:130px;
     border-radius: 4px;
     height:36px;
     font-size:16px;
@@ -117,11 +117,11 @@ QMenu::item
 
 QMenu::item:selected {
     border-radius: 4px;
-    background-color:rgb(255,255,255,30%);
+    background-color:rgba(255,255,255,30%);
 }
 QMenu::item:pressed {
     border-radius: 4px;
-    background-color: rgb(255,255,255,30%);
+    background-color: rgba(255,255,255,30%);
 }
 
 /* 虚拟键盘开启按钮、用户切换按钮 */
@@ -129,7 +129,7 @@ QMenu::item:pressed {
     border-radius: 4px;
 }
 #btnKeyboard::hover, #btnSwitchUser::hover,#btnPowerManager::hover {
-    background-color: rgb(255, 255, 255, 20%);
+    background-color: rgba(255, 255, 255, 20%);
 }
 #btnKeyboard::pressed, #btnSwitchUser::pressed,#btnPowerManager::hover{
     background: rgba(0, 0, 0, 30%);
@@ -141,7 +141,7 @@ QMenu::item:pressed {
 
 QComboBox{
     background: rgba(255, 255, 255, 20);
-    border: 1px solid rgb(255, 255, 255, 30);
+    border: 1px solid rgba(255, 255, 255, 30);
     font-size:18px;
     color: white;
     combobox-popup: 0;  /* 配合setMaxVisibleItems设置下拉框显示的条数，超过的滚动显示 */
@@ -217,13 +217,13 @@ QListWidget{
     border: 0px;
 }
 QListWidget::item:hover{
-    background:rgb(255, 255, 255, 20%);
+    background:rgba(255, 255, 255, 20%);
     border-radius: 4px;
     border: none;
 }
 
 QListWidget::item:selected
-    background:rgb(255, 255, 255, 20%);
+    background:rgba(255, 255, 255, 20%);
     border: none;
     border-radius: 4px;
 }

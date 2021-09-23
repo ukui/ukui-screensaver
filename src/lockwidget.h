@@ -37,6 +37,7 @@ class Users;
 class UserItem;
 class DisplayManager;
 class QMenu;
+class QScrollArea;
 
 class LockWidget : public QWidget
 {
@@ -72,16 +73,18 @@ protected:
      void keyReleaseEvent(QKeyEvent *e);
 
 private:
-    Ui::LockWidget      *ui;
-    AuthDialog          *authDialog;
-    VirtualKeyboard     *vKeyboard;
-    PowerManager        *powermanager;
-    QTimer              *timer;
-    QMenu               *usersMenu;
-    Users               *users;
-    DisplayManager      *displayManager;
-    int			 timeType;
-    QString      dateType;
+     Ui::LockWidget      *ui;
+     AuthDialog          *authDialog;
+     VirtualKeyboard     *vKeyboard;
+     PowerManager        *powermanager;
+     QTimer              *timer;
+     QMenu               *usersMenu;
+     Users               *users;
+     DisplayManager      *displayManager;
+     int                 timeType;
+     QString             dateType;
+     QScrollArea         *scrollArea;
+     QWidget             *scrollContents;
 };
 
 #endif // LOCKWIDGET_H

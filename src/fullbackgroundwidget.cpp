@@ -494,17 +494,17 @@ void FullBackgroundWidget::onCursorMoved(const QPoint &pos)
             break;
         }
 #else
-       	if(screen->geometry().contains(pos))
-       	{
+        if(screen->geometry().contains(pos))
+        {
             if(lockWidget->geometry() == screen->geometry())
                 return ;
             /*避免切换时闪烁*/
-	    qDebug()<<screen->geometry()<<lockWidget->geometry();
+            qDebug()<<screen->geometry()<<lockWidget->geometry();
             lockWidget->hide();
-  	    lockWidget->setGeometry(screen->geometry());
+            lockWidget->setGeometry(screen->geometry());
             lockWidget->show();
-    	    break;
-       	}
+            break;
+        }
 #endif
     }
 }
