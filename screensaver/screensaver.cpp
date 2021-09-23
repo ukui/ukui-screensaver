@@ -355,7 +355,7 @@ void Screensaver::paintEvent(QPaintEvent *event)
             screenLabel->hide();
     }
     /*这里是为了不显示笔的线条*/
-    painter.drawRect(0,0,this->width(),this->height());
+    painter.drawRect(-1,-1,this->width()+1,this->height()+1);
 }
 
 QPixmap Screensaver::getPaddingPixmap()
