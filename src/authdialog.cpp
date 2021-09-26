@@ -506,19 +506,20 @@ void AuthDialog::onAuthComplete()
     }
     else
     { 
-        if (prompted)
-        {
+	   //因为有个概率性会认证失败的问题，导致重试按钮显示出来，因此这里暂时屏蔽
+//        if (prompted)
+//        {
             if(m_messageLabel->text()=="")
                 onShowMessage(tr("Authentication failure, Please try again"),
                       Auth::MessageTypeError);
 
             authMode = PASSWORD;
             startAuth();
-	}
-	else
-	{
-            show_authenticated (false);	
-	}
+//	}
+//	else
+//	{
+//            show_authenticated (false);	
+//	}
     }
 }
 
@@ -926,6 +927,7 @@ void AuthDialog::showPasswordAuthWidget()
     qDebug() << "show password authentication widget";
     m_userWidget->setVisible(true);
     m_passwdWidget->setVisible(true);
+    m_passwordEdit->setVisible(true);
 
     if(m_biometricAuthWidget)
     {
