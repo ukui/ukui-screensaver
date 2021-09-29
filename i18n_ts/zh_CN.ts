@@ -16,8 +16,8 @@
         <translation type="obsolete">使用密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="526"/>
-        <location filename="../src/authdialog.cpp" line="750"/>
+        <location filename="../src/authdialog.cpp" line="544"/>
+        <location filename="../src/authdialog.cpp" line="768"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
@@ -38,41 +38,40 @@
         <translation type="obsolete">已登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="454"/>
         <source>Password: </source>
-        <translation>密码：</translation>
+        <translation type="vanished">密码：</translation>
     </message>
     <message>
         <source>Account locked %1 minutes due to %2 fail attempts</source>
         <translation type="vanished">账户锁定%1分钟由于%2次错误尝试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="189"/>
-        <location filename="../src/authdialog.cpp" line="190"/>
-        <location filename="../src/authdialog.cpp" line="243"/>
-        <location filename="../src/authdialog.cpp" line="244"/>
+        <location filename="../src/authdialog.cpp" line="201"/>
+        <location filename="../src/authdialog.cpp" line="202"/>
+        <location filename="../src/authdialog.cpp" line="260"/>
+        <location filename="../src/authdialog.cpp" line="261"/>
         <source>Please try again in %1 minutes.</source>
         <translation>请%1分钟后再试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="199"/>
-        <location filename="../src/authdialog.cpp" line="200"/>
-        <location filename="../src/authdialog.cpp" line="253"/>
-        <location filename="../src/authdialog.cpp" line="254"/>
+        <location filename="../src/authdialog.cpp" line="211"/>
+        <location filename="../src/authdialog.cpp" line="212"/>
+        <location filename="../src/authdialog.cpp" line="270"/>
+        <location filename="../src/authdialog.cpp" line="271"/>
         <source>Please try again in %1 seconds.</source>
         <translation>请%1秒后再试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="208"/>
-        <location filename="../src/authdialog.cpp" line="209"/>
-        <location filename="../src/authdialog.cpp" line="262"/>
-        <location filename="../src/authdialog.cpp" line="263"/>
+        <location filename="../src/authdialog.cpp" line="220"/>
+        <location filename="../src/authdialog.cpp" line="221"/>
+        <location filename="../src/authdialog.cpp" line="279"/>
+        <location filename="../src/authdialog.cpp" line="280"/>
         <source>Account locked permanently.</source>
         <translation>账号已被永久锁定</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="356"/>
-        <location filename="../src/authdialog.cpp" line="357"/>
+        <location filename="../src/authdialog.cpp" line="373"/>
+        <location filename="../src/authdialog.cpp" line="374"/>
         <source>Password cannot be empty</source>
         <translation>密码不能为空</translation>
     </message>
@@ -85,46 +84,51 @@
         <translation type="vanished">认证失败，还剩%1次尝试机会</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="370"/>
-        <location filename="../src/authdialog.cpp" line="444"/>
-        <location filename="../src/authdialog.cpp" line="449"/>
+        <location filename="../src/authdialog.cpp" line="387"/>
+        <location filename="../src/authdialog.cpp" line="461"/>
+        <location filename="../src/authdialog.cpp" line="466"/>
         <source>Please enter your password or enroll your fingerprint </source>
         <translation>请输入密码或者录入指纹</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="223"/>
-        <location filename="../src/authdialog.cpp" line="278"/>
-        <location filename="../src/authdialog.cpp" line="495"/>
+        <location filename="../src/authdialog.cpp" line="235"/>
+        <location filename="../src/authdialog.cpp" line="295"/>
+        <location filename="../src/authdialog.cpp" line="513"/>
         <source>Authentication failure, Please try again</source>
         <translation>认证失败，请重试</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="521"/>
+        <location filename="../src/authdialog.cpp" line="471"/>
+        <source>Password </source>
+        <translation>密码 </translation>
+    </message>
+    <message>
+        <location filename="../src/authdialog.cpp" line="539"/>
         <source>Login</source>
         <translation>登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="714"/>
+        <location filename="../src/authdialog.cpp" line="732"/>
         <source>Biometric Authentication</source>
         <translation>生物识别认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="727"/>
+        <location filename="../src/authdialog.cpp" line="745"/>
         <source>Password Authentication</source>
         <translation>密码认证</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="740"/>
+        <location filename="../src/authdialog.cpp" line="758"/>
         <source>Other Devices</source>
         <translation>其他设备</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="839"/>
+        <location filename="../src/authdialog.cpp" line="857"/>
         <source>Too many unsuccessful attempts,please enter password.</source>
         <translation>指纹验证失败达最大次数，请使用密码登录</translation>
     </message>
     <message>
-        <location filename="../src/authdialog.cpp" line="843"/>
+        <location filename="../src/authdialog.cpp" line="861"/>
         <source>Fingerprint authentication failed, you still have %1 verification opportunities</source>
         <translation>指纹验证失败，您还有%1次尝试机会</translation>
     </message>
@@ -1811,12 +1815,12 @@
         <translation>时间</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="322"/>
+        <location filename="../src/lockwidget.cpp" line="335"/>
         <source>Guest</source>
         <translation>游客</translation>
     </message>
     <message>
-        <location filename="../src/lockwidget.cpp" line="305"/>
+        <location filename="../src/lockwidget.cpp" line="317"/>
         <source>SwitchUser</source>
         <translation>切换用户</translation>
     </message>
