@@ -468,7 +468,7 @@ void AuthDialog::onShowPrompt(const QString &prompt, Auth::PromptType type)
                     });
                 }
             }
-            text = tr("Password: ");
+            text = tr("Password ");
         }
 
         m_passwordEdit->clear();
