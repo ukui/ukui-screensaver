@@ -57,6 +57,7 @@ add_subdirectory(src)
 add_subdirectory(i18n_ts)
 add_subdirectory(data)
 add_subdirectory(screensaver)
+add_subdirectory(screensaver-focus-helper)
 add_subdirectory(Common)
 add_subdirectory(KylinNM)
 

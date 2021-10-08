@@ -132,22 +132,22 @@ int main(int argc, char *argv[])
 
     checkIsRunning();
     checkIslivecd();
-   
+ 
     if(QString(argv[1]) == "--lock-startup"){
         Configuration::instance();
-	QDBusInterface *checkInterface =
-            new QDBusInterface("org.freedesktop.DBus",
-                               "/org/freedesktop/DBus",
-                               "org.freedesktop.DBus",
-                               QDBusConnection::sessionBus());
+        QDBusInterface *checkInterface =
+                new QDBusInterface("org.freedesktop.DBus",
+                                   "/org/freedesktop/DBus",
+                                   "org.freedesktop.DBus",
+                                   QDBusConnection::sessionBus());
         for(int i = 0;i<20;i++){
-	    QDBusReply<bool> ret = checkInterface->call("NameHasOwner",
-                                               "org.gnome.SessionManager");
+            QDBusReply<bool> ret = checkInterface->call("NameHasOwner",
+                                                        "org.gnome.SessionManager");
             if(ret.value()) {
                 break;
-    	    }
+            }
 
-	    usleep(100000);
+            usleep(100000);
         }
     }
 
@@ -158,12 +158,12 @@ int main(int argc, char *argv[])
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
     QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 #endif
-
+ 
     qunsetenv("QT_IM_MODULE");
     //signal(SIGTERM,handler);
     QApplication a(argc, argv);
     QApplication::setSetuidAllowed(true);
-    
+
     QDesktopWidget *desktop = QApplication::desktop();
     if(desktop->geometry().width()<=0 || desktop->geometry().height()<=0)
         return 0;
@@ -200,7 +200,6 @@ int main(int argc, char *argv[])
     }
 
     qInstallMessageHandler(messageOutput);
-
     //加载翻译文件
     QString locale = QLocale::system().name();
     QTranslator translator;
@@ -234,6 +233,7 @@ int main(int argc, char *argv[])
     if(parser.isSet(lstOption))
     {
         window->lock();
+	window->setIsStartup(true);
     }
 
     if(parser.isSet(sessionIdleOption))

@@ -108,8 +108,7 @@ void BiometricAuthWidget::startAuth(DeviceInfoPtr device, int uid)
     proxy->StopOps(device->id);
     startAuth_();
 
-
-    if(!device->deviceType == DeviceType::Type::Face){
+    if(device->deviceType != DeviceType::Type::Face){
         updateImage(1);
     }
 

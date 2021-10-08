@@ -20,6 +20,7 @@
 #include <QPalette>
 #include <QPixmap>
 #include <QPainter>
+#include <QDesktopWidget>
 #include <QDebug>
 #include <QDate>
 #include <QDate>

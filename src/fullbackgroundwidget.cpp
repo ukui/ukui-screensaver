@@ -29,7 +29,7 @@
 #include <QDesktopWidget>
 #include <QCloseEvent>
 #include <QDBusPendingReply>
-
+#include <QImageReader>
 #include <QX11Info>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
@@ -284,7 +284,7 @@ void FullBackgroundWidget::setLockState()
     QDBusMessage msg = interface->call("SetLockState");
     if(msg.type() == QDBusMessage::ErrorMessage)
            qDebug() << msg.errorMessage();
-
+    
 }
 
 bool FullBackgroundWidget::eventFilter(QObject *obj, QEvent *event)
@@ -295,6 +295,11 @@ bool FullBackgroundWidget::eventFilter(QObject *obj, QEvent *event)
         QTimer::singleShot(500,this,SLOT(setLockState()));
     }
     return false;
+}
+
+void FullBackgroundWidget::setIsStartup(bool val)
+{
+    isStartup = val;
 }
 
 void FullBackgroundWidget::paintEvent(QPaintEvent *event)
@@ -308,7 +313,7 @@ void FullBackgroundWidget::paintEvent(QPaintEvent *event)
             painter.drawRect(screen->geometry());
         }
     else{
-            painter.drawPixmap(screen->geometry(), getPaddingPixmap(background, screen->size().width(),screen->size().height()));
+            painter.drawPixmap(screen->geometry(), background);
         }
     }
     return QWidget::paintEvent(event);
@@ -341,6 +346,12 @@ void FullBackgroundWidget::closeEvent(QCloseEvent *event)
             widget->close();
     }
     closeGrab();
+
+    if(isStartup){
+        QProcess process;
+        process.start("killall screensaver-focus-helper");
+        process.waitForFinished(1000);
+    }
     return QWidget::closeEvent(event);
 }
 
@@ -465,10 +476,15 @@ void FullBackgroundWidget::init()
 //    setGeometry(0, 0, totalWidth, totalHeight);
     QDesktopWidget *desktop = QApplication::desktop();
     setGeometry(desktop->geometry());
-
-//    background.load(configuration->getBackground());
-    background = scaledPixmap(QApplication::primaryScreen()->geometry().width(), QApplication::primaryScreen()->geometry().height(), configuration->getBackground());
     
+    QImageReader reader;
+    reader.setFileName(configuration->getBackground());
+    reader.setAutoTransform(true);
+    reader.setScaledSize(QApplication::primaryScreen()->size());
+    background = QPixmap::fromImageReader(&reader);
+    
+//    background.load(configuration->getBackground());
+//    background = scaledPixmap(QApplication::primaryScreen()->geometry().width(), QApplication::primaryScreen()->geometry().height(), configuration->getBackground());
     if(!background.isNull()){
         background = blurPixmap(background);
     }

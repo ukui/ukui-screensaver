@@ -53,6 +53,7 @@ public:
     void onScreensaver();    
     void onBlankScreensaver();
     void closeScreensaver();
+    void setIsStartup(bool val);
 
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);
@@ -110,6 +111,7 @@ private:
     bool                isPassed;
     bool                m_delay;
     int			isBlank;
+    bool		isStartup = false;
 };
 
 #endif // FULLBACKGROUNDWIDGET_H
