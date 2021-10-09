@@ -24,7 +24,7 @@
 
 #include <QWidget>
 #include <QResizeEvent>
-
+#include <QSettings>
 
 namespace Ui {
 class LockWidget;
@@ -50,6 +50,7 @@ public:
     void startAuth();
     void stopAuth();
     void setX11Focus();
+    QVariant getValue(const QString &);
 Q_SIGNALS:
     void closed();
     void capsLockChanged();
@@ -85,6 +86,7 @@ private:
      QString             dateType;
      QScrollArea         *scrollArea;
      QWidget             *scrollContents;
+     QSettings           *configSettings;
 };
 
 #endif // LOCKWIDGET_H
