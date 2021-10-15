@@ -18,7 +18,7 @@
 #include "lockwidget.h"
 #include "powermanager.h"
 #include "ui_lockwidget.h"
-
+#include <QDir>
 #include <QDateTime>
 #include <QTimer>
 #include <QDebug>
@@ -37,6 +37,7 @@
 #include "commonfunc.h"
 
 #define TIME_TYPE_SCHEMA "org.ukui.control-center.panel.plugins"
+#define CONFIG_FILE "/etc/lightdm/ukui-greeter.conf"
 float scale;
 LockWidget::LockWidget(QWidget *parent)
     : QWidget(parent),
@@ -51,6 +52,10 @@ LockWidget::LockWidget(QWidget *parent)
     ui->setupUi(this);
 
     UserItem user = users->getUserByName(getenv("USER"));
+    QString recodfile = QDir::homePath() + "/.cache/ukui-greeter.conf";
+    qDebug() << recodfile;
+
+    configSettings = new QSettings(CONFIG_FILE, QSettings::IniFormat, this);
     authDialog = new AuthDialog(user, this);
     authDialog->installEventFilter(this);
     connect(authDialog, &AuthDialog::authenticateCompete,
@@ -68,6 +73,15 @@ LockWidget::LockWidget(QWidget *parent)
 LockWidget::~LockWidget()
 {
     delete ui;
+}
+
+QVariant LockWidget::getValue(const QString &key)
+{
+    configSettings->beginGroup("Greeter");
+    QVariant value = configSettings->value(key);
+    configSettings->endGroup();
+
+    return value;
 }
 
 void LockWidget::closeEvent(QCloseEvent *event)
@@ -271,7 +285,11 @@ void LockWidget::initUserMenu()
     ui->btnSwitchUser->setIconSize(QSize(36, 24));
     ui->btnSwitchUser->setFixedSize(52, 48);
     ui->btnSwitchUser->setFocusPolicy(Qt::NoFocus);
-
+    bool isHideUser = getValue("hide-switchuser-button").toBool();
+    if(isHideUser)
+    {
+        ui->btnSwitchUser->hide();
+    }
     scrollArea = new QScrollArea(this);
 //    scrollArea->setAttribute(Qt::WA_TranslucentBackground); //设置背景透明
 //    scrollArea->viewport()->setAttribute(Qt::WA_TranslucentBackground); //设置背景透明
