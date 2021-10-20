@@ -18,10 +18,12 @@
 #include "lockwidget.h"
 #include "powermanager.h"
 #include "ui_lockwidget.h"
-
+#include <QDir>
 #include <QDateTime>
 #include <QTimer>
 #include <QDebug>
+#include <QScrollArea>
+#include <QScrollBar>
 #include <QMenu>
 #include <QtX11Extras/QX11Info>
 #include <X11/Xlib.h>
@@ -31,13 +33,17 @@
 #include "virtualkeyboard.h"
 #include "users.h"
 #include "displaymanager.h"
+#include "config.h"
+#include "commonfunc.h"
 
 #define TIME_TYPE_SCHEMA "org.ukui.control-center.panel.plugins"
+#define CONFIG_FILE "/etc/lightdm/ukui-greeter.conf"
 float scale;
 LockWidget::LockWidget(QWidget *parent)
     : QWidget(parent),
       ui(new Ui::LockWidget),
       usersMenu(nullptr),
+      scrollArea(nullptr),
       users(new Users(this)),
       displayManager(new DisplayManager(this)),
       timeType(24)
@@ -46,6 +52,10 @@ LockWidget::LockWidget(QWidget *parent)
     ui->setupUi(this);
 
     UserItem user = users->getUserByName(getenv("USER"));
+    QString recodfile = QDir::homePath() + "/.cache/ukui-greeter.conf";
+    qDebug() << recodfile;
+
+    configSettings = new QSettings(CONFIG_FILE, QSettings::IniFormat, this);
     authDialog = new AuthDialog(user, this);
     authDialog->installEventFilter(this);
     connect(authDialog, &AuthDialog::authenticateCompete,
@@ -65,6 +75,15 @@ LockWidget::~LockWidget()
     delete ui;
 }
 
+QVariant LockWidget::getValue(const QString &key)
+{
+    configSettings->beginGroup("Greeter");
+    QVariant value = configSettings->value(key);
+    configSettings->endGroup();
+
+    return value;
+}
+
 void LockWidget::closeEvent(QCloseEvent *event)
 {
     qDebug() << "LockWidget::closeEvent";
@@ -78,8 +97,8 @@ bool LockWidget::eventFilter(QObject *obj, QEvent *event)
         if(obj == ui->btnPowerManager || obj == ui->btnSwitchUser)
             return false;
 
-        if(usersMenu && usersMenu->isVisible()){
-            usersMenu->hide();
+        if(scrollArea && scrollArea->isVisible()){
+            scrollArea->hide();
 	    }
  	    if(powermanager->isVisible()){
         	authDialog->setFocus();
@@ -133,7 +152,7 @@ void LockWidget::initUI()
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [&]{
         if(timeType == 12)
-            ui->lblTime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+            ui->lblTime->setText(QDateTime::currentDateTime().toString("A hh:mm"));
         else
             ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
 
@@ -144,7 +163,7 @@ void LockWidget::initUI()
     });
 
     if(timeType == 12)
-    	ui->lblTime->setText(QDateTime::currentDateTime().toString("ap hh:mm"));
+    	ui->lblTime->setText(QDateTime::currentDateTime().toString("A hh:mm"));
     else
         ui->lblTime->setText(QDateTime::currentDateTime().toString("hh:mm"));
 
@@ -227,11 +246,12 @@ void LockWidget::showPowerManager()
     else{     
         authDialog->hide();
         powermanager->show();
+#ifndef USE_INTEL
         if(width() < 1280)
             powermanager->showSmallSize();
         else
             powermanager->showNormalSize();
-
+#endif
         powermanager->setGeometry((width()-powermanager->width())/2,
                                   (height()-powermanager->height())/2,
                                   powermanager->width(),powermanager->height());
@@ -265,34 +285,46 @@ void LockWidget::initUserMenu()
     ui->btnSwitchUser->setIconSize(QSize(36, 24));
     ui->btnSwitchUser->setFixedSize(52, 48);
     ui->btnSwitchUser->setFocusPolicy(Qt::NoFocus);
+    bool isHideUser = getValue("hide-switchuser-button").toBool();
+    if(isHideUser)
+    {
+        ui->btnSwitchUser->hide();
+    }
+    scrollArea = new QScrollArea(this);
+//    scrollArea->setAttribute(Qt::WA_TranslucentBackground); //设置背景透明
+//    scrollArea->viewport()->setAttribute(Qt::WA_TranslucentBackground); //设置背景透明
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //屏蔽水平滚动条
+    scrollArea->setStyleSheet("QScrollArea {background-color:transparent;}");
+    scrollArea->viewport()->setStyleSheet("background-color:transparent;");
+    scrollArea->verticalScrollBar()->setProperty("drawScrollBarGroove", false);
+    scrollArea->verticalScrollBar()->setContextMenuPolicy(Qt::NoContextMenu);
+    scrollContents = new QWidget(scrollArea);
+    scrollArea->setWidget(scrollContents);
+    scrollArea->hide();
+
     if(!usersMenu)
     {
-        usersMenu = new QMenu(this);
+        usersMenu = new QMenu(scrollContents);
         usersMenu->setObjectName("usersMenu");
-/*
-* qt5.6上，qmenu文字以图标左方为起点，20.04上文字以图标右方为起点，所以
-* qt5.6时，左边距要设置大一点,避免与图标重合
-*/
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 7, 0))
-        usersMenu->setStyleSheet("QMenu::item{padding: 2px 10px 2px 10px;}");
-#else
-        usersMenu->setStyleSheet("QMenu::item{padding: 2px 10px 2px 30px;}");
-#endif
-
+        usersMenu->setToolTipsVisible(true);
+        usersMenu->setStyleSheet("background-color: rgba(255,255,255,20%);\
+                                 color: white; \
+                                 border-radius: 4px; \
+                                 padding: 5px 5px 5px 5px;");
 	//如果没有设置x11属性，则由于弹出菜单受窗口管理器管理，而主窗口不受，在点击菜单又点回主窗口会闪屏。
         usersMenu->setWindowFlags(Qt::X11BypassWindowManagerHint);
-        usersMenu->hide();
+        //usersMenu->hide();
         connect(usersMenu, &QMenu::triggered,
                 this, &LockWidget::onUserMenuTrigged);
         connect(ui->btnSwitchUser, &QPushButton::clicked,
                 this, [&]{
-                if(usersMenu->isVisible()){
-                    usersMenu->hide();
-		}
+                if(scrollArea->isVisible()){
+                    scrollArea->hide();
+                }
                 else{
-                    usersMenu->show();
-                    usersMenu->setActiveAction(nullptr);
-                    usersMenu->setFocus();
+                    scrollArea->show();
+                   // usersMenu->setActiveAction(nullptr);
+                    scrollArea->setFocus();
                 }
         });
 
@@ -301,6 +333,7 @@ void LockWidget::initUserMenu()
     if(displayManager->getDisplayType() == "gdm"){
         QAction *action = new QAction(QIcon(users->getDefaultIcon()),
                                       tr("SwitchUser"), this);
+        action->setToolTip("SwitchUser");
         action->setData("SwitchUser");
         usersMenu->addAction(action);
     }
@@ -319,9 +352,13 @@ void LockWidget::initUserMenu()
             QAction *action = new QAction(QIcon(users->getDefaultIcon()),
                                       tr("Guest"), this);
             action->setData("Guest");
+            action->setToolTip("Guest");
             usersMenu->addAction(action);
         }
     }
+
+    scrollContents->setFixedSize(usersMenu->size());
+    //scrollArea->setFixedSize(scrollContents->width(),scrollContents->height()+20);
 }
 
 void LockWidget::keyReleaseEvent(QKeyEvent *e)
@@ -363,17 +400,24 @@ void LockWidget::resizeEvent(QResizeEvent *event)
     setVirkeyboardPos();
 
     //设置弹出菜单，设置弹出菜单的坐标为切换用户按钮的上方，中间保持一定间隔。
-    if(usersMenu){
-        usersMenu->move(width() - x , \
-                    height() - y - usersMenu->height() - 5);
+    if(scrollArea){
+        if(scrollContents->height() < height()/2){
+            scrollArea->setFixedSize(scrollContents->width(),scrollContents->height()+10);
+        }else{
+            scrollArea->setFixedSize(scrollContents->width(),height()/2);
+        }
+
+        scrollArea->move(width() - x, \
+                    height() - y - scrollArea->height() - 5);
     }
     
     if(powermanager){
+#ifndef USE_INTEL
         if(width() < 1280)
             powermanager->showSmallSize();
         else
             powermanager->showNormalSize();
-
+#endif
         powermanager->setGeometry((width()- powermanager->width())/2,
                                   (height()-powermanager->height())/2,
                                   powermanager->width(),powermanager->height());
@@ -386,7 +430,14 @@ void LockWidget::resizeEvent(QResizeEvent *event)
 void LockWidget::onUserAdded(const UserItem &user)
 {
     QAction *action = new QAction(QIcon(user.icon), user.realName, this);
-    action->setData(user.name);
+
+    QFont font;
+    font.setPixelSize(16);
+    QString str = ElideText(font,120,user.realName);
+    if(user.realName != str)
+         action->setToolTip(user.realName);
+    action->setData(user.realName);
+    action->setText(str);
     usersMenu->addAction(action);
     usersMenu->adjustSize();
 }

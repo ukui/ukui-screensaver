@@ -62,6 +62,10 @@ void SCConfiguration::initGsettings()
 
     connect(udgsettings, &QGSettings::changed,
             this, &SCConfiguration::onConfigurationChanged);
+    connect(ukgsettings, &QGSettings::changed,
+            this, &SCConfiguration::onConfigurationChanged);
+    connect(timegsettings, &QGSettings::changed,
+            this, &SCConfiguration::onConfigurationChanged);
 }
 
 void SCConfiguration::initDefaultSettings()
@@ -90,14 +94,26 @@ void SCConfiguration::onConfigurationChanged(QString key)
     }else if(key == "textIsCenter"){
         bool ret = getTextIsCenter();
         Q_EMIT textIsCenterChanged(ret);
+    }else if(key == "showMessageEnabled"){
+        bool ret = getMessageShowEnable();
+        Q_EMIT messageShowEnableChanged(ret);
+    }else if(key == "messageNumber"){
+        int num = getMessageNumber();
+        Q_EMIT messageNumberChanged(num);
+    }else if(key == "hoursystem"){
+        int timeType = timegsettings->get("hoursystem").toInt();
+        Q_EMIT timeTypeChanged(timeType);
+    }else if(key == "type"){
+        QString dateType = timegsettings->get("date").toString();
+        Q_EMIT dateTypeChanged(dateType);
     }
 }
 
 QString SCConfiguration::getDefaultBackground()
 {
     QString backgroundFile = "";
-    if(mgsettings){
-        backgroundFile = mgsettings->get("picture-filename").toString();    
+    if(ukgsettings){
+        backgroundFile = ukgsettings->get("background").toString();
     }
 
     if(ispicture(backgroundFile))
@@ -141,6 +157,26 @@ bool SCConfiguration::getAutoSwitch()
 }
 
 bool SCConfiguration::getIsCustom()
+{
+    bool ret = false;
+    if(ukgsettings){
+        ret = (ukgsettings->get("mode").toString() == "default-ukui-custom");
+    }
+
+    return ret;
+}
+
+bool SCConfiguration::getMessageShowEnable()
+{
+    bool ret = false;
+    if(ukgsettings){
+        ret = ukgsettings->get("show-message-enabled").toBool();
+    }
+
+    return ret;
+}
+
+int SCConfiguration::getMessageNumber()
 {
     bool ret = false;
     if(ukgsettings){

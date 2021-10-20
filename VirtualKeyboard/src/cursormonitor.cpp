@@ -19,7 +19,7 @@
 #include "cursormonitor.h"
 #include <X11/Xlib.h>
 #include <QPoint>
-
+#include <sys/syslog.h>
 CursorMonitor::CursorMonitor(QObject *parent) : QThread(parent)
 {
 
@@ -32,6 +32,10 @@ void CursorMonitor::run()
     Window window;
 
     display = XOpenDisplay(NULL);
+    if (display == 0) {
+        syslog(LOG_ERR, "CursorMonitor unable to open display");
+        return;
+    }
 
 
     window = DefaultRootWindow(display);

@@ -39,6 +39,7 @@ Interface::Interface(QObject *parent)
             this->onShowScreensaver();
         }
     );
+
     connect(m_logind, &LogindIntegration::requestUnlock, this,
         [this]() {
 //        	process.terminate();
@@ -203,7 +204,7 @@ void Interface::onPrepareForSleep(bool sleep)
                 }
             });
         }
-        m_timer->start(100);
+        m_timer->start(200);
     }
     else
     {

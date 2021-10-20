@@ -26,7 +26,9 @@
 #include "types.h"
 #include <QAbstractNativeEventFilter>
 #include <QDBusUnixFileDescriptor>
+#include <QTimer>
 #include "logind.h"
+#include "config.h"
 
 void x11_get_screen_size(int *width,int *height);
 
@@ -35,6 +37,7 @@ class XEventMonitor;
 class MonitorWatcher;
 class Configuration;
 class QDBusInterface;
+class TabletLockWidget;
 
 class FullBackgroundWidget : public QWidget , public QAbstractNativeEventFilter
 {
@@ -47,9 +50,10 @@ public:
     virtual bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
     void mouseMoveEvent(QMouseEvent *e);
     void mousePressEvent(QMouseEvent *e);
-    void onScreensaver();
+    void onScreensaver();    
     void onBlankScreensaver();
     void closeScreensaver();
+    void setIsStartup(bool val);
 
 public Q_SLOTS:
     void onCursorMoved(const QPoint &pos);
@@ -59,11 +63,18 @@ public Q_SLOTS:
     int onSessionStatusChanged(uint status);
     void inhibit();
     void uninhibit();
-
+#ifdef USE_INTEL
+    void propertiesChangedSlot(QString, QMap<QString, QVariant>, QStringList);
+    void onShowBlackBackGround();
+#endif
 private:
     void init();
     void clearScreensavers();
     bool eventFilter(QObject *obj, QEvent *event);
+
+    QPixmap getPaddingPixmap(QPixmap pixmap, int width, int height);
+//    void checkNumLock();
+//    int numberMatch(const QString &key);
 
 private Q_SLOTS:
     void onScreenCountChanged(int);
@@ -81,19 +92,26 @@ private Q_SLOTS:
 
 private:
     QDBusInterface      *smInterface;
+#ifdef USE_INTEL
+    TabletLockWidget    *lockWidget;
+#else
     LockWidget          *lockWidget;
+#endif
     XEventMonitor       *xEventMonitor;
     MonitorWatcher      *monitorWatcher;
     Configuration       *configuration;
     QList<QWidget*>     widgetXScreensaverList;
+    QList<QWidget*>     widgetBlackList;
     QList<pid_t>        xscreensaverPidList;
     bool                isLocked;
     bool                lockState;
     ScreenStatus        screenStatus;
     QPixmap             background;
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
-    bool 		isPassed;
+    bool                isPassed;
+    bool                m_delay;
     int			isBlank;
+    bool		isStartup = false;
 };
 
 #endif // FULLBACKGROUNDWIDGET_H

@@ -54,21 +54,19 @@ IconEdit::IconEdit(QWidget *parent)
     m_edit->setContextMenuPolicy(Qt::NoContextMenu);    //禁用右键菜单
     m_edit->installEventFilter(this);
 
-    m_capsIcon = new QSvgWidget(this);
+    m_capsIcon = new QLabel(this);
     m_capsIcon->setObjectName(QStringLiteral("capsIconLabel"));
     m_capsIcon->setVisible(checkCapsLockState());
-    m_capsIcon->load(QString(":/image/assets/capslock.svg"));
 
     m_iconButton = new QPushButton(this);
     m_iconButton->setObjectName(QStringLiteral("loginButton"));
     m_iconButton->setFocusPolicy(Qt::NoFocus);
     m_iconButton->setCursor(QCursor(Qt::PointingHandCursor));
     m_iconButton->installEventFilter(this);
-    
+
     m_modeButton = new QPushButton(this);
     m_modeButton->setObjectName(QStringLiteral("echoModeButton"));
     m_modeButton->setCheckable(true);
-    m_modeButton->setIcon(QIcon::fromTheme("ukui-eye-display-symbolic"));
     m_modeButton->setFocusPolicy(Qt::NoFocus);
     m_modeButton->setCursor(Qt::PointingHandCursor);
     connect(m_modeButton, &QPushButton::clicked, this, [&](bool checked){
@@ -89,6 +87,15 @@ IconEdit::IconEdit(QWidget *parent)
     setFocusProxy(m_edit);
 }
 
+void IconEdit::setType(QLineEdit::EchoMode type)
+{
+    m_edit->setEchoMode(type);
+    if(type == 0)
+       m_modeButton->setChecked(true);
+    else
+       m_modeButton->setChecked(false);
+}
+
 void IconEdit::resizeEvent(QResizeEvent *)
 {
     // 设置输入框中文件输入区，不让输入的文字在被隐藏在按钮下
@@ -104,7 +111,7 @@ bool IconEdit::eventFilter(QObject *obj, QEvent *event)
             if(keyEvent->matches(QKeySequence::Copy) || keyEvent->matches(QKeySequence::Cut) || keyEvent->matches(QKeySequence::Paste)){
                 event->ignore();
                 return true;
-            }else if(keyEvent->modifiers() ==(Qt::MetaModifier)){//当meta键被按下时，忽略按键事件
+            }else if((keyEvent->modifiers() & Qt::MetaModifier) || (keyEvent->modifiers() & Qt::AltModifier)){//当meta或者alt键被按下时，忽略按键事件
                 event->ignore();
                 return true;
             }
@@ -124,27 +131,13 @@ bool IconEdit::eventFilter(QObject *obj, QEvent *event)
             return false;
         }
         if(event->type() == QEvent::HoverEnter){
-            setIcon(QIcon(":/image/assets/login-button-hover.svg"));
+            setIcon(QIcon(":/image/assets/unlock-button-hover.png"));
         }
         else if(event->type() == QEvent::HoverLeave){
-            setIcon(QIcon(":/image/assets/login-button.svg"));
+            setIcon(QIcon(":/image/assets/unlock-button.png"));
         }
     }
-
     return false;
-}
-
-void IconEdit::setType(QLineEdit::EchoMode type)
-{
-    m_edit->setEchoMode(type);
-    if(type == 0){
-       m_modeButton->setChecked(true);
-       m_modeButton->setIcon(QIcon::fromTheme("ukui-eye-display-symbolic"));
-    }
-    else{
-       m_modeButton->setChecked(false);
-       m_modeButton->setIcon(QIcon::fromTheme("ukui-eye-hidden-symbolic"));
-    }
 }
 
 void IconEdit::setX11Focus()
@@ -187,6 +180,11 @@ void IconEdit::clear()
 {
     m_edit->setText("");
     setPrompt("");
+}
+
+void IconEdit::clearText()
+{
+    m_edit->setText("");
 }
 
 void IconEdit::setPrompt(const QString &prompt)

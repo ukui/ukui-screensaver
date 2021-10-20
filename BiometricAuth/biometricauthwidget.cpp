@@ -108,8 +108,7 @@ void BiometricAuthWidget::startAuth(DeviceInfoPtr device, int uid)
     proxy->StopOps(device->id);
     startAuth_();
 
-
-    if(!device->deviceType == DeviceType::Type::Face){
+    if(device->deviceType != DeviceType::Type::Face){
         updateImage(1);
     }
 
@@ -247,6 +246,7 @@ void BiometricAuthWidget::onFrameWritten(int drvid)
 
     cv::Mat mat2(1, sizeof(base64_bufferData), CV_8U, base64_bufferData);
     img = cv::imdecode(mat2, cv::IMREAD_COLOR);
+    cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
 
     QImage srcQImage = QImage((uchar*)(img.data), img.cols, img.rows, QImage::Format_RGB888);
     lblImage->setFixedSize(160,160);

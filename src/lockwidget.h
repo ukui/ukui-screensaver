@@ -24,7 +24,7 @@
 
 #include <QWidget>
 #include <QResizeEvent>
-
+#include <QSettings>
 
 namespace Ui {
 class LockWidget;
@@ -37,6 +37,7 @@ class Users;
 class UserItem;
 class DisplayManager;
 class QMenu;
+class QScrollArea;
 
 class LockWidget : public QWidget
 {
@@ -49,6 +50,7 @@ public:
     void startAuth();
     void stopAuth();
     void setX11Focus();
+    QVariant getValue(const QString &);
 Q_SIGNALS:
     void closed();
     void capsLockChanged();
@@ -72,16 +74,19 @@ protected:
      void keyReleaseEvent(QKeyEvent *e);
 
 private:
-    Ui::LockWidget      *ui;
-    AuthDialog          *authDialog;
-    VirtualKeyboard     *vKeyboard;
-    PowerManager        *powermanager;
-    QTimer              *timer;
-    QMenu               *usersMenu;
-    Users               *users;
-    DisplayManager      *displayManager;
-    int			 timeType;
-    QString      dateType;
+     Ui::LockWidget      *ui;
+     AuthDialog          *authDialog;
+     VirtualKeyboard     *vKeyboard;
+     PowerManager        *powermanager;
+     QTimer              *timer;
+     QMenu               *usersMenu;
+     Users               *users;
+     DisplayManager      *displayManager;
+     int                 timeType;
+     QString             dateType;
+     QScrollArea         *scrollArea;
+     QWidget             *scrollContents;
+     QSettings           *configSettings;
 };
 
 #endif // LOCKWIDGET_H

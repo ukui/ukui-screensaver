@@ -35,6 +35,7 @@ public:
     void setIcon(const QString &text);
     void setIcon(const QIcon &icon);
     void clear();
+    void clearText();
     void setPrompt(const QString &);
     const QString text();
     void setType(QLineEdit::EchoMode type = QLineEdit::Password);
@@ -60,7 +61,7 @@ public Q_SLOTS:
 
 private:
     QLineEdit       *m_edit;
-    QSvgWidget      *m_capsIcon;
+    QLabel          *m_capsIcon;
     QPushButton     *m_iconButton;
     QPushButton     *m_modeButton;
     QTimer          *m_timer;

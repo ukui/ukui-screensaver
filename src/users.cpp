@@ -82,6 +82,14 @@ QString Users::getDefaultIcon()
     return defaultIcon;
 }
 
+bool compareBarData(const UserItem &user1, const UserItem &user2)
+{
+    if (user1.realName < user2.realName)
+    {
+        return true;
+    }
+    return false;
+}
 
 //https://stackoverflow.com/questions/20206376/
 //how-do-i-extract-the-returned-data-from-qdbusmessage-in-a-qt-dbus-call
@@ -109,6 +117,7 @@ void Users::loadUsers()
         getUser(path.path());
     }
     dbusArgs.endArray();
+    qSort(users.begin(), users.end(), compareBarData);
 }
 
 UserItem Users::getUser(const QString &path)

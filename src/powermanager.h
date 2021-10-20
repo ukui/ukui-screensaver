@@ -21,50 +21,76 @@
 #include <QWidget>
 #include <QListWidget>
 #include <QTime>
+#include "config.h"
 
+#ifdef USE_INTEL
+#define ITEM_WIDTH 128
+#define ITEM_HEIGHT (ITEM_WIDTH + 40)
+#define ITEM_SPACING 72
+
+class QWidget;
+class PowerManager:public QWidget
+#else
 #define ITEM_WIDTH 168
 #define ITEM_HEIGHT ITEM_WIDTH
 #define ITEM_SPACING (ITEM_WIDTH/8)
-
 class QListWidget;
 class QListWidgetItem;
 class QDBusInterface;
 class PowerManager:public QListWidget
+#endif
 {
     Q_OBJECT
 
 public:
     PowerManager(QWidget *parent = 0);
+#ifdef USE_INTEL
+    bool hibernate();
+#else
     void showNormalSize();
     void showSmallSize();
+#endif
 private:
     void initUI();
+
+#ifdef USE_INTEL
+    void setQSS();
+    QWidget *list;
+#else
     QListWidget *list;
+    QWidget *suspendWidget;
+    QWidget *hibernateWidget;
+    QDBusInterface *sessionInterface;
+    QDBusInterface *loginInterface;
+    QDBusInterface      *actService;
+
+    bool    canSuspend;
+    bool    canHibernate;
+    int     m_count;
+#endif
     QWidget *lockWidget;
     QWidget *switchWidget;
     QWidget *logoutWidget;
     QWidget *rebootWidget;
     QWidget *shutdownWidget;
-    QWidget *suspendWidget;
-    QWidget *hibernateWidget;
     QTime lasttime;
-    QDBusInterface *sessionInterface;
-    QDBusInterface *loginInterface;
-    bool    canSuspend;
-    bool    canHibernate;
-    int     m_count;
 private:
     void lockWidgetClicked();
     void switchWidgetClicked();
     void logoutWidgetCliced();
     void rebootWidgetClicked();
     void shutdownWidgetClicked();
+#ifdef USE_INTEL
+    bool reboot();
+    bool powerOff();
+#else
     void suspendWidgetClicked();
     void hibernateWidgetClicked();
-
+#endif
 private Q_SLOTS:
+#ifndef USE_INTEL
     void powerClicked(QListWidgetItem *item);
-
+#endif
 Q_SIGNALS:
     void switchToUser();
     void lock();

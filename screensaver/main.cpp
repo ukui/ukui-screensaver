@@ -32,8 +32,10 @@
 #include <signal.h>
 #include <syslog.h>
 
+#include "config.h"
 
 #define WORKING_DIRECTORY "/usr/share/ukui-screensaver"
+bool bControlFlg = false;//是否控制面板窗口
 
 int main(int argc, char *argv[])
 {
@@ -87,12 +89,16 @@ int main(int argc, char *argv[])
         s.windowHandle()->setParent(window);
         XGetWindowAttributes (QX11Info::display(), wid, &xwa);
 
+#ifndef USE_INTEL
         XClassHint ch;
         ch.res_name = NULL;
         ch.res_class = NULL;
         XGetClassHint (QX11Info::display(), wid, &ch);
-        if(ch.res_name && strcmp(ch.res_name,"ukui-control-center")==0)
+        if(ch.res_name && strcmp(ch.res_name,"ukui-control-center")==0){
+            bControlFlg = true;
             s.addClickedEvent();
+        }
+#endif
 
         //获取屏保所在屏幕对应的缩放比例。
         for(auto screen : QGuiApplication::screens())
@@ -108,6 +114,7 @@ int main(int argc, char *argv[])
         s.show();
     }
     else if(onRoot){
+        bControlFlg = false;
         WId wid = QX11Info::appRootWindow();
         QWindow* window = QWindow::fromWinId(wid);
         window->setProperty("_q_embedded_native_parent_handle",QVariant(wid));

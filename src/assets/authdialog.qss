@@ -1,8 +1,17 @@
-QPushButton {
+QPushButton{
+    text-align:center;
+    color: rgba(255, 255, 255, 255);
     border: none;
+    border-radius: 4px;
     outline: none;
-    color: white;
 }
+QPushButton::hover{
+    background-color: rgba(255, 255, 255, 20%);
+}
+QPushButton::pressed {
+    background-color: rgba(0, 0, 0, 30%);
+}
+
 
 QLabel {
     color: white;
@@ -22,7 +31,7 @@ QLabel {
 
 /* 用户名 */
 #login_nameLabel{
-    font-size: 16px;
+    font-size: 24px;
 }
 
 /* 密码输入框 */
@@ -39,34 +48,36 @@ QLineEdit::focus{
 
 /* 大写提示 */
 #capsIconLabel{
+    background: url(:/image/assets/capslock.png);
     background-repeat: no-repeat;
     background-position: center;
-    max-width: 16px;
-    max-height: 16px;
-    min-width: 16px;
-    min-height: 16px;
-    icon-size: 16px;
+    max-width: 22px;
+    max-height: 22px;
+    min-width: 22px;
+    min-height: 22px;
 }
 
 /* echo mode */
 #echoModeButton {
     background: transparent;
+    image: url(:/image/assets/hide-password.png);
     max-width: 22px;
     max-height: 22px;
-    min-width: 22px;
-    min-height: 22px;
     margin-right: 5px;
-    icon-size: 22px;
+}
+#echoModeButton::checked {
+    image: url(:/image/assets/show-password.png);
 }
 /* 登录按钮 */
 #loginButton{
-    min-width: 24px;
-    max-width: 24px;
-    min-height: 24px;
-    max-height: 24px;
-    icon-size: 24px;
+    /*image: url(:/image/assets/unlock-button.png);*/
+    min-width: 26px;
+    max-width: 26px;
+    min-height: 26px;
+    max-height: 26px;
+    icon-size: 26px;
     background:#3D6BE5;
-    border-radius:12px;
+    border-radius:13px;
 }
 
 /* PAM message提示*/
@@ -75,10 +86,16 @@ QLineEdit::focus{
     color: white;
 }
 
+#messageButton{
+    text-align:center;
+    font-size: 16px;
+    color: white;
+}
+
 /* 切换用户 */
 
 QMenu{
-    background-color: rgb(255,255,255,20%);
+    background-color: rgba(255,255,255,20%);
     color: white;
     border-radius: 4px;
     width:165px;
@@ -91,7 +108,7 @@ QMenu::icon{
 }
 QMenu::item
 {
-    width:135px;
+    width:130px;
     border-radius: 4px;
     height:36px;
     font-size:16px;
@@ -100,11 +117,11 @@ QMenu::item
 
 QMenu::item:selected {
     border-radius: 4px;
-    background-color:rgb(255,255,255,30%);
+    background-color:rgba(255,255,255,30%);
 }
 QMenu::item:pressed {
     border-radius: 4px;
-    background-color: rgb(255,255,255,30%);
+    background-color: rgba(255,255,255,30%);
 }
 
 /* 虚拟键盘开启按钮、用户切换按钮 */
@@ -112,7 +129,7 @@ QMenu::item:pressed {
     border-radius: 4px;
 }
 #btnKeyboard::hover, #btnSwitchUser::hover,#btnPowerManager::hover {
-    background-color: rgb(255, 255, 255, 20%);
+    background-color: rgba(255, 255, 255, 20%);
 }
 #btnKeyboard::pressed, #btnSwitchUser::pressed,#btnPowerManager::hover{
     background: rgba(0, 0, 0, 30%);
@@ -124,7 +141,7 @@ QMenu::item:pressed {
 
 QComboBox{
     background: rgba(255, 255, 255, 20);
-    border: 1px solid rgb(255, 255, 255, 30);
+    border: 1px solid rgba(255, 255, 255, 30);
     font-size:18px;
     color: white;
     combobox-popup: 0;  /* 配合setMaxVisibleItems设置下拉框显示的条数，超过的滚动显示 */
@@ -200,13 +217,13 @@ QListWidget{
     border: 0px;
 }
 QListWidget::item:hover{
-    background:rgb(255, 255, 255, 20%);
+    background:rgba(255, 255, 255, 20%);
     border-radius: 4px;
     border: none;
 }
 
 QListWidget::item:selected
-    background:rgb(255, 255, 255, 20%);
+    background:rgba(255, 255, 255, 20%);
     border: none;
     border-radius: 4px;
 }

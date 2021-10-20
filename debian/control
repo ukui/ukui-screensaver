@@ -16,7 +16,10 @@ Build-Depends: debhelper-compat (= 12),
                libopencv-dev,
                libx11-dev,
                libxtst-dev,
-               libgsettings-qt-dev
+			   libqt5svg5-dev,
+               libgsettings-qt-dev,
+               libkf5windowsystem-dev,
+               libmatemixer-dev
 Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Homepage: https://www.github.com/ukui/ukui-screensaver

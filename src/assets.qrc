@@ -9,7 +9,7 @@
         <file>assets/switchGreeter.png</file>
 	<file>assets/switchUser.png</file>
         <file>assets/waiting.png</file>
-        <file>assets/capslock.svg</file>
+        <file>assets/capslock.png</file>
         <file>assets/combobox_down.png</file>
         <file>assets/scrollbar_down.png</file>
         <file>assets/scrollbar_down_clicked.png</file>
@@ -18,11 +18,8 @@
         <file>assets/scrollbar_up_clicked.png</file>
         <file>assets/scrollbar_up_hover.png</file>
         <file>assets/unlock-button.png</file>
-        <file>assets/unlock-button-hover.png</file>
-        <file>assets/unlock-button-pressed.png</file>
-        <file>assets/login-button.svg</file>
-	<file>assets/login-button-hover.svg</file>
-	<file>assets/login-button-pressed.svg</file>
+	<file>assets/unlock-button-hover.png</file>
+	<file>assets/unlock-button-pressed.png</file>
     	<file>assets/iconFace.png</file>
 	<file>assets/iconFace.svg</file>
 	<file>assets/powerManager.png</file>
@@ -33,6 +30,83 @@
 	<file>assets/hibernate.png</file>
 	<file>assets/reboot.png</file>
         <file>assets/bio-login.png</file>
-	<file>assets/password-login.png</file>
+        <file>assets/password-login.png</file>
+        <file>assets/weather/68.png</file>
+        <file>assets/weather/67.png</file>
+        <file>assets/weather/66.png</file>
+        <file>assets/weather/63.png</file>
+        <file>assets/weather/62.png</file>
+        <file>assets/weather/60.png</file>
+        <file>assets/weather/59.png</file>
+        <file>assets/weather/58.png</file>
+        <file>assets/weather/56.png</file>
+        <file>assets/weather/55.png</file>
+        <file>assets/weather/53.png</file>
+        <file>assets/weather/52.png</file>
+        <file>assets/weather/51.png</file>
+        <file>assets/weather/49.png</file>
+        <file>assets/weather/48.png</file>
+        <file>assets/weather/47.png</file>
+        <file>assets/weather/45.png</file>
+        <file>assets/weather/43.png</file>
+        <file>assets/weather/41.png</file>
+        <file>assets/weather/40.png</file>
+        <file>assets/weather/39.png</file>
+        <file>assets/weather/38.png</file>
+        <file>assets/weather/36.png</file>
+        <file>assets/weather/35.png</file>
+        <file>assets/weather/33.png</file>
+        <file>assets/weather/31.png</file>
+        <file>assets/weather/30.png</file>
+        <file>assets/weather/29.png</file>
+        <file>assets/weather/28.png</file>
+        <file>assets/weather/27.png</file>
+        <file>assets/weather/24.png</file>
+        <file>assets/weather/22.png</file>
+        <file>assets/weather/21.png</file>
+        <file>assets/weather/20.png</file>
+        <file>assets/weather/19.png</file>
+        <file>assets/weather/18.png</file>
+        <file>assets/weather/17.png</file>
+        <file>assets/weather/16.png</file>
+        <file>assets/weather/15.png</file>
+        <file>assets/weather/14.png</file>
+        <file>assets/weather/13.png</file>
+        <file>assets/weather/11.png</file>
+        <file>assets/weather/10.png</file>
+        <file>assets/weather/9.png</file>
+        <file>assets/weather/8.png</file>
+        <file>assets/weather/7.png</file>
+        <file>assets/weather/6.png</file>
+        <file>assets/weather/5.png</file>
+        <file>assets/weather/4.png</file>
+        <file>assets/weather/3.png</file>
+        <file>assets/weather/2.png</file>
+        <file>assets/weather/1.png</file>
+        <file>assets/weather/0.png</file>
+        <file>assets/intel/message.png</file>
+        <file>assets/intel/more.png</file>
+        <file>assets/intel/slide_unlock.png</file>
+        <file>assets/intel/qr-code.png</file>
+        <file>assets/intel/wifi.png</file>
+        <file>assets/intel/delete.svg</file>
+        <file>assets/intel/pin.png</file>
+        <file>assets/intel/wechat.png</file>
+        <file>assets/intel/back.png</file>
+        <file>assets/intel/cancel.png</file>
+        <file>assets/intel/qr-reload.png</file>
+        <file>assets/intel/icon-wechat-noqrcode.png</file>
+        <file>assets/intel/icon-no-signal.png</file>
+        <file>assets/intel/icon-wired.png</file>
+        <file>assets/intel/icon-wifi.png</file>
+        <file>assets/intel/sms.png</file>
+        <file>assets/intel/phone.png</file>
+        <file>assets/intel/icon-backspace.png</file>
+        <file>assets/intel/lock.png</file>
+        <file>assets/intel/logout.png</file>
+        <file>assets/intel/shutdown.png</file>
+        <file>assets/intel/reboot.png</file>
+	<file>assets/intel/powerManager.png</file>
+        <file>assets/intel/keyboard.png</file>
     </qresource>
 </RCC>

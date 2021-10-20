@@ -1,0 +1,9 @@
+#cmakedefine USE_INTEL
+
+// == 下面是测试用的
+#cmakedefine01 TEST_ON
+#cmakedefine01 TEST_OF
+
+#ifndef __${VAR}___@VAR@
+
+#endif

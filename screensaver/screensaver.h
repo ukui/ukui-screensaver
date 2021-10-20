@@ -29,12 +29,15 @@
 #include <QSettings>
 #include <QSplitterHandle>
 #include <QSplitter>
+#include <QTime>
+
 #include "sleeptime.h"
 #include "chinesedate.h"
 #include "mbackground.h"
 #include "checkbutton.h"
 #include "scconfiguration.h"
 #include "cyclelabel.h"
+#include "weathermanager.h"
 
 class Screensaver : public QWidget
 {
@@ -48,6 +51,8 @@ public:
 private:
     void initUI();
     void setDatelayout();
+    void setWeatherLayout();
+    void setNoticeLaout();
     void setSleeptime(bool Isshow);
     void setCenterWidget();
     void updateDate();
@@ -57,9 +62,12 @@ private:
     void stopSwitchImages();
     void onBackgroundChanged();
     void setRandomText();
+    void setPreviewText(bool bVisible);//设置预览样式
     void setRandomPos();
     void connectSingles();
     void updateBackgroundPath();
+    void enterEvent(QEvent*);
+    void leaveEvent(QEvent*);
    
     QTimer              *switchTimer;
     QTimer              *fadeTimer;
@@ -72,14 +80,22 @@ private:
     bool                textIsCenter;
     QString             myText;
     QLabel              *myTextLabel;
+    QLabel              *myPreviewLabel;
     CycleLabel          *cycleLabel;
 
     SCConfiguration     *configuration;
+    void showNotice();
+    void hideNotice();
 
     QWidget             *myTextWidget;
     QLabel              *dateOfLocaltime;
-    QLabel              *dateOfDay;
 
+    QLabel *dateOfWeek;
+    QLabel *dateOfLocaltimeHour;
+    QLabel *dateofLocaltimeColon;
+    QLabel *dateOfLocaltimeMinute;
+    QLabel *dateOfDay;
+    QLabel *dateOfLunar;
     QWidget             *centerWidget;
 
     QWidget             *timeLayout;
@@ -110,9 +126,21 @@ private:
     bool                hasChanged;
     int                 timeType;
     QString             dateType;
-    QProcess		*process;
+    QProcess            *process;
     QLabel              *screenLabel;
     bool                respondClick;
+    static QTime        m_currentTime;
+
+    WeatherManager *m_weatherManager;
+    QWidget *m_weatherLaout;
+    QLabel *m_weatherIcon;
+    QLabel *m_weatherArea;
+    QLabel *m_weatherCond;
+    QLabel *m_weatherTemperature;
+
+    QWidget *m_widgetNotice;
+    QLabel *m_labelNoticeIcon;
+    QLabel *m_labelNoticeMessage;
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);
@@ -129,6 +157,12 @@ private Q_SLOTS:
     void showRestTimeChanged(bool isShow);
     void textIsCenterChanged(bool isCenter);
     void themeChanged();
+    void getWeatherFinish(QString city, QString cond, QString tmp);
+    void onMessageNumberChanged(int num);
+    void onMessageShowEnabledChanged(bool enabled);
+    void onTimeFormatChanged(int type);
+    void onDateFormatChanged(QString type);
+    QPixmap getPaddingPixmap();
 };
 
 #endif // MAINWINDOW_H

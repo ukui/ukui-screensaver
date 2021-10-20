@@ -22,12 +22,13 @@
 #define COMMONFUNC_H
 
 #include <QString>
-
+#include <QFont>
 
 bool ispicture(QString filepath);
 QString getSystemVersion();
 QString getSystemDistrib();
 bool getUseFirstDevice();
+QString ElideText(QFont font,int width,QString strInfo);
 
 class commonFunc
 {
