@@ -55,4 +55,5 @@ install(FILES
         language/screensaver-zh_CN.ini 
 	language/screensaver-en_US.ini
 	language/screensaver-jd.ini
+	language/screensaver-ru_RU.ini
         DESTINATION share/ukui-screensaver/language)

@@ -666,7 +666,10 @@ void Screensaver::updateCenterWidget(int index)
     }
     qsettings->beginGroup(QString::number(index));
     if(qsettings->contains("OL")){
-        centerlabel1->setText(qsettings->value("OL").toString());
+        if(qsettings->value("OL").typeName() == "QString")
+            centerlabel1->setText(qsettings->value("OL").toString());
+        else
+            centerlabel1->setText(qsettings->value("OL").toStringList().join(' '));
         centerlabel2->hide();
 #ifndef USE_INTEL
         authorlabel->setText(qsettings->value("author").toString());
@@ -674,8 +677,14 @@ void Screensaver::updateCenterWidget(int index)
     }
     else if(qsettings->contains("FL"))
     {
-        centerlabel1->setText(qsettings->value("FL").toString());
-        centerlabel2->setText(qsettings->value("SL").toString());
+        if(qsettings->value("FL").typeName() == "QString")
+            centerlabel2->setText(qsettings->value("FL").toString());
+        else
+            centerlabel2->setText(qsettings->value("FL").toStringList().join(' '));
+        if(qsettings->value("SL").typeName() == "QString")
+            centerlabel2->setText(qsettings->value("SL").toString());
+        else
+            centerlabel2->setText(qsettings->value("SL").toStringList().join(' '));
         centerlabel2->show();
 #ifndef USE_INTEL
         authorlabel->setText(qsettings->value("author").toString());
@@ -1078,7 +1087,10 @@ void Screensaver::setCenterWidget()
         authorlabel = new QLabel("");
     }
     else if(qsettings->contains("OL")){
-        centerlabel1 = new QLabel(qsettings->value("OL").toString());
+        if(qsettings->value("OL").typeName() == "QString")
+            centerlabel1 = new QLabel(qsettings->value("OL").toString());
+        else
+            centerlabel1 = new QLabel(qsettings->value("OL").toStringList().join(' '));
         centerlabel2 = new QLabel("");
         centerlabel2->hide();
 #ifndef USE_INTEL
@@ -1087,8 +1099,14 @@ void Screensaver::setCenterWidget()
     }
     else if(qsettings->contains("FL"))
     {
-        centerlabel1 = new QLabel(qsettings->value("FL").toString());
-        centerlabel2 = new QLabel(qsettings->value("SL").toString());
+        if(qsettings->value("FL").typeName() == "QString")
+            centerlabel1 = new QLabel(qsettings->value("FL").toString());
+        else
+            centerlabel1 = new QLabel(qsettings->value("FL").toStringList().join(' '));
+        if(qsettings->value("SL").typeName() == "QString")
+            centerlabel2 = new QLabel(qsettings->value("SL").toString());
+        else
+            centerlabel2 = new QLabel(qsettings->value("SL").toStringList().join(' '));
         centerlabel2->show();
 #ifndef USE_INTEL
         authorlabel = new QLabel(qsettings->value("author").toString());
