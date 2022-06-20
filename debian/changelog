@@ -1,3 +1,9 @@
+ukui-screensaver (3.0.4-1) unstable; urgency=medium
+
+  * fix:bug#123652 【俄文化】【屏保】屏保名人名言未翻译
+
+ -- Yang Min <yangmin@kylinos.cn>  Mon, 20 Jun 2022 15:42:04 +0800
+
 ukui-screensaver (3.0.3-1) unstable; urgency=medium
 
   * New upstream release.
